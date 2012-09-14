@@ -27,7 +27,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 
     @Override
     protected void onCreateResources() {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
     }
 
     @Override
