@@ -1,6 +1,9 @@
 package ultraextreme.model;
 
+
 public class Weapon {
 
-	Projectile projectile;
+	BulletManager bulletManager;
+	BulletController bulletController;
+	EntityManager entityManager;
 }

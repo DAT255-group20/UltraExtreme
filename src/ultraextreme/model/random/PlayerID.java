@@ -1,4 +1,4 @@
-package ultraextreme.model;
+package ultraextreme.model.random;
 
 public enum PlayerID {
 

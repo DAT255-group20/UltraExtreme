@@ -1,14 +1,13 @@
-package ultraextreme.model;
+package ultraextreme.model.entity;
 
 import java.util.List;
 
+
 public class Ship extends DestroyableEntity {
 
-	PlayerID playerID;
-	ItemBar itemBar;
 	
 	@Override
-	public List<Projectile> getProjectilesFired() {
+	public List<Bullet> getProjectilesFired() {
 		// TODO Auto-generated method stub
 		return null;
 	}
