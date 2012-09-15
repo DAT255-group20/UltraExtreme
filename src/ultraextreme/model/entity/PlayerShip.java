@@ -1,16 +1,14 @@
 package ultraextreme.model.entity;
 
-import java.util.List;
 
-
+/**
+ * The player's ship.
+ * @author Bjorn Persson Mattsson
+ *
+ */
 public class PlayerShip extends DestroyableEntity {
 
 	
-	@Override
-	public List<AbstractBullet> getProjectilesFired() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	@Override
 	public boolean isDestroyed() {
 		// TODO Auto-generated method stub

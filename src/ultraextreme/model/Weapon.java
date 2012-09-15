@@ -1,6 +1,10 @@
 package ultraextreme.model;
 
-
+/**
+ * An ingame weapon.
+ * @author Bjorn Persson Mattsson
+ *
+ */
 public class Weapon {
 
 	BulletProductionQueue bulletProdqueue;
