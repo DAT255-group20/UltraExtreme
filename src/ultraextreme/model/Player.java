@@ -1,11 +1,17 @@
 package ultraextreme.model;
 
-import ultraextreme.model.entity.Ship;
-import ultraextreme.model.random.PlayerID;
+import ultraextreme.model.entity.PlayerShip;
+import ultraextreme.model.util.PlayerID;
 
+/**
+ * The player.
+ * 
+ * @author Bjorn Persson Mattsson
+ * 
+ */
 public class Player {
 
-	Ship ship;
+	PlayerShip ship;
 	PlayerID playerID;
 	ItemBar itemBar;
 }

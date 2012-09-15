@@ -1,11 +1,11 @@
 package ultraextreme.model.entity;
 
 /**
- * An weapon pickup item.
+ * En enemy ship.
  * 
  * @author Bjorn Persson Mattsson
  * 
  */
-public class WeaponPickup extends Entity {
+public abstract class EnemyShip extends DestroyableEntity {
 
 }

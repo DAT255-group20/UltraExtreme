@@ -1,11 +1,15 @@
 package ultraextreme.model.entity;
 
-import java.util.List;
-
-
+/**
+ * An entity that can be destroyed.
+ * 
+ * @author Bjorn Persson Mattsson
+ * 
+ */
 public abstract class DestroyableEntity extends Entity {
 
-	public abstract List<Bullet> getProjectilesFired();
-	
+	/**
+	 * @return true if and only if the entity has been destroyed.
+	 */
 	public abstract boolean isDestroyed();
 }

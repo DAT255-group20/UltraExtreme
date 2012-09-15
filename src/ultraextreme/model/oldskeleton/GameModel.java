@@ -4,8 +4,7 @@ public class GameModel {
 
 	IEntityController entityControllers;
 	EntitySpawnQueue entityFactory;
-	
-	public void update()
-	{
+
+	public void update() {
 	}
 }
