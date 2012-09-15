@@ -6,9 +6,9 @@ public class GameModel {
 	
 	Player player;
 	Entity entity;
-	BulletManager bulletManager;
+	BulletProductionQueue bulletProdQueue;
 	EntityManager entityManager;
-	EnemyController enemyController;
+	Enemy enemyController;
 	
 	public void update()
 	{

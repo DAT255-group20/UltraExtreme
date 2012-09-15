@@ -3,11 +3,11 @@ package ultraextreme.model.entity;
 import java.util.List;
 
 
-public class Ship extends DestroyableEntity {
+public class PlayerShip extends DestroyableEntity {
 
 	
 	@Override
-	public List<Bullet> getProjectilesFired() {
+	public List<AbstractBullet> getProjectilesFired() {
 		// TODO Auto-generated method stub
 		return null;
 	}

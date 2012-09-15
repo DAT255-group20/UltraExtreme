@@ -2,5 +2,5 @@ package ultraextreme.model;
 
 public class Boss {
 
-	EnemyController enemyController;
+	Enemy enemyController;
 }

@@ -1,11 +1,11 @@
 package ultraextreme.model;
 
-import ultraextreme.model.random.PlayerID;
+import ultraextreme.model.util.PlayerID;
 
 public class ItemBar {
 
 	Weapon weapon;
 	Bomb bomb;
 	PlayerID playerID;
-	BulletManager bulletManager;
+	BulletProductionQueue bulletManager;
 }
