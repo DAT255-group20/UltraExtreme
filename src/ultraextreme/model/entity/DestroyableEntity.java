@@ -1,10 +1,10 @@
 package ultraextreme.model.entity;
 
-
 /**
  * An entity that can be destroyed.
+ * 
  * @author Bjorn Persson Mattsson
- *
+ * 
  */
 public abstract class DestroyableEntity extends Entity {
 

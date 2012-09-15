@@ -15,7 +15,7 @@ public class SceneController extends SimpleBaseGameActivity {
 	@Override
 	protected void onCreateResources() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
