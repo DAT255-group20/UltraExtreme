@@ -7,7 +7,7 @@ package ultraextreme.model.entity;
  * 
  */
 public class PlayerShip extends DestroyableEntity {
-
+	
 	@Override
 	public boolean isDestroyed() {
 		// TODO Auto-generated method stub

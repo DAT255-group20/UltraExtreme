@@ -30,6 +30,13 @@ public class BulletProductionQueue {
 	public List<AbstractBullet> getNewBullets() {
 		return null;
 	}
+	
+	/**
+	 * Clear the list of bullets.
+	 */
+	public void clear() {
+		
+	}
 
 	/**
 	 * Informs the class that a bomb has been dropped.

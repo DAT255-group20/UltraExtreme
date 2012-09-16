@@ -1,5 +1,8 @@
 package ultraextreme.model;
 
+import ultraextreme.model.entity.Bullet;
+import ultraextreme.model.util.PlayerID;
+
 /**
  * An ingame weapon.
  * 
@@ -10,7 +13,7 @@ public class Weapon {
 
 	BulletProductionQueue bulletProdqueue;
 
-	public void fireShot() {
+	public void fireShot(PlayerID playerId) {
 		/*
 		 * Weapon skapar sin Bullet och skickar in PlayerID Weapon lägger till
 		 * Bulleten till BulletProdQueue GameModel antingen lyssnar på
@@ -20,5 +23,6 @@ public class Weapon {
 		 * att undvika att fiender skjuter på fiender osv) } Lägg till Bullet i
 		 * listan som innehåller alla Bullets }
 		 */
+		bulletProdqueue.addBullet(new Bullet(playerId));
 	}
 }
