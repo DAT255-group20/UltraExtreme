@@ -16,7 +16,9 @@ Open .xcf images with Gimp. These images have been made with Gimp 2.8.2.
 Download: http://openfontlibrary.org/en/font/stop-motion--
 
 License: OFL (SIL Open Font License) 1.1
-http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL#5667e9e4
+
+* http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+* http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=OFL-FAQ_web
 
 ## Settings for main_menu & game_modes_menu:
 
