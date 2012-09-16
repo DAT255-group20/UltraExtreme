@@ -8,12 +8,12 @@ import ultraextreme.model.entity.Entity;
  * @author Bjorn Persson Mattsson
  * 
  */
-public class GameModel {
+public class GameModel implements IUltraExtremeModel {
 
-	Player player;
-	Entity entity;
-	BulletProductionQueue bulletProdQueue;
-	Enemy enemyController;
+	private Player player;
+	private Entity entity;
+	private BulletProductionQueue bulletProdQueue;
+	private Enemy enemyController;
 
 	public void update() {
 	}

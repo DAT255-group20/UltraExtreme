@@ -1,11 +1,14 @@
-package ultraextreme;
+package ultraextreme.controller;
 
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.entity.scene.Scene;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-public class SceneController extends SimpleBaseGameActivity {
+public class MainActivity extends SimpleBaseGameActivity implements IControllerListener {
 
+	private GameController gameController;
+	private MainMenuController mainMenuController;
+	
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		// TODO Auto-generated method stub
@@ -15,7 +18,7 @@ public class SceneController extends SimpleBaseGameActivity {
 	@Override
 	protected void onCreateResources() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -24,4 +27,9 @@ public class SceneController extends SimpleBaseGameActivity {
 		return null;
 	}
 
+	@Override
+	public void controllerListenerUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
 }
