@@ -2,6 +2,12 @@ package ultraextreme.model.entity;
 
 import ultraextreme.model.util.PlayerID;
 
+/**
+ * A basic bullet.
+ * 
+ * @author Daniel Jonsson
+ * 
+ */
 public class Bullet extends AbstractBullet {
 
 	public Bullet(PlayerID playerId) {

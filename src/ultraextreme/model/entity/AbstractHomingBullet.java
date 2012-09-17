@@ -14,7 +14,7 @@ public abstract class AbstractHomingBullet extends AbstractBullet {
 		super(playerId);
 	}
 
-	protected Entity target;
+	protected AbstractEntity target;
 
 	/**
 	 * Sets the target for the homing bullet.
@@ -22,7 +22,7 @@ public abstract class AbstractHomingBullet extends AbstractBullet {
 	 * @param target
 	 *            Target
 	 */
-	public void setTarget(Entity target) {
+	public void setTarget(AbstractEntity target) {
 		this.target = target;
 	}
 }

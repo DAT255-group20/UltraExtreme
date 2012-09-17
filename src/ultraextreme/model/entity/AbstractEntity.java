@@ -8,15 +8,15 @@ import ultraextreme.model.util.Position;
  * @author Bjorn Persson Mattsson
  * 
  */
-public abstract class Entity {
+public abstract class AbstractEntity {
 
-	Position position;
+	private Position position;
 
-	public Entity() {
+	public AbstractEntity() {
 		this(0, 0);
 	}
 
-	public Entity(double x, double y) {
+	public AbstractEntity(double x, double y) {
 		new Position(x, y);
 	}
 
@@ -40,11 +40,10 @@ public abstract class Entity {
 	 *            The other entity.
 	 * @return true if and only if the two entities are colliding.
 	 */
-	public boolean collidesWith(Entity other) {
+	public boolean collidesWith(AbstractEntity other) {
 		return false;
 	}
 
 	public void getHitboxes() {
 	}
-
 }

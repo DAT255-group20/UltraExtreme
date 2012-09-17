@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.entity.Entity;
+import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.util.PlayerID;
 
@@ -17,7 +17,7 @@ import ultraextreme.model.util.PlayerID;
 public class GameModel implements IUltraExtremeModel {
 
 	private Player player;
-	private Entity entity;
+	private AbstractEntity entity;
 	private BulletProductionQueue bulletProdQueue;
 	private Enemy enemyController;
 	private List<AbstractBullet> bullets;

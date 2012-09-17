@@ -11,7 +11,7 @@ import ultraextreme.model.util.PlayerID;
  */
 public class Weapon {
 
-	BulletProductionQueue bulletProdqueue;
+	private BulletProductionQueue bulletProdqueue;
 
 	public void fireShot(PlayerID playerId) {
 		/*

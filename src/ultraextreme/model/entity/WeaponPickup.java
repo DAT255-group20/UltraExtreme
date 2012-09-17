@@ -6,6 +6,6 @@ package ultraextreme.model.entity;
  * @author Bjorn Persson Mattsson
  * 
  */
-public class WeaponPickup extends Entity {
+public class WeaponPickup extends AbstractEntity {
 
 }

@@ -1,6 +1,12 @@
 package ultraextreme.model;
 
+/**
+ * A level boss.
+ * 
+ * @author Bjorn Persson Mattsson
+ * 
+ */
 public class Boss {
 
-	Enemy enemyController;
+	private Enemy enemyController;
 }

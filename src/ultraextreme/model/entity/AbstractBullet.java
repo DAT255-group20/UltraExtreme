@@ -8,9 +8,9 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * 
  */
-public abstract class AbstractBullet extends Entity implements IBullet {
+public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
-	PlayerID playerId;
+	private PlayerID playerId;
 
 	public AbstractBullet(PlayerID playerId) {
 		this.playerId = playerId;

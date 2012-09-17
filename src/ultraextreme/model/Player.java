@@ -11,19 +11,19 @@ import ultraextreme.model.util.PlayerID;
  */
 public class Player implements IPlayer {
 
-	PlayerShip ship;
+	private PlayerShip ship;
 
 	/**
 	 * The player's ID. This is used in the view to differentiate player ships
 	 * from each other.
 	 */
-	PlayerID playerId;
+	private PlayerID playerId;
 
 	/**
 	 * Item bar containing the items that the player's ship are currently
 	 * holding.
 	 */
-	ItemBar itemBar;
+	private ItemBar itemBar;
 
 	/**
 	 * Create a new player.
