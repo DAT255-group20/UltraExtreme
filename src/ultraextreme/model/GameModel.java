@@ -5,6 +5,7 @@ import java.util.List;
 
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.Entity;
+import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -41,11 +42,24 @@ public class GameModel implements IUltraExtremeModel {
 		}
 	}
 	
-	public Player getPlayer() {
+	public IPlayer getPlayer() {
 		return player;
 	}
 	
-	public List<AbstractBullet> getBullets() {
-		return bullets;
+	public List<IBullet> getBullets() {
+		List<IBullet> output = new ArrayList<IBullet>();
+		for (AbstractBullet b : bullets)
+		{
+			output.add(b);
+		}
+		return output;
+	}
+	
+	/**
+	 * @return A model interface with only get methods.
+	 */
+	public IUltraExtremeModel getModelInterface()
+	{
+		return this;
 	}
 }

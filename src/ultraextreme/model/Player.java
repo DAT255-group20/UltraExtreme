@@ -9,7 +9,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * 
  */
-public class Player {
+public class Player implements IPlayer {
 
 	PlayerShip ship;
 	

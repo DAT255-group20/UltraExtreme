@@ -35,7 +35,7 @@ public class BulletProductionQueue {
 	 * Clear the list of bullets.
 	 */
 	public void clear() {
-		
+		// TODO Couldn't the list be auto-cleared when you ask for new bullets? /Plankton
 	}
 
 	/**

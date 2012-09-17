@@ -18,8 +18,8 @@ public class MainActivity extends SimpleBaseGameActivity implements IControllerL
 	private GameController gameController;
 	private MainMenuController mainMenuController;
 	
-	static final int CAMERA_WIDTH = 800;
-	static final int CAMERA_HEIGHT = 480;
+	private static final int CAMERA_WIDTH = 800;
+	private static final int CAMERA_HEIGHT = 480;
 	
 	@Override
 	public EngineOptions onCreateEngineOptions() {
@@ -30,7 +30,7 @@ public class MainActivity extends SimpleBaseGameActivity implements IControllerL
 
 	@Override
 	protected void onCreateResources() {
-		// TODO Auto-generated method stub
+		// TODO MainActivity.onCreateResources()
 		
 	}
 
@@ -49,7 +49,7 @@ public class MainActivity extends SimpleBaseGameActivity implements IControllerL
 
 	@Override
 	public void controllerListenerUpdate() {
-		// TODO Auto-generated method stub
+		// TODO MainActivity.controllerListenerUpdate()
 		
 	}
 }
