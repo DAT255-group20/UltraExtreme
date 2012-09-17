@@ -6,7 +6,7 @@ package ultraextreme.model.entity;
  * @author Bjorn Persson Mattsson
  * 
  */
-public abstract class DestroyableEntity extends Entity {
+public abstract class DestroyableEntity extends AbstractEntity {
 
 	/**
 	 * @return true if and only if the entity has been destroyed.

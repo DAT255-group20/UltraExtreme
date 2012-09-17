@@ -1,11 +1,11 @@
 package ultraextreme.model.entity;
 
 /**
- * An weapon pickup item.
+ * An interface for a Bullet
  * 
  * @author Bjorn Persson Mattsson
  * 
  */
-public class WeaponPickup extends AbstractEntity {
+public interface IBullet {
 
 }

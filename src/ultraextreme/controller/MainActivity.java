@@ -13,14 +13,15 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import android.graphics.Typeface;
 
-public class MainActivity extends SimpleBaseGameActivity implements IControllerListener {
+public class MainActivity extends SimpleBaseGameActivity implements
+		IControllerListener {
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
-	
-	static final int CAMERA_WIDTH = 800;
-	static final int CAMERA_HEIGHT = 480;
-	
+
+	private static final int CAMERA_WIDTH = 800;
+	private static final int CAMERA_HEIGHT = 480;
+
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		Camera mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -30,8 +31,8 @@ public class MainActivity extends SimpleBaseGameActivity implements IControllerL
 
 	@Override
 	protected void onCreateResources() {
-		// TODO Auto-generated method stub
-		
+		// TODO MainActivity.onCreateResources()
+
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class MainActivity extends SimpleBaseGameActivity implements IControllerL
 
 	@Override
 	public void controllerListenerUpdate() {
-		// TODO Auto-generated method stub
-		
+		// TODO MainActivity.controllerListenerUpdate()
+
 	}
 }

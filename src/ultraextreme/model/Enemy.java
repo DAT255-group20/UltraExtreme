@@ -10,6 +10,6 @@ import ultraextreme.model.entity.EnemyShip;
  */
 public class Enemy {
 
-	EnemyShip enemy;
-	Weapon weapon;
+	private EnemyShip enemy;
+	private Weapon weapon;
 }

@@ -30,12 +30,13 @@ public class BulletProductionQueue {
 	public List<AbstractBullet> getNewBullets() {
 		return null;
 	}
-	
+
 	/**
 	 * Clear the list of bullets.
 	 */
 	public void clear() {
-		
+		// Maybe change this class to a BulletManager and let it handle all the
+		// bullets
 	}
 
 	/**

@@ -8,22 +8,25 @@ import ultraextreme.model.util.Position;
  * @author Bjorn Persson Mattsson
  * 
  */
-public abstract class Entity {
+public abstract class AbstractEntity {
 
-	Position position;
-	
-	public Entity() {
+	private Position position;
+
+	public AbstractEntity() {
 		this(0, 0);
 	}
-	
-	public Entity(double x, double y) {
+
+	public AbstractEntity(double x, double y) {
 		new Position(x, y);
 	}
-	
+
 	/**
 	 * Move the entity a given x an y units.
-	 * @param x Number of x units the entity shall move with.
-	 * @param y Number of y units the entity shall move with.
+	 * 
+	 * @param x
+	 *            Number of x units the entity shall move with.
+	 * @param y
+	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
 		position.setX(position.getX() + x);
@@ -37,12 +40,10 @@ public abstract class Entity {
 	 *            The other entity.
 	 * @return true if and only if the two entities are colliding.
 	 */
-	public boolean collidesWith(Entity other) {
+	public boolean collidesWith(AbstractEntity other) {
 		return false;
 	}
 
 	public void getHitboxes() {
 	}
-	
-	
 }
