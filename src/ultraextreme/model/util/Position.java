@@ -11,19 +11,19 @@ import javax.vecmath.Vector2d;
 public class Position {
 
 	private Vector2d coordinates;
-	
+
 	public Position() {
 		this(0, 0);
 	}
-	
+
 	public Position(double x, double y) {
 		coordinates = new Vector2d(x, y);
 	}
-	
+
 	public void setX(double x) {
 		coordinates.x = x;
 	}
-	
+
 	public void setY(double y) {
 		coordinates.y = y;
 	}

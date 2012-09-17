@@ -19,11 +19,11 @@ public class ItemBar {
 	Bomb bomb;
 	PlayerID playerId;
 	BulletProductionQueue bulletManager;
-	
+
 	public ItemBar(PlayerID playerId, BulletProductionQueue bulletManager) {
 		this(playerId, bulletManager, 1);
 	}
-	
+
 	public ItemBar(PlayerID playerId, BulletProductionQueue bulletManager,
 			int maximumNumberOfItems) {
 		this.playerId = playerId;
@@ -32,17 +32,19 @@ public class ItemBar {
 		this.maximumNumberOfItems = maximumNumberOfItems;
 		this.cursorPosition = 0;
 	}
-	
+
 	/**
 	 * Add an item to the item bar.
-	 * @param item The item that should be added.
+	 * 
+	 * @param item
+	 *            The item that should be added.
 	 */
 	public void addItem(Weapon item) {
 		items.set(cursorPosition, item);
 		cursorPosition++;
 		cursorPosition = cursorPosition % (maximumNumberOfItems - 1);
 	}
-	
+
 	public void fireWeapons() {
 		for (Weapon weapon : items) {
 			weapon.fireShot(playerId);

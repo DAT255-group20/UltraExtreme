@@ -9,17 +9,19 @@ import ultraextreme.view.GameScene;
 
 /**
  * Controller for the game model.
+ * 
  * @author Bjorn Persson Mattsson
- *
+ * 
  */
-public class GameController extends AbstractController implements IOnSceneTouchListener {
+public class GameController extends AbstractController implements
+		IOnSceneTouchListener {
 
 	private GameScene scene;
 	private GameModel gameModel;
 
 	@Override
 	public boolean onSceneTouchEvent(Scene arg0, TouchEvent arg1) {
-		// TODO Auto-generated method stub
+		// TODO GameController.onSceneTouchEvent()
 		return false;
 	}
 }

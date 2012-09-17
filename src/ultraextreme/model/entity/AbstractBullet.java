@@ -11,7 +11,7 @@ import ultraextreme.model.util.PlayerID;
 public abstract class AbstractBullet extends Entity implements IBullet {
 
 	PlayerID playerId;
-	
+
 	public AbstractBullet(PlayerID playerId) {
 		this.playerId = playerId;
 	}
@@ -23,7 +23,7 @@ public abstract class AbstractBullet extends Entity implements IBullet {
 	 *            Time passed since last update.
 	 */
 	public abstract void doMovement(float timePassed);
-	
+
 	public PlayerID getPlayerId() {
 		return playerId;
 	}

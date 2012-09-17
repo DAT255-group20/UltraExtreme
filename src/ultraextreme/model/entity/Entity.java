@@ -11,19 +11,22 @@ import ultraextreme.model.util.Position;
 public abstract class Entity {
 
 	Position position;
-	
+
 	public Entity() {
 		this(0, 0);
 	}
-	
+
 	public Entity(double x, double y) {
 		new Position(x, y);
 	}
-	
+
 	/**
 	 * Move the entity a given x an y units.
-	 * @param x Number of x units the entity shall move with.
-	 * @param y Number of y units the entity shall move with.
+	 * 
+	 * @param x
+	 *            Number of x units the entity shall move with.
+	 * @param y
+	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
 		position.setX(position.getX() + x);
@@ -43,6 +46,5 @@ public abstract class Entity {
 
 	public void getHitboxes() {
 	}
-	
-	
+
 }
