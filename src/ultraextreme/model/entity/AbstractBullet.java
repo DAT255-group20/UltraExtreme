@@ -8,9 +8,13 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * 
  */
-public abstract class AbstractBullet extends Entity {
+public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
-	PlayerID playerID;
+	private PlayerID playerId;
+
+	public AbstractBullet(PlayerID playerId) {
+		this.playerId = playerId;
+	}
 
 	/**
 	 * Executes the bullets movement algorithm.
@@ -18,5 +22,9 @@ public abstract class AbstractBullet extends Entity {
 	 * @param timePassed
 	 *            Time passed since last update.
 	 */
-	public abstract void doMovement(int timePassed);
+	public abstract void doMovement(float timePassed);
+
+	public PlayerID getPlayerId() {
+		return playerId;
+	}
 }

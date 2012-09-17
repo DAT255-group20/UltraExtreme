@@ -1,12 +1,11 @@
 package ultraextreme.model;
 
 /**
- * A level boss.
+ * An interface for a player.
  * 
  * @author Bjorn Persson Mattsson
  * 
  */
-public class Boss {
+public interface IPlayer {
 
-	private Enemy enemyController;
 }

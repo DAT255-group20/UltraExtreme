@@ -32,6 +32,14 @@ public class BulletProductionQueue {
 	}
 
 	/**
+	 * Clear the list of bullets.
+	 */
+	public void clear() {
+		// Maybe change this class to a BulletManager and let it handle all the
+		// bullets
+	}
+
+	/**
 	 * Informs the class that a bomb has been dropped.
 	 */
 	public void dropBomb() {
