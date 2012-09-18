@@ -2,6 +2,7 @@ package ultraextreme.model;
 
 import java.util.List;
 
+import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IBullet;
 
 /**
@@ -14,5 +15,5 @@ public interface IUltraExtremeModel {
 
 	IPlayer getPlayer();
 
-	List<IBullet> getBullets();
+	List<AbstractBullet> getBullets();
 }

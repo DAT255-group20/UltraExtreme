@@ -1,5 +1,6 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.BulletID;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -9,11 +10,16 @@ import ultraextreme.model.util.PlayerID;
  * 
  */
 public abstract class AbstractBullet extends AbstractEntity implements IBullet {
-
+	
+	//What player shot this bullet
 	private PlayerID playerId;
-
-	public AbstractBullet(PlayerID playerId) {
+	
+	//The name of this bullet
+	private BulletID bulletId;
+	
+	public AbstractBullet(PlayerID playerId, BulletID bulletId) {
 		this.playerId = playerId;
+		this.bulletId = bulletId;
 	}
 
 	/**
@@ -26,5 +32,9 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	public PlayerID getPlayerId() {
 		return playerId;
+	}
+	
+	public BulletID getBulletID() {
+		return bulletId;
 	}
 }

@@ -1,5 +1,6 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.BulletID;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -11,7 +12,7 @@ import ultraextreme.model.util.PlayerID;
 public class Bullet extends AbstractBullet {
 
 	public Bullet(PlayerID playerId) {
-		super(playerId);
+		super(playerId, BulletID.BASIC_BULLET);
 	}
 
 	@Override

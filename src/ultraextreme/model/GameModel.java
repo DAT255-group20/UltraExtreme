@@ -14,7 +14,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * 
  */
-public class GameModel implements IUltraExtremeModel {
+public class GameModel implements IUltraExtremeModel  {
 
 	private Player player;
 	private AbstractEntity entity;
@@ -51,8 +51,8 @@ public class GameModel implements IUltraExtremeModel {
 	}
 
 	@Override
-	public List<IBullet> getBullets() {
-		List<IBullet> output = new ArrayList<IBullet>();
+	public List<AbstractBullet> getBullets() {
+		List<AbstractBullet> output = new ArrayList<AbstractBullet>();
 		for (AbstractBullet b : bullets) {
 			output.add(b);
 		}
