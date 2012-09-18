@@ -1,6 +1,6 @@
 package ultraextreme.model;
 
-import ultraextreme.model.entity.Bullet;
+import ultraextreme.model.entity.BasicBullet;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -23,6 +23,6 @@ public class Weapon {
 		 * att undvika att fiender skjuter på fiender osv) } Lägg till Bullet i
 		 * listan som innehåller alla Bullets }
 		 */
-		bulletProdqueue.addBullet(new Bullet(playerId));
+		bulletProdqueue.addBullet(new BasicBullet(playerId));
 	}
 }

@@ -8,9 +8,9 @@ import ultraextreme.model.util.PlayerID;
  * @author Daniel Jonsson
  * 
  */
-public class Bullet extends AbstractBullet {
+public class BasicBullet extends AbstractBullet {
 
-	public Bullet(PlayerID playerId) {
+	public BasicBullet(PlayerID playerId) {
 		super(playerId);
 	}
 
