@@ -7,6 +7,7 @@ import ultraextreme.model.util.PlayerID;
  * An interface for a player.
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public interface IPlayer {

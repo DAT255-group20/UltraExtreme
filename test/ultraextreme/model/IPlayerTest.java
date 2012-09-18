@@ -4,6 +4,11 @@ import junit.framework.TestCase;
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.PlayerID;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class IPlayerTest extends TestCase {
 
 	public void testGetPlayerShip() {
@@ -12,4 +17,8 @@ public class IPlayerTest extends TestCase {
 		assertTrue(playerShip == player.getShip());
 	}
 	
+	public void testGetPlayerId() {
+		IPlayer player = new Player(PlayerID.PLAYER1, new BulletProductionQueue());
+		assertEquals(player.getPlayerId(), PlayerID.PLAYER1);
+	}
 }
