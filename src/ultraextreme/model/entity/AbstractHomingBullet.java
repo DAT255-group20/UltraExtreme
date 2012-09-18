@@ -1,5 +1,6 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -10,8 +11,8 @@ import ultraextreme.model.util.PlayerID;
  */
 public abstract class AbstractHomingBullet extends AbstractBullet {
 
-	public AbstractHomingBullet(PlayerID playerId) {
-		super(playerId);
+	public AbstractHomingBullet(double x, double y, PlayerID playerId, Direction direction) {
+		super(x, y, playerId, direction);
 	}
 
 	protected AbstractEntity target;

@@ -1,5 +1,7 @@
 package ultraextreme.model.entity;
 
+import javax.vecmath.Vector2d;
+
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.Position;
 
@@ -13,18 +15,20 @@ public abstract class AbstractEntity {
 
 	private Position position;
 	private Direction direction;
+	
+	/**
+	 * A positive double that impacts on the entity's movement speed.
+	 */
+	private double speedModifier;
 
 	public AbstractEntity() {
-		this(0, 0, Direction.UP);
-	}
-	
-	public AbstractEntity(Direction direction) {
-		this(0, 0, direction);
+		this(0, 0, Direction.UP, 1);
 	}
 
-	public AbstractEntity(double x, double y, Direction direction) {
+	public AbstractEntity(double x, double y, Direction direction, double speedModifier) {
 		position = new Position(x, y);
 		this.direction = direction;
+		this.speedModifier = speedModifier;
 	}
 
 	/**
@@ -36,8 +40,8 @@ public abstract class AbstractEntity {
 	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
-		position.setX(position.getX() + x * direction.getXMod());
-		position.setY(position.getY() + y * direction.getYMod());
+		position.setX(position.getX() + x * direction.getXMod() * speedModifier);
+		position.setY(position.getY() + y * direction.getYMod() * speedModifier);
 	}
 	
 	/**
@@ -48,6 +52,16 @@ public abstract class AbstractEntity {
 	 */
 	public void setPosition(Position position) {
 		this.position = new Position(position);
+	}
+	
+	/**
+	 * Returns this entity's position.
+	 * 
+	 * @return
+	 * 			A new position with the same values as this position.
+	 */
+	public Position getPosition() {
+		return new Position(this.position);
 	}
 
 	/**

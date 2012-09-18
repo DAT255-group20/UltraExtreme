@@ -4,23 +4,19 @@ import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 
 /**
- * A basic bullet.
+ * A basic bullet that flies straight forward.
  * 
  * @author Daniel Jonsson, Viktor Anderling
  * 
  */
 public class BasicBullet extends AbstractBullet {
 
-	public BasicBullet(PlayerID playerId, Direction direction) {
-		super(playerId, direction);
-	}
-	
-	public BasicBullet(PlayerID playerId) {
-		this(playerId, Direction.UP);
+	public BasicBullet(double x, double y, PlayerID playerId, Direction direction) {
+		super(x, y, playerId, direction);
 	}
 
 	@Override
 	public void doMovement(float timePassed) {
-		this.move(1 * timePassed, 1 * timePassed);
+		this.move(0 * timePassed, 1 * timePassed);
 	}
 }

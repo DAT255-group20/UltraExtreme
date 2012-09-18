@@ -9,7 +9,7 @@ package ultraextreme.model.util;
  */
 public class Constants {
 
-	private Constants INSTANCE;
+	private static Constants INSTANCE;
 	
 	private Constants() {
 		INSTANCE = this;
@@ -18,7 +18,7 @@ public class Constants {
 	/**
 	 * @return This instance.
 	 */
-	public Constants getInstance() {
+	public static Constants getInstance() {
 		if(INSTANCE == null) {
 			return new Constants();
 		} else {
@@ -33,4 +33,27 @@ public class Constants {
 		return new Dimension(900, 1600);		
 	}
 	
+	/**
+	 * @return A positive double that impacts how fast the
+	 * enemy ships will move
+	 */
+	public double getEnemySpeedModifier() {
+		return 1;
+	}
+	
+	/**
+	 * @return A positive double that impacts how fast the
+	 * upgrade items will move
+	 */
+	public double getItemSpeedModifier() {
+		return 1;
+	}
+	
+	/**
+	 * @return A positive double that impacts how fast the
+	 * bullets will move
+	 */
+	public double getBulletSpeedModifier() {
+		return 1;
+	}
 }
