@@ -49,6 +49,10 @@ public abstract class AbstractEntity {
 	public void setPosition(Position position) {
 		this.position = new Position(position);
 	}
+	
+	public Position getPosition() {
+		return position;
+	}
 
 	/**
 	 * Determines whether this entity collides with another entity.

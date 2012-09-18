@@ -23,7 +23,7 @@ public class Position {
 	public Position(double x, double y) {
 		coordinates = new Vector2d(x, y);
 	}
-
+	
 	public void setX(double x) {
 		coordinates.x = x;
 	}
