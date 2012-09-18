@@ -5,7 +5,7 @@ import ultraextreme.model.util.PlayerID;
 /**
  * An abstract class representing a generic HomingBullet.
  * 
- * @author Bjorn Persson Mattsson
+ * @author Bjorn Persson Mattsson, Viktor Anderling
  * 
  */
 public abstract class AbstractHomingBullet extends AbstractBullet {
@@ -20,7 +20,7 @@ public abstract class AbstractHomingBullet extends AbstractBullet {
 	 * Sets the target for the homing bullet.
 	 * 
 	 * @param target
-	 *            Target
+	 * 				Target
 	 */
 	public void setTarget(AbstractEntity target) {
 		this.target = target;
