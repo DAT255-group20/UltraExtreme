@@ -6,18 +6,14 @@ import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.ui.activity.BaseActivity;
-import org.andengine.ui.activity.BaseGameActivity;
 
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.model.entity.AbstractBullet;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 /**
  * Class responsible for reflecting the model with a graphical representation
@@ -46,6 +42,7 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
+		registerUpdateHandler(new GameLoop());
 	}
 
 	private void drawBullets(List<AbstractBullet> bulletList) {
@@ -68,6 +65,6 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		shipSprite.setX(shipSprite.getX() + 1);
+		shipSprite.setX(shipSprite.getX() + event.values[1]);
 	}
 }
