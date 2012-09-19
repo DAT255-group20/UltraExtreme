@@ -36,6 +36,7 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 //		bulletSpriteMap.put(BulletID.BASIC_BULLET, basicBulletSprite);
 		setBackground(new Background(0.09804f, 0.6274f, 0));	
 		shipSprite = new Rectangle(10, 10, 100, 200, vertexBufferObjectManager);
+		SpriteContainer.playerShip = shipSprite;
 		attachChild(shipSprite);
 		setOnSceneTouchListener(this);
 		
@@ -67,8 +68,5 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		//shipSprite.setX(shipSprite.getX() + event.values[1]);
-		Position p = gameModel.getPlayer().getShip().getPosition();
-		shipSprite.setX((float) (p.getX()));
-		shipSprite.setY((float) (p.getY()));
 	}
 }
