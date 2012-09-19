@@ -3,6 +3,7 @@ package ultraextreme.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultraextreme.model.Enemy.AbstractEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.entity.IBullet;
@@ -19,7 +20,7 @@ public class GameModel implements IUltraExtremeModel {
 	private Player player;
 	private AbstractEntity entity;
 	private BulletProductionQueue bulletProdQueue;
-	private Enemy enemyController;
+	private AbstractEnemy enemyController;
 	private List<AbstractBullet> bullets;
 
 	public GameModel() {

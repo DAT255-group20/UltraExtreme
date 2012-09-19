@@ -11,8 +11,8 @@ import ultraextreme.model.util.PlayerID;
  */
 public class BasicBullet extends AbstractBullet {
 
-	public BasicBullet(double x, double y, PlayerID playerId, Direction direction) {
-		super(x, y, playerId, direction);
+	public BasicBullet(double x, double y, int width, int height, PlayerID playerId, Direction direction) {
+		super(x, y, width, height, playerId, direction);
 	}
 
 	@Override

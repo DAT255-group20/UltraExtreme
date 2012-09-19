@@ -11,8 +11,8 @@ import ultraextreme.model.util.PlayerID;
  */
 public abstract class AbstractHomingBullet extends AbstractBullet {
 
-	public AbstractHomingBullet(double x, double y, PlayerID playerId, Direction direction) {
-		super(x, y, playerId, direction);
+	public AbstractHomingBullet(double x, double y, int width, int height, PlayerID playerId, Direction direction) {
+		super(x, y,  width, height, playerId, direction);
 	}
 
 	protected AbstractEntity target;

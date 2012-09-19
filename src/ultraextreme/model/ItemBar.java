@@ -3,7 +3,9 @@ package ultraextreme.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Position;
 
 /**
  * An inventory containing weapons and bombs.
@@ -15,12 +17,13 @@ public class ItemBar {
 
 	private int maximumNumberOfItems;
 	private int cursorPosition;
-	private List<Weapon> items;
+	private List<AbstractWeapon> items;
 	private Bomb bomb;
 	private PlayerID playerId;
 	private BulletProductionQueue bulletManager;
+	private Position shipPosition;
 
-	public ItemBar(PlayerID playerId, BulletProductionQueue bulletManager) {
+	public ItemBar(Position shipPosition, PlayerID playerId, BulletProductionQueue bulletManager) {
 		this(playerId, bulletManager, 1);
 	}
 
@@ -28,7 +31,7 @@ public class ItemBar {
 			int maximumNumberOfItems) {
 		this.playerId = playerId;
 		this.bulletManager = bulletManager;
-		this.items = new ArrayList<Weapon>();
+		this.items = new ArrayList<AbstractWeapon>();
 		this.maximumNumberOfItems = maximumNumberOfItems;
 		this.cursorPosition = 0;
 	}
@@ -39,7 +42,7 @@ public class ItemBar {
 	 * @param item
 	 *            The item that should be added.
 	 */
-	public void addItem(Weapon item) {
+	public void addItem(AbstractWeapon item) {
 		items.set(cursorPosition, item);
 		cursorPosition++;
 		cursorPosition = cursorPosition % (maximumNumberOfItems - 1);
@@ -49,8 +52,8 @@ public class ItemBar {
 	 * Fires all the weapons in the ItemBar
 	 */
 	public void fireWeapons() {
-		for (Weapon weapon : items) {
-			weapon.fireShot(playerId);
+		for (AbstractWeapon weapon : items) {
+			weapon.fireShot(shipPosition, playerId, Direction.UP);
 		}
 	}
 }

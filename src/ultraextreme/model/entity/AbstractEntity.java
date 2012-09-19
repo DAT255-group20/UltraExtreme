@@ -6,29 +6,43 @@ import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.Position;
 
 /**
- * An abstract class representing an ingame "physical" entity.
+ * An abstract class representing an in-game "physical" entity.
  * 
- * @author Bjorn Persson Mattsson, Viktor Anderling
+ * @author Bjorn Persson Mattsson, Viktor Anderling, Johan Gronvall
  * 
  */
 public abstract class AbstractEntity {
 
 	private Position position;
+
 	private Direction direction;
+	
+	private int width;
+	
+	private int height;
 	
 	/**
 	 * A positive double that impacts on the entity's movement speed.
 	 */
 	private double speedModifier;
 
+	/**
+	 * Creates and entity at the position 0,0 and with the side 0
+	 */
 	public AbstractEntity() {
-		this(0, 0, Direction.UP, 1);
+		this(0, 0, 0, 0, Direction.UP, 1);
 	}
 
-	public AbstractEntity(double x, double y, Direction direction, double speedModifier) {
-		position = new Position(x, y);
+	public AbstractEntity(double x, double y, int width, int height, Direction direction, double speedModifier) {
+		this(x, y, width, height);
 		this.direction = direction;
 		this.speedModifier = speedModifier;
+	}
+	
+	public AbstractEntity(double x, double y, int width, int height){
+		this.position = new Position(x, y);
+		this.width = width;
+		this.height = height;
 	}
 
 	/**
