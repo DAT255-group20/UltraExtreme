@@ -1,30 +1,48 @@
 package ultraextreme.model.entity;
 
+import javax.vecmath.Vector2d;
+
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.Position;
 
 /**
- * An abstract class representing an ingame "physical" entity.
+ * An abstract class representing an in-game "physical" entity.
  * 
- * @author Bjorn Persson Mattsson, Viktor Anderling
+ * @author Bjorn Persson Mattsson, Viktor Anderling, Johan Gronvall
  * 
  */
 public abstract class AbstractEntity {
 
 	private Position position;
-	private Direction direction;
 
+	private Direction direction;
+	
+	private int width;
+	
+	private int height;
+	
+	/**
+	 * A positive double that impacts on the entity's movement speed.
+	 */
+	private double speedModifier;
+
+	/**
+	 * Creates and entity at the position 0,0 and with the side 0
+	 */
 	public AbstractEntity() {
-		this(0, 0, Direction.UP);
+		this(0, 0, 0, 0, Direction.UP, 1);
+	}
+
+	public AbstractEntity(double x, double y, int width, int height, Direction direction, double speedModifier) {
+		this(x, y, width, height);
+		this.direction = direction;
+		this.speedModifier = speedModifier;
 	}
 	
-	public AbstractEntity(Direction direction) {
-		this(0, 0, direction);
-	}
-
-	public AbstractEntity(double x, double y, Direction direction) {
-		position = new Position(x, y);
-		this.direction = direction;
+	public AbstractEntity(double x, double y, int width, int height){
+		this.position = new Position(x, y);
+		this.width = width;
+		this.height = height;
 	}
 
 	/**
@@ -36,8 +54,8 @@ public abstract class AbstractEntity {
 	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
-		position.setX(position.getX() + x * direction.getXMod());
-		position.setY(position.getY() + y * direction.getYMod());
+		position.setX(position.getX() + x * direction.getXMod() * speedModifier);
+		position.setY(position.getY() + y * direction.getYMod() * speedModifier);
 	}
 	
 	/**
@@ -50,8 +68,14 @@ public abstract class AbstractEntity {
 		this.position = new Position(position);
 	}
 	
+	/**
+	 * Returns this entity's position.
+	 * 
+	 * @return
+	 * 			A new position with the same values as this position.
+	 */
 	public Position getPosition() {
-		return position;
+		return new Position(this.position);
 	}
 
 	/**

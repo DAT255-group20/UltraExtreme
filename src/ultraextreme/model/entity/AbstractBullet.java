@@ -1,5 +1,6 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 
@@ -12,6 +13,7 @@ import ultraextreme.model.util.PlayerID;
 public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	private PlayerID playerId;
+	private static double speedModifier = Constants.getInstance().getBulletSpeedModifier();
 
 	/**
 	 * 
@@ -20,18 +22,9 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * @param direction
 	 * 					The direction the bullet is shot at.
 	 */
-	public AbstractBullet(PlayerID playerId, Direction direction) {
+	public AbstractBullet(double x, double y, int width, int height, PlayerID playerId, Direction direction) {
+		super(x, y, width, height, direction, speedModifier);
 		this.playerId = playerId;
-	}
-	
-	/**
-	 * Default direction is up.
-	 * 
-	 * @param playerId
-	 * 					The owner of the bullet.
-	 */
-	public AbstractBullet(PlayerID playerId) {
-		this(playerId, Direction.UP);
 	}
 
 	/**

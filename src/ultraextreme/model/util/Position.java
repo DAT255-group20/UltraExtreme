@@ -2,6 +2,7 @@ package ultraextreme.model.util;
 
 import javax.vecmath.Vector2d;
 
+
 /**
  * A 2d position that is used in the model.
  * 

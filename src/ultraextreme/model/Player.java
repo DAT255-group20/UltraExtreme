@@ -42,7 +42,7 @@ public class Player implements IPlayer {
 	public Player(PlayerID playerId, BulletProductionQueue bulletManager) {
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(playerId, bulletManager);
+		this.itemBar = new ItemBar(ship.getPosition(), playerId, bulletManager);
 	}
 
 	/**
