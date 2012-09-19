@@ -5,19 +5,17 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
-import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.text.Text;
-import org.andengine.opengl.font.Font;
-import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-import android.graphics.Typeface;
+import ultraextreme.model.GameModel;
+import ultraextreme.view.GameScene;
 
 public class MainActivity extends SimpleBaseGameActivity implements
 		IControllerListener {
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
+//	private GameModel gameModel;
 
 	private static final int CAMERA_WIDTH = 800;
 	private static final int CAMERA_HEIGHT = 480;
@@ -32,25 +30,15 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	@Override
 	protected void onCreateResources() {
 		// TODO MainActivity.onCreateResources()
-
 	}
 
 	@Override
 	protected Scene onCreateScene() {
-		Scene scene = new Scene();
-		scene.setBackground(new Background(0.09804f, 0.6274f, 0));
-		Font mFont = FontFactory.create(this.getFontManager(),
-				this.getTextureManager(), 256, 256,
-				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
-		mFont.load();
-		Text text = new Text(0, 0, mFont, "FUNKAR!!!", null);
-		scene.attachChild(text);
-		return scene;
+		return new GameScene(new GameModel(), this.getVertexBufferObjectManager());
 	}
 
 	@Override
 	public void controllerListenerUpdate() {
 		// TODO MainActivity.controllerListenerUpdate()
-
 	}
 }
