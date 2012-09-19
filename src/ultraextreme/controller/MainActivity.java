@@ -5,10 +5,12 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
+import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.view.GameScene;
+import android.hardware.SensorManager;
 
 public class MainActivity extends SimpleBaseGameActivity implements
 		IControllerListener {
@@ -34,7 +36,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected Scene onCreateScene() {
-		return new GameScene(new GameModel(), this.getVertexBufferObjectManager());
+		return new GameScene(new GameModel(),
+				this.getVertexBufferObjectManager(),
+				(SensorManager) this
+						.getSystemService(BaseGameActivity.SENSOR_SERVICE));
 	}
 
 	@Override
