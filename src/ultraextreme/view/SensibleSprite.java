@@ -16,6 +16,7 @@ public class SensibleSprite extends Sprite{
 		super(pX, pY, pWidth, pHeight, pTextureRegion, pSpriteVertexBufferObject);
 		// TODO Auto-generated constructor stub
 	}
+	
 	//A method which FUCKING DRAWS THE MOTHERFUCKING SPRITE
 	public void draw(final GLState pGLState, final Camera pCamera) {
 		super.draw(pGLState, pCamera);
