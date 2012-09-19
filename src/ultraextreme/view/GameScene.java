@@ -11,6 +11,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.util.Position;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -65,6 +66,9 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		shipSprite.setX(shipSprite.getX() + event.values[1]);
+		//shipSprite.setX(shipSprite.getX() + event.values[1]);
+		Position p = gameModel.getPlayer().getShip().getPosition();
+		shipSprite.setX((float) (p.getX()));
+		shipSprite.setY((float) (p.getY()));
 	}
 }

@@ -39,11 +39,11 @@ public class GameModel implements IUltraExtremeModel  {
 	 */
 	public void update(ModelInput input, float timeElapsed) {
 		player.update(input, timeElapsed);
-		bullets.addAll(bulletProdQueue.getNewBullets());
-		bulletProdQueue.clear();
-		for (AbstractBullet bullet : bullets) {
-			bullet.doMovement(timeElapsed);
-		}
+//		bullets.addAll(bulletProdQueue.getNewBullets());
+//		bulletProdQueue.clear();
+//		for (AbstractBullet bullet : bullets) {
+//			bullet.doMovement(timeElapsed);
+//		}
 	}
 
 	@Override

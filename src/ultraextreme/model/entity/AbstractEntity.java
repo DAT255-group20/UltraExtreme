@@ -54,9 +54,12 @@ public abstract class AbstractEntity {
 	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
-		double[][] m = direction.getMatrixMod();
-		position.setX((position.getX() + (x * m[0][0] + y * m[1][0])) * speedModifier);
-		position.setY((position.getY() + (y * m[0][1] + x * m[1][1])) * speedModifier);
+		// FIXME: this makes the program crash
+//		double[][] m = direction.getMatrixMod();
+//		position.setX((position.getX() + (x * m[0][0] + y * m[1][0])) * speedModifier);
+//		position.setY((position.getY() + (y * m[0][1] + x * m[1][1])) * speedModifier);
+		position.setX(position.getX() + x);
+		position.setY(position.getY() + y);
 	}
 	
 	/**

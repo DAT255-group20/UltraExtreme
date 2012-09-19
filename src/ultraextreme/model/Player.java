@@ -50,9 +50,9 @@ public class Player implements IPlayer {
 	 */
 	public void update(ModelInput input, float delta) {
 		ship.move(input.dX, input.dY);
-		if (input.fireWeapons) {
-			itemBar.fireWeapons();
-		}
+//		if (input.fireWeapons) {
+//			itemBar.fireWeapons();
+//		}
 	}
 
 	/**

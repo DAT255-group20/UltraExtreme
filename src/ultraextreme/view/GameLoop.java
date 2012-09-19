@@ -14,7 +14,7 @@ public class GameLoop implements IUpdateHandler {
 	}
 	@Override
 	public void onUpdate(float time) {
-		gameModel.update(new ModelInput(0, 0, false, false), time);
+		gameModel.update(new ModelInput(1, 1, false, false), time);
 	}
 
 	@Override
