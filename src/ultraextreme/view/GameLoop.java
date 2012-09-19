@@ -2,12 +2,19 @@ package ultraextreme.view;
 
 import org.andengine.engine.handler.IUpdateHandler;
 
+import ultraextreme.model.IUltraExtremeModel;
+import ultraextreme.model.ModelInput;
+
 public class GameLoop implements IUpdateHandler {
 
+	private IUltraExtremeModel gameModel;
+	
+	public GameLoop(IUltraExtremeModel gameModel) {
+		this.gameModel = gameModel;
+	}
 	@Override
-	public void onUpdate(float arg0) {
-		// TODO Auto-generated method stub
-		
+	public void onUpdate(float time) {
+		gameModel.update(new ModelInput(0, 0, false, false), time);
 	}
 
 	@Override

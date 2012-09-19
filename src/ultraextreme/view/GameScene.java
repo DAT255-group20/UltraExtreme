@@ -42,7 +42,7 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
-		registerUpdateHandler(new GameLoop());
+		registerUpdateHandler(new GameLoop(gameModel));
 	}
 
 	private void drawBullets(List<AbstractBullet> bulletList) {

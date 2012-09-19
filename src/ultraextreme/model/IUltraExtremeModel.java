@@ -3,7 +3,6 @@ package ultraextreme.model;
 import java.util.List;
 
 import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.entity.IBullet;
 
 /**
  * An interface for a GameModel that only has get methods.
@@ -12,7 +11,10 @@ import ultraextreme.model.entity.IBullet;
  * 
  */
 public interface IUltraExtremeModel {
-
+	
+	// TODO: Only for testing
+	public void update(ModelInput input, float timeElapsed);
+	
 	IPlayer getPlayer();
 
 	List<AbstractBullet> getBullets();
