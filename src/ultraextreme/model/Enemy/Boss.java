@@ -1,4 +1,4 @@
-package ultraextreme.model;
+package ultraextreme.model.Enemy;
 
 /**
  * A level boss.
@@ -8,5 +8,5 @@ package ultraextreme.model;
  */
 public class Boss {
 
-	private Enemy enemyController;
+	private AbstractEnemy enemyController;
 }
