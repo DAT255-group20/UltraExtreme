@@ -1,5 +1,7 @@
 package ultraextreme.controller;
 
+import org.andengine.entity.scene.Scene;
+
 /**
  * All controllers should implement this class.
  * 
@@ -16,4 +18,6 @@ public abstract class AbstractController {
 	 */
 	public void addListener(IControllerListener listener) {
 	}
+	
+	public abstract Scene getScene();
 }

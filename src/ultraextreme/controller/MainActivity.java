@@ -36,9 +36,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected Scene onCreateScene() {
-		return new GameScene(new GameModel(),
-				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
+		this.gameController = new GameController(this.getVertexBufferObjectManager(), (SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
+		return gameController.getScene();
 	}
 
 	@Override
