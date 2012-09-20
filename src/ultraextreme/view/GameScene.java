@@ -4,10 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.andengine.entity.primitive.Rectangle;
-import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
-import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
@@ -23,8 +21,7 @@ import android.hardware.SensorManager;
  * @author Johan Gronvall
  * 
  */
-public class GameScene extends Scene implements IOnSceneTouchListener,
-		SensorEventListener {
+public class GameScene extends Scene implements SensorEventListener {
 
 	private IUltraExtremeModel gameModel;
 	// private Map<BulletID, RectangularShape> bulletSpriteMap;
@@ -44,7 +41,6 @@ public class GameScene extends Scene implements IOnSceneTouchListener,
 		bulletSprites = new LinkedList<BulletSprite>();
 		SpriteContainer.playerShip = shipSprite;
 		attachChild(shipSprite);
-		setOnSceneTouchListener(this);
 
 		this.sensorManager = sensorManager;
 		sensorManager.registerListener(this,
@@ -56,12 +52,6 @@ public class GameScene extends Scene implements IOnSceneTouchListener,
 		// for(AbstractBullet bullet : bulletList) {
 		// bulletSpriteMap.get(bullet.getBulletID())
 		// }
-	}
-
-	@Override
-	public boolean onSceneTouchEvent(Scene arg0, TouchEvent arg1) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

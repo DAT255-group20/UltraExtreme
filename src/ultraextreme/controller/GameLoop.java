@@ -19,12 +19,13 @@ import android.util.Log;
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	private GameScene gameScene;
-
 	private GameModel gameModel;
-
 	private List<BulletSprite> bulletSprites;
-
 	private VertexBufferObjectManager vertexBufferObjectManager;
+	
+	private boolean firing;
+	private double moveX;
+	private double moveY;
 
 	public GameLoop(GameScene gameScene, GameModel gameModel,
 			List<BulletSprite> bulletSprites,
@@ -37,7 +38,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void onUpdate(float time) {
-		gameModel.update(new ModelInput(1, 1, true, false), time);
+		gameModel.update(new ModelInput(moveX, moveY, firing, false), time);
+		moveX = 0;
+		moveY = 0;
+		
 		Position p = gameModel.getPlayer().getShip().getPosition();
 		// Log.d("DEBUG", "" + p.getX());
 		SpriteContainer.playerShip.setX((float) (p.getX()));
@@ -63,5 +67,14 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			gameScene.attachChild(b);
 			Log.d("Bullet list length View", "" + bulletSprites.size());
 		}
+	}
+
+	public void setFiring(boolean b) {
+		this.firing = b;
+	}
+
+	public void addToMovement(double dX, double dY) {
+		this.moveX += dX;
+		this.moveY += dY;
 	}
 }
