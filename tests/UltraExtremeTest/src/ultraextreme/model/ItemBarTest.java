@@ -96,14 +96,14 @@ public class ItemBarTest extends TestCase {
 	 */
 	public void testFireWeapon() {
 		itemBar.fireWeapons(new Position());
-		assertTrue(bulletManager.getNewBullets().size() == 0);
+		assertTrue(bulletManager.getBullets().size() == 0);
 		
 		itemBar.addItem(getNewWeapon());
 		itemBar.fireWeapons(new Position());
-		int bulletsShot = bulletManager.getNewBullets().size();
+		int bulletsShot = bulletManager.getBullets().size();
 		assertTrue(bulletsShot > 0);
 		
 		itemBar.fireWeapons(new Position());
-		assertTrue(bulletManager.getNewBullets().size() > bulletsShot);
+		assertTrue(bulletManager.getBullets().size() > bulletsShot);
 	}
 }

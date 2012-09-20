@@ -74,9 +74,9 @@ public class IPlayerTest extends TestCase {
 		assertEquals(pOld.getX() + dX, pNew.getX());
 		assertEquals(pOld.getY() + dY, pNew.getY());
 		if (fireWeapons)
-			assertTrue(bulletManager.getNewBullets().size() > 0);
+			assertTrue(bulletManager.getBullets().size() > 0);
 		else
-			assertTrue(bulletManager.getNewBullets().size() == 0);
+			assertTrue(bulletManager.getBullets().size() == 0);
 		//assertEquals(bulletManager.isBombDropped(), dropBomb);
 	}
 }

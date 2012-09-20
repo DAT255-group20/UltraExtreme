@@ -37,10 +37,9 @@ public class BulletManager {
 	}
 
 	/**
-	 * @return A list of all bullets that have been added since last call to
-	 *         this method.
+	 * @return A list of all bullets in the bullet manager.
 	 */
-	public List<AbstractBullet> getNewBullets() {
+	public List<AbstractBullet> getBullets() {
 		return bullets;
 	}
 
