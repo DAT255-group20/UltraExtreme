@@ -84,7 +84,16 @@ public class ItemBar {
 			items.set(cursorPosition, item);
 		}
 		cursorPosition++;
-		cursorPosition = (maximumNumberOfItems - 1) % cursorPosition;
+		cursorPosition = cursorPosition % maximumNumberOfItems ;
+	}
+	
+	/**
+	 * Return a list of the items in the item bar.
+	 * 
+	 * @return A list of the items in the item bar.
+	 */
+	public List<AbstractWeapon> getItems() {
+		return this.items;
 	}
 
 	/**
