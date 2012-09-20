@@ -2,7 +2,7 @@ package ultraextreme.model;
 
 import java.util.List;
 
-import ultraextreme.model.enemy1.AbstractEnemy;
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.PlayerID;
