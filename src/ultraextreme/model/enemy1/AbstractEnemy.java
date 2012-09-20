@@ -1,4 +1,4 @@
-package ultraextreme.model.enemy;
+package ultraextreme.model.enemy1;
 
 import ultraextreme.model.AbstractWeapon;
 import ultraextreme.model.entity.EnemyShip;

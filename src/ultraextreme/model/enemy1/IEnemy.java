@@ -1,4 +1,4 @@
-package ultraextreme.model.enemy;
+package ultraextreme.model.enemy1;
 
 /**
  * Interface for self-thinking enemies
