@@ -110,4 +110,6 @@ public abstract class AbstractEntity {
 	public Direction getDirection() {
 		return direction;
 	}
+	
+	public abstract double getSpeedMod();
 }

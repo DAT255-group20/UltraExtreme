@@ -1,5 +1,6 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Direction;
 
 /**
@@ -11,6 +12,8 @@ import ultraextreme.model.util.Direction;
 public abstract class EnemyShip extends DestroyableEntity {
 
 	private int hitPoints;
+	
+	private static double speedMod = Constants.getInstance().getEnemySpeedModifier();
 
 	public EnemyShip(double x, double y, int width, int height, Direction direction, int hitpoints) {
 		super(x, y, width, height, direction);
@@ -21,6 +24,11 @@ public abstract class EnemyShip extends DestroyableEntity {
 	public boolean isDestroyed() {
 		// TODO Auto-generated method stub
 		return hitPoints < 1;
+	}
+	
+	@Override
+	public double getSpeedMod() {
+		return speedMod;
 	}
 
 }

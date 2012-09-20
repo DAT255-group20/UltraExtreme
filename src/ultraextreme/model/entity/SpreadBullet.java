@@ -30,7 +30,7 @@ public class SpreadBullet extends AbstractBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		this.move(timePassed * slope, timePassed);
+		this.move(timePassed * slope * getSpeedMod(), timePassed * getSpeedMod());
 
 	}
 

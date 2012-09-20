@@ -38,12 +38,19 @@ public class Constants {
 	public double getEnemySpeedModifier() {
 		return 1;
 	}
+	
+	/**
+	 * @return A positive double that impacts how fast the player ships will move
+	 */
+	public double getPlayerSpeedModifier() {
+		return 1;
+	}
 
 	/**
 	 * @return A positive double that impacts how fast the upgrade items will
 	 *         move
 	 */
-	public double getItemSpeedModifier() {
+	public double getPickupSpeedModifier() {
 		return 1;
 	}
 

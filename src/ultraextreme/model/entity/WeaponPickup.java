@@ -1,5 +1,7 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.Constants;
+
 /**
  * An weapon pickup item.
  * 
@@ -7,5 +9,12 @@ package ultraextreme.model.entity;
  * 
  */
 public class WeaponPickup extends AbstractEntity {
+
+	private static double speedMod = Constants.getInstance().getPickupSpeedModifier();
+	
+	@Override
+	public double getSpeedMod() {
+		return speedMod;
+	}
 
 }
