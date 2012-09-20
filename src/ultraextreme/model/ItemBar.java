@@ -15,24 +15,56 @@ import ultraextreme.model.util.Position;
  */
 public class ItemBar {
 
+	/**
+	 * Maximum number of items that the item bar can hold.
+	 */
 	private int maximumNumberOfItems;
-	private int cursorPosition;
-	private List<AbstractWeapon> items;
-	private Bomb bomb;
-	private PlayerID playerId;
-	private BulletManager bulletManager;
-	private Position shipPosition;
 
-	public ItemBar(Position shipPosition, PlayerID playerId,
-			BulletManager bulletManager) {
-		this(shipPosition, playerId, bulletManager, 1);
+	/**
+	 * Where the next item will be put into the item bar.
+	 */
+	private int cursorPosition;
+
+	/**
+	 * A list of all items in the item bar.
+	 */
+	private List<AbstractWeapon> items;
+
+	/**
+	 * The player's ID that the item bar belongs to.
+	 */
+	private PlayerID playerId;
+
+	// private Bomb bomb;
+	
+	//private BulletManager bulletManager;
+
+	/**
+	 * Create an item bar.
+	 * 
+	 * @param playerId
+	 *            The player's ID it belongs to.
+	 * @param bulletManager
+	 *            Reference to the bullet manager.
+	 */
+	public ItemBar(PlayerID playerId, BulletManager bulletManager) {
+		this(playerId, bulletManager, 1);
 	}
 
-	public ItemBar(Position shipPosition, PlayerID playerId,
-			BulletManager bulletManager, int maximumNumberOfItems) {
-		this.shipPosition = shipPosition;
+	/**
+	 * Create an item bar.
+	 * 
+	 * @param playerId
+	 *            The player's ID it belongs to.
+	 * @param bulletManager
+	 *            Reference to the bullet manager.
+	 * @param maximumNumberOfItems
+	 *            Maximum number of items that fit in the item bar.
+	 */
+	public ItemBar(PlayerID playerId, BulletManager bulletManager,
+			int maximumNumberOfItems) {
 		this.playerId = playerId;
-		this.bulletManager = bulletManager;
+		//this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
 		this.maximumNumberOfItems = maximumNumberOfItems;
 		this.cursorPosition = 0;
@@ -56,10 +88,13 @@ public class ItemBar {
 
 	/**
 	 * Fires all the weapons in the ItemBar
+	 * 
+	 * @param firePositon
+	 *            From where the guns should be fired.
 	 */
-	public void fireWeapons() {
+	public void fireWeapons(Position firePosition) {
 		for (AbstractWeapon weapon : items) {
-			weapon.fireShot(shipPosition, playerId, Direction.UP);
+			weapon.fireShot(firePosition, playerId, Direction.UP);
 		}
 	}
 }

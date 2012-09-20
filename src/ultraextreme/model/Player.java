@@ -42,8 +42,7 @@ public class Player implements IPlayer {
 	public Player(PlayerID playerId, BulletManager bulletManager) {
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(ship.getPosition(), playerId, bulletManager);
-		// Add a basic weapon for testing purpose
+		this.itemBar = new ItemBar(playerId, bulletManager);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 	}
 
@@ -54,7 +53,7 @@ public class Player implements IPlayer {
 	public void update(ModelInput input, float delta) {
 		ship.move(input.dX, input.dY);
 		if (input.fireWeapons) {
-			itemBar.fireWeapons();
+			itemBar.fireWeapons(ship.getPosition());
 		}
 	}
 
