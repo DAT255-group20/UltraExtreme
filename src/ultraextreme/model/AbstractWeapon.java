@@ -1,6 +1,5 @@
 package ultraextreme.model;
 
-import ultraextreme.model.entity.BasicBullet;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
@@ -13,24 +12,26 @@ import ultraextreme.model.util.Position;
  */
 public abstract class AbstractWeapon {
 
-	private BulletProductionQueue bulletProdQueue;
+	private BulletProductionQueue bulletManager;
+	
+	public AbstractWeapon(BulletProductionQueue bulletManager) {
+		this.bulletManager = bulletManager;
+	}
 	
 	/*
-	 * Weapon skapar sin Bullet och skickar in PlayerID Weapon lägger till
-	 * Bulleten till BulletProdQueue GameModel antingen lyssnar på
-	 * BulletProdQueue eller frågar efter nya Bullets varje update För varje
-	 * ny Bullet { Om Bullet är målsökande (instanceof HominBullet) { Sök
-	 * reda på närmsta mål med hjälp av den PlayerID som bulleten har (för
-	 * att undvika att fiender skjuter på fiender osv) } Lägg till Bullet i
-	 * listan som innehåller alla Bullets }
+	 * Weapon skapar sin Bullet och skickar in PlayerID Weapon lï¿½gger till
+	 * Bulleten till BulletProdQueue GameModel antingen lyssnar pï¿½
+	 * BulletProdQueue eller frï¿½gar efter nya Bullets varje update Fï¿½r varje
+	 * ny Bullet { Om Bullet ï¿½r mï¿½lsï¿½kande (instanceof HominBullet) { Sï¿½k
+	 * reda pï¿½ nï¿½rmsta mï¿½l med hjï¿½lp av den PlayerID som bulleten har (fï¿½r
+	 * att undvika att fiender skjuter pï¿½ fiender osv) } Lï¿½gg till Bullet i
+	 * listan som innehï¿½ller alla Bullets }
 	 */
 	//bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(), shipPosition.getY(), width, height, playerId));
 	public abstract void fireShot(Position shipPosition, PlayerID playerId, Direction direction);
 
-
-	
 	protected BulletProductionQueue getBulletManager() {
-		return bulletProdQueue;
+		return bulletManager;
 	}
 
 }

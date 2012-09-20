@@ -17,6 +17,6 @@ public class BasicBullet extends AbstractBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		this.move(0 * timePassed, 1 * timePassed);
+		this.move(0 * timePassed, 100 * timePassed);
 	}
 }

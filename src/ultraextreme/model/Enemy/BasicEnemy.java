@@ -27,7 +27,8 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(double x, double y) {
 		//TODO change to a proper 
-		this(new BasicEnemyShip(x, y), new BasicWeapon());
+		// FIXME: BasicWeapon need a reference to the bullet manager.
+		this(new BasicEnemyShip(x, y), new BasicWeapon(null));
 	}
 	
 	@Override

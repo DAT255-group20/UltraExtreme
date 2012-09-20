@@ -1,5 +1,6 @@
 package ultraextreme.view;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.andengine.entity.primitive.Rectangle;
@@ -11,7 +12,6 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.util.Position;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -27,6 +27,7 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 //	private Map<BulletID, RectangularShape> bulletSpriteMap;
 	private Rectangle shipSprite;
 	private SensorManager sensorManager;
+	private List<BulletSprite> bulletSprites;
 
 	public GameScene(IUltraExtremeModel gameModel,
 			VertexBufferObjectManager vertexBufferObjectManager,
@@ -36,6 +37,7 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 //		bulletSpriteMap.put(BulletID.BASIC_BULLET, basicBulletSprite);
 		setBackground(new Background(0.09804f, 0.6274f, 0));	
 		shipSprite = new Rectangle(10, 10, 100, 200, vertexBufferObjectManager);
+		bulletSprites = new LinkedList<BulletSprite>();
 		SpriteContainer.playerShip = shipSprite;
 		attachChild(shipSprite);
 		setOnSceneTouchListener(this);
@@ -44,7 +46,11 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
-		registerUpdateHandler(new GameLoop(gameModel));
+		
+		// Start the game loop and add it as a listener to the bullet manage
+		GameLoop gameLoop = new GameLoop(this, gameModel, bulletSprites, vertexBufferObjectManager);
+		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
+		registerUpdateHandler(gameLoop);
 	}
 
 	private void drawBullets(List<AbstractBullet> bulletList) {

@@ -1,5 +1,8 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.entity.AbstractBullet;
@@ -13,6 +16,14 @@ import ultraextreme.model.entity.AbstractBullet;
 public class BulletProductionQueue {
 
 	private boolean isBombDropped = false;
+	
+	private List<AbstractBullet> bullets;
+	
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
+	public BulletProductionQueue() {
+		bullets = new ArrayList<AbstractBullet>();
+	}
 
 	/**
 	 * Adds a bullet to the creation queue.
@@ -21,14 +32,18 @@ public class BulletProductionQueue {
 	 *            Bullet to be added.
 	 */
 	public void addBullet(AbstractBullet b) {
+		bullets.add(b);
+		pcs.firePropertyChange("newBullet", null, b);
 	}
 
 	/**
 	 * @return A list of all bullets that have been added since last call to
 	 *         this method.
 	 */
+	// FIXME: This should be renamed to getBullets(). I use it as a getBullets
+	// in several places, but I don't want to break too much right now.
 	public List<AbstractBullet> getNewBullets() {
-		return null;
+		return bullets;
 	}
 
 	/**
@@ -37,6 +52,7 @@ public class BulletProductionQueue {
 	public void clear() {
 		// Maybe change this class to a BulletManager and let it handle all the
 		// bullets
+		bullets.clear();
 	}
 
 	/**
@@ -58,4 +74,12 @@ public class BulletProductionQueue {
 		}
 		return output;
 	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.removePropertyChangeListener(listener);
+    }	
 }

@@ -23,12 +23,14 @@ public class ItemBar {
 	private BulletProductionQueue bulletManager;
 	private Position shipPosition;
 
-	public ItemBar(Position shipPosition, PlayerID playerId, BulletProductionQueue bulletManager) {
-		this(playerId, bulletManager, 1);
+	public ItemBar(Position shipPosition, PlayerID playerId,
+			BulletProductionQueue bulletManager) {
+		this(shipPosition, playerId, bulletManager, 1);
 	}
 
-	public ItemBar(PlayerID playerId, BulletProductionQueue bulletManager,
+	public ItemBar(Position shipPosition, PlayerID playerId, BulletProductionQueue bulletManager,
 			int maximumNumberOfItems) {
+		this.shipPosition = shipPosition;
 		this.playerId = playerId;
 		this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
@@ -43,9 +45,13 @@ public class ItemBar {
 	 *            The item that should be added.
 	 */
 	public void addItem(AbstractWeapon item) {
-		items.set(cursorPosition, item);
+		if (items.size() < maximumNumberOfItems) {
+			items.add(item);
+		} else {
+			items.set(cursorPosition, item);
+		}
 		cursorPosition++;
-		cursorPosition = cursorPosition % (maximumNumberOfItems - 1);
+		cursorPosition = (maximumNumberOfItems - 1) % cursorPosition ;
 	}
 
 	/**

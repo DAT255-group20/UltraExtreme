@@ -93,7 +93,15 @@ public abstract class AbstractEntity {
 		return false;
 	}
 
-	public void getHitboxes() {
+//	public void getHitbox() {
+//	}
+	
+	public int getWidth() {
+		return 100;
+	}
+	
+	public int getHeight() {
+		return 100;
 	}
 	
 	/**
