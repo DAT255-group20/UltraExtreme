@@ -11,6 +11,7 @@ import ultraextreme.model.util.Position;
  * An inventory containing weapons and bombs.
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class ItemBar {

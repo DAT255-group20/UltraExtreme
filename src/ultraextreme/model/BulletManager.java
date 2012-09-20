@@ -48,8 +48,6 @@ public class BulletManager {
 	 * Clear the list of bullets.
 	 */
 	public void clear() {
-		// Maybe change this class to a BulletManager and let it handle all the
-		// bullets
 		bullets.clear();
 	}
 
