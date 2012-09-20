@@ -16,11 +16,11 @@ import ultraextreme.model.entity.AbstractBullet;
 public class BulletManager {
 
 	private boolean isBombDropped = false;
-	
+
 	private List<AbstractBullet> bullets;
-	
+
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+
 	public BulletManager() {
 		bullets = new ArrayList<AbstractBullet>();
 	}
@@ -72,12 +72,12 @@ public class BulletManager {
 		}
 		return output;
 	}
-	
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.addPropertyChangeListener(listener);
-    }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.removePropertyChangeListener(listener);
-    }	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.addPropertyChangeListener(listener);
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.removePropertyChangeListener(listener);
+	}
 }

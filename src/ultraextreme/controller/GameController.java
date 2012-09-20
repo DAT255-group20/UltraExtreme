@@ -18,14 +18,13 @@ public class GameController extends AbstractController implements
 
 	private GameScene scene;
 	private GameModel gameModel;
-	
+
 	public GameController() {
 		super();
-//		scene = new GameScene(gameModel);
-//		gameModel = new GameModel();
+		// scene = new GameScene(gameModel);
+		// gameModel = new GameModel();
 	}
 
-	
 	@Override
 	public boolean onSceneTouchEvent(Scene arg0, TouchEvent arg1) {
 		// TODO GameController.onSceneTouchEvent()

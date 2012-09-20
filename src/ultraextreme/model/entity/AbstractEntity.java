@@ -16,11 +16,11 @@ public abstract class AbstractEntity {
 	private Position position;
 
 	private Direction direction;
-	
+
 	private int width;
-	
+
 	private int height;
-	
+
 	/**
 	 * A positive double that impacts on the entity's movement speed.
 	 */
@@ -33,13 +33,14 @@ public abstract class AbstractEntity {
 		this(0, 0, 0, 0, Direction.UP, 1);
 	}
 
-	public AbstractEntity(double x, double y, int width, int height, Direction direction, double speedModifier) {
+	public AbstractEntity(double x, double y, int width, int height,
+			Direction direction, double speedModifier) {
 		this(x, y, width, height);
 		this.direction = direction;
 		this.speedModifier = speedModifier;
 	}
-	
-	public AbstractEntity(double x, double y, int width, int height){
+
+	public AbstractEntity(double x, double y, int width, int height) {
 		this.position = new Position(x, y);
 		this.width = width;
 		this.height = height;
@@ -55,28 +56,29 @@ public abstract class AbstractEntity {
 	 */
 	public void move(double x, double y) {
 		// FIXME: this makes the program crash
-//		double[][] m = direction.getMatrixMod();
-//		position.setX((position.getX() + (x * m[0][0] + y * m[1][0])) * speedModifier);
-//		position.setY((position.getY() + (y * m[0][1] + x * m[1][1])) * speedModifier);
+		// double[][] m = direction.getMatrixMod();
+		// position.setX((position.getX() + (x * m[0][0] + y * m[1][0])) *
+		// speedModifier);
+		// position.setY((position.getY() + (y * m[0][1] + x * m[1][1])) *
+		// speedModifier);
 		position.setX(position.getX() + x);
 		position.setY(position.getY() + y);
 	}
-	
+
 	/**
 	 * Sets the position of this entity to the given position.
 	 * 
 	 * @param position
-	 * 					The given position.
+	 *            The given position.
 	 */
 	public void setPosition(Position position) {
 		this.position = new Position(position);
 	}
-	
+
 	/**
 	 * Returns this entity's position.
 	 * 
-	 * @return
-	 * 			A new position with the same values as this position.
+	 * @return A new position with the same values as this position.
 	 */
 	public Position getPosition() {
 		return new Position(this.position);
@@ -93,17 +95,17 @@ public abstract class AbstractEntity {
 		return false;
 	}
 
-//	public void getHitbox() {
-//	}
-	
+	// public void getHitbox() {
+	// }
+
 	public int getWidth() {
 		return 100;
 	}
-	
+
 	public int getHeight() {
 		return 100;
 	}
-	
+
 	/**
 	 * Returns The direction this entity are facing.
 	 * 

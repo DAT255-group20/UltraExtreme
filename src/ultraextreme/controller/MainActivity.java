@@ -17,7 +17,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
-//	private GameModel gameModel;
+	// private GameModel gameModel;
 
 	private static final int CAMERA_WIDTH = 800;
 	private static final int CAMERA_HEIGHT = 480;

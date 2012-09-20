@@ -2,7 +2,6 @@ package ultraextreme.model.util;
 
 import javax.vecmath.Vector2d;
 
-
 /**
  * A 2d position that is used in the model.
  * 
@@ -16,7 +15,7 @@ public class Position {
 	public Position() {
 		this(0, 0);
 	}
-	
+
 	public Position(Position position) {
 		this(position.getX(), position.getY());
 	}
@@ -24,7 +23,7 @@ public class Position {
 	public Position(double x, double y) {
 		coordinates = new Vector2d(x, y);
 	}
-	
+
 	public void setX(double x) {
 		coordinates.x = x;
 	}

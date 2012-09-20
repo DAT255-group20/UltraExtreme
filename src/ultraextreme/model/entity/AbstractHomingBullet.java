@@ -11,8 +11,9 @@ import ultraextreme.model.util.PlayerID;
  */
 public abstract class AbstractHomingBullet extends AbstractBullet {
 
-	public AbstractHomingBullet(double x, double y, int width, int height, PlayerID playerId, Direction direction) {
-		super(x, y,  width, height, playerId, direction);
+	public AbstractHomingBullet(double x, double y, int width, int height,
+			PlayerID playerId, Direction direction) {
+		super(x, y, width, height, playerId, direction);
 	}
 
 	protected AbstractEntity target;
@@ -21,7 +22,7 @@ public abstract class AbstractHomingBullet extends AbstractBullet {
 	 * Sets the target for the homing bullet.
 	 * 
 	 * @param target
-	 * 				Target
+	 *            Target
 	 */
 	public void setTarget(AbstractEntity target) {
 		this.target = target;

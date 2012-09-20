@@ -28,8 +28,8 @@ public class ItemBar {
 		this(shipPosition, playerId, bulletManager, 1);
 	}
 
-	public ItemBar(Position shipPosition, PlayerID playerId, BulletManager bulletManager,
-			int maximumNumberOfItems) {
+	public ItemBar(Position shipPosition, PlayerID playerId,
+			BulletManager bulletManager, int maximumNumberOfItems) {
 		this.shipPosition = shipPosition;
 		this.playerId = playerId;
 		this.bulletManager = bulletManager;
@@ -51,7 +51,7 @@ public class ItemBar {
 			items.set(cursorPosition, item);
 		}
 		cursorPosition++;
-		cursorPosition = (maximumNumberOfItems - 1) % cursorPosition ;
+		cursorPosition = (maximumNumberOfItems - 1) % cursorPosition;
 	}
 
 	/**

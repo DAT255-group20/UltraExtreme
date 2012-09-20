@@ -1,4 +1,4 @@
-package ultraextreme.model.Enemy;
+package ultraextreme.model.enemy;
 
 /**
  * A level boss.

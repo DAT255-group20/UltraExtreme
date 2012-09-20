@@ -11,13 +11,13 @@ import ultraextreme.model.entity.AbstractBullet;
  * 
  */
 public interface IUltraExtremeModel {
-	
+
 	// TODO: Only for testing
 	public void update(ModelInput input, float timeElapsed);
-	
+
 	// TODO: Only for testing. perhaps
 	public BulletManager getBulletManager();
-	
+
 	IPlayer getPlayer();
 
 	List<AbstractBullet> getBullets();

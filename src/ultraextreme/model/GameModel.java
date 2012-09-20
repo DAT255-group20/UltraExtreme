@@ -2,7 +2,7 @@ package ultraextreme.model;
 
 import java.util.List;
 
-import ultraextreme.model.Enemy.AbstractEnemy;
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.PlayerID;
@@ -13,15 +13,15 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * 
  */
-public class GameModel implements IUltraExtremeModel  {
+public class GameModel implements IUltraExtremeModel {
 
 	private Player player;
-	
-	//private AbstractEntity entity;
-	
+
+	// private AbstractEntity entity;
+
 	private BulletManager bulletManager;
-	
-	//private AbstractEnemy enemyController;
+
+	// private AbstractEnemy enemyController;
 
 	public GameModel() {
 		bulletManager = new BulletManager();

@@ -16,15 +16,18 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+
 /**
  * Class responsible for reflecting the model with a graphical representation
+ * 
  * @author Johan Gronvall
- *
+ * 
  */
-public class GameScene extends Scene implements IOnSceneTouchListener, SensorEventListener {
+public class GameScene extends Scene implements IOnSceneTouchListener,
+		SensorEventListener {
 
 	private IUltraExtremeModel gameModel;
-//	private Map<BulletID, RectangularShape> bulletSpriteMap;
+	// private Map<BulletID, RectangularShape> bulletSpriteMap;
 	private Rectangle shipSprite;
 	private SensorManager sensorManager;
 	private List<BulletSprite> bulletSprites;
@@ -33,30 +36,32 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 			VertexBufferObjectManager vertexBufferObjectManager,
 			SensorManager sensorManager) {
 		this.gameModel = gameModel;
-//		Sprite basicBulletSprite = new RectangularShape(); //todo sprite specification
-//		bulletSpriteMap.put(BulletID.BASIC_BULLET, basicBulletSprite);
-		setBackground(new Background(0.09804f, 0.6274f, 0));	
+		// Sprite basicBulletSprite = new RectangularShape(); //todo sprite
+		// specification
+		// bulletSpriteMap.put(BulletID.BASIC_BULLET, basicBulletSprite);
+		setBackground(new Background(0.09804f, 0.6274f, 0));
 		shipSprite = new Rectangle(10, 10, 100, 200, vertexBufferObjectManager);
 		bulletSprites = new LinkedList<BulletSprite>();
 		SpriteContainer.playerShip = shipSprite;
 		attachChild(shipSprite);
 		setOnSceneTouchListener(this);
-		
+
 		this.sensorManager = sensorManager;
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
-		
+
 		// Start the game loop and add it as a listener to the bullet manage
-		GameLoop gameLoop = new GameLoop(this, gameModel, bulletSprites, vertexBufferObjectManager);
+		GameLoop gameLoop = new GameLoop(this, gameModel, bulletSprites,
+				vertexBufferObjectManager);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		registerUpdateHandler(gameLoop);
 	}
 
 	private void drawBullets(List<AbstractBullet> bulletList) {
-//		for(AbstractBullet bullet : bulletList) {
-//			bulletSpriteMap.get(bullet.getBulletID())
-//		}
+		// for(AbstractBullet bullet : bulletList) {
+		// bulletSpriteMap.get(bullet.getBulletID())
+		// }
 	}
 
 	@Override
@@ -68,11 +73,11 @@ public class GameScene extends Scene implements IOnSceneTouchListener, SensorEve
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		//shipSprite.setX(shipSprite.getX() + event.values[1]);
+		// shipSprite.setX(shipSprite.getX() + event.values[1]);
 	}
 }

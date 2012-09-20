@@ -16,11 +16,11 @@ import android.util.Log;
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	private GameScene gameScene;
-	
+
 	private IUltraExtremeModel gameModel;
-	
+
 	private List<BulletSprite> bulletSprites;
-	
+
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
 	public GameLoop(GameScene gameScene, IUltraExtremeModel gameModel,
@@ -31,15 +31,15 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		this.bulletSprites = bulletSprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 	}
-	
+
 	@Override
 	public void onUpdate(float time) {
 		gameModel.update(new ModelInput(1, 1, true, false), time);
 		Position p = gameModel.getPlayer().getShip().getPosition();
-		//Log.d("DEBUG", "" + p.getX());
+		// Log.d("DEBUG", "" + p.getX());
 		SpriteContainer.playerShip.setX((float) (p.getX()));
 		SpriteContainer.playerShip.setY((float) (p.getY()));
-		for(BulletSprite b : bulletSprites) {
+		for (BulletSprite b : bulletSprites) {
 			b.update();
 		}
 	}
@@ -47,12 +47,15 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName().equals("newBullet")) {
-			BulletSprite b = new BulletSprite((AbstractBullet) event.getNewValue(), vertexBufferObjectManager);
+			BulletSprite b = new BulletSprite(
+					(AbstractBullet) event.getNewValue(),
+					vertexBufferObjectManager);
 			bulletSprites.add(b);
 			gameScene.attachChild(b);
 			Log.d("Bullet list length View", "" + bulletSprites.size());

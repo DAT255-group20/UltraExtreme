@@ -11,19 +11,21 @@ import ultraextreme.model.util.PlayerID;
  * 
  */
 public abstract class AbstractBullet extends AbstractEntity implements IBullet {
-	
-	//What player shot this bullet
+
+	// What player shot this bullet
 	private PlayerID playerId;
-	private static double speedModifier = Constants.getInstance().getBulletSpeedModifier();
+	private static double speedModifier = Constants.getInstance()
+			.getBulletSpeedModifier();
 
 	/**
 	 * 
 	 * @param playerId
-	 * 					The owner of the bullet.
+	 *            The owner of the bullet.
 	 * @param direction
-	 * 					The direction the bullet is shot at.
+	 *            The direction the bullet is shot at.
 	 */
-	public AbstractBullet(double x, double y, int width, int height, PlayerID playerId, Direction direction) {
+	public AbstractBullet(double x, double y, int width, int height,
+			PlayerID playerId, Direction direction) {
 		super(x, y, width, height, direction, speedModifier);
 		this.playerId = playerId;
 	}
@@ -32,7 +34,7 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * Executes the bullets movement algorithm.
 	 * 
 	 * @param timePassed
-	 * 					Time passed since last update.
+	 *            Time passed since last update.
 	 */
 	public abstract void doMovement(float timePassed);
 

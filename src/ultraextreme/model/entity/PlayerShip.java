@@ -8,7 +8,7 @@ package ultraextreme.model.entity;
  */
 public class PlayerShip extends DestroyableEntity {
 
-	public PlayerShip(double x, double y,  int width, int height) {
+	public PlayerShip(double x, double y, int width, int height) {
 		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 	}
