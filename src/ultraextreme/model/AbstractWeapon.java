@@ -17,6 +17,7 @@ public abstract class AbstractWeapon {
 	public AbstractWeapon(BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
 	}
+
 	// bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(),
 	// shipPosition.getY(), width, height, playerId));
 	public abstract void fireShot(Position shipPosition, PlayerID playerId,

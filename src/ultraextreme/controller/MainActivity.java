@@ -5,7 +5,6 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
-import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import ultraextreme.model.GameModel;
@@ -39,8 +38,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	protected Scene onCreateScene() {
 		return new GameScene(new GameModel(),
 				this.getVertexBufferObjectManager(),
-				(SensorManager) this
-						.getSystemService(Context.SENSOR_SERVICE));
+				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
 	}
 
 	@Override
