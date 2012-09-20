@@ -4,10 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.andengine.entity.primitive.Rectangle;
-import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
-import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
@@ -23,8 +21,7 @@ import android.hardware.SensorManager;
  * @author Johan Gronvall
  * 
  */
-public class GameScene extends Scene implements IOnSceneTouchListener,
-		SensorEventListener {
+public class GameScene extends Scene implements SensorEventListener {
 
 	private IUltraExtremeModel gameModel;
 	// private Map<BulletID, RectangularShape> bulletSpriteMap;
@@ -44,30 +41,17 @@ public class GameScene extends Scene implements IOnSceneTouchListener,
 		bulletSprites = new LinkedList<BulletSprite>();
 		SpriteContainer.playerShip = shipSprite;
 		attachChild(shipSprite);
-		setOnSceneTouchListener(this);
 
 		this.sensorManager = sensorManager;
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
-
-		// Start the game loop and add it as a listener to the bullet manage
-		GameLoop gameLoop = new GameLoop(this, gameModel, bulletSprites,
-				vertexBufferObjectManager);
-		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
-		registerUpdateHandler(gameLoop);
 	}
 
 	private void drawBullets(List<AbstractBullet> bulletList) {
 		// for(AbstractBullet bullet : bulletList) {
 		// bulletSpriteMap.get(bullet.getBulletID())
 		// }
-	}
-
-	@Override
-	public boolean onSceneTouchEvent(Scene arg0, TouchEvent arg1) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -79,5 +63,9 @@ public class GameScene extends Scene implements IOnSceneTouchListener,
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// shipSprite.setX(shipSprite.getX() + event.values[1]);
+	}
+
+	public List<BulletSprite> getBulletSprites() {
+		return bulletSprites;
 	}
 }

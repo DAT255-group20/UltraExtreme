@@ -7,8 +7,6 @@ import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-import ultraextreme.model.GameModel;
-import ultraextreme.view.GameScene;
 import android.content.Context;
 import android.hardware.SensorManager;
 
@@ -36,9 +34,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected Scene onCreateScene() {
-		return new GameScene(new GameModel(),
+		this.gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
+		return gameController.getScene();
 	}
 
 	@Override
