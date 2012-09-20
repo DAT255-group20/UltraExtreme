@@ -6,8 +6,6 @@ import org.andengine.entity.sprite.vbo.ISpriteVertexBufferObject;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.util.GLState;
 
-import android.opengl.GLES20;
-
 public class SensibleSprite extends Sprite {
 
 	public SensibleSprite(float pX, float pY, float pWidth, float pHeight,
@@ -19,6 +17,7 @@ public class SensibleSprite extends Sprite {
 	}
 
 	// A method which FUCKING DRAWS THE MOTHERFUCKING SPRITE
+	@Override
 	public void draw(final GLState pGLState, final Camera pCamera) {
 		super.draw(pGLState, pCamera);
 	}

@@ -1,7 +1,5 @@
 package ultraextreme.model.entity;
 
-import javax.vecmath.Vector2d;
-
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.Position;
 

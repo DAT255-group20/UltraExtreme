@@ -50,6 +50,7 @@ public class Player implements IPlayer {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void update(ModelInput input, float delta) {
 		ship.move(input.dX, input.dY);
 		if (input.fireWeapons) {
@@ -60,6 +61,7 @@ public class Player implements IPlayer {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public PlayerShip getShip() {
 		return ship;
 	}
@@ -67,6 +69,7 @@ public class Player implements IPlayer {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public PlayerID getPlayerId() {
 		return playerId;
 	}
