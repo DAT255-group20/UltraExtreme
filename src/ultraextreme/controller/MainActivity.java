@@ -10,6 +10,7 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.view.GameScene;
+import android.content.Context;
 import android.hardware.SensorManager;
 
 public class MainActivity extends SimpleBaseGameActivity implements
@@ -39,7 +40,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		return new GameScene(new GameModel(),
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this
-						.getSystemService(BaseGameActivity.SENSOR_SERVICE));
+						.getSystemService(Context.SENSOR_SERVICE));
 	}
 
 	@Override

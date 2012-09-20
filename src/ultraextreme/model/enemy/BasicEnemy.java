@@ -4,7 +4,6 @@ import ultraextreme.model.BasicWeapon;
 import ultraextreme.model.AbstractWeapon;
 import ultraextreme.model.entity.BasicEnemyShip;
 import ultraextreme.model.entity.EnemyShip;
-import ultraextreme.model.util.PlayerID;
 
 /**
  * Class representing a very basic enemy that only flies downwards and has a

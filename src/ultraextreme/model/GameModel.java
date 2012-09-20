@@ -2,9 +2,7 @@ package ultraextreme.model;
 
 import java.util.List;
 
-import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -36,6 +34,7 @@ public class GameModel implements IUltraExtremeModel {
 	 * @param timeElapsed
 	 *            Time in seconds since last update.
 	 */
+	@Override
 	public void update(ModelInput input, float timeElapsed) {
 		player.update(input, timeElapsed);
 		for (AbstractBullet bullet : bulletManager.getNewBullets()) {
