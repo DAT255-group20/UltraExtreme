@@ -4,6 +4,7 @@ import ultraextreme.model.BasicWeapon;
 import ultraextreme.model.AbstractWeapon;
 import ultraextreme.model.entity.BasicEnemyShip;
 import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.util.Direction;
 
 /**
  * Class representing a very basic enemy that only flies downwards and has a
@@ -33,7 +34,7 @@ public class BasicEnemy extends AbstractEnemy {
 	public BasicEnemy(double x, double y) {
 		// TODO change to a proper
 		// FIXME: BasicWeapon need a reference to the bullet manager.
-		this(new BasicEnemyShip(x, y), new BasicWeapon(null));
+		this(new BasicEnemyShip(x, y, Direction.DOWN), new BasicWeapon(null));
 	}
 
 	@Override

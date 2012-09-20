@@ -1,5 +1,8 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.Direction;
+
+
 /**
  * The player's ship.
  * 
@@ -9,12 +12,12 @@ package ultraextreme.model.entity;
 public class PlayerShip extends DestroyableEntity {
 
 	public PlayerShip(double x, double y, int width, int height) {
-		super(x, y, width, height);
+		super(x, y, width, height, Direction.UP);
 		// TODO Auto-generated constructor stub
 	}
 
 	public PlayerShip() {
-		super(0, 0, 50, 50);
+		super(0, 0, 50, 50, Direction.UP);
 	}
 
 	@Override

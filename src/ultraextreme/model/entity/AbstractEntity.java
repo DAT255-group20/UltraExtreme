@@ -20,29 +20,25 @@ public abstract class AbstractEntity {
 	private int height;
 
 	/**
-	 * A positive double that impacts on the entity's movement speed.
-	 */
-	private double speedModifier;
-
-	/**
 	 * Creates and entity at the position 0,0 and with the side 0
 	 */
 	public AbstractEntity() {
-		this(0, 0, 0, 0, Direction.UP, 1);
+		this(0, 0, 0, 0, Direction.UP);
 	}
 
 	public AbstractEntity(double x, double y, int width, int height,
-			Direction direction, double speedModifier) {
-		this(x, y, width, height);
+			Direction direction) {
 		this.direction = direction;
-		this.speedModifier = speedModifier;
-	}
-
-	public AbstractEntity(double x, double y, int width, int height) {
 		this.position = new Position(x, y);
 		this.width = width;
 		this.height = height;
 	}
+
+//	public AbstractEntity(double x, double y, int width, int height) {
+//		this.position = new Position(x, y);
+//		this.width = width;
+//		this.height = height;
+//	}
 
 	/**
 	 * Move the entity a given x an y units.
@@ -96,6 +92,8 @@ public abstract class AbstractEntity {
 	// public void getHitbox() {
 	// }
 
+	
+	//TODO Change these to actual width/Height?
 	public int getWidth() {
 		return 100;
 	}
