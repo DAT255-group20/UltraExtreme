@@ -5,7 +5,7 @@ import javax.vecmath.Vector2d;
 /**
  * A 2d position that is used in the model.
  * 
- * @author Bjorn Persson Mattsson
+ * @author Bjorn Persson Mattsson, Viktor Anderling
  * 
  */
 public class Position {
@@ -14,6 +14,10 @@ public class Position {
 
 	public Position() {
 		this(0, 0);
+	}
+
+	public Position(Position position) {
+		this(position.getX(), position.getY());
 	}
 
 	public Position(double x, double y) {

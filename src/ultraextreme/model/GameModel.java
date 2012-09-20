@@ -1,11 +1,8 @@
 package ultraextreme.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.entity.AbstractEntity;
-import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -17,15 +14,16 @@ import ultraextreme.model.util.PlayerID;
 public class GameModel implements IUltraExtremeModel {
 
 	private Player player;
-	private AbstractEntity entity;
-	private BulletProductionQueue bulletProdQueue;
-	private Enemy enemyController;
-	private List<AbstractBullet> bullets;
+
+	// private AbstractEntity entity;
+
+	private BulletManager bulletManager;
+
+	// private AbstractEnemy enemyController;
 
 	public GameModel() {
-		bulletProdQueue = new BulletProductionQueue();
-		player = new Player(PlayerID.PLAYER1, bulletProdQueue);
-		bullets = new ArrayList<AbstractBullet>();
+		bulletManager = new BulletManager();
+		player = new Player(PlayerID.PLAYER1, bulletManager);
 	}
 
 	/**
@@ -38,9 +36,7 @@ public class GameModel implements IUltraExtremeModel {
 	 */
 	public void update(ModelInput input, float timeElapsed) {
 		player.update(input, timeElapsed);
-		bullets.addAll(bulletProdQueue.getNewBullets());
-		bulletProdQueue.clear();
-		for (AbstractBullet bullet : bullets) {
+		for (AbstractBullet bullet : bulletManager.getNewBullets()) {
 			bullet.doMovement(timeElapsed);
 		}
 	}
@@ -51,12 +47,8 @@ public class GameModel implements IUltraExtremeModel {
 	}
 
 	@Override
-	public List<IBullet> getBullets() {
-		List<IBullet> output = new ArrayList<IBullet>();
-		for (AbstractBullet b : bullets) {
-			output.add(b);
-		}
-		return output;
+	public List<AbstractBullet> getBullets() {
+		return bulletManager.getNewBullets();
 	}
 
 	/**
@@ -64,5 +56,10 @@ public class GameModel implements IUltraExtremeModel {
 	 */
 	public IUltraExtremeModel getModelInterface() {
 		return this;
+	}
+
+	@Override
+	public BulletManager getBulletManager() {
+		return bulletManager;
 	}
 }

@@ -8,6 +8,10 @@ package ultraextreme.model.entity;
  */
 public abstract class DestroyableEntity extends AbstractEntity {
 
+	public DestroyableEntity(double x, double y, int width, int height) {
+		super(x, y, width, height);
+	}
+
 	/**
 	 * @return true if and only if the entity has been destroyed.
 	 */

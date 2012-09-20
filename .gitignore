@@ -16,3 +16,5 @@ gen/
 *.settings
 *.launch
 *.loadpath
+
+*.log

@@ -1,5 +1,6 @@
 package ultraextreme.controller;
 
+import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.andengine.entity.scene.menu.item.IMenuItem;
@@ -16,6 +17,12 @@ public class MainMenuController extends AbstractController implements
 			float arg2, float arg3) {
 		// TODO MainMenuController.onMenuItemClicked()
 		return false;
+	}
+
+	@Override
+	public Scene getScene() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
