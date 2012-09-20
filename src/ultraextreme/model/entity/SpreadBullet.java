@@ -23,8 +23,8 @@ public class SpreadBullet extends AbstractBullet {
 	 * @param slope
 	 * 				The inclination of the bullet.
 	 */
-	public SpreadBullet(double x, double y, PlayerID playerId, Direction direction, double slope) {
-		super(x, y, playerId, direction);
+	public SpreadBullet(double x, double y, int width, int height, PlayerID playerId, Direction direction, double slope) {
+		super(x, y, width, height, playerId, direction);
 		this.slope = slope;
 	}
 

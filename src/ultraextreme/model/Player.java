@@ -4,13 +4,18 @@ import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.util.PlayerID;
 
 /**
- * The player.
+ * The player. The player has a ship and an item bar containing the ship's items
+ * (such as weapons).
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class Player implements IPlayer {
 
+	/**
+	 * Reference to the player's ship.
+	 */
 	private PlayerShip ship;
 
 	/**
@@ -20,7 +25,7 @@ public class Player implements IPlayer {
 	private PlayerID playerId;
 
 	/**
-	 * Item bar containing the items that the player's ship are currently
+	 * Item bar containing the items that the player's ship is currently
 	 * holding.
 	 */
 	private ItemBar itemBar;
@@ -37,16 +42,13 @@ public class Player implements IPlayer {
 	public Player(PlayerID playerId, BulletProductionQueue bulletManager) {
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(playerId, bulletManager);
+		this.itemBar = new ItemBar(ship.getPosition(), playerId, bulletManager);
+		// Add a basic weapon for testing purpose
+		this.itemBar.addItem(new BasicWeapon(bulletManager));
 	}
 
 	/**
-	 * Read the player's input data and update the player's ship.
-	 * 
-	 * @param input
-	 *            Input data such as keystrokes.
-	 * @param delta
-	 *            Time since last update.
+	 * {@inheritDoc}
 	 */
 	public void update(ModelInput input, float delta) {
 		ship.move(input.dX, input.dY);
@@ -55,14 +57,15 @@ public class Player implements IPlayer {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public PlayerShip getShip() {
 		return ship;
 	}
 
 	/**
-	 * Return the ID of the player.
-	 * 
-	 * @return The player's ID.
+	 * {@inheritDoc}
 	 */
 	public PlayerID getPlayerId() {
 		return playerId;

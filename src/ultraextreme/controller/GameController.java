@@ -10,7 +10,7 @@ import ultraextreme.view.GameScene;
 /**
  * Controller for the game model.
  * 
- * @author Bjorn Persson Mattsson
+ * @author Bjorn Persson Mattsson, Johan Gronvall
  * 
  */
 public class GameController extends AbstractController implements
@@ -18,7 +18,14 @@ public class GameController extends AbstractController implements
 
 	private GameScene scene;
 	private GameModel gameModel;
+	
+	public GameController() {
+		super();
+//		scene = new GameScene(gameModel);
+//		gameModel = new GameModel();
+	}
 
+	
 	@Override
 	public boolean onSceneTouchEvent(Scene arg0, TouchEvent arg1) {
 		// TODO GameController.onSceneTouchEvent()

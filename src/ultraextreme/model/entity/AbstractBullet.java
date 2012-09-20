@@ -11,7 +11,8 @@ import ultraextreme.model.util.PlayerID;
  * 
  */
 public abstract class AbstractBullet extends AbstractEntity implements IBullet {
-
+	
+	//What player shot this bullet
 	private PlayerID playerId;
 	private static double speedModifier = Constants.getInstance().getBulletSpeedModifier();
 
@@ -22,8 +23,8 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * @param direction
 	 * 					The direction the bullet is shot at.
 	 */
-	public AbstractBullet(double x, double y, PlayerID playerId, Direction direction) {
-		super(x, y, direction, speedModifier);
+	public AbstractBullet(double x, double y, int width, int height, PlayerID playerId, Direction direction) {
+		super(x, y, width, height, direction, speedModifier);
 		this.playerId = playerId;
 	}
 
