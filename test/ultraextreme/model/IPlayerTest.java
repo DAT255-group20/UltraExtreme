@@ -13,7 +13,7 @@ import ultraextreme.model.util.Position;
 public class IPlayerTest extends TestCase {
 
 	private IPlayer player;
-	private BulletProductionQueue bulletManager;
+	private BulletManager bulletManager;
 	private PlayerID playerId;
 
 	@Override
@@ -23,7 +23,7 @@ public class IPlayerTest extends TestCase {
 	}
 
 	private void resetInstanceVariables() {
-		bulletManager = new BulletProductionQueue();
+		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
 		player = new Player(playerId, bulletManager);
 	}

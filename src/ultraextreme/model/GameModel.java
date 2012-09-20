@@ -19,13 +19,12 @@ public class GameModel implements IUltraExtremeModel  {
 	
 	//private AbstractEntity entity;
 	
-	// FIXME: BulletProductionQueue should be renamed to BulletManager
-	private BulletProductionQueue bulletManager;
+	private BulletManager bulletManager;
 	
 	//private AbstractEnemy enemyController;
 
 	public GameModel() {
-		bulletManager = new BulletProductionQueue();
+		bulletManager = new BulletManager();
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 	}
 
@@ -62,7 +61,7 @@ public class GameModel implements IUltraExtremeModel  {
 	}
 
 	@Override
-	public BulletProductionQueue getBulletManager() {
+	public BulletManager getBulletManager() {
 		return bulletManager;
 	}
 }

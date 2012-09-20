@@ -16,7 +16,7 @@ public interface IUltraExtremeModel {
 	public void update(ModelInput input, float timeElapsed);
 	
 	// TODO: Only for testing. perhaps
-	public BulletProductionQueue getBulletManager();
+	public BulletManager getBulletManager();
 	
 	IPlayer getPlayer();
 

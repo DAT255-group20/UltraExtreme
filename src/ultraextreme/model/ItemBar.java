@@ -20,15 +20,15 @@ public class ItemBar {
 	private List<AbstractWeapon> items;
 	private Bomb bomb;
 	private PlayerID playerId;
-	private BulletProductionQueue bulletManager;
+	private BulletManager bulletManager;
 	private Position shipPosition;
 
 	public ItemBar(Position shipPosition, PlayerID playerId,
-			BulletProductionQueue bulletManager) {
+			BulletManager bulletManager) {
 		this(shipPosition, playerId, bulletManager, 1);
 	}
 
-	public ItemBar(Position shipPosition, PlayerID playerId, BulletProductionQueue bulletManager,
+	public ItemBar(Position shipPosition, PlayerID playerId, BulletManager bulletManager,
 			int maximumNumberOfItems) {
 		this.shipPosition = shipPosition;
 		this.playerId = playerId;

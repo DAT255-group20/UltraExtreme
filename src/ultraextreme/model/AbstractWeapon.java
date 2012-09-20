@@ -12,9 +12,9 @@ import ultraextreme.model.util.Position;
  */
 public abstract class AbstractWeapon {
 
-	private BulletProductionQueue bulletManager;
+	private BulletManager bulletManager;
 	
-	public AbstractWeapon(BulletProductionQueue bulletManager) {
+	public AbstractWeapon(BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
 	}
 	
@@ -30,7 +30,7 @@ public abstract class AbstractWeapon {
 	//bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(), shipPosition.getY(), width, height, playerId));
 	public abstract void fireShot(Position shipPosition, PlayerID playerId, Direction direction);
 
-	protected BulletProductionQueue getBulletManager() {
+	protected BulletManager getBulletManager() {
 		return bulletManager;
 	}
 

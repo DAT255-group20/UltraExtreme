@@ -8,5 +8,5 @@ package ultraextreme.model;
  */
 public class Bomb {
 
-	private BulletProductionQueue bulletManager;
+	private BulletManager bulletManager;
 }

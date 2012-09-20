@@ -10,7 +10,7 @@ public class BasicWeapon extends AbstractWeapon {
 	private static final int bulletWidth = 5;
 	private static final int bulletHeight = 5;
 	
-	public BasicWeapon(BulletProductionQueue bulletManager) {
+	public BasicWeapon(BulletManager bulletManager) {
 		super(bulletManager);
 	}
 	

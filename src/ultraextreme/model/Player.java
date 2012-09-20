@@ -39,7 +39,7 @@ public class Player implements IPlayer {
 	 *            A manager that the player ship's guns should add the bullets
 	 *            to.
 	 */
-	public Player(PlayerID playerId, BulletProductionQueue bulletManager) {
+	public Player(PlayerID playerId, BulletManager bulletManager) {
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(ship.getPosition(), playerId, bulletManager);

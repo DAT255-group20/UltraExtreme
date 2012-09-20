@@ -13,7 +13,7 @@ import ultraextreme.model.entity.AbstractBullet;
  * @author Bjorn Persson Mattsson
  * 
  */
-public class BulletProductionQueue {
+public class BulletManager {
 
 	private boolean isBombDropped = false;
 	
@@ -21,7 +21,7 @@ public class BulletProductionQueue {
 	
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
-	public BulletProductionQueue() {
+	public BulletManager() {
 		bullets = new ArrayList<AbstractBullet>();
 	}
 
@@ -40,8 +40,6 @@ public class BulletProductionQueue {
 	 * @return A list of all bullets that have been added since last call to
 	 *         this method.
 	 */
-	// FIXME: This should be renamed to getBullets(). I use it as a getBullets
-	// in several places, but I don't want to break too much right now.
 	public List<AbstractBullet> getNewBullets() {
 		return bullets;
 	}
