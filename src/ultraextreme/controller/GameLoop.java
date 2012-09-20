@@ -22,7 +22,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private GameModel gameModel;
 	private List<BulletSprite> bulletSprites;
 	private VertexBufferObjectManager vertexBufferObjectManager;
-	
+
 	private boolean firing;
 	private double moveX;
 	private double moveY;
@@ -41,7 +41,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		gameModel.update(new ModelInput(moveX, moveY, firing, false), time);
 		moveX = 0;
 		moveY = 0;
-		
+
 		Position p = gameModel.getPlayer().getShip().getPosition();
 		// Log.d("DEBUG", "" + p.getX());
 		SpriteContainer.playerShip.setX((float) (p.getX()));
