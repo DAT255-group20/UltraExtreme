@@ -21,8 +21,8 @@ public class GameController extends AbstractController implements
 
 	public GameController() {
 		super();
-		// scene = new GameScene(gameModel);
-		// gameModel = new GameModel();
+		scene = new GameScene();
+		gameModel = new GameModel();
 	}
 
 	@Override
