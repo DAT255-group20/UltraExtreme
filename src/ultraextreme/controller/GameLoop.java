@@ -1,4 +1,4 @@
-package ultraextreme.view;
+package ultraextreme.controller;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -7,23 +7,26 @@ import java.util.List;
 import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import ultraextreme.model.IUltraExtremeModel;
+import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.util.Position;
+import ultraextreme.view.BulletSprite;
+import ultraextreme.view.GameScene;
+import ultraextreme.view.SpriteContainer;
 import android.util.Log;
 
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	private GameScene gameScene;
 
-	private IUltraExtremeModel gameModel;
+	private GameModel gameModel;
 
 	private List<BulletSprite> bulletSprites;
 
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
-	public GameLoop(GameScene gameScene, IUltraExtremeModel gameModel,
+	public GameLoop(GameScene gameScene, GameModel gameModel,
 			List<BulletSprite> bulletSprites,
 			VertexBufferObjectManager vertexBufferObjectManager) {
 		this.gameScene = gameScene;
@@ -61,5 +64,4 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			Log.d("Bullet list length View", "" + bulletSprites.size());
 		}
 	}
-
 }

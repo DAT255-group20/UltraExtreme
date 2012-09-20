@@ -50,12 +50,6 @@ public class GameScene extends Scene implements IOnSceneTouchListener,
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
-
-		// Start the game loop and add it as a listener to the bullet manage
-		GameLoop gameLoop = new GameLoop(this, gameModel, bulletSprites,
-				vertexBufferObjectManager);
-		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
-		registerUpdateHandler(gameLoop);
 	}
 
 	private void drawBullets(List<AbstractBullet> bulletList) {
@@ -79,5 +73,9 @@ public class GameScene extends Scene implements IOnSceneTouchListener,
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// shipSprite.setX(shipSprite.getX() + event.values[1]);
+	}
+
+	public List<BulletSprite> getBulletSprites() {
+		return bulletSprites;
 	}
 }

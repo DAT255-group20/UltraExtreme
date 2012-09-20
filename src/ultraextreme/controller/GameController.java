@@ -5,10 +5,9 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import android.hardware.SensorManager;
-
 import ultraextreme.model.GameModel;
 import ultraextreme.view.GameScene;
+import android.hardware.SensorManager;
 
 /**
  * Controller for the game model.
@@ -22,9 +21,17 @@ public class GameController extends AbstractController implements
 	private GameScene scene;
 	private GameModel gameModel;
 
-	public GameController(VertexBufferObjectManager vertexBufferObjectManager, SensorManager sensorManager) {
+	public GameController(VertexBufferObjectManager vertexBufferObjectManager,
+			SensorManager sensorManager) {
 		gameModel = new GameModel();
-		scene = new GameScene(gameModel, vertexBufferObjectManager, sensorManager);
+		scene = new GameScene(gameModel, vertexBufferObjectManager,
+				sensorManager);
+
+		// Start the game loop and add it as a listener to the bullet manage
+		GameLoop gameLoop = new GameLoop(scene, gameModel,
+				scene.getBulletSprites(), vertexBufferObjectManager);
+		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
+		scene.registerUpdateHandler(gameLoop);
 	}
 
 	@Override

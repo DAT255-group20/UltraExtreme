@@ -34,7 +34,6 @@ public class GameModel implements IUltraExtremeModel {
 	 * @param timeElapsed
 	 *            Time in seconds since last update.
 	 */
-	@Override
 	public void update(ModelInput input, float timeElapsed) {
 		player.update(input, timeElapsed);
 		for (AbstractBullet bullet : bulletManager.getNewBullets()) {

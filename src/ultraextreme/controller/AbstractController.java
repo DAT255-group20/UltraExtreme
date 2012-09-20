@@ -18,6 +18,6 @@ public abstract class AbstractController {
 	 */
 	public void addListener(IControllerListener listener) {
 	}
-	
+
 	public abstract Scene getScene();
 }
