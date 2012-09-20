@@ -95,11 +95,11 @@ public abstract class AbstractEntity {
 	
 	//TODO Change these to actual width/Height?
 	public int getWidth() {
-		return 100;
+		return width;
 	}
 
 	public int getHeight() {
-		return 100;
+		return height;
 	}
 
 	/**
