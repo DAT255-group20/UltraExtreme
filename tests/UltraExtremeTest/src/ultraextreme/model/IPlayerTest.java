@@ -28,11 +28,17 @@ public class IPlayerTest extends TestCase {
 		player = new Player(playerId, bulletManager);
 	}
 
+	/**
+	 * Test if the get method works.
+	 */
 	public void testGetPlayerShip() {
 		AbstractEntity playerShip = player.getShip();
 		assertTrue(playerShip == player.getShip());
 	}
 
+	/**
+	 * Test if it's possible to get the player ID.
+	 */
 	public void testGetPlayerId() {
 		assertEquals(player.getPlayerId(), PlayerID.PLAYER1);
 	}
