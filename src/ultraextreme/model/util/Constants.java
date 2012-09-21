@@ -59,6 +59,6 @@ public class Constants {
 	 * @return A positive double that impacts how fast the bullets will move
 	 */
 	public double getBulletSpeedModifier() {
-		return 1;
+		return 100;
 	}
 }
