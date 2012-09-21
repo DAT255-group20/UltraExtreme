@@ -38,6 +38,7 @@ public abstract class AbstractEnemy implements IEnemy {
 		return ship.isDestroyed();
 	}
 
+	@Override
 	public EnemyShip getShip() {
 		return ship;
 	}

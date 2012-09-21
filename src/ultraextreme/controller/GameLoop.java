@@ -7,20 +7,29 @@ import java.util.List;
 import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import ultraextreme.model.EnemyManager;
 import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
+import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.util.Position;
 import ultraextreme.view.BulletSprite;
+import ultraextreme.view.EnemySprite;
 import ultraextreme.view.GameScene;
 import ultraextreme.view.SpriteContainer;
 import android.util.Log;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	private GameScene gameScene;
 	private GameModel gameModel;
 	private List<BulletSprite> bulletSprites;
+	private List<EnemySprite> enemySprites;
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
 	private boolean firing;
@@ -28,11 +37,12 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private double moveY;
 
 	public GameLoop(GameScene gameScene, GameModel gameModel,
-			List<BulletSprite> bulletSprites,
+			List<BulletSprite> bulletSprites, List<EnemySprite> enemySprites,
 			VertexBufferObjectManager vertexBufferObjectManager) {
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.bulletSprites = bulletSprites;
+		this.enemySprites = enemySprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 	}
 
@@ -48,6 +58,9 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		SpriteContainer.playerShip.setY((float) (p.getY()));
 		for (BulletSprite b : bulletSprites) {
 			b.update();
+		}
+		for (EnemySprite e : enemySprites) {
+			e.update();
 		}
 	}
 
@@ -66,6 +79,12 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			bulletSprites.add(b);
 			gameScene.attachChild(b);
 			Log.d("Bullet list length View", "" + bulletSprites.size());
+		} else if (event.getPropertyName().equals(EnemyManager.NEW_ENEMY)) {
+			EnemySprite e = new EnemySprite(
+					((IEnemy) event.getNewValue()).getShip(),
+					vertexBufferObjectManager);
+			enemySprites.add(e);
+			gameScene.attachChild(e);
 		}
 	}
 

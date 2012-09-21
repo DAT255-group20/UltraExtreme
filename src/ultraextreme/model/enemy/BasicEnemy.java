@@ -45,7 +45,9 @@ public class BasicEnemy extends AbstractEnemy {
 		// Shoot every 0.8seconds
 		if (cooldown > 0.8) {
 			cooldown = 0;
-			this.Shoot();
+			// FIXME: This is uncommented because calling this method makes the
+			// game crash.
+			//this.Shoot();
 		}
 		// TODO cooldown should be stored in weapon
 	}

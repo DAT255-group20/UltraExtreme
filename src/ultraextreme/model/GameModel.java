@@ -2,6 +2,8 @@ package ultraextreme.model;
 
 import java.util.List;
 
+import ultraextreme.model.enemy.BasicEnemy;
+import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.util.PlayerID;
 
@@ -15,14 +17,16 @@ public class GameModel implements IUltraExtremeModel {
 
 	private Player player;
 
-	// private AbstractEntity entity;
-
 	private BulletManager bulletManager;
 
-	// private AbstractEnemy enemyController;
+	private EnemyManager enemyManager;
+
+	// FIXME: Only for testing and shouldn't be here.
+	private float enemySpawnTimer = 0;
 
 	public GameModel() {
 		bulletManager = new BulletManager();
+		enemyManager = new EnemyManager();
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 	}
 
@@ -39,6 +43,18 @@ public class GameModel implements IUltraExtremeModel {
 		for (AbstractBullet bullet : bulletManager.getBullets()) {
 			bullet.doMovement(timeElapsed);
 		}
+		for (IEnemy enemy : enemyManager.getEnemies()) {
+			enemy.update(timeElapsed);
+		}
+
+		// FIXME: Only for testing
+		enemySpawnTimer += timeElapsed;
+		if (enemySpawnTimer > 1) {
+			enemyManager.addEnemy(new BasicEnemy(100 * enemyManager
+					.getEnemies().size(), 100 * enemyManager.getEnemies()
+					.size()));
+			enemySpawnTimer = 0;
+		}
 	}
 
 	@Override
@@ -51,6 +67,11 @@ public class GameModel implements IUltraExtremeModel {
 		return bulletManager.getBullets();
 	}
 
+	@Override
+	public List<IEnemy> getEnemies() {
+		return enemyManager.getEnemies();
+	}
+
 	/**
 	 * @return A model interface with only get methods.
 	 */
@@ -58,8 +79,11 @@ public class GameModel implements IUltraExtremeModel {
 		return this;
 	}
 
-	@Override
 	public BulletManager getBulletManager() {
 		return bulletManager;
+	}
+
+	public EnemyManager getEnemyManager() {
+		return enemyManager;
 	}
 }

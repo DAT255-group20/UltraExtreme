@@ -20,28 +20,27 @@ import android.hardware.SensorManager;
  * Class responsible for reflecting the model with a graphical representation
  * 
  * @author Johan Gronvall
+ * @author Daniel Jonsson
  * 
  */
 public class GameScene extends Scene implements SensorEventListener {
 
 	private IUltraExtremeModel gameModel;
-	// private Map<BulletID, RectangularShape> bulletSpriteMap;
 	private Rectangle shipSprite;
 	private SensorManager sensorManager;
 	private List<BulletSprite> bulletSprites;
+	private List<EnemySprite> enemySprites;
 
 	public GameScene(IUltraExtremeModel gameModel,
 			VertexBufferObjectManager vertexBufferObjectManager,
 			SensorManager sensorManager) {
 		this.gameModel = gameModel;
-		// Sprite basicBulletSprite = new RectangularShape(); //todo sprite
-		// specification
-		// bulletSpriteMap.put(BulletID.BASIC_BULLET, basicBulletSprite);
 		setBackground(new Background(0.09804f, 0.6274f, 0));
 		PlayerShip playerShip = gameModel.getPlayer().getShip();
 		shipSprite = new Rectangle(10, 10, playerShip.getWidth(),
 				playerShip.getHeight(), vertexBufferObjectManager);
 		bulletSprites = new LinkedList<BulletSprite>();
+		enemySprites = new LinkedList<EnemySprite>();
 		SpriteContainer.playerShip = shipSprite;
 		attachChild(shipSprite);
 
@@ -49,12 +48,6 @@ public class GameScene extends Scene implements SensorEventListener {
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
-	}
-
-	private void drawBullets(List<AbstractBullet> bulletList) {
-		// for(AbstractBullet bullet : bulletList) {
-		// bulletSpriteMap.get(bullet.getBulletID())
-		// }
 	}
 
 	@Override
@@ -70,5 +63,9 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public List<BulletSprite> getBulletSprites() {
 		return bulletSprites;
+	}
+
+	public List<EnemySprite> getEnemySprites() {
+		return enemySprites;
 	}
 }
