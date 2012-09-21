@@ -38,9 +38,10 @@ public class Constants {
 	public double getEnemySpeedModifier() {
 		return 1;
 	}
-	
+
 	/**
-	 * @return A positive double that impacts how fast the player ships will move
+	 * @return A positive double that impacts how fast the player ships will
+	 *         move
 	 */
 	public double getPlayerSpeedModifier() {
 		return 1;

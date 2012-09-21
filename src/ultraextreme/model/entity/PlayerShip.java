@@ -3,7 +3,6 @@ package ultraextreme.model.entity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Direction;
 
-
 /**
  * The player's ship.
  * 
@@ -12,8 +11,9 @@ import ultraextreme.model.util.Direction;
  */
 public class PlayerShip extends DestroyableEntity {
 
-	private static double speedMod = Constants.getInstance().getPlayerSpeedModifier();
-	
+	private static double speedMod = Constants.getInstance()
+			.getPlayerSpeedModifier();
+
 	public PlayerShip(double x, double y, int width, int height) {
 		super(x, y, width, height, Direction.UP);
 		// TODO Auto-generated constructor stub

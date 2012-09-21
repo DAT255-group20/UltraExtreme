@@ -10,14 +10,14 @@ import ultraextreme.model.util.Position;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class ItemBarTest extends TestCase {
-	
+
 	private PlayerID playerId;
 	private BulletManager bulletManager;
 	private ItemBar itemBar;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -28,8 +28,8 @@ public class ItemBarTest extends TestCase {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
 		itemBar = new ItemBar(playerId, bulletManager, slots);
-	}	
-	
+	}
+
 	/**
 	 * Add a lot of items to the item bar, get them from the item bar and
 	 * finally check if the size is correct.
@@ -40,14 +40,14 @@ public class ItemBarTest extends TestCase {
 			addItemSizeTester(i);
 		}
 	}
-	
+
 	private void addItemSizeTester(int numberOfItems) {
 		for (int i = 0; i < numberOfItems; i++) {
 			itemBar.addItem(new BasicWeapon(bulletManager));
 		}
 		assertEquals(itemBar.getItems().size(), numberOfItems);
 	}
-	
+
 	/**
 	 * Add 15 items to an item bar that can only take 10 items, and then check
 	 * that the size of items is correct in the item bar.
@@ -59,7 +59,7 @@ public class ItemBarTest extends TestCase {
 		}
 		assertEquals(itemBar.getItems().size(), 10);
 	}
-	
+
 	/**
 	 * Add 7 items to an item bar that can only hold 5 items. Then check so it's
 	 * the last 5 added items that are in the item bar. Also check so they are
@@ -81,15 +81,15 @@ public class ItemBarTest extends TestCase {
 		assertSame(itemBar.getItems().get(3), items.get(3));
 		assertSame(itemBar.getItems().get(4), items.get(4));
 	}
-	
+
 	private AbstractWeapon getNewItem() {
 		return new BasicWeapon(bulletManager);
 	}
-	
+
 	private AbstractWeapon getNewWeapon() {
 		return new BasicWeapon(bulletManager);
 	}
-	
+
 	/**
 	 * Fire a weapon a couple of times and check if the bullets are added to the
 	 * bullet manager.
@@ -97,12 +97,12 @@ public class ItemBarTest extends TestCase {
 	public void testFireWeapon() {
 		itemBar.fireWeapons(new Position());
 		assertTrue(bulletManager.getBullets().size() == 0);
-		
+
 		itemBar.addItem(getNewWeapon());
 		itemBar.fireWeapons(new Position());
 		int bulletsShot = bulletManager.getBullets().size();
 		assertTrue(bulletsShot > 0);
-		
+
 		itemBar.fireWeapons(new Position());
 		assertTrue(bulletManager.getBullets().size() > bulletsShot);
 	}

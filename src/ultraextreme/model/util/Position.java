@@ -42,10 +42,13 @@ public class Position {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) return false;
-	    if (o == this) return true;
-	    if (!(o instanceof Position)) return false;
-	    Position oPosition = (Position)o;
+		if (o == null)
+			return false;
+		if (o == this)
+			return true;
+		if (!(o instanceof Position))
+			return false;
+		Position oPosition = (Position) o;
 		return coordinates.equals(oPosition.coordinates);
 	}
 }

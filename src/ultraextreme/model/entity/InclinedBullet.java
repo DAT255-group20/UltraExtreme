@@ -30,7 +30,8 @@ public class InclinedBullet extends AbstractBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		this.move(timePassed * slope * getSpeedMod(), timePassed * getSpeedMod());
+		this.move(timePassed * slope * getSpeedMod(), timePassed
+				* getSpeedMod());
 
 	}
 

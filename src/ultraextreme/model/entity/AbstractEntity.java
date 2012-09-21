@@ -34,11 +34,11 @@ public abstract class AbstractEntity {
 		this.height = height;
 	}
 
-//	public AbstractEntity(double x, double y, int width, int height) {
-//		this.position = new Position(x, y);
-//		this.width = width;
-//		this.height = height;
-//	}
+	// public AbstractEntity(double x, double y, int width, int height) {
+	// this.position = new Position(x, y);
+	// this.width = width;
+	// this.height = height;
+	// }
 
 	/**
 	 * Move the entity a given x an y units.
@@ -92,8 +92,7 @@ public abstract class AbstractEntity {
 	// public void getHitbox() {
 	// }
 
-	
-	//TODO Change these to actual width/Height?
+	// TODO Change these to actual width/Height?
 	public int getWidth() {
 		return width;
 	}
@@ -110,6 +109,6 @@ public abstract class AbstractEntity {
 	public Direction getDirection() {
 		return direction;
 	}
-	
+
 	public abstract double getSpeedMod();
 }

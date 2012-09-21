@@ -83,6 +83,6 @@ public class IPlayerTest extends TestCase {
 			assertTrue(bulletManager.getBullets().size() > 0);
 		else
 			assertTrue(bulletManager.getBullets().size() == 0);
-		//assertEquals(bulletManager.isBombDropped(), dropBomb);
+		// assertEquals(bulletManager.isBombDropped(), dropBomb);
 	}
 }

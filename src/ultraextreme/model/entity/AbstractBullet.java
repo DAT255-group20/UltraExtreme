@@ -14,8 +14,9 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	// What player shot this bullet
 	private PlayerID playerId;
-	
-	private static double speedMod = Constants.getInstance().getBulletSpeedModifier();
+
+	private static double speedMod = Constants.getInstance()
+			.getBulletSpeedModifier();
 
 	/**
 	 * 
@@ -41,7 +42,7 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	public PlayerID getPlayerId() {
 		return playerId;
 	}
-	
+
 	@Override
 	public double getSpeedMod() {
 		return speedMod;

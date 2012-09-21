@@ -69,10 +69,24 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		}
 	}
 
+	/**
+	 * Sets if the player is firing or not.
+	 * 
+	 * @param b
+	 *            true if the player is firing, otherwise false.
+	 */
 	public void setFiring(boolean b) {
 		this.firing = b;
 	}
 
+	/**
+	 * Adds the provided change to the movement.
+	 * 
+	 * @param dX
+	 *            The change in the x axis.
+	 * @param dY
+	 *            The change in the y axis.
+	 */
 	public void addToMovement(double dX, double dY) {
 		this.moveX += dX;
 		this.moveY += dY;

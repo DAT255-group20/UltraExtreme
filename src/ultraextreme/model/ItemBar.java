@@ -37,8 +37,8 @@ public class ItemBar {
 	private PlayerID playerId;
 
 	// private Bomb bomb;
-	
-	//private BulletManager bulletManager;
+
+	// private BulletManager bulletManager;
 
 	/**
 	 * Create an item bar.
@@ -65,7 +65,7 @@ public class ItemBar {
 	public ItemBar(PlayerID playerId, BulletManager bulletManager,
 			int maximumNumberOfItems) {
 		this.playerId = playerId;
-		//this.bulletManager = bulletManager;
+		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
 		this.maximumNumberOfItems = maximumNumberOfItems;
 		this.cursorPosition = 0;
@@ -84,9 +84,9 @@ public class ItemBar {
 			items.set(cursorPosition, item);
 		}
 		cursorPosition++;
-		cursorPosition = cursorPosition % maximumNumberOfItems ;
+		cursorPosition = cursorPosition % maximumNumberOfItems;
 	}
-	
+
 	/**
 	 * Return a list of the items in the item bar.
 	 * 

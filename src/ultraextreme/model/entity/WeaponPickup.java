@@ -10,8 +10,9 @@ import ultraextreme.model.util.Constants;
  */
 public abstract class WeaponPickup extends AbstractEntity {
 
-	private static double speedMod = Constants.getInstance().getPickupSpeedModifier();
-	
+	private static double speedMod = Constants.getInstance()
+			.getPickupSpeedModifier();
+
 	@Override
 	public double getSpeedMod() {
 		return speedMod;

@@ -12,10 +12,12 @@ import ultraextreme.model.util.Direction;
 public abstract class EnemyShip extends DestroyableEntity {
 
 	private int hitPoints;
-	
-	private static double speedMod = Constants.getInstance().getEnemySpeedModifier();
 
-	public EnemyShip(double x, double y, int width, int height, Direction direction, int hitpoints) {
+	private static double speedMod = Constants.getInstance()
+			.getEnemySpeedModifier();
+
+	public EnemyShip(double x, double y, int width, int height,
+			Direction direction, int hitpoints) {
 		super(x, y, width, height, direction);
 		this.hitPoints = hitpoints;
 	}
@@ -25,7 +27,7 @@ public abstract class EnemyShip extends DestroyableEntity {
 		// TODO Auto-generated method stub
 		return hitPoints < 1;
 	}
-	
+
 	@Override
 	public double getSpeedMod() {
 		return speedMod;
