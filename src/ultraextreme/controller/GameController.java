@@ -33,8 +33,8 @@ public class GameController extends AbstractController implements
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
-		gameLoop = new GameLoop(scene, gameModel, scene.getBulletSprites(), scene.getEnemySprites(),
-				vertexBufferObjectManager);
+		gameLoop = new GameLoop(scene, gameModel, scene.getBulletSprites(),
+				scene.getEnemySprites(), vertexBufferObjectManager);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
 		scene.registerUpdateHandler(gameLoop);

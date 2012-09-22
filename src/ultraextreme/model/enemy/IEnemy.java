@@ -16,6 +16,6 @@ public interface IEnemy {
 	 *            since last update in (seconds?)
 	 */
 	public void update(float timePassed);
-	
+
 	public EnemyShip getShip();
 }

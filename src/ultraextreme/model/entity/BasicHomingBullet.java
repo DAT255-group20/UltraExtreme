@@ -14,7 +14,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		//TODO Test before optimizing code!
+		// TODO Test before optimizing code!
 		Position targetPosition = target.getPosition();
 		Position thisPosition = this.getPosition();
 		double deltaX = targetPosition.getX() - thisPosition.getX();
@@ -22,30 +22,31 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 		double moveX = 0;
 		double moveY = 0;
 		double speedMod = this.getSpeedMod();
-		
-		if(deltaX * deltaY == 0) {
-			if(deltaX + deltaY == 0) {
+
+		if (deltaX * deltaY == 0) {
+			if (deltaX + deltaY == 0) {
 				moveX = 0;
 				moveY = 0;
-			} else if(deltaX == 0) {
+			} else if (deltaX == 0) {
 				moveX = 0;
 				moveY = timePassed * this.getSpeedMod();
-			} else if(deltaY == 0) {
+			} else if (deltaY == 0) {
 				moveY = 0;
 				moveX = timePassed * this.getSpeedMod();
 			}
 		} else {
-			double k = Math.abs(Math.min(deltaY, deltaX) / Math.max(deltaY, deltaX));
-			if(deltaY < deltaX) { 
+			double k = Math.abs(Math.min(deltaY, deltaX)
+					/ Math.max(deltaY, deltaX));
+			if (deltaY < deltaX) {
 				moveX = 1;
 				moveY = k;
 			} else {
 				moveY = 1;
 				moveX = k;
-			}	
+			}
 		}
-		this.move(moveX * Math.signum(deltaX) * timePassed * speedMod, 
-				moveY * Math.signum(deltaY) * timePassed * speedMod);
+		this.move(moveX * Math.signum(deltaX) * timePassed * speedMod, moveY
+				* Math.signum(deltaY) * timePassed * speedMod);
 	}
 
 }

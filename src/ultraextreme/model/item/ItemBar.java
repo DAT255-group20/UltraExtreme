@@ -3,7 +3,6 @@ package ultraextreme.model.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultraextreme.model.BulletManager;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;

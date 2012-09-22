@@ -7,9 +7,9 @@ import java.util.List;
 import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import ultraextreme.model.EnemyManager;
 import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
+import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.util.Position;
@@ -22,7 +22,7 @@ import android.util.Log;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 

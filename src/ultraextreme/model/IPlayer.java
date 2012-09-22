@@ -1,6 +1,5 @@
-package ultraextreme.model.player;
+package ultraextreme.model;
 
-import ultraextreme.model.ModelInput;
 import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.util.PlayerID;
 

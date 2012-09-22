@@ -16,7 +16,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	// The entity representing the enemyShip
 	private EnemyShip ship;
 	private AbstractWeapon weapon;
-	
+
 	protected AbstractEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		this.ship = ship;
 		this.weapon = weapon;
@@ -38,6 +38,7 @@ public abstract class AbstractEnemy implements IEnemy {
 		return ship.isDestroyed();
 	}
 
+	@Override
 	public EnemyShip getShip() {
 		return ship;
 	}

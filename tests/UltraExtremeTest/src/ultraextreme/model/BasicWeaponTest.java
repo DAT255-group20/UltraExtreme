@@ -3,6 +3,7 @@ package ultraextreme.model;
 import junit.framework.TestCase;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.BasicBullet;
+import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;

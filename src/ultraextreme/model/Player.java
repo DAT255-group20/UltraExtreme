@@ -1,9 +1,8 @@
-package ultraextreme.model.player;
+package ultraextreme.model;
 
-import ultraextreme.model.BulletManager;
-import ultraextreme.model.ModelInput;
 import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.BasicWeapon;
+import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.util.PlayerID;
 

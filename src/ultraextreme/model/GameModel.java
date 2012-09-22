@@ -3,10 +3,10 @@ package ultraextreme.model;
 import java.util.List;
 
 import ultraextreme.model.enemy.BasicEnemy;
+import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.player.IPlayer;
-import ultraextreme.model.player.Player;
+import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.PlayerID;
 
 /**

@@ -1,10 +1,10 @@
 package ultraextreme.model.enemy;
 
-import ultraextreme.model.BulletManager;
 import ultraextreme.model.entity.BasicEnemyShip;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
+import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Direction;
 
 /**
@@ -18,7 +18,7 @@ public class BasicEnemy extends AbstractEnemy {
 
 	private static final int ySpeed = -50;
 	private float cooldown = 0;
-	
+
 	private BasicEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
 	}
@@ -35,8 +35,9 @@ public class BasicEnemy extends AbstractEnemy {
 	public BasicEnemy(double x, double y, BulletManager bulletManager) {
 		// TODO change to a proper
 		// FIXME: BasicWeapon need a reference to the bullet manager.
-		
-		this(new BasicEnemyShip(x, y, Direction.DOWN), new BasicWeapon(bulletManager));
+
+		this(new BasicEnemyShip(x, y, Direction.DOWN), new BasicWeapon(
+				bulletManager));
 	}
 
 	@Override

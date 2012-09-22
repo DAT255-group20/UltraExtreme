@@ -1,4 +1,4 @@
-package ultraextreme.model;
+package ultraextreme.model.item;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

@@ -1,6 +1,5 @@
 package ultraextreme.model.item;
 
-import ultraextreme.model.BulletManager;
 import ultraextreme.model.entity.BasicBullet;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;

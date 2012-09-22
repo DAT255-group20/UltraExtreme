@@ -9,7 +9,6 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
-import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.PlayerShip;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
