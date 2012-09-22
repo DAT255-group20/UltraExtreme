@@ -27,5 +27,4 @@ public class BulletSprite extends Rectangle {
 		this.setX((float) bullet.getPosition().getX());
 		this.setY((float) bullet.getPosition().getY());
 	}
-
 }
