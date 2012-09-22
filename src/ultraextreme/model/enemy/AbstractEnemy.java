@@ -1,7 +1,7 @@
 package ultraextreme.model.enemy;
 
-import ultraextreme.model.AbstractWeapon;
 import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 
@@ -16,7 +16,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	// The entity representing the enemyShip
 	private EnemyShip ship;
 	private AbstractWeapon weapon;
-
+	
 	protected AbstractEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		this.ship = ship;
 		this.weapon = weapon;
@@ -38,7 +38,6 @@ public abstract class AbstractEnemy implements IEnemy {
 		return ship.isDestroyed();
 	}
 
-	@Override
 	public EnemyShip getShip() {
 		return ship;
 	}

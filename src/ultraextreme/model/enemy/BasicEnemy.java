@@ -1,9 +1,10 @@
 package ultraextreme.model.enemy;
 
-import ultraextreme.model.BasicWeapon;
-import ultraextreme.model.AbstractWeapon;
+import ultraextreme.model.BulletManager;
 import ultraextreme.model.entity.BasicEnemyShip;
 import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.item.AbstractWeapon;
+import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.util.Direction;
 
 /**
@@ -17,8 +18,8 @@ public class BasicEnemy extends AbstractEnemy {
 
 	private static final int ySpeed = -50;
 	private float cooldown = 0;
-
-	protected BasicEnemy(EnemyShip ship, AbstractWeapon weapon) {
+	
+	private BasicEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
 	}
 
@@ -31,10 +32,11 @@ public class BasicEnemy extends AbstractEnemy {
 	 * @param y
 	 *            coordinate for the enemyShip
 	 */
-	public BasicEnemy(double x, double y) {
+	public BasicEnemy(double x, double y, BulletManager bulletManager) {
 		// TODO change to a proper
 		// FIXME: BasicWeapon need a reference to the bullet manager.
-		this(new BasicEnemyShip(x, y, Direction.DOWN), new BasicWeapon(null));
+		
+		this(new BasicEnemyShip(x, y, Direction.DOWN), new BasicWeapon(bulletManager));
 	}
 
 	@Override
@@ -45,9 +47,7 @@ public class BasicEnemy extends AbstractEnemy {
 		// Shoot every 0.8seconds
 		if (cooldown > 0.8) {
 			cooldown = 0;
-			// FIXME: This is uncommented because calling this method makes the
-			// game crash.
-			//this.Shoot();
+			this.Shoot();
 		}
 		// TODO cooldown should be stored in weapon
 	}

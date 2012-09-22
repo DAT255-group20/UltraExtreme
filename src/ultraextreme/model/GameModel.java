@@ -5,6 +5,8 @@ import java.util.List;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.player.IPlayer;
+import ultraextreme.model.player.Player;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -52,7 +54,7 @@ public class GameModel implements IUltraExtremeModel {
 		if (enemySpawnTimer > 1) {
 			enemyManager.addEnemy(new BasicEnemy(100 * enemyManager
 					.getEnemies().size(), 100 * enemyManager.getEnemies()
-					.size()));
+					.size(), bulletManager));
 			enemySpawnTimer = 0;
 		}
 	}

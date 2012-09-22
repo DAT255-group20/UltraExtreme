@@ -4,6 +4,7 @@ import java.util.List;
 
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.player.IPlayer;
 
 /**
  * An interface for a GameModel that only has get methods.
