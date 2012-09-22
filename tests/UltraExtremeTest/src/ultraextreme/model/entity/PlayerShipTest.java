@@ -1,28 +1,20 @@
 package ultraextreme.model.entity;
 
-import junit.framework.TestCase;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.Position;
 
-public class PlayerShipTest extends TestCase {
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
+public class PlayerShipTest extends AbstractEntityTest {
 
 	PlayerShip playerShip;
 
 	private void resetInstanceVariables(double x, double y, int width,
 			int height) {
 		playerShip = new PlayerShip(x, y, width, height);
-	}
-
-	/**
-	 * Create a ship and check if it's possible to get the given values.
-	 */
-	public void testGetProperties() {
-		resetInstanceVariables(10, 20, 30, 40);
-		assertEquals(playerShip.getPosition().getX(), 10.0);
-		assertEquals(playerShip.getPosition().getY(), 20.0);
-		assertEquals(playerShip.getWidth(), 30);
-		assertEquals(playerShip.getHeight(), 40);
-		assertEquals(playerShip.getDirection(), Direction.UP);
 	}
 
 	/**
@@ -47,5 +39,22 @@ public class PlayerShipTest extends TestCase {
 		// FIXME: Since the ship can't get hurt yet this is hard to test.
 		resetInstanceVariables(0, 0, 0, 0);
 		assertEquals(playerShip.isDestroyed(), false);
+	}
+	
+	@Override
+	public void testGetDirection() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertEquals(playerShip.getDirection(), Direction.UP);
+	}
+	
+	@Override
+	public void testGetSpeedModifier() {
+		// FIXME
+	}
+
+	@Override
+	protected AbstractEntity getNewAbstractEntity(double x, double y,
+			int width, int height, Direction direction) {
+		return new PlayerShip(x, y, width, height);
 	}
 }
