@@ -1,7 +1,7 @@
 package ultraextreme.model.enemy;
 
-import ultraextreme.model.AbstractWeapon;
 import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 

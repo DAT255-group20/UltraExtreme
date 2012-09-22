@@ -1,4 +1,4 @@
-package ultraextreme.model;
+package ultraextreme.model.item;
 
 import ultraextreme.model.entity.BasicBullet;
 import ultraextreme.model.util.Direction;

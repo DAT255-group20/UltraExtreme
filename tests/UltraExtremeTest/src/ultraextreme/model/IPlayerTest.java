@@ -2,6 +2,7 @@ package ultraextreme.model;
 
 import junit.framework.TestCase;
 import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 

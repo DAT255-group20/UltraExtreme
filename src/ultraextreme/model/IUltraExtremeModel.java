@@ -14,6 +14,8 @@ import ultraextreme.model.entity.AbstractBullet;
 public interface IUltraExtremeModel {
 
 	IPlayer getPlayer();
+
 	List<AbstractBullet> getBullets();
+
 	List<IEnemy> getEnemies();
 }
