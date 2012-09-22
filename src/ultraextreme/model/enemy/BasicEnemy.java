@@ -16,7 +16,7 @@ import ultraextreme.model.util.Direction;
  */
 public class BasicEnemy extends AbstractEnemy {
 
-	private static final int ySpeed = -50;
+	private static final int ySpeed = 50;
 	private float cooldown = 0;
 	
 

@@ -31,7 +31,7 @@ public enum Direction {
 			double yToXMod) {
 		this.modifierArr = new double[2][2];
 		modifierArr[0][0] = xToXMod;
-		modifierArr[0][1] = yToYMod;
+		modifierArr[0][1] = -yToYMod;
 		modifierArr[1][0] = xToYMod;
 		modifierArr[1][1] = yToXMod;
 	}

@@ -55,7 +55,7 @@ public class Player implements IPlayer {
 	 */
 	@Override
 	public void update(ModelInput input, float delta) {
-		ship.move(input.dX, input.dY);
+		ship.move(input.dX, -input.dY);
 		if (input.fireWeapons) {
 			itemBar.fireWeapons(ship.getPosition());
 		}
