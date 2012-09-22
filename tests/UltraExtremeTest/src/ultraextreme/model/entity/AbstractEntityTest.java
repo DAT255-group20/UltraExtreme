@@ -53,7 +53,11 @@ public abstract class AbstractEntityTest extends TestCase {
 	}
 	
 	public void testCollidesWith() {
-		// FIXME
+		// TODO Write collidesWith test
+	}
+	
+	public void testIsOutOfScreen() {
+		// TODO Write isOutOfScreen test
 	}
 	
 	public abstract void testGetSpeedModifier();
