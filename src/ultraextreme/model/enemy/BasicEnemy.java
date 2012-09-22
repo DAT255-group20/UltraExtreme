@@ -18,6 +18,7 @@ public class BasicEnemy extends AbstractEnemy {
 
 	private static final int ySpeed = -50;
 	private float cooldown = 0;
+	
 
 	private BasicEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
@@ -48,7 +49,7 @@ public class BasicEnemy extends AbstractEnemy {
 		// Shoot every 0.8seconds
 		if (cooldown > 0.8) {
 			cooldown = 0;
-			this.Shoot();
+			this.shoot();
 		}
 		// TODO cooldown should be stored in weapon
 	}

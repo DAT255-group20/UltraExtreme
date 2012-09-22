@@ -16,17 +16,19 @@ public abstract class AbstractEnemy implements IEnemy {
 	// The entity representing the enemyShip
 	private EnemyShip ship;
 	private AbstractWeapon weapon;
+	private Direction enemyDirection;
 
 	protected AbstractEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		this.ship = ship;
 		this.weapon = weapon;
+		this.enemyDirection = ship.getDirection();
 	}
 
 	/**
 	 * Fires the weapon assigned to this enemy
 	 */
-	public void Shoot() {
-		weapon.fireShot(ship.getPosition(), PlayerID.ENEMY, Direction.DOWN);
+	public void shoot() {
+		weapon.fireShot(ship.getPosition(), PlayerID.ENEMY, this.enemyDirection);
 	}
 
 	/**

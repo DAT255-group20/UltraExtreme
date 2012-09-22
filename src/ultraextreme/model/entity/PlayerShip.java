@@ -16,7 +16,6 @@ public class PlayerShip extends DestroyableEntity {
 
 	public PlayerShip(double x, double y, int width, int height) {
 		super(x, y, width, height, Direction.UP);
-		// TODO Auto-generated constructor stub
 	}
 
 	public PlayerShip() {
@@ -25,7 +24,7 @@ public class PlayerShip extends DestroyableEntity {
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return false;
 	}
 
