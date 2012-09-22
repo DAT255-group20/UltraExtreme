@@ -1,11 +1,12 @@
 package ultraextreme.model.enemy;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnemyManager {
+public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "n";
 
@@ -32,5 +33,13 @@ public class EnemyManager {
 
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		// This is executed when an enemy spawner wants to add a new enemy.
+		if (event.getPropertyName().equals(EnemySpawner.NEW_ENEMY)) {
+			addEnemy((IEnemy) event.getNewValue());
+		}
 	}
 }

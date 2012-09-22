@@ -2,8 +2,8 @@ package ultraextreme.model;
 
 import java.util.List;
 
-import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.EnemyManager;
+import ultraextreme.model.enemy.EnemySpawner;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.item.BulletManager;
@@ -22,13 +22,14 @@ public class GameModel implements IUltraExtremeModel {
 	private BulletManager bulletManager;
 
 	private EnemyManager enemyManager;
-
-	// FIXME: Only for testing and shouldn't be here.
-	private float enemySpawnTimer = 0;
+	
+	private EnemySpawner enemySpawner;
 
 	public GameModel() {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
+		enemySpawner = new EnemySpawner(bulletManager);
+		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 	}
 
@@ -48,16 +49,9 @@ public class GameModel implements IUltraExtremeModel {
 		for (IEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
-
-		// FIXME: Only for testing
-		enemySpawnTimer += timeElapsed;
-		if (enemySpawnTimer > 1) {
-			enemyManager.addEnemy(new BasicEnemy(100 * enemyManager
-					.getEnemies().size(), 100 * enemyManager.getEnemies()
-					.size(), bulletManager));
-			enemySpawnTimer = 0;
-		}
 		
+		enemySpawner.update(timeElapsed);
+
 		bulletManager.clearBulletsOffScreen();
 	}
 
