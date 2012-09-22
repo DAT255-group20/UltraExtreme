@@ -30,7 +30,7 @@ public class AbstractEnemyTest extends TestCase{
 	 */
 	@Test
 	public void testShoot() {
-		enemy.Shoot();
+		enemy.shoot();
 		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
 	

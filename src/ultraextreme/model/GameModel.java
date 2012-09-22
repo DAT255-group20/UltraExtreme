@@ -57,6 +57,8 @@ public class GameModel implements IUltraExtremeModel {
 					.size(), bulletManager));
 			enemySpawnTimer = 0;
 		}
+		
+		bulletManager.clearBulletsOffScreen();
 	}
 
 	@Override
