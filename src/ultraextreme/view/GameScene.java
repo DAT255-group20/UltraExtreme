@@ -38,8 +38,9 @@ public class GameScene extends Scene implements SensorEventListener {
 		setBackground(new Background(0.09804f, 0.6274f, 0));
 		PlayerShip playerShip = gameModel.getPlayer().getShip();
 		Position p = gameModel.getPlayer().getShip().getPosition();
-		shipSprite = new Rectangle((float) p.getX(), (float) p.getY(), playerShip.getWidth(),
-				playerShip.getHeight(), vertexBufferObjectManager);
+		shipSprite = new Rectangle((float) p.getX(), (float) p.getY(),
+				playerShip.getWidth(), playerShip.getHeight(),
+				vertexBufferObjectManager);
 		bulletSprites = new LinkedList<BulletSprite>();
 		enemySprites = new LinkedList<EnemySprite>();
 		SpriteContainer.playerShip = shipSprite;

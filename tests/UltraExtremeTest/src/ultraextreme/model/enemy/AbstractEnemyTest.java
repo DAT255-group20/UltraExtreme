@@ -5,26 +5,28 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import ultraextreme.model.item.BulletManager;
+
 /**
  * 
  * @author Johan Gronvall
- *
+ * 
  */
-public class AbstractEnemyTest extends TestCase{
+public class AbstractEnemyTest extends TestCase {
 	BulletManager bulletManager;
 	BasicEnemy enemy;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		resetInstanceVariables();
 	}
+
 	@Test
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
-		enemy = new BasicEnemy(5,5, bulletManager);
+		enemy = new BasicEnemy(5, 5, bulletManager);
 	}
-	
+
 	/**
 	 * Tests the shoot() Method
 	 */
@@ -33,7 +35,7 @@ public class AbstractEnemyTest extends TestCase{
 		enemy.shoot();
 		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
-	
+
 	/**
 	 * Tests the isDead() method
 	 */
@@ -43,7 +45,5 @@ public class AbstractEnemyTest extends TestCase{
 		enemy.getShip().damage(10000);
 		assertTrue(enemy.isDead());
 	}
-	
-	
-	
+
 }

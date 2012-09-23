@@ -22,7 +22,7 @@ public class GameModel implements IUltraExtremeModel {
 	private BulletManager bulletManager;
 
 	private EnemyManager enemyManager;
-	
+
 	private EnemySpawner enemySpawner;
 
 	public GameModel() {
@@ -49,7 +49,7 @@ public class GameModel implements IUltraExtremeModel {
 		for (IEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
-		
+
 		enemySpawner.update(timeElapsed);
 
 		bulletManager.clearBulletsOffScreen();

@@ -26,10 +26,10 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 	public void testGetPlayerId() {
 		AbstractBullet bullet = newBullet(PlayerID.PLAYER1);
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
-		
+
 		bullet = newBullet(PlayerID.PLAYER1);
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
-		
+
 		bullet = newBullet(PlayerID.ENEMY);
 		assertEquals(bullet.getPlayerId(), PlayerID.ENEMY);
 	}
@@ -44,9 +44,8 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 	private AbstractBullet newBullet() {
 		return newBullet(PlayerID.PLAYER1);
 	}
-	
+
 	private AbstractBullet newBullet(PlayerID playerId) {
-		return getNewAbstractBullet(10, 20, 30, 40, playerId,
-				Direction.UP);
+		return getNewAbstractBullet(10, 20, 30, 40, playerId, Direction.UP);
 	}
 }

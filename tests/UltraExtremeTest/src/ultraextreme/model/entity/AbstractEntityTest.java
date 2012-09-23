@@ -20,7 +20,7 @@ public abstract class AbstractEntityTest extends TestCase {
 		entity.move(-100, -1000);
 		assertEquals(entity.getPosition(), new Position(-80.0, -880.0));
 	}
-	
+
 	public void testSetPosition() {
 		AbstractEntity entity = newEntity();
 		entity.setPosition(new Position(40, 50));
@@ -30,40 +30,39 @@ public abstract class AbstractEntityTest extends TestCase {
 		assertEquals(entity.getPosition().getX(), -40.0);
 		assertEquals(entity.getPosition().getY(), -50.0);
 	}
-	
+
 	public void testGetPosition() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getPosition().getX(), 10.0);
 		assertEquals(entity.getPosition().getY(), 20.0);
 	}
-	
+
 	public void testGetWidth() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getWidth(), 30);
 	}
-	
+
 	public void testGetHeight() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getHeight(), 40);
 	}
-	
+
 	public void testGetDirection() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getDirection(), Direction.UP);
 	}
-	
+
 	public void testCollidesWith() {
 		// TODO Write collidesWith test
 	}
-	
+
 	public void testIsOutOfScreen() {
 		// TODO Write isOutOfScreen test
 	}
-	
+
 	public abstract void testGetSpeedModifier();
-	
-	private AbstractEntity newEntity()
-	{
+
+	private AbstractEntity newEntity() {
 		return getNewAbstractEntity(10, 20, 30, 40, Direction.UP);
 	}
 }

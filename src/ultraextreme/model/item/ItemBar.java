@@ -35,7 +35,7 @@ public class ItemBar {
 	 * The player's ID that the item bar belongs to.
 	 */
 	private PlayerID playerId;
-	
+
 	private Direction playerDirection;
 
 	// private Bomb bomb;
@@ -50,7 +50,8 @@ public class ItemBar {
 	 * @param bulletManager
 	 *            Reference to the bullet manager.
 	 */
-	public ItemBar(PlayerID playerId, BulletManager bulletManager, Direction playerDirection) {
+	public ItemBar(PlayerID playerId, BulletManager bulletManager,
+			Direction playerDirection) {
 		this(playerId, bulletManager, playerDirection, 1);
 	}
 
@@ -64,8 +65,8 @@ public class ItemBar {
 	 * @param maximumNumberOfItems
 	 *            Maximum number of items that fit in the item bar.
 	 */
-	public ItemBar(PlayerID playerId, BulletManager bulletManager, Direction playerDirection,
-			int maximumNumberOfItems) {
+	public ItemBar(PlayerID playerId, BulletManager bulletManager,
+			Direction playerDirection, int maximumNumberOfItems) {
 		this.playerId = playerId;
 		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();

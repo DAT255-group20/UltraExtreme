@@ -68,14 +68,17 @@ public abstract class AbstractEntity {
 	public Position getPosition() {
 		return new Position(this.position);
 	}
+
 	/**
 	 * Returns true if and only if the entity is entirely outside of the screen
+	 * 
 	 * @return true if and only if the entity is entirely outside of the screen
 	 */
 	public boolean isOutOfScreen() {
 		Dimension screen = Constants.getInstance().getLevelDimension();
-		return position.getY()-height < 0 || position.getX()-width < 0 ||
-				position.getX() > screen.getX() || position.getY() > screen.getY();
+		return position.getY() - height < 0 || position.getX() - width < 0
+				|| position.getX() > screen.getX()
+				|| position.getY() > screen.getY();
 	}
 
 	/**
