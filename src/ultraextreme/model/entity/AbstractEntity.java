@@ -1,5 +1,7 @@
 package ultraextreme.model.entity;
 
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.Position;
 
@@ -20,25 +22,15 @@ public abstract class AbstractEntity {
 	private int height;
 
 	/**
-	 * A positive double that impacts on the entity's movement speed.
-	 */
-	private double speedModifier;
-
-	/**
 	 * Creates and entity at the position 0,0 and with the side 0
 	 */
 	public AbstractEntity() {
-		this(0, 0, 0, 0, Direction.UP, 1);
+		this(0, 0, 0, 0, Direction.UP);
 	}
 
 	public AbstractEntity(double x, double y, int width, int height,
-			Direction direction, double speedModifier) {
-		this(x, y, width, height);
+			Direction direction) {
 		this.direction = direction;
-		this.speedModifier = speedModifier;
-	}
-
-	public AbstractEntity(double x, double y, int width, int height) {
 		this.position = new Position(x, y);
 		this.width = width;
 		this.height = height;
@@ -53,14 +45,9 @@ public abstract class AbstractEntity {
 	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
-		// FIXME: this makes the program crash
-		// double[][] m = direction.getMatrixMod();
-		// position.setX((position.getX() + (x * m[0][0] + y * m[1][0])) *
-		// speedModifier);
-		// position.setY((position.getY() + (y * m[0][1] + x * m[1][1])) *
-		// speedModifier);
-		position.setX(position.getX() + x);
-		position.setY(position.getY() + y);
+		double[][] m = direction.getMatrixMod();
+		position.setX((position.getX() + (x * m[0][0] + y * m[1][0])));
+		position.setY((position.getY() + (y * m[0][1] + x * m[1][1])));
 	}
 
 	/**
@@ -81,6 +68,15 @@ public abstract class AbstractEntity {
 	public Position getPosition() {
 		return new Position(this.position);
 	}
+	/**
+	 * Returns true if and only if the entity is entirely outside of the screen
+	 * @return true if and only if the entity is entirely outside of the screen
+	 */
+	public boolean isOutOfScreen() {
+		Dimension screen = Constants.getInstance().getLevelDimension();
+		return position.getY()-height < 0 || position.getX()-width < 0 ||
+				position.getX() > screen.getX() || position.getY() > screen.getY();
+	}
 
 	/**
 	 * Determines whether this entity collides with another entity.
@@ -96,12 +92,13 @@ public abstract class AbstractEntity {
 	// public void getHitbox() {
 	// }
 
+	// TODO Change these to actual width/Height?
 	public int getWidth() {
-		return 100;
+		return width;
 	}
 
 	public int getHeight() {
-		return 100;
+		return height;
 	}
 
 	/**
@@ -112,4 +109,6 @@ public abstract class AbstractEntity {
 	public Direction getDirection() {
 		return direction;
 	}
+
+	public abstract double getSpeedMod();
 }

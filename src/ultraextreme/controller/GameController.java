@@ -34,8 +34,9 @@ public class GameController extends AbstractController implements
 
 		// Start the game loop and add it as a listener to the bullet manage
 		gameLoop = new GameLoop(scene, gameModel, scene.getBulletSprites(),
-				vertexBufferObjectManager);
+				scene.getEnemySprites(), vertexBufferObjectManager);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
+		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
 		scene.registerUpdateHandler(gameLoop);
 	}
 

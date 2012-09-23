@@ -2,6 +2,7 @@ package ultraextreme.model;
 
 import java.util.List;
 
+import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 
 /**
@@ -12,10 +13,9 @@ import ultraextreme.model.entity.AbstractBullet;
  */
 public interface IUltraExtremeModel {
 
-	// TODO: Only for testing. perhaps
-	public BulletManager getBulletManager();
-
 	IPlayer getPlayer();
 
 	List<AbstractBullet> getBullets();
+
+	List<IEnemy> getEnemies();
 }

@@ -40,10 +40,18 @@ public class Constants {
 	}
 
 	/**
+	 * @return A positive double that impacts how fast the player ships will
+	 *         move
+	 */
+	public double getPlayerSpeedModifier() {
+		return 1;
+	}
+
+	/**
 	 * @return A positive double that impacts how fast the upgrade items will
 	 *         move
 	 */
-	public double getItemSpeedModifier() {
+	public double getPickupSpeedModifier() {
 		return 1;
 	}
 
@@ -51,6 +59,6 @@ public class Constants {
 	 * @return A positive double that impacts how fast the bullets will move
 	 */
 	public double getBulletSpeedModifier() {
-		return 1;
+		return 100;
 	}
 }

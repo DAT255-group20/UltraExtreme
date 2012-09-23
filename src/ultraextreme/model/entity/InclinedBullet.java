@@ -9,7 +9,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Viktor Anderling
  * 
  */
-public class SpreadBullet extends AbstractBullet {
+public class InclinedBullet extends AbstractBullet {
 
 	/**
 	 * The inclination of the bullet. Can be either positive or negative. The
@@ -22,7 +22,7 @@ public class SpreadBullet extends AbstractBullet {
 	 * @param slope
 	 *            The inclination of the bullet.
 	 */
-	public SpreadBullet(double x, double y, int width, int height,
+	public InclinedBullet(double x, double y, int width, int height,
 			PlayerID playerId, Direction direction, double slope) {
 		super(x, y, width, height, playerId, direction);
 		this.slope = slope;
@@ -30,7 +30,8 @@ public class SpreadBullet extends AbstractBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		this.move(timePassed * slope, timePassed);
+		this.move(timePassed * slope * getSpeedMod(), timePassed
+				* getSpeedMod());
 
 	}
 

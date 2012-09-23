@@ -1,4 +1,4 @@
-package ultraextreme.model;
+package ultraextreme.model.item;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -33,23 +33,32 @@ public class BulletManager {
 	 */
 	public void addBullet(AbstractBullet b) {
 		bullets.add(b);
+		// TODO Not entirely sure that using a raw string is so good /Plankton
 		pcs.firePropertyChange("newBullet", null, b);
 	}
 
 	/**
-	 * @return A list of all bullets that have been added since last call to
-	 *         this method.
+	 * @return A list of all bullets in the bullet manager.
 	 */
-	public List<AbstractBullet> getNewBullets() {
+	public List<AbstractBullet> getBullets() {
 		return bullets;
+	}
+	/**
+	 * Removes all bullets that are outside the gameScreen
+	 */
+	public void clearBulletsOffScreen() {
+		// OBS: Using a for each loop would result in an error
+		for(int i = 0; i < bullets.size(); i++) { 
+			if((bullets.get(i).isOutOfScreen())){
+				bullets.remove(i);
+			}
+		}
 	}
 
 	/**
 	 * Clear the list of bullets.
 	 */
 	public void clear() {
-		// Maybe change this class to a BulletManager and let it handle all the
-		// bullets
 		bullets.clear();
 	}
 

@@ -39,4 +39,16 @@ public class Position {
 	public double getY() {
 		return coordinates.y;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		if (o == this)
+			return true;
+		if (!(o instanceof Position))
+			return false;
+		Position oPosition = (Position) o;
+		return coordinates.equals(oPosition.coordinates);
+	}
 }
