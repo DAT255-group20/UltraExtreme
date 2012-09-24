@@ -3,8 +3,8 @@ package ultraextreme.model;
 import java.util.List;
 
 import ultraextreme.model.enemy.EnemyManager;
-import ultraextreme.model.enemy.EnemySpawner;
 import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.PlayerID;

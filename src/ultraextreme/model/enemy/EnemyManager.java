@@ -6,6 +6,8 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultraextreme.model.enemyspawning.EnemySpawner;
+
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "n";

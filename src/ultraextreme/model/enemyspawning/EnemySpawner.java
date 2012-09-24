@@ -1,9 +1,10 @@
-package ultraextreme.model.enemy;
+package ultraextreme.model.enemyspawning;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Random;
 
+import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Position;
 
