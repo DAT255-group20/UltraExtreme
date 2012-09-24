@@ -46,7 +46,7 @@ public class Player implements IPlayer {
 	public Player(PlayerID playerId, BulletManager bulletManager) {
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(playerId, bulletManager, Direction.UP);
+		this.itemBar = new ItemBar(playerId, bulletManager, new Direction(0));
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 	}
 

@@ -36,7 +36,7 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(double x, double y, BulletManager bulletManager) {
 
-		this(new BasicEnemyShip(x, y, Direction.DOWN), new BasicWeapon(
+		this(new BasicEnemyShip(x, y, new Direction(Math.PI)), new BasicWeapon(
 				bulletManager));
 	}
 

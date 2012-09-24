@@ -25,7 +25,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	public BasicHomingBullet(double x, double y, int width, int height,
 			PlayerID playerId, DestroyableEntity target) {
-		super(x, y, width, height, playerId, Direction.UP);
+		super(x, y, width, height, playerId, new Direction(0));
 		this.setTarget(target);
 		vector = new Vector2d();
 		updateDirection();
