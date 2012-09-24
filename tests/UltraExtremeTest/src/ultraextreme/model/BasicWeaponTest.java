@@ -1,8 +1,8 @@
 package ultraextreme.model;
 
 import junit.framework.TestCase;
-import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.BasicBullet;
+import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Direction;
@@ -52,7 +52,7 @@ public class BasicWeaponTest extends TestCase {
 	public void testBulletProperties() {
 		basicWeapon.fireShot(new Position(10, 5), PlayerID.PLAYER1,
 				Direction.UP);
-		AbstractBullet bullet = bulletManager.getBullets().get(0);
+		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
 		assertEquals(bullet.getWidth(), 5);
 		assertEquals(bullet.getHeight(), 5);

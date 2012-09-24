@@ -5,7 +5,7 @@ import java.util.List;
 import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.EnemySpawner;
 import ultraextreme.model.enemy.IEnemy;
-import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.PlayerID;
 
@@ -43,7 +43,7 @@ public class GameModel implements IUltraExtremeModel {
 	 */
 	public void update(ModelInput input, float timeElapsed) {
 		player.update(input, timeElapsed);
-		for (AbstractBullet bullet : bulletManager.getBullets()) {
+		for (IBullet bullet : bulletManager.getBullets()) {
 			bullet.doMovement(timeElapsed);
 		}
 		for (IEnemy enemy : enemyManager.getEnemies()) {
@@ -61,7 +61,7 @@ public class GameModel implements IUltraExtremeModel {
 	}
 
 	@Override
-	public List<AbstractBullet> getBullets() {
+	public List<IBullet> getBullets() {
 		return bulletManager.getBullets();
 	}
 

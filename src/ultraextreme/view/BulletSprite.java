@@ -3,16 +3,16 @@ package ultraextreme.view;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.entity.IBullet;
 
 public class BulletSprite extends Rectangle {
 
 	/**
 	 * Reference to a bullet in the model.
 	 */
-	private AbstractBullet bullet;
+	private IBullet bullet;
 
-	public BulletSprite(AbstractBullet bullet,
+	public BulletSprite(IBullet bullet,
 			VertexBufferObjectManager pVertexBufferObjectManager) {
 		super((float) bullet.getPosition().getX(), (float) bullet.getPosition()
 				.getY(), bullet.getWidth(), bullet.getHeight(),

@@ -1,28 +1,28 @@
 package ultraextreme.model.item;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.entity.IBullet;
 
 /**
  * Contains a queue of all bullets that are to be added to the game.
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class BulletManager {
 
 	private boolean isBombDropped = false;
 
-	private List<AbstractBullet> bullets;
+	private List<IBullet> bullets;
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private List<BulletManagerListener> listeners = new ArrayList<BulletManagerListener>();
 
 	public BulletManager() {
-		bullets = new ArrayList<AbstractBullet>();
+		bullets = new ArrayList<IBullet>();
 	}
 
 	/**
@@ -33,14 +33,13 @@ public class BulletManager {
 	 */
 	public void addBullet(AbstractBullet b) {
 		bullets.add(b);
-		// TODO Not entirely sure that using a raw string is so good /Plankton
-		pcs.firePropertyChange("newBullet", null, b);
+		fireAddedBulletUpdate(b);
 	}
 
 	/**
 	 * @return A list of all bullets in the bullet manager.
 	 */
-	public List<AbstractBullet> getBullets() {
+	public List<IBullet> getBullets() {
 		return bullets;
 	}
 
@@ -50,6 +49,7 @@ public class BulletManager {
 	public void clearBulletsOffScreen() {
 		for (int i = 0; i < bullets.size(); i++) {
 			if ((bullets.get(i).isOutOfScreen())) {
+				fireRemovedBulletUpdate(bullets.get(i));
 				bullets.remove(i);
 				i--;
 			}
@@ -82,12 +82,24 @@ public class BulletManager {
 		}
 		return output;
 	}
-
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
+	
+	private void fireAddedBulletUpdate(IBullet bullet) {
+		for (BulletManagerListener listener : listeners) {
+			listener.bulletAdded(bullet);
+		}
 	}
-
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.removePropertyChangeListener(listener);
+	
+	private void fireRemovedBulletUpdate(IBullet bullet) {
+		for (BulletManagerListener listener : listeners) {
+			listener.bulletRemoved(bullet);
+		}
+	}
+	
+	public void addListener(BulletManagerListener listener) {
+		this.listeners.add(listener);
+	}
+	
+	public void removeListener(BulletManagerListener listener) {
+		this.listeners.remove(listener);
 	}
 }

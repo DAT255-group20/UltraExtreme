@@ -12,6 +12,8 @@ import ultraextreme.model.ModelInput;
 import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.item.BulletManagerListener;
 import ultraextreme.model.util.Position;
 import ultraextreme.view.BulletSprite;
 import ultraextreme.view.EnemySprite;
@@ -24,7 +26,8 @@ import android.util.Log;
  * @author Daniel Jonsson
  * 
  */
-public class GameLoop implements IUpdateHandler, PropertyChangeListener {
+public class GameLoop implements IUpdateHandler, PropertyChangeListener,
+		BulletManagerListener {
 
 	private GameScene gameScene;
 	private GameModel gameModel;
@@ -87,7 +90,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			gameScene.attachChild(e);
 		}
 	}
-
+	
 	/**
 	 * Sets if the player is firing or not.
 	 * 
@@ -109,5 +112,17 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public void addToMovement(double dX, double dY) {
 		this.moveX += dX;
 		this.moveY += dY;
+	}
+
+	@Override
+	public void bulletAdded(IBullet bullet) {
+		BulletSprite b = new BulletSprite(bullet, vertexBufferObjectManager);
+		bulletSprites.add(b);
+		gameScene.attachChild(b);
+	}
+
+	@Override
+	public void bulletRemoved(IBullet bullet) {
+		
 	}
 }
