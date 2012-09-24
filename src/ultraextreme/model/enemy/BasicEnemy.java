@@ -35,8 +35,6 @@ public class BasicEnemy extends AbstractEnemy {
 	 *            A reference to the bullet manager.
 	 */
 	public BasicEnemy(double x, double y, BulletManager bulletManager) {
-		// TODO change to a proper
-		// FIXME: BasicWeapon need a reference to the bullet manager.
 
 		this(new BasicEnemyShip(x, y, Direction.DOWN), new BasicWeapon(
 				bulletManager));

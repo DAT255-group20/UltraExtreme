@@ -66,7 +66,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 
 	}
 

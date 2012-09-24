@@ -21,7 +21,7 @@ public class MainMenuController extends AbstractController implements
 
 	@Override
 	public Scene getScene() {
-		// TODO Auto-generated method stub
+		// TODO MainMenuController.getScene()
 		return null;
 	}
 

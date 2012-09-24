@@ -24,7 +24,6 @@ public abstract class EnemyShip extends DestroyableEntity {
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
 		return hitPoints < 1;
 	}
 

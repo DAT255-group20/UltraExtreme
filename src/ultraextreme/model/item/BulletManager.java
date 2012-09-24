@@ -48,10 +48,10 @@ public class BulletManager {
 	 * Removes all bullets that are outside the gameScreen
 	 */
 	public void clearBulletsOffScreen() {
-		// OBS: Using a for each loop would result in an error
 		for (int i = 0; i < bullets.size(); i++) {
 			if ((bullets.get(i).isOutOfScreen())) {
 				bullets.remove(i);
+				i--;
 			}
 		}
 	}

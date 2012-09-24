@@ -54,7 +54,7 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 
 	}
 

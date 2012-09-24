@@ -95,7 +95,6 @@ public abstract class AbstractEntity {
 	// public void getHitbox() {
 	// }
 
-	// TODO Change these to actual width/Height?
 	public int getWidth() {
 		return width;
 	}
