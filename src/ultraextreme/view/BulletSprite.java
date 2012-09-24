@@ -19,7 +19,15 @@ public class BulletSprite extends Rectangle {
 				pVertexBufferObjectManager);
 		this.bullet = bullet;
 	}
-
+	
+	/**
+	 * Get the bullet that this sprite gets its data from.
+	 * @return The bullet this sprite gets its data from.
+	 */
+	public IBullet getIBullet() {
+		return bullet;
+	}
+	
 	/**
 	 * Update the bullet sprite with data from the model.
 	 */
