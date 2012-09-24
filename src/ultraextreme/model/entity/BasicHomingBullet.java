@@ -2,6 +2,7 @@ package ultraextreme.model.entity;
 
 import javax.vecmath.Vector2d;
 
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
@@ -9,6 +10,11 @@ import ultraextreme.model.util.Position;
 public class BasicHomingBullet extends AbstractHomingBullet {
 
 	private Vector2d vector;
+	
+	/**
+	 * Distance left before stopping to track the enemy.
+	 */
+	private double bulletFuel;
 
 	public BasicHomingBullet(double x, double y, int width, int height,
 			PlayerID playerId, DestroyableEntity target) {
@@ -16,6 +22,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 		this.setTarget(target);
 		vector = new Vector2d();
 		updateDirection();
+		bulletFuel = Constants.getInstance().getLevelDimension().getY() * 0.8; // Will track 80% of the levels length.
 
 	}
 
@@ -29,11 +36,14 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		if (!((DestroyableEntity) target).isDestroyed()) {
+		if (!((DestroyableEntity) target).isDestroyed() || bulletFuel < 0) {
 			updateDirection();
 		}
-		this.move(vector.x * timePassed * this.getSpeedMod(), vector.y
-				* timePassed * this.getSpeedMod());
+		double xMovement = vector.x * timePassed * this.getSpeedMod();
+		double yMovement = vector.y * timePassed * this.getSpeedMod();
+		bulletFuel = bulletFuel - Math.sqrt(xMovement * xMovement + yMovement * yMovement) ;
+		
+		this.move(xMovement, yMovement);
 	}
 
 }
