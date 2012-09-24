@@ -90,7 +90,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener,
 			gameScene.attachChild(e);
 		}
 	}
-	
+
 	/**
 	 * Sets if the player is firing or not.
 	 * 
@@ -122,7 +122,18 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener,
 	}
 
 	@Override
-	public void bulletRemoved(IBullet bullet) {
-		
+	public void bulletRemoved(IBullet removedBullet) {
+		// Find the BulletSprite that has a reference to this bullet and remove
+		// it from the bullet sprite list and from the render scene.
+		// Note: It's generally not a very good idea to remove elements when
+		// iterating through them, but this breaks the loop when one element is
+		// removed.
+		for (BulletSprite b : bulletSprites) {
+			if (b.getIBullet() == removedBullet) {
+				gameScene.detachChild(b);
+				bulletSprites.remove(b);
+				break;
+			}
+		}
 	}
 }
