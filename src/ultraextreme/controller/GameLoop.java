@@ -12,10 +12,12 @@ import ultraextreme.model.ModelInput;
 import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.Position;
 import ultraextreme.view.GameObjectSprite;
 import ultraextreme.view.GameScene;
 import ultraextreme.view.SpriteContainer;
+import ultraextreme.view.SpriteFactory;
 import android.util.Log;
 
 /**
@@ -86,7 +88,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		spriteFactory.getNewSprite(event.getPropertyName());
+		if(event.getPropertyName() == "new") {
+			AbstractEntity entity = (AbstractEntity)event.getNewValue();
+			spriteFactory.getNewSprite(entity, vertexBufferObjectManager,entity.getName());
+		}
 	}
 
 	/**

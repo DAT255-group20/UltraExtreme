@@ -1,5 +1,6 @@
 package ultraextreme.view;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.andengine.opengl.texture.region.ITextureRegion;
@@ -7,17 +8,25 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.ObjectName;
-
+/**
+ * Class in charge of creating new GameObjectSprites
+ * @author Johan Gronvall
+ *
+ */
 public class SpriteFactory {
 	
 	Map<ObjectName, ITextureRegion> textureMap;
+	
+	//TODO not yet changed
+	Map<ObjectName, Integer> offsetMap;
 	
 	/**
 	 * Creates a spriteFactory
 	 * OBS: should be called during a loadResources because this constructor might get heavy
 	 */
 	public SpriteFactory() {
-		
+		textureMap = new HashMap<ObjectName, ITextureRegion>();
+		ITextureRegion shiptexture = new MTextureRegion();
 	}
 
 	 /**

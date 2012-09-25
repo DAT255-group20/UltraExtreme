@@ -1,6 +1,7 @@
 package ultraextreme.model.item;
 
 import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -13,7 +14,7 @@ import ultraextreme.model.util.Position;
 public class Bomb extends AbstractWeapon{
 
 	public Bomb(BulletManager bulletManager) {
-		super(bulletManager);
+		super(bulletManager, ObjectName.BOMB);
 	}
 
 	@Override

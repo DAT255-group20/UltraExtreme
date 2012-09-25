@@ -3,6 +3,7 @@ package ultraextreme.model.entity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 
 /**
@@ -20,20 +21,24 @@ public abstract class AbstractEntity {
 	private int width;
 
 	private int height;
+	
+	private ObjectName objectName;
 
 	/**
-	 * Creates and entity at the position 0,0 and with the side 0
+	 * Creates a nameless entity at the position 0,0 and with the side 0
 	 */
 	public AbstractEntity() {
-		this(0, 0, 0, 0, Direction.UP);
+		this(0, 0, 0, 0, Direction.UP, null);
 	}
 
 	public AbstractEntity(double x, double y, int width, int height,
-			Direction direction) {
+			Direction direction, ObjectName objectName) {
 		this.direction = direction;
 		this.position = new Position(x, y);
 		this.width = width;
 		this.height = height;
+		this.objectName = objectName;
+		
 	}
 
 	/**
@@ -110,6 +115,14 @@ public abstract class AbstractEntity {
 	 */
 	public Direction getDirection() {
 		return direction;
+	}
+	
+	/**
+	 * Returns what kind of entity this is as an ObjectName
+	 * @return what kind of entity this is as an ObjectName
+	 */
+	public ObjectName getObjectName() {
+		return objectName;
 	}
 
 	public abstract double getSpeedMod();

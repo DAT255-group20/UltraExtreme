@@ -1,6 +1,7 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.ObjectName;
 
 /**
  * An entity that can be destroyed.
@@ -11,8 +12,8 @@ import ultraextreme.model.util.Direction;
 public abstract class DestroyableEntity extends AbstractEntity {
 
 	public DestroyableEntity(double x, double y, int width, int height,
-			Direction direction) {
-		super(x, y, width, height, direction);
+			Direction direction, ObjectName objectName) {
+		super(x, y, width, height, direction, objectName);
 	}
 
 	/**

@@ -18,7 +18,7 @@ public class WeaponPickup extends AbstractEntity {
 			.getPickupSpeedModifier();
 
 	public WeaponPickup(double x, double y, AbstractWeapon weapon) {
-		super(x, y, width, width, Direction.DOWN);
+		super(x, y, width, width, Direction.DOWN, weapon.getName());
 		this.weapon = weapon;
 	}
 	
