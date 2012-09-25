@@ -9,8 +9,8 @@ public class BasicWeapon extends AbstractWeapon {
 
 	private static final int bulletWidth = 5;
 	private static final int bulletHeight = 5;
-	private static double initCooldown = 0.5;
-	private double cooldown;
+	private static float initCooldown = 0.5f;
+	private float cooldown;
 	
 	public BasicWeapon(BulletManager bulletManager) {
 		super(bulletManager);
@@ -29,7 +29,7 @@ public class BasicWeapon extends AbstractWeapon {
 		}
 	}
 	
-	public double getInitCooldown() {
+	public static float getInitCooldown() {
 		return initCooldown;
 	}
 }
