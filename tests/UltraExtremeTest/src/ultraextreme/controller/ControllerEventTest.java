@@ -7,6 +7,11 @@ import org.junit.Test;
 
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ *
+ */
 public class ControllerEventTest {
 
 	@Test
