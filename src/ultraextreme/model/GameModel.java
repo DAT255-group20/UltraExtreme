@@ -5,6 +5,7 @@ import java.util.List;
 import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.enemyspawning.EnemySpawner;
+import ultraextreme.model.enemyspawning.wavelist.PredefinedWaveList;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.PlayerID;
@@ -28,7 +29,7 @@ public class GameModel implements IUltraExtremeModel {
 	public GameModel() {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
-		enemySpawner = new EnemySpawner(bulletManager);
+		enemySpawner = new EnemySpawner(new PredefinedWaveList(bulletManager));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 	}

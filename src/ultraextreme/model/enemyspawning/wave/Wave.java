@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.enemy.BasicEnemy;
-import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.item.BulletManager;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class Wave {
-	
-	private EnemyManager enemyManager;
 	
 	private List<WaveListener> listeners = new ArrayList<WaveListener>();
 	
@@ -22,7 +24,6 @@ public class Wave {
 	
 	public Wave(BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
-		this.enemyManager= enemyManager;
 		timer = 0;
 		waveCounter = 0;
 	}

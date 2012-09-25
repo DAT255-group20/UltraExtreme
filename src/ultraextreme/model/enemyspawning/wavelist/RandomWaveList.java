@@ -3,13 +3,20 @@ package ultraextreme.model.enemyspawning.wavelist;
 import java.util.Random;
 
 import ultraextreme.model.enemyspawning.wave.Wave;
-import ultraextreme.model.enemyspawning.wave.WaveFactory;
+import ultraextreme.model.item.BulletManager;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class RandomWaveList extends AbstractWaveList {
 
 	private Wave currentWave;
 	
 	private float currentSpawningTime;
+	
+	private BulletManager bulletManager;
 	
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
@@ -17,17 +24,18 @@ public class RandomWaveList extends AbstractWaveList {
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
 	 */
-	public RandomWaveList(int numberOfWaves) {
+	public RandomWaveList(int numberOfWaves, BulletManager bulletManager) {
 		super(numberOfWaves);
 		this.generateNewWave();
+		this.bulletManager = bulletManager;
 	}
 	
 	/**
 	 * Update currentWave and currentSpawningTime with new random values.
 	 */
 	private void generateNewWave() {
-		// doesnt work
-		//currentWave = WaveFactory.getWave();
+		// TODO: This needs some more work.
+		currentWave = new Wave(bulletManager);
 		Random random = new Random();
 		currentSpawningTime += random.nextFloat() * 2 + 0.5;
 	}

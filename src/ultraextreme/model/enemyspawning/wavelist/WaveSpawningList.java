@@ -2,6 +2,11 @@ package ultraextreme.model.enemyspawning.wavelist;
 
 import ultraextreme.model.enemyspawning.wave.Wave;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public interface WaveSpawningList {
 
 	/**

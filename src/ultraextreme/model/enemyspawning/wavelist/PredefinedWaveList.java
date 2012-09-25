@@ -6,6 +6,11 @@ import java.util.List;
 import ultraextreme.model.enemyspawning.wave.Wave;
 import ultraextreme.model.item.BulletManager;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class PredefinedWaveList extends AbstractWaveList {
 
 	private List<Wave> waves;
