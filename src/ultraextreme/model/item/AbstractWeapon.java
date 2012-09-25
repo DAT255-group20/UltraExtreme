@@ -13,9 +13,12 @@ import ultraextreme.model.util.Position;
 public abstract class AbstractWeapon {
 
 	private BulletManager bulletManager;
+	
+	private boolean isFiring;
 
 	public AbstractWeapon(BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
+		isFiring = false;
 	}
 
 	// bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(),
@@ -25,6 +28,10 @@ public abstract class AbstractWeapon {
 
 	protected BulletManager getBulletManager() {
 		return bulletManager;
+	}
+	
+	public void setFire(boolean fireOn) {
+		isFiring = fireOn;
 	}
 
 }
