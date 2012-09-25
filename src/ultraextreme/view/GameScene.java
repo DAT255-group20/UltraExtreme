@@ -28,8 +28,7 @@ public class GameScene extends Scene implements SensorEventListener {
 	private IUltraExtremeModel gameModel;
 	private Rectangle shipSprite;
 	private SensorManager sensorManager;
-	private List<BulletSprite> bulletSprites;
-	private List<EnemySprite> enemySprites;
+	private List<GameObjectSprite> gameObjectSprites;
 
 	public GameScene(IUltraExtremeModel gameModel,
 			VertexBufferObjectManager vertexBufferObjectManager,
@@ -41,8 +40,8 @@ public class GameScene extends Scene implements SensorEventListener {
 		shipSprite = new Rectangle((float) p.getX(), (float) p.getY(),
 				playerShip.getWidth(), playerShip.getHeight(),
 				vertexBufferObjectManager);
-		bulletSprites = new LinkedList<BulletSprite>();
-		enemySprites = new LinkedList<EnemySprite>();
+		
+		gameObjectSprites = new LinkedList<GameObjectSprite>();
 		SpriteContainer.playerShip = shipSprite;
 		attachChild(shipSprite);
 
@@ -63,11 +62,7 @@ public class GameScene extends Scene implements SensorEventListener {
 		// shipSprite.setX(shipSprite.getX() + event.values[1]);
 	}
 
-	public List<BulletSprite> getBulletSprites() {
-		return bulletSprites;
-	}
-
-	public List<EnemySprite> getEnemySprites() {
-		return enemySprites;
+	public List<GameObjectSprite> getGameObjectSprites() {
+		return gameObjectSprites;
 	}
 }

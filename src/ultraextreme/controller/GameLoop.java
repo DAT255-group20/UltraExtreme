@@ -13,8 +13,7 @@ import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.util.Position;
-import ultraextreme.view.BulletSprite;
-import ultraextreme.view.EnemySprite;
+import ultraextreme.view.GameObjectSprite;
 import ultraextreme.view.GameScene;
 import ultraextreme.view.SpriteContainer;
 import android.util.Log;
@@ -28,22 +27,22 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	private GameScene gameScene;
 	private GameModel gameModel;
-	private List<BulletSprite> bulletSprites;
-	private List<EnemySprite> enemySprites;
+	private List<GameObjectSprite> gameObjectSprites;
 	private VertexBufferObjectManager vertexBufferObjectManager;
-
+	private SpriteFactory spriteFactory;
+	
 	private boolean firing;
 	private double moveX;
 	private double moveY;
 
 	public GameLoop(GameScene gameScene, GameModel gameModel,
-			List<BulletSprite> bulletSprites, List<EnemySprite> enemySprites,
+			List<GameObjectSprite> gameObjectSprites,
 			VertexBufferObjectManager vertexBufferObjectManager) {
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
-		this.bulletSprites = bulletSprites;
-		this.enemySprites = enemySprites;
+		this.gameObjectSprites = gameObjectSprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
+		spriteFactory = new SpriteFactory();
 	}
 
 	@Override
@@ -56,11 +55,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		// Log.d("DEBUG", "" + p.getX());
 		SpriteContainer.playerShip.setX((float) (p.getX()));
 		SpriteContainer.playerShip.setY((float) (p.getY()));
-		for (BulletSprite b : bulletSprites) {
-			b.update();
-		}
-		for (EnemySprite e : enemySprites) {
-			e.update();
+		for (GameObjectSprite sprite: gameObjectSprites) {
+			sprite.update();
 		}
 	}
 
@@ -70,22 +66,27 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	}
 
+//	@Override
+//	public void propertyChange(PropertyChangeEvent event) {
+//		if (event.getPropertyName().equals("newBullet")) {
+//			BulletSprite b = new BulletSprite(
+//					(AbstractBullet) event.getNewValue(),
+//					vertexBufferObjectManager);
+//			bulletSprites.add(b);
+//			gameScene.attachChild(b);
+//			Log.d("Bullet list length View", "" + bulletSprites.size());
+//		} else if (event.getPropertyName().equals(EnemyManager.NEW_ENEMY)) {
+//			EnemySprite e = new EnemySprite(
+//					((IEnemy) event.getNewValue()).getShip(),
+//					vertexBufferObjectManager);
+//			enemySprites.add(e);
+//			gameScene.attachChild(e);
+//		}
+//	}
+	
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if (event.getPropertyName().equals("newBullet")) {
-			BulletSprite b = new BulletSprite(
-					(AbstractBullet) event.getNewValue(),
-					vertexBufferObjectManager);
-			bulletSprites.add(b);
-			gameScene.attachChild(b);
-			Log.d("Bullet list length View", "" + bulletSprites.size());
-		} else if (event.getPropertyName().equals(EnemyManager.NEW_ENEMY)) {
-			EnemySprite e = new EnemySprite(
-					((IEnemy) event.getNewValue()).getShip(),
-					vertexBufferObjectManager);
-			enemySprites.add(e);
-			gameScene.attachChild(e);
-		}
+		spriteFactory.getNewSprite(event.getPropertyName());
 	}
 
 	/**

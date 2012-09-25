@@ -4,8 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
-
 import ultraextreme.model.entity.WeaponPickup;
+
 /**
  * In charge of storing and handling all pickups. (WeaponPickUpables)
  * @author Johan Gronvall
