@@ -1,6 +1,6 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -23,7 +23,7 @@ public class InclinedBullet extends AbstractBullet {
 	 *            The inclination of the bullet.
 	 */
 	public InclinedBullet(double x, double y, int width, int height,
-			PlayerID playerId, Direction direction, double slope) {
+			PlayerID playerId, Rotation direction, double slope) {
 		super(x, y, width, height, playerId, direction);
 		this.slope = slope;
 	}

@@ -23,7 +23,7 @@ import android.util.Log;
 
 /**
  * 
- * @author Daniel Jonsson
+ * @author Daniel Jonsson, Bjorn Persson Mattsson
  * 
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener,
@@ -38,6 +38,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener,
 	private boolean firing;
 	private double moveX;
 	private double moveY;
+	private boolean specialAttack;
 
 	public GameLoop(GameScene gameScene, GameModel gameModel,
 			List<BulletSprite> bulletSprites, List<EnemySprite> enemySprites,
@@ -51,9 +52,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener,
 
 	@Override
 	public void onUpdate(float time) {
-		gameModel.update(new ModelInput(moveX, moveY, firing, false), time);
+		gameModel.update(new ModelInput(moveX, moveY, firing, specialAttack), time);
 		moveX = 0;
 		moveY = 0;
+		specialAttack = false;
 
 		Position p = gameModel.getPlayer().getShip().getPosition();
 		// Log.d("DEBUG", "" + p.getX());
@@ -112,6 +114,15 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener,
 	public void addToMovement(double dX, double dY) {
 		this.moveX += dX;
 		this.moveY += dY;
+	}
+	
+	/**
+	 * Orders the player to fire a special attack.
+	 */
+	public void fireSpecialAttack()
+	{
+		specialAttack = true;
+		Log.d("DEBUG", "specialAttack " + specialAttack);
 	}
 
 	@Override

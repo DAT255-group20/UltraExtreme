@@ -4,7 +4,7 @@ import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -46,7 +46,7 @@ public class Player implements IPlayer {
 	public Player(PlayerID playerId, BulletManager bulletManager) {
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(playerId, bulletManager, Direction.UP);
+		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(Math.PI));
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 	}
 
@@ -55,7 +55,7 @@ public class Player implements IPlayer {
 	 */
 	@Override
 	public void update(ModelInput input, float delta) {
-		ship.move(input.dX, -input.dY);
+		ship.move(input.dX, input.dY);
 		if (input.fireWeapons) {
 			itemBar.fireWeapons(ship.getPosition());
 		}
