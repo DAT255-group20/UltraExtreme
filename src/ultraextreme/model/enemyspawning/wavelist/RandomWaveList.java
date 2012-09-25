@@ -26,7 +26,8 @@ public class RandomWaveList extends AbstractWaveList {
 	 * Update currentWave and currentSpawningTime with new random values.
 	 */
 	private void generateNewWave() {
-		currentWave = WaveFactory.getWave();
+		// doesnt work
+		//currentWave = WaveFactory.getWave();
 		Random random = new Random();
 		currentSpawningTime += random.nextFloat() * 2 + 0.5;
 	}

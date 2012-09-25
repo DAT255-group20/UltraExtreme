@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.enemyspawning.wave.Wave;
-import ultraextreme.model.enemyspawning.wave.WaveFactory;
+import ultraextreme.model.item.BulletManager;
 
 public class PredefinedWaveList extends AbstractWaveList {
 
@@ -14,15 +14,19 @@ public class PredefinedWaveList extends AbstractWaveList {
 	/**
 	 * Create a wave list with predefined waves.
 	 */
-	public PredefinedWaveList() {
+	public PredefinedWaveList(BulletManager bulletManager) {
 		super(4);
 		this.waves = new ArrayList<Wave>();
 		this.spawningTimes = new ArrayList<Float>();
 		// Some example values
-		add(1.0f, WaveFactory.getWave());
-		add(3.0f, WaveFactory.getWave());
-		add(5.0f, WaveFactory.getWave());
-		add(9.0f, WaveFactory.getWave());
+		add(1.0f, new Wave(bulletManager));
+		add(13.0f, new Wave(bulletManager));
+		add(25.0f, new Wave(bulletManager));
+		add(39.0f, new Wave(bulletManager));
+//		add(1.0f, WaveFactory.getWave());
+//		add(3.0f, WaveFactory.getWave());
+//		add(5.0f, WaveFactory.getWave());
+//		add(9.0f, WaveFactory.getWave());
 	}
 
 	/**

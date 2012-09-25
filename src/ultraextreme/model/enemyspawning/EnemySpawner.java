@@ -2,13 +2,18 @@ package ultraextreme.model.enemyspawning;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
-import ultraextreme.model.enemy.BasicEnemy;
+import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.enemyspawning.wave.Wave;
+import ultraextreme.model.enemyspawning.wave.WaveListener;
+import ultraextreme.model.enemyspawning.wavelist.PredefinedWaveList;
+import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
 import ultraextreme.model.item.BulletManager;
-import ultraextreme.model.util.Position;
+import android.util.Log;
 
-public class EnemySpawner {
+public class EnemySpawner implements WaveListener {
 
 	public static final String NEW_ENEMY = "nE";
 
@@ -18,34 +23,9 @@ public class EnemySpawner {
 	private float timer;
 
 	/**
-	 * When the next wave will spawn.
-	 */
-	private float nextWaveTime;
-
-	/**
 	 * The number of the last started enemy wave.
 	 */
 	private int wave;
-
-	/**
-	 * The number of ships in the current wave.
-	 */
-	private int waveSize;
-
-	/**
-	 * Keep track of how many enemies that have spawned in the current wave.
-	 */
-	private int waveSpawnCounter;
-
-	/**
-	 * When the next enemy wave will spawn.
-	 */
-	private float nextEnemySpawnTime;
-
-	/**
-	 * Used so the next enemy knows where to spawn.
-	 */
-	private Position nextPosition;
 
 	/**
 	 * A reference to the bullet manager.
@@ -53,6 +33,10 @@ public class EnemySpawner {
 	private BulletManager bulletManager;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
+	private WaveSpawningList waveList;
+	
+	private List<Wave> activeWaves;
 
 	/**
 	 * Create an enemy spawner.
@@ -62,8 +46,9 @@ public class EnemySpawner {
 	 */
 	public EnemySpawner(BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
-		nextWaveTime = 0;
 		wave = 0;
+		waveList = new PredefinedWaveList(bulletManager);
+		activeWaves = new ArrayList<Wave>();
 	}
 
 	/**
@@ -75,26 +60,41 @@ public class EnemySpawner {
 	 */
 	public void update(float timeElapsed) {
 		timer += timeElapsed;
-		if (timer > nextEnemySpawnTime) {
-			if (waveSpawnCounter < waveSize) {
-				waveSpawnCounter++;
-				nextEnemySpawnTime = timer + 1;
-				pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null,
-						new BasicEnemy(nextPosition.getX(),
-								nextPosition.getY(), bulletManager));
-				nextPosition.setX(nextPosition.getX() + 70);
-			} else if (timer > nextWaveTime) {
+		addNewWaves();
+		updateWaves(timeElapsed);
+	}
+	
+	private void addNewWaves() {
+		if (waveList.hasNext()) {
+			if (waveList.getCurrentSpawningTime() < timer) {
+				activeWaves.add(waveList.getCurrentWave());
+				waveList.getCurrentWave().addListener(this);
+				waveList.next();
 				wave++;
-				Random random = new Random();
-				waveSize = (int) (random.nextFloat() * 5 + 2);
-				waveSpawnCounter = 0;
-				nextWaveTime = timer + waveSize + 2;
-				nextPosition = new Position(10, 10);
-				nextEnemySpawnTime = timer + 2;
+				addNewWaves();
 			}
 		}
-		if (timer > nextWaveTime) {
+	}
+	
+	private void updateWaves(float timeElapsed) {
+		for (Wave wave : activeWaves) {
+			wave.update(timeElapsed);
 		}
+	}
+
+	@Override
+	public void waveEnded(Wave wave) {
+		for (Wave w : activeWaves) {
+			if (w == wave) {
+				activeWaves.remove(w);
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void enemySpawned(IEnemy enemy) {
+		pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, enemy);
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -103,5 +103,9 @@ public class EnemySpawner {
 
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
+	}
+	
+	public int getCurrentWave() {
+		return wave;
 	}
 }

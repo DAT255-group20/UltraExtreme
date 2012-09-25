@@ -3,7 +3,7 @@ package ultraextreme.model.enemyspawning.wave;
 
 public class WaveFactory {
 
-	public static Wave getWave() {
-		return new Wave();
-	}
+//	public static Wave getWave() {
+//		return new Wave();
+//	}
 }
