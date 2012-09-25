@@ -48,8 +48,8 @@ public abstract class AbstractEntity {
 	 */
 	public void move(double x, double y) {
 		Vector2d rotatedVector = direction.getRotatedCoordinates(x, y);
-		position.setX(rotatedVector.x);
-		position.setY(rotatedVector.y);
+		position.setX(position.getX() + rotatedVector.x);
+		position.setY(position.getY() - rotatedVector.y);
 	}
 
 	/**
