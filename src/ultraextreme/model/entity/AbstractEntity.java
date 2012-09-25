@@ -16,6 +16,8 @@ import ultraextreme.model.util.Position;
 public abstract class AbstractEntity {
 
 	private Position position;
+	
+	private Position prevPosition;
 
 	private Rotation direction;
 
@@ -47,6 +49,7 @@ public abstract class AbstractEntity {
 	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
+		prevPosition.setPosition(position);
 		Vector2d rotatedVector = direction.getRotatedCoordinates(x, y);
 		position.setX(position.getX() + rotatedVector.x);
 		position.setY(position.getY() + rotatedVector.y);
@@ -103,6 +106,13 @@ public abstract class AbstractEntity {
 
 	public int getHeight() {
 		return height;
+	}
+	
+	public Vector2d getNormalizedDirection() {
+		Vector2d v = new Vector2d(position.getX() - prevPosition.getX(), 
+				position.getY() - prevPosition.getY());
+		v.normalize();
+		return v;
 	}
 
 	/**

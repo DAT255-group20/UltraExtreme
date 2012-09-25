@@ -10,13 +10,12 @@ import ultraextreme.model.util.Position;
 /**
  * A bullet that constantly changes its direction towards its target, 
  * until it runs out of fuel and then continues straight forward.
- * 
  * @author Viktor Anderling
  *
  */
 public class BasicHomingBullet extends AbstractHomingBullet {
 
-	private Vector2d vector;
+	private Vector2d normDirectionVector;
 	
 	/**
 	 * Distance left before stopping to track the enemy.
@@ -27,7 +26,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 			PlayerID playerId, DestroyableEntity target) {
 		super(x, y, width, height, playerId, new Rotation(0));
 		this.setTarget(target);
-		vector = new Vector2d();
+		normDirectionVector = new Vector2d();
 		updateDirection();
 		bulletFuel = Constants.getInstance().getLevelDimension().getY() * 0.8; // Will track 80% of the levels length.
 
@@ -36,7 +35,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 	private void updateDirection() {
 		Position targetPosition = target.getPosition();
 		Position thisPosition = this.getPosition();
-		vector.normalize(new Vector2d(targetPosition.getX()
+		normDirectionVector.normalize(new Vector2d(targetPosition.getX()
 				- thisPosition.getX(), targetPosition.getY()
 				- thisPosition.getY()));
 	}
@@ -46,11 +45,17 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 		if (!((DestroyableEntity) target).isDestroyed() || bulletFuel < 0) {
 			updateDirection();
 		}
-		double xMovement = vector.x * timePassed * this.getSpeedMod();
-		double yMovement = vector.y * timePassed * this.getSpeedMod();
+		double xMovement = normDirectionVector.x * timePassed * this.getSpeedMod();
+		double yMovement = normDirectionVector.y * timePassed * this.getSpeedMod();
 		bulletFuel = bulletFuel - Math.sqrt(xMovement * xMovement + yMovement * yMovement) ;
 		
 		this.move(xMovement, yMovement);
+	}
+	
+	@Override
+	public Vector2d getNormalizedDirection() {
+		return normDirectionVector;
+		
 	}
 
 }
