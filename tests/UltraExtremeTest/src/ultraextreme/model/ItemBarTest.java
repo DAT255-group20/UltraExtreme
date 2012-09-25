@@ -32,7 +32,7 @@ public class ItemBarTest extends TestCase {
 	private void resetInstanceVariables(int slots) {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
-		itemBar = new ItemBar(playerId, bulletManager, Direction.UP, slots);
+		itemBar = new ItemBar(playerId, bulletManager, new Direction(0), slots);
 	}
 
 	/**

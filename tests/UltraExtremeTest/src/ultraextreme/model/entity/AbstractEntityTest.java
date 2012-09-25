@@ -49,7 +49,7 @@ public abstract class AbstractEntityTest extends TestCase {
 
 	public void testGetDirection() {
 		AbstractEntity entity = newEntity();
-		assertEquals(entity.getDirection(), Direction.UP);
+		assertEquals(entity.getDirection(), new Direction(0));
 	}
 
 	public void testCollidesWith() {
@@ -63,6 +63,6 @@ public abstract class AbstractEntityTest extends TestCase {
 	public abstract void testGetSpeedModifier();
 
 	private AbstractEntity newEntity() {
-		return getNewAbstractEntity(10, 20, 30, 40, Direction.UP);
+		return getNewAbstractEntity(10, 20, 30, 40, new Direction(0));
 	}
 }

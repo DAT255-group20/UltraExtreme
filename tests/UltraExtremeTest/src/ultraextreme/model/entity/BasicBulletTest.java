@@ -21,7 +21,7 @@ public class BasicBulletTest extends AbstractBulletTest {
 	public void testDoMovement() {
 		double speed = Constants.getInstance().getBulletSpeedModifier();
 		AbstractBullet bullet = getNewAbstractBullet(10, 20, 30, 40,
-				PlayerID.PLAYER1, Direction.UP);
+				PlayerID.PLAYER1, new Direction(0));
 
 		bullet.doMovement(1);
 		assertEquals(bullet.getPosition().getY(), 20 + 1 * speed);

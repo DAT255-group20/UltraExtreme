@@ -36,13 +36,13 @@ public class BasicWeaponTest extends TestCase {
 	public void testFireShot() {
 		assertTrue(bulletManager.getBullets().size() == 0);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, Direction.UP);
+		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Direction(0));
 		assertTrue(bulletManager.getBullets().size() == 1);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, Direction.UP);
+		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Direction(0));
 		assertTrue(bulletManager.getBullets().size() == 2);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, Direction.UP);
+		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Direction(0));
 		assertTrue(bulletManager.getBullets().size() == 3);
 	}
 
@@ -51,12 +51,12 @@ public class BasicWeaponTest extends TestCase {
 	 */
 	public void testBulletProperties() {
 		basicWeapon.fireShot(new Position(10, 5), PlayerID.PLAYER1,
-				Direction.UP);
+				new Direction(0));
 		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
 		assertEquals(bullet.getWidth(), 5);
 		assertEquals(bullet.getHeight(), 5);
-		assertEquals(bullet.getDirection(), Direction.UP);
+		assertEquals(bullet.getDirection(), new Direction(0));
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 	}
 }

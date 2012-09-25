@@ -45,7 +45,7 @@ public class PlayerShipTest extends AbstractEntityTest {
 	@Override
 	public void testGetDirection() {
 		resetInstanceVariables(0, 0, 0, 0);
-		assertEquals(playerShip.getDirection(), Direction.UP);
+		assertEquals(playerShip.getDirection(), new Direction(0));
 	}
 
 	@Override
