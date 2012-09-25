@@ -8,7 +8,7 @@ import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -32,7 +32,7 @@ public class ItemBarTest extends TestCase {
 	private void resetInstanceVariables(int slots) {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
-		itemBar = new ItemBar(playerId, bulletManager, new Direction(0), slots);
+		itemBar = new ItemBar(playerId, bulletManager, new Rotation(0), slots);
 	}
 
 	/**

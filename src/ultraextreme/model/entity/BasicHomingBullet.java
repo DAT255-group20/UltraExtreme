@@ -3,7 +3,7 @@ package ultraextreme.model.entity;
 import javax.vecmath.Vector2d;
 
 import ultraextreme.model.util.Constants;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -25,7 +25,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	public BasicHomingBullet(double x, double y, int width, int height,
 			PlayerID playerId, DestroyableEntity target) {
-		super(x, y, width, height, playerId, new Direction(0));
+		super(x, y, width, height, playerId, new Rotation(0));
 		this.setTarget(target);
 		vector = new Vector2d();
 		updateDirection();

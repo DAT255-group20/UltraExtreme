@@ -1,7 +1,7 @@
 package ultraextreme.model.item;
 
 import ultraextreme.model.entity.BasicBullet;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -16,7 +16,7 @@ public class BasicWeapon extends AbstractWeapon {
 
 	@Override
 	public void fireShot(Position shipPosition, PlayerID playerId,
-			Direction direction) {
+			Rotation direction) {
 
 		this.getBulletManager().addBullet(
 				new BasicBullet(shipPosition.getX(), shipPosition.getY(),

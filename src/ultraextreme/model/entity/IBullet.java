@@ -1,6 +1,6 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.PlayerID;
 
@@ -22,7 +22,7 @@ public interface IBullet {
 
 	void doMovement(float timeElapsed);
 
-	Direction getDirection();
+	Rotation getRotation();
 
 	PlayerID getPlayerId();
 

@@ -6,7 +6,7 @@ import ultraextreme.model.util.Direction;
 
 public class DirectionTest extends TestCase {
 
-	Direction direction;
+	Rotation rotation;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -14,8 +14,8 @@ public class DirectionTest extends TestCase {
 	}
 	
 	private void testGetRotatedCoordinates() {
-		direction = new Direction(0);
-		Vector2d vec = direction.getRotatedCoordinates(1, 1)
+		rotation = new Rotation(0);
+		Vector2d vec = rotation.getRotatedCoordinates(1, 1)
 		assertTrue(vec.x == 1 && vec.y == 1);
 		
 		

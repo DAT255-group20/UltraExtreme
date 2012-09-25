@@ -1,7 +1,7 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Constants;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 
 /**
  * Class representing a hostile entity which can be destroyed by the player
@@ -17,7 +17,7 @@ public abstract class EnemyShip extends DestroyableEntity {
 			.getEnemySpeedModifier();
 
 	public EnemyShip(double x, double y, int width, int height,
-			Direction direction, int hitpoints) {
+			Rotation direction, int hitpoints) {
 		super(x, y, width, height, direction);
 		this.hitPoints = hitpoints;
 	}

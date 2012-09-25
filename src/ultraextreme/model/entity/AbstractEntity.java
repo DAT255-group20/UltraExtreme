@@ -4,7 +4,7 @@ import javax.vecmath.Vector2d;
 
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
 
 /**
@@ -17,7 +17,7 @@ public abstract class AbstractEntity {
 
 	private Position position;
 
-	private Direction direction;
+	private Rotation direction;
 
 	private int width;
 
@@ -27,11 +27,11 @@ public abstract class AbstractEntity {
 	 * Creates and entity at the position 0,0 and with the side 0
 	 */
 	public AbstractEntity() {
-		this(0, 0, 0, 0, new Direction(0));
+		this(0, 0, 0, 0, new Rotation(0));
 	}
 
 	public AbstractEntity(double x, double y, int width, int height,
-			Direction direction) {
+			Rotation direction) {
 		this.direction = direction;
 		this.position = new Position(x, y);
 		this.width = width;
@@ -110,7 +110,7 @@ public abstract class AbstractEntity {
 	 * 
 	 * @return The direction this entity are facing.
 	 */
-	public Direction getDirection() {
+	public Rotation getRotation() {
 		return direction;
 	}
 
