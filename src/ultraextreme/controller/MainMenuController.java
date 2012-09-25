@@ -12,17 +12,26 @@ public class MainMenuController extends AbstractController implements
 
 	private MainMenuScene scene;
 
+	public MainMenuController()
+	{
+	}
+	
 	@Override
-	public boolean onMenuItemClicked(MenuScene arg0, IMenuItem arg1,
-			float arg2, float arg3) {
-		// TODO MainMenuController.onMenuItemClicked()
-		return false;
+	public boolean onMenuItemClicked(MenuScene menuScene, IMenuItem menuItem,
+			float menuItemLocalX, float menuItemLocalY) {
+		switch (menuItem.getID()) {
+		case MainMenuScene.MENU_START:
+			// Switch to gamescene
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 
 	@Override
 	public Scene getScene() {
-		// TODO MainMenuController.getScene()
-		return null;
+		return scene;
 	}
-
 }
