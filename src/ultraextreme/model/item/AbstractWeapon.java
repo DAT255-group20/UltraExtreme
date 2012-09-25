@@ -22,7 +22,7 @@ public abstract class AbstractWeapon {
 	// bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(),
 	// shipPosition.getY(), width, height, playerId));
 	public abstract void fire(Position shipPosition, PlayerID playerId,
-			Rotation direction, float timeElapsed);
+			Rotation rotation, float timeElapsed);
 
 	protected BulletManager getBulletManager() {
 		return bulletManager;

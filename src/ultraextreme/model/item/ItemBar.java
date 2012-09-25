@@ -67,12 +67,12 @@ public class ItemBar {
 	 *            Maximum number of items that fit in the item bar.
 	 */
 	public ItemBar(PlayerID playerId, BulletManager bulletManager,
-			Rotation playerDirection, int maximumNumberOfItems) {
+			Rotation playerRotation, int maximumNumberOfItems) {
 		this.playerId = playerId;
 		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
 		this.maximumNumberOfItems = maximumNumberOfItems;
-		this.playerRotation = playerDirection;
+		this.playerRotation = playerRotation;
 		this.cursorPosition = 0;
 	}
 
