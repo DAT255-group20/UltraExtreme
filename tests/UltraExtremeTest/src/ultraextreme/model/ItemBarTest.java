@@ -100,15 +100,17 @@ public class ItemBarTest extends TestCase {
 	 * bullet manager.
 	 */
 	public void testFireWeapon() {
-		itemBar.fireWeapons(new Position());
+		float epsilon = 0.001f;
+		float cooldown = (float)BasicWeapon.getInitCooldown();
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() == 0);
 
 		itemBar.addItem(getNewWeapon());
-		itemBar.fireWeapons(new Position());
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		int bulletsShot = bulletManager.getBullets().size();
 		assertTrue(bulletsShot > 0);
 
-		itemBar.fireWeapons(new Position());
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() > bulletsShot);
 	}
 }
