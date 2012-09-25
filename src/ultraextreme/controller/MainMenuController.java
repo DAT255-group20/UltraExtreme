@@ -4,7 +4,10 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.andengine.entity.scene.menu.item.IMenuItem;
+import org.andengine.opengl.font.Font;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.view.MainMenuScene;
 
 public class MainMenuController extends AbstractController implements
@@ -12,8 +15,10 @@ public class MainMenuController extends AbstractController implements
 
 	private MainMenuScene scene;
 
-	public MainMenuController()
+	public MainMenuController(Font font, VertexBufferObjectManager vertexBufferObjectManager)
 	{
+		scene = new MainMenuScene(font, vertexBufferObjectManager);
+		scene.setOnMenuItemClickListener(this);
 	}
 	
 	@Override
@@ -21,7 +26,7 @@ public class MainMenuController extends AbstractController implements
 			float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case MainMenuScene.MENU_START:
-			// Switch to gamescene
+			fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_GAME));
 			break;
 
 		default:

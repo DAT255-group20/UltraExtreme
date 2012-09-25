@@ -1,13 +1,13 @@
 package ultraextreme.view;
 
-import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-public class MainMenuScene extends Scene {
+public class MainMenuScene extends MenuScene {
 	
 	public static final int MENU_START = 0;
 
@@ -19,5 +19,6 @@ public class MainMenuScene extends Scene {
 				"Start game",
 				vertexBufferObjectManager);
 		startButton.setPosition(100, 100);
+		addMenuItem(startButton);
 	}
 }

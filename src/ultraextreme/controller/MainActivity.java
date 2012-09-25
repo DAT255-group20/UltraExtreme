@@ -5,9 +5,12 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
+import org.andengine.opengl.font.Font;
+import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.hardware.SensorManager;
 
 public class MainActivity extends SimpleBaseGameActivity implements
@@ -16,6 +19,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private GameController gameController;
 	private MainMenuController mainMenuController;
 	// private GameModel gameModel;
+	private Font defaultFont;
 
 	private static final int CAMERA_WIDTH = 480;
 	private static final int CAMERA_HEIGHT = 800;
@@ -29,7 +33,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected void onCreateResources() {
-		// TODO MainActivity.onCreateResources()
+		defaultFont = FontFactory.create(this.getFontManager(),
+				this.getTextureManager(), 256, 256,
+				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
+		defaultFont.load();
 	}
 
 	@Override
@@ -37,11 +44,12 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		this.gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
-		return gameController.getScene();
+		this.mainMenuController = new MainMenuController(defaultFont, this.getVertexBufferObjectManager());
+		return mainMenuController.getScene();
 	}
 
 	@Override
-	public void controllerListenerUpdate() {
+	public void controllerListenerUpdate(ControllerEvent event) {
 		// TODO MainActivity.controllerListenerUpdate()
 	}
 }

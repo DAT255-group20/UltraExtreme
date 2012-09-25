@@ -35,4 +35,12 @@ public abstract class AbstractController {
 	}
 
 	public abstract Scene getScene();
+	
+	protected void fireEvent(ControllerEvent event)
+	{
+		for (IControllerListener listener : listeners)
+		{
+			listener.controllerListenerUpdate(event);
+		}
+	}
 }
