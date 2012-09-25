@@ -12,6 +12,7 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 public class MainActivity extends SimpleBaseGameActivity implements
 		IControllerListener {

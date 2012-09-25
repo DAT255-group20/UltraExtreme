@@ -7,6 +7,8 @@ import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import android.util.Log;
+
 public class MainMenuScene extends MenuScene {
 	
 	public static final int MENU_START = 0;
@@ -20,5 +22,6 @@ public class MainMenuScene extends MenuScene {
 				vertexBufferObjectManager);
 		startButton.setPosition(100, 100);
 		addMenuItem(startButton);
+		Log.d("DEBUG", "onCreateScene");
 	}
 }
