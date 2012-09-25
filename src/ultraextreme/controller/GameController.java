@@ -8,6 +8,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import ultraextreme.model.GameModel;
 import ultraextreme.view.GameScene;
 import android.hardware.SensorManager;
+import android.view.MotionEvent;
 
 /**
  * Controller for the game model.
@@ -18,12 +19,16 @@ import android.hardware.SensorManager;
 public class GameController extends AbstractController implements
 		IOnSceneTouchListener {
 
+	private static final int INVALID_POINTER_ID = -1;
+	// The 'active pointer' is the one currently moving the player.
+	private int activePointerId = INVALID_POINTER_ID;
+	
 	private GameScene scene;
 	private GameModel gameModel;
 	private GameLoop gameLoop;
 
-	double lastX = -1;
-	double lastY = -1;
+	float lastX = -1;
+	float lastY = -1;
 
 	public GameController(VertexBufferObjectManager vertexBufferObjectManager,
 			SensorManager sensorManager) {
@@ -41,34 +46,68 @@ public class GameController extends AbstractController implements
 	}
 
 	@Override
-	public boolean onSceneTouchEvent(Scene scene, TouchEvent event) {
-		// Get the movement since last event
-		double currentX = event.getX();
-		double currentY = event.getY();
-		double dX = 0;
-		double dY = 0;
-		if (lastX != -1 && lastY != -1) {
-			dX = currentX - lastX;
-			dY = currentY - lastY;
-		}
-		lastX = currentX;
-		lastY = currentY;
-
-		switch (event.getAction()) {
-		case TouchEvent.ACTION_DOWN:
-
+	public boolean onSceneTouchEvent(Scene scene, TouchEvent tEvent) {
+		MotionEvent event = tEvent.getMotionEvent();
+		// Multitouch handling code inspired by following android dev blog post
+		// http://android-developers.blogspot.se/2010/06/making-sense-of-multitouch.html
+		final int action = event.getAction();
+		switch (action & MotionEvent.ACTION_MASK) {
+		case MotionEvent.ACTION_DOWN: {
+			lastX = event.getX();
+			lastY = event.getY();
+			
+			//Save the ID of this pointer
+			activePointerId = event.getPointerId(0);
 			gameLoop.setFiring(true);
 			break;
-
-		case TouchEvent.ACTION_MOVE:
-
+		}
+			
+		case MotionEvent.ACTION_MOVE: {
+			// Find the index of the active pointer and fetch its position
+			final int pointerIndex = event.findPointerIndex(activePointerId);
+			final float x = event.getX(pointerIndex);
+			final float y = event.getY(pointerIndex);
+			
+			final float dX = x - lastX;
+			final float dY = y - lastY;
+			
 			gameLoop.addToMovement(dX, dY);
+			
+			lastX = x;
+			lastY = y;
 			break;
-
-		case TouchEvent.ACTION_UP:
-
+		}
+			
+		case MotionEvent.ACTION_UP: {
+			activePointerId = INVALID_POINTER_ID;
 			gameLoop.setFiring(false);
 			break;
+		}
+			
+		case MotionEvent.ACTION_CANCEL: {
+			activePointerId = INVALID_POINTER_ID;
+			break;
+		}
+			
+		case MotionEvent.ACTION_POINTER_UP: {
+			// Extract the index of the pointer that left the touch sensor
+			final int pointerIndex = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+			final int pointerId = event.getPointerId(pointerIndex);
+			if (pointerId == activePointerId)
+			{
+				// This was our active pointer going up. Choose a new active pointer and adjust accordingly.
+				final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
+				lastX = event.getX(newPointerIndex);
+				lastY = event.getY(newPointerIndex);
+				activePointerId = event.getPointerId(newPointerIndex);
+			}
+			break;
+		}
+		
+		case MotionEvent.ACTION_POINTER_DOWN: {
+			gameLoop.fireSpecialAttack();
+			break;
+		}
 
 		default:
 			break;
