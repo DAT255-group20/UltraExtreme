@@ -29,4 +29,10 @@ public class GameObjectSprite extends Sprite{
 		this.setX((float) entity.getPosition().getX());
 		this.setY((float) entity.getPosition().getY());
 	}
+	/**
+	 * returns the entity this sprite is representing
+	 */
+	public AbstractEntity getEntity() {
+		return entity;
+	}
 }

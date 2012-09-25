@@ -34,7 +34,7 @@ public class BulletManager {
 	public void addBullet(AbstractBullet b) {
 		bullets.add(b);
 		// TODO Not entirely sure that using a raw string is so good /Plankton
-		pcs.firePropertyChange("newBullet", null, b);
+		pcs.firePropertyChange("add", null, b);
 	}
 
 	/**

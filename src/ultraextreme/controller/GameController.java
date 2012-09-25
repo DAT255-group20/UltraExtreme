@@ -7,6 +7,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.view.GameScene;
+import ultraextreme.view.SpriteFactory;
 import android.hardware.SensorManager;
 
 /**
@@ -26,15 +27,15 @@ public class GameController extends AbstractController implements
 	double lastY = -1;
 
 	public GameController(VertexBufferObjectManager vertexBufferObjectManager,
-			SensorManager sensorManager) {
+			SensorManager sensorManager, SpriteFactory spriteFactory) {
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager);
+				sensorManager, spriteFactory);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
-		gameLoop = new GameLoop(scene, gameModel, scene.getBulletSprites(),
-				scene.getEnemySprites(), vertexBufferObjectManager);
+		gameLoop = new GameLoop(scene, gameModel, scene.getGameObjectSprites(),
+				vertexBufferObjectManager, spriteFactory);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
 		scene.registerUpdateHandler(gameLoop);

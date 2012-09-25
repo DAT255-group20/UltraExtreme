@@ -7,6 +7,7 @@ import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import ultraextreme.view.SpriteFactory;
 import android.content.Context;
 import android.hardware.SensorManager;
 
@@ -15,6 +16,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
+	private SpriteFactory spriteFactory;
 	// private GameModel gameModel;
 
 	private static final int CAMERA_WIDTH = 480;
@@ -29,19 +31,20 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected void onCreateResources() {
-		// TODO MainActivity.onCreateResources()
+		spriteFactory = new SpriteFactory(this);
 	}
 
 	@Override
 	protected Scene onCreateScene() {
 		this.gameController = new GameController(
 				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
+				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE), spriteFactory);
 		return gameController.getScene();
 	}
-
+	
 	@Override
 	public void controllerListenerUpdate() {
 		// TODO MainActivity.controllerListenerUpdate()
 	}
+	
 }

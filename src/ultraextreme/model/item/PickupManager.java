@@ -15,7 +15,7 @@ public class PickupManager {
 	private List<WeaponPickup> pickups;
 	private final PropertyChangeSupport pcs;
 	
-	private static final String NEW_PICKUP = "new_pickup";
+	private static final String NEW_PICKUP = "add";
 	
 	public PickupManager() {
 		pickups = new ArrayList<WeaponPickup>();

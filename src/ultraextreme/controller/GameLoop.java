@@ -9,16 +9,14 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
-import ultraextreme.model.enemy.EnemyManager;
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.IEnemy;
-import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.Position;
 import ultraextreme.view.GameObjectSprite;
 import ultraextreme.view.GameScene;
 import ultraextreme.view.SpriteContainer;
 import ultraextreme.view.SpriteFactory;
-import android.util.Log;
 
 /**
  * 
@@ -39,12 +37,14 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	public GameLoop(GameScene gameScene, GameModel gameModel,
 			List<GameObjectSprite> gameObjectSprites,
-			VertexBufferObjectManager vertexBufferObjectManager) {
+			VertexBufferObjectManager vertexBufferObjectManager,
+			SpriteFactory spriteFactory) {
+		
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
-		spriteFactory = new SpriteFactory();
+		this.spriteFactory = spriteFactory;
 	}
 
 	@Override
@@ -52,11 +52,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		gameModel.update(new ModelInput(moveX, moveY, firing, false), time);
 		moveX = 0;
 		moveY = 0;
-
-		Position p = gameModel.getPlayer().getShip().getPosition();
-		// Log.d("DEBUG", "" + p.getX());
-		SpriteContainer.playerShip.setX((float) (p.getX()));
-		SpriteContainer.playerShip.setY((float) (p.getY()));
+		
 		for (GameObjectSprite sprite: gameObjectSprites) {
 			sprite.update();
 		}
@@ -77,6 +73,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 //			bulletSprites.add(b);
 //			gameScene.attachChild(b);
 //			Log.d("Bullet list length View", "" + bulletSprites.size());
+	
 //		} else if (event.getPropertyName().equals(EnemyManager.NEW_ENEMY)) {
 //			EnemySprite e = new EnemySprite(
 //					((IEnemy) event.getNewValue()).getShip(),
@@ -86,11 +83,40 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 //		}
 //	}
 	
+	/**
+	 * If a new sprite is created, adds it to the scene and to the list
+	 * if a sprite is removed, removes it from the scene and the list
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if(event.getPropertyName() == "new") {
-			AbstractEntity entity = (AbstractEntity)event.getNewValue();
-			spriteFactory.getNewSprite(entity, vertexBufferObjectManager,entity.getName());
+		if(event.getPropertyName().equals("add")) {
+			AbstractEntity entity;
+			
+			if(event.getNewValue() instanceof IEnemy){
+				entity = ((AbstractEnemy) event.getNewValue()).getShip();
+			} else { //if item or bullet
+				entity = (AbstractEntity)event.getNewValue();
+			
+			
+			GameObjectSprite newSprite = 
+					spriteFactory.getNewSprite(entity, vertexBufferObjectManager);
+			gameScene.attachChild(newSprite);
+			gameObjectSprites.add(newSprite);
+			}
+			
+		} else if(event.getPropertyName().equals("remove")){
+			// Find the GameObjectSprite that has a reference to this entity and remove
+			// it from the GameObjectSprite list and from the render scene.
+			// Note: It's generally not a very good idea to remove elements when
+			// iterating through them, but this breaks the loop when one element is
+			// removed.
+			for (GameObjectSprite sprite : gameObjectSprites) {
+				if (sprite.getEntity() == event.getNewValue()) {
+					gameScene.detachChild(sprite);
+					gameObjectSprites.remove(sprite);
+					break;
+				}
+			}
 		}
 	}
 
