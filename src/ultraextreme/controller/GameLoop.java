@@ -122,6 +122,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener,
 	public void fireSpecialAttack()
 	{
 		specialAttack = true;
+		Log.d("DEBUG", "specialAttack " + specialAttack);
 	}
 
 	@Override

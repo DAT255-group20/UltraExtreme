@@ -103,44 +103,15 @@ public class GameController extends AbstractController implements
 			}
 			break;
 		}
-
-		default:
-			break;
-		}
 		
-		/*
-		// Get the movement since last event
-		float currentX = tEvent.getX();
-		float currentY = tEvent.getY();
-		double dX = 0;
-		double dY = 0;
-		if (lastX != -1 && lastY != -1) {
-			dX = currentX - lastX;
-			dY = currentY - lastY;
+		case MotionEvent.ACTION_POINTER_DOWN: {
+			gameLoop.fireSpecialAttack();
+			break;
 		}
-		lastX = currentX;
-		lastY = currentY;
-
-		switch (tEvent.getAction()) {
-		case TouchEvent.ACTION_DOWN:
-
-			gameLoop.setFiring(true);
-			break;
-
-		case TouchEvent.ACTION_MOVE:
-
-			gameLoop.addToMovement(dX, dY);
-			break;
-
-		case TouchEvent.ACTION_UP:
-
-			gameLoop.setFiring(false);
-			break;
 
 		default:
 			break;
 		}
-		*/
 
 		return true;
 	}
