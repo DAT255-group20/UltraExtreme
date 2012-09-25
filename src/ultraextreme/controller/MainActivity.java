@@ -12,7 +12,6 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 public class MainActivity extends SimpleBaseGameActivity implements
 		IControllerListener {
@@ -46,7 +45,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
 		this.mainMenuController = new MainMenuController(defaultFont, this.getVertexBufferObjectManager());
-		return mainMenuController.getScene();
+		return gameController.getScene();
 	}
 
 	@Override
