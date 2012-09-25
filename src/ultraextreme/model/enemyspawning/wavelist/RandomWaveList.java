@@ -35,7 +35,7 @@ public class RandomWaveList extends AbstractWaveList {
 	 */
 	private void generateNewWave() {
 		// TODO: This needs some more work.
-		currentWave = new Wave(bulletManager);
+		//currentWave = new Wave(bulletManager);
 		Random random = new Random();
 		currentSpawningTime += random.nextFloat() * 2 + 0.5;
 	}

@@ -3,13 +3,16 @@ package ultraextreme.model.enemyspawning.wavelist;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
+import ultraextreme.model.enemyspawning.wave.VWave;
+import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
 import ultraextreme.model.enemyspawning.wave.Wave;
 import ultraextreme.model.item.BulletManager;
 
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class PredefinedWaveList extends AbstractWaveList {
 
@@ -20,18 +23,21 @@ public class PredefinedWaveList extends AbstractWaveList {
 	 * Create a wave list with predefined waves.
 	 */
 	public PredefinedWaveList(BulletManager bulletManager) {
-		super(4);
+		super(5);
 		this.waves = new ArrayList<Wave>();
 		this.spawningTimes = new ArrayList<Float>();
 		// Some example values
-		add(1.0f, new Wave(bulletManager));
-		add(13.0f, new Wave(bulletManager));
-		add(25.0f, new Wave(bulletManager));
-		add(39.0f, new Wave(bulletManager));
-//		add(1.0f, WaveFactory.getWave());
-//		add(3.0f, WaveFactory.getWave());
-//		add(5.0f, WaveFactory.getWave());
-//		add(9.0f, WaveFactory.getWave());
+		add(1.0f, new VerticalLineWave(2, 0, 200, -10, bulletManager));
+		add(1.0f, new HorizontalLineWave(5, 3, Math.PI / 8, 400, -10,
+				bulletManager));
+		add(5.0f, new VerticalLineWave(5, Math.PI / 8, 100, -10, bulletManager));
+		add(5.0f, new VerticalLineWave(10, -Math.PI / 2, -100, 400,
+				bulletManager));
+		add(10.0f, new VWave(0, 200, -10, bulletManager));
+		// add(1.0f, WaveFactory.getWave());
+		// add(3.0f, WaveFactory.getWave());
+		// add(5.0f, WaveFactory.getWave());
+		// add(9.0f, WaveFactory.getWave());
 	}
 
 	/**

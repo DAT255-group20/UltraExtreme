@@ -3,6 +3,7 @@ package ultraextreme.model.enemyspawning;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import ultraextreme.model.enemy.IEnemy;
@@ -13,7 +14,7 @@ import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class EnemySpawner implements WaveListener {
 
@@ -43,6 +44,11 @@ public class EnemySpawner implements WaveListener {
 	private List<Wave> activeWaves;
 
 	/**
+	 * Keeps track of which waves that have ended since the last update.
+	 */
+	private List<Wave> finishedWaves;
+
+	/**
 	 * Create an enemy spawner.
 	 * 
 	 * @param waveLists
@@ -62,6 +68,7 @@ public class EnemySpawner implements WaveListener {
 					"You must specify one or more non-null waveLists");
 		}
 		activeWaves = new ArrayList<Wave>();
+		finishedWaves = new ArrayList<Wave>();
 		wave = 0;
 	}
 
@@ -108,7 +115,13 @@ public class EnemySpawner implements WaveListener {
 	 *            Time that has elapsed since the last update.
 	 */
 	private void updateWaves(float timeElapsed) {
-		for (Wave wave : activeWaves) {
+		for (int i = 0; i < finishedWaves.size(); i++) {
+			activeWaves.remove(finishedWaves.get(i));
+			finishedWaves.remove(i);
+			i--;
+		}
+		for (Iterator<Wave> i = activeWaves.iterator(); i.hasNext();) {
+			Wave wave = i.next();
 			wave.update(timeElapsed);
 		}
 	}
@@ -118,12 +131,10 @@ public class EnemySpawner implements WaveListener {
 	 */
 	@Override
 	public void waveEnded(Wave wave) {
-		for (Wave w : activeWaves) {
-			if (w == wave) {
-				activeWaves.remove(w);
-				break;
-			}
-		}
+		// This method can't directly delete the wave from the activeWaves list
+		// because that will result in an ConcurrentModificationException, since
+		// higher up in the stack is this class' updateWaves method running.
+		finishedWaves.add(wave);
 	}
 
 	/**
