@@ -7,6 +7,13 @@ import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
+/**
+ * A bullet that constantly changes its direction towards its target, 
+ * until it runs out of fuel and then continues straight forward.
+ * 
+ * @author Viktor Anderling
+ *
+ */
 public class BasicHomingBullet extends AbstractHomingBullet {
 
 	private Vector2d vector;
@@ -18,7 +25,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	public BasicHomingBullet(double x, double y, int width, int height,
 			PlayerID playerId, DestroyableEntity target) {
-		super(x, y, width, height, playerId, Direction.UP);
+		super(x, y, width, height, playerId, new Direction(0));
 		this.setTarget(target);
 		vector = new Vector2d();
 		updateDirection();

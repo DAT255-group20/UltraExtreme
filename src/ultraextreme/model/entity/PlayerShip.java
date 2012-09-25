@@ -15,11 +15,11 @@ public class PlayerShip extends DestroyableEntity {
 			.getPlayerSpeedModifier();
 
 	public PlayerShip(double x, double y, int width, int height) {
-		super(x, y, width, height, Direction.UP);
+		super(x, y, width, height, new Direction(0));
 	}
 
 	public PlayerShip() {
-		super(0, 0, 50, 50, Direction.UP);
+		super(0, 0, 50, 50, new Direction(0));
 	}
 
 	@Override

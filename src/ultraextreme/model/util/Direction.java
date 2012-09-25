@@ -1,45 +1,44 @@
 package ultraextreme.model.util;
 
+import javax.vecmath.Vector2d;
+
 /**
- * This enumerator defines a direction in which an entity may move.
+ * This immutable class defines a direction in which an entity may move.
  * 
  * @author Viktor Anderling
  * 
  */
-public enum Direction {
-	UP(1, 1, 0, 0), DOWN(-1, -1, 0, 0), LEFT(0, 0, -1, 1), RIGHT(0, 0, 1, -1);
+public class Direction {
 
 	/**
-	 * A matrix stored with axis modifiers.
+	 * The angle measured in radians.
+	 * As it gets larger it will turn counterclockwise.
 	 */
-	private double[][] modifierArr;
+	private double angle;
 
 	/**
-	 * For example, if the x-value is to become the y-value, the xToYMod will be
-	 * 1. Or if x value is to be negated, xToXMod will be -1.
+	 * Creates a direction with the chosen angle.
 	 * 
-	 * @param xToXMod
-	 *            The way the x-value will effect the x-value.
-	 * @param yToYMod
-	 *            The way the y-value will effect the y-value.
-	 * @param xToYMod
-	 *            The way the x-value will effect the y-value.
-	 * @param yToXMod
-	 *            The way the y-value will effect the x-value.
+	 * @param angle
+	 * 			The chosen angle.
 	 */
-	private Direction(double xToXMod, double yToYMod, double xToYMod,
-			double yToXMod) {
-		this.modifierArr = new double[2][2];
-		modifierArr[0][0] = xToXMod;
-		modifierArr[0][1] = -yToYMod;
-		modifierArr[1][0] = xToYMod;
-		modifierArr[1][1] = yToXMod;
+	public Direction(double angle) {
+			this.angle = angle;
 	}
-
+	
 	/**
-	 * @return A matrix stored with axis modifiers.
+	 * Gets the coordinates rotated by the angle.
+	 * If the angle is 0, the same coordinates as the input will be returned.
+	 * 
+	 * @param x
+	 * 			The x-value of the coordinate.
+	 * @param y
+	 * 			The y-value of the coordinate.
+	 * 
+	 * @return The rotated form of the coordinate counterclockwise.
 	 */
-	public double[][] getMatrixMod() {
-		return modifierArr;
+	public Vector2d getRotatedCoordinates(double x, double y) {
+		return new Vector2d(x * Math.cos(angle) - y * Math.sin(angle), 
+				x * Math.sin(angle) + y * Math.cos(angle));
 	}
 }

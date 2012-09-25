@@ -1,5 +1,7 @@
 package ultraextreme.model.entity;
 
+import javax.vecmath.Vector2d;
+
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Direction;
@@ -25,7 +27,7 @@ public abstract class AbstractEntity {
 	 * Creates and entity at the position 0,0 and with the side 0
 	 */
 	public AbstractEntity() {
-		this(0, 0, 0, 0, Direction.UP);
+		this(0, 0, 0, 0, new Direction(0));
 	}
 
 	public AbstractEntity(double x, double y, int width, int height,
@@ -45,9 +47,9 @@ public abstract class AbstractEntity {
 	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
-		double[][] m = direction.getMatrixMod();
-		position.setX((position.getX() + (x * m[0][0] + y * m[1][0])));
-		position.setY((position.getY() + (y * m[0][1] + x * m[1][1])));
+		Vector2d rotatedVector = direction.getRotatedCoordinates(x, y);
+		position.setX(position.getX() + rotatedVector.x);
+		position.setY(position.getY() - rotatedVector.y);
 	}
 
 	/**
