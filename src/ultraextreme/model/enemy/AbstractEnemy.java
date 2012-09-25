@@ -9,6 +9,7 @@ import ultraextreme.model.util.PlayerID;
  * Represents an enemy brain/controller.
  * 
  * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public abstract class AbstractEnemy implements IEnemy {
@@ -27,8 +28,8 @@ public abstract class AbstractEnemy implements IEnemy {
 	/**
 	 * Fires the weapon assigned to this enemy
 	 */
-	public void shoot() {
-		weapon.fireShot(ship.getPosition(), PlayerID.ENEMY, this.enemyDirection);
+	public void shoot(float timeElapsed) {
+		weapon.fire(ship.getPosition(), PlayerID.ENEMY, this.enemyDirection, timeElapsed);
 	}
 
 	/**

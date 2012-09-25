@@ -11,8 +11,8 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 	}
 
 	@Override
-	public void fireShot(Position shipPosition, PlayerID playerId,
-			Rotation direction) {
+	public void fire(Position shipPosition, PlayerID playerId,
+			Rotation direction, float timeElapsed) {
 		// TODO Auto-generated method stub
 		
 	}

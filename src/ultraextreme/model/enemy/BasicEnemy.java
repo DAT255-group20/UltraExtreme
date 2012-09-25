@@ -12,12 +12,12 @@ import ultraextreme.model.util.Rotation;
  * basic weapon.
  * 
  * @author zapray
+ * @author Viktor Anderling
  * 
  */
 public class BasicEnemy extends AbstractEnemy {
 
 	private static final int ySpeed = 50;
-	private float cooldown = 0;
 
 	private BasicEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
@@ -41,15 +41,8 @@ public class BasicEnemy extends AbstractEnemy {
 	}
 
 	@Override
-	public void update(float timePassed) {
-		this.getShip().move(0, timePassed * ySpeed);
-		cooldown += timePassed;
-
-		// Shoot every 0.8seconds
-		if (cooldown > 0.8) {
-			cooldown = 0;
-			this.shoot();
-		}
-		// TODO cooldown should be stored in weapon
+	public void update(float timeElapsed) {
+		this.getShip().move(0, timeElapsed * ySpeed);
+		this.shoot(timeElapsed);
 	}
 }
