@@ -1,5 +1,6 @@
 package ultraextreme.controller;
 
+import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
@@ -15,9 +16,9 @@ public class MainMenuController extends AbstractController implements
 
 	private MainMenuScene scene;
 
-	public MainMenuController(Font font, VertexBufferObjectManager vertexBufferObjectManager)
+	public MainMenuController(Camera camera, Font font, VertexBufferObjectManager vertexBufferObjectManager)
 	{
-		scene = new MainMenuScene(font, vertexBufferObjectManager);
+		scene = new MainMenuScene(camera, font, vertexBufferObjectManager);
 		scene.setOnMenuItemClickListener(this);
 	}
 	

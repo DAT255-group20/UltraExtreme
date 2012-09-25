@@ -20,15 +20,17 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private MainMenuController mainMenuController;
 	// private GameModel gameModel;
 	private Font defaultFont;
+	private Camera camera;
+	private Scene currentScene;
 
 	private static final int CAMERA_WIDTH = 480;
 	private static final int CAMERA_HEIGHT = 800;
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
-		Camera mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
-				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
+				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
 	}
 
 	@Override
@@ -44,12 +46,26 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		this.gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
-		this.mainMenuController = new MainMenuController(defaultFont, this.getVertexBufferObjectManager());
-		return gameController.getScene();
+		this.mainMenuController = new MainMenuController(camera, defaultFont, this.getVertexBufferObjectManager());
+		setScene(this.mainMenuController.getScene());
+		return currentScene;
 	}
 
 	@Override
 	public void controllerListenerUpdate(ControllerEvent event) {
-		// TODO MainActivity.controllerListenerUpdate()
+		switch (event.getEventType()) {
+		case SWITCH_TO_GAME:
+			setScene(gameController.getScene());
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	private void setScene(Scene scene)
+	{
+		currentScene = scene;
+		getEngine().setScene(currentScene);
 	}
 }
