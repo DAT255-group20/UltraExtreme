@@ -51,6 +51,7 @@ public class EnemySpawner implements WaveListener {
 	 *            waves.
 	 */
 	public EnemySpawner(WaveSpawningList... waveLists) {
+		this.waveLists = new ArrayList<WaveSpawningList>();
 		for (WaveSpawningList waveList : waveLists) {
 			if (waveList != null) {
 				this.waveLists.add(waveList);
