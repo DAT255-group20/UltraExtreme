@@ -1,6 +1,6 @@
 package ultraextreme.model.item;
 
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -24,7 +24,7 @@ public abstract class AbstractWeapon {
 	// bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(),
 	// shipPosition.getY(), width, height, playerId));
 	public abstract void fireShot(Position shipPosition, PlayerID playerId,
-			Direction direction);
+			Rotation direction);
 
 	protected BulletManager getBulletManager() {
 		return bulletManager;

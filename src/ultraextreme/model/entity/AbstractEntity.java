@@ -4,7 +4,7 @@ import javax.vecmath.Vector2d;
 
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
 
 /**
@@ -16,8 +16,10 @@ import ultraextreme.model.util.Position;
 public abstract class AbstractEntity {
 
 	private Position position;
+	
+	private Position prevPosition;
 
-	private Direction direction;
+	private Rotation rotation;
 
 	private int width;
 
@@ -27,13 +29,14 @@ public abstract class AbstractEntity {
 	 * Creates and entity at the position 0,0 and with the side 0
 	 */
 	public AbstractEntity() {
-		this(0, 0, 0, 0, new Direction(0));
+		this(0, 0, 0, 0, new Rotation(0));
 	}
 
 	public AbstractEntity(double x, double y, int width, int height,
-			Direction direction) {
-		this.direction = direction;
+			Rotation direction) {
+		this.rotation = direction;
 		this.position = new Position(x, y);
+		this.prevPosition = new Position(x, y);
 		this.width = width;
 		this.height = height;
 	}
@@ -47,7 +50,8 @@ public abstract class AbstractEntity {
 	 *            Number of y units the entity shall move with.
 	 */
 	public void move(double x, double y) {
-		Vector2d rotatedVector = direction.getRotatedCoordinates(x, y);
+		prevPosition.setPosition(position);
+		Vector2d rotatedVector = rotation.getRotatedCoordinates(x, y);
 		position.setX(position.getX() + rotatedVector.x);
 		position.setY(position.getY() + rotatedVector.y);
 	}
@@ -104,14 +108,21 @@ public abstract class AbstractEntity {
 	public int getHeight() {
 		return height;
 	}
+	
+	public Vector2d getNormalizedDirection() {
+		Vector2d v = new Vector2d(position.getX() - prevPosition.getX(), 
+				position.getY() - prevPosition.getY());
+		v.normalize();
+		return v;
+	}
 
 	/**
 	 * Returns The direction this entity are facing.
 	 * 
 	 * @return The direction this entity are facing.
 	 */
-	public Direction getDirection() {
-		return direction;
+	public Rotation getRotation() {
+		return rotation;
 	}
 
 	public abstract double getSpeedMod();

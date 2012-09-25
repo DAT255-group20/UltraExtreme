@@ -3,12 +3,12 @@ package ultraextreme.model.util;
 import javax.vecmath.Vector2d;
 
 /**
- * This immutable class defines a direction in which an entity may move.
+ * This immutable class defines a rotation in which an entity may move.
  * 
  * @author Viktor Anderling
  * 
  */
-public class Direction {
+public class Rotation {
 
 	/**
 	 * The angle measured in radians.
@@ -22,7 +22,7 @@ public class Direction {
 	 * @param angle
 	 * 			The chosen angle.
 	 */
-	public Direction(double angle) {
+	public Rotation(double angle) {
 			this.angle = angle;
 	}
 	
@@ -56,7 +56,7 @@ public class Direction {
 		} else if(this.getClass() != o.getClass()) {
 			return false;
 		} else {
-			return this.getAngle() == ((Direction)o).getAngle();
+			return this.getAngle() == ((Rotation)o).getAngle();
 		}
 	}
 }

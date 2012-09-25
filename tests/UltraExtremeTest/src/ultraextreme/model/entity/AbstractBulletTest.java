@@ -1,7 +1,7 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Constants;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -13,13 +13,13 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
-			int width, int height, Direction direction) {
+			int width, int height, Rotation direction) {
 		return getNewAbstractBullet(x, y, width, height, PlayerID.PLAYER1,
 				direction);
 	}
 
 	protected abstract AbstractBullet getNewAbstractBullet(double x, double y,
-			int width, int height, PlayerID playerId, Direction direction);
+			int width, int height, PlayerID playerId, Rotation direction);
 
 	public abstract void testDoMovement();
 
@@ -46,6 +46,6 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 	}
 
 	private AbstractBullet newBullet(PlayerID playerId) {
-		return getNewAbstractBullet(10, 20, 30, 40, playerId, new Direction(0));
+		return getNewAbstractBullet(10, 20, 30, 40, playerId, new Rotation(0));
 	}
 }

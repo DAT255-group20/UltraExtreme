@@ -2,7 +2,7 @@ package ultraextreme.model.enemy;
 
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -16,12 +16,12 @@ public abstract class AbstractEnemy implements IEnemy {
 	// The entity representing the enemyShip
 	private EnemyShip ship;
 	private AbstractWeapon weapon;
-	private Direction enemyDirection;
+	private Rotation enemyDirection;
 
 	protected AbstractEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		this.ship = ship;
 		this.weapon = weapon;
-		this.enemyDirection = ship.getDirection();
+		this.enemyDirection = ship.getRotation();
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
 
 /**
@@ -45,7 +45,7 @@ public class PlayerShipTest extends AbstractEntityTest {
 	@Override
 	public void testGetDirection() {
 		resetInstanceVariables(0, 0, 0, 0);
-		assertEquals(playerShip.getDirection(), new Direction(0));
+		assertEquals(playerShip.getRotation(), new Rotation(0));
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class PlayerShipTest extends AbstractEntityTest {
 
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
-			int width, int height, Direction direction) {
+			int width, int height, Rotation direction) {
 		return new PlayerShip(x, y, width, height);
 	}
 }

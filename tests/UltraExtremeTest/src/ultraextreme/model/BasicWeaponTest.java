@@ -5,7 +5,7 @@ import ultraextreme.model.entity.BasicBullet;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -36,13 +36,13 @@ public class BasicWeaponTest extends TestCase {
 	public void testFireShot() {
 		assertTrue(bulletManager.getBullets().size() == 0);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Direction(0));
+		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Rotation(0));
 		assertTrue(bulletManager.getBullets().size() == 1);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Direction(0));
+		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Rotation(0));
 		assertTrue(bulletManager.getBullets().size() == 2);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Direction(0));
+		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Rotation(0));
 		assertTrue(bulletManager.getBullets().size() == 3);
 	}
 
@@ -51,12 +51,12 @@ public class BasicWeaponTest extends TestCase {
 	 */
 	public void testBulletProperties() {
 		basicWeapon.fireShot(new Position(10, 5), PlayerID.PLAYER1,
-				new Direction(0));
+				new Rotation(0));
 		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
 		assertEquals(bullet.getWidth(), 5);
 		assertEquals(bullet.getHeight(), 5);
-		assertEquals(bullet.getDirection(), new Direction(0));
+		assertEquals(bullet.getRotation(), new Rotation(0));
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 	}
 }
