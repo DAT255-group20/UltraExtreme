@@ -12,6 +12,7 @@ import ultraextreme.model.util.Position;
  * 
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
+ * @author Viktor Anderling
  * 
  */
 public class ItemBar {
@@ -36,7 +37,7 @@ public class ItemBar {
 	 */
 	private PlayerID playerId;
 
-	private Rotation playerDirection;
+	private Rotation playerRotation;
 
 	// private Bomb bomb;
 
@@ -71,7 +72,7 @@ public class ItemBar {
 		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
 		this.maximumNumberOfItems = maximumNumberOfItems;
-		this.playerDirection = playerDirection;
+		this.playerRotation = playerDirection;
 		this.cursorPosition = 0;
 	}
 
@@ -106,9 +107,9 @@ public class ItemBar {
 	 * @param firePositon
 	 *            From where the guns should be fired.
 	 */
-	public void fireWeapons(Position firePosition) {
+	public void fireWeapons(Position firePosition, float timeElapsed) {
 		for (AbstractWeapon weapon : items) {
-			weapon.fireShot(firePosition, playerId, playerDirection);
+			weapon.fire(firePosition, playerId, playerRotation, timeElapsed);
 		}
 	}
 }

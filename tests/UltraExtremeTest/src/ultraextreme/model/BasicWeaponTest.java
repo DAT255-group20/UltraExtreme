@@ -36,13 +36,13 @@ public class BasicWeaponTest extends TestCase {
 	public void testFireShot() {
 		assertTrue(bulletManager.getBullets().size() == 0);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Rotation(0));
+		basicWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0), null);
 		assertTrue(bulletManager.getBullets().size() == 1);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Rotation(0));
+		basicWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0), null);
 		assertTrue(bulletManager.getBullets().size() == 2);
 
-		basicWeapon.fireShot(new Position(), PlayerID.PLAYER1, new Rotation(0));
+		basicWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0), null);
 		assertTrue(bulletManager.getBullets().size() == 3);
 	}
 
@@ -50,8 +50,8 @@ public class BasicWeaponTest extends TestCase {
 	 * Test so the properties of the bullet that the weapon fires are correct.
 	 */
 	public void testBulletProperties() {
-		basicWeapon.fireShot(new Position(10, 5), PlayerID.PLAYER1,
-				new Rotation(0));
+		basicWeapon.fire(new Position(10, 5), PlayerID.PLAYER1,
+				new Rotation(0), null);
 		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
 		assertEquals(bullet.getWidth(), 5);

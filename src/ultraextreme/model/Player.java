@@ -13,7 +13,7 @@ import ultraextreme.model.util.PlayerID;
  * 
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
- * 
+ * @author Viktor Anderling
  */
 public class Player implements IPlayer {
 
@@ -54,10 +54,10 @@ public class Player implements IPlayer {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(ModelInput input, float delta) {
+	public void update(ModelInput input, float timeElapsed) {
 		ship.move(input.dX, input.dY);
 		if (input.fireWeapons) {
-			itemBar.fireWeapons(ship.getPosition());
+			itemBar.fireWeapons(ship.getPosition(), timeElapsed);
 		}
 	}
 
