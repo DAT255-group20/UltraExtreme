@@ -26,6 +26,13 @@ public class Direction {
 			this.angle = angle;
 	}
 	
+	 /**
+	  * @return The angle of the direction.
+	  */
+	public double getAngle() {
+		return angle;
+	}
+	
 	/**
 	 * Gets the coordinates rotated by the angle.
 	 * If the angle is 0, the same coordinates as the input will be returned.
