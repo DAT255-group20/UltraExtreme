@@ -19,7 +19,7 @@ public abstract class AbstractEntity {
 	
 	private Position prevPosition;
 
-	private Rotation direction;
+	private Rotation rotation;
 
 	private int width;
 
@@ -34,8 +34,9 @@ public abstract class AbstractEntity {
 
 	public AbstractEntity(double x, double y, int width, int height,
 			Rotation direction) {
-		this.direction = direction;
+		this.rotation = direction;
 		this.position = new Position(x, y);
+		this.prevPosition = new Position(x, y);
 		this.width = width;
 		this.height = height;
 	}
@@ -50,7 +51,7 @@ public abstract class AbstractEntity {
 	 */
 	public void move(double x, double y) {
 		prevPosition.setPosition(position);
-		Vector2d rotatedVector = direction.getRotatedCoordinates(x, y);
+		Vector2d rotatedVector = rotation.getRotatedCoordinates(x, y);
 		position.setX(position.getX() + rotatedVector.x);
 		position.setY(position.getY() + rotatedVector.y);
 	}
@@ -121,7 +122,7 @@ public abstract class AbstractEntity {
 	 * @return The direction this entity are facing.
 	 */
 	public Rotation getRotation() {
-		return direction;
+		return rotation;
 	}
 
 	public abstract double getSpeedMod();
