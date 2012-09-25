@@ -48,4 +48,15 @@ public class Direction {
 		return new Vector2d(x * Math.cos(angle) - y * Math.sin(angle), 
 				x * Math.sin(angle) + y * Math.cos(angle));
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) {
+			return true;
+		} else if(this.getClass() != o.getClass()) {
+			return false;
+		} else {
+			return this.getAngle() == ((Direction)o).getAngle();
+		}
+	}
 }
