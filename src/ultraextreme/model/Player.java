@@ -1,6 +1,7 @@
 package ultraextreme.model;
 
 import ultraextreme.model.entity.PlayerShip;
+import ultraextreme.model.item.BasicSpreadWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
@@ -50,6 +51,7 @@ public class Player implements IPlayer {
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(Math.PI), 5);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
+		this.itemBar.addItem(new BasicSpreadWeapon(bulletManager));
 	}
 
 	/**
