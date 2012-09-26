@@ -2,6 +2,9 @@ package ultraextreme.model.enemyspawning.wavelist;
 
 import java.util.Random;
 
+import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
+import ultraextreme.model.enemyspawning.wave.VWave;
+import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
 import ultraextreme.model.enemyspawning.wave.Wave;
 import ultraextreme.model.item.BulletManager;
 
@@ -19,6 +22,8 @@ public class RandomWaveList extends AbstractWaveList {
 
 	private BulletManager bulletManager;
 
+	private int counter;
+
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
 	 * 
@@ -30,8 +35,9 @@ public class RandomWaveList extends AbstractWaveList {
 	 */
 	public RandomWaveList(int numberOfWaves, BulletManager bulletManager) {
 		super(numberOfWaves);
-		this.generateNewWave();
+		this.counter = 0;
 		this.bulletManager = bulletManager;
+		this.generateNewWave();
 	}
 
 	/**
@@ -39,9 +45,22 @@ public class RandomWaveList extends AbstractWaveList {
 	 */
 	private void generateNewWave() {
 		// TODO: This needs some more work.
-		// currentWave = new Wave(bulletManager);
+		counter %= 3;
+		switch (counter) {
+		case 0:
+			currentWave = new VWave(0, 200, -10, bulletManager);
+			break;
+		case 1:
+			currentWave = new HorizontalLineWave(5, 3, Math.PI / 8, 400, -10,
+					bulletManager);
+			break;
+		case 2:
+			currentWave = new VerticalLineWave(2, 0, 200, -10, bulletManager);
+			break;
+		}
+		counter++;
 		Random random = new Random();
-		currentSpawningTime += random.nextFloat() * 2 + 0.5;
+		currentSpawningTime += random.nextFloat() * 2 + 3.5;
 	}
 
 	/**
