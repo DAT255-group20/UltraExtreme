@@ -3,9 +3,11 @@ package ultraextreme.model.enemyspawning.wavelist;
 import ultraextreme.model.enemyspawning.wave.Wave;
 
 /**
+ * A WaveSpawningList has a number of enemy waves (the Wave class), that a
+ * EnemySpawner uses to grab waves from.
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public interface WaveSpawningList {
 
@@ -42,9 +44,10 @@ public interface WaveSpawningList {
 	 * @return The number of available levels.
 	 */
 	public int getNumberOfWaves();
-	
+
 	/**
 	 * If there exists a next wave.
+	 * 
 	 * @return If there exists a next wave.
 	 */
 	public boolean hasNext();

@@ -6,40 +6,44 @@ import ultraextreme.model.enemyspawning.wave.Wave;
 import ultraextreme.model.item.BulletManager;
 
 /**
+ * This wave list return a specified number of random enemy waves.
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class RandomWaveList extends AbstractWaveList {
 
 	private Wave currentWave;
-	
+
 	private float currentSpawningTime;
-	
+
 	private BulletManager bulletManager;
-	
+
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
 	 * 
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
+	 * @param bulletManager
+	 *            Reference to a BulletManager that the enemies will add their
+	 *            bullets to.
 	 */
 	public RandomWaveList(int numberOfWaves, BulletManager bulletManager) {
 		super(numberOfWaves);
 		this.generateNewWave();
 		this.bulletManager = bulletManager;
 	}
-	
+
 	/**
 	 * Update currentWave and currentSpawningTime with new random values.
 	 */
 	private void generateNewWave() {
 		// TODO: This needs some more work.
-		//currentWave = new Wave(bulletManager);
+		// currentWave = new Wave(bulletManager);
 		Random random = new Random();
 		currentSpawningTime += random.nextFloat() * 2 + 0.5;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -48,7 +52,7 @@ public class RandomWaveList extends AbstractWaveList {
 		super.next();
 		this.generateNewWave();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -56,7 +60,7 @@ public class RandomWaveList extends AbstractWaveList {
 	public Wave getCurrentWave() {
 		return currentWave;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

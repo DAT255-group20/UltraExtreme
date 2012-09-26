@@ -3,9 +3,12 @@ package ultraextreme.model.enemyspawning.wave;
 import ultraextreme.model.enemy.IEnemy;
 
 /**
+ * A class that wants to get updates from a wave should implement this
+ * interface. Mainly made for the EnemySpawner class, which handles the active
+ * waves.
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public interface WaveListener {
 

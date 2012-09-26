@@ -12,6 +12,10 @@ import ultraextreme.model.enemyspawning.wave.WaveListener;
 import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
 
 /**
+ * This class is responsible for managing the waves of enemies. It takes one or
+ * more WaveSpawningLists in its constructor, which this class then grabs new
+ * waves from. References to the enemies are then sent to all of the
+ * EnemySpawner's listeners.
  * 
  * @author Daniel Jonsson
  * 

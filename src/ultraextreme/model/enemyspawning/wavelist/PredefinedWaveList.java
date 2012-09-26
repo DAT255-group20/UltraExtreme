@@ -10,6 +10,7 @@ import ultraextreme.model.enemyspawning.wave.Wave;
 import ultraextreme.model.item.BulletManager;
 
 /**
+ * This wave list consists of a list of predefined enemy waves.
  * 
  * @author Daniel Jonsson
  * 
@@ -21,12 +22,15 @@ public class PredefinedWaveList extends AbstractWaveList {
 
 	/**
 	 * Create a wave list with predefined waves.
+	 * 
+	 * @param bulletManager
+	 *            Reference to a BulletManager that the enemies will add their
+	 *            bullets to.
 	 */
 	public PredefinedWaveList(BulletManager bulletManager) {
 		super(5);
 		this.waves = new ArrayList<Wave>();
 		this.spawningTimes = new ArrayList<Float>();
-		// Some example values
 		add(1.0f, new VerticalLineWave(2, 0, 200, -10, bulletManager));
 		add(1.0f, new HorizontalLineWave(5, 3, Math.PI / 8, 400, -10,
 				bulletManager));
@@ -34,10 +38,6 @@ public class PredefinedWaveList extends AbstractWaveList {
 		add(5.0f, new VerticalLineWave(10, -Math.PI / 2, -100, 400,
 				bulletManager));
 		add(10.0f, new VWave(0, 200, -10, bulletManager));
-		// add(1.0f, WaveFactory.getWave());
-		// add(3.0f, WaveFactory.getWave());
-		// add(5.0f, WaveFactory.getWave());
-		// add(9.0f, WaveFactory.getWave());
 	}
 
 	/**
