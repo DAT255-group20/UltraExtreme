@@ -41,8 +41,8 @@ public class BulletManager {
 		pcs.firePropertyChange("add", null, b);
 	}
 	public void removeBullet(int index) {
-		bullets.remove(index);
 		pcs.firePropertyChange("remove", null, bullets.get(index));
+		bullets.remove(index);
 	}
 
 	/**
