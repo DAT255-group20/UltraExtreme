@@ -80,6 +80,16 @@ public abstract class AbstractEntity implements IEntity {
 	public Position getPosition() {
 		return new Position(this.position);
 	}
+	
+	//TODO test this getCenteredPosition()
+	/**
+	 * Returns the position at the center of this entity.
+	 * 
+	 * @return A new position at the center of this entity.
+	 */
+	public Position getCenteredPosition() {
+		return new Position(position.getX() - getWidth() / 2, position.getY() - getHeight() / 2);
+	}
 
 	/**
 	 * Returns true if and only if the entity is entirely outside of the screen
