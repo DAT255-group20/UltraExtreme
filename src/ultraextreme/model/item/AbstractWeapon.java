@@ -1,8 +1,9 @@
 package ultraextreme.model.item;
 
-import ultraextreme.model.util.Rotation;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * An ingame weapon.
@@ -14,9 +15,11 @@ import ultraextreme.model.util.Position;
 public abstract class AbstractWeapon {
 
 	private BulletManager bulletManager;
-
-	public AbstractWeapon(BulletManager bulletManager) {
+	private ObjectName objectName;
+	
+	public AbstractWeapon(BulletManager bulletManager, ObjectName objectName) {
 		this.bulletManager = bulletManager;
+		this.objectName = objectName;
 	}
 
 	// bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(),
@@ -26,5 +29,8 @@ public abstract class AbstractWeapon {
 
 	protected BulletManager getBulletManager() {
 		return bulletManager;
+	}
+	public ObjectName getName() {
+		return objectName;
 	}
 }

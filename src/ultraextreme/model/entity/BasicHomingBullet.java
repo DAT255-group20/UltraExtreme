@@ -3,9 +3,10 @@ package ultraextreme.model.entity;
 import javax.vecmath.Vector2d;
 
 import ultraextreme.model.util.Constants;
-import ultraextreme.model.util.Rotation;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * A bullet that constantly changes its direction towards its target, 
@@ -24,7 +25,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	public BasicHomingBullet(double x, double y, int width, int height,
 			PlayerID playerId, DestroyableEntity target) {
-		super(x, y, width, height, playerId, new Rotation(0));
+		super(x, y, width, height, playerId, new Rotation(0), ObjectName.BASIC_HOMING_BULLET);
 		this.setTarget(target);
 		normDirectionVector = new Vector2d();
 		updateDirection();
