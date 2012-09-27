@@ -40,6 +40,10 @@ public class BulletManager {
 		// TODO Not entirely sure that using a raw string is so good /Plankton
 		pcs.firePropertyChange("add", null, b);
 	}
+	public void removeBullet(int index) {
+		bullets.remove(index);
+		pcs.firePropertyChange("remove", null, bullets.get(index));
+	}
 
 	/**
 	 * @return A list of all bullets in the bullet manager.
@@ -54,9 +58,8 @@ public class BulletManager {
 	public void clearBulletsOffScreen() {
 		for (int i = 0; i < bullets.size(); i++) {
 			if ((bullets.get(i).isOutOfScreen())) {
-				pcs.firePropertyChange("remove", null, bullets.get(i));
 				//TODO Change to fit reversed Y axis. (do tests)
-				bullets.remove(i);
+				this.removeBullet(i);
 				i--;
 			}
 		}
