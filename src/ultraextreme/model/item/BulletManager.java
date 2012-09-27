@@ -1,5 +1,7 @@
 package ultraextreme.model.item;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class BulletManager {
 
 	private List<IBullet> bullets;
 
-	private List<BulletManagerListener> listeners = new ArrayList<BulletManagerListener>();
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
+
 
 	public BulletManager() {
 		bullets = new ArrayList<IBullet>();
@@ -33,7 +37,12 @@ public class BulletManager {
 	 */
 	public void addBullet(AbstractBullet b) {
 		bullets.add(b);
-		fireAddedBulletUpdate(b);
+		// TODO Not entirely sure that using a raw string is so good /Plankton
+		pcs.firePropertyChange("add", null, b);
+	}
+	public void removeBullet(int index) {
+		pcs.firePropertyChange("remove", null, bullets.get(index));
+		bullets.remove(index);
 	}
 
 	/**
@@ -49,8 +58,8 @@ public class BulletManager {
 	public void clearBulletsOffScreen() {
 		for (int i = 0; i < bullets.size(); i++) {
 			if ((bullets.get(i).isOutOfScreen())) {
-				fireRemovedBulletUpdate(bullets.get(i));
-				bullets.remove(i);
+				//TODO Change to fit reversed Y axis. (do tests)
+				this.removeBullet(i);
 				i--;
 			}
 		}
@@ -83,23 +92,11 @@ public class BulletManager {
 		return output;
 	}
 	
-	private void fireAddedBulletUpdate(IBullet bullet) {
-		for (BulletManagerListener listener : listeners) {
-			listener.bulletAdded(bullet);
-		}
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
 	}
 	
-	private void fireRemovedBulletUpdate(IBullet bullet) {
-		for (BulletManagerListener listener : listeners) {
-			listener.bulletRemoved(bullet);
-		}
-	}
-	
-	public void addListener(BulletManagerListener listener) {
-		this.listeners.add(listener);
-	}
-	
-	public void removeListener(BulletManagerListener listener) {
-		this.listeners.remove(listener);
+	public void removeListener(PropertyChangeListener listener) {
+		pcs.removePropertyChangeListener(listener);
 	}
 }

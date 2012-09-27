@@ -1,10 +1,10 @@
 package ultraextreme.model.enemy;
 
-import ultraextreme.model.entity.BasicEnemyShip;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Rotation;
 
 /**
@@ -36,8 +36,9 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(double x, double y, BulletManager bulletManager) {
 
-		this(new BasicEnemyShip(x, y, new Rotation(0)), new BasicWeapon(
+		this(new EnemyShip(x, y, 40, 40, new Rotation(0), 50, ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(
 				bulletManager));
+		
 	}
 
 	@Override

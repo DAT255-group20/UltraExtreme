@@ -1,6 +1,7 @@
 package ultraextreme.model;
 
 import ultraextreme.model.entity.PlayerShip;
+import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
@@ -80,5 +81,10 @@ public class Player implements IPlayer {
 	@Override
 	public PlayerID getPlayerId() {
 		return playerId;
+	}
+
+	@Override
+	public void giveWeapon(AbstractWeapon weapon) {
+		itemBar.addItem(weapon);
 	}
 }

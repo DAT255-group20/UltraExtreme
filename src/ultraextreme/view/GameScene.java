@@ -10,6 +10,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.model.entity.PlayerShip;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -26,25 +27,22 @@ import android.hardware.SensorManager;
 public class GameScene extends Scene implements SensorEventListener {
 
 	private IUltraExtremeModel gameModel;
-	private Rectangle shipSprite;
+	private GameObjectSprite shipSprite;
 	private SensorManager sensorManager;
-	private List<BulletSprite> bulletSprites;
-	private List<EnemySprite> enemySprites;
+	private List<GameObjectSprite> gameObjectSprites;
 
 	public GameScene(IUltraExtremeModel gameModel,
 			VertexBufferObjectManager vertexBufferObjectManager,
-			SensorManager sensorManager) {
+			SensorManager sensorManager, SpriteFactory spriteFactory) {
 		this.gameModel = gameModel;
-		setBackground(new Background(0.09804f, 0.6274f, 0));
-		PlayerShip playerShip = gameModel.getPlayer().getShip();
-		Position p = gameModel.getPlayer().getShip().getPosition();
-		shipSprite = new Rectangle((float) p.getX(), (float) p.getY(),
-				playerShip.getWidth(), playerShip.getHeight(),
+		setBackground(new Background(0, 0, 0));		
+		
+		gameObjectSprites = new LinkedList<GameObjectSprite>();
+		GameObjectSprite playerSprite = spriteFactory.getNewSprite(gameModel.getPlayer().getShip(),
 				vertexBufferObjectManager);
-		bulletSprites = new LinkedList<BulletSprite>();
-		enemySprites = new LinkedList<EnemySprite>();
-		SpriteContainer.playerShip = shipSprite;
-		attachChild(shipSprite);
+		
+		gameObjectSprites.add(playerSprite);
+		attachChild(playerSprite);
 
 		this.sensorManager = sensorManager;
 		sensorManager.registerListener(this,
@@ -63,11 +61,7 @@ public class GameScene extends Scene implements SensorEventListener {
 		// shipSprite.setX(shipSprite.getX() + event.values[1]);
 	}
 
-	public List<BulletSprite> getBulletSprites() {
-		return bulletSprites;
-	}
-
-	public List<EnemySprite> getEnemySprites() {
-		return enemySprites;
+	public List<GameObjectSprite> getGameObjectSprites() {
+		return gameObjectSprites;
 	}
 }

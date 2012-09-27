@@ -9,7 +9,7 @@ import ultraextreme.model.util.Position;
 
 public class EnemySpawner {
 
-	public static final String NEW_ENEMY = "nE";
+	public static final String NEW_ENEMY = "add";
 
 	/**
 	 * A clock that keeps track of the time.
@@ -67,7 +67,7 @@ public class EnemySpawner {
 
 	/**
 	 * Run an update on the enemy spawner. The PropertyChangeListeners
-	 * registered to this class will get an enemy in an event if one is spawned.
+	 * registered to this class will get an enemyShip in an event if an enemy is spawned.
 	 * 
 	 * @param timeElapsed
 	 *            Time since this method was last called.
@@ -78,9 +78,11 @@ public class EnemySpawner {
 			if (waveSpawnCounter < waveSize) {
 				waveSpawnCounter++;
 				nextEnemySpawnTime = timer + 1;
-				pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null,
-						new BasicEnemy(nextPosition.getX(),
-								nextPosition.getY(), bulletManager));
+				
+				BasicEnemy newEnemy = new BasicEnemy(nextPosition.getX(),
+						nextPosition.getY(), bulletManager);
+				pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, newEnemy);
+				
 				nextPosition.setX(nextPosition.getX() + 70);
 			} else if (timer > nextWaveTime) {
 				wave++;
