@@ -14,8 +14,7 @@ import ultraextreme.model.util.PlayerID;
 /**
  * Contains all bullets in the game.
  * 
- * @author Bjorn Persson Mattsson
- * @author Daniel Jonsson
+ * @author Bjorn Persson Mattsson, Daniel Jonsson
  * 
  */
 public class BulletManager {
@@ -26,8 +25,9 @@ public class BulletManager {
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
-
-
+	/**
+	 * Initializes an empty bullet manager.
+	 */
 	public BulletManager() {
 		for (PlayerID pID : PlayerID.values())
 		{
@@ -36,7 +36,7 @@ public class BulletManager {
 	}
 
 	/**
-	 * Adds a bullet to the creation queue.
+	 * Adds a bullet to the bullet manager.
 	 * 
 	 * @param b
 	 *            Bullet to be added.
@@ -72,7 +72,7 @@ public class BulletManager {
 	}
 
 	/**
-	 * Removes all bullets that are outside the gameScreen
+	 * Removes all bullets that are off the gameScreen
 	 */
 	public void clearBulletsOffScreen() {
 		for (List<IBullet> list : bulletsMap.values())
@@ -108,7 +108,7 @@ public class BulletManager {
 	}
 
 	/**
-	 * Informs the class that a bomb has been dropped.
+	 * Informs the bullet manager that a bomb has been dropped.
 	 */
 	public void dropBomb() {
 		this.isBombDropped = true;
@@ -119,6 +119,7 @@ public class BulletManager {
 	 *         this method.
 	 */
 	public boolean isBombDropped() {
+		// TODO Is this method really needed?
 		boolean output = this.isBombDropped;
 
 		if (output) {
@@ -127,10 +128,18 @@ public class BulletManager {
 		return output;
 	}
 	
+	/**
+	 * Adds a property change listener.
+	 * @param listener The listener.
+	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
 	
+	/**
+	 * Removes the property change listner.
+	 * @param listener The listener.
+	 */
 	public void removeListener(PropertyChangeListener listener) {
 		pcs.removePropertyChangeListener(listener);
 	}
