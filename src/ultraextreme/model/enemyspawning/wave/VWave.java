@@ -35,12 +35,10 @@ public class VWave extends Wave {
 	 */
 	public VWave(double rotation, int x, int y, BulletManager bulletManager) {
 		super(bulletManager);
-		timer = 0;
+		timer = 2;
 		counter = 0;
 		this.rotation = new Rotation(rotation);
 		this.spawningPositon = new Position(x, y);
-		fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
-				spawningPositon.getY(), this.rotation, this.bulletManager));
 	}
 
 	/**
@@ -49,12 +47,17 @@ public class VWave extends Wave {
 	@Override
 	public void update(float timeElapsed) {
 		timer += timeElapsed;
-		if (timer > 2) {
-			fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX() - counter
-					* 60, spawningPositon.getY(), rotation, this.bulletManager));
-			fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX() + counter
-					* 60, spawningPositon.getY(), rotation, this.bulletManager));
-			timer = 0;
+		if (timer >= 2) {
+			if (counter == 0) {
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
+					spawningPositon.getY(), this.rotation, this.bulletManager));
+			} else {
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX() - counter
+						* 60, spawningPositon.getY(), rotation, this.bulletManager));
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX() + counter
+						* 60, spawningPositon.getY(), rotation, this.bulletManager));
+			}
+			timer -= 2;
 			counter++;
 			if (counter > 3) {
 				this.fireWaveEnded();
