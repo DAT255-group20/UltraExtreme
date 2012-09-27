@@ -1,7 +1,9 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 
@@ -26,6 +28,13 @@ public class PlayerShip extends DestroyableEntity {
 	
 	public PlayerShip() {
 		this(0, 0);
+	}
+	
+	public boolean canMove(double deltaX, double deltaY) {
+		Dimension dimension = Constants.getInstance().getLevelDimension();
+		Position position = this.getCenteredPosition();
+		return dimension.getX() - (deltaX + position.getX() + getWidth() / 2) > 0 
+				&& dimension.getY() - (deltaY + position.getY() + getHeight() / 2) > 0;
 	}
 
 	@Override

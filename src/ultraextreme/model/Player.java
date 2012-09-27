@@ -61,7 +61,9 @@ public class Player implements IPlayer {
 	 */
 	@Override
 	public void update(ModelInput input, float timeElapsed) {
-		ship.move(input.dX, input.dY);
+		if(ship.canMove(input.dX, input.dY)) {
+			ship.move(input.dX, input.dY);
+		}
 		if (input.fireWeapons) {
 			itemBar.fireWeapons(ship.getPosition(), timeElapsed);
 		}
