@@ -61,6 +61,13 @@ public class PlayerShip extends DestroyableEntity {
 		double newY = deltaY + position.getY();
 		return newY + getHeight() / 2 < dimension.getY() && newY - getHeight() / 2 > 0;
 	}
+	
+	public boolean canMove(double deltaX, double deltaY) {
+		Dimension dimension = Constants.getInstance().getLevelDimension();
+		Position position = this.getCenteredPosition();
+		return dimension.getX() - (deltaX + position.getX() + getWidth() / 2) > 0 
+				&& dimension.getY() - (deltaY + position.getY() + getHeight() / 2) > 0;
+	}
 
 	@Override
 	public boolean isDestroyed() {
