@@ -24,11 +24,7 @@ public class BulletManager {
 	private Map<PlayerID, List<IBullet>> bulletsMap = new HashMap<PlayerID, List<IBullet>>();
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> Updated javadoc
 	/**
 	 * Initializes an empty bullet manager.
 	 */
@@ -131,36 +127,22 @@ public class BulletManager {
 		}
 		return output;
 	}
-<<<<<<< HEAD
 
 	/**
 	 * Adds a property change listener.
 	 * 
 	 * @param listener
 	 *            The listener.
-=======
-	
-	/**
-	 * Adds a property change listener.
-	 * @param listener The listener.
->>>>>>> Updated javadoc
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
-<<<<<<< HEAD
 
 	/**
 	 * Removes the property change listner.
 	 * 
 	 * @param listener
 	 *            The listener.
-=======
-	
-	/**
-	 * Removes the property change listner.
-	 * @param listener The listener.
->>>>>>> Updated javadoc
 	 */
 	public void removeListener(PropertyChangeListener listener) {
 		pcs.removePropertyChangeListener(listener);
