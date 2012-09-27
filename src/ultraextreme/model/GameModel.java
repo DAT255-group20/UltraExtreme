@@ -56,6 +56,24 @@ public class GameModel implements IUltraExtremeModel {
 		enemySpawner.update(timeElapsed);
 
 		bulletManager.clearBulletsOffScreen();
+		
+		checkCollisions();
+	}
+
+	private void checkCollisions() {
+		// TODO Auto-generated method stub
+		List<IBullet> playerBullets = bulletManager.getBulletsFrom(PlayerID.PLAYER1);
+		for (IBullet b : playerBullets)
+		{
+			for (IEnemy e : enemyManager.getEnemies())
+			{
+				if (b.collidesWith(e.getShip()))
+				{
+					e.getShip().damage(1);
+					b.markForRemoval();
+				}
+			}
+		}
 	}
 
 	@Override

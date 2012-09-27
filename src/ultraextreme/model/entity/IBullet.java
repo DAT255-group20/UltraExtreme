@@ -26,4 +26,6 @@ public interface IBullet extends IEntity {
 
 	PlayerID getPlayerId();
 
+	void markForRemoval();
+
 }
