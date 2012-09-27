@@ -14,7 +14,7 @@ import ultraextreme.model.util.Rotation;
  * @author Bjorn Persson Mattsson, Viktor Anderling, Johan Gronvall
  * 
  */
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements IEntity {
 
 	private Position position;
 	
@@ -99,7 +99,7 @@ public abstract class AbstractEntity {
 	 *            The other entity.
 	 * @return true if and only if the two entities are colliding.
 	 */
-	public boolean collidesWith(AbstractEntity other) {
+	public boolean collidesWith(IEntity other) {
 		// Rectangle collision detection
 		double left1 = this.getPosition().getX();
 		double top1 = this.getPosition().getY();
