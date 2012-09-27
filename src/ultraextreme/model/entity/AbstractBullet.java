@@ -15,7 +15,7 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	// What player shot this bullet
 	private PlayerID playerId;
-	
+
 	private boolean markedForRemoval = false;
 
 	private static double speedMod = Constants.getInstance()
@@ -62,7 +62,7 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	public boolean isMarkedForRemoval() {
 		return markedForRemoval;
 	}
-	
+
 	@Override
 	public int getDamage() {
 		return 10;
