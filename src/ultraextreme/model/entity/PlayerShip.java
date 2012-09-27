@@ -18,8 +18,12 @@ public class PlayerShip extends DestroyableEntity {
 		super(x, y, width, height, new Rotation(0));
 	}
 
+	public PlayerShip(double x, double y) {
+		this(x, y, 50, 50);
+	}
+	
 	public PlayerShip() {
-		super(0, 0, 50, 50, new Rotation(0));
+		this(0, 0);
 	}
 
 	@Override

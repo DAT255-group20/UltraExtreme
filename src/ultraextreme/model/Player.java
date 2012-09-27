@@ -5,6 +5,8 @@ import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.item.SpinningSpreadWeapon;
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 
@@ -45,7 +47,8 @@ public class Player implements IPlayer {
 	 *            to.
 	 */
 	public Player(PlayerID playerId, BulletManager bulletManager) {
-		this.ship = new PlayerShip();
+		Dimension levelDimension = Constants.getInstance().getLevelDimension();
+		this.ship = new PlayerShip(levelDimension.getX() * 0.5, levelDimension.getY() * 0.8);
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(Math.PI), 5);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
