@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EnemyManager implements PropertyChangeListener {
 
-	public static final String NEW_ENEMY = "n";
+	public static final String NEW_ENEMY = "add";
 
 	private List<IEnemy> enemies;
 
@@ -24,7 +24,7 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void addEnemy(IEnemy enemy) {
 		enemies.add(enemy);
-		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy);
+		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

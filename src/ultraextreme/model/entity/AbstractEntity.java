@@ -4,8 +4,9 @@ import javax.vecmath.Vector2d;
 
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
-import ultraextreme.model.util.Rotation;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * An abstract class representing an in-game "physical" entity.
@@ -24,21 +25,25 @@ public abstract class AbstractEntity {
 	private int width;
 
 	private int height;
+	
+	private ObjectName objectName;
 
 	/**
-	 * Creates and entity at the position 0,0 and with the side 0
+	 * Creates a nameless entity at the position 0,0 and with the side 0
 	 */
 	public AbstractEntity() {
-		this(0, 0, 0, 0, new Rotation(0));
+		this(0, 0, 0, 0, new Rotation(0), null);
 	}
 
 	public AbstractEntity(double x, double y, int width, int height,
-			Rotation direction) {
-		this.rotation = direction;
+			Rotation rotation, ObjectName objectName) {
+		this.rotation = rotation;
 		this.position = new Position(x, y);
 		this.prevPosition = new Position(x, y);
 		this.width = width;
 		this.height = height;
+		this.objectName = objectName;
+		
 	}
 
 	/**
@@ -134,6 +139,14 @@ public abstract class AbstractEntity {
 	 */
 	public Rotation getRotation() {
 		return rotation;
+	}
+	
+	/**
+	 * Returns what kind of entity this is as an ObjectName
+	 * @return what kind of entity this is as an ObjectName
+	 */
+	public ObjectName getObjectName() {
+		return objectName;
 	}
 
 	public abstract double getSpeedMod();
