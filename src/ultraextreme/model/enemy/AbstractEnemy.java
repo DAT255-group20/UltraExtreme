@@ -32,11 +32,7 @@ public abstract class AbstractEnemy implements IEnemy {
 		weapon.fire(ship.getPosition(), PlayerID.ENEMY, this.enemyDirection, timeElapsed);
 	}
 
-	/**
-	 * returns true if this enemy has been destroyed
-	 * 
-	 * @return true if this enemy has been destroyed
-	 */
+	@Override
 	public boolean isDead() {
 		return ship.isDestroyed();
 	}

@@ -57,11 +57,11 @@ public class GameModel implements IUltraExtremeModel {
 		
 		checkCollisions();
 
+		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
 	}
 
 	private void checkCollisions() {
-		// TODO Auto-generated method stub
 		List<IBullet> playerBullets = bulletManager.getBulletsFrom(PlayerID.PLAYER1);
 		for (IBullet b : playerBullets)
 		{
@@ -69,7 +69,7 @@ public class GameModel implements IUltraExtremeModel {
 			{
 				if (b.collidesWith(e.getShip()))
 				{
-					e.getShip().damage(1);
+					e.getShip().damage(b.getDamage());
 					b.markForRemoval();
 				}
 			}

@@ -18,4 +18,11 @@ public interface IEnemy {
 	public void update(float timePassed);
 
 	public EnemyShip getShip();
+	
+	/**
+	 * returns true if this enemy has been destroyed
+	 * 
+	 * @return true if this enemy has been destroyed
+	 */
+	boolean isDead();
 }
