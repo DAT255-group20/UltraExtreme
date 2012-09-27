@@ -55,10 +55,10 @@ public class VerticalLineWave extends Wave {
 	@Override
 	public void update(float timeElapsed) {
 		timer += timeElapsed;
-		if (timer > 2) {
+		if (timer >= 2) {
 			fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
 					spawningPositon.getY(), rotation, this.bulletManager));
-			timer = 0;
+			timer -= 2;
 			enemyCounter++;
 			if (enemyCounter >= numberOfEnemies) {
 				this.fireWaveEnded();
