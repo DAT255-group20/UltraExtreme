@@ -23,11 +23,13 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private Camera camera;
 	private Scene currentScene;
 
-	private static final int CAMERA_WIDTH = 480;
-	private static final int CAMERA_HEIGHT = 800;
+	private static int CAMERA_WIDTH;
+	private static int CAMERA_HEIGHT;
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
+		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
+		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
 				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
