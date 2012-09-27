@@ -6,8 +6,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultraextreme.model.entity.IBullet;
-
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";
@@ -28,13 +26,13 @@ public class EnemyManager implements PropertyChangeListener {
 		enemies.add(enemy);
 		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
 	}
-	
-	public void clearDeadEnemies()
-	{
+
+	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			IEnemy e = enemies.get(i);
 			if (e.isDead()) {
-				// TODO Also check for when the enemy has left the screen and should be removed
+				// TODO Also check for when the enemy has left the screen and
+				// should be removed
 				// TODO Change to fit reversed Y axis. (do tests)
 				pcs.firePropertyChange("remove", null, e);
 				enemies.remove(i);

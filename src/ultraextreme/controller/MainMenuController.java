@@ -16,18 +16,19 @@ public class MainMenuController extends AbstractController implements
 
 	private MainMenuScene scene;
 
-	public MainMenuController(Camera camera, Font font, VertexBufferObjectManager vertexBufferObjectManager)
-	{
+	public MainMenuController(Camera camera, Font font,
+			VertexBufferObjectManager vertexBufferObjectManager) {
 		scene = new MainMenuScene(camera, font, vertexBufferObjectManager);
 		scene.setOnMenuItemClickListener(this);
 	}
-	
+
 	@Override
 	public boolean onMenuItemClicked(MenuScene menuScene, IMenuItem menuItem,
 			float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case MainMenuScene.MENU_START:
-			fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_GAME));
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_GAME));
 			break;
 
 		default:

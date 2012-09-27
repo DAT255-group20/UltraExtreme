@@ -25,9 +25,9 @@ public class GameModel implements IUltraExtremeModel {
 	private EnemyManager enemyManager;
 
 	private EnemySpawner enemySpawner;
-	
+
 	private PickupManager pickUpManager;
-	
+
 	public GameModel() {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
@@ -54,7 +54,7 @@ public class GameModel implements IUltraExtremeModel {
 		}
 
 		enemySpawner.update(timeElapsed);
-		
+
 		checkCollisions();
 
 		enemyManager.clearDeadEnemies();
@@ -62,27 +62,24 @@ public class GameModel implements IUltraExtremeModel {
 	}
 
 	private void checkCollisions() {
-		List<IBullet> playerBullets = bulletManager.getBulletsFrom(PlayerID.PLAYER1);
-		List<IBullet> enemyBullets = bulletManager.getBulletsFrom(PlayerID.ENEMY);
-		
+		List<IBullet> playerBullets = bulletManager
+				.getBulletsFrom(PlayerID.PLAYER1);
+		List<IBullet> enemyBullets = bulletManager
+				.getBulletsFrom(PlayerID.ENEMY);
+
 		// Check player bullets against enemies
-		for (IBullet b : playerBullets)
-		{
-			for (IEnemy e : enemyManager.getEnemies())
-			{
-				if (b.collidesWith(e.getShip()))
-				{
+		for (IBullet b : playerBullets) {
+			for (IEnemy e : enemyManager.getEnemies()) {
+				if (b.collidesWith(e.getShip())) {
 					e.getShip().receiveDamage(b.getDamage());
 					b.markForRemoval();
 				}
 			}
 		}
-		
+
 		// Check enemy bullets against player
-		for (IBullet b : enemyBullets)
-		{
-			if (b.collidesWith(player.getShip()))
-			{
+		for (IBullet b : enemyBullets) {
+			if (b.collidesWith(player.getShip())) {
 				player.getShip().receiveDamage(b.getDamage());
 				b.markForRemoval();
 			}

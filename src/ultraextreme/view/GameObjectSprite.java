@@ -6,7 +6,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.entity.AbstractEntity;
 
-public class GameObjectSprite extends Sprite{
+public class GameObjectSprite extends Sprite {
 
 	/**
 	 * Reference to a bullet in the model.
@@ -14,8 +14,9 @@ public class GameObjectSprite extends Sprite{
 	private AbstractEntity entity;
 
 	public GameObjectSprite(AbstractEntity entity,
-			VertexBufferObjectManager pVertexBufferObjectManager, ITextureRegion texture) {
-		
+			VertexBufferObjectManager pVertexBufferObjectManager,
+			ITextureRegion texture) {
+
 		super((float) entity.getPosition().getX(), (float) entity.getPosition()
 				.getY(), entity.getWidth(), entity.getHeight(), texture,
 				pVertexBufferObjectManager);
@@ -29,6 +30,7 @@ public class GameObjectSprite extends Sprite{
 		this.setX((float) entity.getPosition().getX());
 		this.setY((float) entity.getPosition().getY());
 	}
+
 	/**
 	 * returns the entity this sprite is representing
 	 */
