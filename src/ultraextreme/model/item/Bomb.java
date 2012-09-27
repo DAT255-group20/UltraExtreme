@@ -1,9 +1,9 @@
 package ultraextreme.model.item;
 
-import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * This represents the bomb item that is in the player ship's inventory.
@@ -18,8 +18,8 @@ public class Bomb extends AbstractWeapon{
 	}
 
 	@Override
-	public void fireShot(Position shipPosition, PlayerID playerId,
-			Direction direction) {
+	public void fire(Position shipPosition, PlayerID playerId,
+			Rotation rotation, float timeElapsed) {
 		// TODO Auto-generated method stub
 		
 	}

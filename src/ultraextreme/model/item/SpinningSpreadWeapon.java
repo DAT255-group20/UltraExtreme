@@ -1,6 +1,7 @@
 package ultraextreme.model.item;
 
 import ultraextreme.model.entity.BasicBullet;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
@@ -15,7 +16,7 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 	private double currentAngle;
 	
 	public SpinningSpreadWeapon(BulletManager bulletManager) {
-		super(bulletManager);
+		super(bulletManager, ObjectName.SPINNING_SPREAD_WEAPON);
 		cooldown = initCooldown;
 		angleStep = Math.PI / 12;
 		currentAngle = 0;

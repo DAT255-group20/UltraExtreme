@@ -54,8 +54,8 @@ public class BulletManager {
 	public void clearBulletsOffScreen() {
 		for (int i = 0; i < bullets.size(); i++) {
 			if ((bullets.get(i).isOutOfScreen())) {
-				// TODO Fix this
-				//fireRemovedBulletUpdate(bullets.get(i));
+				pcs.firePropertyChange("remove", null, bullets.get(i));
+				//TODO Change to fit reversed Y axis. (do tests)
 				bullets.remove(i);
 				i--;
 			}

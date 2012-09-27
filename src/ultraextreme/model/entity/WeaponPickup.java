@@ -2,7 +2,7 @@ package ultraextreme.model.entity;
 
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.util.Constants;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 
 /**
  * A pickupable weapon or bomb.
@@ -18,7 +18,7 @@ public class WeaponPickup extends AbstractEntity {
 			.getPickupSpeedModifier();
 
 	public WeaponPickup(double x, double y, AbstractWeapon weapon) {
-		super(x, y, width, width, Direction.DOWN, weapon.getName());
+		super(x, y, width, width, new Rotation(0), weapon.getName());
 		this.weapon = weapon;
 	}
 	
