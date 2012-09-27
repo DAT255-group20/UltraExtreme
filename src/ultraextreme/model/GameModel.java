@@ -54,10 +54,10 @@ public class GameModel implements IUltraExtremeModel {
 		}
 
 		enemySpawner.update(timeElapsed);
-
-		bulletManager.clearBulletsOffScreen();
 		
 		checkCollisions();
+
+		bulletManager.clearBulletsOffScreen();
 	}
 
 	private void checkCollisions() {
