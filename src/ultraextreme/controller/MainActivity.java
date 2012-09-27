@@ -9,6 +9,7 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import ultraextreme.view.SpriteFactory;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
@@ -18,6 +19,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
+	private SpriteFactory spriteFactory;
 	// private GameModel gameModel;
 	private Font defaultFont;
 	private Camera camera;
@@ -37,6 +39,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected void onCreateResources() {
+		spriteFactory = new SpriteFactory(this);
 		defaultFont = FontFactory.create(this.getFontManager(),
 				this.getTextureManager(), 256, 256,
 				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
@@ -47,7 +50,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	protected Scene onCreateScene() {
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
+				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE), spriteFactory);
 		mainMenuController = new MainMenuController(camera, defaultFont, this.getVertexBufferObjectManager());
 		
 		gameController.addListener(this);
@@ -56,7 +59,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		setScene(mainMenuController.getScene());
 		return currentScene;
 	}
-
+	
 	@Override
 	public void controllerListenerUpdate(ControllerEvent event) {
 		switch (event.getEventType()) {
@@ -74,4 +77,5 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		currentScene = scene;
 		getEngine().setScene(currentScene);
 	}
+	
 }

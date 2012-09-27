@@ -7,6 +7,7 @@ import ultraextreme.model.enemy.EnemySpawner;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.PickupManager;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -24,7 +25,9 @@ public class GameModel implements IUltraExtremeModel {
 	private EnemyManager enemyManager;
 
 	private EnemySpawner enemySpawner;
-
+	
+	private PickupManager pickUpManager;
+	
 	public GameModel() {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
