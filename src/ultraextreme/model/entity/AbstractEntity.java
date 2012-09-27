@@ -100,10 +100,7 @@ public abstract class AbstractEntity implements IEntity {
 	 *            The other entity.
 	 * @return true if and only if the two entities are colliding.
 	 */
-<<<<<<< HEAD
 	@Override
-=======
->>>>>>> Added interface IEntity
 	public boolean collidesWith(IEntity other) {
 		// Rectangle collision detection
 		double left1 = this.getPosition().getX();

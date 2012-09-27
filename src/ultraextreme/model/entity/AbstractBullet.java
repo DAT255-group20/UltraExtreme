@@ -15,6 +15,8 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	// What player shot this bullet
 	private PlayerID playerId;
+	
+	private boolean toBeRemoved = false;
 
 	private boolean markedForRemoval = false;
 

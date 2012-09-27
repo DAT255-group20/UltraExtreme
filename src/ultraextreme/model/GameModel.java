@@ -60,6 +60,8 @@ public class GameModel implements IUltraExtremeModel {
 
 		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
+		
+		checkCollisions();
 	}
 
 	private void checkCollisions() {
