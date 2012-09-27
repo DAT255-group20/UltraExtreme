@@ -28,4 +28,6 @@ public interface IBullet extends IEntity {
 
 	void markForRemoval();
 
+	boolean isMarkedForRemoval();
+
 }
