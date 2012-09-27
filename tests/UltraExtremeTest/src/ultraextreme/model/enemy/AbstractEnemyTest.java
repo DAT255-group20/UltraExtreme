@@ -40,7 +40,7 @@ public class AbstractEnemyTest extends TestCase {
 	 */
 	public void testIsDead() {
 		assertTrue(enemy.getShip().isDestroyed() == enemy.isDead());
-		enemy.getShip().damage(10000);
+		enemy.getShip().receiveDamage(10000);
 		assertTrue(enemy.isDead());
 	}
 
