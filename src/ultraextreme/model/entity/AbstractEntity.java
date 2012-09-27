@@ -95,7 +95,36 @@ public abstract class AbstractEntity {
 	 * @return true if and only if the two entities are colliding.
 	 */
 	public boolean collidesWith(AbstractEntity other) {
-		return false;
+		// Rectangle collision detection
+		double left1 = this.getPosition().getX();
+		double top1 = this.getPosition().getY();
+		double right1 = this.getPosition().getX()+this.getWidth();
+		double bottom1 = this.getPosition().getY()+this.getHeight();
+		
+		double left2 = other.getPosition().getX();
+		double top2 = other.getPosition().getY();
+		double right2 = other.getPosition().getX()+other.getWidth();
+		double bottom2 = other.getPosition().getY()+other.getHeight();
+		
+		if (bottom1 < top2)
+		{
+			return false;
+		}
+		if (top1 > bottom2)
+		{
+			return false;
+		}
+		
+		if (right1 < left2)
+		{
+			return false;
+		}
+		if (left1 > right2)
+		{
+			return false;
+		}
+		
+		return true;
 	}
 
 	// public void getHitbox() {

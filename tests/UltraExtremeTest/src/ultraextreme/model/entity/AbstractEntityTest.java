@@ -53,10 +53,21 @@ public abstract class AbstractEntityTest extends TestCase {
 	}
 
 	public void testCollidesWith() {
-		// TODO Write collidesWith test
+		AbstractEntity e1 = getNewAbstractEntity(10, 10, 10, 10, new Rotation(0));
+		AbstractEntity e2 = getNewAbstractEntity(30, 10, 10, 10, new Rotation(0));
+		
+		assertFalse(e1.collidesWith(e2));
+		assertFalse(e2.collidesWith(e1));
+		
+		e1 = getNewAbstractEntity(10, 10, 10, 10, new Rotation(0));
+		e2 = getNewAbstractEntity(15, 15, 10, 10, new Rotation(0));
+		
+		assertTrue(e1.collidesWith(e2));
+		assertTrue(e2.collidesWith(e1));
 	}
 
 	public void testIsOutOfScreen() {
+		fail("Not implemented");
 		// TODO Write isOutOfScreen test
 	}
 
