@@ -63,15 +63,28 @@ public class GameModel implements IUltraExtremeModel {
 
 	private void checkCollisions() {
 		List<IBullet> playerBullets = bulletManager.getBulletsFrom(PlayerID.PLAYER1);
+		List<IBullet> enemyBullets = bulletManager.getBulletsFrom(PlayerID.ENEMY);
+		
+		// Check player bullets against enemies
 		for (IBullet b : playerBullets)
 		{
 			for (IEnemy e : enemyManager.getEnemies())
 			{
 				if (b.collidesWith(e.getShip()))
 				{
-					e.getShip().damage(b.getDamage());
+					e.getShip().receiveDamage(b.getDamage());
 					b.markForRemoval();
 				}
+			}
+		}
+		
+		// Check enemy bullets against player
+		for (IBullet b : enemyBullets)
+		{
+			if (b.collidesWith(player.getShip()))
+			{
+				player.getShip().receiveDamage(b.getDamage());
+				b.markForRemoval();
 			}
 		}
 	}
