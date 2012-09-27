@@ -77,7 +77,8 @@ public class BulletManager {
 		for (List<IBullet> list : bulletsMap.values())
 		{
 			for (int i = 0; i < list.size(); i++) {
-				if ((list.get(i).isOutOfScreen())) {
+				IBullet b = list.get(i);
+				if (b.isMarkedForRemoval() || (list.get(i).isOutOfScreen())) {
 					//TODO Change to fit reversed Y axis. (do tests)
 					pcs.firePropertyChange("remove", null, list.get(i));
 					list.remove(i);

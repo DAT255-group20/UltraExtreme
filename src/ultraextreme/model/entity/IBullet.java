@@ -34,5 +34,4 @@ public interface IBullet extends IEntity {
 	boolean isMarkedForRemoval();
 
 	int getDamage();
-
 }
