@@ -40,7 +40,8 @@ public class EnemyShip extends DestroyableEntity {
 	 * @param damage
 	 *            how many hitPoints are to be lost
 	 */
-	public void damage(int damage) {
+	@Override
+	public void receiveDamage(int damage) {
 		hitPoints -= damage;
 	}
 

@@ -10,7 +10,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * 
  */
-public interface IBullet {
+public interface IBullet extends IEntity {
 
 	Position getPosition();
 
@@ -25,5 +25,11 @@ public interface IBullet {
 	Rotation getRotation();
 
 	PlayerID getPlayerId();
+
+	void markForRemoval();
+
+	boolean isMarkedForRemoval();
+
+	int getDamage();
 
 }
