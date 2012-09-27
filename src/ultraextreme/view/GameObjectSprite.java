@@ -10,7 +10,7 @@ import org.andengine.util.math.MathUtils;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.AbstractEntity;
 
-public class GameObjectSprite extends Sprite{
+public class GameObjectSprite extends Sprite {
 
 	/**
 	 * Reference to a bullet in the model.
@@ -20,8 +20,9 @@ public class GameObjectSprite extends Sprite{
 	private Vector2d directionVector;
 
 	public GameObjectSprite(AbstractEntity entity,
-			VertexBufferObjectManager pVertexBufferObjectManager, ITextureRegion texture) {
-		
+			VertexBufferObjectManager pVertexBufferObjectManager,
+			ITextureRegion texture) {
+
 		super((float) entity.getPosition().getX(), (float) entity.getPosition()
 				.getY(), entity.getWidth(), entity.getHeight(), texture,
 				pVertexBufferObjectManager);
@@ -46,6 +47,7 @@ public class GameObjectSprite extends Sprite{
 			this.setRotation(newAngle + 90f);
 		}
 	}
+
 	/**
 	 * returns the entity this sprite is representing
 	 */

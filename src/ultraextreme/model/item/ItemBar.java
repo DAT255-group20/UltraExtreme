@@ -3,9 +3,9 @@ package ultraextreme.model.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * An inventory containing weapons and bombs.

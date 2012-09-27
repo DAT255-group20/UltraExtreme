@@ -3,15 +3,11 @@ package ultraextreme.view;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
-import ultraextreme.model.entity.PlayerShip;
-import ultraextreme.model.util.ObjectName;
-import ultraextreme.model.util.Position;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -35,12 +31,12 @@ public class GameScene extends Scene implements SensorEventListener {
 			VertexBufferObjectManager vertexBufferObjectManager,
 			SensorManager sensorManager, SpriteFactory spriteFactory) {
 		this.gameModel = gameModel;
-		setBackground(new Background(0, 0, 0));		
-		
+		setBackground(new Background(0, 0, 0));
+
 		gameObjectSprites = new LinkedList<GameObjectSprite>();
-		GameObjectSprite playerSprite = spriteFactory.getNewSprite(gameModel.getPlayer().getShip(),
-				vertexBufferObjectManager);
-		
+		GameObjectSprite playerSprite = spriteFactory.getNewSprite(gameModel
+				.getPlayer().getShip(), vertexBufferObjectManager);
+
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
 

@@ -12,7 +12,6 @@ import ultraextreme.model.ModelInput;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractEntity;
-import ultraextreme.model.entity.IBullet;
 import ultraextreme.view.GameObjectSprite;
 import ultraextreme.view.GameScene;
 import ultraextreme.view.SpriteFactory;
@@ -30,7 +29,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private List<GameObjectSprite> gameObjectSprites;
 	private VertexBufferObjectManager vertexBufferObjectManager;
 	private SpriteFactory spriteFactory;
-	
+
 	private boolean firing;
 	private double moveX;
 	private double moveY;
@@ -40,7 +39,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			List<GameObjectSprite> gameObjectSprites,
 			VertexBufferObjectManager vertexBufferObjectManager,
 			SpriteFactory spriteFactory) {
-		
+
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
@@ -50,13 +49,14 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void onUpdate(float time) {
-		gameModel.update(new ModelInput(moveX, moveY, firing, specialAttack), time);
+		gameModel.update(new ModelInput(moveX, moveY, firing, specialAttack),
+				time);
 		moveX = 0;
 		moveY = 0;
-		
-		for (GameObjectSprite sprite: gameObjectSprites) {
+
+		for (GameObjectSprite sprite : gameObjectSprites) {
 			sprite.update();
-		specialAttack = false;
+			specialAttack = false;
 
 		}
 	}
@@ -67,51 +67,52 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	}
 
-//	@Override
-//	public void propertyChange(PropertyChangeEvent event) {
-//		if (event.getPropertyName().equals("newBullet")) {
-//			BulletSprite b = new BulletSprite(
-//					(AbstractBullet) event.getNewValue(),
-//					vertexBufferObjectManager);
-//			bulletSprites.add(b);
-//			gameScene.attachChild(b);
-//			Log.d("Bullet list length View", "" + bulletSprites.size());
-	
-//		} else if (event.getPropertyName().equals(EnemyManager.NEW_ENEMY)) {
-//			EnemySprite e = new EnemySprite(
-//					((IEnemy) event.getNewValue()).getShip(),
-//					vertexBufferObjectManager);
-//			enemySprites.add(e);
-//			gameScene.attachChild(e);
-//		}
-//	}
-	
+	// @Override
+	// public void propertyChange(PropertyChangeEvent event) {
+	// if (event.getPropertyName().equals("newBullet")) {
+	// BulletSprite b = new BulletSprite(
+	// (AbstractBullet) event.getNewValue(),
+	// vertexBufferObjectManager);
+	// bulletSprites.add(b);
+	// gameScene.attachChild(b);
+	// Log.d("Bullet list length View", "" + bulletSprites.size());
+
+	// } else if (event.getPropertyName().equals(EnemyManager.NEW_ENEMY)) {
+	// EnemySprite e = new EnemySprite(
+	// ((IEnemy) event.getNewValue()).getShip(),
+	// vertexBufferObjectManager);
+	// enemySprites.add(e);
+	// gameScene.attachChild(e);
+	// }
+	// }
+
 	/**
-	 * If a new sprite is created, adds it to the scene and to the list
-	 * if a sprite is removed, removes it from the scene and the list
+	 * If a new sprite is created, adds it to the scene and to the list if a
+	 * sprite is removed, removes it from the scene and the list
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if(event.getPropertyName().equals("add")) {
+		if (event.getPropertyName().equals("add")) {
 			AbstractEntity entity;
-			
-			if(event.getNewValue() instanceof IEnemy){
+
+			if (event.getNewValue() instanceof IEnemy) {
 				entity = ((AbstractEnemy) event.getNewValue()).getShip();
-			} else { //if item or bullet
-				entity = (AbstractEntity)event.getNewValue();
-			
-			
-			GameObjectSprite newSprite = 
-					spriteFactory.getNewSprite(entity, vertexBufferObjectManager);
-			gameScene.attachChild(newSprite);
-			gameObjectSprites.add(newSprite);
+			} else { // if item or bullet
+				entity = (AbstractEntity) event.getNewValue();
+
+				GameObjectSprite newSprite = spriteFactory.getNewSprite(entity,
+						vertexBufferObjectManager);
+				gameScene.attachChild(newSprite);
+				gameObjectSprites.add(newSprite);
 			}
-			
-		} else if(event.getPropertyName().equals("remove")){
-			// Find the GameObjectSprite that has a reference to this entity and remove
+
+		} else if (event.getPropertyName().equals("remove")) {
+			// Find the GameObjectSprite that has a reference to this entity and
+			// remove
 			// it from the GameObjectSprite list and from the render scene.
 			// Note: It's generally not a very good idea to remove elements when
-			// iterating through them, but this breaks the loop when one element is
+			// iterating through them, but this breaks the loop when one element
+			// is
 			// removed.
 			for (GameObjectSprite sprite : gameObjectSprites) {
 				if (sprite.getEntity() == event.getNewValue()) {
@@ -145,12 +146,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		this.moveX += dX;
 		this.moveY += dY;
 	}
-	
+
 	/**
 	 * Orders the player to fire a special attack.
 	 */
-	public void fireSpecialAttack()
-	{
+	public void fireSpecialAttack() {
 		specialAttack = true;
 		Log.d("DEBUG", "specialAttack " + specialAttack);
 	}

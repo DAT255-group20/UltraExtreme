@@ -2,8 +2,6 @@ package ultraextreme.model.enemy;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 

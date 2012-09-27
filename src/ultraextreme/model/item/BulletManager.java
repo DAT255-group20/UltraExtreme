@@ -24,13 +24,12 @@ public class BulletManager {
 	private Map<PlayerID, List<IBullet>> bulletsMap = new HashMap<PlayerID, List<IBullet>>();
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	
+
 	/**
 	 * Initializes an empty bullet manager.
 	 */
 	public BulletManager() {
-		for (PlayerID pID : PlayerID.values())
-		{
+		for (PlayerID pID : PlayerID.values()) {
 			bulletsMap.put(pID, new ArrayList<IBullet>());
 		}
 	}
@@ -43,7 +42,7 @@ public class BulletManager {
 	 */
 	public void addBullet(AbstractBullet b) {
 		bulletsMap.get(b.getPlayerId()).add(b);
-		
+
 		// TODO Not entirely sure that using a raw string is so good /Plankton
 		pcs.firePropertyChange("add", null, b);
 	}
@@ -53,20 +52,20 @@ public class BulletManager {
 	 */
 	public List<IBullet> getBullets() {
 		List<IBullet> output = new ArrayList<IBullet>();
-		for (List<IBullet> list : bulletsMap.values())
-		{
+		for (List<IBullet> list : bulletsMap.values()) {
 			output.addAll(list);
 		}
 		return output;
 	}
-	
+
 	/**
 	 * Returns a list of all bullets shot by the provided player.
-	 * @param player The shooter of the bullets.
+	 * 
+	 * @param player
+	 *            The shooter of the bullets.
 	 * @return A list of all bullets shot by the provided player
 	 */
-	public List<IBullet> getBulletsFrom(PlayerID player)
-	{
+	public List<IBullet> getBulletsFrom(PlayerID player) {
 		// TODO Should not return the reference
 		return bulletsMap.get(player);
 	}
@@ -75,12 +74,11 @@ public class BulletManager {
 	 * Removes all bullets that are off the gameScreen
 	 */
 	public void clearBulletsOffScreen() {
-		for (List<IBullet> list : bulletsMap.values())
-		{
+		for (List<IBullet> list : bulletsMap.values()) {
 			for (int i = 0; i < list.size(); i++) {
 				IBullet b = list.get(i);
 				if (b.isMarkedForRemoval() || (b.isOutOfScreen())) {
-					//TODO Change to fit reversed Y axis. (do tests)
+					// TODO Change to fit reversed Y axis. (do tests)
 					pcs.firePropertyChange("remove", null, b);
 					list.remove(i);
 					i--;
@@ -93,18 +91,18 @@ public class BulletManager {
 	 * Clears the bullet manager of all bullets.
 	 */
 	public void clearAllBullets() {
-		for (List<IBullet> list : bulletsMap.values())
-		{
+		for (List<IBullet> list : bulletsMap.values()) {
 			list.clear();
 		}
 	}
-	
+
 	/**
 	 * Clears the bullet manager of all bullets from the player.
-	 * @param player The owner of the bullets
+	 * 
+	 * @param player
+	 *            The owner of the bullets
 	 */
-	public void clearAllBulletsFrom(PlayerID player)
-	{
+	public void clearAllBulletsFrom(PlayerID player) {
 		bulletsMap.get(player).clear();
 	}
 
@@ -128,18 +126,22 @@ public class BulletManager {
 		}
 		return output;
 	}
-	
+
 	/**
 	 * Adds a property change listener.
-	 * @param listener The listener.
+	 * 
+	 * @param listener
+	 *            The listener.
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
-	
+
 	/**
 	 * Removes the property change listner.
-	 * @param listener The listener.
+	 * 
+	 * @param listener
+	 *            The listener.
 	 */
 	public void removeListener(PropertyChangeListener listener) {
 		pcs.removePropertyChangeListener(listener);
