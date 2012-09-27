@@ -1,6 +1,10 @@
 package ultraextreme.model.enemy;
 
 import junit.framework.TestCase;
+
+import org.junit.Test;
+
+import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 
 /**
@@ -27,7 +31,7 @@ public class AbstractEnemyTest extends TestCase {
 	 * Tests the shoot() Method
 	 */
 	public void testShoot() {
-		enemy.shoot();
+		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
 		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
 

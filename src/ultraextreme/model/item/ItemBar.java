@@ -3,7 +3,7 @@ package ultraextreme.model.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -12,6 +12,7 @@ import ultraextreme.model.util.Position;
  * 
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
+ * @author Viktor Anderling
  * 
  */
 public class ItemBar {
@@ -36,7 +37,7 @@ public class ItemBar {
 	 */
 	private PlayerID playerId;
 
-	private Direction playerDirection;
+	private Rotation playerRotation;
 
 	// private Bomb bomb;
 
@@ -51,7 +52,7 @@ public class ItemBar {
 	 *            Reference to the bullet manager.
 	 */
 	public ItemBar(PlayerID playerId, BulletManager bulletManager,
-			Direction playerDirection) {
+			Rotation playerDirection) {
 		this(playerId, bulletManager, playerDirection, 1);
 	}
 
@@ -66,12 +67,12 @@ public class ItemBar {
 	 *            Maximum number of items that fit in the item bar.
 	 */
 	public ItemBar(PlayerID playerId, BulletManager bulletManager,
-			Direction playerDirection, int maximumNumberOfItems) {
+			Rotation playerRotation, int maximumNumberOfItems) {
 		this.playerId = playerId;
 		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
 		this.maximumNumberOfItems = maximumNumberOfItems;
-		this.playerDirection = playerDirection;
+		this.playerRotation = playerRotation;
 		this.cursorPosition = 0;
 	}
 
@@ -106,9 +107,9 @@ public class ItemBar {
 	 * @param firePositon
 	 *            From where the guns should be fired.
 	 */
-	public void fireWeapons(Position firePosition) {
+	public void fireWeapons(Position firePosition, float timeElapsed) {
 		for (AbstractWeapon weapon : items) {
-			weapon.fireShot(firePosition, playerId, playerDirection);
+			weapon.fire(firePosition, playerId, playerRotation, timeElapsed);
 		}
 	}
 }

@@ -1,13 +1,13 @@
 package ultraextreme.model.entity;
 
 import junit.framework.TestCase;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
 
 public abstract class AbstractEntityTest extends TestCase {
 
 	protected abstract AbstractEntity getNewAbstractEntity(double x, double y,
-			int width, int height, Direction direction);
+			int width, int height, Rotation direction);
 
 	public void testMove() {
 		AbstractEntity entity = newEntity();
@@ -49,7 +49,7 @@ public abstract class AbstractEntityTest extends TestCase {
 
 	public void testGetDirection() {
 		AbstractEntity entity = newEntity();
-		assertEquals(entity.getDirection(), Direction.UP);
+		assertEquals(entity.getRotation(), new Rotation(0));
 	}
 
 	public void testCollidesWith() {
@@ -63,6 +63,6 @@ public abstract class AbstractEntityTest extends TestCase {
 	public abstract void testGetSpeedModifier();
 
 	private AbstractEntity newEntity() {
-		return getNewAbstractEntity(10, 20, 30, 40, Direction.UP);
+		return getNewAbstractEntity(10, 20, 30, 40, new Rotation(0));
 	}
 }

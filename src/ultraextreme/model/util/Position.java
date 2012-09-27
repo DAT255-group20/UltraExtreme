@@ -31,6 +31,11 @@ public class Position {
 	public void setY(double y) {
 		coordinates.y = y;
 	}
+	
+	public void setPosition(Position position) {
+		coordinates.x = position.getX();
+		coordinates.y = position.getY();
+	}
 
 	public double getX() {
 		return coordinates.x;

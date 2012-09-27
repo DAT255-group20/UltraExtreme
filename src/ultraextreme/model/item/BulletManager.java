@@ -6,23 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.entity.IBullet;
 
 /**
  * Contains a queue of all bullets that are to be added to the game.
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class BulletManager {
 
 	private boolean isBombDropped = false;
 
-	private List<AbstractBullet> bullets;
+	private List<IBullet> bullets;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
+
 
 	public BulletManager() {
-		bullets = new ArrayList<AbstractBullet>();
+		bullets = new ArrayList<IBullet>();
 	}
 
 	/**
@@ -40,7 +44,7 @@ public class BulletManager {
 	/**
 	 * @return A list of all bullets in the bullet manager.
 	 */
-	public List<AbstractBullet> getBullets() {
+	public List<IBullet> getBullets() {
 		return bullets;
 	}
 
@@ -50,6 +54,8 @@ public class BulletManager {
 	public void clearBulletsOffScreen() {
 		for (int i = 0; i < bullets.size(); i++) {
 			if ((bullets.get(i).isOutOfScreen())) {
+				// TODO Fix this
+				//fireRemovedBulletUpdate(bullets.get(i));
 				bullets.remove(i);
 				i--;
 			}
@@ -82,12 +88,12 @@ public class BulletManager {
 		}
 		return output;
 	}
-
+	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
+		pcs.addPropertyChangeListener(listener);
 	}
-
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.removePropertyChangeListener(listener);
+	
+	public void removeListener(PropertyChangeListener listener) {
+		pcs.removePropertyChangeListener(listener);
 	}
 }

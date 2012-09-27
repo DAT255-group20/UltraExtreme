@@ -12,15 +12,15 @@ import ultraextreme.model.ModelInput;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractEntity;
-import ultraextreme.model.util.Position;
+import ultraextreme.model.entity.IBullet;
 import ultraextreme.view.GameObjectSprite;
 import ultraextreme.view.GameScene;
-import ultraextreme.view.SpriteContainer;
 import ultraextreme.view.SpriteFactory;
+import android.util.Log;
 
 /**
  * 
- * @author Daniel Jonsson
+ * @author Daniel Jonsson, Bjorn Persson Mattsson
  * 
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
@@ -34,6 +34,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private boolean firing;
 	private double moveX;
 	private double moveY;
+	private boolean specialAttack;
 
 	public GameLoop(GameScene gameScene, GameModel gameModel,
 			List<GameObjectSprite> gameObjectSprites,
@@ -49,12 +50,14 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void onUpdate(float time) {
-		gameModel.update(new ModelInput(moveX, moveY, firing, false), time);
+		gameModel.update(new ModelInput(moveX, moveY, firing, specialAttack), time);
 		moveX = 0;
 		moveY = 0;
 		
 		for (GameObjectSprite sprite: gameObjectSprites) {
 			sprite.update();
+		specialAttack = false;
+
 		}
 	}
 
@@ -141,5 +144,14 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public void addToMovement(double dX, double dY) {
 		this.moveX += dX;
 		this.moveY += dY;
+	}
+	
+	/**
+	 * Orders the player to fire a special attack.
+	 */
+	public void fireSpecialAttack()
+	{
+		specialAttack = true;
+		Log.d("DEBUG", "specialAttack " + specialAttack);
 	}
 }

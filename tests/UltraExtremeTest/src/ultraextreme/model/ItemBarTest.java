@@ -8,7 +8,7 @@ import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -32,7 +32,7 @@ public class ItemBarTest extends TestCase {
 	private void resetInstanceVariables(int slots) {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
-		itemBar = new ItemBar(playerId, bulletManager, Direction.UP, slots);
+		itemBar = new ItemBar(playerId, bulletManager, new Rotation(0), slots);
 	}
 
 	/**
@@ -100,15 +100,17 @@ public class ItemBarTest extends TestCase {
 	 * bullet manager.
 	 */
 	public void testFireWeapon() {
-		itemBar.fireWeapons(new Position());
+		float epsilon = 0.001f;
+		float cooldown = (float)BasicWeapon.getInitCooldown();
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() == 0);
 
 		itemBar.addItem(getNewWeapon());
-		itemBar.fireWeapons(new Position());
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		int bulletsShot = bulletManager.getBullets().size();
 		assertTrue(bulletsShot > 0);
 
-		itemBar.fireWeapons(new Position());
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() > bulletsShot);
 	}
 }

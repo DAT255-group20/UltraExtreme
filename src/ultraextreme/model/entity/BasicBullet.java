@@ -1,8 +1,8 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Rotation;
 
 /**
  * A basic bullet that flies straight forward.
@@ -13,7 +13,7 @@ import ultraextreme.model.util.PlayerID;
 public class BasicBullet extends AbstractBullet {
 
 	public BasicBullet(double x, double y, int width, int height,
-			PlayerID playerId, Direction direction) {
+			PlayerID playerId, Rotation direction) {
 		super(x, y, width, height, playerId, direction, ObjectName.BASIC_BULLET);
 	}
 

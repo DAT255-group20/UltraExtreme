@@ -1,26 +1,24 @@
 package ultraextreme.model.item;
 
 import ultraextreme.model.entity.BasicBullet;
-import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
-import ultraextreme.model.util.Rotation;
 
-/**
- * 
- * @author Viktor Anderling
- *
- */
-public class BasicWeapon extends AbstractWeapon {
+public class SpinningSpreadWeapon extends AbstractWeapon {
 
-	private static final int bulletWidth = 20;
-	private static final int bulletHeight = 40;
-	private static float initCooldown = 0.5f;
+	private static final int bulletWidth = 5;
+	private static final int bulletHeight = 5;
+	private static float initCooldown = 1/6f;
 	private float cooldown;
+	private static double angleStep;
+	private double currentAngle;
 	
-	public BasicWeapon(BulletManager bulletManager) {
-		super(bulletManager, ObjectName.BASIC_WEAPON);
+	public SpinningSpreadWeapon(BulletManager bulletManager) {
+		super(bulletManager);
 		cooldown = initCooldown;
+		angleStep = Math.PI / 12;
+		currentAngle = 0;
 	}
 
 	@Override
@@ -31,11 +29,13 @@ public class BasicWeapon extends AbstractWeapon {
 			cooldown = cooldown + initCooldown;
 			this.getBulletManager().addBullet(
 					new BasicBullet(shipPosition.getX(), shipPosition.getY(), 
-							bulletWidth, bulletHeight, playerId, rotation));
+							bulletWidth, bulletHeight, playerId, new Rotation(rotation.getAngle() + currentAngle)));
+			currentAngle = currentAngle + angleStep;
 		}
 	}
 	
 	public static float getInitCooldown() {
 		return initCooldown;
 	}
+
 }

@@ -1,8 +1,8 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Rotation;
 
 /**
  * An abstract class representing a generic HomingBullet.
@@ -13,7 +13,7 @@ import ultraextreme.model.util.PlayerID;
 public abstract class AbstractHomingBullet extends AbstractBullet {
 
 	public AbstractHomingBullet(double x, double y, int width, int height,
-			PlayerID playerId, Direction direction, ObjectName bulletType) {
+			PlayerID playerId, Rotation direction, ObjectName bulletType) {
 		super(x, y, width, height, playerId, direction, bulletType);
 	}
 

@@ -1,9 +1,9 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Constants;
-import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Rotation;
 
 /**
  * An abstract class representing a generic Bullet.
@@ -27,8 +27,8 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 *            The direction the bullet is shot at.
 	 */
 	public AbstractBullet(double x, double y, int width, int height,
-			PlayerID playerId, Direction direction, ObjectName bulletType) {
-		super(x, y, width, height, direction, bulletType);
+			PlayerID playerId, Rotation rotation, ObjectName bulletType) {
+		super(x, y, width, height, rotation, bulletType);
 		this.playerId = playerId;
 	}
 
