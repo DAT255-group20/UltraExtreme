@@ -3,77 +3,112 @@ package ultraextreme.model.item;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.util.PlayerID;
 
 /**
- * Contains a queue of all bullets that are to be added to the game.
+ * Contains all bullets in the game.
  * 
- * @author Bjorn Persson Mattsson
- * @author Daniel Jonsson
+ * @author Bjorn Persson Mattsson, Daniel Jonsson
  * 
  */
 public class BulletManager {
 
 	private boolean isBombDropped = false;
 
-	private List<IBullet> bullets;
+	private Map<PlayerID, List<IBullet>> bulletsMap = new HashMap<PlayerID, List<IBullet>>();
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
-
-
+	/**
+	 * Initializes an empty bullet manager.
+	 */
 	public BulletManager() {
-		bullets = new ArrayList<IBullet>();
+		for (PlayerID pID : PlayerID.values())
+		{
+			bulletsMap.put(pID, new ArrayList<IBullet>());
+		}
 	}
 
 	/**
-	 * Adds a bullet to the creation queue.
+	 * Adds a bullet to the bullet manager.
 	 * 
 	 * @param b
 	 *            Bullet to be added.
 	 */
 	public void addBullet(AbstractBullet b) {
-		bullets.add(b);
+		bulletsMap.get(b.getPlayerId()).add(b);
+		
 		// TODO Not entirely sure that using a raw string is so good /Plankton
 		pcs.firePropertyChange("add", null, b);
-	}
-	public void removeBullet(int index) {
-		pcs.firePropertyChange("remove", null, bullets.get(index));
-		bullets.remove(index);
 	}
 
 	/**
 	 * @return A list of all bullets in the bullet manager.
 	 */
 	public List<IBullet> getBullets() {
-		return bullets;
+		List<IBullet> output = new ArrayList<IBullet>();
+		for (List<IBullet> list : bulletsMap.values())
+		{
+			output.addAll(list);
+		}
+		return output;
+	}
+	
+	/**
+	 * Returns a list of all bullets shot by the provided player.
+	 * @param player The shooter of the bullets.
+	 * @return A list of all bullets shot by the provided player
+	 */
+	public List<IBullet> getBulletsFrom(PlayerID player)
+	{
+		// TODO Should not return the reference
+		return bulletsMap.get(player);
 	}
 
 	/**
-	 * Removes all bullets that are outside the gameScreen
+	 * Removes all bullets that are off the gameScreen
 	 */
 	public void clearBulletsOffScreen() {
-		for (int i = 0; i < bullets.size(); i++) {
-			if ((bullets.get(i).isOutOfScreen())) {
-				//TODO Change to fit reversed Y axis. (do tests)
-				this.removeBullet(i);
-				i--;
+		for (List<IBullet> list : bulletsMap.values())
+		{
+			for (int i = 0; i < list.size(); i++) {
+				if ((list.get(i).isOutOfScreen())) {
+					//TODO Change to fit reversed Y axis. (do tests)
+					pcs.firePropertyChange("remove", null, list.get(i));
+					list.remove(i);
+					i--;
+				}
 			}
 		}
 	}
 
 	/**
-	 * Clear the list of bullets.
+	 * Clears the bullet manager of all bullets.
 	 */
-	public void clear() {
-		bullets.clear();
+	public void clearAllBullets() {
+		for (List<IBullet> list : bulletsMap.values())
+		{
+			list.clear();
+		}
+	}
+	
+	/**
+	 * Clears the bullet manager of all bullets from the player.
+	 * @param player The owner of the bullets
+	 */
+	public void clearAllBulletsFrom(PlayerID player)
+	{
+		bulletsMap.get(player).clear();
 	}
 
 	/**
-	 * Informs the class that a bomb has been dropped.
+	 * Informs the bullet manager that a bomb has been dropped.
 	 */
 	public void dropBomb() {
 		this.isBombDropped = true;
@@ -84,6 +119,7 @@ public class BulletManager {
 	 *         this method.
 	 */
 	public boolean isBombDropped() {
+		// TODO Is this method really needed?
 		boolean output = this.isBombDropped;
 
 		if (output) {
@@ -92,10 +128,18 @@ public class BulletManager {
 		return output;
 	}
 	
+	/**
+	 * Adds a property change listener.
+	 * @param listener The listener.
+	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
 	
+	/**
+	 * Removes the property change listner.
+	 * @param listener The listener.
+	 */
 	public void removeListener(PropertyChangeListener listener) {
 		pcs.removePropertyChangeListener(listener);
 	}
