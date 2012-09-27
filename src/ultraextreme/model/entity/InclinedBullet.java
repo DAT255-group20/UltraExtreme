@@ -24,7 +24,8 @@ public class InclinedBullet extends AbstractBullet {
 	 */
 	public InclinedBullet(double x, double y, int width, int height,
 			PlayerID playerId, Rotation direction, double slope) {
-		super(x, y, width, height, playerId, direction);
+		// TODO IS THIS SUPPOSED TO EXIST????!
+		super(x, y, width, height, playerId, direction, null);
 		this.slope = slope;
 	}
 
