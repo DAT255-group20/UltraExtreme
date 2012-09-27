@@ -56,8 +56,15 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 		markedForRemoval = true;
 	}
 	
+	@Override
 	public boolean isMarkedForRemoval()
 	{
 		return markedForRemoval;
+	}
+	
+	@Override
+	public int getDamage()
+	{
+		return 10;
 	}
 }
