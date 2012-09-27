@@ -1,4 +1,4 @@
-package ultraextreme.model;
+package ultraextreme.model.item;
 
 import junit.framework.TestCase;
 import ultraextreme.model.entity.BasicBullet;
