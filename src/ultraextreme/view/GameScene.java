@@ -35,7 +35,7 @@ public class GameScene extends Scene implements SensorEventListener {
 			VertexBufferObjectManager vertexBufferObjectManager,
 			SensorManager sensorManager, SpriteFactory spriteFactory) {
 		this.gameModel = gameModel;
-		setBackground(new Background(0.09804f, 0.6274f, 0));		
+		setBackground(new Background(0, 0, 0));		
 		
 		gameObjectSprites = new LinkedList<GameObjectSprite>();
 		GameObjectSprite playerSprite = spriteFactory.getNewSprite(gameModel.getPlayer().getShip(),
