@@ -62,11 +62,11 @@ public class HorizontalLineWave extends Wave {
 	@Override
 	public void update(float timeElapsed) {
 		timer += timeElapsed;
-		if (timer > 2) {
+		if (timer >= 2) {
 			spawnLine();
-			timer = 0;
+			timer -= 2;
 			lineCounter++;
-			if (lineCounter > maxLines) {
+			if (lineCounter >= maxLines) {
 				this.fireWaveEnded();
 			}
 		}
