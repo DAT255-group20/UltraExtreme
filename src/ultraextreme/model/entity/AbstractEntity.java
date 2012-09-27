@@ -98,20 +98,15 @@ public abstract class AbstractEntity {
 		// Rectangle collision detection
 		double left1 = this.getPosition().getX();
 		double top1 = this.getPosition().getY();
-		double right1 = this.getPosition().getX()+this.getWidth();
-		double bottom1 = this.getPosition().getY()+this.getHeight();
+		double right1 = left1+this.getWidth();
+		double bottom1 = top1+this.getHeight();
 		
 		double left2 = other.getPosition().getX();
 		double top2 = other.getPosition().getY();
-		double right2 = other.getPosition().getX()+other.getWidth();
-		double bottom2 = other.getPosition().getY()+other.getHeight();
+		double right2 = left2+other.getWidth();
+		double bottom2 = top2+other.getHeight();
 		
-		if (bottom1 < top2 || top1 > bottom2 || right1 < left2 || left1 > right2)
-		{
-			return false;
-		}
-		
-		return true;
+		return !(bottom1 < top2 || top1 > bottom2 || right1 < left2 || left1 > right2);
 	}
 
 	// public void getHitbox() {
