@@ -78,7 +78,7 @@ public class GameModel implements IUltraExtremeModel {
 				}
 			}
 		}
-
+		
 		// Check enemy bullets against player
 		for (IBullet b : enemyBullets) {
 			if (b.collidesWith(player.getShip())) {
