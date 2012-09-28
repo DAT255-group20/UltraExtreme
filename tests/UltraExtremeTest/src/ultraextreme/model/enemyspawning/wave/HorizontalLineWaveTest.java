@@ -4,6 +4,11 @@ import junit.framework.TestCase;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class HorizontalLineWaveTest extends TestCase {
 
 	private BulletManager bulletManager;

@@ -7,10 +7,16 @@ import java.util.List;
 
 import ultraextreme.model.enemy.IEnemy;
 
+/**
+ * Used in the EnemySpawnerTest to collect the spawned enemies.
+ * 
+ * @author Daniel Jonsson
+ * 
+ */
 public class EnemyCollector implements PropertyChangeListener {
-	
+
 	private List<IEnemy> enemies;
-	
+
 	public EnemyCollector() {
 		enemies = new ArrayList<IEnemy>();
 	}
@@ -21,7 +27,7 @@ public class EnemyCollector implements PropertyChangeListener {
 			enemies.add((IEnemy) event.getNewValue());
 		}
 	}
-	
+
 	public List<IEnemy> getSpawnedEnemies() {
 		return enemies;
 	}
