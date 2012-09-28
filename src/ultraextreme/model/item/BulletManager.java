@@ -42,7 +42,6 @@ public class BulletManager {
 	 */
 	public void addBullet(AbstractBullet b) {
 		bulletsMap.get(b.getPlayerId()).add(b);
-
 		// TODO Not entirely sure that using a raw string is so good /Plankton
 		pcs.firePropertyChange("add", null, b);
 	}
@@ -52,7 +51,8 @@ public class BulletManager {
 	 */
 	public List<IBullet> getBullets() {
 		List<IBullet> output = new ArrayList<IBullet>();
-		for (List<IBullet> list : bulletsMap.values()) {
+		for (List<IBullet> list : bulletsMap.values())
+		{
 			output.addAll(list);
 		}
 		return output;
@@ -74,12 +74,12 @@ public class BulletManager {
 	 * Removes all bullets that are off the gameScreen
 	 */
 	public void clearBulletsOffScreen() {
-		for (List<IBullet> list : bulletsMap.values()) {
+		for (List<IBullet> list : bulletsMap.values())
+		{
 			for (int i = 0; i < list.size(); i++) {
-				IBullet b = list.get(i);
-				if (b.isMarkedForRemoval() || (b.isOutOfScreen())) {
-					// TODO Change to fit reversed Y axis. (do tests)
-					pcs.firePropertyChange("remove", null, b);
+				if ((list.get(i).isOutOfScreen())) {
+					//TODO Change to fit reversed Y axis. (do tests)
+					pcs.firePropertyChange("remove", null, list.get(i));
 					list.remove(i);
 					i--;
 				}
@@ -91,7 +91,8 @@ public class BulletManager {
 	 * Clears the bullet manager of all bullets.
 	 */
 	public void clearAllBullets() {
-		for (List<IBullet> list : bulletsMap.values()) {
+		for (List<IBullet> list : bulletsMap.values())
+		{
 			list.clear();
 		}
 	}
