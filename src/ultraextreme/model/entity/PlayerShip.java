@@ -10,6 +10,7 @@ import ultraextreme.model.util.Rotation;
  * The player's ship.
  * 
  * @author Bjorn Persson Mattsson
+ * @author Viktor Anderling
  * 
  */
 public class PlayerShip extends DestroyableEntity {
@@ -29,11 +30,36 @@ public class PlayerShip extends DestroyableEntity {
 		super(0, 0, 50, 50, new Rotation(0), ObjectName.PLAYERSHIP);
 	}
 	
-	public boolean canMove(double deltaX, double deltaY) {
+	/**
+	 * Checks so that the ship wont move out of the level along the x-axis.
+	 * 
+	 * @param deltaX
+	 * 				The given movement along the x-axis.
+	 * 
+	 * @return True if movement with the given distance wont take the ship 
+	 * out of the level, else false.
+	 */
+	public boolean canMoveX(double deltaX) {
 		Dimension dimension = Constants.getInstance().getLevelDimension();
 		Position position = this.getCenteredPosition();
-		return dimension.getX() - (deltaX + position.getX() + getWidth() / 2) > 0 
-				&& dimension.getY() - (deltaY + position.getY() + getHeight() / 2) > 0;
+		double newX = deltaX + position.getX();
+		return newX + getWidth() / 2 < dimension.getX() && newX - getWidth() / 2 > 0;
+	}
+	
+	/**
+	 * Checks so that the ship wont move out of the level along the y-axis.
+	 * 
+	 * @param deltaX
+	 * 				The given movement along the y-axis.
+	 * 
+	 * @return True if movement with the given distance wont take the ship 
+	 * out of the level, else false.
+	 */
+	public boolean canMoveY(double deltaY) {
+		Dimension dimension = Constants.getInstance().getLevelDimension();
+		Position position = this.getCenteredPosition();
+		double newY = deltaY + position.getY();
+		return newY + getHeight() / 2 < dimension.getY() && newY - getHeight() / 2 > 0;
 	}
 
 	@Override
