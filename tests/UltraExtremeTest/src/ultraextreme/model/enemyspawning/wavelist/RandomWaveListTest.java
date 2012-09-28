@@ -29,27 +29,33 @@ public class RandomWaveListTest extends TestCase {
 					}
 				});
 
-		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
+		// 0
+		assertEquals(waveList.getCurrentSpawningTime(), 0f);
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
+
+		waveList.next();
+		
+		// 5.5
+		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
+		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
 
 		waveList.next();
 
 		// 5.5 + 7.5 = 13
 		assertEquals(waveList.getCurrentSpawningTime(), 13f);
-		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
+		assertTrue(waveList.getCurrentWave() instanceof VerticalLineWave);
 
 		waveList.next();
 
 		// 5.5 + 7.5 + 9.5 = 22.5
 		assertEquals(waveList.getCurrentSpawningTime(), 22.5f);
-		assertTrue(waveList.getCurrentWave() instanceof VerticalLineWave);
+		assertTrue(waveList.getCurrentWave() instanceof VWave);
 
 		waveList.next();
 
 		// 5.5 + 7.5 + 9.5 + 11.5 = 34
 		assertEquals(waveList.getCurrentSpawningTime(), 34f);
-		assertTrue(waveList.getCurrentWave() instanceof VWave);
-
+		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
 	}
 
 }

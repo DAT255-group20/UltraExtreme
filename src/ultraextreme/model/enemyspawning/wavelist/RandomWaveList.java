@@ -64,10 +64,11 @@ public class RandomWaveList extends AbstractWaveList {
 		this.counter = 0;
 		this.bulletManager = bulletManager;
 		this.generateNewWave();
+		this.currentSpawningTime = 0;
 	}
 
 	/**
-	 * Update currentWave and currentSpawningTime with new random values.
+	 * Update currentWave with a new random wave.
 	 */
 	private void generateNewWave() {
 		// TODO: This needs some more work.
@@ -85,6 +86,12 @@ public class RandomWaveList extends AbstractWaveList {
 			break;
 		}
 		counter++;
+	}
+	
+	/**
+	 * Update the currentSpawningTime with a random number.
+	 */
+	private void generateNewSpawningTime() {
 		currentSpawningTime += randomGenerator.nextFloat() * 2 + 3.5;
 	}
 
@@ -95,6 +102,7 @@ public class RandomWaveList extends AbstractWaveList {
 	public void next() {
 		super.next();
 		this.generateNewWave();
+		this.generateNewSpawningTime();
 	}
 
 	/**

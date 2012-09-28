@@ -12,11 +12,15 @@ import ultraextreme.model.item.BulletManager;
  */
 public class EnemySpawnerTest extends TestCase {
 
+	/**
+	 * Create a EnemySpawner, give it a RandomWaveList with a custom
+	 * RandomGenerator and see if the EnemySpawner behaves correctly.
+	 */
 	public void testUpdateMethod() {
 		BulletManager bulletManager = new BulletManager();
 		RandomWaveList waveList = new RandomWaveList(1, bulletManager,
 				new RandomGenerator() {
-					private int counter;
+					private int counter = 0;
 
 					@Override
 					public float nextFloat() {
@@ -27,15 +31,15 @@ public class EnemySpawnerTest extends TestCase {
 		EnemyCollector enemyCollector = new EnemyCollector();
 		enemySpawner.addPropertyChangeListener(enemyCollector);
 
-		enemySpawner.update(5.4f);
+		assertEquals(enemySpawner.getCurrentWave(), 0);
 
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 0);
+		enemySpawner.update(0); // A VWave has spawned
 
-		enemySpawner.update(0.1f); // A VWave has spawned
+		assertEquals(enemySpawner.getCurrentWave(), 1);
 
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
 
-		enemySpawner.update(1.88f); // Timer in VWave is ~1.98
+		enemySpawner.update(1.98f); // Timer in VWave is ~1.98
 
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
 
@@ -43,15 +47,15 @@ public class EnemySpawnerTest extends TestCase {
 									// spawn
 
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 3);
-		
+
 		enemySpawner.update(2f); // 2 New enemies spawn
 
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 5);
-		
+
 		enemySpawner.update(2f); // 2 New enemies spawn
 
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 7);
-		
+
 		enemySpawner.update(2f); // No new enemies spawn
 
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 7);
