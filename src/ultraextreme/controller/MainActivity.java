@@ -50,8 +50,9 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	protected Scene onCreateScene() {
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
+				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE), 
 				spriteFactory, this);
+
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 

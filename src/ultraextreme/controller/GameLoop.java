@@ -35,6 +35,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private SpriteFactory spriteFactory;
 	private Vector2d scalingQuotient;
 
+
 	private boolean firing;
 	private double moveX;
 	private double moveY;
@@ -48,6 +49,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		Dimension screenDimension = new Dimension(screenWidth, screenHeight);
 		this.scalingQuotient = screenDimension.getQuotient(
 				Constants.getInstance().getLevelDimension());
+
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
@@ -59,8 +61,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public void onUpdate(float time) {
 		System.out.println(scalingQuotient.x);
 		gameModel.update(new ModelInput(moveX / scalingQuotient.x, 
-				moveY / scalingQuotient.y, firing, specialAttack),
-				time);
+				moveY / scalingQuotient.y, firing, specialAttack), time);
 		moveX = 0;
 		moveY = 0;
 
