@@ -16,6 +16,8 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	// What player shot this bullet
 	private PlayerID playerId;
 
+	private boolean markedForRemoval = false;
+
 	private static double speedMod = Constants.getInstance()
 			.getBulletSpeedModifier();
 
@@ -38,8 +40,10 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * @param timePassed
 	 *            Time passed since last update.
 	 */
+	@Override
 	public abstract void doMovement(float timePassed);
 
+	@Override
 	public PlayerID getPlayerId() {
 		return playerId;
 	}
@@ -47,5 +51,20 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	@Override
 	public double getSpeedMod() {
 		return speedMod;
+	}
+
+	@Override
+	public void markForRemoval() {
+		markedForRemoval = true;
+	}
+
+	@Override
+	public boolean isMarkedForRemoval() {
+		return markedForRemoval;
+	}
+
+	@Override
+	public int getDamage() {
+		return 10;
 	}
 }

@@ -6,7 +6,6 @@ import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
-
 /**
  * The player's ship.
  * 
@@ -39,12 +38,17 @@ public class PlayerShip extends DestroyableEntity {
 
 	@Override
 	public boolean isDestroyed() {
-		// Auto-generated method stub
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double getSpeedMod() {
 		return speedMod;
+	}
+
+	@Override
+	public void receiveDamage(int damage) {
+		// TODO Auto-generated method stub
 	}
 }

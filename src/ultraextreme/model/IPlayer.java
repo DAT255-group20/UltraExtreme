@@ -34,9 +34,10 @@ public interface IPlayer {
 	 * @return The player's ID.
 	 */
 	public PlayerID getPlayerId();
-	
+
 	/**
 	 * adds a weapon (or bomb) to this player's ItemBar
+	 * 
 	 * @param weapon
 	 */
 	public void giveWeapon(AbstractWeapon weapon);

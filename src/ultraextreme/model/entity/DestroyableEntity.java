@@ -20,4 +20,6 @@ public abstract class DestroyableEntity extends AbstractEntity {
 	 * @return true if and only if the entity has been destroyed.
 	 */
 	public abstract boolean isDestroyed();
+
+	public abstract void receiveDamage(int damage);
 }

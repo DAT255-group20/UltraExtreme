@@ -50,16 +50,18 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	protected Scene onCreateScene() {
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE), spriteFactory);
-		mainMenuController = new MainMenuController(camera, defaultFont, this.getVertexBufferObjectManager());
-		
+				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
+				spriteFactory, this);
+		mainMenuController = new MainMenuController(camera, defaultFont,
+				this.getVertexBufferObjectManager());
+
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
-		
+
 		setScene(mainMenuController.getScene());
 		return currentScene;
 	}
-	
+
 	@Override
 	public void controllerListenerUpdate(ControllerEvent event) {
 		switch (event.getEventType()) {
@@ -71,11 +73,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 			break;
 		}
 	}
-	
-	private void setScene(Scene scene)
-	{
+
+	private void setScene(Scene scene) {
 		currentScene = scene;
 		getEngine().setScene(currentScene);
 	}
-	
+
 }

@@ -51,7 +51,8 @@ public class Player implements IPlayer {
 		Dimension levelDimension = Constants.getInstance().getLevelDimension();
 		this.ship = new PlayerShip(levelDimension.getX() * 0.5, levelDimension.getY() * 0.8);
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(Math.PI), 5);
+		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
+				Math.PI), 5);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
 	}
