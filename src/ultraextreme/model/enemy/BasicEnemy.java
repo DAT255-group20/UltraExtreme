@@ -35,10 +35,27 @@ public class BasicEnemy extends AbstractEnemy {
 	 *            A reference to the bullet manager.
 	 */
 	public BasicEnemy(double x, double y, BulletManager bulletManager) {
-
 		this(new EnemyShip(x, y, 40, 40, new Rotation(0), 50,
 				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
+	}
 
+	/**
+	 * Constructor for an enemy with predetermined ship and weapon. Specific to
+	 * this type of enemy
+	 * 
+	 * @param x
+	 *            coordinate for the enemyShip
+	 * @param y
+	 *            coordinate for the enemyShip
+	 * @param rotation
+	 *            Rotation modifier of the enemy's flying path.
+	 * @param bulletManager
+	 *            A reference to the bullet manager.
+	 */
+	public BasicEnemy(double x, double y, Rotation rotation,
+			BulletManager bulletManager) {
+		this(new EnemyShip(x, y, 40, 40, rotation, 50,
+				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
 	}
 
 	@Override

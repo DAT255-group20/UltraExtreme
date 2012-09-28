@@ -3,8 +3,9 @@ package ultraextreme.model;
 import java.util.List;
 
 import ultraextreme.model.enemy.EnemyManager;
-import ultraextreme.model.enemy.EnemySpawner;
 import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.enemyspawning.EnemySpawner;
+import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
@@ -31,7 +32,7 @@ public class GameModel implements IUltraExtremeModel {
 	public GameModel() {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
-		enemySpawner = new EnemySpawner(bulletManager);
+		enemySpawner = new EnemySpawner(new RandomWaveList(1000, bulletManager));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 	}
