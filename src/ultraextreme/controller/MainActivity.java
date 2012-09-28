@@ -51,7 +51,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				spriteFactory);
+				spriteFactory, this);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 

@@ -4,6 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
@@ -12,6 +14,8 @@ import ultraextreme.model.ModelInput;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.view.GameObjectSprite;
 import ultraextreme.view.GameScene;
 import ultraextreme.view.SpriteFactory;
@@ -29,6 +33,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private List<GameObjectSprite> gameObjectSprites;
 	private VertexBufferObjectManager vertexBufferObjectManager;
 	private SpriteFactory spriteFactory;
+	private Vector2d scalingQuotient;
 
 	private boolean firing;
 	private double moveX;
@@ -38,8 +43,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public GameLoop(GameScene gameScene, GameModel gameModel,
 			List<GameObjectSprite> gameObjectSprites,
 			VertexBufferObjectManager vertexBufferObjectManager,
-			SpriteFactory spriteFactory) {
+			SpriteFactory spriteFactory, double screenWidth, double screenHeight) {
 
+		Dimension screenDimension = new Dimension(screenWidth, screenHeight);
+		this.scalingQuotient = screenDimension.getQuotient(
+				Constants.getInstance().getLevelDimension());
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
@@ -49,7 +57,9 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void onUpdate(float time) {
-		gameModel.update(new ModelInput(moveX, moveY, firing, specialAttack),
+		System.out.println(scalingQuotient.x);
+		gameModel.update(new ModelInput(moveX / scalingQuotient.x, 
+				moveY / scalingQuotient.y, firing, specialAttack),
 				time);
 		moveX = 0;
 		moveY = 0;
