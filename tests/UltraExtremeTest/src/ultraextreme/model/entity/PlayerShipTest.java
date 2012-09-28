@@ -6,7 +6,7 @@ import ultraextreme.model.util.Position;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class PlayerShipTest extends AbstractEntityTest {
 
@@ -20,6 +20,7 @@ public class PlayerShipTest extends AbstractEntityTest {
 	/**
 	 * Test if it's possible to move the ship.
 	 */
+	@Override
 	public void testMove() {
 		resetInstanceVariables(10, 20, 30, 40);
 		playerShip.move(0, 0);
@@ -40,13 +41,13 @@ public class PlayerShipTest extends AbstractEntityTest {
 		resetInstanceVariables(0, 0, 0, 0);
 		assertEquals(playerShip.isDestroyed(), false);
 	}
-	
+
 	@Override
 	public void testGetDirection() {
 		resetInstanceVariables(0, 0, 0, 0);
 		assertEquals(playerShip.getDirection(), Direction.UP);
 	}
-	
+
 	@Override
 	public void testGetSpeedModifier() {
 		// FIXME

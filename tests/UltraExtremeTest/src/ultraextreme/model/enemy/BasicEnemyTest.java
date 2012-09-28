@@ -1,4 +1,5 @@
 package ultraextreme.model.enemy;
+
 import ultraextreme.model.util.Position;
 
 /**
@@ -7,7 +8,8 @@ import ultraextreme.model.util.Position;
 public class BasicEnemyTest extends AbstractEnemyTest {
 
 	/**
-	 * Tests if the enemy has moved forward and test if he has shot after a period of 10seconds
+	 * Tests if the enemy has moved forward and test if he has shot after a
+	 * period of 10seconds
 	 * 
 	 */
 	public void testUpdate() {

@@ -24,7 +24,6 @@ public abstract class EnemyShip extends DestroyableEntity {
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
 		return hitPoints < 1;
 	}
 
@@ -32,14 +31,16 @@ public abstract class EnemyShip extends DestroyableEntity {
 	public double getSpeedMod() {
 		return speedMod;
 	}
-	
+
 	/**
-	 * Damages an enemy by subtracting the given parameter from the
-	 * Enemy's hitPoints
-	 * @param damage how many hitPoints are to be lost
+	 * Damages an enemy by subtracting the given parameter from the Enemy's
+	 * hitPoints
+	 * 
+	 * @param damage
+	 *            how many hitPoints are to be lost
 	 */
 	public void damage(int damage) {
-		hitPoints -=damage;
+		hitPoints -= damage;
 	}
 
 }
