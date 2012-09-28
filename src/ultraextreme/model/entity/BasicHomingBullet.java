@@ -9,15 +9,16 @@ import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 /**
- * A bullet that constantly changes its direction towards its target, 
- * until it runs out of fuel and then continues straight forward.
+ * A bullet that constantly changes its direction towards its target, until it
+ * runs out of fuel and then continues straight forward.
+ * 
  * @author Viktor Anderling
- *
+ * 
  */
 public class BasicHomingBullet extends AbstractHomingBullet {
 
 	private Vector2d normDirectionVector;
-	
+
 	/**
 	 * Distance left before stopping to track the enemy.
 	 */
@@ -25,11 +26,18 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	public BasicHomingBullet(double x, double y, int width, int height,
 			PlayerID playerId, DestroyableEntity target) {
-		super(x, y, width, height, playerId, new Rotation(0), ObjectName.BASIC_HOMING_BULLET);
+		super(x, y, width, height, playerId, new Rotation(0),
+				ObjectName.BASIC_HOMING_BULLET);
 		this.setTarget(target);
 		normDirectionVector = new Vector2d();
 		updateDirection();
-		bulletFuel = Constants.getInstance().getLevelDimension().getY() * 0.8; // Will track 80% of the levels length.
+		bulletFuel = Constants.getInstance().getLevelDimension().getY() * 0.8; // Will
+																				// track
+																				// 80%
+																				// of
+																				// the
+																				// levels
+																				// length.
 
 	}
 
@@ -46,17 +54,20 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 		if (!((DestroyableEntity) target).isDestroyed() || bulletFuel < 0) {
 			updateDirection();
 		}
-		double xMovement = normDirectionVector.x * timePassed * this.getSpeedMod();
-		double yMovement = normDirectionVector.y * timePassed * this.getSpeedMod();
-		bulletFuel = bulletFuel - Math.sqrt(xMovement * xMovement + yMovement * yMovement) ;
-		
+		double xMovement = normDirectionVector.x * timePassed
+				* this.getSpeedMod();
+		double yMovement = normDirectionVector.y * timePassed
+				* this.getSpeedMod();
+		bulletFuel = bulletFuel
+				- Math.sqrt(xMovement * xMovement + yMovement * yMovement);
+
 		this.move(xMovement, yMovement);
 	}
-	
+
 	@Override
 	public Vector2d getNormalizedDirection() {
 		return normDirectionVector;
-		
+
 	}
 
 }

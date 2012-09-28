@@ -11,7 +11,7 @@ import ultraextreme.model.util.Rotation;
  * @author Bjorn Persson Mattsson
  * 
  */
-public class Bomb extends AbstractWeapon{
+public class Bomb extends AbstractWeapon {
 
 	public Bomb(BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BOMB);
@@ -21,7 +21,7 @@ public class Bomb extends AbstractWeapon{
 	public void fire(Position shipPosition, PlayerID playerId,
 			Rotation rotation, float timeElapsed) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

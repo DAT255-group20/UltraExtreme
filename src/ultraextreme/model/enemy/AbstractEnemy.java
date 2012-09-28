@@ -2,8 +2,8 @@ package ultraextreme.model.enemy;
 
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Rotation;
 
 /**
  * Represents an enemy brain/controller.
@@ -29,14 +29,11 @@ public abstract class AbstractEnemy implements IEnemy {
 	 * Fires the weapon assigned to this enemy
 	 */
 	public void shoot(float timeElapsed) {
-		weapon.fire(ship.getPosition(), PlayerID.ENEMY, this.enemyDirection, timeElapsed);
+		weapon.fire(ship.getPosition(), PlayerID.ENEMY, this.enemyDirection,
+				timeElapsed);
 	}
 
-	/**
-	 * returns true if this enemy has been destroyed
-	 * 
-	 * @return true if this enemy has been destroyed
-	 */
+	@Override
 	public boolean isDead() {
 		return ship.isDestroyed();
 	}

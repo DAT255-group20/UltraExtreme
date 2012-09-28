@@ -1,7 +1,7 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Rotation;
 
 /**
  * A class representing a bullet that has the ability to fly with a slope.

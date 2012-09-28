@@ -14,10 +14,10 @@ import ultraextreme.model.util.Rotation;
  * @author Bjorn Persson Mattsson, Viktor Anderling, Johan Gronvall
  * 
  */
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements IEntity {
 
 	private Position position;
-	
+
 	private Position prevPosition;
 
 	private Rotation rotation;
@@ -25,7 +25,7 @@ public abstract class AbstractEntity {
 	private int width;
 
 	private int height;
-	
+
 	private ObjectName objectName;
 
 	/**
@@ -43,7 +43,7 @@ public abstract class AbstractEntity {
 		this.width = width;
 		this.height = height;
 		this.objectName = objectName;
-		
+
 	}
 
 	/**
@@ -76,6 +76,7 @@ public abstract class AbstractEntity {
 	 * 
 	 * @return A new position with the same values as this position.
 	 */
+	@Override
 	public Position getPosition() {
 		return new Position(this.position);
 	}
@@ -99,34 +100,37 @@ public abstract class AbstractEntity {
 	 *            The other entity.
 	 * @return true if and only if the two entities are colliding.
 	 */
-	public boolean collidesWith(AbstractEntity other) {
+	@Override
+	public boolean collidesWith(IEntity other) {
 		// Rectangle collision detection
 		double left1 = this.getPosition().getX();
 		double top1 = this.getPosition().getY();
-		double right1 = left1+this.getWidth();
-		double bottom1 = top1+this.getHeight();
-		
+		double right1 = left1 + this.getWidth();
+		double bottom1 = top1 + this.getHeight();
+
 		double left2 = other.getPosition().getX();
 		double top2 = other.getPosition().getY();
-		double right2 = left2+other.getWidth();
-		double bottom2 = top2+other.getHeight();
-		
+		double right2 = left2 + other.getWidth();
+		double bottom2 = top2 + other.getHeight();
+
 		return !(bottom1 < top2 || top1 > bottom2 || right1 < left2 || left1 > right2);
 	}
 
 	// public void getHitbox() {
 	// }
 
+	@Override
 	public int getWidth() {
 		return width;
 	}
 
+	@Override
 	public int getHeight() {
 		return height;
 	}
-	
+
 	public Vector2d getNormalizedDirection() {
-		Vector2d v = new Vector2d(position.getX() - prevPosition.getX(), 
+		Vector2d v = new Vector2d(position.getX() - prevPosition.getX(),
 				position.getY() - prevPosition.getY());
 		v.normalize();
 		return v;
@@ -140,9 +144,10 @@ public abstract class AbstractEntity {
 	public Rotation getRotation() {
 		return rotation;
 	}
-	
+
 	/**
 	 * Returns what kind of entity this is as an ObjectName
+	 * 
 	 * @return what kind of entity this is as an ObjectName
 	 */
 	public ObjectName getObjectName() {
