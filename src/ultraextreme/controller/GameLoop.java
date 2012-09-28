@@ -59,7 +59,6 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void onUpdate(float time) {
-		System.out.println(scalingQuotient.x);
 		gameModel.update(new ModelInput(moveX / scalingQuotient.x, 
 				moveY / scalingQuotient.y, firing, specialAttack), time);
 		moveX = 0;
