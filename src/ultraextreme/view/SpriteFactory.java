@@ -13,6 +13,8 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.ObjectName;
 
 /**
@@ -29,12 +31,18 @@ public class SpriteFactory {
 	Map<ObjectName, Integer> offsetMap;
 
 	private BitmapTextureAtlas textureAtlas;
+	
+	private Dimension screenDimension; //TODO implement scaling in this class?
+	private static final Dimension modelDimension = Constants.getInstance().getLevelDimension();
 
 	/**
 	 * Creates a spriteFactory OBS: should be called during a loadResources
 	 * because this constructor might get heavy
 	 */
 	public SpriteFactory(SimpleBaseGameActivity activity) {
+		screenDimension = new Dimension(activity.getResources().getDisplayMetrics().widthPixels, 
+				activity.getResources().getDisplayMetrics().heightPixels);
+		GameObjectSprite.setScreenDimension(screenDimension);
 		textureMap = new HashMap<ObjectName, ITextureRegion>();
 		// TODO does this work? might not pickup what i want
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");

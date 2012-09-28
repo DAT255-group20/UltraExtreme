@@ -4,6 +4,7 @@ import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.view.GameScene;
@@ -32,15 +33,18 @@ public class GameController extends AbstractController implements
 	float lastY = -1;
 
 	public GameController(VertexBufferObjectManager vertexBufferObjectManager,
-			SensorManager sensorManager, SpriteFactory spriteFactory) {
+			SensorManager sensorManager, SpriteFactory spriteFactory, 
+			SimpleBaseGameActivity activity) {
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
 				sensorManager, spriteFactory);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
-		gameLoop = new GameLoop(scene, gameModel, scene.getGameObjectSprites(),
-				vertexBufferObjectManager, spriteFactory);
+		gameLoop = new GameLoop(scene, gameModel, scene.getGameObjectSprites(), 
+				vertexBufferObjectManager, spriteFactory, 
+				activity.getResources().getDisplayMetrics().widthPixels, 
+				activity.getResources().getDisplayMetrics().heightPixels);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
