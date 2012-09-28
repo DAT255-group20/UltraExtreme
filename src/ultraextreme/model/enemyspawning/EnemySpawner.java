@@ -85,8 +85,8 @@ public class EnemySpawner implements WaveListener {
 	 */
 	public void update(float timeElapsed) {
 		timer += timeElapsed;
-		updateWaves(timeElapsed);
 		addNewWaves();
+		updateWaves(timeElapsed);
 	}
 
 	/**
@@ -96,9 +96,10 @@ public class EnemySpawner implements WaveListener {
 	 */
 	private void addNewWaves() {
 		// TODO: This method could use some optimization.
-		for (WaveSpawningList waveList : waveLists) {
+		for (int i = 0; i < waveLists.size(); i++) {
+			WaveSpawningList waveList = waveLists.get(i);
 			if (waveList.hasNext()) {
-				if (waveList.getCurrentSpawningTime() < timer) {
+				if (waveList.getCurrentSpawningTime() <= timer) {
 					activeWaves.add(waveList.getCurrentWave());
 					waveList.getCurrentWave().addListener(this);
 					waveList.next();
@@ -107,7 +108,7 @@ public class EnemySpawner implements WaveListener {
 				}
 			} else {
 				waveLists.remove(waveList);
-				break;
+				i--;
 			}
 		}
 	}

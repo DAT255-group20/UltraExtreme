@@ -1,7 +1,5 @@
 package ultraextreme.model.enemyspawning.wavelist;
 
-import org.andengine.util.VerticalAlign;
-
 import junit.framework.TestCase;
 import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
