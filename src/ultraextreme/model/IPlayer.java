@@ -21,24 +21,24 @@ public interface IPlayer {
 	 * @param delta
 	 *            Time since last update.
 	 */
-	public void update(ModelInput input, float delta);
+	void update(ModelInput input, float delta);
 
 	/**
 	 * Return a reference to the player's ship.
 	 */
-	public PlayerShip getShip();
+	PlayerShip getShip();
 
 	/**
 	 * Return the ID of the player.
 	 * 
 	 * @return The player's ID.
 	 */
-	public PlayerID getPlayerId();
+	PlayerID getPlayerId();
 
 	/**
 	 * adds a weapon (or bomb) to this player's ItemBar
 	 * 
 	 * @param weapon
 	 */
-	public void giveWeapon(AbstractWeapon weapon);
+	void giveWeapon(AbstractWeapon weapon);
 }

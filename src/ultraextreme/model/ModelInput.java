@@ -32,8 +32,8 @@ public class ModelInput {
 	 * @param dropBomb
 	 *            True if and only if the player is dropping a bomb
 	 */
-	public ModelInput(double dX, double dY, boolean fireWeapons,
-			boolean dropBomb) {
+	public ModelInput(final double dX, final double dY, final boolean fireWeapons,
+			final boolean dropBomb) {
 		this.dX = dX;
 		this.dY = dY;
 		this.fireWeapons = fireWeapons;

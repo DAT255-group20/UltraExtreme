@@ -19,13 +19,13 @@ import ultraextreme.model.util.PlayerID;
  */
 public class GameModel implements IUltraExtremeModel {
 
-	private Player player;
+	final private Player player;
 
-	private BulletManager bulletManager;
+	final private BulletManager bulletManager;
 
-	private EnemyManager enemyManager;
+	final private EnemyManager enemyManager;
 
-	private EnemySpawner enemySpawner;
+	final private EnemySpawner enemySpawner;
 
 	private PickupManager pickUpManager;
 
@@ -45,7 +45,7 @@ public class GameModel implements IUltraExtremeModel {
 	 * @param timeElapsed
 	 *            Time in seconds since last update.
 	 */
-	public void update(ModelInput input, float timeElapsed) {
+	public void update(final ModelInput input, final float timeElapsed) {
 		player.update(input, timeElapsed);
 		for (IBullet bullet : bulletManager.getBullets()) {
 			bullet.doMovement(timeElapsed);
@@ -64,9 +64,9 @@ public class GameModel implements IUltraExtremeModel {
 	}
 
 	private void checkCollisions() {
-		List<IBullet> playerBullets = bulletManager
+		final List<IBullet> playerBullets = bulletManager
 				.getBulletsFrom(PlayerID.PLAYER1);
-		List<IBullet> enemyBullets = bulletManager
+		final List<IBullet> enemyBullets = bulletManager
 				.getBulletsFrom(PlayerID.ENEMY);
 
 		// Check player bullets against enemies
