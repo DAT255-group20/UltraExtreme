@@ -40,17 +40,17 @@ public class EnemySpawner implements WaveListener {
 	 * The wave lists that the enemy spawner is working with and grabbing waves
 	 * from.
 	 */
-	private List<WaveSpawningList> waveLists;
+	private final List<WaveSpawningList> waveLists;
 
 	/**
 	 * The waves of enemies that are currently spawning enemies.
 	 */
-	private List<Wave> activeWaves;
+	private final List<Wave> activeWaves;
 
 	/**
 	 * Keeps track of which waves that have ended since the last update.
 	 */
-	private List<Wave> finishedWaves;
+	private final List<Wave> finishedWaves;
 
 	/**
 	 * Create an enemy spawner.
@@ -60,7 +60,7 @@ public class EnemySpawner implements WaveListener {
 	 *            EnemySpawner keep track of and spawn the enemies from their
 	 *            waves.
 	 */
-	public EnemySpawner(WaveSpawningList... waveLists) {
+	public EnemySpawner(final WaveSpawningList... waveLists) {
 		this.waveLists = new ArrayList<WaveSpawningList>();
 		for (WaveSpawningList waveList : waveLists) {
 			if (waveList != null) {
@@ -83,7 +83,7 @@ public class EnemySpawner implements WaveListener {
 	 * @param timeElapsed
 	 *            Time since this method was last called.
 	 */
-	public void update(float timeElapsed) {
+	public void update(final float timeElapsed) {
 		timer += timeElapsed;
 		addNewWaves();
 		updateWaves(timeElapsed);
@@ -97,7 +97,7 @@ public class EnemySpawner implements WaveListener {
 	private void addNewWaves() {
 		// TODO: This method could use some optimization.
 		for (int i = 0; i < waveLists.size(); i++) {
-			WaveSpawningList waveList = waveLists.get(i);
+			final WaveSpawningList waveList = waveLists.get(i);
 			if (waveList.hasNext()) {
 				if (waveList.getCurrentSpawningTime() <= timer) {
 					activeWaves.add(waveList.getCurrentWave());
@@ -119,14 +119,14 @@ public class EnemySpawner implements WaveListener {
 	 * @param timeElapsed
 	 *            Time that has elapsed since the last update.
 	 */
-	private void updateWaves(float timeElapsed) {
+	private void updateWaves(final float timeElapsed) {
 		for (int i = 0; i < finishedWaves.size(); i++) {
 			activeWaves.remove(finishedWaves.get(i));
 			finishedWaves.remove(i);
 			i--;
 		}
-		for (Iterator<Wave> i = activeWaves.iterator(); i.hasNext();) {
-			Wave wave = i.next();
+		for (final Iterator<Wave> i = activeWaves.iterator(); i.hasNext();) {
+			final Wave wave = i.next();
 			wave.update(timeElapsed);
 		}
 	}
@@ -135,7 +135,7 @@ public class EnemySpawner implements WaveListener {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void waveEnded(Wave wave) {
+	public void waveEnded(final Wave wave) {
 		// This method can't directly delete the wave from the activeWaves list
 		// because that will result in an ConcurrentModificationException, since
 		// higher up in the stack is this class' updateWaves method running.
@@ -146,7 +146,7 @@ public class EnemySpawner implements WaveListener {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void enemySpawned(IEnemy enemy) {
+	public void enemySpawned(final IEnemy enemy) {
 		pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, enemy);
 	}
 
