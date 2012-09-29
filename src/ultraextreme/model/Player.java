@@ -24,19 +24,19 @@ public class Player implements IPlayer {
 	/**
 	 * Reference to the player's ship.
 	 */
-	private PlayerShip ship;
+	final private PlayerShip ship;
 
 	/**
 	 * The player's ID. This is used in the view to differentiate player ships
 	 * from each other.
 	 */
-	private PlayerID playerId;
+	final private PlayerID playerId;
 
 	/**
 	 * Item bar containing the items that the player's ship is currently
 	 * holding.
 	 */
-	private ItemBar itemBar;
+	final private ItemBar itemBar;
 
 	/**
 	 * Create a new player.
@@ -47,9 +47,11 @@ public class Player implements IPlayer {
 	 *            A manager that the player ship's guns should add the bullets
 	 *            to.
 	 */
-	public Player(PlayerID playerId, BulletManager bulletManager) {
-		Dimension levelDimension = Constants.getInstance().getLevelDimension();
-		this.ship = new PlayerShip(levelDimension.getX() * 0.5, levelDimension.getY() * 0.8);
+	public Player(final PlayerID playerId, final BulletManager bulletManager) {
+		final Dimension levelDimension = Constants.getInstance()
+				.getLevelDimension();
+		this.ship = new PlayerShip(levelDimension.getX() * 0.5,
+				levelDimension.getY() * 0.8);
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
 				Math.PI), 5);
@@ -61,13 +63,13 @@ public class Player implements IPlayer {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(ModelInput input, float timeElapsed) {
+	public void update(final ModelInput input, final float timeElapsed) {
 		double newX = 0;
 		double newY = 0;
-		if(ship.canMoveX(input.dX)) {
+		if (ship.canMoveX(input.dX)) {
 			newX = input.dX;
 		}
-		if(ship.canMoveY(input.dY)) {
+		if (ship.canMoveY(input.dY)) {
 			newY = input.dY;
 		}
 		ship.move(newX, newY);
@@ -98,7 +100,7 @@ public class Player implements IPlayer {
 	}
 
 	@Override
-	public void giveWeapon(AbstractWeapon weapon) {
+	public void giveWeapon(final AbstractWeapon weapon) {
 		itemBar.addItem(weapon);
 	}
 }

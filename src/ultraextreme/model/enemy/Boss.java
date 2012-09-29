@@ -8,5 +8,6 @@ package ultraextreme.model.enemy;
  */
 public class Boss {
 
+	// TODO This class is not used and not implemented
 	private AbstractEnemy enemyController;
 }

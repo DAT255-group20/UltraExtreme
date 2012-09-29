@@ -7,7 +7,7 @@ import ultraextreme.model.item.BulletManager;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class VerticalLineWaveTest extends TestCase {
 
@@ -15,7 +15,7 @@ public class VerticalLineWaveTest extends TestCase {
 
 	private EnemyCollector enemyCollector;
 
-	private Wave wave;
+	private AbstractWave wave;
 
 	@Override
 	public void setUp() {

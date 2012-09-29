@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import ultraextreme.model.enemyspawning.EnemySpawner;
 
-
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";
 
-	private List<IEnemy> enemies;
+	private final List<IEnemy> enemies;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -24,18 +23,17 @@ public class EnemyManager implements PropertyChangeListener {
 		return enemies;
 	}
 
-	public void addEnemy(IEnemy enemy) {
+	public void addEnemy(final IEnemy enemy) {
 		enemies.add(enemy);
 		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
 	}
 
 	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
-			IEnemy e = enemies.get(i);
-			if (e.isDead()) {
-				// TODO Also check for when the enemy has left the screen and
-				// should be removed
-				// TODO Change to fit reversed Y axis. (do tests)
+			final IEnemy e = enemies.get(i);
+			if (e.isDead()/* || e.getShip().isOutOfScreen() */) {
+				// TODO Enemies are obviously counted as out of screen when they
+				// are spawned and are removed right away.
 				pcs.firePropertyChange("remove", null, e);
 				enemies.remove(i);
 				i--;
@@ -43,16 +41,17 @@ public class EnemyManager implements PropertyChangeListener {
 		}
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	public void removePropertyChangeListener(
+			final PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent event) {
+	public void propertyChange(final PropertyChangeEvent event) {
 		// This is executed when an enemy spawner wants to add a new enemy.
 		if (event.getPropertyName().equals(EnemySpawner.NEW_ENEMY)) {
 			addEnemy((IEnemy) event.getNewValue());

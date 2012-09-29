@@ -17,15 +17,16 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicHomingBullet extends AbstractHomingBullet {
 
-	private Vector2d normDirectionVector;
+	private final Vector2d normDirectionVector;
 
 	/**
 	 * Distance left before stopping to track the enemy.
 	 */
 	private double bulletFuel;
 
-	public BasicHomingBullet(double x, double y, int width, int height,
-			PlayerID playerId, DestroyableEntity target) {
+	public BasicHomingBullet(final double x, final double y, final int width,
+			final int height, final PlayerID playerId,
+			AbstractDestroyableEntity target) {
 		super(x, y, width, height, playerId, new Rotation(0),
 				ObjectName.BASIC_HOMING_BULLET);
 		this.setTarget(target);
@@ -42,8 +43,8 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 	}
 
 	private void updateDirection() {
-		Position targetPosition = target.getPosition();
-		Position thisPosition = this.getPosition();
+		final Position targetPosition = target.getPosition();
+		final Position thisPosition = this.getPosition();
 		normDirectionVector.normalize(new Vector2d(targetPosition.getX()
 				- thisPosition.getX(), targetPosition.getY()
 				- thisPosition.getY()));
@@ -51,12 +52,13 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		if (!((DestroyableEntity) target).isDestroyed() || bulletFuel < 0) {
+		if (!((AbstractDestroyableEntity) target).isDestroyed()
+				|| bulletFuel < 0) {
 			updateDirection();
 		}
-		double xMovement = normDirectionVector.x * timePassed
+		final double xMovement = normDirectionVector.x * timePassed
 				* this.getSpeedMod();
-		double yMovement = normDirectionVector.y * timePassed
+		final double yMovement = normDirectionVector.y * timePassed
 				* this.getSpeedMod();
 		bulletFuel = bulletFuel
 				- Math.sqrt(xMovement * xMovement + yMovement * yMovement);

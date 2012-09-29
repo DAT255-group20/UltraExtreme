@@ -15,19 +15,19 @@ import ultraextreme.model.util.Rotation;
  * @author Daniel Jonsson
  * 
  */
-public class HorizontalLineWave extends Wave {
+public class HorizontalLineWave extends AbstractWave {
 
 	private float timer;
 
 	private int lineCounter;
 
-	private int maxLines;
+	private final int maxLines;
 
-	private int enemiesInLines;
+	private final int enemiesInLines;
 
-	private Rotation rotation;
+	private final Rotation rotation;
 
-	private Position spawningPosition;
+	private final Position spawningPosition;
 
 	/**
 	 * Create a new vertical enemy line.
@@ -45,8 +45,9 @@ public class HorizontalLineWave extends Wave {
 	 * @param bulletManager
 	 *            Reference to a bullet manager so the enemies can be created.
 	 */
-	public HorizontalLineWave(int enemiesInLines, int maxLines,
-			double rotation, int x, int y, BulletManager bulletManager) {
+	public HorizontalLineWave(final int enemiesInLines, final int maxLines,
+			final double rotation, final int x, final int y,
+			final BulletManager bulletManager) {
 		super(bulletManager);
 		timer = 2;
 		lineCounter = 0;
@@ -60,7 +61,7 @@ public class HorizontalLineWave extends Wave {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(float timeElapsed) {
+	public void update(final float timeElapsed) {
 		timer += timeElapsed;
 		if (timer >= 2) {
 			spawnLine();

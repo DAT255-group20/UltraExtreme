@@ -12,9 +12,9 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicBullet extends AbstractBullet {
 
-	public BasicBullet(double x, double y, int width, int height,
-			PlayerID playerId, Rotation direction) {
-		super(x, y, width, height, playerId, direction, ObjectName.BASIC_BULLET);
+	public BasicBullet(final double x, final double y, final int width,
+			final int height, PlayerID playerId, final Rotation rotation) {
+		super(x, y, width, height, playerId, rotation, ObjectName.BASIC_BULLET);
 	}
 
 	@Override

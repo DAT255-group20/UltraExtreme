@@ -13,28 +13,36 @@ import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
 
+/**
+ * 
+ * @author Johan Gronvall
+ * 
+ */
 public class GameObjectSprite extends Sprite {
 
 	/**
 	 * Reference to a bullet in the model.
 	 */
-	private AbstractEntity entity;
-	
-	private Vector2d directionVector;
-	
-	private static Dimension screenDimension;
-	private static final Dimension modelDimension = Constants.getInstance().getLevelDimension();
+	private final AbstractEntity entity;
 
-	public GameObjectSprite(AbstractEntity entity,
-			VertexBufferObjectManager pVertexBufferObjectManager,
-			ITextureRegion texture) {
+	private Vector2d directionVector;
+
+	// TODO PMD: Possible unsafe assignment to a non-final static field in a
+	// constructor.
+	private static Dimension screenDimension;
+	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
+			.getLevelDimension();
+
+	public GameObjectSprite(final AbstractEntity entity,
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			final ITextureRegion texture) {
 
 		super((float) entity.getPosition().getX(), (float) entity.getPosition()
 				.getY(), entity.getWidth(), entity.getHeight(), texture,
-				pVertexBufferObjectManager);
+				vertexBufferObjectManager);
 		this.entity = entity;
-		if(screenDimension == null) {
-			screenDimension = modelDimension;
+		if (screenDimension == null) {
+			screenDimension = MODEL_DIMENSION;
 		}
 	}
 
@@ -42,16 +50,18 @@ public class GameObjectSprite extends Sprite {
 	 * Update the bullet sprite with data from the model.
 	 */
 	public void update() {
-		Position newPosition = screenDimension.scalePosition(modelDimension, entity.getPosition());
+		final Position newPosition = screenDimension.scalePosition(
+				MODEL_DIMENSION, entity.getPosition());
 		this.setX((float) newPosition.getX());
 		this.setY((float) newPosition.getY());
-		if(entity instanceof AbstractBullet) {
-			Vector2d newVector = entity.getNormalizedDirection();
-			if(!(newVector.x == 0 && newVector.y == 0)) {
+		if (entity instanceof AbstractBullet) {
+			final Vector2d newVector = entity.getNormalizedDirection();
+			if (!(newVector.x == 0 && newVector.y == 0)) {
 				directionVector = newVector;
 			}
-			float newAngle = MathUtils.radToDeg((float) (Math.atan(directionVector.y / directionVector.x)));
-			if(directionVector.x < 0) {
+			float newAngle = MathUtils.radToDeg((float) (Math
+					.atan(directionVector.y / directionVector.x)));
+			if (directionVector.x < 0) {
 				newAngle = newAngle + 180f;
 			}
 			this.setRotation(newAngle + 90f);
@@ -64,8 +74,8 @@ public class GameObjectSprite extends Sprite {
 	public AbstractEntity getEntity() {
 		return entity;
 	}
-	
-	public static void setScreenDimension(Dimension dimension) {
+
+	public static void setScreenDimension(final Dimension dimension) {
 		screenDimension = dimension;
 	}
 }

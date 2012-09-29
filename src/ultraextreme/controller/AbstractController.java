@@ -13,7 +13,7 @@ import org.andengine.entity.scene.Scene;
  */
 public abstract class AbstractController {
 
-	private List<IControllerListener> listeners = new ArrayList<IControllerListener>();
+	private final List<IControllerListener> listeners = new ArrayList<IControllerListener>();
 
 	/**
 	 * Adds a listener to this controller.
@@ -21,7 +21,7 @@ public abstract class AbstractController {
 	 * @param listener
 	 *            Listener
 	 */
-	public void addListener(IControllerListener listener) {
+	public void addListener(final IControllerListener listener) {
 		listeners.add(listener);
 	}
 
@@ -31,13 +31,13 @@ public abstract class AbstractController {
 	 * @param listener
 	 *            Listener to be removed.
 	 */
-	public void removeListener(IControllerListener listener) {
+	public void removeListener(final IControllerListener listener) {
 		listeners.remove(listener);
 	}
 
 	public abstract Scene getScene();
 
-	protected void fireEvent(ControllerEvent event) {
+	protected void fireEvent(final ControllerEvent event) {
 		for (IControllerListener listener : listeners) {
 			listener.controllerListenerUpdate(event);
 		}

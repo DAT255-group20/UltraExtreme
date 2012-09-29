@@ -15,21 +15,21 @@ import ultraextreme.model.util.Rotation;
 public abstract class AbstractEnemy implements IEnemy {
 
 	// The entity representing the enemyShip
-	private EnemyShip ship;
-	private AbstractWeapon weapon;
-	private Rotation enemyDirection;
+	private final EnemyShip ship;
+	private final AbstractWeapon weapon;
+	private final Rotation enemyRotation;
 
-	protected AbstractEnemy(EnemyShip ship, AbstractWeapon weapon) {
+	protected AbstractEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
 		this.ship = ship;
 		this.weapon = weapon;
-		this.enemyDirection = ship.getRotation();
+		this.enemyRotation = ship.getRotation();
 	}
 
 	/**
 	 * Fires the weapon assigned to this enemy
 	 */
-	public void shoot(float timeElapsed) {
-		weapon.fire(ship.getPosition(), PlayerID.ENEMY, this.enemyDirection,
+	public void shoot(final float timeElapsed) {
+		weapon.fire(ship.getPosition(), PlayerID.ENEMY, this.enemyRotation,
 				timeElapsed);
 	}
 

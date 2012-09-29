@@ -27,22 +27,24 @@ import android.hardware.SensorManager;
  */
 public class GameScene extends Scene implements SensorEventListener {
 
-	private IUltraExtremeModel gameModel;
+	private final IUltraExtremeModel gameModel;
 	private GameObjectSprite shipSprite;
-	private SensorManager sensorManager;
-	private List<GameObjectSprite> gameObjectSprites;
+	
+	private final SensorManager sensorManager;
+	private final List<GameObjectSprite> gameObjectSprites;
 	private ItemBarPanel itemBarPanel;
 
-	public GameScene(IUltraExtremeModel gameModel,
-			VertexBufferObjectManager vertexBufferObjectManager,
-			SensorManager sensorManager, SpriteFactory spriteFactory,
-			float scaling) {
+	public GameScene(final IUltraExtremeModel gameModel,
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			final SensorManager sensorManager, final SpriteFactory spriteFactory, float scaling) {
+		super();
+		
 		this.gameModel = gameModel;
 		setBackground(new Background(0, 0, 0));
 
 		gameObjectSprites = new LinkedList<GameObjectSprite>();
-		GameObjectSprite playerSprite = spriteFactory.getNewSprite(gameModel
-				.getPlayer().getShip(), vertexBufferObjectManager);
+		final GameObjectSprite playerSprite = spriteFactory.getNewSprite(
+				gameModel.getPlayer().getShip(), vertexBufferObjectManager);
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
@@ -59,7 +61,7 @@ public class GameScene extends Scene implements SensorEventListener {
 	}
 
 	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	public void onAccuracyChanged(Sensor sensor, final int accuracy) {
 		// Auto-generated method stub
 
 	}

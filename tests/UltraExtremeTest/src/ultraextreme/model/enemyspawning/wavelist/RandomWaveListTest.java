@@ -9,7 +9,7 @@ import ultraextreme.model.item.BulletManager;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class RandomWaveListTest extends TestCase {
 
@@ -20,7 +20,7 @@ public class RandomWaveListTest extends TestCase {
 	public void testGeneratingNewWaves() {
 		BulletManager bulletManager = new BulletManager();
 		RandomWaveList waveList = new RandomWaveList(100, bulletManager,
-				new RandomGenerator() {
+				new AbstractRandomGenerator() {
 					private int counter;
 
 					@Override
@@ -34,7 +34,7 @@ public class RandomWaveListTest extends TestCase {
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
 
 		waveList.next();
-		
+
 		// 5.5
 		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
 		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);

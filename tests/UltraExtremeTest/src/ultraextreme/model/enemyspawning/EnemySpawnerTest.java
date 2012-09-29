@@ -1,7 +1,7 @@
 package ultraextreme.model.enemyspawning;
 
 import junit.framework.TestCase;
-import ultraextreme.model.enemyspawning.wavelist.RandomGenerator;
+import ultraextreme.model.enemyspawning.wavelist.AbstractRandomGenerator;
 import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
 import ultraextreme.model.item.BulletManager;
 
@@ -19,7 +19,7 @@ public class EnemySpawnerTest extends TestCase {
 	public void testUpdateMethod() {
 		BulletManager bulletManager = new BulletManager();
 		RandomWaveList waveList = new RandomWaveList(1, bulletManager,
-				new RandomGenerator() {
+				new AbstractRandomGenerator() {
 					private int counter = 0;
 
 					@Override

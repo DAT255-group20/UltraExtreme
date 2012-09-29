@@ -13,58 +13,61 @@ import ultraextreme.model.util.Rotation;
  * @author Viktor Anderling
  * 
  */
-public class PlayerShip extends DestroyableEntity {
+public class PlayerShip extends AbstractDestroyableEntity {
 
 	private static double speedMod = Constants.getInstance()
 			.getPlayerSpeedModifier();
 
-	public PlayerShip(double x, double y, int width, int height) {
+	public PlayerShip(final double x, final double y, final int width,
+			final int height) {
 		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
 	}
 
-	public PlayerShip(double x, double y) {
+	public PlayerShip(final double x, double y) {
 		this(x, y, 50, 50);
 	}
-	
+
 	public PlayerShip() {
 		this(0, 0);
 	}
-	
+
 	/**
 	 * Checks so that the ship wont move out of the level along the x-axis.
 	 * 
 	 * @param deltaX
-	 * 				The given movement along the x-axis.
+	 *            The given movement along the x-axis.
 	 * 
-	 * @return True if movement with the given distance wont take the ship 
-	 * out of the level, else false.
+	 * @return True if movement with the given distance wont take the ship out
+	 *         of the level, else false.
 	 */
 	public boolean canMoveX(double deltaX) {
-		Dimension dimension = Constants.getInstance().getLevelDimension();
-		Position position = this.getCenteredPosition();
-		double newX = deltaX + position.getX();
-		return newX + getWidth() / 2 < dimension.getX() && newX - getWidth() / 2 > 0;
+		final Dimension dimension = Constants.getInstance().getLevelDimension();
+		final Position position = this.getCenteredPosition();
+		final double newX = deltaX + position.getX();
+		return newX + getWidth() / 2 < dimension.getX()
+				&& newX - getWidth() / 2 > 0;
 	}
-	
+
 	/**
 	 * Checks so that the ship wont move out of the level along the y-axis.
 	 * 
 	 * @param deltaX
-	 * 				The given movement along the y-axis.
+	 *            The given movement along the y-axis.
 	 * 
-	 * @return True if movement with the given distance wont take the ship 
-	 * out of the level, else false.
+	 * @return True if movement with the given distance wont take the ship out
+	 *         of the level, else false.
 	 */
 	public boolean canMoveY(double deltaY) {
-		Dimension dimension = Constants.getInstance().getLevelDimension();
-		Position position = this.getCenteredPosition();
+		final Dimension dimension = Constants.getInstance().getLevelDimension();
+		final Position position = this.getCenteredPosition();
 		double newY = deltaY + position.getY();
-		return newY + getHeight() / 2 < dimension.getY() && newY - getHeight() / 2 > 0;
+		return newY + getHeight() / 2 < dimension.getY()
+				&& newY - getHeight() / 2 > 0;
 	}
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
+		// TODO PlayerShip.isDestroyed()
 		return false;
 	}
 
@@ -75,6 +78,6 @@ public class PlayerShip extends DestroyableEntity {
 
 	@Override
 	public void receiveDamage(int damage) {
-		// TODO Auto-generated method stub
+		// TODO PlayerShip.receiveDamage()
 	}
 }

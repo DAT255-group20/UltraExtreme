@@ -13,25 +13,25 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicWeapon extends AbstractWeapon {
 
-	private static final int bulletWidth = 20;
-	private static final int bulletHeight = 40;
+	private static final int BULLET_WIDTH = 20;
+	private static final int BULLET_HEIGHT = 40;
 	private static float initCooldown = 0.5f;
 	private float cooldown;
 
-	public BasicWeapon(BulletManager bulletManager) {
+	public BasicWeapon(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BASIC_WEAPON);
 		cooldown = initCooldown;
 	}
 
 	@Override
-	public void fire(Position shipPosition, PlayerID playerId,
-			Rotation rotation, float timeElapsed) {
+	public void fire(final Position shipPosition, final PlayerID playerId,
+			final Rotation rotation, final float timeElapsed) {
 		cooldown = cooldown - timeElapsed;
 		if (cooldown < 0) {
 			cooldown = cooldown + initCooldown;
 			this.getBulletManager().addBullet(
 					new BasicBullet(shipPosition.getX(), shipPosition.getY(),
-							bulletWidth, bulletHeight, playerId, rotation));
+							BULLET_WIDTH, BULLET_HEIGHT, playerId, rotation));
 		}
 	}
 

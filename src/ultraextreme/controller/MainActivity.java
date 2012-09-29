@@ -26,6 +26,9 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private Camera camera;
 	private Scene currentScene;
 
+	// TODO PMD: The field name indicates a constant but its modifiers do not
+	// These two should either be final, or not be in capital letters.
+	// Capital letters indicates a constant, but constants MUST be final.
 	private static int CAMERA_WIDTH;
 	private static int CAMERA_HEIGHT;
 
@@ -33,6 +36,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
+		// TODO FindBugs: This instance method writes to a static field.
+		// This is tricky to get correct if multiple instances are being
+		// manipulated,
+		// and generally bad practice.
 		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
 		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
 		scaling = (float) ((float) getResources().getDisplayMetrics().heightPixels / Constants
@@ -68,7 +75,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	}
 
 	@Override
-	public void controllerListenerUpdate(ControllerEvent event) {
+	public void controllerListenerUpdate(final ControllerEvent event) {
 		switch (event.getEventType()) {
 		case SWITCH_TO_GAME:
 			setScene(gameController.getScene());
@@ -79,7 +86,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		}
 	}
 
-	private void setScene(Scene scene) {
+	private void setScene(final Scene scene) {
 		currentScene = scene;
 		getEngine().setScene(currentScene);
 	}

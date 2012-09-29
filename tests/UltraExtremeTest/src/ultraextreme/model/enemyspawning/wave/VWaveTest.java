@@ -7,7 +7,7 @@ import ultraextreme.model.item.BulletManager;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class VWaveTest extends TestCase {
 
@@ -15,7 +15,7 @@ public class VWaveTest extends TestCase {
 
 	private EnemyCollector enemyCollector;
 
-	private Wave wave;
+	private AbstractWave wave;
 
 	@Override
 	public void setUp() {
@@ -34,12 +34,12 @@ public class VWaveTest extends TestCase {
 	 */
 	public void testUpdate1() {
 		initWave(0, 0, 0);
-		
+
 		assertFalse(enemyCollector.hasWaveEnded());
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 0);
-		
+
 		wave.update(0);
-		
+
 		assertFalse(enemyCollector.hasWaveEnded());
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
 

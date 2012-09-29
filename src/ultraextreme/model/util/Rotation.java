@@ -14,7 +14,7 @@ public class Rotation {
 	 * The angle measured in radians. As it gets larger it will turn
 	 * counterclockwise.
 	 */
-	private double angle;
+	private final double angle;
 
 	/**
 	 * Creates a direction with the chosen angle.
@@ -22,7 +22,7 @@ public class Rotation {
 	 * @param angle
 	 *            The chosen angle.
 	 */
-	public Rotation(double angle) {
+	public Rotation(final double angle) {
 		this.angle = angle;
 	}
 
@@ -44,16 +44,25 @@ public class Rotation {
 	 * 
 	 * @return The rotated form of the coordinate counterclockwise.
 	 */
-	public Vector2d getRotatedCoordinates(double x, double y) {
+	public Vector2d getRotatedCoordinates(final double x, final double y) {
 		return new Vector2d(x * Math.cos(angle) - y * Math.sin(angle), x
 				* Math.sin(angle) + y * Math.cos(angle));
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(final Object o) {
+		// TODO PMD: Ensure you override both equals() and hashCode()
+		// TODO FindBugs: This class overrides equals(Object),
+		// but does not override hashCode(), and inherits the implementation of
+		// hashCode() from java.lang.Object (which returns the identity hash
+		// code,
+		// an arbitrary value assigned to the object by the VM).
+		// Therefore, the class is very likely to violate the invariant
+		// that equal objects must have equal hashcodes.
 		if (this == o) {
 			return true;
 		} else if (this.getClass() != o.getClass()) {
+			// TODO PMD: Avoid if (x != y) ..; else ..;
 			return false;
 		} else {
 			return this.getAngle() == ((Rotation) o).getAngle();

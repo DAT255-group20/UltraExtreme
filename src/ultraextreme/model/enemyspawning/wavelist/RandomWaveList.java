@@ -5,7 +5,7 @@ import java.util.Random;
 import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
-import ultraextreme.model.enemyspawning.wave.Wave;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.item.BulletManager;
 
 /**
@@ -16,7 +16,7 @@ import ultraextreme.model.item.BulletManager;
  */
 public class RandomWaveList extends AbstractWaveList {
 
-	private Wave currentWave;
+	private AbstractWave currentWave;
 
 	private float currentSpawningTime;
 
@@ -24,7 +24,7 @@ public class RandomWaveList extends AbstractWaveList {
 
 	private int counter;
 
-	private RandomGenerator randomGenerator;
+	private AbstractRandomGenerator randomGenerator;
 
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
@@ -35,11 +35,12 @@ public class RandomWaveList extends AbstractWaveList {
 	 *            Reference to a BulletManager that the enemies will add their
 	 *            bullets to.
 	 */
-	public RandomWaveList(int numberOfWaves, BulletManager bulletManager) {
-		this(numberOfWaves, bulletManager, new RandomGenerator() {
+	public RandomWaveList(final int numberOfWaves,
+			final BulletManager bulletManager) {
+		this(numberOfWaves, bulletManager, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
-				Random random = new Random();
+				final Random random = new Random();
 				return random.nextFloat();
 			}
 		});
@@ -57,8 +58,9 @@ public class RandomWaveList extends AbstractWaveList {
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
 	 */
-	public RandomWaveList(int numberOfWaves, BulletManager bulletManager,
-			RandomGenerator randomGenerator) {
+	public RandomWaveList(final int numberOfWaves,
+			final BulletManager bulletManager,
+			final AbstractRandomGenerator randomGenerator) {
 		super(numberOfWaves);
 		this.randomGenerator = randomGenerator;
 		this.counter = 0;
@@ -74,6 +76,7 @@ public class RandomWaveList extends AbstractWaveList {
 		// TODO: This needs some more work.
 		counter %= 3;
 		switch (counter) {
+		// TODO PMD: Switch statements should have a default label
 		case 0:
 			currentWave = new VWave(0, 200, -10, bulletManager);
 			break;
@@ -87,7 +90,7 @@ public class RandomWaveList extends AbstractWaveList {
 		}
 		counter++;
 	}
-	
+
 	/**
 	 * Update the currentSpawningTime with a random number.
 	 */
@@ -109,7 +112,7 @@ public class RandomWaveList extends AbstractWaveList {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Wave getCurrentWave() {
+	public AbstractWave getCurrentWave() {
 		return currentWave;
 	}
 

@@ -20,7 +20,7 @@ public class ItemBar {
 	/**
 	 * Maximum number of items that the item bar can hold.
 	 */
-	private int maximumNumberOfItems;
+	private int maxNumberOfItems;
 
 	/**
 	 * Where the next item will be put into the item bar.
@@ -51,9 +51,9 @@ public class ItemBar {
 	 * @param bulletManager
 	 *            Reference to the bullet manager.
 	 */
-	public ItemBar(PlayerID playerId, BulletManager bulletManager,
-			Rotation playerDirection) {
-		this(playerId, bulletManager, playerDirection, 1);
+	public ItemBar(final PlayerID playerId, BulletManager bulletManager,
+			final Rotation playerRotation) {
+		this(playerId, bulletManager, playerRotation, 1);
 	}
 
 	/**
@@ -63,15 +63,17 @@ public class ItemBar {
 	 *            The player's ID it belongs to.
 	 * @param bulletManager
 	 *            Reference to the bullet manager.
-	 * @param maximumNumberOfItems
+	 * @param maxNumberOfItems
 	 *            Maximum number of items that fit in the item bar.
 	 */
-	public ItemBar(PlayerID playerId, BulletManager bulletManager,
-			Rotation playerRotation, int maximumNumberOfItems) {
+	public ItemBar(final PlayerID playerId, BulletManager bulletManager,
+			Rotation playerRotation, int maxNumberOfItems) {
+		// TODO PMD: Avoid passing parameters to methods or constructors and
+		// then not using those parameters. (bulletManager)
 		this.playerId = playerId;
 		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
-		this.maximumNumberOfItems = maximumNumberOfItems;
+		this.maxNumberOfItems = maxNumberOfItems;
 		this.playerRotation = playerRotation;
 		this.cursorPosition = 0;
 	}
@@ -83,13 +85,13 @@ public class ItemBar {
 	 *            The item that should be added.
 	 */
 	public void addItem(AbstractWeapon item) {
-		if (items.size() < maximumNumberOfItems) {
+		if (items.size() < maxNumberOfItems) {
 			items.add(item);
 		} else {
 			items.set(cursorPosition, item);
 		}
 		cursorPosition++;
-		cursorPosition = cursorPosition % maximumNumberOfItems;
+		cursorPosition = cursorPosition % maxNumberOfItems;
 	}
 
 	/**

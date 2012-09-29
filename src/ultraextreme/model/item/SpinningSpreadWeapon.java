@@ -8,14 +8,14 @@ import ultraextreme.model.util.Rotation;
 
 public class SpinningSpreadWeapon extends AbstractWeapon {
 
-	private static final int bulletWidth = 20;
-	private static final int bulletHeight = 40;
+	private static final int BULLET_WIDTH = 20;
+	private static final int BULLET_HEIGHT = 40;
 	private static float initCooldown = 1 / 6f;
 	private float cooldown;
-	private static double angleStep;
+	private double angleStep;
 	private double currentAngle;
 
-	public SpinningSpreadWeapon(BulletManager bulletManager) {
+	public SpinningSpreadWeapon(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.SPINNING_SPREAD_WEAPON);
 		cooldown = initCooldown;
 		angleStep = Math.PI / 12;
@@ -23,15 +23,15 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 	}
 
 	@Override
-	public void fire(Position shipPosition, PlayerID playerId,
-			Rotation rotation, float timeElapsed) {
+	public void fire(final Position shipPosition, final PlayerID playerId,
+			final Rotation rotation, final float timeElapsed) {
 		cooldown = cooldown - timeElapsed;
 		if (cooldown < 0) {
 			cooldown = cooldown + initCooldown;
 			this.getBulletManager().addBullet(
 					new BasicBullet(shipPosition.getX(), shipPosition.getY(),
-							bulletWidth, bulletHeight, playerId, new Rotation(
-									rotation.getAngle() + currentAngle)));
+							BULLET_WIDTH, BULLET_HEIGHT, playerId,
+							new Rotation(rotation.getAngle() + currentAngle)));
 			currentAngle = currentAngle + angleStep;
 		}
 	}

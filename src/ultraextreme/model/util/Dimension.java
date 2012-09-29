@@ -22,7 +22,7 @@ public class Dimension {
 	 * @param y
 	 *            A positive double.
 	 */
-	public Dimension(double x, double y) {
+	public Dimension(final double x, final double y) {
 		if (x <= 0 || y <= 0) {
 			throw new IllegalArgumentException("Non-positive input value");
 		} else {
@@ -51,7 +51,7 @@ public class Dimension {
 	 * @param otherDimension
 	 * @return A vector with an x-quotient and an y-quotient.
 	 */
-	public Vector2d getQuotient(Dimension otherDimension) {
+	public Vector2d getQuotient(final Dimension otherDimension) {
 		return new Vector2d(this.getX() / otherDimension.getX(), this.getY()
 				/ otherDimension.getY());
 	}
@@ -66,12 +66,12 @@ public class Dimension {
 	 *            The other position that will be scaled.
 	 * @return A position scaled from the other position.
 	 */
-	public Position scalePosition(Dimension otherDimension,
-			Position otherPosition) {
+	public Position scalePosition(final Dimension otherDimension,
+			final Position otherPosition) {
 		if (this.equals(otherDimension)) {
 			return otherPosition;
 		} else {
-			Vector2d quotientVector = this.getQuotient(otherDimension);
+			final Vector2d quotientVector = this.getQuotient(otherDimension);
 			return new Position(quotientVector.x * otherPosition.getX(),
 					quotientVector.y * otherPosition.getY());
 		}
@@ -79,9 +79,18 @@ public class Dimension {
 
 	@Override
 	public boolean equals(Object o) {
+		// TODO PMD: Ensure you override both equals() and hashCode()
+		// TODO FindBugs: This class overrides equals(Object),
+		// but does not override hashCode(), and inherits the implementation of
+		// hashCode() from java.lang.Object (which returns the identity hash
+		// code,
+		// an arbitrary value assigned to the object by the VM).
+		// Therefore, the class is very likely to violate the invariant
+		// that equal objects must have equal hashcodes.
 		if (this == o) {
 			return true;
 		} else if (this.getClass() != o.getClass()) {
+			// TODO PMD: Avoid if (x != y) ..; else ..;
 			return false;
 		} else {
 			return this.getX() == ((Dimension) o).getX()

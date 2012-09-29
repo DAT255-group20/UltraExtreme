@@ -35,8 +35,8 @@ public abstract class AbstractEntity implements IEntity {
 		this(0, 0, 0, 0, new Rotation(0), null);
 	}
 
-	public AbstractEntity(double x, double y, int width, int height,
-			Rotation rotation, ObjectName objectName) {
+	public AbstractEntity(final double x, final double y, final int width,
+			final int height, Rotation rotation, final ObjectName objectName) {
 		this.rotation = rotation;
 		this.position = new Position(x, y);
 		this.prevPosition = new Position(x, y);
@@ -56,7 +56,7 @@ public abstract class AbstractEntity implements IEntity {
 	 */
 	public void move(double x, double y) {
 		prevPosition.setPosition(position);
-		Vector2d rotatedVector = rotation.getRotatedCoordinates(x, y);
+		final Vector2d rotatedVector = rotation.getRotatedCoordinates(x, y);
 		position.setX(position.getX() + rotatedVector.x);
 		position.setY(position.getY() + rotatedVector.y);
 	}
@@ -80,24 +80,22 @@ public abstract class AbstractEntity implements IEntity {
 	public Position getPosition() {
 		return new Position(this.position);
 	}
-	
-	//TODO test this getCenteredPosition()
+
 	/**
 	 * Returns the position at the center of this entity.
 	 * 
 	 * @return A new position at the center of this entity.
 	 */
 	public Position getCenteredPosition() {
-		return new Position(position.getX() + getWidth() / 2, position.getY() + getHeight() / 2);
+		// TODO test this getCenteredPosition()
+		return new Position(position.getX() + getWidth() / 2, position.getY()
+				+ getHeight() / 2);
 	}
 
-	/**
-	 * Returns true if and only if the entity is entirely outside of the screen
-	 * 
-	 * @return true if and only if the entity is entirely outside of the screen
-	 */
+	@Override
 	public boolean isOutOfScreen() {
-		Dimension screen = Constants.getInstance().getLevelDimension();
+		// TODO Change to fit reversed Y axis. (do tests)
+		final Dimension screen = Constants.getInstance().getLevelDimension();
 		return position.getY() - height < 0 || position.getX() - width < 0
 				|| position.getX() > screen.getX()
 				|| position.getY() > screen.getY();
@@ -113,15 +111,15 @@ public abstract class AbstractEntity implements IEntity {
 	@Override
 	public boolean collidesWith(IEntity other) {
 		// Rectangle collision detection
-		double left1 = this.getPosition().getX();
-		double top1 = this.getPosition().getY();
-		double right1 = left1 + this.getWidth();
-		double bottom1 = top1 + this.getHeight();
+		final double left1 = this.getPosition().getX();
+		final double top1 = this.getPosition().getY();
+		final double right1 = left1 + this.getWidth();
+		final double bottom1 = top1 + this.getHeight();
 
-		double left2 = other.getPosition().getX();
-		double top2 = other.getPosition().getY();
-		double right2 = left2 + other.getWidth();
-		double bottom2 = top2 + other.getHeight();
+		final double left2 = other.getPosition().getX();
+		final double top2 = other.getPosition().getY();
+		final double right2 = left2 + other.getWidth();
+		final double bottom2 = top2 + other.getHeight();
 
 		return !(bottom1 < top2 || top1 > bottom2 || right1 < left2 || left1 > right2);
 	}

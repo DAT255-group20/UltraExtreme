@@ -19,9 +19,9 @@ import ultraextreme.model.util.PlayerID;
  */
 public class BulletManager {
 
-	private boolean isBombDropped = false;
+	private boolean bombIsDropped = false;
 
-	private Map<PlayerID, List<IBullet>> bulletsMap = new HashMap<PlayerID, List<IBullet>>();
+	private final Map<PlayerID, List<IBullet>> bulletsMap = new HashMap<PlayerID, List<IBullet>>();
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -40,7 +40,7 @@ public class BulletManager {
 	 * @param b
 	 *            Bullet to be added.
 	 */
-	public void addBullet(AbstractBullet b) {
+	public void addBullet(final AbstractBullet b) {
 		bulletsMap.get(b.getPlayerId()).add(b);
 		// TODO Not entirely sure that using a raw string is so good /Plankton
 		pcs.firePropertyChange("add", null, b);
@@ -50,7 +50,7 @@ public class BulletManager {
 	 * @return A list of all bullets in the bullet manager.
 	 */
 	public List<IBullet> getBullets() {
-		List<IBullet> output = new ArrayList<IBullet>();
+		final List<IBullet> output = new ArrayList<IBullet>();
 		for (List<IBullet> list : bulletsMap.values()) {
 			output.addAll(list);
 		}
@@ -64,9 +64,10 @@ public class BulletManager {
 	 *            The shooter of the bullets.
 	 * @return A list of all bullets shot by the provided player
 	 */
-	public List<IBullet> getBulletsFrom(PlayerID player) {
-		// TODO Should not return the reference
-		return bulletsMap.get(player);
+	public List<IBullet> getBulletsFrom(final PlayerID player) {
+		final List<IBullet> output = new ArrayList<IBullet>();
+		output.addAll(bulletsMap.get(player));
+		return output;
 	}
 
 	/**
@@ -75,9 +76,8 @@ public class BulletManager {
 	public void clearBulletsOffScreen() {
 		for (List<IBullet> list : bulletsMap.values()) {
 			for (int i = 0; i < list.size(); i++) {
-				IBullet b = list.get(i);
+				final IBullet b = list.get(i);
 				if (b.isMarkedForRemoval() || (b.isOutOfScreen())) {
-					// TODO Change to fit reversed Y axis. (do tests)
 					pcs.firePropertyChange("remove", null, b);
 					list.remove(i);
 					i--;
@@ -101,7 +101,7 @@ public class BulletManager {
 	 * @param player
 	 *            The owner of the bullets
 	 */
-	public void clearAllBulletsFrom(PlayerID player) {
+	public void clearAllBulletsFrom(final PlayerID player) {
 		bulletsMap.get(player).clear();
 	}
 
@@ -109,7 +109,7 @@ public class BulletManager {
 	 * Informs the bullet manager that a bomb has been dropped.
 	 */
 	public void dropBomb() {
-		this.isBombDropped = true;
+		this.bombIsDropped = true;
 	}
 
 	/**
@@ -117,11 +117,10 @@ public class BulletManager {
 	 *         this method.
 	 */
 	public boolean isBombDropped() {
-		// TODO Is this method really needed?
-		boolean output = this.isBombDropped;
+		final boolean output = this.bombIsDropped;
 
 		if (output) {
-			this.isBombDropped = false;
+			this.bombIsDropped = false;
 		}
 		return output;
 	}
@@ -132,7 +131,7 @@ public class BulletManager {
 	 * @param listener
 	 *            The listener.
 	 */
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
 
@@ -142,7 +141,7 @@ public class BulletManager {
 	 * @param listener
 	 *            The listener.
 	 */
-	public void removeListener(PropertyChangeListener listener) {
+	public void removeListener(final PropertyChangeListener listener) {
 		pcs.removePropertyChangeListener(listener);
 	}
 }
