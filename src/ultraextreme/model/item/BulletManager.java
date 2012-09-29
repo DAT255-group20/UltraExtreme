@@ -65,8 +65,9 @@ public class BulletManager {
 	 * @return A list of all bullets shot by the provided player
 	 */
 	public List<IBullet> getBulletsFrom(PlayerID player) {
-		// TODO Should not return the reference
-		return bulletsMap.get(player);
+		List<IBullet> output = new ArrayList<IBullet>();
+		output.addAll(bulletsMap.get(player));
+		return output;
 	}
 
 	/**
