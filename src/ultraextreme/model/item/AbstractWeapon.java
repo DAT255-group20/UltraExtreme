@@ -14,10 +14,10 @@ import ultraextreme.model.util.Rotation;
  */
 public abstract class AbstractWeapon {
 
-	private BulletManager bulletManager;
-	private ObjectName objectName;
+	private final BulletManager bulletManager;
+	private final ObjectName objectName;
 
-	public AbstractWeapon(BulletManager bulletManager, ObjectName objectName) {
+	public AbstractWeapon(final BulletManager bulletManager, final ObjectName objectName) {
 		this.bulletManager = bulletManager;
 		this.objectName = objectName;
 	}

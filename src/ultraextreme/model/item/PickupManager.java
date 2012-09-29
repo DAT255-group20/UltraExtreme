@@ -14,7 +14,7 @@ import ultraextreme.model.entity.WeaponPickup;
  * 
  */
 public class PickupManager {
-	private List<WeaponPickup> pickups;
+	private final List<WeaponPickup> pickups;
 	private final PropertyChangeSupport pcs;
 
 	private static final String NEW_PICKUP = "add";
@@ -29,7 +29,7 @@ public class PickupManager {
 	 * 
 	 * @param pickup
 	 */
-	public void addPickup(WeaponPickup pickup) {
+	public void addPickup(final WeaponPickup pickup) {
 		pickups.add(pickup);
 		pcs.firePropertyChange(NEW_PICKUP, null, pickup);
 
@@ -41,15 +41,15 @@ public class PickupManager {
 	 * @param pickup
 	 *            item which is to be removed
 	 */
-	public void removePickUp(WeaponPickup pickup) {
+	public void removePickUp(final WeaponPickup pickup) {
 		pickups.remove(pickup);
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
 	}
 }

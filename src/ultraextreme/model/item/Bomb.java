@@ -13,15 +13,14 @@ import ultraextreme.model.util.Rotation;
  */
 public class Bomb extends AbstractWeapon {
 
-	public Bomb(BulletManager bulletManager) {
+	public Bomb(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BOMB);
 	}
 
 	@Override
-	public void fire(Position shipPosition, PlayerID playerId,
-			Rotation rotation, float timeElapsed) {
+	public void fire(final Position shipPosition, final PlayerID playerId,
+		final Rotation rotation, final float timeElapsed) {
 		// TODO Bomb.fire()
 
 	}
-
 }
