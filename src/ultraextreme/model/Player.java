@@ -48,8 +48,10 @@ public class Player implements IPlayer {
 	 *            to.
 	 */
 	public Player(final PlayerID playerId, final BulletManager bulletManager) {
-		final Dimension levelDimension = Constants.getInstance().getLevelDimension();
-		this.ship = new PlayerShip(levelDimension.getX() * 0.5, levelDimension.getY() * 0.8);
+		final Dimension levelDimension = Constants.getInstance()
+				.getLevelDimension();
+		this.ship = new PlayerShip(levelDimension.getX() * 0.5,
+				levelDimension.getY() * 0.8);
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
 				Math.PI), 5);
@@ -64,10 +66,10 @@ public class Player implements IPlayer {
 	public void update(final ModelInput input, final float timeElapsed) {
 		double newX = 0;
 		double newY = 0;
-		if(ship.canMoveX(input.dX)) {
+		if (ship.canMoveX(input.dX)) {
 			newX = input.dX;
 		}
-		if(ship.canMoveY(input.dY)) {
+		if (ship.canMoveY(input.dY)) {
 			newY = input.dY;
 		}
 		ship.move(newX, newY);

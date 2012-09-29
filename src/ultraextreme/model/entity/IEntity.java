@@ -11,7 +11,7 @@ public interface IEntity {
 	int getHeight();
 
 	int getWidth();
-	
+
 	/**
 	 * Returns true if and only if the entity is entirely outside of the screen
 	 * 

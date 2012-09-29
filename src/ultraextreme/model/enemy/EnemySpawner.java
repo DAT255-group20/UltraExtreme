@@ -104,7 +104,8 @@ public class EnemySpawner {
 		this.pcs.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(final PropertyChangeListener listener) {
+	public void removePropertyChangeListener(
+			final PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
 	}
 }

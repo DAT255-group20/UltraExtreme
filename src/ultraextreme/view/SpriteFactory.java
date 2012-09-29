@@ -25,28 +25,33 @@ import ultraextreme.model.util.ObjectName;
  */
 public class SpriteFactory {
 
-	// TODO PMD: Use explicit scoping instead of the default package private level
+	// TODO PMD: Use explicit scoping instead of the default package private
+	// level
 	Map<ObjectName, ITextureRegion> textureMap;
 
-	// TODO PMD: Use explicit scoping instead of the default package private level
+	// TODO PMD: Use explicit scoping instead of the default package private
+	// level
 	// TODO not yet implemented offsets
 	Map<ObjectName, Integer> offsetMap;
 
 	// TODO PMD: Perhaps 'textureAtlas' could be replaced by a local variable.
 	private BitmapTextureAtlas textureAtlas;
-	
-	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local variable.
-	private Dimension screenDimension; //TODO implement scaling in this class?
+
+	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
+	// variable.
+	private Dimension screenDimension; // TODO implement scaling in this class?
 	// TODO PMD: Avoid unused private fields such as 'MODEL_DIMENSION'.
-	private static final Dimension MODEL_DIMENSION = Constants.getInstance().getLevelDimension();
+	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
+			.getLevelDimension();
 
 	/**
 	 * Creates a spriteFactory OBS: should be called during a loadResources
 	 * because this constructor might get heavy
 	 */
 	public SpriteFactory(final SimpleBaseGameActivity activity) {
-		screenDimension = new Dimension(activity.getResources().getDisplayMetrics().widthPixels, 
-				activity.getResources().getDisplayMetrics().heightPixels);
+		screenDimension = new Dimension(activity.getResources()
+				.getDisplayMetrics().widthPixels, activity.getResources()
+				.getDisplayMetrics().heightPixels);
 		GameObjectSprite.setScreenDimension(screenDimension);
 		textureMap = new HashMap<ObjectName, ITextureRegion>();
 		// TODO does this work? might not pickup what i want

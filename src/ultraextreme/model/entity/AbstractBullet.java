@@ -28,8 +28,9 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * @param direction
 	 *            The direction the bullet is shot at.
 	 */
-	public AbstractBullet(final double x, final double y, final int width, final int height,
-			PlayerID playerId, Rotation rotation, final ObjectName bulletType) {
+	public AbstractBullet(final double x, final double y, final int width,
+			final int height, PlayerID playerId, Rotation rotation,
+			final ObjectName bulletType) {
 		super(x, y, width, height, rotation, bulletType);
 		this.playerId = playerId;
 	}

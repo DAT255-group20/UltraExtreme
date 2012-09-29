@@ -35,7 +35,8 @@ public class RandomWaveList extends AbstractWaveList {
 	 *            Reference to a BulletManager that the enemies will add their
 	 *            bullets to.
 	 */
-	public RandomWaveList(final int numberOfWaves, final BulletManager bulletManager) {
+	public RandomWaveList(final int numberOfWaves,
+			final BulletManager bulletManager) {
 		this(numberOfWaves, bulletManager, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
@@ -57,7 +58,8 @@ public class RandomWaveList extends AbstractWaveList {
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
 	 */
-	public RandomWaveList(final int numberOfWaves, final BulletManager bulletManager,
+	public RandomWaveList(final int numberOfWaves,
+			final BulletManager bulletManager,
 			final AbstractRandomGenerator randomGenerator) {
 		super(numberOfWaves);
 		this.randomGenerator = randomGenerator;
@@ -88,7 +90,7 @@ public class RandomWaveList extends AbstractWaveList {
 		}
 		counter++;
 	}
-	
+
 	/**
 	 * Update the currentSpawningTime with a random number.
 	 */

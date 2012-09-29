@@ -32,8 +32,10 @@ public class GameController extends AbstractController implements
 	private float lastX = -1;
 	private float lastY = -1;
 
-	public GameController(final VertexBufferObjectManager vertexBufferObjectManager,
-			final SensorManager sensorManager, final SpriteFactory spriteFactory, 
+	public GameController(
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			final SensorManager sensorManager,
+			final SpriteFactory spriteFactory,
 			final SimpleBaseGameActivity activity) {
 		super();
 		gameModel = new GameModel();
@@ -42,9 +44,9 @@ public class GameController extends AbstractController implements
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
-		gameLoop = new GameLoop(scene, gameModel, scene.getGameObjectSprites(), 
-				vertexBufferObjectManager, spriteFactory, 
-				activity.getResources().getDisplayMetrics().widthPixels, 
+		gameLoop = new GameLoop(scene, gameModel, scene.getGameObjectSprites(),
+				vertexBufferObjectManager, spriteFactory, activity
+						.getResources().getDisplayMetrics().widthPixels,
 				activity.getResources().getDisplayMetrics().heightPixels);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 

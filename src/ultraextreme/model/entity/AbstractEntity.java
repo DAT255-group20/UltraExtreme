@@ -35,8 +35,8 @@ public abstract class AbstractEntity implements IEntity {
 		this(0, 0, 0, 0, new Rotation(0), null);
 	}
 
-	public AbstractEntity(final double x, final double y, final int width, final int height,
-			Rotation rotation, final ObjectName objectName) {
+	public AbstractEntity(final double x, final double y, final int width,
+			final int height, Rotation rotation, final ObjectName objectName) {
 		this.rotation = rotation;
 		this.position = new Position(x, y);
 		this.prevPosition = new Position(x, y);
@@ -80,15 +80,16 @@ public abstract class AbstractEntity implements IEntity {
 	public Position getPosition() {
 		return new Position(this.position);
 	}
-	
+
 	/**
 	 * Returns the position at the center of this entity.
 	 * 
 	 * @return A new position at the center of this entity.
 	 */
 	public Position getCenteredPosition() {
-		//TODO test this getCenteredPosition()
-		return new Position(position.getX() + getWidth() / 2, position.getY() + getHeight() / 2);
+		// TODO test this getCenteredPosition()
+		return new Position(position.getX() + getWidth() / 2, position.getY()
+				+ getHeight() / 2);
 	}
 
 	@Override

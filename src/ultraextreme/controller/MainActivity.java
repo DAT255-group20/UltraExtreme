@@ -34,8 +34,9 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		// TODO FindBugs: This instance method writes to a static field.
-		// This is tricky to get correct if multiple instances are being manipulated,
-		// and generally bad practice. 
+		// This is tricky to get correct if multiple instances are being
+		// manipulated,
+		// and generally bad practice.
 		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
 		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);

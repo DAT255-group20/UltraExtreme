@@ -7,9 +7,11 @@ package ultraextreme.model.util;
  * 
  */
 public class Constants {
-	// TODO PMD: A class with only private constructors should be final, unless the private constructor is called by a inner class.
+	// TODO PMD: A class with only private constructors should be final, unless
+	// the private constructor is called by a inner class.
 
 	private static Constants INSTANCE;
+
 	// TODO PMD: Variables should start with a lowercase character
 
 	private Constants() {

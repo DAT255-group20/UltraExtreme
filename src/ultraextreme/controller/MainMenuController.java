@@ -24,8 +24,8 @@ public class MainMenuController extends AbstractController implements
 	}
 
 	@Override
-	public boolean onMenuItemClicked(final MenuScene menuScene, final IMenuItem menuItem,
-			float menuItemLocalX, float menuItemLocalY) {
+	public boolean onMenuItemClicked(final MenuScene menuScene,
+			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case MainMenuScene.MENU_START:
 			fireEvent(new ControllerEvent(this,

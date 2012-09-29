@@ -43,11 +43,13 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public GameLoop(final GameScene gameScene, final GameModel gameModel,
 			final List<GameObjectSprite> gameObjectSprites,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			SpriteFactory spriteFactory, double screenWidth, final double screenHeight) {
+			SpriteFactory spriteFactory, double screenWidth,
+			final double screenHeight) {
 
-		final Dimension screenDimension = new Dimension(screenWidth, screenHeight);
-		this.scalingQuotient = screenDimension.getQuotient(
-				Constants.getInstance().getLevelDimension());
+		final Dimension screenDimension = new Dimension(screenWidth,
+				screenHeight);
+		this.scalingQuotient = screenDimension.getQuotient(Constants
+				.getInstance().getLevelDimension());
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
@@ -57,9 +59,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void onUpdate(float time) {
-		gameModel.update(new ModelInput(moveX / scalingQuotient.x, 
-				moveY / scalingQuotient.y, firing, specialAttack),
-				time);
+		gameModel.update(new ModelInput(moveX / scalingQuotient.x, moveY
+				/ scalingQuotient.y, firing, specialAttack), time);
 		moveX = 0;
 		moveY = 0;
 		specialAttack = false;
@@ -108,8 +109,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			} else { // if item or bullet
 				entity = (AbstractEntity) event.getNewValue();
 
-				final GameObjectSprite newSprite = spriteFactory.getNewSprite(entity,
-						vertexBufferObjectManager);
+				final GameObjectSprite newSprite = spriteFactory.getNewSprite(
+						entity, vertexBufferObjectManager);
 				gameScene.attachChild(newSprite);
 				gameObjectSprites.add(newSprite);
 			}

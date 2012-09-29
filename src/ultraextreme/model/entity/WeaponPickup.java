@@ -17,7 +17,8 @@ public class WeaponPickup extends AbstractEntity {
 	private static final double SPEED_MOD = Constants.getInstance()
 			.getPickupSpeedModifier();
 
-	public WeaponPickup(final double x, final double y, final AbstractWeapon weapon) {
+	public WeaponPickup(final double x, final double y,
+			final AbstractWeapon weapon) {
 		super(x, y, WIDTH, WIDTH, new Rotation(0), weapon.getName());
 		this.weapon = weapon;
 	}

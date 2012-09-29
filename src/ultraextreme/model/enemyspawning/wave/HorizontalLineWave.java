@@ -46,7 +46,8 @@ public class HorizontalLineWave extends AbstractWave {
 	 *            Reference to a bullet manager so the enemies can be created.
 	 */
 	public HorizontalLineWave(final int enemiesInLines, final int maxLines,
-			final double rotation, final int x, final int y, final BulletManager bulletManager) {
+			final double rotation, final int x, final int y,
+			final BulletManager bulletManager) {
 		super(bulletManager);
 		timer = 2;
 		lineCounter = 0;

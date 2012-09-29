@@ -125,7 +125,8 @@ public class EnemySpawner implements WaveListener {
 			finishedWaves.remove(i);
 			i--;
 		}
-		for (final Iterator<AbstractWave> i = activeWaves.iterator(); i.hasNext();) {
+		for (final Iterator<AbstractWave> i = activeWaves.iterator(); i
+				.hasNext();) {
 			final AbstractWave wave = i.next();
 			wave.update(timeElapsed);
 		}

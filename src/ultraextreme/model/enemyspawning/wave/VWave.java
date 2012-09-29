@@ -33,7 +33,8 @@ public class VWave extends AbstractWave {
 	 * @param bulletManager
 	 *            Reference to a bullet manager so the enemies can be created.
 	 */
-	public VWave(final double rotation, final int x, final int y, final BulletManager bulletManager) {
+	public VWave(final double rotation, final int x, final int y,
+			final BulletManager bulletManager) {
 		super(bulletManager);
 		timer = 2;
 		counter = 0;
@@ -50,12 +51,15 @@ public class VWave extends AbstractWave {
 		if (timer >= 2) {
 			if (counter == 0) {
 				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
-					spawningPositon.getY(), this.rotation, this.bulletManager));
+						spawningPositon.getY(), this.rotation,
+						this.bulletManager));
 			} else {
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX() - counter
-						* 60, spawningPositon.getY(), rotation, this.bulletManager));
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX() + counter
-						* 60, spawningPositon.getY(), rotation, this.bulletManager));
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
+						- counter * 60, spawningPositon.getY(), rotation,
+						this.bulletManager));
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
+						+ counter * 60, spawningPositon.getY(), rotation,
+						this.bulletManager));
 			}
 			timer -= 2;
 			counter++;

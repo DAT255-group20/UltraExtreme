@@ -17,7 +17,8 @@ public abstract class AbstractWeapon {
 	private final BulletManager bulletManager;
 	private final ObjectName objectName;
 
-	public AbstractWeapon(final BulletManager bulletManager, final ObjectName objectName) {
+	public AbstractWeapon(final BulletManager bulletManager,
+			final ObjectName objectName) {
 		this.bulletManager = bulletManager;
 		this.objectName = objectName;
 	}

@@ -68,7 +68,8 @@ public class ItemBar {
 	 */
 	public ItemBar(final PlayerID playerId, BulletManager bulletManager,
 			Rotation playerRotation, int maxNumberOfItems) {
-		// TODO PMD: Avoid passing parameters to methods or constructors and then not using those parameters. (bulletManager)
+		// TODO PMD: Avoid passing parameters to methods or constructors and
+		// then not using those parameters. (bulletManager)
 		this.playerId = playerId;
 		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();

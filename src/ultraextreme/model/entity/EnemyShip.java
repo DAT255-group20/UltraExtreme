@@ -17,8 +17,9 @@ public class EnemyShip extends AbstractDestroyableEntity {
 	private static double speedMod = Constants.getInstance()
 			.getEnemySpeedModifier();
 
-	public EnemyShip(final double x, final double y, final int width, final int height,
-			final Rotation rotation, int hitpoints, ObjectName objectName) {
+	public EnemyShip(final double x, final double y, final int width,
+			final int height, final Rotation rotation, int hitpoints,
+			ObjectName objectName) {
 		super(x, y, width, height, rotation, objectName);
 		this.hitPoints = hitpoints;
 	}

@@ -30,8 +30,8 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 			cooldown = cooldown + initCooldown;
 			this.getBulletManager().addBullet(
 					new BasicBullet(shipPosition.getX(), shipPosition.getY(),
-							BULLET_WIDTH, BULLET_HEIGHT, playerId, new Rotation(
-									rotation.getAngle() + currentAngle)));
+							BULLET_WIDTH, BULLET_HEIGHT, playerId,
+							new Rotation(rotation.getAngle() + currentAngle)));
 			currentAngle = currentAngle + angleStep;
 		}
 	}

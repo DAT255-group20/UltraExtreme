@@ -7,7 +7,7 @@ import ultraextreme.model.item.BulletManager;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class HorizontalLineWaveTest extends TestCase {
 

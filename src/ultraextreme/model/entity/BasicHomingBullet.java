@@ -24,8 +24,9 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 	 */
 	private double bulletFuel;
 
-	public BasicHomingBullet(final double x, final double y, final int width, final int height,
-			final PlayerID playerId, AbstractDestroyableEntity target) {
+	public BasicHomingBullet(final double x, final double y, final int width,
+			final int height, final PlayerID playerId,
+			AbstractDestroyableEntity target) {
 		super(x, y, width, height, playerId, new Rotation(0),
 				ObjectName.BASIC_HOMING_BULLET);
 		this.setTarget(target);
@@ -51,7 +52,8 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		if (!((AbstractDestroyableEntity) target).isDestroyed() || bulletFuel < 0) {
+		if (!((AbstractDestroyableEntity) target).isDestroyed()
+				|| bulletFuel < 0) {
 			updateDirection();
 		}
 		final double xMovement = normDirectionVector.x * timePassed

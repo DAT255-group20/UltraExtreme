@@ -34,7 +34,8 @@ public class BasicEnemy extends AbstractEnemy {
 	 * @param bulletManager
 	 *            A reference to the bullet manager.
 	 */
-	public BasicEnemy(final double x, final double y, final BulletManager bulletManager) {
+	public BasicEnemy(final double x, final double y,
+			final BulletManager bulletManager) {
 		this(new EnemyShip(x, y, 40, 40, new Rotation(0), 50,
 				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
 	}

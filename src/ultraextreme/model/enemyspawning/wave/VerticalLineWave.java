@@ -39,8 +39,8 @@ public class VerticalLineWave extends AbstractWave {
 	 * @param bulletManager
 	 *            Reference to a bullet manager so the enemies can be created.
 	 */
-	public VerticalLineWave(final int numberOfEnemies, final double rotation, final int x, final int y,
-			final BulletManager bulletManager) {
+	public VerticalLineWave(final int numberOfEnemies, final double rotation,
+			final int x, final int y, final BulletManager bulletManager) {
 		super(bulletManager);
 		timer = 2;
 		enemyCounter = 0;

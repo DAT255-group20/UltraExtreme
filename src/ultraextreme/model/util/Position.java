@@ -50,11 +50,12 @@ public class Position {
 		// TODO PMD: Ensure you override both equals() and hashCode()
 		// TODO FindBugs: This class overrides equals(Object),
 		// but does not override hashCode(), and inherits the implementation of
-		// hashCode() from java.lang.Object (which returns the identity hash code,
+		// hashCode() from java.lang.Object (which returns the identity hash
+		// code,
 		// an arbitrary value assigned to the object by the VM).
 		// Therefore, the class is very likely to violate the invariant
 		// that equal objects must have equal hashcodes.
-		
+
 		// TODO PMD: Avoid using if statements without curly braces
 		if (o == null)
 			return false;
