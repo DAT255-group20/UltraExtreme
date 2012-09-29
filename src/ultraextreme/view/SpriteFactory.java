@@ -36,13 +36,23 @@ public class SpriteFactory {
 
 	// TODO PMD: Perhaps 'textureAtlas' could be replaced by a local variable.
 	private BitmapTextureAtlas textureAtlas;
-
+	
 	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
 	// variable.
 	private Dimension screenDimension; // TODO implement scaling in this class?
 	// TODO PMD: Avoid unused private fields such as 'MODEL_DIMENSION'.
 	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
 			.getLevelDimension();
+	
+	/**
+	 * The item bar's texture.
+	 */
+	private ITextureRegion itemBarTexture;
+	
+	/**
+	 * The items' textures.
+	 */
+	private Map<ObjectName, ITextureRegion> itemTextures;
 
 	/**
 	 * Creates a spriteFactory OBS: should be called during a loadResources
@@ -75,6 +85,15 @@ public class SpriteFactory {
 						"enemy_placeholder.png", 0, 40);
 		textureMap.put(ObjectName.BASIC_ENEMYSHIP, BasicEnemy);
 
+		// Init the item bar texture
+		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "itembar.png", 80, 0);
+		
+		// Init the item textures
+		itemTextures = new HashMap<ObjectName, ITextureRegion>();
+		itemTextures.put(ObjectName.BASIC_WEAPON, BasicEnemy); // Test only
+		
+		// What is this for?
 		textureManager.loadTexture(textureAtlas);
 	}
 
@@ -94,5 +113,22 @@ public class SpriteFactory {
 		textureMap.get(entity.getObjectName());
 		return new GameObjectSprite(entity, vbom, textureMap.get(entity
 				.getObjectName()));
+	}
+	
+	/**
+	 * 
+	 * @return The texture of the item bar.
+	 */
+	public ITextureRegion getItemBarTexture() {
+		return itemBarTexture;
+	}
+	
+	/**
+	 * 
+	 * @param item The item you want an image of.
+	 * @return  An texture of an item that you want to show in the item bar.
+	 */
+	public ITextureRegion getItemTexture(ObjectName item) {
+		return itemTextures.get(item);
 	}
 }
