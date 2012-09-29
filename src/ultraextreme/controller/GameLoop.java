@@ -62,11 +62,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				time);
 		moveX = 0;
 		moveY = 0;
+		specialAttack = false;
 
 		for (GameObjectSprite sprite : gameObjectSprites) {
 			sprite.update();
-			specialAttack = false;
-
 		}
 	}
 
