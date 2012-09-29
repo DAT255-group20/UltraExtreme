@@ -29,6 +29,11 @@ public class EnemyManager implements PropertyChangeListener {
 		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
 	}
 	
+	public void removeEnemy(int index) {
+		pcs.firePropertyChange("remove", null, enemies.get(index));
+		enemies.remove(index);
+	}
+	
 	public void clearDeadEnemies()
 	{
 		for (int i = 0; i < enemies.size(); i++) {
@@ -36,8 +41,7 @@ public class EnemyManager implements PropertyChangeListener {
 			if (e.isDead()) {
 				// TODO Also check for when the enemy has left the screen and should be removed
 				// TODO Change to fit reversed Y axis. (do tests)
-				pcs.firePropertyChange("remove", null, e);
-				enemies.remove(i);
+				removeEnemy(i);
 				i--;
 			}
 		}

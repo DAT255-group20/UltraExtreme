@@ -99,22 +99,28 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				entity = ((AbstractEnemy) event.getNewValue()).getShip();
 			} else { //if item or bullet
 				entity = (AbstractEntity)event.getNewValue();
-			
+			}
 			
 			GameObjectSprite newSprite = 
 					spriteFactory.getNewSprite(entity, vertexBufferObjectManager);
 			gameScene.attachChild(newSprite);
 			gameObjectSprites.add(newSprite);
-			}
+
 			
-		} else if(event.getPropertyName().equals("remove")){
+		} else if(event.getPropertyName().equals("remove")) {
+			AbstractEntity entity;
+			if(event.getNewValue() instanceof IEnemy){
+				entity = ((AbstractEnemy) event.getNewValue()).getShip();
+			} else { //if item or bullet
+				entity = (AbstractEntity)event.getNewValue();
+			}
 			// Find the GameObjectSprite that has a reference to this entity and remove
 			// it from the GameObjectSprite list and from the render scene.
 			// Note: It's generally not a very good idea to remove elements when
 			// iterating through them, but this breaks the loop when one element is
 			// removed.
 			for (GameObjectSprite sprite : gameObjectSprites) {
-				if (sprite.getEntity() == event.getNewValue()) {
+				if (sprite.getEntity() == entity) {
 					gameScene.detachChild(sprite);
 					gameObjectSprites.remove(sprite);
 					break;
