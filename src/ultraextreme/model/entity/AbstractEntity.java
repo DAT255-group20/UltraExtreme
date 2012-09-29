@@ -46,6 +46,14 @@ public abstract class AbstractEntity implements IEntity {
 
 	}
 
+	public AbstractEntity(Position position, int width, int height,
+			ObjectName name) {
+		this.position = position;
+		this.width = width;
+		this.height = height;
+		this.objectName = name;
+	}
+
 	/**
 	 * Move the entity a given x an y units.
 	 * 

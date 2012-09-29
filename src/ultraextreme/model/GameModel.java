@@ -59,14 +59,31 @@ public class GameModel implements IUltraExtremeModel {
 		for (IEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
+		
+		//TODO Decide if we want pickups to move around. If so, the following commented code is necessary.
+//		for(WeaponPickup pickup : pickupManager.getPickups()) {
+//			pickup.doMovement(timeElapsed); ?
+//		}
 
 		enemySpawner.update(timeElapsed);
 
 		checkCollisions();
-
+		
+		spawnPickups();
 		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
-
+	}
+	
+	/**
+	 * spawns a pickup for every enemy marked as "should spawn a pickup"
+	 */
+	private void spawnPickups() {
+		for(IEnemy enemy : enemyManager.getEnemies()) {
+			if(enemy.ShouldSpawnPickup()) {
+				pickupManager.addPickup(new WeaponPickup(
+						enemy.getShip().getPosition(), enemy.getWeapon().getName()));
+			}
+		}
 	}
 
 	private void checkCollisions() {
@@ -92,13 +109,15 @@ public class GameModel implements IUltraExtremeModel {
 				b.markForRemoval();
 			}
 		}
-		
+
 		//Check Items against player
-		for(WeaponPickup wp : pickupManager.getPickups()) {
+		for(int i = 0;  i < pickupManager.getPickups().size(); i++) {
+			WeaponPickup wp = pickupManager.getPickups().get(i);
 			if(wp.collidesWith(player.getShip())) {
 				player.giveWeapon(weaponFactory.getNewWeapon(
 						wp.getObjectName()));
-				pickupManager.removePickUp(wp);
+				pickupManager.removePickUp(i);
+				i--;
 			}
 		}
 	}

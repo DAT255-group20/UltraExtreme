@@ -1,6 +1,7 @@
 package ultraextreme.model.enemy;
 
 import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.item.AbstractWeapon;
 
 /**
  * Interface for self-thinking enemies
@@ -25,4 +26,11 @@ public interface IEnemy {
 	 * @return true if this enemy has been destroyed
 	 */
 	boolean isDead();
+	/**
+	 * true if and only if this enemy should be spawning a pickup
+	 * @return true if and only if this enemy should be spawning a pickup
+	 */
+	boolean ShouldSpawnPickup();
+
+	public AbstractWeapon getWeapon();
 }
