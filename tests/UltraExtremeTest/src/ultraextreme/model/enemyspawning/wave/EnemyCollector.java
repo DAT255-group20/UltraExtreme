@@ -18,7 +18,7 @@ public class EnemyCollector implements WaveListener {
 	private List<IEnemy> enemies = new ArrayList<IEnemy>();
 
 	@Override
-	public void waveEnded(Wave wave) {
+	public void waveEnded(AbstractWave wave) {
 		this.hasWaveEnded = true;
 	}
 

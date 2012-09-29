@@ -18,7 +18,7 @@ public interface WaveListener {
 	 * @param wave
 	 *            Reference to the wave that has ended.
 	 */
-	public void waveEnded(Wave wave);
+	void waveEnded(AbstractWave wave);
 
 	/**
 	 * A Wave has spawned an enemy.
@@ -26,6 +26,6 @@ public interface WaveListener {
 	 * @param enemy
 	 *            The enemy that has spawned.
 	 */
-	public void enemySpawned(IEnemy enemy);
+	void enemySpawned(IEnemy enemy);
 
 }

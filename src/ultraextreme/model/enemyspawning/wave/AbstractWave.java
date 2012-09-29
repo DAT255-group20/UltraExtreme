@@ -13,7 +13,7 @@ import ultraextreme.model.item.BulletManager;
  * @author Daniel Jonsson
  * 
  */
-public abstract class Wave {
+public abstract class AbstractWave {
 
 	/**
 	 * The classes that listen to the wave.
@@ -31,7 +31,7 @@ public abstract class Wave {
 	 * @param bulletManager
 	 *            Reference to a bullet manager.
 	 */
-	public Wave(BulletManager bulletManager) {
+	public AbstractWave(BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
 	}
 

@@ -6,7 +6,7 @@ import java.util.List;
 import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
-import ultraextreme.model.enemyspawning.wave.Wave;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.item.BulletManager;
 
 /**
@@ -17,7 +17,7 @@ import ultraextreme.model.item.BulletManager;
  */
 public class PredefinedWaveList extends AbstractWaveList {
 
-	private List<Wave> waves;
+	private List<AbstractWave> waves;
 	private List<Float> spawningTimes;
 
 	/**
@@ -29,7 +29,7 @@ public class PredefinedWaveList extends AbstractWaveList {
 	 */
 	public PredefinedWaveList(BulletManager bulletManager) {
 		super(5);
-		this.waves = new ArrayList<Wave>();
+		this.waves = new ArrayList<AbstractWave>();
 		this.spawningTimes = new ArrayList<Float>();
 		add(1.0f, new VerticalLineWave(2, 0, 200, -10, bulletManager));
 		add(1.0f, new HorizontalLineWave(5, 3, Math.PI / 8, 400, -10,
@@ -46,7 +46,7 @@ public class PredefinedWaveList extends AbstractWaveList {
 	 * @param spawningTime
 	 * @param wave
 	 */
-	private void add(float spawningTime, Wave wave) {
+	private void add(float spawningTime, AbstractWave wave) {
 		this.waves.add(wave);
 		this.spawningTimes.add(spawningTime);
 	}
@@ -55,7 +55,7 @@ public class PredefinedWaveList extends AbstractWaveList {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Wave getCurrentWave() {
+	public AbstractWave getCurrentWave() {
 		return this.waves.get(0);
 	}
 

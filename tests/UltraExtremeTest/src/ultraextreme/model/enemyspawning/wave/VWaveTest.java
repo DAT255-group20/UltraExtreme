@@ -15,7 +15,7 @@ public class VWaveTest extends TestCase {
 
 	private EnemyCollector enemyCollector;
 
-	private Wave wave;
+	private AbstractWave wave;
 
 	@Override
 	public void setUp() {

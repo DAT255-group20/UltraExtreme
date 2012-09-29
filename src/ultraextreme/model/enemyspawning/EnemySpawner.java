@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import ultraextreme.model.enemy.IEnemy;
-import ultraextreme.model.enemyspawning.wave.Wave;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.WaveListener;
 import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
 
@@ -45,12 +45,12 @@ public class EnemySpawner implements WaveListener {
 	/**
 	 * The waves of enemies that are currently spawning enemies.
 	 */
-	private final List<Wave> activeWaves;
+	private final List<AbstractWave> activeWaves;
 
 	/**
 	 * Keeps track of which waves that have ended since the last update.
 	 */
-	private final List<Wave> finishedWaves;
+	private final List<AbstractWave> finishedWaves;
 
 	/**
 	 * Create an enemy spawner.
@@ -71,8 +71,8 @@ public class EnemySpawner implements WaveListener {
 			throw new IllegalArgumentException(
 					"You must specify one or more non-null waveLists");
 		}
-		activeWaves = new ArrayList<Wave>();
-		finishedWaves = new ArrayList<Wave>();
+		activeWaves = new ArrayList<AbstractWave>();
+		finishedWaves = new ArrayList<AbstractWave>();
 		wave = 0;
 	}
 
@@ -125,8 +125,8 @@ public class EnemySpawner implements WaveListener {
 			finishedWaves.remove(i);
 			i--;
 		}
-		for (final Iterator<Wave> i = activeWaves.iterator(); i.hasNext();) {
-			final Wave wave = i.next();
+		for (final Iterator<AbstractWave> i = activeWaves.iterator(); i.hasNext();) {
+			final AbstractWave wave = i.next();
 			wave.update(timeElapsed);
 		}
 	}
@@ -135,7 +135,7 @@ public class EnemySpawner implements WaveListener {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void waveEnded(final Wave wave) {
+	public void waveEnded(final AbstractWave wave) {
 		// This method can't directly delete the wave from the activeWaves list
 		// because that will result in an ConcurrentModificationException, since
 		// higher up in the stack is this class' updateWaves method running.

@@ -1,6 +1,6 @@
 package ultraextreme.model.enemyspawning.wavelist;
 
-import ultraextreme.model.enemyspawning.wave.Wave;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 
 /**
  * A WaveSpawningList has a number of enemy waves (the Wave class), that a
@@ -16,7 +16,7 @@ public interface WaveSpawningList {
 	 * 
 	 * @return The current wave.
 	 */
-	public Wave getCurrentWave();
+	public AbstractWave getCurrentWave();
 
 	/**
 	 * Get when the current wave is supposed to start spawning.

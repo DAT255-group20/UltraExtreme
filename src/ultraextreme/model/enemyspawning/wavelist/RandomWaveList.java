@@ -5,7 +5,7 @@ import java.util.Random;
 import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
-import ultraextreme.model.enemyspawning.wave.Wave;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.item.BulletManager;
 
 /**
@@ -16,7 +16,7 @@ import ultraextreme.model.item.BulletManager;
  */
 public class RandomWaveList extends AbstractWaveList {
 
-	private Wave currentWave;
+	private AbstractWave currentWave;
 
 	private float currentSpawningTime;
 
@@ -109,7 +109,7 @@ public class RandomWaveList extends AbstractWaveList {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Wave getCurrentWave() {
+	public AbstractWave getCurrentWave() {
 		return currentWave;
 	}
 
