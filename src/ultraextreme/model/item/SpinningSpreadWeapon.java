@@ -40,4 +40,9 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 		return initCooldown;
 	}
 
+	@Override
+	public AbstractWeapon shallowClone() {
+		return new SpinningSpreadWeapon(this.getBulletManager());
+	}
+
 }

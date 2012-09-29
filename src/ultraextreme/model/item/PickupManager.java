@@ -46,6 +46,14 @@ public class PickupManager {
 	public void removePickUp(WeaponPickup pickup) {
 		pcs.firePropertyChange(REMOVE_PICKUP, null, pickup);
 		pickups.remove(pickup);
+	}	
+	/**
+	 * removes the pickup at the assigned position of the list
+	 * @param index what item is to be removed [0, n]
+	 */
+	public void removePickUp(int index) {
+		pcs.firePropertyChange(REMOVE_PICKUP, null, pickups.get(index));
+		pickups.remove(index);
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -54,5 +62,9 @@ public class PickupManager {
 
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
+	}
+
+	public List<WeaponPickup> getPickups() {
+		return pickups;
 	}
 }
