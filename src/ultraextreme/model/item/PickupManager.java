@@ -18,6 +18,8 @@ public class PickupManager {
 	private final PropertyChangeSupport pcs;
 
 	private static final String NEW_PICKUP = "add";
+	private static final String REMOVE_PICKUP = "remove";
+	
 
 	public PickupManager() {
 		pickups = new ArrayList<WeaponPickup>();
@@ -42,6 +44,7 @@ public class PickupManager {
 	 *            item which is to be removed
 	 */
 	public void removePickUp(WeaponPickup pickup) {
+		pcs.firePropertyChange(REMOVE_PICKUP, null, pickup);
 		pickups.remove(pickup);
 	}
 
