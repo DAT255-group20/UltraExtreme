@@ -13,16 +13,16 @@ import ultraextreme.model.util.Rotation;
  * @author Viktor Anderling
  * 
  */
-public class PlayerShip extends DestroyableEntity {
+public class PlayerShip extends AbstractDestroyableEntity {
 
 	private static double speedMod = Constants.getInstance()
 			.getPlayerSpeedModifier();
 
-	public PlayerShip(double x, double y, int width, int height) {
+	public PlayerShip(final double x, final double y, final int width, final int height) {
 		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
 	}
 
-	public PlayerShip(double x, double y) {
+	public PlayerShip(final double x, double y) {
 		this(x, y, 50, 50);
 	}
 	
@@ -40,9 +40,9 @@ public class PlayerShip extends DestroyableEntity {
 	 * out of the level, else false.
 	 */
 	public boolean canMoveX(double deltaX) {
-		Dimension dimension = Constants.getInstance().getLevelDimension();
-		Position position = this.getCenteredPosition();
-		double newX = deltaX + position.getX();
+		final Dimension dimension = Constants.getInstance().getLevelDimension();
+		final Position position = this.getCenteredPosition();
+		final double newX = deltaX + position.getX();
 		return newX + getWidth() / 2 < dimension.getX() && newX - getWidth() / 2 > 0;
 	}
 	
@@ -56,8 +56,8 @@ public class PlayerShip extends DestroyableEntity {
 	 * out of the level, else false.
 	 */
 	public boolean canMoveY(double deltaY) {
-		Dimension dimension = Constants.getInstance().getLevelDimension();
-		Position position = this.getCenteredPosition();
+		final Dimension dimension = Constants.getInstance().getLevelDimension();
+		final Position position = this.getCenteredPosition();
 		double newY = deltaY + position.getY();
 		return newY + getHeight() / 2 < dimension.getY() && newY - getHeight() / 2 > 0;
 	}

@@ -9,9 +9,9 @@ import ultraextreme.model.util.Rotation;
  * @author Bjorn Persson Mattsson
  * 
  */
-public abstract class DestroyableEntity extends AbstractEntity {
+public abstract class AbstractDestroyableEntity extends AbstractEntity {
 
-	public DestroyableEntity(double x, double y, int width, int height,
+	public AbstractDestroyableEntity(double x, double y, int width, int height,
 			Rotation direction, ObjectName objectName) {
 		super(x, y, width, height, direction, objectName);
 	}

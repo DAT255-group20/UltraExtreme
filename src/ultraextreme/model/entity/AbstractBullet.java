@@ -14,7 +14,7 @@ import ultraextreme.model.util.Rotation;
 public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	// What player shot this bullet
-	private PlayerID playerId;
+	private final PlayerID playerId;
 
 	private boolean markedForRemoval = false;
 
@@ -28,8 +28,8 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * @param direction
 	 *            The direction the bullet is shot at.
 	 */
-	public AbstractBullet(double x, double y, int width, int height,
-			PlayerID playerId, Rotation rotation, ObjectName bulletType) {
+	public AbstractBullet(final double x, final double y, final int width, final int height,
+			PlayerID playerId, Rotation rotation, final ObjectName bulletType) {
 		super(x, y, width, height, rotation, bulletType);
 		this.playerId = playerId;
 	}

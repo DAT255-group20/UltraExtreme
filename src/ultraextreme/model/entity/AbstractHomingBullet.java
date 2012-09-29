@@ -12,8 +12,8 @@ import ultraextreme.model.util.Rotation;
  */
 public abstract class AbstractHomingBullet extends AbstractBullet {
 
-	public AbstractHomingBullet(double x, double y, int width, int height,
-			PlayerID playerId, Rotation direction, ObjectName bulletType) {
+	public AbstractHomingBullet(final double x, final double y, final int width, final int height,
+			PlayerID playerId, Rotation direction, final ObjectName bulletType) {
 		super(x, y, width, height, playerId, direction, bulletType);
 	}
 
