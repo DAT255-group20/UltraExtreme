@@ -15,9 +15,10 @@ public interface IEnemy {
 	 * @param timePassed
 	 *            since last update in (seconds?)
 	 */
-	public void update(float timePassed);
+	void update(float timePassed);
 
-	public EnemyShip getShip();
+	// TODO Write javadoc
+	EnemyShip getShip();
 
 	/**
 	 * returns true if this enemy has been destroyed

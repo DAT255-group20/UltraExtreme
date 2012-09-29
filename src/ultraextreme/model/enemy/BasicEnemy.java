@@ -11,15 +11,15 @@ import ultraextreme.model.util.Rotation;
  * Class representing a very basic enemy that only flies downwards and has a
  * basic weapon.
  * 
- * @author zapray
+ * @author Johan Gronvall
  * @author Viktor Anderling
  * 
  */
 public class BasicEnemy extends AbstractEnemy {
 
-	private static final int ySpeed = 50;
+	private static final int Y_SPEED = 50;
 
-	private BasicEnemy(EnemyShip ship, AbstractWeapon weapon) {
+	private BasicEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
 		super(ship, weapon);
 	}
 
@@ -34,7 +34,7 @@ public class BasicEnemy extends AbstractEnemy {
 	 * @param bulletManager
 	 *            A reference to the bullet manager.
 	 */
-	public BasicEnemy(double x, double y, BulletManager bulletManager) {
+	public BasicEnemy(final double x, final double y, final BulletManager bulletManager) {
 		this(new EnemyShip(x, y, 40, 40, new Rotation(0), 50,
 				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
 	}
@@ -60,7 +60,7 @@ public class BasicEnemy extends AbstractEnemy {
 
 	@Override
 	public void update(float timeElapsed) {
-		this.getShip().move(0, timeElapsed * ySpeed);
+		this.getShip().move(0, timeElapsed * Y_SPEED);
 		this.shoot(timeElapsed);
 	}
 }
