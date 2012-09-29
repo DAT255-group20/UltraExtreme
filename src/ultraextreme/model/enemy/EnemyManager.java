@@ -40,11 +40,15 @@ public class EnemyManager implements PropertyChangeListener {
 		for (int i = 0; i < enemies.size(); i++) {
 			final IEnemy e = enemies.get(i);
 			if (e.isDead() || e.getShip().isOutOfScreen(150) ) {
-				pcs.firePropertyChange("remove", null, e);
-				enemies.remove(i);
+				removeEnemy(i);
 				i--;
 			}
 		}
+	}
+
+	public void removeEnemy(int index) {
+		pcs.firePropertyChange("remove", null, enemies.get(index));
+		enemies.remove(index);
 	}
 
 	public void addPropertyChangeListener(final PropertyChangeListener listener) {
