@@ -34,10 +34,10 @@ public class GameController extends AbstractController implements
 
 	public GameController(VertexBufferObjectManager vertexBufferObjectManager,
 			SensorManager sensorManager, SpriteFactory spriteFactory, 
-			SimpleBaseGameActivity activity) {
+			SimpleBaseGameActivity activity, float scaling) {
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager, spriteFactory);
+				sensorManager, spriteFactory, scaling);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage

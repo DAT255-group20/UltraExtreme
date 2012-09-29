@@ -2,6 +2,7 @@ package ultraextreme.model;
 
 import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.AbstractWeapon;
+import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -35,6 +36,9 @@ public interface IPlayer {
 	 */
 	public PlayerID getPlayerId();
 
+	// test
+	public ItemBar getItemBar();
+	
 	/**
 	 * adds a weapon (or bomb) to this player's ItemBar
 	 * 

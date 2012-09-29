@@ -3,11 +3,16 @@ package ultraextreme.view;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
+import ultraextreme.model.util.Position;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -26,10 +31,12 @@ public class GameScene extends Scene implements SensorEventListener {
 	private GameObjectSprite shipSprite;
 	private SensorManager sensorManager;
 	private List<GameObjectSprite> gameObjectSprites;
+	private ItemBarPanel itemBarPanel;
 
 	public GameScene(IUltraExtremeModel gameModel,
 			VertexBufferObjectManager vertexBufferObjectManager,
-			SensorManager sensorManager, SpriteFactory spriteFactory) {
+			SensorManager sensorManager, SpriteFactory spriteFactory,
+			float scaling) {
 		this.gameModel = gameModel;
 		setBackground(new Background(0, 0, 0));
 
@@ -39,6 +46,11 @@ public class GameScene extends Scene implements SensorEventListener {
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
+
+		itemBarPanel = new ItemBarPanel(gameModel.getPlayer().getItemBar(),
+				spriteFactory, vertexBufferObjectManager,
+				new Position(75, 1400), scaling);
+		attachChild(itemBarPanel);
 
 		this.sensorManager = sensorManager;
 		sensorManager.registerListener(this,
@@ -59,5 +71,9 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public List<GameObjectSprite> getGameObjectSprites() {
 		return gameObjectSprites;
+	}
+
+	public ItemBarPanel getItemBarPanel() {
+		return itemBarPanel;
 	}
 }

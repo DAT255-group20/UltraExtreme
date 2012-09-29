@@ -9,6 +9,7 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import ultraextreme.model.util.Constants;
 import ultraextreme.view.SpriteFactory;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -28,10 +29,14 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private static int CAMERA_WIDTH;
 	private static int CAMERA_HEIGHT;
 
+	private float scaling;
+
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
 		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
+		scaling = (float) ((float) getResources().getDisplayMetrics().heightPixels / Constants
+				.getInstance().getLevelDimension().getY());
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
 				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
@@ -51,7 +56,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				spriteFactory, this);
+				spriteFactory, this, scaling);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 

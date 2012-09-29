@@ -91,6 +91,11 @@ public class Player implements IPlayer {
 	public PlayerID getPlayerId() {
 		return playerId;
 	}
+	
+	// test
+	public ItemBar getItemBar() {
+		return itemBar;
+	}
 
 	@Override
 	public void giveWeapon(AbstractWeapon weapon) {
