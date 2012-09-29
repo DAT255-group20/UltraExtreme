@@ -17,8 +17,8 @@ import ultraextreme.model.item.BulletManager;
  */
 public class PredefinedWaveList extends AbstractWaveList {
 
-	private List<AbstractWave> waves;
-	private List<Float> spawningTimes;
+	private final List<AbstractWave> waves;
+	private final List<Float> spawningTimes;
 
 	/**
 	 * Create a wave list with predefined waves.
@@ -27,7 +27,7 @@ public class PredefinedWaveList extends AbstractWaveList {
 	 *            Reference to a BulletManager that the enemies will add their
 	 *            bullets to.
 	 */
-	public PredefinedWaveList(BulletManager bulletManager) {
+	public PredefinedWaveList(final BulletManager bulletManager) {
 		super(5);
 		this.waves = new ArrayList<AbstractWave>();
 		this.spawningTimes = new ArrayList<Float>();
@@ -46,7 +46,7 @@ public class PredefinedWaveList extends AbstractWaveList {
 	 * @param spawningTime
 	 * @param wave
 	 */
-	private void add(float spawningTime, AbstractWave wave) {
+	private void add(final float spawningTime, final AbstractWave wave) {
 		this.waves.add(wave);
 		this.spawningTimes.add(spawningTime);
 	}

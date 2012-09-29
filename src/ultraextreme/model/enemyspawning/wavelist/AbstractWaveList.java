@@ -17,13 +17,13 @@ public abstract class AbstractWaveList implements WaveSpawningList {
 	/**
 	 * Total number of waves that this list contains.
 	 */
-	private int numberOfWaves;
+	private final int numberOfWaves;
 
 	/**
 	 * @param numberOfWaves
 	 *            The number of available waves.
 	 */
-	public AbstractWaveList(int numberOfWaves) {
+	public AbstractWaveList(final int numberOfWaves) {
 		this.numberOfWaves = numberOfWaves;
 		this.currentWaveNumber = 1;
 	}

@@ -7,7 +7,7 @@ package ultraextreme.model.enemyspawning.wavelist;
  * @author Daniel Jonsson
  * 
  */
-public abstract class RandomGenerator {
+public abstract class AbstractRandomGenerator {
 
 	/**
 	 * Return a float between 0.0 and 1.0.

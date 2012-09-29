@@ -20,7 +20,7 @@ public class RandomWaveListTest extends TestCase {
 	public void testGeneratingNewWaves() {
 		BulletManager bulletManager = new BulletManager();
 		RandomWaveList waveList = new RandomWaveList(100, bulletManager,
-				new RandomGenerator() {
+				new AbstractRandomGenerator() {
 					private int counter;
 
 					@Override

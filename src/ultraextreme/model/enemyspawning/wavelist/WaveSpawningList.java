@@ -16,40 +16,40 @@ public interface WaveSpawningList {
 	 * 
 	 * @return The current wave.
 	 */
-	public AbstractWave getCurrentWave();
+	AbstractWave getCurrentWave();
 
 	/**
 	 * Get when the current wave is supposed to start spawning.
 	 * 
 	 * @return When the wave is supposed to start spawn.
 	 */
-	public float getCurrentSpawningTime();
+	float getCurrentSpawningTime();
 
 	/**
 	 * Move the list to the next wave entry. Observe that it's not possible to
 	 * go back again, so make sure the last wave has spawned.
 	 */
-	public void next();
+	void next();
 
 	/**
 	 * Get which wave that was the latest to spawn.
 	 * 
 	 * @return Number of the latest wave.
 	 */
-	public int getCurrentWaveNumber();
+	int getCurrentWaveNumber();
 
 	/**
 	 * The maximum of available levels.
 	 * 
 	 * @return The number of available levels.
 	 */
-	public int getNumberOfWaves();
+	int getNumberOfWaves();
 
 	/**
 	 * If there exists a next wave.
 	 * 
 	 * @return If there exists a next wave.
 	 */
-	public boolean hasNext();
+	boolean hasNext();
 
 }
