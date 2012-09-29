@@ -36,6 +36,12 @@ public abstract class AbstractEntityTest extends TestCase {
 		assertEquals(entity.getPosition().getX(), 10.0);
 		assertEquals(entity.getPosition().getY(), 20.0);
 	}
+	
+	public void tetGetCenteredPosition()
+	{
+		fail("Not implemented");
+		// TODO Write getCenteredPosition test
+	}
 
 	public void testGetWidth() {
 		AbstractEntity entity = newEntity();
