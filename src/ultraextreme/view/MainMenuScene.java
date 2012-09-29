@@ -14,13 +14,13 @@ public class MainMenuScene extends MenuScene {
 
 	public static final int MENU_START = 0;
 
-	public MainMenuScene(Camera camera, Font font,
-			VertexBufferObjectManager vertexBufferObjectManager) {
+	public MainMenuScene(final Camera camera, final Font font,
+			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super(camera);
 		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
 		// TODO Should probably use baseGameActivity.getString(R.string.start)
 		// instead of hard coding
-		IMenuItem startButton = new TextMenuItem(MENU_START, font,
+		final IMenuItem startButton = new TextMenuItem(MENU_START, font,
 				"Start game", vertexBufferObjectManager);
 		startButton.setPosition(100, 100);
 		addMenuItem(startButton);
