@@ -79,6 +79,12 @@ public class Dimension {
 
 	@Override
 	public boolean equals(Object o) {
+		// TODO FindBugs: This class overrides equals(Object),
+		// but does not override hashCode(), and inherits the implementation of
+		// hashCode() from java.lang.Object (which returns the identity hash code,
+		// an arbitrary value assigned to the object by the VM).
+		// Therefore, the class is very likely to violate the invariant
+		// that equal objects must have equal hashcodes.
 		if (this == o) {
 			return true;
 		} else if (this.getClass() != o.getClass()) {
