@@ -14,8 +14,8 @@ public class ControllerEvent {
 		SWITCH_TO_GAME, SWITCH_TO_MENU, SWITCH_TO_HIGHSCORE;
 	}
 
-	public ControllerEvent(AbstractController source,
-			ControllerEventType eventType) {
+	public ControllerEvent(final AbstractController source,
+			final ControllerEventType eventType) {
 		this.source = source;
 		this.eventType = eventType;
 	}

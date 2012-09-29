@@ -14,16 +14,17 @@ import ultraextreme.view.MainMenuScene;
 public class MainMenuController extends AbstractController implements
 		IOnMenuItemClickListener {
 
-	private MainMenuScene scene;
+	private final MainMenuScene scene;
 
-	public MainMenuController(Camera camera, Font font,
-			VertexBufferObjectManager vertexBufferObjectManager) {
+	public MainMenuController(final Camera camera, final Font font,
+			final VertexBufferObjectManager vertexBufferObjectManager) {
+		super();
 		scene = new MainMenuScene(camera, font, vertexBufferObjectManager);
 		scene.setOnMenuItemClickListener(this);
 	}
 
 	@Override
-	public boolean onMenuItemClicked(MenuScene menuScene, IMenuItem menuItem,
+	public boolean onMenuItemClicked(final MenuScene menuScene, final IMenuItem menuItem,
 			float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case MainMenuScene.MENU_START:

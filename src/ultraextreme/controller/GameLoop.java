@@ -28,11 +28,11 @@ import android.util.Log;
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
-	private GameScene gameScene;
-	private GameModel gameModel;
-	private List<GameObjectSprite> gameObjectSprites;
-	private VertexBufferObjectManager vertexBufferObjectManager;
-	private SpriteFactory spriteFactory;
+	final private GameScene gameScene;
+	final private GameModel gameModel;
+	final private List<GameObjectSprite> gameObjectSprites;
+	final private VertexBufferObjectManager vertexBufferObjectManager;
+	final private SpriteFactory spriteFactory;
 	private Vector2d scalingQuotient;
 
 	private boolean firing;
@@ -40,12 +40,12 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private double moveY;
 	private boolean specialAttack;
 
-	public GameLoop(GameScene gameScene, GameModel gameModel,
-			List<GameObjectSprite> gameObjectSprites,
-			VertexBufferObjectManager vertexBufferObjectManager,
-			SpriteFactory spriteFactory, double screenWidth, double screenHeight) {
+	public GameLoop(final GameScene gameScene, final GameModel gameModel,
+			final List<GameObjectSprite> gameObjectSprites,
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			SpriteFactory spriteFactory, double screenWidth, final double screenHeight) {
 
-		Dimension screenDimension = new Dimension(screenWidth, screenHeight);
+		final Dimension screenDimension = new Dimension(screenWidth, screenHeight);
 		this.scalingQuotient = screenDimension.getQuotient(
 				Constants.getInstance().getLevelDimension());
 		this.gameScene = gameScene;
@@ -108,7 +108,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			} else { // if item or bullet
 				entity = (AbstractEntity) event.getNewValue();
 
-				GameObjectSprite newSprite = spriteFactory.getNewSprite(entity,
+				final GameObjectSprite newSprite = spriteFactory.getNewSprite(entity,
 						vertexBufferObjectManager);
 				gameScene.attachChild(newSprite);
 				gameObjectSprites.add(newSprite);

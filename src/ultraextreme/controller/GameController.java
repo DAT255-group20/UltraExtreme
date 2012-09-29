@@ -25,16 +25,17 @@ public class GameController extends AbstractController implements
 	// The 'active pointer' is the one currently moving the player.
 	private int activePointerId = INVALID_POINTER_ID;
 
-	private GameScene scene;
-	private GameModel gameModel;
-	private GameLoop gameLoop;
+	private final GameScene scene;
+	private final GameModel gameModel;
+	private final GameLoop gameLoop;
 
-	float lastX = -1;
-	float lastY = -1;
+	private float lastX = -1;
+	private float lastY = -1;
 
-	public GameController(VertexBufferObjectManager vertexBufferObjectManager,
-			SensorManager sensorManager, SpriteFactory spriteFactory, 
-			SimpleBaseGameActivity activity) {
+	public GameController(final VertexBufferObjectManager vertexBufferObjectManager,
+			final SensorManager sensorManager, final SpriteFactory spriteFactory, 
+			final SimpleBaseGameActivity activity) {
+		super();
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
 				sensorManager, spriteFactory);
@@ -52,8 +53,8 @@ public class GameController extends AbstractController implements
 	}
 
 	@Override
-	public boolean onSceneTouchEvent(Scene scene, TouchEvent tEvent) {
-		MotionEvent event = tEvent.getMotionEvent();
+	public boolean onSceneTouchEvent(final Scene scene, TouchEvent tEvent) {
+		final MotionEvent event = tEvent.getMotionEvent();
 		// Multitouch handling code inspired by following android dev blog post
 		// http://android-developers.blogspot.se/2010/06/making-sense-of-multitouch.html
 		final int action = event.getAction();
