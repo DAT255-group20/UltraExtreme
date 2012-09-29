@@ -20,7 +20,7 @@ public class Bomb extends AbstractWeapon {
 	@Override
 	public void fire(Position shipPosition, PlayerID playerId,
 			Rotation rotation, float timeElapsed) {
-		// TODO Auto-generated method stub
+		// TODO Bomb.fire()
 
 	}
 

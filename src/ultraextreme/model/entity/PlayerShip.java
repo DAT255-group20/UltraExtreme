@@ -64,7 +64,7 @@ public class PlayerShip extends DestroyableEntity {
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
+		// TODO PlayerShip.isDestroyed()
 		return false;
 	}
 
@@ -75,6 +75,6 @@ public class PlayerShip extends DestroyableEntity {
 
 	@Override
 	public void receiveDamage(int damage) {
-		// TODO Auto-generated method stub
+		// TODO PlayerShip.receiveDamage()
 	}
 }

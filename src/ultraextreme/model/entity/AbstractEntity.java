@@ -91,12 +91,9 @@ public abstract class AbstractEntity implements IEntity {
 		return new Position(position.getX() + getWidth() / 2, position.getY() + getHeight() / 2);
 	}
 
-	/**
-	 * Returns true if and only if the entity is entirely outside of the screen
-	 * 
-	 * @return true if and only if the entity is entirely outside of the screen
-	 */
+	@Override
 	public boolean isOutOfScreen() {
+		// TODO Change to fit reversed Y axis. (do tests)
 		Dimension screen = Constants.getInstance().getLevelDimension();
 		return position.getY() - height < 0 || position.getX() - width < 0
 				|| position.getX() > screen.getX()

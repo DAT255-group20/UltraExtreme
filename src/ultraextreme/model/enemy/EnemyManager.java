@@ -32,10 +32,8 @@ public class EnemyManager implements PropertyChangeListener {
 	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			IEnemy e = enemies.get(i);
-			if (e.isDead()) {
-				// TODO Also check for when the enemy has left the screen and
-				// should be removed
-				// TODO Change to fit reversed Y axis. (do tests)
+			if (e.isDead()/* || e.getShip().isOutOfScreen()*/) {
+				// TODO Enemies are obviously counted as out of screen when they are spawned and are removed right away.
 				pcs.firePropertyChange("remove", null, e);
 				enemies.remove(i);
 				i--;

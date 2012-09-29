@@ -77,7 +77,6 @@ public class BulletManager {
 			for (int i = 0; i < list.size(); i++) {
 				IBullet b = list.get(i);
 				if (b.isMarkedForRemoval() || (b.isOutOfScreen())) {
-					// TODO Change to fit reversed Y axis. (do tests)
 					pcs.firePropertyChange("remove", null, b);
 					list.remove(i);
 					i--;
@@ -117,7 +116,6 @@ public class BulletManager {
 	 *         this method.
 	 */
 	public boolean isBombDropped() {
-		// TODO Is this method really needed?
 		boolean output = this.isBombDropped;
 
 		if (output) {
