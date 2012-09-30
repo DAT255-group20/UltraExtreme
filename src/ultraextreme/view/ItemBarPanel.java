@@ -1,7 +1,5 @@
 package ultraextreme.view;
 
-import java.beans.PropertyChangeEvent;
-
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
@@ -10,12 +8,32 @@ import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.item.ItemBarUpdatedListener;
 import ultraextreme.model.util.Position;
 
+/**
+ * An item bar that is shown in the view part of the game.
+ * 
+ * @author Daniel Jonsson
+ * 
+ */
 public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 
 	private SpriteFactory spriteFactory;
 
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
+	/**
+	 * Create an ItemBarPanel.
+	 * 
+	 * @param itemBar
+	 *            Reference to an ItemBar that this panel should show items
+	 *            from.
+	 * @param spriteFactory
+	 *            Reference to a SpriteFactory.
+	 * @param vertexBufferObjectManager
+	 * @param position
+	 *            Where the panel should be placed on the screen.
+	 * @param scaling
+	 *            Scaling so the position and size become correct.
+	 */
 	public ItemBarPanel(ItemBar itemBar, SpriteFactory spriteFactory,
 			VertexBufferObjectManager vertexBufferObjectManager,
 			Position position, float scaling) {
@@ -25,6 +43,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 		this.spriteFactory = spriteFactory;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		updateItemBar(itemBar);
+		itemBar.addListener(this);
 	}
 
 	/**

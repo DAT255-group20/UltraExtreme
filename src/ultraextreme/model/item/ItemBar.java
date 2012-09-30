@@ -97,6 +97,13 @@ public class ItemBar {
 		}
 		cursorPosition++;
 		cursorPosition = cursorPosition % maxNumberOfItems;
+		fireItemBarUpdated();
+	}
+	
+	/**
+	 * Tell the listeners that this item bar has been updated.
+	 */
+	private void fireItemBarUpdated() {
 		for (ItemBarUpdatedListener listener : listeners) {
 			listener.updatedItemBar(this);
 		}
