@@ -79,7 +79,7 @@ public class GameModel implements IUltraExtremeModel {
 	 */
 	private void spawnPickups() {
 		for(IEnemy enemy : enemyManager.getEnemies()) {
-			if(enemy.ShouldSpawnPickup()) {
+			if(enemy.shouldSpawnPickup()) {
 				pickupManager.addPickup(new WeaponPickup(
 						enemy.getShip().getPosition(), enemy.getWeapon().getName()));
 			}

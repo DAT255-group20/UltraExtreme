@@ -31,7 +31,8 @@ public interface IEnemy {
 	 * true if and only if this enemy should be spawning a pickup
 	 * @return true if and only if this enemy should be spawning a pickup
 	 */
-	boolean ShouldSpawnPickup();
+	boolean shouldSpawnPickup();
 
-	public AbstractWeapon getWeapon();
+	// TODO Write javadoc
+	AbstractWeapon getWeapon();
 }
