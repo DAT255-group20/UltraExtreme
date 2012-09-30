@@ -92,6 +92,7 @@ public class SpriteFactory {
 		// Init the item textures
 		itemTextures = new HashMap<ObjectName, ITextureRegion>();
 		itemTextures.put(ObjectName.BASIC_WEAPON, BasicEnemy); // Test only
+		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test only
 		
 		// What is this for?
 		textureManager.loadTexture(textureAtlas);
