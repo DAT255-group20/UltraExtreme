@@ -110,7 +110,7 @@ public abstract class AbstractEntity implements IEntity {
 	{
 		// TODO Change to fit reversed Y axis. (do tests)
 		final Dimension screen = Constants.getInstance().getLevelDimension();
-		return position.getY() - height < marginal || position.getX() - width < marginal
+		return position.getY() - height < -marginal || position.getX() - width < -marginal
 				|| position.getX() > screen.getX()+marginal
 				|| position.getY() > screen.getY()+marginal;
 	}
