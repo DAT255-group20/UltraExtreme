@@ -7,8 +7,12 @@ package ultraextreme.model.util;
  * 
  */
 public class Constants {
+	// TODO PMD: A class with only private constructors should be final, unless
+	// the private constructor is called by a inner class.
 
 	private static Constants INSTANCE;
+
+	// TODO PMD: Variables should start with a lowercase character
 
 	private Constants() {
 		INSTANCE = this;
@@ -30,6 +34,13 @@ public class Constants {
 	 */
 	public Dimension getLevelDimension() {
 		return new Dimension(900, 1600);
+	}
+	/**
+	 * returns the dropChance of a weaponPickup upon enemy death as a percentage
+	 * @return
+	 */
+	public int getWeaponDropChance() {
+		return 10;
 	}
 
 	/**
@@ -59,6 +70,6 @@ public class Constants {
 	 * @return A positive double that impacts how fast the bullets will move
 	 */
 	public double getBulletSpeedModifier() {
-		return 100;
+		return 200;
 	}
 }

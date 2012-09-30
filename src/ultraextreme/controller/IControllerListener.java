@@ -8,5 +8,5 @@ package ultraextreme.controller;
  */
 public interface IControllerListener {
 
-	void controllerListenerUpdate();
+	void controllerListenerUpdate(ControllerEvent event);
 }

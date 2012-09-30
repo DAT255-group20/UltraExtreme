@@ -9,7 +9,7 @@ import ultraextreme.model.util.Position;
 
 public class EnemySpawner {
 
-	public static final String NEW_ENEMY = "nE";
+	public static final String NEW_ENEMY = "add";
 
 	/**
 	 * A clock that keeps track of the time.
@@ -24,7 +24,7 @@ public class EnemySpawner {
 	/**
 	 * The number of the last started enemy wave.
 	 */
-	private int wave;
+	private int wave; // TODO PMD: This field is not used
 
 	/**
 	 * The number of ships in the current wave.
@@ -49,7 +49,7 @@ public class EnemySpawner {
 	/**
 	 * A reference to the bullet manager.
 	 */
-	private BulletManager bulletManager;
+	private final BulletManager bulletManager;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -59,7 +59,7 @@ public class EnemySpawner {
 	 * @param bulletManager
 	 *            A reference to the bullet manager.
 	 */
-	public EnemySpawner(BulletManager bulletManager) {
+	public EnemySpawner(final BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
 		nextWaveTime = 0;
 		wave = 0;
@@ -67,24 +67,27 @@ public class EnemySpawner {
 
 	/**
 	 * Run an update on the enemy spawner. The PropertyChangeListeners
-	 * registered to this class will get an enemy in an event if one is spawned.
+	 * registered to this class will get an enemyShip in an event if an enemy is
+	 * spawned.
 	 * 
 	 * @param timeElapsed
 	 *            Time since this method was last called.
 	 */
-	public void update(float timeElapsed) {
+	public void update(final float timeElapsed) {
 		timer += timeElapsed;
 		if (timer > nextEnemySpawnTime) {
 			if (waveSpawnCounter < waveSize) {
 				waveSpawnCounter++;
 				nextEnemySpawnTime = timer + 1;
-				pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null,
-						new BasicEnemy(nextPosition.getX(),
-								nextPosition.getY(), bulletManager));
+
+				final BasicEnemy newEnemy = new BasicEnemy(nextPosition.getX(),
+						nextPosition.getY(), bulletManager);
+				pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, newEnemy);
+
 				nextPosition.setX(nextPosition.getX() + 70);
 			} else if (timer > nextWaveTime) {
 				wave++;
-				Random random = new Random();
+				final Random random = new Random();
 				waveSize = (int) (random.nextFloat() * 5 + 2);
 				waveSpawnCounter = 0;
 				nextWaveTime = timer + waveSize + 2;
@@ -93,14 +96,16 @@ public class EnemySpawner {
 			}
 		}
 		if (timer > nextWaveTime) {
+			// TODO PMD: Avoid empty 'if' statements
 		}
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	public void removePropertyChangeListener(
+			final PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
 	}
 }

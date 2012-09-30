@@ -5,9 +5,14 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
+import org.andengine.opengl.font.Font;
+import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import ultraextreme.model.util.Constants;
+import ultraextreme.view.SpriteFactory;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.hardware.SensorManager;
 
 public class MainActivity extends SimpleBaseGameActivity implements
@@ -15,33 +20,75 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
+	private SpriteFactory spriteFactory;
 	// private GameModel gameModel;
+	private Font defaultFont;
+	private Camera camera;
+	private Scene currentScene;
 
-	private static final int CAMERA_WIDTH = 480;
-	private static final int CAMERA_HEIGHT = 800;
+	// TODO PMD: The field name indicates a constant but its modifiers do not
+	// These two should either be final, or not be in capital letters.
+	// Capital letters indicates a constant, but constants MUST be final.
+	private static int CAMERA_WIDTH;
+	private static int CAMERA_HEIGHT;
+
+	private float scaling;
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
-		Camera mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		// TODO FindBugs: This instance method writes to a static field.
+		// This is tricky to get correct if multiple instances are being
+		// manipulated,
+		// and generally bad practice.
+		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
+		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
+		scaling = (float) ((float) getResources().getDisplayMetrics().heightPixels / Constants
+				.getInstance().getLevelDimension().getY());
+		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
-				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
+				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
 	}
 
 	@Override
 	protected void onCreateResources() {
-		// TODO MainActivity.onCreateResources()
+		spriteFactory = new SpriteFactory(this);
+		defaultFont = FontFactory.create(this.getFontManager(),
+				this.getTextureManager(), 256, 256,
+				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
+		defaultFont.load();
 	}
 
 	@Override
 	protected Scene onCreateScene() {
-		this.gameController = new GameController(
+		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE));
-		return gameController.getScene();
+				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
+				spriteFactory, this, scaling);
+		mainMenuController = new MainMenuController(camera, defaultFont,
+				this.getVertexBufferObjectManager());
+
+		gameController.addListener(this);
+		mainMenuController.addListener(this);
+
+		setScene(mainMenuController.getScene());
+		return currentScene;
 	}
 
 	@Override
-	public void controllerListenerUpdate() {
-		// TODO MainActivity.controllerListenerUpdate()
+	public void controllerListenerUpdate(final ControllerEvent event) {
+		switch (event.getEventType()) {
+		case SWITCH_TO_GAME:
+			setScene(gameController.getScene());
+			break;
+
+		default:
+			break;
+		}
 	}
+
+	private void setScene(final Scene scene) {
+		currentScene = scene;
+		getEngine().setScene(currentScene);
+	}
+
 }

@@ -1,13 +1,13 @@
 package ultraextreme.model.entity;
 
 import junit.framework.TestCase;
-import ultraextreme.model.util.Direction;
+import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
 
 public abstract class AbstractEntityTest extends TestCase {
 
 	protected abstract AbstractEntity getNewAbstractEntity(double x, double y,
-			int width, int height, Direction direction);
+			int width, int height, Rotation direction);
 
 	public void testMove() {
 		AbstractEntity entity = newEntity();
@@ -37,6 +37,11 @@ public abstract class AbstractEntityTest extends TestCase {
 		assertEquals(entity.getPosition().getY(), 20.0);
 	}
 
+	public void tetGetCenteredPosition() {
+		fail("Not implemented");
+		// TODO Write getCenteredPosition test
+	}
+
 	public void testGetWidth() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getWidth(), 30);
@@ -49,20 +54,45 @@ public abstract class AbstractEntityTest extends TestCase {
 
 	public void testGetDirection() {
 		AbstractEntity entity = newEntity();
-		assertEquals(entity.getDirection(), Direction.UP);
+		assertEquals(entity.getRotation(), new Rotation(0));
 	}
 
 	public void testCollidesWith() {
-		// TODO Write collidesWith test
+		AbstractEntity e1 = getNewAbstractEntity(10, 10, 10, 10,
+				new Rotation(0));
+		AbstractEntity e2 = getNewAbstractEntity(30, 10, 10, 10,
+				new Rotation(0));
+
+		assertFalse(e1.collidesWith(e2));
+		assertFalse(e2.collidesWith(e1));
+
+		e1 = getNewAbstractEntity(10, 10, 10, 10, new Rotation(0));
+		e2 = getNewAbstractEntity(15, 15, 10, 10, new Rotation(0));
+
+		assertTrue(e1.collidesWith(e2));
+		assertTrue(e2.collidesWith(e1));
+
+		e1 = getNewAbstractEntity(20, 20, 10, 10, new Rotation(0));
+		e2 = getNewAbstractEntity(30, 20, 10, 10, new Rotation(0));
+
+		assertTrue(e1.collidesWith(e2));
+		assertTrue(e2.collidesWith(e1));
+
+		e1 = getNewAbstractEntity(20, 20, 10, 10, new Rotation(0));
+		e2 = getNewAbstractEntity(31, 20, 10, 10, new Rotation(0));
+
+		assertFalse(e1.collidesWith(e2));
+		assertFalse(e2.collidesWith(e1));
 	}
 
 	public void testIsOutOfScreen() {
+		fail("Not implemented");
 		// TODO Write isOutOfScreen test
 	}
 
 	public abstract void testGetSpeedModifier();
 
 	private AbstractEntity newEntity() {
-		return getNewAbstractEntity(10, 20, 30, 40, Direction.UP);
+		return getNewAbstractEntity(10, 20, 30, 40, new Rotation(0));
 	}
 }

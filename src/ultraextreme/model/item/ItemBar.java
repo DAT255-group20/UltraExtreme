@@ -3,15 +3,16 @@ package ultraextreme.model.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultraextreme.model.util.Direction;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * An inventory containing weapons and bombs.
  * 
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
+ * @author Viktor Anderling
  * 
  */
 public class ItemBar {
@@ -19,7 +20,7 @@ public class ItemBar {
 	/**
 	 * Maximum number of items that the item bar can hold.
 	 */
-	private int maximumNumberOfItems;
+	private int maxNumberOfItems;
 
 	/**
 	 * Where the next item will be put into the item bar.
@@ -36,7 +37,12 @@ public class ItemBar {
 	 */
 	private PlayerID playerId;
 
-	private Direction playerDirection;
+	private Rotation playerRotation;
+
+	/**
+	 * The classes that listen to the item bar.
+	 */
+	private List<ItemBarUpdatedListener> listeners = new ArrayList<ItemBarUpdatedListener>();
 
 	// private Bomb bomb;
 
@@ -50,9 +56,9 @@ public class ItemBar {
 	 * @param bulletManager
 	 *            Reference to the bullet manager.
 	 */
-	public ItemBar(PlayerID playerId, BulletManager bulletManager,
-			Direction playerDirection) {
-		this(playerId, bulletManager, playerDirection, 1);
+	public ItemBar(final PlayerID playerId, BulletManager bulletManager,
+			final Rotation playerRotation) {
+		this(playerId, bulletManager, playerRotation, 1);
 	}
 
 	/**
@@ -62,16 +68,18 @@ public class ItemBar {
 	 *            The player's ID it belongs to.
 	 * @param bulletManager
 	 *            Reference to the bullet manager.
-	 * @param maximumNumberOfItems
+	 * @param maxNumberOfItems
 	 *            Maximum number of items that fit in the item bar.
 	 */
-	public ItemBar(PlayerID playerId, BulletManager bulletManager,
-			Direction playerDirection, int maximumNumberOfItems) {
+	public ItemBar(final PlayerID playerId, BulletManager bulletManager,
+			Rotation playerRotation, int maxNumberOfItems) {
+		// TODO PMD: Avoid passing parameters to methods or constructors and
+		// then not using those parameters. (bulletManager)
 		this.playerId = playerId;
 		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
-		this.maximumNumberOfItems = maximumNumberOfItems;
-		this.playerDirection = playerDirection;
+		this.maxNumberOfItems = maxNumberOfItems;
+		this.playerRotation = playerRotation;
 		this.cursorPosition = 0;
 	}
 
@@ -82,13 +90,23 @@ public class ItemBar {
 	 *            The item that should be added.
 	 */
 	public void addItem(AbstractWeapon item) {
-		if (items.size() < maximumNumberOfItems) {
+		if (items.size() < maxNumberOfItems) {
 			items.add(item);
 		} else {
 			items.set(cursorPosition, item);
 		}
 		cursorPosition++;
-		cursorPosition = cursorPosition % maximumNumberOfItems;
+		cursorPosition = cursorPosition % maxNumberOfItems;
+		fireItemBarUpdated();
+	}
+	
+	/**
+	 * Tell the listeners that this item bar has been updated.
+	 */
+	private void fireItemBarUpdated() {
+		for (ItemBarUpdatedListener listener : listeners) {
+			listener.updatedItemBar(this);
+		}
 	}
 
 	/**
@@ -106,9 +124,29 @@ public class ItemBar {
 	 * @param firePositon
 	 *            From where the guns should be fired.
 	 */
-	public void fireWeapons(Position firePosition) {
+	public void fireWeapons(Position firePosition, float timeElapsed) {
 		for (AbstractWeapon weapon : items) {
-			weapon.fireShot(firePosition, playerId, playerDirection);
+			weapon.fire(firePosition, playerId, playerRotation, timeElapsed);
 		}
+	}
+	
+	/**
+	 * Add a listener that wants to know when the item bar is updated.
+	 * 
+	 * @param listener
+	 *            The listener to be added.
+	 */
+	public void addListener(ItemBarUpdatedListener listener) {
+		this.listeners.add(listener);
+	}
+
+	/**
+	 * Remove a listener from the item bar.
+	 * 
+	 * @param listener
+	 *            The listener to be removed.
+	 */
+	public void removeListener(ItemBarUpdatedListener listener) {
+		this.listeners.remove(listener);
 	}
 }
