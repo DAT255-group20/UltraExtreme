@@ -45,5 +45,4 @@ public class EnemyShip extends AbstractDestroyableEntity {
 	public void receiveDamage(int damage) {
 		hitPoints -= damage;
 	}
-
 }
