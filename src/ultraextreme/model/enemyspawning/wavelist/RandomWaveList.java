@@ -78,14 +78,14 @@ public class RandomWaveList extends AbstractWaveList {
 		switch (counter) {
 		// TODO PMD: Switch statements should have a default label
 		case 0:
-			currentWave = new VWave(0, 200, -10, bulletManager);
+			currentWave = new VWave(0, 200, -100, bulletManager);
 			break;
 		case 1:
-			currentWave = new HorizontalLineWave(5, 3, Math.PI / 8, 400, -10,
+			currentWave = new HorizontalLineWave(5, 3, Math.PI / 8, 400, -100,
 					bulletManager);
 			break;
 		case 2:
-			currentWave = new VerticalLineWave(2, 0, 200, -10, bulletManager);
+			currentWave = new VerticalLineWave(2, 0, 200, -100, bulletManager);
 			break;
 		}
 		counter++;
