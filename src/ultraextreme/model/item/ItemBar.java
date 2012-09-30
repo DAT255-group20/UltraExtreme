@@ -39,6 +39,11 @@ public class ItemBar {
 
 	private Rotation playerRotation;
 
+	/**
+	 * The classes that listen to the item bar.
+	 */
+	private List<ItemBarUpdatedListener> listeners = new ArrayList<ItemBarUpdatedListener>();
+
 	// private Bomb bomb;
 
 	// private BulletManager bulletManager;
@@ -92,6 +97,16 @@ public class ItemBar {
 		}
 		cursorPosition++;
 		cursorPosition = cursorPosition % maxNumberOfItems;
+		fireItemBarUpdated();
+	}
+	
+	/**
+	 * Tell the listeners that this item bar has been updated.
+	 */
+	private void fireItemBarUpdated() {
+		for (ItemBarUpdatedListener listener : listeners) {
+			listener.updatedItemBar(this);
+		}
 	}
 
 	/**
@@ -113,5 +128,25 @@ public class ItemBar {
 		for (AbstractWeapon weapon : items) {
 			weapon.fire(firePosition, playerId, playerRotation, timeElapsed);
 		}
+	}
+	
+	/**
+	 * Add a listener that wants to know when the item bar is updated.
+	 * 
+	 * @param listener
+	 *            The listener to be added.
+	 */
+	public void addListener(ItemBarUpdatedListener listener) {
+		this.listeners.add(listener);
+	}
+
+	/**
+	 * Remove a listener from the item bar.
+	 * 
+	 * @param listener
+	 *            The listener to be removed.
+	 */
+	public void removeListener(ItemBarUpdatedListener listener) {
+		this.listeners.remove(listener);
 	}
 }

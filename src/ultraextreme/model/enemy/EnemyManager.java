@@ -5,7 +5,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+
 import ultraextreme.model.enemyspawning.EnemySpawner;
+import ultraextreme.model.item.PickupManager;
 
 public class EnemyManager implements PropertyChangeListener {
 

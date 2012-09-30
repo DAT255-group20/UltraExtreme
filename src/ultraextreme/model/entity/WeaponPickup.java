@@ -1,40 +1,33 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 /**
- * A pickupable weapon or bomb.
+ * A pickupable weapon or bomb. What kind of weapon this pickup represents is
+ * saved as its ObjectName
  * 
  * @author Johan Gronvall
  * 
  */
 public class WeaponPickup extends AbstractEntity {
-	private final AbstractWeapon weapon;
-	private static final int WIDTH = 10;
+	private static final int width = 10;
 
-	private static final double SPEED_MOD = Constants.getInstance()
+	private static final double speedMod = Constants.getInstance()
 			.getPickupSpeedModifier();
 
-	public WeaponPickup(final double x, final double y,
-			final AbstractWeapon weapon) {
-		super(x, y, WIDTH, WIDTH, new Rotation(0), weapon.getName());
-		this.weapon = weapon;
+	public WeaponPickup(double x, double y, ObjectName weaponType) {
+		super(x, y, width, width, new Rotation(0), weaponType);
+	}
+
+	public WeaponPickup(Position position, ObjectName name) {
+		super(position, width, width, name);
 	}
 
 	@Override
 	public double getSpeedMod() {
-		return SPEED_MOD;
+		return speedMod;
 	}
-
-	/**
-	 * returns the weapon this entity is representing as an item
-	 * 
-	 * @return the weapon this entity is representing as an item
-	 */
-	public AbstractWeapon getItem() {
-		return weapon;
-	}
-
 }
