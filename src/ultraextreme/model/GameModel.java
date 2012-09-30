@@ -7,8 +7,10 @@ import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
 import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.entity.WeaponPickup;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
+import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -27,11 +29,15 @@ public class GameModel implements IUltraExtremeModel {
 
 	final private EnemySpawner enemySpawner;
 
-	private PickupManager pickUpManager;
+	private PickupManager pickupManager;
+	
+	private WeaponFactory weaponFactory;
 
 	public GameModel() {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
+		pickupManager = new PickupManager();
+		weaponFactory = new WeaponFactory(bulletManager);
 		enemySpawner = new EnemySpawner(new RandomWaveList(1000, bulletManager));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
@@ -53,14 +59,31 @@ public class GameModel implements IUltraExtremeModel {
 		for (IEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
+		
+		//TODO Decide if we want pickups to move around. If so, the following commented code is necessary.
+//		for(WeaponPickup pickup : pickupManager.getPickups()) {
+//			pickup.doMovement(timeElapsed); ?
+//		}
 
 		enemySpawner.update(timeElapsed);
 
 		checkCollisions();
-
+		
+		spawnPickups();
 		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
-
+	}
+	
+	/**
+	 * spawns a pickup for every enemy marked as "should spawn a pickup"
+	 */
+	private void spawnPickups() {
+		for(IEnemy enemy : enemyManager.getEnemies()) {
+			if(enemy.ShouldSpawnPickup()) {
+				pickupManager.addPickup(new WeaponPickup(
+						enemy.getShip().getPosition(), enemy.getWeapon().getName()));
+			}
+		}
 	}
 
 	private void checkCollisions() {
@@ -84,6 +107,17 @@ public class GameModel implements IUltraExtremeModel {
 			if (b.collidesWith(player.getShip())) {
 				player.getShip().receiveDamage(b.getDamage());
 				b.markForRemoval();
+			}
+		}
+
+		//Check Items against player
+		for(int i = 0;  i < pickupManager.getPickups().size(); i++) {
+			WeaponPickup wp = pickupManager.getPickups().get(i);
+			if(wp.collidesWith(player.getShip())) {
+				player.giveWeapon(weaponFactory.getNewWeapon(
+						wp.getObjectName()));
+				pickupManager.removePickUp(i);
+				i--;
 			}
 		}
 	}

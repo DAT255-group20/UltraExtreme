@@ -1,7 +1,10 @@
 package ultraextreme.model.enemy;
 
+import java.util.Random;
+
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Rotation;
 
@@ -18,6 +21,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	private final EnemyShip ship;
 	private final AbstractWeapon weapon;
 	private final Rotation enemyRotation;
+	private final static Random randomGenerator = new Random();
 
 	protected AbstractEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
 		this.ship = ship;
@@ -42,5 +46,20 @@ public abstract class AbstractEnemy implements IEnemy {
 	public EnemyShip getShip() {
 		return ship;
 	}
+	
+	@Override
+	public AbstractWeapon getWeapon() {
+		return weapon;
+	}
+	
+	/**
+	May randomly return true if the enemy is dead based on the dropchance of weapons. 
+	**/
+	@Override
+	public boolean ShouldSpawnPickup() {
+		
+		return (randomGenerator.nextInt(99) < Constants.getInstance().getWeaponDropChance()+1 && isDead());
+	}
+
 
 }

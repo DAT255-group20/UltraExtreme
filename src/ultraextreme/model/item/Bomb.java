@@ -23,4 +23,11 @@ public class Bomb extends AbstractWeapon {
 		// TODO Bomb.fire()
 
 	}
+
+	@Override
+	public AbstractWeapon shallowClone() {
+		// TODO Auto-generated method stub
+		return new Bomb(this.getBulletManager());
+	}
+
 }
