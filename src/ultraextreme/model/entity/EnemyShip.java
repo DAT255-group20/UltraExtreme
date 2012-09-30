@@ -1,6 +1,7 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Rotation;
 
@@ -46,4 +47,14 @@ public class EnemyShip extends AbstractDestroyableEntity {
 		hitPoints -= damage;
 	}
 
+	public boolean isOutsideOfWorld() {
+		// adding a marginal to screen dimension since the enemy can be right
+		// off the screen (eg. spawning)
+		double marginal = 150;
+		Dimension screen = Constants.getInstance().getLevelDimension();
+		return getPosition().getY() - getHeight() < -marginal
+				|| getPosition().getX() - getWidth() < -marginal
+				|| getPosition().getX() > screen.getX() + marginal
+				|| getPosition().getY() > screen.getY() + marginal;
+	}
 }
