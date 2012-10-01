@@ -34,7 +34,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	public PlayerShip(final double x, final double y, final int width,
 			final int height) {
 		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
-		lives = 3;
+		lives = Constants.getInstance().getInitShipLives();
 	}
 
 	public PlayerShip(final double x, double y) {

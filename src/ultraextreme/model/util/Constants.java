@@ -80,4 +80,11 @@ public class Constants {
 	public double getShipInvincibilityTime() {
 		return 3;
 	}
+	
+	/**
+	 * @return The number of lives the ship will start with.
+	 */
+	public int getInitShipLives() {
+		return 3;
+	}
 }
