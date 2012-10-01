@@ -19,6 +19,7 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";
 	public static final String ENEMY_KILLED = "enemyKilled";
+	public static final String REMOVED_ENEMY = "remove";
 
 	private final List<IEnemy> enemies;
 
@@ -57,8 +58,8 @@ public class EnemyManager implements PropertyChangeListener {
 		}
 	}
 
-	public void removeEnemy(int index) {
-		pcs.firePropertyChange("remove", null, enemies.get(index));
+	private void removeEnemy(int index) {
+		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null, enemies.get(index));
 		enemies.remove(index);
 	}
 
