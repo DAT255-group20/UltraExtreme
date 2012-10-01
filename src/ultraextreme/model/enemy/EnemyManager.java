@@ -39,9 +39,18 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
+			boolean remove = false;
 			final IEnemy e = enemies.get(i);
-			if (e.isDead() || e.getShip().isOutOfScreen(150) ) {
+			if (e.isDead()) {
 				pcs.firePropertyChange(ENEMY_KILLED, null, e);
+				remove = true;
+			}
+			else if (e.getShip().isOutOfScreen(150))
+			{
+				remove = true;
+			}
+			if (remove)
+			{
 				removeEnemy(i);
 				i--;
 			}

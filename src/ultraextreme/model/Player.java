@@ -117,7 +117,7 @@ public class Player implements IPlayer {
 		// TODO Extract the strings
 		if (event.getPropertyName().equals("enemyKilled")) {
 			score  += 10;
-			//Log.d("DEBUG", "Score: " + score);
+			Log.d("DEBUG", "Score: " + score);
 		}
 	}
 
