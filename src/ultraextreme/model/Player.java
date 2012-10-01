@@ -66,6 +66,13 @@ public class Player implements IPlayer {
 	public void update(final ModelInput input, final float timeElapsed) {
 		double newX = 0;
 		double newY = 0;
+		if(ship.isInvincible()) {
+			if(ship.justGotInvincible()) {
+				setShipToSpawn();
+			}
+			ship.countDownInvincibility((double)timeElapsed);
+		}
+		
 		if (ship.canMoveX(input.dX)) {
 			newX = input.dX;
 		}
@@ -111,8 +118,8 @@ public class Player implements IPlayer {
 	public void setShipToSpawn() {
 		final Dimension levelDimension = Constants.getInstance()
 				.getLevelDimension();
-		ship.setPosition(new Position(levelDimension.getX() * 0.5,
-				levelDimension.getY() * 0.8));
+		ship.setPosition(new Position(levelDimension.getX() * 0.5 - ship.getWidth()/2,
+				levelDimension.getY() * 0.65));
 		
 	}
 }

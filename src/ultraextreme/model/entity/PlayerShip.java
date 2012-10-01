@@ -17,10 +17,24 @@ public class PlayerShip extends AbstractDestroyableEntity {
 
 	private static double speedMod = Constants.getInstance()
 			.getPlayerSpeedModifier();
+	
+	/**
+	 * The time the ship will be invincible after receiving damage.
+	 */
+	private static double invTime = Constants.getInstance()
+			.getShipInvincibilityTime();
+	
+	private int lives;
+	
+	/**
+	 * A count down for the ships invincibility.
+	 */
+	private double invCountDown;
 
 	public PlayerShip(final double x, final double y, final int width,
 			final int height) {
 		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
+		lives = 3;
 	}
 
 	public PlayerShip(final double x, double y) {
@@ -67,8 +81,19 @@ public class PlayerShip extends AbstractDestroyableEntity {
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO PlayerShip.isDestroyed()
-		return false;
+		return lives <= 0;
+	}
+	
+	public boolean isInvincible() {
+		return invCountDown > 0;
+	}
+	
+	public boolean justGotInvincible() {
+		return invCountDown == invTime;
+	}
+	
+	public void countDownInvincibility(double timeElapsed) {
+		invCountDown = invCountDown - timeElapsed;
 	}
 
 	@Override
@@ -78,6 +103,9 @@ public class PlayerShip extends AbstractDestroyableEntity {
 
 	@Override
 	public void receiveDamage(int damage) {
-		// TODO PlayerShip.receiveDamage()
+		if(invCountDown <= 0) {
+			lives = lives - damage;
+			invCountDown = invTime;
+		}
 	}
 }

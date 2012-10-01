@@ -72,4 +72,12 @@ public class Constants {
 	public double getBulletSpeedModifier() {
 		return 200;
 	}
+	
+	/**
+	 * @return The time in seconds of which the will stay invincible after 
+	 * receiving damage.
+	 */
+	public double getShipInvincibilityTime() {
+		return 3;
+	}
 }
