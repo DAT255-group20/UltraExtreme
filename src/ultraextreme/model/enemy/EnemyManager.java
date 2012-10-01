@@ -48,7 +48,7 @@ public class EnemyManager implements PropertyChangeListener {
 		}
 	}
 
-	public void removeEnemy(int index) {
+	private void removeEnemy(int index) {
 		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null, enemies.get(index));
 		enemies.remove(index);
 	}
