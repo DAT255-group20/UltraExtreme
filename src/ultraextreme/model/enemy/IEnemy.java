@@ -37,4 +37,6 @@ public interface IEnemy {
 
 	// TODO Write javadoc
 	AbstractWeapon getWeapon();
+
+	int getScoreValue();
 }
