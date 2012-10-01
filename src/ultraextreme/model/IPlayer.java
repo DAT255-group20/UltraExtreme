@@ -26,6 +26,11 @@ public interface IPlayer {
 	void update(ModelInput input, float delta);
 
 	/**
+	 * Sets the players ship to its spawn point.
+	 */
+	void setShipToSpawn();
+	
+	/**
 	 * Return a reference to the player's ship.
 	 */
 	PlayerShip getShip();
