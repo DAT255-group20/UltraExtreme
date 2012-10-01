@@ -16,9 +16,14 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class EnemyManagerTest extends TestCase {
 
-	EnemyManager enemyManager;
+	private EnemyManager enemyManager;
 
 	@Override
 	public void setUp() {
@@ -37,7 +42,6 @@ public class EnemyManagerTest extends TestCase {
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
 		assertEquals(enemy.getShip(),
 				collector.getEnemyShips().get(EnemyManager.NEW_ENEMY));
-
 	}
 
 	/**
@@ -49,10 +53,10 @@ public class EnemyManagerTest extends TestCase {
 		List<IEnemy> addedEnemies = new ArrayList<IEnemy>();
 		List<EnemyShip> addedShips = new ArrayList<EnemyShip>();
 		BulletManager bulletManager = new BulletManager();
+		enemyManager.addPropertyChangeListener(collector);
 		// Add a lot of enemies to the enemy manager and to a local list.
 		for (int i = 0; i < 10000; i++) {
 			IEnemy enemy = new BasicEnemy(0, 0, bulletManager);
-			enemyManager.addPropertyChangeListener(collector);
 			enemyManager.addEnemy(enemy);
 			addedEnemies.add(enemy);
 			addedShips.add(enemy.getShip());
