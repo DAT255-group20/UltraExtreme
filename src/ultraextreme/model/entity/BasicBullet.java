@@ -7,7 +7,8 @@ import ultraextreme.model.util.Rotation;
 /**
  * A basic bullet that flies straight forward.
  * 
- * @author Daniel Jonsson, Viktor Anderling
+ * @author Daniel Jonsson
+ * @author Viktor Anderling
  * 
  */
 public class BasicBullet extends AbstractBullet {

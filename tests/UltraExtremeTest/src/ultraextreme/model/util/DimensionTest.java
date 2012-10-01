@@ -4,6 +4,11 @@ import javax.vecmath.Vector2d;
 
 import junit.framework.TestCase;
 
+/**
+ * 
+ * @author Viktor Anderling
+ *
+ */
 public class DimensionTest extends TestCase {
 
 	private Dimension dimension;

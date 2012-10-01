@@ -8,7 +8,8 @@ import ultraextreme.model.util.Rotation;
 /**
  * An abstract class representing a generic Bullet.
  * 
- * @author Bjorn Persson Mattsson, Viktor Anderling
+ * @author Bjorn Persson Mattsson
+ * @author Viktor Anderling
  * 
  */
 public abstract class AbstractBullet extends AbstractEntity implements IBullet {

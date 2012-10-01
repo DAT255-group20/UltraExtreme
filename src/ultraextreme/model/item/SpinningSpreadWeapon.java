@@ -6,6 +6,14 @@ import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
+ * @author Viktor Anderling
+ *
+ */
 public class SpinningSpreadWeapon extends AbstractWeapon {
 
 	private static final int BULLET_WIDTH = 20;

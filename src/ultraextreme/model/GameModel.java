@@ -17,6 +17,8 @@ import ultraextreme.model.util.PlayerID;
  * The main class for a running game.
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
  * 
  */
 public class GameModel implements IUltraExtremeModel {

@@ -17,6 +17,7 @@ import ultraextreme.model.util.PlayerID;
  * 
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
+ * @author Johan Gronvall
  * @author Viktor Anderling
  */
 public class Player implements IPlayer {

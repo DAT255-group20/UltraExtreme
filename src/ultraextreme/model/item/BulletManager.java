@@ -14,7 +14,8 @@ import ultraextreme.model.util.PlayerID;
 /**
  * Contains all bullets in the game.
  * 
- * @author Bjorn Persson Mattsson, Daniel Jonsson
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class BulletManager {

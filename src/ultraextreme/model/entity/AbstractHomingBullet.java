@@ -7,7 +7,8 @@ import ultraextreme.model.util.Rotation;
 /**
  * An abstract class representing a generic HomingBullet.
  * 
- * @author Bjorn Persson Mattsson, Viktor Anderling
+ * @author Bjorn Persson Mattsson
+ * @author Viktor Anderling
  * 
  */
 public abstract class AbstractHomingBullet extends AbstractBullet {

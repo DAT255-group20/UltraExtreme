@@ -2,6 +2,11 @@ package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Position;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ *
+ */
 public interface IEntity {
 
 	boolean collidesWith(IEntity other);

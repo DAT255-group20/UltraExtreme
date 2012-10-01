@@ -8,6 +8,13 @@ import java.util.List;
 
 import ultraextreme.model.enemyspawning.EnemySpawner;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
+ *
+ */
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";

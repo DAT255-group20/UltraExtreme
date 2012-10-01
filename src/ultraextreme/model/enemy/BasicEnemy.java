@@ -11,6 +11,8 @@ import ultraextreme.model.util.Rotation;
  * Class representing a very basic enemy that only flies downwards and has a
  * basic weapon.
  * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * @author Johan Gronvall
  * @author Viktor Anderling
  * 

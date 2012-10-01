@@ -6,6 +6,8 @@ import ultraextreme.model.item.AbstractWeapon;
 /**
  * Interface for self-thinking enemies
  * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * @author Johan Gronvall
  * 
  */

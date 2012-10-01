@@ -11,6 +11,11 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.view.MainMenuScene;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ *
+ */
 public class MainMenuController extends AbstractController implements
 		IOnMenuItemClickListener {
 
