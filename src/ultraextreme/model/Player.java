@@ -2,6 +2,8 @@ package ultraextreme.model;
 
 import java.beans.PropertyChangeEvent;
 
+import android.util.Log;
+
 import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
@@ -115,6 +117,7 @@ public class Player implements IPlayer {
 		// TODO Extract the strings
 		if (event.getPropertyName().equals("enemyKilled")) {
 			score  += 10;
+			//Log.d("DEBUG", "Score: " + score);
 		}
 	}
 
