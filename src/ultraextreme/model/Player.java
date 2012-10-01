@@ -39,7 +39,25 @@ public class Player implements IPlayer {
 	 * holding.
 	 */
 	final private ItemBar itemBar;
+	
+	final private BulletManager bulletManager;
+	
+	/**
+	 * The lives the player has left.
+	 */
+	private int lives;
 
+	/**
+	 * The time the ship will be invincible after receiving damage.
+	 */
+	private static final double invTime = Constants.getInstance()
+			.getShipInvincibilityTime();
+	
+	/**
+	 * A count down for the ships invincibility.
+	 */
+	private double invCountDown;
+	
 	/**
 	 * Create a new player.
 	 * 
@@ -50,6 +68,7 @@ public class Player implements IPlayer {
 	 *            to.
 	 */
 	public Player(final PlayerID playerId, final BulletManager bulletManager) {
+		this.bulletManager = bulletManager;
 		this.ship = new PlayerShip();
 		setShipToSpawn();
 		this.playerId = playerId;
@@ -57,6 +76,7 @@ public class Player implements IPlayer {
 				Math.PI), 5);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
+		lives = Constants.getInstance().getInitShipLives();
 	}
 
 	/**
@@ -66,11 +86,24 @@ public class Player implements IPlayer {
 	public void update(final ModelInput input, final float timeElapsed) {
 		double newX = 0;
 		double newY = 0;
-		if(ship.isInvincible()) {
-			if(ship.justGotInvincible()) {
-				setShipToSpawn();
+		if(ship.justGotHit() && invCountDown <= 0) {
+			if(itemBar.getItems().isEmpty()) {
+				lives -= 1;
+				if(lives == 0) {
+					ship.setDestroyed();
+				} else {
+					itemBar.addItem(new BasicWeapon(bulletManager));
+					setShipToSpawn();
+				}
+			} else {
+				itemBar.looseItems();
 			}
-			ship.countDownInvincibility((double)timeElapsed);
+			if(!ship.isDestroyed()) {
+				invCountDown = invTime;
+			}
+		}
+		if(invCountDown > 0) {
+			invCountDown -= (double) timeElapsed;
 		}
 		
 		if (ship.canMoveX(input.dX)) {

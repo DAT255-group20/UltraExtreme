@@ -100,6 +100,17 @@ public class ItemBar {
 		fireItemBarUpdated();
 	}
 	
+	public void looseItems() {
+		//TODO Should possibly remove more items? change implementation?
+		if(!items.isEmpty()) {
+			if(cursorPosition == items.size() - 1) {
+				cursorPosition--;
+			}
+			items.remove(items.size() - 1);
+			fireItemBarUpdated();
+		}
+	}
+	
 	/**
 	 * Tell the listeners that this item bar has been updated.
 	 */

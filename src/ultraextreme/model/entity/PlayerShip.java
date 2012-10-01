@@ -19,22 +19,18 @@ public class PlayerShip extends AbstractDestroyableEntity {
 			.getPlayerSpeedModifier();
 	
 	/**
-	 * The time the ship will be invincible after receiving damage.
+	 * If the ship is hit this update.
 	 */
-	private static double invTime = Constants.getInstance()
-			.getShipInvincibilityTime();
-	
-	private int lives;
+	private boolean justHit;
 	
 	/**
-	 * A count down for the ships invincibility.
+	 * Wether or not the ship is destroyed.
 	 */
-	private double invCountDown;
+	private boolean destroyed;
 
 	public PlayerShip(final double x, final double y, final int width,
 			final int height) {
 		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
-		lives = Constants.getInstance().getInitShipLives();
 	}
 
 	public PlayerShip(final double x, double y) {
@@ -78,22 +74,20 @@ public class PlayerShip extends AbstractDestroyableEntity {
 		return newY + getHeight() / 2 < dimension.getY()
 				&& newY - getHeight() / 2 > 0;
 	}
+	
+	@Override
+	public void move(double x, double y) {
+		justHit = false;
+		super.move(x, y);
+	}
 
 	@Override
 	public boolean isDestroyed() {
-		return lives <= 0;
+		return destroyed;
 	}
 	
-	public boolean isInvincible() {
-		return invCountDown > 0;
-	}
-	
-	public boolean justGotInvincible() {
-		return invCountDown == invTime;
-	}
-	
-	public void countDownInvincibility(double timeElapsed) {
-		invCountDown = invCountDown - timeElapsed;
+	public void setDestroyed() {
+		destroyed = true;
 	}
 
 	@Override
@@ -101,11 +95,17 @@ public class PlayerShip extends AbstractDestroyableEntity {
 		return speedMod;
 	}
 
+	/**
+	 * Returns true if the ship got hit this update, else false.
+	 * 
+	 * @return True if the ship got hit this update, else false.
+	 */
+	public boolean justGotHit() {
+		return justHit;
+	}
+	
 	@Override
 	public void receiveDamage(int damage) {
-		if(invCountDown <= 0) {
-			lives = lives - damage;
-			invCountDown = invTime;
-		}
+		justHit = true;
 	}
 }
