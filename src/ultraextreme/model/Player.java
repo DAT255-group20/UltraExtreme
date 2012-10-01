@@ -1,5 +1,7 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeEvent;
+
 import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
@@ -8,8 +10,8 @@ import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.item.SpinningSpreadWeapon;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Rotation;
 
 /**
  * The player. The player has a ship and an item bar containing the ship's items
@@ -103,5 +105,11 @@ public class Player implements IPlayer {
 	@Override
 	public void giveWeapon(final AbstractWeapon weapon) {
 		itemBar.addItem(weapon);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		// TODO Handle score events
+		
 	}
 }

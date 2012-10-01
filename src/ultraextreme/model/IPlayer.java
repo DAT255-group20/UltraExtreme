@@ -1,5 +1,7 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeListener;
+
 import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.ItemBar;
@@ -13,7 +15,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Johan Gronvall
  * 
  */
-public interface IPlayer {
+public interface IPlayer extends PropertyChangeListener {
 
 	/**
 	 * Read the player's input data and update the player's ship.

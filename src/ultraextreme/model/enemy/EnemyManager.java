@@ -18,6 +18,7 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";
+	public static final String ENEMY_KILLED = "enemyKilled";
 
 	private final List<IEnemy> enemies;
 
@@ -40,6 +41,7 @@ public class EnemyManager implements PropertyChangeListener {
 		for (int i = 0; i < enemies.size(); i++) {
 			final IEnemy e = enemies.get(i);
 			if (e.isDead() || e.getShip().isOutOfScreen(150) ) {
+				pcs.firePropertyChange(ENEMY_KILLED, null, e);
 				removeEnemy(i);
 				i--;
 			}
