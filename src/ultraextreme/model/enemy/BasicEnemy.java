@@ -66,4 +66,9 @@ public class BasicEnemy extends AbstractEnemy {
 		this.getShip().move(0, timeElapsed * Y_SPEED);
 		this.shoot(timeElapsed);
 	}
+
+	@Override
+	public int getScoreValue() {
+		return 10;
+	}
 }

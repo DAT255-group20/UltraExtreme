@@ -24,8 +24,6 @@ public interface IEnemy {
 	EnemyShip getShip();
 
 	/**
-	 * returns true if this enemy has been destroyed
-	 * 
 	 * @return true if this enemy has been destroyed
 	 */
 	boolean isDead();
@@ -37,4 +35,9 @@ public interface IEnemy {
 
 	// TODO Write javadoc
 	AbstractWeapon getWeapon();
+
+	/**
+	 * @return The score value that is earned by killing this enemy.
+	 */
+	int getScoreValue();
 }

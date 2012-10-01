@@ -43,6 +43,9 @@ public class GameModel implements IUltraExtremeModel {
 		enemySpawner = new EnemySpawner(new RandomWaveList(1000, bulletManager));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
+		
+		//Player listens when enemies are killed
+		enemyManager.addPropertyChangeListener(player);
 	}
 
 	/**
