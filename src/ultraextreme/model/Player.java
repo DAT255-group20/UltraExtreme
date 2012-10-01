@@ -41,6 +41,8 @@ public class Player implements IPlayer {
 	 */
 	final private ItemBar itemBar;
 
+	private int score;
+
 	/**
 	 * Create a new player.
 	 * 
@@ -60,6 +62,7 @@ public class Player implements IPlayer {
 				Math.PI), 5);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
+		this.score = 0;
 	}
 
 	/**
@@ -109,7 +112,14 @@ public class Player implements IPlayer {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		// TODO Handle score events
-		
+		// TODO Extract the strings
+		if (event.getPropertyName().equals("enemyKilled")) {
+			score  += 10;
+		}
+	}
+
+	@Override
+	public int getScore() {
+		return score;
 	}
 }

@@ -38,8 +38,10 @@ public interface IPlayer extends PropertyChangeListener {
 	 * @return The player's ID.
 	 */
 	PlayerID getPlayerId();
+	
+	int getScore();
 
-	// test
+	// TODO test
 	public ItemBar getItemBar();
 	
 	/**
