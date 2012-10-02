@@ -97,6 +97,7 @@ public class Player implements IPlayer {
 		double newX = 0;
 		double newY = 0;
 		if(ship.justGotHit() && invCountDown <= 0) {
+			itemBar.looseItems();
 			if(itemBar.getItems().isEmpty()) {
 				lives -= 1;
 				if(lives == 0) {
@@ -105,8 +106,6 @@ public class Player implements IPlayer {
 					itemBar.addItem(new BasicWeapon(bulletManager));
 					setShipToSpawn();
 				}
-			} else {
-				itemBar.looseItems();
 			}
 			if(!ship.isDestroyed()) {
 				invCountDown = invTime;
