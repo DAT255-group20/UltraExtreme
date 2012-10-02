@@ -4,6 +4,7 @@ import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
@@ -40,11 +41,11 @@ public class GameController extends AbstractController implements
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
 			final SpriteFactory spriteFactory,
-			final SimpleBaseGameActivity activity, float scaling, Camera camera) {
+			final SimpleBaseGameActivity activity, float scaling, Camera camera, Font font) {
 		super();
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager, spriteFactory, scaling, camera);
+				sensorManager, spriteFactory, scaling, camera, font);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage

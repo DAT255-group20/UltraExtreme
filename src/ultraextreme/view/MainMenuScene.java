@@ -7,6 +7,7 @@ import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.util.color.Color;
 
 import android.util.Log;
 
@@ -28,6 +29,7 @@ public class MainMenuScene extends MenuScene {
 		final IMenuItem startButton = new TextMenuItem(MENU_START, font,
 				"Start game", vertexBufferObjectManager);
 		startButton.setPosition(100, 100);
+		startButton.setColor(Color.BLACK);
 		addMenuItem(startButton);
 		Log.d("DEBUG", "onCreateScene");
 	}

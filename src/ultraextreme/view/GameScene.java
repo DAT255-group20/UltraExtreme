@@ -7,6 +7,7 @@ import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
+import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
@@ -37,7 +38,7 @@ public class GameScene extends Scene implements SensorEventListener {
 	public GameScene(final IUltraExtremeModel gameModel,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
-			final SpriteFactory spriteFactory, float scaling, Camera camera) {
+			final SpriteFactory spriteFactory, float scaling, Camera camera, Font font) {
 		super();
 
 		this.gameModel = gameModel;
@@ -54,9 +55,13 @@ public class GameScene extends Scene implements SensorEventListener {
 		itemBarPanel = new ItemBarPanel(itemBar, spriteFactory,
 				vertexBufferObjectManager, new Position(75, 1400), scaling);
 		
+		ScoreText scoreText = new ScoreText(100, 100, font, vertexBufferObjectManager);
+		gameModel.registerPlayerListener(scoreText);
+		
 		hud = new HUD();
 		hud.setVisible(false);
 		hud.attachChild(itemBarPanel);
+		hud.attachChild(scoreText);
 		camera.setHUD(hud);
 
 		this.sensorManager = sensorManager;

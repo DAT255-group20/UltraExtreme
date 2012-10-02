@@ -11,7 +11,7 @@ public class ScoreText extends Text implements IPlayerListener  {
 
 	public ScoreText(float x, float y, Font font, VertexBufferObjectManager vbo)
 	{
-		super(x, y, font, "No score yet", vbo);
+		super(x, y, font, "Score: 0         ", vbo);
 	}
 
 	@Override
