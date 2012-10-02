@@ -1,5 +1,6 @@
 package ultraextreme.controller;
 
+import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
@@ -39,11 +40,11 @@ public class GameController extends AbstractController implements
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
 			final SpriteFactory spriteFactory,
-			final SimpleBaseGameActivity activity, float scaling) {
+			final SimpleBaseGameActivity activity, float scaling, Camera camera) {
 		super();
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager, spriteFactory, scaling);
+				sensorManager, spriteFactory, scaling, camera);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
@@ -131,5 +132,15 @@ public class GameController extends AbstractController implements
 	@Override
 	public Scene getScene() {
 		return this.scene;
+	}
+
+	@Override
+	public void activateController() {
+		scene.setHUDVisible(true);
+	}
+
+	@Override
+	public void deactivateController() {
+		scene.setHUDVisible(false);
 	}
 }
