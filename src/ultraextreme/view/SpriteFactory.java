@@ -27,15 +27,12 @@ public class SpriteFactory {
 
 	// TODO PMD: Use explicit scoping instead of the default package private
 	// level
-	Map<ObjectName, ITextureRegion> textureMap;
+	private Map<ObjectName, ITextureRegion> textureMap;
 
 	// TODO PMD: Use explicit scoping instead of the default package private
 	// level
 	// TODO not yet implemented offsets
-	Map<ObjectName, Integer> offsetMap;
-
-	// TODO PMD: Perhaps 'textureAtlas' could be replaced by a local variable.
-	private BitmapTextureAtlas textureAtlas;
+	private Map<ObjectName, Integer> offsetMap;
 
 	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
 	// variable.
@@ -64,12 +61,12 @@ public class SpriteFactory {
 				.getDisplayMetrics().heightPixels);
 		GameObjectSprite.setScreenDimension(screenDimension);
 		textureMap = new HashMap<ObjectName, ITextureRegion>();
-		// TODO does this work? might not pickup what i want
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		final TextureManager textureManager = activity.getTextureManager();
-		this.textureAtlas = new BitmapTextureAtlas(textureManager, 1024, 1024,
+		BitmapTextureAtlas textureAtlas = new BitmapTextureAtlas(textureManager, 1024, 1024,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-
+		
+		//init enemies bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
 						"ship_placeholder.png", 0, 0);
@@ -84,18 +81,23 @@ public class SpriteFactory {
 				.createFromAsset(textureAtlas, activity,
 						"enemy_placeholder.png", 0, 40);
 		textureMap.put(ObjectName.BASIC_ENEMYSHIP, BasicEnemy);
+		
+		//init pickupables
+		textureMap.put(ObjectName.BASIC_WEAPON, BasicEnemy);
+		textureMap.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip);
+
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar.png", 80, 0);
 
-		// Init the item textures
+		// Init the item textures for items in the itembar
 		itemTextures = new HashMap<ObjectName, ITextureRegion>();
 		itemTextures.put(ObjectName.BASIC_WEAPON, BasicEnemy); // Test only
 		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test
 																			// only
 
-		// What is this for?
+		// What is this for?(I think it needs to be called to init the atlas, we will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
 	}
 

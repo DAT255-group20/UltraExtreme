@@ -68,7 +68,7 @@ public class GameModel implements IUltraExtremeModel {
 		// TODO Decide if we want pickups to move around. If so, the following
 		// commented code is necessary.
 		// for(WeaponPickup pickup : pickupManager.getPickups()) {
-		// pickup.doMovement(timeElapsed); ?
+		// pickup.doMovement(timeElapsed);
 		// }
 
 		enemySpawner.update(timeElapsed);
@@ -165,5 +165,9 @@ public class GameModel implements IUltraExtremeModel {
 	@Override
 	public void unregisterPlayerListener(IPlayerListener listener) {
 		player.unregisterListener(listener);
+	}
+
+	public PickupManager getPickupManager() {
+		return pickupManager;
 	}
 }
