@@ -33,7 +33,7 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void addEnemy(final IEnemy enemy) {
 		enemies.add(enemy);
-		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
+		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy);
 	}
 
 	public void clearDeadEnemies() {
