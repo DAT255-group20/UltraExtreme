@@ -42,21 +42,24 @@ public abstract class AbstractController {
 
 	/**
 	 * Fires an event and alerts all listeners to this controller.
-	 * @param event The event that is fired.
+	 * 
+	 * @param event
+	 *            The event that is fired.
 	 */
 	protected void fireEvent(final ControllerEvent event) {
 		for (IControllerListener listener : listeners) {
 			listener.controllerListenerUpdate(event);
 		}
 	}
-	
+
 	/**
 	 * Does what is necessary to activate this controller.
 	 */
 	public abstract void activateController();
-	
+
 	/**
-	 * Does what is necessary to deactivate this controller, that is make it inactive.
+	 * Does what is necessary to deactivate this controller, that is make it
+	 * inactive.
 	 */
 	public abstract void deactivateController();
 }

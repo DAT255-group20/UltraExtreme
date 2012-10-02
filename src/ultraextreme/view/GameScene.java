@@ -29,7 +29,7 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	private static final Position SCORE_POS = new Position(10, 10);
 	private static final Position ITEMBAR_POS = new Position(75, 1400);
-	
+
 	private final IUltraExtremeModel gameModel;
 	private GameObjectSprite shipSprite;
 
@@ -41,7 +41,8 @@ public class GameScene extends Scene implements SensorEventListener {
 	public GameScene(final IUltraExtremeModel gameModel,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
-			final SpriteFactory spriteFactory, float scaling, Camera camera, Font font) {
+			final SpriteFactory spriteFactory, float scaling, Camera camera,
+			Font font) {
 		super();
 
 		this.gameModel = gameModel;
@@ -53,14 +54,15 @@ public class GameScene extends Scene implements SensorEventListener {
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
-		
+
 		ItemBar itemBar = gameModel.getPlayer().getItemBar();
 		itemBarPanel = new ItemBarPanel(itemBar, spriteFactory,
 				vertexBufferObjectManager, ITEMBAR_POS, scaling);
-		
-		ScoreText scoreText = new ScoreText(SCORE_POS, font, vertexBufferObjectManager);
+
+		ScoreText scoreText = new ScoreText(SCORE_POS, font,
+				vertexBufferObjectManager);
 		gameModel.registerPlayerListener(scoreText);
-		
+
 		hud = new HUD();
 		hud.setVisible(false);
 		hud.attachChild(itemBarPanel);

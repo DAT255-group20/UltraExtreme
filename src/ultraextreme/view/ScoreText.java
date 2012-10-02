@@ -8,13 +8,14 @@ import ultraextreme.model.IPlayer;
 import ultraextreme.model.IPlayerListener;
 import ultraextreme.model.util.Position;
 
-public class ScoreText extends Text implements IPlayerListener  {
+public class ScoreText extends Text implements IPlayerListener {
 
-	public ScoreText(Position textPos, Font font, VertexBufferObjectManager vbo)
-	{
+	public ScoreText(Position textPos, Font font, VertexBufferObjectManager vbo) {
 		// Creates with empty characters to "allocate" memory for the object
-		// According to https://sites.google.com/site/matimdevelopment/creating-text
-		super((float)textPos.getX(), (float)textPos.getY(), font, "Score: 0         ", vbo);
+		// According to
+		// https://sites.google.com/site/matimdevelopment/creating-text
+		super((float) textPos.getX(), (float) textPos.getY(), font,
+				"Score: 0         ", vbo);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * 
  * @author Bjorn Persson Mattsson
- *
+ * 
  */
 public class ModelInputTest {
 
@@ -21,21 +21,21 @@ public class ModelInputTest {
 		boolean fireWeapons2 = false;
 		boolean dropBomb1 = false;
 		boolean dropBomb2 = true;
-		
+
 		ModelInput input = new ModelInput(dX1, dY1, fireWeapons1, dropBomb1);
-		
+
 		assertTrue(input.dX == dX1);
 		assertTrue(input.dY == dY1);
 		assertTrue(input.fireWeapons == fireWeapons1);
 		assertTrue(input.dropBomb == dropBomb1);
-		
+
 		input = new ModelInput(dX2, dY2, fireWeapons2, dropBomb2);
-		
+
 		assertFalse(input.dX == dX1);
 		assertFalse(input.dY == dY1);
 		assertFalse(input.fireWeapons == fireWeapons1);
 		assertFalse(input.dropBomb == dropBomb1);
-		
+
 		assertTrue(input.dX == dX2);
 		assertTrue(input.dY == dY2);
 		assertTrue(input.fireWeapons == fireWeapons2);

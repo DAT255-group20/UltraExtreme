@@ -19,7 +19,6 @@ public class PickupManager {
 
 	private static final String NEW_PICKUP = "add";
 	private static final String REMOVE_PICKUP = "remove";
-	
 
 	public PickupManager() {
 		pickups = new ArrayList<WeaponPickup>();
@@ -46,10 +45,13 @@ public class PickupManager {
 	public void removePickUp(final WeaponPickup pickup) {
 		pcs.firePropertyChange(REMOVE_PICKUP, null, pickup);
 		pickups.remove(pickup);
-	}	
+	}
+
 	/**
 	 * removes the pickup at the assigned position of the list
-	 * @param index what item is to be removed [0, n]
+	 * 
+	 * @param index
+	 *            what item is to be removed [0, n]
 	 */
 	public void removePickUp(int index) {
 		pcs.firePropertyChange(REMOVE_PICKUP, null, pickups.get(index));

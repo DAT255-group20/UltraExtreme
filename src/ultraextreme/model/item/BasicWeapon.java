@@ -38,6 +38,7 @@ public class BasicWeapon extends AbstractWeapon {
 	public static float getInitCooldown() {
 		return initCooldown;
 	}
+
 	@Override
 	public AbstractWeapon shallowClone() {
 		return new BasicWeapon(this.getBulletManager());

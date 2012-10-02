@@ -14,7 +14,7 @@ import android.util.Log;
 /**
  * 
  * @author Bjorn Persson Mattsson
- *
+ * 
  */
 public class MainMenuScene extends MenuScene {
 

@@ -21,7 +21,8 @@ public interface IUltraExtremeModel {
 	List<IBullet> getBullets();
 
 	List<IEnemy> getEnemies();
-	
+
 	void registerPlayerListener(IPlayerListener listener);
+
 	void unregisterPlayerListener(IPlayerListener listener);
 }

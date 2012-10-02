@@ -48,20 +48,21 @@ public abstract class AbstractEnemy implements IEnemy {
 	public EnemyShip getShip() {
 		return ship;
 	}
-	
+
 	@Override
 	public AbstractWeapon getWeapon() {
 		return weapon;
 	}
-	
+
 	/**
-	May randomly return true if the enemy is dead based on the dropchance of weapons. 
-	**/
+	 * May randomly return true if the enemy is dead based on the dropchance of
+	 * weapons.
+	 **/
 	@Override
 	public boolean shouldSpawnPickup() {
-		
-		return (randomGenerator.nextInt(99) < Constants.getInstance().getWeaponDropChance()+1 && isDead());
-	}
 
+		return (randomGenerator.nextInt(99) < Constants.getInstance()
+				.getWeaponDropChance() + 1 && isDead());
+	}
 
 }

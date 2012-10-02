@@ -22,7 +22,7 @@ import android.hardware.SensorManager;
  * @author Daniel Jonsson
  * @author Johan Gronvall
  * @author Viktor Anderling
- *
+ * 
  */
 public class MainActivity extends SimpleBaseGameActivity implements
 		IControllerListener {
@@ -52,7 +52,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		// and generally bad practice.
 		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
 		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
-		scaling = (float) ((float) getResources().getDisplayMetrics().heightPixels / Constants
+		scaling = (float) (getResources().getDisplayMetrics().heightPixels / Constants
 				.getInstance().getLevelDimension().getY());
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
@@ -64,7 +64,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		spriteFactory = new SpriteFactory(this);
 		defaultFont = FontFactory.create(this.getFontManager(),
 				this.getTextureManager(), 256, 256,
-				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32f, Color.WHITE_ARGB_PACKED_INT);
+				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32f,
+				Color.WHITE_ARGB_PACKED_INT);
 		defaultFont.load();
 	}
 
@@ -101,9 +102,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		currentScene = currentController.getScene();
 		getEngine().setScene(currentScene);
 	}
-	
-	private void switchControllerTo(AbstractController newController)
-	{
+
+	private void switchControllerTo(AbstractController newController) {
 		currentController.deactivateController();
 		currentController = newController;
 		currentController.activateController();

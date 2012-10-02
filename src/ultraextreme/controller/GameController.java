@@ -29,7 +29,7 @@ public class GameController extends AbstractController implements
 	private static final int INVALID_POINTER_ID = -1;
 	// The 'active pointer' is the one currently moving the player.
 	private int activePointerId = INVALID_POINTER_ID;
-	
+
 	private final GameScene scene;
 	private final GameModel gameModel;
 	private final GameLoop gameLoop;
@@ -41,7 +41,8 @@ public class GameController extends AbstractController implements
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
 			final SpriteFactory spriteFactory,
-			final SimpleBaseGameActivity activity, float scaling, Camera camera, Font font) {
+			final SimpleBaseGameActivity activity, float scaling,
+			Camera camera, Font font) {
 		super();
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,

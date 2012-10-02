@@ -104,8 +104,9 @@ public class Player implements IPlayer {
 	public PlayerID getPlayerId() {
 		return playerId;
 	}
-	
+
 	// test
+	@Override
 	public ItemBar getItemBar() {
 		return itemBar;
 	}
@@ -119,15 +120,14 @@ public class Player implements IPlayer {
 	public void propertyChange(PropertyChangeEvent event) {
 		// TODO Extract the strings
 		if (event.getPropertyName().equals("enemyKilled")) {
-			score  += ((IEnemy) event.getNewValue()).getScoreValue();
+			score += ((IEnemy) event.getNewValue()).getScoreValue();
 			notifyListeners();
 			Log.d("DEBUG", "Score: " + score);
 		}
 	}
 
 	private void notifyListeners() {
-		for (IPlayerListener l : listeners)
-		{
+		for (IPlayerListener l : listeners) {
 			l.playerUpdate(this);
 		}
 	}

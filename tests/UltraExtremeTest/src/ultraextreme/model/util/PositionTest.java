@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * 
  * @author Bjorn Persson Mattsson
- *
+ * 
  */
 public class PositionTest {
 

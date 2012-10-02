@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 /**
  * 
  * @author Viktor Anderling
- *
+ * 
  */
 public class DimensionTest extends TestCase {
 

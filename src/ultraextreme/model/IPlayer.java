@@ -38,7 +38,7 @@ public interface IPlayer extends PropertyChangeListener {
 	 * @return The player's ID.
 	 */
 	PlayerID getPlayerId();
-	
+
 	/**
 	 * @return The score of the player.
 	 */
@@ -46,7 +46,7 @@ public interface IPlayer extends PropertyChangeListener {
 
 	// TODO test
 	public ItemBar getItemBar();
-	
+
 	/**
 	 * adds a weapon (or bomb) to this player's ItemBar
 	 * 
