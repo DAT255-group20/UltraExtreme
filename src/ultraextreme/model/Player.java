@@ -100,6 +100,7 @@ public class Player implements IPlayer {
 			itemBar.looseItems();
 			if(itemBar.getItems().isEmpty()) {
 				lives -= 1;
+				this.notifyListeners();
 				if(lives == 0) {
 					ship.setDestroyed();
 				} else {
