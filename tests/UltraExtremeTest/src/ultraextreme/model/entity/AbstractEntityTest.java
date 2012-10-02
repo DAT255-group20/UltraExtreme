@@ -9,7 +9,7 @@ import ultraextreme.model.util.Position;
  * @author Viktor Anderling
  * @author Daniel Jonsson
  * @author Bjorn Persson Mattsson
- *
+ * 
  */
 public abstract class AbstractEntityTest extends TestCase {
 

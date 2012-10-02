@@ -12,7 +12,7 @@ import ultraextreme.model.util.Rotation;
  * @author Daniel Jonsson
  * @author Johan Gronvall
  * @author Viktor Anderling
- *
+ * 
  */
 public class SpinningSpreadWeapon extends AbstractWeapon {
 

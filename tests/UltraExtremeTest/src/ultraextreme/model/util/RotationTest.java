@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 /**
  * 
  * @author Viktor Anderling
- *
+ * 
  */
 public class RotationTest extends TestCase {
 

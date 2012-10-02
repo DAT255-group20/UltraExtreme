@@ -3,10 +3,10 @@ package ultraextreme.model.enemyspawning.wavelist;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
-import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.item.BulletManager;
 
 /**

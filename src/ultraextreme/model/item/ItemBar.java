@@ -99,7 +99,7 @@ public class ItemBar {
 		cursorPosition = cursorPosition % maxNumberOfItems;
 		fireItemBarUpdated();
 	}
-	
+
 	/**
 	 * Tell the listeners that this item bar has been updated.
 	 */
@@ -129,7 +129,7 @@ public class ItemBar {
 			weapon.fire(firePosition, playerId, playerRotation, timeElapsed);
 		}
 	}
-	
+
 	/**
 	 * Add a listener that wants to know when the item bar is updated.
 	 * 

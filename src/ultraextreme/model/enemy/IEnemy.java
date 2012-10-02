@@ -27,8 +27,10 @@ public interface IEnemy {
 	 * @return true if this enemy has been destroyed
 	 */
 	boolean isDead();
+
 	/**
 	 * true if and only if this enemy should be spawning a pickup
+	 * 
 	 * @return true if and only if this enemy should be spawning a pickup
 	 */
 	boolean shouldSpawnPickup();

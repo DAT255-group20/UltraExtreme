@@ -19,7 +19,7 @@ import ultraextreme.model.item.BulletManager;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class EnemyManagerTest extends TestCase {
 
@@ -73,26 +73,28 @@ public class EnemyManagerTest extends TestCase {
 		IEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
 		enemyManager.addPropertyChangeListener(collector);
 		enemyManager.addEnemy(enemy);
-		
+
 		// kill the ship
 		enemy.getShip().receiveDamage(10000);
-		
+
 		enemyManager.clearDeadEnemies();
-		
+
 		assertEquals(collector.getEnemyShips().size(), 2);
-		assertEquals(enemy, collector.getEnemyShips().get(EnemyManager.REMOVED_ENEMY));
+		assertEquals(enemy,
+				collector.getEnemyShips().get(EnemyManager.REMOVED_ENEMY));
 		collector.getEnemyShips().clear();
-		
+
 		// Now check if an enemy gets removed when it is outside the map
 		enemy = new BasicEnemy(0, 0, new BulletManager());
 		enemyManager.addEnemy(enemy);
-		
+
 		enemy.getShip().move(-500, -500);
-		
+
 		enemyManager.clearDeadEnemies();
-		
+
 		assertEquals(collector.getEnemyShips().size(), 2);
-		assertEquals(enemy, collector.getEnemyShips().get(EnemyManager.REMOVED_ENEMY));
+		assertEquals(enemy,
+				collector.getEnemyShips().get(EnemyManager.REMOVED_ENEMY));
 	}
 
 	/**

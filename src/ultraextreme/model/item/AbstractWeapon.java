@@ -35,10 +35,12 @@ public abstract class AbstractWeapon {
 	public ObjectName getName() {
 		return objectName;
 	}
+
 	/**
 	 * returns a shallow clone of this weapon
+	 * 
 	 * @return a shallow clone of this weapon
 	 */
 	public abstract AbstractWeapon shallowClone();
-	
+
 }

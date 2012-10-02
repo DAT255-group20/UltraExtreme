@@ -13,7 +13,7 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
  * @author Johan Gronvall
- *
+ * 
  */
 public class EnemyManager implements PropertyChangeListener {
 
@@ -45,13 +45,10 @@ public class EnemyManager implements PropertyChangeListener {
 			if (e.isDead()) {
 				pcs.firePropertyChange(ENEMY_KILLED, null, e);
 				remove = true;
-			}
-			else if (e.getShip().isOutOfScreen(150))
-			{
+			} else if (e.getShip().isOutOfScreen(150)) {
 				remove = true;
 			}
-			if (remove)
-			{
+			if (remove) {
 				removeEnemy(i);
 				i--;
 			}
@@ -59,7 +56,8 @@ public class EnemyManager implements PropertyChangeListener {
 	}
 
 	private void removeEnemy(int index) {
-		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null, enemies.get(index));
+		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null,
+				enemies.get(index));
 		enemies.remove(index);
 	}
 

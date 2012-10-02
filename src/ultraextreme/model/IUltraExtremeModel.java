@@ -15,9 +15,14 @@ import ultraextreme.model.entity.IBullet;
  */
 public interface IUltraExtremeModel {
 
+	// TODO Add javadoc
 	IPlayer getPlayer();
 
 	List<IBullet> getBullets();
 
 	List<IEnemy> getEnemies();
+
+	void registerPlayerListener(IPlayerListener listener);
+
+	void unregisterPlayerListener(IPlayerListener listener);
 }
