@@ -49,7 +49,7 @@ public class PlayerShipTest extends AbstractEntityTest {
 	}
 
 	@Override
-	public void testGetSpeedModifier() {
+	public void testGetSpeedMod() {
 		// FIXME
 	}
 

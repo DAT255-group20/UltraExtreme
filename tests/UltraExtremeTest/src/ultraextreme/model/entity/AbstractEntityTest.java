@@ -97,7 +97,7 @@ public abstract class AbstractEntityTest extends TestCase {
 		// TODO Write isOutOfScreen test
 	}
 
-	public abstract void testGetSpeedModifier();
+	public abstract void testGetSpeedMod();
 
 	private AbstractEntity newEntity() {
 		return getNewAbstractEntity(10, 20, 30, 40, new Rotation(0));
