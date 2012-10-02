@@ -184,6 +184,11 @@ public class Player implements IPlayer {
 	public int getScore() {
 		return score;
 	}
+	
+	@Override
+	public int getLives() {
+		return lives;
+	}
 
 	public void registerListener(IPlayerListener listener) {
 		listeners.add(listener);
@@ -192,4 +197,5 @@ public class Player implements IPlayer {
 	public void unregisterListener(IPlayerListener listener) {
 		listeners.remove(listener);
 	}
+
 }

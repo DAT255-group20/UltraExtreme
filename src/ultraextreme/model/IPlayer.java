@@ -47,6 +47,11 @@ public interface IPlayer extends PropertyChangeListener {
 
 	// TODO test
 	public ItemBar getItemBar();
+	
+	/**
+	 * @return The number of lives the player has left.
+	 */
+	public int getLives();
 
 	/**
 	 * adds a weapon (or bomb) to this player's ItemBar
