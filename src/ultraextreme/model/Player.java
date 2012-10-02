@@ -155,10 +155,9 @@ public class Player implements IPlayer {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Sets the players ship to its spawn point.
 	 */
-	@Override
-	public void setShipToSpawn() {
+	private void setShipToSpawn() {
 		final Dimension levelDimension = Constants.getInstance()
 				.getLevelDimension();
 		ship.setPosition(new Position(levelDimension.getX() * 0.5 - ship.getWidth()/2,

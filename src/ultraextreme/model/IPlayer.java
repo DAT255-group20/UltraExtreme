@@ -13,6 +13,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
  * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public interface IPlayer extends PropertyChangeListener {
@@ -26,11 +27,6 @@ public interface IPlayer extends PropertyChangeListener {
 	 *            Time since last update.
 	 */
 	void update(ModelInput input, float delta);
-
-	/**
-	 * Sets the players ship to its spawn point.
-	 */
-	void setShipToSpawn();
 	
 	/**
 	 * Return a reference to the player's ship.
