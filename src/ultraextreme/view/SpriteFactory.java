@@ -64,7 +64,6 @@ public class SpriteFactory {
 				.getDisplayMetrics().heightPixels);
 		GameObjectSprite.setScreenDimension(screenDimension);
 		textureMap = new HashMap<ObjectName, ITextureRegion>();
-		// TODO does this work? might not pickup what i want
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		final TextureManager textureManager = activity.getTextureManager();
 		this.textureAtlas = new BitmapTextureAtlas(textureManager, 1024, 1024,
