@@ -110,7 +110,7 @@ public class ItemBar {
 			fireItemBarUpdated();
 		}
 	}
-	
+
 	/**
 	 * Tell the listeners that this item bar has been updated.
 	 */
