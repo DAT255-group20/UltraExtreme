@@ -55,7 +55,7 @@ public class GameController extends AbstractController implements
 						.getResources().getDisplayMetrics().widthPixels,
 				activity.getResources().getDisplayMetrics().heightPixels);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
-
+		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
 		scene.registerUpdateHandler(gameLoop);
 	}
