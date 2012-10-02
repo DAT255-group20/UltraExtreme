@@ -39,6 +39,9 @@ public interface IPlayer extends PropertyChangeListener {
 	 */
 	PlayerID getPlayerId();
 	
+	/**
+	 * @return The score of the player.
+	 */
 	int getScore();
 
 	// TODO test
