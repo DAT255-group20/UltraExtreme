@@ -15,6 +15,14 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
+ * @author Viktor Anderling
+ *
+ */
 public class MainActivity extends SimpleBaseGameActivity implements
 		IControllerListener {
 

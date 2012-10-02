@@ -17,6 +17,8 @@ import ultraextreme.model.util.PlayerID;
  * The main class for a running game.
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
  * 
  */
 public class GameModel implements IUltraExtremeModel {
@@ -79,7 +81,7 @@ public class GameModel implements IUltraExtremeModel {
 	 */
 	private void spawnPickups() {
 		for(IEnemy enemy : enemyManager.getEnemies()) {
-			if(enemy.ShouldSpawnPickup()) {
+			if(enemy.shouldSpawnPickup()) {
 				pickupManager.addPickup(new WeaponPickup(
 						enemy.getShip().getPosition(), enemy.getWeapon().getName()));
 			}

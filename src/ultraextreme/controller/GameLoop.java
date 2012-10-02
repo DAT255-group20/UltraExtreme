@@ -23,7 +23,10 @@ import android.util.Log;
 
 /**
  * 
- * @author Daniel Jonsson, Bjorn Persson Mattsson
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {

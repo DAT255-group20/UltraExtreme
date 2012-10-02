@@ -14,7 +14,8 @@ import ultraextreme.model.util.PlayerID;
 /**
  * Contains all bullets in the game.
  * 
- * @author Bjorn Persson Mattsson, Daniel Jonsson
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class BulletManager {
@@ -77,7 +78,7 @@ public class BulletManager {
 		for (List<IBullet> list : bulletsMap.values()) {
 			for (int i = 0; i < list.size(); i++) {
 				final IBullet b = list.get(i);
-				if (b.isMarkedForRemoval() || (b.isOutOfScreen())) {
+				if (b.isMarkedForRemoval() || (b.isOutOfScreen(100))) {
 					pcs.firePropertyChange("remove", null, b);
 					list.remove(i);
 					i--;

@@ -15,7 +15,10 @@ import android.view.MotionEvent;
 /**
  * Controller for the game model.
  * 
- * @author Bjorn Persson Mattsson, Johan Gronvall
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public class GameController extends AbstractController implements

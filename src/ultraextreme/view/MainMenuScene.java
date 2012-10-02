@@ -10,6 +10,11 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import android.util.Log;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ *
+ */
 public class MainMenuScene extends MenuScene {
 
 	public static final int MENU_START = 0;

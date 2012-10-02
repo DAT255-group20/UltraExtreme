@@ -11,6 +11,8 @@ import ultraextreme.model.util.Rotation;
 /**
  * Represents an enemy brain/controller.
  * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * @author Johan Gronvall
  * @author Viktor Anderling
  * 
@@ -56,7 +58,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	May randomly return true if the enemy is dead based on the dropchance of weapons. 
 	**/
 	@Override
-	public boolean ShouldSpawnPickup() {
+	public boolean shouldSpawnPickup() {
 		
 		return (randomGenerator.nextInt(99) < Constants.getInstance().getWeaponDropChance()+1 && isDead());
 	}

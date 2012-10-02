@@ -7,6 +7,12 @@ import java.util.Random;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Position;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @author Bjorn Persson Mattsson
+ *
+ */
 public class EnemySpawner {
 
 	public static final String NEW_ENEMY = "add";

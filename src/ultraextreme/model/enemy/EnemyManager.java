@@ -7,8 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.enemyspawning.EnemySpawner;
-import ultraextreme.model.item.PickupManager;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
+ *
+ */
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";
@@ -33,9 +39,7 @@ public class EnemyManager implements PropertyChangeListener {
 	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			final IEnemy e = enemies.get(i);
-			if (e.isDead()/* || e.getShip().isOutOfScreen() */) {
-				// TODO Enemies are obviously counted as out of screen when they
-				// are spawned and are removed right away.
+			if (e.isDead() || e.getShip().isOutOfScreen(150) ) {
 				pcs.firePropertyChange("remove", null, e);
 				enemies.remove(i);
 				i--;

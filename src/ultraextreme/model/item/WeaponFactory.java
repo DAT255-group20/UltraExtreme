@@ -5,10 +5,9 @@ import java.util.Map;
 
 import ultraextreme.model.util.ObjectName;
 /**
- * 
+ * A factory class for weapons in charge of creating weapons 
  * @author Johan Gronvall
- * A factoryclass for weapons
- * in charge of creating weapons 
+ * 
  */
 public class WeaponFactory {
 	private Map<ObjectName, AbstractWeapon> weaponMap;

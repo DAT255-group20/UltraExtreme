@@ -3,6 +3,11 @@ package ultraextreme.model.util;
 import javax.vecmath.Vector2d;
 import junit.framework.TestCase;
 
+/**
+ * 
+ * @author Viktor Anderling
+ *
+ */
 public class RotationTest extends TestCase {
 
 	Rotation rotation;
