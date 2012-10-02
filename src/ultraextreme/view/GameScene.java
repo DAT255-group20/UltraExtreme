@@ -27,6 +27,9 @@ import android.hardware.SensorManager;
  */
 public class GameScene extends Scene implements SensorEventListener {
 
+	private static final Position SCORE_POS = new Position(10, 10);
+	private static final Position ITEMBAR_POS = new Position(75, 1400);
+	
 	private final IUltraExtremeModel gameModel;
 	private GameObjectSprite shipSprite;
 
@@ -53,9 +56,9 @@ public class GameScene extends Scene implements SensorEventListener {
 		
 		ItemBar itemBar = gameModel.getPlayer().getItemBar();
 		itemBarPanel = new ItemBarPanel(itemBar, spriteFactory,
-				vertexBufferObjectManager, new Position(75, 1400), scaling);
+				vertexBufferObjectManager, ITEMBAR_POS, scaling);
 		
-		ScoreText scoreText = new ScoreText(100, 100, font, vertexBufferObjectManager);
+		ScoreText scoreText = new ScoreText(SCORE_POS, font, vertexBufferObjectManager);
 		gameModel.registerPlayerListener(scoreText);
 		
 		hud = new HUD();
