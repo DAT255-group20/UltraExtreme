@@ -17,6 +17,16 @@ public class PlayerShip extends AbstractDestroyableEntity {
 
 	private static double speedMod = Constants.getInstance()
 			.getPlayerSpeedModifier();
+	
+	/**
+	 * If the ship is hit this update.
+	 */
+	private boolean justHit;
+	
+	/**
+	 * Wether or not the ship is destroyed.
+	 */
+	private boolean destroyed;
 
 	public PlayerShip(final double x, final double y, final int width,
 			final int height) {
@@ -64,11 +74,20 @@ public class PlayerShip extends AbstractDestroyableEntity {
 		return newY + getHeight() / 2 < dimension.getY()
 				&& newY - getHeight() / 2 > 0;
 	}
+	
+	@Override
+	public void move(double x, double y) {
+		justHit = false;
+		super.move(x, y);
+	}
 
 	@Override
 	public boolean isDestroyed() {
-		// TODO PlayerShip.isDestroyed()
-		return false;
+		return destroyed;
+	}
+	
+	public void setDestroyed() {
+		destroyed = true;
 	}
 
 	@Override
@@ -76,8 +95,17 @@ public class PlayerShip extends AbstractDestroyableEntity {
 		return speedMod;
 	}
 
+	/**
+	 * Returns true if the ship got hit this update, else false.
+	 * 
+	 * @return True if the ship got hit this update, else false.
+	 */
+	public boolean justGotHit() {
+		return justHit;
+	}
+	
 	@Override
 	public void receiveDamage(int damage) {
-		// TODO PlayerShip.receiveDamage()
+		justHit = true;
 	}
 }

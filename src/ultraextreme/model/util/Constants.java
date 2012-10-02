@@ -74,4 +74,19 @@ public class Constants {
 	public double getBulletSpeedModifier() {
 		return 200;
 	}
+	
+	/**
+	 * @return The time in seconds of which the will stay invincible after 
+	 * receiving damage.
+	 */
+	public double getShipInvincibilityTime() {
+		return 3;
+	}
+	
+	/**
+	 * @return The number of lives the ship will start with.
+	 */
+	public int getInitShipLives() {
+		return 3;
+	}
 }
