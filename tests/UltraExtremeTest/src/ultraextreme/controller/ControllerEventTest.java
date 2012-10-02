@@ -22,6 +22,14 @@ public class ControllerEventTest {
 			public Scene getScene() {
 				return null;
 			}
+
+			@Override
+			public void activateController() {
+			}
+
+			@Override
+			public void deactivateController() {
+			}
 		};
 		ControllerEvent event = new ControllerEvent(null, null);
 		assertNull(event.getSource());
