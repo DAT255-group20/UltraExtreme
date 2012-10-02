@@ -53,7 +53,6 @@ public class GameScene extends Scene implements SensorEventListener {
 		ItemBar itemBar = gameModel.getPlayer().getItemBar();
 		itemBarPanel = new ItemBarPanel(itemBar, spriteFactory,
 				vertexBufferObjectManager, new Position(75, 1400), scaling);
-		//attachChild(itemBarPanel);
 		
 		hud = new HUD();
 		hud.setVisible(false);
