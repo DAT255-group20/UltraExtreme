@@ -1,5 +1,10 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
@@ -8,9 +13,10 @@ import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.item.SpinningSpreadWeapon;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
+import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
-import ultraextreme.model.util.PlayerID;
+import android.util.Log;
 
 /**
  * The player. The player has a ship and an item bar containing the ship's items
@@ -23,6 +29,7 @@ import ultraextreme.model.util.PlayerID;
  */
 public class Player implements IPlayer {
 
+	List<IPlayerListener> listeners = new ArrayList<IPlayerListener>();
 	/**
 	 * Reference to the player's ship.
 	 */
@@ -46,6 +53,8 @@ public class Player implements IPlayer {
 	 * The lives the player has left.
 	 */
 	private int lives;
+
+	private int score;
 
 	/**
 	 * The time the ship will be invincible after receiving damage.
@@ -77,6 +86,7 @@ public class Player implements IPlayer {
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
 		lives = Constants.getInstance().getInitShipLives();
+		this.score = 0;
 	}
 
 	/**
@@ -133,8 +143,9 @@ public class Player implements IPlayer {
 	public PlayerID getPlayerId() {
 		return playerId;
 	}
-	
+
 	// test
+	@Override
 	public ItemBar getItemBar() {
 		return itemBar;
 	}
@@ -153,6 +164,34 @@ public class Player implements IPlayer {
 				.getLevelDimension();
 		ship.setPosition(new Position(levelDimension.getX() * 0.5 - ship.getWidth()/2,
 				levelDimension.getY() * 0.65));
+	}
 		
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		// TODO Extract the strings
+		if (event.getPropertyName().equals("enemyKilled")) {
+			score += ((IEnemy) event.getNewValue()).getScoreValue();
+			notifyListeners();
+			Log.d("DEBUG", "Score: " + score);
+		}
+	}
+
+	private void notifyListeners() {
+		for (IPlayerListener l : listeners) {
+			l.playerUpdate(this);
+		}
+	}
+
+	@Override
+	public int getScore() {
+		return score;
+	}
+
+	public void registerListener(IPlayerListener listener) {
+		listeners.add(listener);
+	}
+
+	public void unregisterListener(IPlayerListener listener) {
+		listeners.remove(listener);
 	}
 }

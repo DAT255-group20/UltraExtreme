@@ -32,7 +32,7 @@ public class GameModel implements IUltraExtremeModel {
 	final private EnemySpawner enemySpawner;
 
 	private PickupManager pickupManager;
-	
+
 	private WeaponFactory weaponFactory;
 
 	public GameModel() {
@@ -43,6 +43,9 @@ public class GameModel implements IUltraExtremeModel {
 		enemySpawner = new EnemySpawner(new RandomWaveList(1000, bulletManager));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
+
+		// Player listens when enemies are killed
+		enemyManager.addPropertyChangeListener(player);
 	}
 
 	/**
@@ -61,29 +64,30 @@ public class GameModel implements IUltraExtremeModel {
 		for (IEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
-		
-		//TODO Decide if we want pickups to move around. If so, the following commented code is necessary.
-//		for(WeaponPickup pickup : pickupManager.getPickups()) {
-//			pickup.doMovement(timeElapsed); ?
-//		}
+
+		// TODO Decide if we want pickups to move around. If so, the following
+		// commented code is necessary.
+		// for(WeaponPickup pickup : pickupManager.getPickups()) {
+		// pickup.doMovement(timeElapsed); ?
+		// }
 
 		enemySpawner.update(timeElapsed);
 
 		checkCollisions();
-		
+
 		spawnPickups();
 		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
 	}
-	
+
 	/**
 	 * spawns a pickup for every enemy marked as "should spawn a pickup"
 	 */
 	private void spawnPickups() {
-		for(IEnemy enemy : enemyManager.getEnemies()) {
-			if(enemy.shouldSpawnPickup()) {
-				pickupManager.addPickup(new WeaponPickup(
-						enemy.getShip().getPosition(), enemy.getWeapon().getName()));
+		for (IEnemy enemy : enemyManager.getEnemies()) {
+			if (enemy.shouldSpawnPickup()) {
+				pickupManager.addPickup(new WeaponPickup(enemy.getShip()
+						.getPosition(), enemy.getWeapon().getName()));
 			}
 		}
 	}
@@ -112,12 +116,11 @@ public class GameModel implements IUltraExtremeModel {
 			}
 		}
 
-		//Check Items against player
-		for(int i = 0;  i < pickupManager.getPickups().size(); i++) {
+		// Check Items against player
+		for (int i = 0; i < pickupManager.getPickups().size(); i++) {
 			WeaponPickup wp = pickupManager.getPickups().get(i);
-			if(wp.collidesWith(player.getShip())) {
-				player.giveWeapon(weaponFactory.getNewWeapon(
-						wp.getObjectName()));
+			if (wp.collidesWith(player.getShip())) {
+				player.giveWeapon(weaponFactory.getNewWeapon(wp.getObjectName()));
 				pickupManager.removePickUp(i);
 				i--;
 			}
@@ -152,5 +155,15 @@ public class GameModel implements IUltraExtremeModel {
 
 	public EnemyManager getEnemyManager() {
 		return enemyManager;
+	}
+
+	@Override
+	public void registerPlayerListener(IPlayerListener listener) {
+		player.registerListener(listener);
+	}
+
+	@Override
+	public void unregisterPlayerListener(IPlayerListener listener) {
+		player.unregisterListener(listener);
 	}
 }

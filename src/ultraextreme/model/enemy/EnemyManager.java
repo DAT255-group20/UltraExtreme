@@ -13,11 +13,13 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
  * @author Johan Gronvall
- *
+ * 
  */
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";
+	public static final String ENEMY_KILLED = "enemyKilled";
+	public static final String REMOVED_ENEMY = "remove";
 
 	private final List<IEnemy> enemies;
 
@@ -38,13 +40,25 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
+			boolean remove = false;
 			final IEnemy e = enemies.get(i);
-			if (e.isDead() || e.getShip().isOutOfScreen(150) ) {
-				pcs.firePropertyChange("remove", null, e);
-				enemies.remove(i);
+			if (e.isDead()) {
+				pcs.firePropertyChange(ENEMY_KILLED, null, e);
+				remove = true;
+			} else if (e.getShip().isOutOfScreen(150)) {
+				remove = true;
+			}
+			if (remove) {
+				removeEnemy(i);
 				i--;
 			}
 		}
+	}
+
+	private void removeEnemy(int index) {
+		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null,
+				enemies.get(index));
+		enemies.remove(index);
 	}
 
 	public void addPropertyChangeListener(final PropertyChangeListener listener) {

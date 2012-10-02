@@ -14,7 +14,7 @@ import ultraextreme.view.MainMenuScene;
 /**
  * 
  * @author Bjorn Persson Mattsson
- *
+ * 
  */
 public class MainMenuController extends AbstractController implements
 		IOnMenuItemClickListener {
@@ -46,5 +46,17 @@ public class MainMenuController extends AbstractController implements
 	@Override
 	public Scene getScene() {
 		return scene;
+	}
+
+	@Override
+	public void activateController() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deactivateController() {
+		// TODO Auto-generated method stub
+
 	}
 }

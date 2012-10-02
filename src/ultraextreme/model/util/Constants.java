@@ -35,8 +35,10 @@ public class Constants {
 	public Dimension getLevelDimension() {
 		return new Dimension(900, 1600);
 	}
+
 	/**
 	 * returns the dropChance of a weaponPickup upon enemy death as a percentage
+	 * 
 	 * @return
 	 */
 	public int getWeaponDropChance() {

@@ -24,17 +24,22 @@ public interface IEnemy {
 	EnemyShip getShip();
 
 	/**
-	 * returns true if this enemy has been destroyed
-	 * 
 	 * @return true if this enemy has been destroyed
 	 */
 	boolean isDead();
+
 	/**
 	 * true if and only if this enemy should be spawning a pickup
+	 * 
 	 * @return true if and only if this enemy should be spawning a pickup
 	 */
 	boolean shouldSpawnPickup();
 
 	// TODO Write javadoc
 	AbstractWeapon getWeapon();
+
+	/**
+	 * @return The score value that is earned by killing this enemy.
+	 */
+	int getScoreValue();
 }

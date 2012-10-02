@@ -20,6 +20,8 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
+	private float alpha = 0.01f;
+
 	/**
 	 * Create an ItemBarPanel.
 	 * 
@@ -44,6 +46,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		updateItemBar(itemBar);
 		itemBar.addListener(this);
+		setAlpha(alpha);
 	}
 
 	/**
@@ -57,8 +60,14 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 			AbstractWeapon item = itemBar.getItems().get(i);
 			int x = i * 60 + 10;
 			int y = 10;
-			this.attachChild(new Sprite(x, y, spriteFactory.getItemTexture(item
-					.getName()), vertexBufferObjectManager));
+			Sprite sprite = new Sprite(x, y, spriteFactory.getItemTexture(item
+					.getName()), vertexBufferObjectManager);
+			// TODO Need a way for setting alpha for the whole panel instead of
+			// for the background panel and the sprites individually. This
+			// causes the sprites to be hard to see because you can see the
+			// panel through the sprites.
+			// sprite.setAlpha(alpha);
+			this.attachChild(sprite);
 		}
 	}
 
@@ -66,5 +75,4 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	public void updatedItemBar(ItemBar itemBar) {
 		updateItemBar(itemBar);
 	}
-
 }

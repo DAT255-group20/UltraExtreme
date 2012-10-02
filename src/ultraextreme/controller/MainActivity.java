@@ -8,6 +8,7 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
+import org.andengine.util.color.Color;
 
 import ultraextreme.model.util.Constants;
 import ultraextreme.view.SpriteFactory;
@@ -21,7 +22,7 @@ import android.hardware.SensorManager;
  * @author Daniel Jonsson
  * @author Johan Gronvall
  * @author Viktor Anderling
- *
+ * 
  */
 public class MainActivity extends SimpleBaseGameActivity implements
 		IControllerListener {
@@ -33,6 +34,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
+	private AbstractController currentController;
 
 	// TODO PMD: The field name indicates a constant but its modifiers do not
 	// These two should either be final, or not be in capital letters.
@@ -50,7 +52,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		// and generally bad practice.
 		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
 		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
-		scaling = (float) ((float) getResources().getDisplayMetrics().heightPixels / Constants
+		scaling = (float) (getResources().getDisplayMetrics().heightPixels / Constants
 				.getInstance().getLevelDimension().getY());
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
@@ -62,7 +64,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		spriteFactory = new SpriteFactory(this);
 		defaultFont = FontFactory.create(this.getFontManager(),
 				this.getTextureManager(), 256, 256,
-				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
+				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32f,
+				Color.WHITE_ARGB_PACKED_INT);
 		defaultFont.load();
 	}
 
@@ -71,14 +74,15 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				spriteFactory, this, scaling);
+				spriteFactory, this, scaling, camera, defaultFont);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
 
-		setScene(mainMenuController.getScene());
+		currentController = mainMenuController;
+		updateScene();
 		return currentScene;
 	}
 
@@ -86,7 +90,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	public void controllerListenerUpdate(final ControllerEvent event) {
 		switch (event.getEventType()) {
 		case SWITCH_TO_GAME:
-			setScene(gameController.getScene());
+			switchControllerTo(gameController);
 			break;
 
 		default:
@@ -94,9 +98,15 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		}
 	}
 
-	private void setScene(final Scene scene) {
-		currentScene = scene;
+	private void updateScene() {
+		currentScene = currentController.getScene();
 		getEngine().setScene(currentScene);
 	}
 
+	private void switchControllerTo(AbstractController newController) {
+		currentController.deactivateController();
+		currentController = newController;
+		currentController.activateController();
+		updateScene();
+	}
 }
