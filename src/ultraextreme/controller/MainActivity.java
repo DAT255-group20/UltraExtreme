@@ -33,6 +33,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
+	private AbstractController currentController;
 
 	// TODO PMD: The field name indicates a constant but its modifiers do not
 	// These two should either be final, or not be in capital letters.
@@ -71,14 +72,15 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				spriteFactory, this, scaling);
+				spriteFactory, this, scaling, camera);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
 
-		setScene(mainMenuController.getScene());
+		currentController = mainMenuController;
+		updateScene();
 		return currentScene;
 	}
 
@@ -86,7 +88,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	public void controllerListenerUpdate(final ControllerEvent event) {
 		switch (event.getEventType()) {
 		case SWITCH_TO_GAME:
-			setScene(gameController.getScene());
+			switchControllerTo(gameController);
 			break;
 
 		default:
@@ -94,9 +96,16 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		}
 	}
 
-	private void setScene(final Scene scene) {
-		currentScene = scene;
+	private void updateScene() {
+		currentScene = currentController.getScene();
 		getEngine().setScene(currentScene);
 	}
-
+	
+	private void switchControllerTo(AbstractController newController)
+	{
+		currentController.deactivateController();
+		currentController = newController;
+		currentController.activateController();
+		updateScene();
+	}
 }

@@ -22,6 +22,14 @@ public class AbstractControllerTest {
 			public Scene getScene() {
 				return null;
 			}
+
+			@Override
+			public void activateController() {
+			}
+
+			@Override
+			public void deactivateController() {
+			}
 		};
 		IControllerListener testListener = new IControllerListener() {
 

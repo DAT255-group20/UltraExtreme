@@ -3,6 +3,8 @@ package ultraextreme.view;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.andengine.engine.camera.Camera;
+import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -30,11 +32,12 @@ public class GameScene extends Scene implements SensorEventListener {
 	private final SensorManager sensorManager;
 	private final List<GameObjectSprite> gameObjectSprites;
 	private ItemBarPanel itemBarPanel;
+	private final HUD hud;
 
 	public GameScene(final IUltraExtremeModel gameModel,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
-			final SpriteFactory spriteFactory, float scaling) {
+			final SpriteFactory spriteFactory, float scaling, Camera camera) {
 		super();
 
 		this.gameModel = gameModel;
@@ -46,11 +49,15 @@ public class GameScene extends Scene implements SensorEventListener {
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
-
+		
 		ItemBar itemBar = gameModel.getPlayer().getItemBar();
 		itemBarPanel = new ItemBarPanel(itemBar, spriteFactory,
 				vertexBufferObjectManager, new Position(75, 1400), scaling);
-		attachChild(itemBarPanel);
+		
+		hud = new HUD();
+		hud.setVisible(false);
+		hud.attachChild(itemBarPanel);
+		camera.setHUD(hud);
 
 		this.sensorManager = sensorManager;
 		sensorManager.registerListener(this,
@@ -75,5 +82,9 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public ItemBarPanel getItemBarPanel() {
 		return itemBarPanel;
+	}
+
+	public void setHUDVisible(boolean b) {
+		hud.setVisible(b);
 	}
 }
