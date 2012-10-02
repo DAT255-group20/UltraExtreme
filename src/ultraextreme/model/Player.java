@@ -121,7 +121,15 @@ public class Player implements IPlayer {
 		// TODO Extract the strings
 		if (event.getPropertyName().equals("enemyKilled")) {
 			score  += ((IEnemy) event.getNewValue()).getScoreValue();
+			notifyListeners();
 			Log.d("DEBUG", "Score: " + score);
+		}
+	}
+
+	private void notifyListeners() {
+		for (IPlayerListener l : listeners)
+		{
+			l.playerUpdate(this);
 		}
 	}
 
