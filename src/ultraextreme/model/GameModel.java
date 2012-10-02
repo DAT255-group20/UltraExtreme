@@ -156,4 +156,14 @@ public class GameModel implements IUltraExtremeModel {
 	public EnemyManager getEnemyManager() {
 		return enemyManager;
 	}
+
+	@Override
+	public void registerPlayerListener(IPlayerListener listener) {
+		player.registerListener(listener);
+	}
+	
+	@Override
+	public void unregisterPlayerListener(IPlayerListener listener) {
+		player.unregisterListener(listener);
+	}
 }

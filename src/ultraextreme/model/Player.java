@@ -1,6 +1,8 @@
 package ultraextreme.model;
 
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.util.Log;
 
@@ -27,6 +29,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class Player implements IPlayer {
 
+	List<IPlayerListener> listeners = new ArrayList<IPlayerListener>();
 	/**
 	 * Reference to the player's ship.
 	 */
@@ -125,5 +128,13 @@ public class Player implements IPlayer {
 	@Override
 	public int getScore() {
 		return score;
+	}
+
+	public void registerListener(IPlayerListener listener) {
+		listeners.add(listener);
+	}
+
+	public void unregisterListener(IPlayerListener listener) {
+		listeners.remove(listener);
 	}
 }
