@@ -55,6 +55,7 @@ public class GameScene extends Scene implements SensorEventListener {
 		//attachChild(itemBarPanel);
 		
 		HUD hud = new HUD();
+		//hud.setVisible(false);
 		hud.attachChild(itemBarPanel);
 		camera.setHUD(hud);
 
