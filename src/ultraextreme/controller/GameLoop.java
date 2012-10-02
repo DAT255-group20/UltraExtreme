@@ -79,24 +79,6 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	}
 
-	// @Override
-	// public void propertyChange(PropertyChangeEvent event) {
-	// if (event.getPropertyName().equals("newBullet")) {
-	// BulletSprite b = new BulletSprite(
-	// (AbstractBullet) event.getNewValue(),
-	// vertexBufferObjectManager);
-	// bulletSprites.add(b);
-	// gameScene.attachChild(b);
-	// Log.d("Bullet list length View", "" + bulletSprites.size());
-
-	// } else if (event.getPropertyName().equals(EnemyManager.NEW_ENEMY)) {
-	// EnemySprite e = new EnemySprite(
-	// ((IEnemy) event.getNewValue()).getShip(),
-	// vertexBufferObjectManager);
-	// enemySprites.add(e);
-	// gameScene.attachChild(e);
-	// }
-	// }
 
 	/**
 	 * If a new sprite is created, adds it to the scene and to the list if a
