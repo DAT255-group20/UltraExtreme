@@ -32,6 +32,7 @@ public class GameScene extends Scene implements SensorEventListener {
 	private final SensorManager sensorManager;
 	private final List<GameObjectSprite> gameObjectSprites;
 	private ItemBarPanel itemBarPanel;
+	private final HUD hud;
 
 	public GameScene(final IUltraExtremeModel gameModel,
 			final VertexBufferObjectManager vertexBufferObjectManager,
@@ -54,8 +55,8 @@ public class GameScene extends Scene implements SensorEventListener {
 				vertexBufferObjectManager, new Position(75, 1400), scaling);
 		//attachChild(itemBarPanel);
 		
-		HUD hud = new HUD();
-		//hud.setVisible(false);
+		hud = new HUD();
+		hud.setVisible(false);
 		hud.attachChild(itemBarPanel);
 		camera.setHUD(hud);
 
@@ -82,5 +83,9 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public ItemBarPanel getItemBarPanel() {
 		return itemBarPanel;
+	}
+
+	public void setHUDVisible(boolean b) {
+		hud.setVisible(b);
 	}
 }

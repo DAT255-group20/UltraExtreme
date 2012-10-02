@@ -136,13 +136,11 @@ public class GameController extends AbstractController implements
 
 	@Override
 	public void activateController() {
-		// TODO Auto-generated method stub
-		
+		scene.setHUDVisible(true);
 	}
 
 	@Override
 	public void deactivateController() {
-		// TODO Auto-generated method stub
-		
+		scene.setHUDVisible(false);
 	}
 }
