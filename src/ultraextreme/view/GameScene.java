@@ -27,7 +27,7 @@ import android.hardware.SensorManager;
  */
 public class GameScene extends Scene implements SensorEventListener {
 
-	//FIXME These shouldn't be hard-coded in?
+	// FIXME These shouldn't be hard-coded in?
 	private static final Position SCORE_POS = new Position(10, 10);
 	private static final Position LIVES_POS = new Position(10, 40);
 	private static final Position ITEMBAR_POS = new Position(75, 1400);
@@ -64,7 +64,7 @@ public class GameScene extends Scene implements SensorEventListener {
 		ScoreText scoreText = new ScoreText(SCORE_POS, font,
 				vertexBufferObjectManager);
 		gameModel.registerPlayerListener(scoreText);
-		LivesText livesText = new LivesText(LIVES_POS, font, 
+		LivesText livesText = new LivesText(LIVES_POS, font,
 				vertexBufferObjectManager);
 		gameModel.registerPlayerListener(livesText);
 

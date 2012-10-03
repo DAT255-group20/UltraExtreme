@@ -1,7 +1,7 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 

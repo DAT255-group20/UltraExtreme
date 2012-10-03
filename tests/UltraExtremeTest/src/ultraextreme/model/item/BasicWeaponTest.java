@@ -3,11 +3,9 @@ package ultraextreme.model.item;
 import junit.framework.TestCase;
 import ultraextreme.model.entity.BasicBullet;
 import ultraextreme.model.entity.IBullet;
-import ultraextreme.model.item.BasicWeapon;
-import ultraextreme.model.item.BulletManager;
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 

@@ -1,6 +1,5 @@
 package ultraextreme.model;
 
-
 /**
  * An interface for a GameModel that only has get methods.
  * 
@@ -18,13 +17,17 @@ public interface IUltraExtremeModel {
 
 	/**
 	 * Registers the provided listener to the player.
-	 * @param listener Listener
+	 * 
+	 * @param listener
+	 *            Listener
 	 */
 	void registerPlayerListener(IPlayerListener listener);
 
 	/**
 	 * Removes the provided listener from the player.
-	 * @param listener Listener
+	 * 
+	 * @param listener
+	 *            Listener
 	 */
 	void unregisterPlayerListener(IPlayerListener listener);
 }

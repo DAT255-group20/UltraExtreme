@@ -16,7 +16,7 @@ import ultraextreme.model.util.PlayerID;
  * 
  */
 public interface IPlayer extends PropertyChangeListener {
-	
+
 	/**
 	 * Return a reference to the player's ship.
 	 */
@@ -36,7 +36,7 @@ public interface IPlayer extends PropertyChangeListener {
 
 	// TODO test
 	public ItemBar getItemBar();
-	
+
 	/**
 	 * @return The number of lives the player has left.
 	 */

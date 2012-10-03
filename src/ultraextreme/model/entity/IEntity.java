@@ -14,7 +14,9 @@ public interface IEntity {
 
 	/**
 	 * Determines whether this entity is colliding with another entity.
-	 * @param other The other entity.
+	 * 
+	 * @param other
+	 *            The other entity.
 	 * @return true if this entity is colliding with the other entity.
 	 */
 	boolean collidesWith(IEntity other);
@@ -53,13 +55,13 @@ public interface IEntity {
 	 *         borders + the marginal
 	 */
 	boolean isOutOfScreen(double marginal);
-	
+
 	/**
 	 * Returns what kind of entity this is as an ObjectName
 	 * 
 	 * @return what kind of entity this is as an ObjectName
 	 */
 	ObjectName getObjectName();
-	
+
 	Vector2d getNormalizedDirection();
 }

@@ -46,9 +46,9 @@ public class Player implements IPlayer {
 	 * holding.
 	 */
 	final private ItemBar itemBar;
-	
+
 	final private BulletManager bulletManager;
-	
+
 	/**
 	 * The lives the player has left.
 	 */
@@ -61,12 +61,12 @@ public class Player implements IPlayer {
 	 */
 	private static final double invTime = Constants.getInstance()
 			.getShipInvincibilityTime();
-	
+
 	/**
 	 * A count down for the ships invincibility.
 	 */
 	private double invCountDown;
-	
+
 	/**
 	 * Create a new player.
 	 * 
@@ -100,26 +100,26 @@ public class Player implements IPlayer {
 	public void update(final ModelInput input, final float timeElapsed) {
 		double newX = 0;
 		double newY = 0;
-		if(ship.justGotHit() && invCountDown <= 0) {
+		if (ship.justGotHit() && invCountDown <= 0) {
 			itemBar.looseItems();
-			if(itemBar.getItems().isEmpty()) {
+			if (itemBar.getItems().isEmpty()) {
 				lives -= 1;
 				this.notifyListeners();
-				if(lives == 0) {
+				if (lives == 0) {
 					ship.setDestroyed();
 				} else {
 					itemBar.addItem(new BasicWeapon(bulletManager));
 					setShipToSpawn();
 				}
 			}
-			if(!ship.isDestroyed()) {
+			if (!ship.isDestroyed()) {
 				invCountDown = invTime;
 			}
 		}
-		if(invCountDown > 0) {
-			invCountDown -= (double) timeElapsed;
+		if (invCountDown > 0) {
+			invCountDown -= timeElapsed;
 		}
-		
+
 		if (ship.canMoveX(input.dX)) {
 			newX = input.dX;
 		}
@@ -169,10 +169,10 @@ public class Player implements IPlayer {
 	private void setShipToSpawn() {
 		final Dimension levelDimension = Constants.getInstance()
 				.getLevelDimension();
-		ship.setPosition(new Position(levelDimension.getX() * 0.5 - ship.getWidth()/2,
-				levelDimension.getY() * 0.65));
+		ship.setPosition(new Position(levelDimension.getX() * 0.5
+				- ship.getWidth() / 2, levelDimension.getY() * 0.65));
 	}
-		
+
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		// TODO Extract the strings
@@ -193,7 +193,7 @@ public class Player implements IPlayer {
 	public int getScore() {
 		return score;
 	}
-	
+
 	@Override
 	public int getLives() {
 		return lives;

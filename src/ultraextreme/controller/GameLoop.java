@@ -78,7 +78,6 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	}
 
-
 	/**
 	 * If a new sprite is created, adds it to the scene and to the list if a
 	 * sprite is removed, removes it from the scene and the list

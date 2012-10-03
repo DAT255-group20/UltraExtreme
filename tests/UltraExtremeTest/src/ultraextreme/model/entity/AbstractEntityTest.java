@@ -116,14 +116,14 @@ public abstract class AbstractEntityTest extends TestCase {
 			/*
 			 * Test outside bottom
 			 */
-			y = (int)screen.getY() + marginal + 1;
+			y = (int) screen.getY() + marginal + 1;
 			e = getNewAbstractEntity(x, y, width, height, new Rotation(0));
 			// Check it's outside
 			assertTrue(e.isOutOfScreen(marginal));
 			e = getNewAbstractEntity(x, y - 1, width, height, new Rotation(0));
 			// Check so it's now inside
 			assertFalse(e.isOutOfScreen(marginal));
-			
+
 			/*
 			 * Test outside left
 			 */
@@ -135,11 +135,11 @@ public abstract class AbstractEntityTest extends TestCase {
 			e = getNewAbstractEntity(x + 1, y, width, height, new Rotation(0));
 			// Check so it's now inside
 			assertFalse(e.isOutOfScreen(marginal));
-			
+
 			/*
 			 * Test outside right
 			 */
-			x = (int)screen.getX() + marginal + 1;
+			x = (int) screen.getX() + marginal + 1;
 			e = getNewAbstractEntity(x, y, width, height, new Rotation(0));
 			// Check it's outside
 			assertTrue(e.isOutOfScreen(marginal));

@@ -19,7 +19,7 @@ public class PositionTest extends TestCase {
 		Position p = new Position();
 		assertEquals(0.0, p.getX());
 		assertEquals(0.0, p.getY());
-		
+
 	}
 
 	/**
