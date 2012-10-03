@@ -21,11 +21,23 @@ public interface IBullet extends IEntity {
 	@Override
 	int getHeight();
 
+	/**
+	 * @return The rotation of the bullet.
+	 */
 	Rotation getRotation();
 
+	/**
+	 * @return The ID of the player that shot the bullet.
+	 */
 	PlayerID getPlayerId();
 
+	/**
+	 * @return true if the bullet is marked for removal.
+	 */
 	boolean isMarkedForRemoval();
 
+	/**
+	 * @return The amount of damage that this bullet inflicts.
+	 */
 	int getDamage();
 }

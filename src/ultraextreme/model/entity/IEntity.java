@@ -9,12 +9,26 @@ import ultraextreme.model.util.Position;
  */
 public interface IEntity {
 
+	/**
+	 * Determines whether this entity is colliding with another entity.
+	 * @param other The other entity.
+	 * @return true if this entity is colliding with the other entity.
+	 */
 	boolean collidesWith(IEntity other);
 
+	/**
+	 * @return The position of this entity.
+	 */
 	Position getPosition();
 
+	/**
+	 * @return The height of this entity.
+	 */
 	int getHeight();
 
+	/**
+	 * @return The width of this entity.
+	 */
 	int getWidth();
 
 	/**
