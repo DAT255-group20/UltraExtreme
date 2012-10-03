@@ -13,9 +13,9 @@ import ultraextreme.model.util.Position;
  * @author Daniel Jonsson
  * 
  */
-public class IPlayerTest extends TestCase {
+public class PlayerTest extends TestCase {
 
-	private IPlayer player;
+	private Player player;
 	private BulletManager bulletManager;
 	private PlayerID playerId;
 

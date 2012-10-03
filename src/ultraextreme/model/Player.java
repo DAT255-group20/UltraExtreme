@@ -90,9 +90,13 @@ public class Player implements IPlayer {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Read the player's input data and update the player's ship.
+	 * 
+	 * @param input
+	 *            Input data such as keystrokes.
+	 * @param delta
+	 *            Time since last update.
 	 */
-	@Override
 	public void update(final ModelInput input, final float timeElapsed) {
 		double newX = 0;
 		double newY = 0;
@@ -150,7 +154,11 @@ public class Player implements IPlayer {
 		return itemBar;
 	}
 
-	@Override
+	/**
+	 * adds a weapon (or bomb) to this player's ItemBar
+	 * 
+	 * @param weapon
+	 */
 	public void giveWeapon(final AbstractWeapon weapon) {
 		itemBar.addItem(weapon);
 	}
