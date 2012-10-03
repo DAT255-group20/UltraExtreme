@@ -25,12 +25,8 @@ import ultraextreme.model.util.ObjectName;
  */
 public class SpriteFactory {
 
-	// TODO PMD: Use explicit scoping instead of the default package private
-	// level
 	private Map<ObjectName, ITextureRegion> textureMap;
 
-	// TODO PMD: Use explicit scoping instead of the default package private
-	// level
 	// TODO not yet implemented offsets
 	private Map<ObjectName, Integer> offsetMap;
 
