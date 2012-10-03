@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.WaveListener;
 import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
@@ -147,7 +147,7 @@ public class EnemySpawner implements WaveListener {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void enemySpawned(final IEnemy enemy) {
+	public void enemySpawned(final AbstractEnemy enemy) {
 		pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, enemy);
 	}
 

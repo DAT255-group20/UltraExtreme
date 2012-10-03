@@ -2,6 +2,7 @@ package ultraextreme.model;
 
 import java.util.List;
 
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.enemyspawning.EnemySpawner;
@@ -61,7 +62,7 @@ public class GameModel implements IUltraExtremeModel {
 		for (IBullet bullet : bulletManager.getBullets()) {
 			bullet.doMovement(timeElapsed);
 		}
-		for (IEnemy enemy : enemyManager.getEnemies()) {
+		for (AbstractEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
 

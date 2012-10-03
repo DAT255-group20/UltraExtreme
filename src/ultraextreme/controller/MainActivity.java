@@ -17,7 +17,7 @@ import android.graphics.Typeface;
 import android.hardware.SensorManager;
 
 /**
- * 
+ * This is the main class of the game.
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
  * @author Johan Gronvall

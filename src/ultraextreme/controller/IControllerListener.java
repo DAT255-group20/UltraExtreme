@@ -8,5 +8,9 @@ package ultraextreme.controller;
  */
 public interface IControllerListener {
 
+	/**
+	 * This method is called whenever a controller event occurs.
+	 * @param event
+	 */
 	void controllerListenerUpdate(ControllerEvent event);
 }

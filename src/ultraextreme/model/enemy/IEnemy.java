@@ -12,15 +12,10 @@ import ultraextreme.model.item.AbstractWeapon;
  * 
  */
 public interface IEnemy {
-	/**
-	 * Update method called once per loop, updating the enemy's behavior
-	 * 
-	 * @param timePassed
-	 *            since last update in (seconds?)
-	 */
-	void update(float timePassed);
 
-	// TODO Write javadoc
+	/**
+	 * @return The ship of this enemy.
+	 */
 	EnemyShip getShip();
 
 	/**
@@ -35,7 +30,9 @@ public interface IEnemy {
 	 */
 	boolean shouldSpawnPickup();
 
-	// TODO Write javadoc
+	/**
+	 * @return The weapon of this enemy.
+	 */
 	AbstractWeapon getWeapon();
 
 	/**
