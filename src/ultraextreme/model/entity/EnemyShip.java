@@ -1,6 +1,7 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Rotation;
 
 /**
@@ -9,16 +10,17 @@ import ultraextreme.model.util.Rotation;
  * @author Bjorn Persson Mattsson
  * 
  */
-public abstract class EnemyShip extends DestroyableEntity {
+public class EnemyShip extends AbstractDestroyableEntity {
 
 	private int hitPoints;
 
 	private static double speedMod = Constants.getInstance()
 			.getEnemySpeedModifier();
 
-	public EnemyShip(double x, double y, int width, int height,
-			Rotation direction, int hitpoints) {
-		super(x, y, width, height, direction);
+	public EnemyShip(final double x, final double y, final int width,
+			final int height, final Rotation rotation, int hitpoints,
+			ObjectName objectName) {
+		super(x, y, width, height, rotation, objectName);
 		this.hitPoints = hitpoints;
 	}
 
@@ -39,8 +41,8 @@ public abstract class EnemyShip extends DestroyableEntity {
 	 * @param damage
 	 *            how many hitPoints are to be lost
 	 */
-	public void damage(int damage) {
+	@Override
+	public void receiveDamage(int damage) {
 		hitPoints -= damage;
 	}
-
 }

@@ -11,23 +11,30 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.view.MainMenuScene;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * 
+ */
 public class MainMenuController extends AbstractController implements
 		IOnMenuItemClickListener {
 
-	private MainMenuScene scene;
+	private final MainMenuScene scene;
 
-	public MainMenuController(Camera camera, Font font, VertexBufferObjectManager vertexBufferObjectManager)
-	{
+	public MainMenuController(final Camera camera, final Font font,
+			final VertexBufferObjectManager vertexBufferObjectManager) {
+		super();
 		scene = new MainMenuScene(camera, font, vertexBufferObjectManager);
 		scene.setOnMenuItemClickListener(this);
 	}
-	
+
 	@Override
-	public boolean onMenuItemClicked(MenuScene menuScene, IMenuItem menuItem,
-			float menuItemLocalX, float menuItemLocalY) {
+	public boolean onMenuItemClicked(final MenuScene menuScene,
+			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case MainMenuScene.MENU_START:
-			fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_GAME));
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_GAME));
 			break;
 
 		default:
@@ -39,5 +46,17 @@ public class MainMenuController extends AbstractController implements
 	@Override
 	public Scene getScene() {
 		return scene;
+	}
+
+	@Override
+	public void activateController() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deactivateController() {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -1,6 +1,10 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeListener;
+
 import ultraextreme.model.entity.PlayerShip;
+import ultraextreme.model.item.AbstractWeapon;
+import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -8,9 +12,11 @@ import ultraextreme.model.util.PlayerID;
  * 
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
+ * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
-public interface IPlayer {
+public interface IPlayer extends PropertyChangeListener {
 
 	/**
 	 * Read the player's input data and update the player's ship.
@@ -20,17 +26,37 @@ public interface IPlayer {
 	 * @param delta
 	 *            Time since last update.
 	 */
-	public void update(ModelInput input, float delta);
-
+	void update(ModelInput input, float delta);
+	
 	/**
 	 * Return a reference to the player's ship.
 	 */
-	public PlayerShip getShip();
+	PlayerShip getShip();
 
 	/**
 	 * Return the ID of the player.
 	 * 
 	 * @return The player's ID.
 	 */
-	public PlayerID getPlayerId();
+	PlayerID getPlayerId();
+
+	/**
+	 * @return The score of the player.
+	 */
+	int getScore();
+
+	// TODO test
+	public ItemBar getItemBar();
+	
+	/**
+	 * @return The number of lives the player has left.
+	 */
+	public int getLives();
+
+	/**
+	 * adds a weapon (or bomb) to this player's ItemBar
+	 * 
+	 * @param weapon
+	 */
+	void giveWeapon(AbstractWeapon weapon);
 }

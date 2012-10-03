@@ -1,8 +1,8 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Rotation;
-import ultraextreme.model.util.Position;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * An interface for a Bullet
@@ -10,15 +10,16 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * 
  */
-public interface IBullet {
+public interface IBullet extends IEntity {
 
+	@Override
 	Position getPosition();
 
+	@Override
 	int getWidth();
 
+	@Override
 	int getHeight();
-
-	boolean isOutOfScreen();
 
 	void doMovement(float timeElapsed);
 
@@ -26,4 +27,9 @@ public interface IBullet {
 
 	PlayerID getPlayerId();
 
+	void markForRemoval();
+
+	boolean isMarkedForRemoval();
+
+	int getDamage();
 }

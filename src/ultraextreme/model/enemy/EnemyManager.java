@@ -6,11 +6,22 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultraextreme.model.enemyspawning.EnemySpawner;
+
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * @author Johan Gronvall
+ * 
+ */
 public class EnemyManager implements PropertyChangeListener {
 
-	public static final String NEW_ENEMY = "n";
+	public static final String NEW_ENEMY = "add";
+	public static final String ENEMY_KILLED = "enemyKilled";
+	public static final String REMOVED_ENEMY = "remove";
 
-	private List<IEnemy> enemies;
+	private final List<IEnemy> enemies;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -22,21 +33,45 @@ public class EnemyManager implements PropertyChangeListener {
 		return enemies;
 	}
 
-	public void addEnemy(IEnemy enemy) {
+	public void addEnemy(final IEnemy enemy) {
 		enemies.add(enemy);
-		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy);
+		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void clearDeadEnemies() {
+		for (int i = 0; i < enemies.size(); i++) {
+			boolean remove = false;
+			final IEnemy e = enemies.get(i);
+			if (e.isDead()) {
+				pcs.firePropertyChange(ENEMY_KILLED, null, e);
+				remove = true;
+			} else if (e.getShip().isOutOfScreen(150)) {
+				remove = true;
+			}
+			if (remove) {
+				removeEnemy(i);
+				i--;
+			}
+		}
+	}
+
+	private void removeEnemy(int index) {
+		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null,
+				enemies.get(index));
+		enemies.remove(index);
+	}
+
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	public void removePropertyChangeListener(
+			final PropertyChangeListener listener) {
 		this.pcs.removePropertyChangeListener(listener);
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent event) {
+	public void propertyChange(final PropertyChangeEvent event) {
 		// This is executed when an enemy spawner wants to add a new enemy.
 		if (event.getPropertyName().equals(EnemySpawner.NEW_ENEMY)) {
 			addEnemy((IEnemy) event.getNewValue());

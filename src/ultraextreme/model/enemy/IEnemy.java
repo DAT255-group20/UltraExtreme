@@ -1,10 +1,13 @@
 package ultraextreme.model.enemy;
 
 import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.item.AbstractWeapon;
 
 /**
  * Interface for self-thinking enemies
  * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * @author Johan Gronvall
  * 
  */
@@ -15,7 +18,28 @@ public interface IEnemy {
 	 * @param timePassed
 	 *            since last update in (seconds?)
 	 */
-	public void update(float timePassed);
+	void update(float timePassed);
 
-	public EnemyShip getShip();
+	// TODO Write javadoc
+	EnemyShip getShip();
+
+	/**
+	 * @return true if this enemy has been destroyed
+	 */
+	boolean isDead();
+
+	/**
+	 * true if and only if this enemy should be spawning a pickup
+	 * 
+	 * @return true if and only if this enemy should be spawning a pickup
+	 */
+	boolean shouldSpawnPickup();
+
+	// TODO Write javadoc
+	AbstractWeapon getWeapon();
+
+	/**
+	 * @return The score value that is earned by killing this enemy.
+	 */
+	int getScoreValue();
 }

@@ -101,7 +101,7 @@ public class ItemBarTest extends TestCase {
 	 */
 	public void testFireWeapon() {
 		float epsilon = 0.001f;
-		float cooldown = (float)BasicWeapon.getInitCooldown();
+		float cooldown = BasicWeapon.getInitCooldown();
 		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() == 0);
 

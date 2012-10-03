@@ -2,8 +2,6 @@ package ultraextreme.model.enemy;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 
@@ -14,7 +12,7 @@ import ultraextreme.model.item.BulletManager;
  */
 public class AbstractEnemyTest extends TestCase {
 	BulletManager bulletManager;
-	BasicEnemy enemy;
+	AbstractEnemy enemy;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -22,7 +20,6 @@ public class AbstractEnemyTest extends TestCase {
 		resetInstanceVariables();
 	}
 
-	@Test
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
 		enemy = new BasicEnemy(5, 5, bulletManager);
@@ -31,7 +28,6 @@ public class AbstractEnemyTest extends TestCase {
 	/**
 	 * Tests the shoot() Method
 	 */
-	@Test
 	public void testShoot() {
 		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
 		assertTrue(!bulletManager.getBullets().isEmpty());
@@ -40,10 +36,9 @@ public class AbstractEnemyTest extends TestCase {
 	/**
 	 * Tests the isDead() method
 	 */
-	@Test
 	public void testIsDead() {
 		assertTrue(enemy.getShip().isDestroyed() == enemy.isDead());
-		enemy.getShip().damage(10000);
+		enemy.getShip().receiveDamage(10000);
 		assertTrue(enemy.isDead());
 	}
 

@@ -7,8 +7,12 @@ package ultraextreme.model.util;
  * 
  */
 public class Constants {
+	// TODO PMD: A class with only private constructors should be final, unless
+	// the private constructor is called by a inner class.
 
 	private static Constants INSTANCE;
+
+	// TODO PMD: Variables should start with a lowercase character
 
 	private Constants() {
 		INSTANCE = this;
@@ -30,6 +34,15 @@ public class Constants {
 	 */
 	public Dimension getLevelDimension() {
 		return new Dimension(900, 1600);
+	}
+
+	/**
+	 * returns the dropChance of a weaponPickup upon enemy death as a percentage
+	 * 
+	 * @return
+	 */
+	public int getWeaponDropChance() {
+		return 10;
 	}
 
 	/**
@@ -60,5 +73,20 @@ public class Constants {
 	 */
 	public double getBulletSpeedModifier() {
 		return 200;
+	}
+	
+	/**
+	 * @return The time in seconds of which the will stay invincible after 
+	 * receiving damage.
+	 */
+	public double getShipInvincibilityTime() {
+		return 3;
+	}
+	
+	/**
+	 * @return The number of lives the ship will start with.
+	 */
+	public int getInitShipLives() {
+		return 3;
 	}
 }
