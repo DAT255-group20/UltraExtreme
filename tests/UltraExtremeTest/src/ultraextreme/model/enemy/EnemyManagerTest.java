@@ -36,7 +36,7 @@ public class EnemyManagerTest extends TestCase {
 	@Test
 	public void testAddEnemy() {
 		EnemyCollector collector = new EnemyCollector();
-		IEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
+		AbstractEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
 		enemyManager.addPropertyChangeListener(collector);
 		enemyManager.addEnemy(enemy);
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
@@ -56,7 +56,7 @@ public class EnemyManagerTest extends TestCase {
 		enemyManager.addPropertyChangeListener(collector);
 		// Add a lot of enemies to the enemy manager and to a local list.
 		for (int i = 0; i < 10000; i++) {
-			IEnemy enemy = new BasicEnemy(0, 0, bulletManager);
+			AbstractEnemy enemy = new BasicEnemy(0, 0, bulletManager);
 			enemyManager.addEnemy(enemy);
 			addedEnemies.add(enemy);
 			addedShips.add(enemy.getShip());
@@ -70,7 +70,7 @@ public class EnemyManagerTest extends TestCase {
 	@Test
 	public void testClearDeadEnemies() {
 		EnemyCollector collector = new EnemyCollector();
-		IEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
+		AbstractEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
 		enemyManager.addPropertyChangeListener(collector);
 		enemyManager.addEnemy(enemy);
 

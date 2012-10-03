@@ -9,7 +9,7 @@ import ultraextreme.model.util.Rotation;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class EnemyShipTest extends AbstractEntityTest {
 
@@ -38,7 +38,7 @@ public class EnemyShipTest extends AbstractEntityTest {
 		resetShip(0, 0, 100, 100, 0, 100);
 		enemyShip.receiveDamage(100);
 		assertTrue(enemyShip.isDestroyed());
-		
+
 		// Create a new enemy ship and kill it more slowly
 		resetShip(0, 0, 100, 100, 0, 1000);
 		enemyShip.receiveDamage(100);
@@ -47,7 +47,7 @@ public class EnemyShipTest extends AbstractEntityTest {
 		assertFalse(enemyShip.isDestroyed());
 		enemyShip.receiveDamage(1);
 		assertTrue(enemyShip.isDestroyed());
-		
+
 		// Kill a third enemy even more slowly
 		resetShip(0, 0, 100, 100, 0, 1000);
 		for (int i = 999; i > 0; --i) {

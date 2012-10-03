@@ -21,19 +21,19 @@ public class EnemyManager implements PropertyChangeListener {
 	public static final String ENEMY_KILLED = "enemyKilled";
 	public static final String REMOVED_ENEMY = "remove";
 
-	private final List<IEnemy> enemies;
+	private final List<AbstractEnemy> enemies;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 	public EnemyManager() {
-		enemies = new ArrayList<IEnemy>();
+		enemies = new ArrayList<AbstractEnemy>();
 	}
 
-	public List<IEnemy> getEnemies() {
+	public List<AbstractEnemy> getEnemies() {
 		return enemies;
 	}
 
-	public void addEnemy(final IEnemy enemy) {
+	public void addEnemy(final AbstractEnemy enemy) {
 		enemies.add(enemy);
 		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
 	}
@@ -41,7 +41,7 @@ public class EnemyManager implements PropertyChangeListener {
 	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			boolean remove = false;
-			final IEnemy e = enemies.get(i);
+			final AbstractEnemy e = enemies.get(i);
 			if (e.isDead()) {
 				pcs.firePropertyChange(ENEMY_KILLED, null, e);
 				remove = true;
@@ -74,7 +74,7 @@ public class EnemyManager implements PropertyChangeListener {
 	public void propertyChange(final PropertyChangeEvent event) {
 		// This is executed when an enemy spawner wants to add a new enemy.
 		if (event.getPropertyName().equals(EnemySpawner.NEW_ENEMY)) {
-			addEnemy((IEnemy) event.getNewValue());
+			addEnemy((AbstractEnemy) event.getNewValue());
 		}
 	}
 }

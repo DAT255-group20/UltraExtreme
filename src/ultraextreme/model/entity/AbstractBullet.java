@@ -42,7 +42,6 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * @param timePassed
 	 *            Time passed since last update.
 	 */
-	@Override
 	public abstract void doMovement(float timePassed);
 
 	@Override

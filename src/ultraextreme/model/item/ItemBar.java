@@ -99,11 +99,11 @@ public class ItemBar {
 		cursorPosition = cursorPosition % maxNumberOfItems;
 		fireItemBarUpdated();
 	}
-	
+
 	public void looseItems() {
-		//TODO Should possibly remove more items? change implementation?
-		if(!items.isEmpty()) {
-			if(cursorPosition == items.size() - 1) {
+		// TODO Should possibly remove more items? change implementation?
+		if (!items.isEmpty()) {
+			if (cursorPosition == items.size() - 1) {
 				cursorPosition--;
 			}
 			items.remove(items.size() - 1);

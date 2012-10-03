@@ -65,4 +65,11 @@ public abstract class AbstractEnemy implements IEnemy {
 				.getWeaponDropChance() + 1 && isDead());
 	}
 
+	/**
+	 * Update method called once per loop, updating the enemy's behavior
+	 * 
+	 * @param timePassed
+	 *            since last update in (seconds?)
+	 */
+	public abstract void update(float timePassed);
 }
