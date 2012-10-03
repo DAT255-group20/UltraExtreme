@@ -21,8 +21,6 @@ public interface IBullet extends IEntity {
 	@Override
 	int getHeight();
 
-	void doMovement(float timeElapsed);
-
 	Rotation getRotation();
 
 	PlayerID getPlayerId();

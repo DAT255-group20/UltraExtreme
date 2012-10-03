@@ -22,7 +22,7 @@ public class BulletManager {
 
 	private boolean bombIsDropped = false;
 
-	private final Map<PlayerID, List<IBullet>> bulletsMap = new HashMap<PlayerID, List<IBullet>>();
+	private final Map<PlayerID, List<AbstractBullet>> bulletsMap = new HashMap<PlayerID, List<AbstractBullet>>();
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -31,7 +31,7 @@ public class BulletManager {
 	 */
 	public BulletManager() {
 		for (PlayerID pID : PlayerID.values()) {
-			bulletsMap.put(pID, new ArrayList<IBullet>());
+			bulletsMap.put(pID, new ArrayList<AbstractBullet>());
 		}
 	}
 
@@ -50,9 +50,9 @@ public class BulletManager {
 	/**
 	 * @return A list of all bullets in the bullet manager.
 	 */
-	public List<IBullet> getBullets() {
-		final List<IBullet> output = new ArrayList<IBullet>();
-		for (List<IBullet> list : bulletsMap.values()) {
+	public List<AbstractBullet> getBullets() {
+		final List<AbstractBullet> output = new ArrayList<AbstractBullet>();
+		for (List<AbstractBullet> list : bulletsMap.values()) {
 			output.addAll(list);
 		}
 		return output;
@@ -75,7 +75,7 @@ public class BulletManager {
 	 * Removes all bullets that are off the gameScreen
 	 */
 	public void clearBulletsOffScreen() {
-		for (List<IBullet> list : bulletsMap.values()) {
+		for (List<AbstractBullet> list : bulletsMap.values()) {
 			for (int i = 0; i < list.size(); i++) {
 				final IBullet b = list.get(i);
 				if (b.isMarkedForRemoval() || (b.isOutOfScreen(100))) {
@@ -91,7 +91,7 @@ public class BulletManager {
 	 * Clears the bullet manager of all bullets.
 	 */
 	public void clearAllBullets() {
-		for (List<IBullet> list : bulletsMap.values()) {
+		for (List<AbstractBullet> list : bulletsMap.values()) {
 			list.clear();
 		}
 	}

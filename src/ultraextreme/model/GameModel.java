@@ -7,6 +7,7 @@ import ultraextreme.model.enemy.EnemyManager;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
+import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.entity.WeaponPickup;
 import ultraextreme.model.item.BulletManager;
@@ -59,7 +60,7 @@ public class GameModel implements IUltraExtremeModel {
 	 */
 	public void update(final ModelInput input, final float timeElapsed) {
 		player.update(input, timeElapsed);
-		for (IBullet bullet : bulletManager.getBullets()) {
+		for (AbstractBullet bullet : bulletManager.getBullets()) {
 			bullet.doMovement(timeElapsed);
 		}
 		for (AbstractEnemy enemy : enemyManager.getEnemies()) {

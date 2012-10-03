@@ -7,8 +7,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.math.MathUtils;
 
-import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
@@ -54,7 +54,7 @@ public class GameObjectSprite extends Sprite {
 				MODEL_DIMENSION, entity.getPosition());
 		this.setX((float) newPosition.getX());
 		this.setY((float) newPosition.getY());
-		if (entity instanceof AbstractBullet) {
+		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
 				directionVector = newVector;
