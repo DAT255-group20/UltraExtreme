@@ -11,7 +11,6 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
-import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.util.Constants;
@@ -90,7 +89,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			AbstractEntity entity;
 
 			if (event.getNewValue() instanceof IEnemy) {
-				entity = ((AbstractEnemy) event.getNewValue()).getShip();
+				entity = ((IEnemy) event.getNewValue()).getShip();
 			} else { // if item or bullet
 				entity = (AbstractEntity) event.getNewValue();
 
@@ -103,7 +102,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		} else if (event.getPropertyName().equals("remove")) {
 			AbstractEntity entity;
 			if (event.getNewValue() instanceof IEnemy) {
-				entity = ((AbstractEnemy) event.getNewValue()).getShip();
+				entity = ((IEnemy) event.getNewValue()).getShip();
 			} else { // if item or bullet
 				entity = (AbstractEntity) event.getNewValue();
 			}

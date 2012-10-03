@@ -41,7 +41,7 @@ public class EnemyManager implements PropertyChangeListener {
 	public void clearDeadEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			boolean remove = false;
-			final IEnemy e = enemies.get(i);
+			final AbstractEnemy e = enemies.get(i);
 			if (e.isDead()) {
 				pcs.firePropertyChange(ENEMY_KILLED, null, e);
 				remove = true;
