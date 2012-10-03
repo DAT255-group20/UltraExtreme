@@ -1,9 +1,5 @@
 package ultraextreme.model;
 
-import java.util.List;
-
-import ultraextreme.model.enemy.IEnemy;
-import ultraextreme.model.entity.IBullet;
 
 /**
  * An interface for a GameModel that only has get methods.
@@ -15,14 +11,20 @@ import ultraextreme.model.entity.IBullet;
  */
 public interface IUltraExtremeModel {
 
-	// TODO Add javadoc
+	/**
+	 * @return The human player in the game.
+	 */
 	IPlayer getPlayer();
 
-	List<IBullet> getBullets();
-
-	List<IEnemy> getEnemies();
-
+	/**
+	 * Registers the provided listener to the player.
+	 * @param listener Listener
+	 */
 	void registerPlayerListener(IPlayerListener listener);
 
+	/**
+	 * Removes the provided listener from the player.
+	 * @param listener Listener
+	 */
 	void unregisterPlayerListener(IPlayerListener listener);
 }

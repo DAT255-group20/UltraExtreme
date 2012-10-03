@@ -132,16 +132,6 @@ public class GameModel implements IUltraExtremeModel {
 		return player;
 	}
 
-	@Override
-	public List<IBullet> getBullets() {
-		return bulletManager.getBullets();
-	}
-
-	@Override
-	public List<IEnemy> getEnemies() {
-		return enemyManager.getEnemies();
-	}
-
 	/**
 	 * @return A model interface with only get methods.
 	 */
