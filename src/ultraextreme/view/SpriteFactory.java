@@ -12,7 +12,7 @@ import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.ObjectName;
@@ -112,7 +112,7 @@ public class SpriteFactory {
 	 *            what kind of sprite (picture) is desired
 	 * @return a new GameOBjectSprite
 	 */
-	public GameObjectSprite getNewSprite(final AbstractEntity entity,
+	public GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
 		textureMap.get(entity.getObjectName());
 		return new GameObjectSprite(entity, vbom, textureMap.get(entity

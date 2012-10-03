@@ -54,6 +54,7 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 		return speedMod;
 	}
 
+	@Override
 	public void markForRemoval() {
 		markedForRemoval = true;
 	}

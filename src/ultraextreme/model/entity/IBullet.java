@@ -40,4 +40,9 @@ public interface IBullet extends IEntity {
 	 * @return The amount of damage that this bullet inflicts.
 	 */
 	int getDamage();
+
+	/**
+	 * Marks this bullet for removal.
+	 */
+	void markForRemoval();
 }

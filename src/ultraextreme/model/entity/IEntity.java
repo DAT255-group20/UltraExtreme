@@ -1,5 +1,8 @@
 package ultraextreme.model.entity;
 
+import javax.vecmath.Vector2d;
+
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 
 /**
@@ -50,4 +53,13 @@ public interface IEntity {
 	 *         borders + the marginal
 	 */
 	boolean isOutOfScreen(double marginal);
+	
+	/**
+	 * Returns what kind of entity this is as an ObjectName
+	 * 
+	 * @return what kind of entity this is as an ObjectName
+	 */
+	ObjectName getObjectName();
+	
+	Vector2d getNormalizedDirection();
 }

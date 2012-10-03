@@ -12,7 +12,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
 import ultraextreme.model.enemy.IEnemy;
-import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.view.GameObjectSprite;
@@ -86,12 +86,12 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName().equals("add")) {
-			AbstractEntity entity;
+			IEntity entity;
 
 			if (event.getNewValue() instanceof IEnemy) {
 				entity = ((IEnemy) event.getNewValue()).getShip();
 			} else { // if item or bullet
-				entity = (AbstractEntity) event.getNewValue();
+				entity = (IEntity) event.getNewValue();
 
 				final GameObjectSprite newSprite = spriteFactory.getNewSprite(
 						entity, vertexBufferObjectManager);
@@ -100,11 +100,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			}
 
 		} else if (event.getPropertyName().equals("remove")) {
-			AbstractEntity entity;
+			IEntity entity;
 			if (event.getNewValue() instanceof IEnemy) {
 				entity = ((IEnemy) event.getNewValue()).getShip();
 			} else { // if item or bullet
-				entity = (AbstractEntity) event.getNewValue();
+				entity = (IEntity) event.getNewValue();
 			}
 			// Find the GameObjectSprite that has a reference to this entity and
 			// remove

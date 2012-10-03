@@ -153,6 +153,7 @@ public abstract class AbstractEntity implements IEntity {
 		return height;
 	}
 
+	@Override
 	public Vector2d getNormalizedDirection() {
 		Vector2d v = new Vector2d(position.getX() - prevPosition.getX(),
 				position.getY() - prevPosition.getY());
@@ -169,11 +170,7 @@ public abstract class AbstractEntity implements IEntity {
 		return rotation;
 	}
 
-	/**
-	 * Returns what kind of entity this is as an ObjectName
-	 * 
-	 * @return what kind of entity this is as an ObjectName
-	 */
+	@Override
 	public ObjectName getObjectName() {
 		return objectName;
 	}

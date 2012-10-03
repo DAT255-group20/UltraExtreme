@@ -7,8 +7,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.math.MathUtils;
 
-import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
@@ -23,7 +23,7 @@ public class GameObjectSprite extends Sprite {
 	/**
 	 * Reference to a bullet in the model.
 	 */
-	private final AbstractEntity entity;
+	private final IEntity entity;
 
 	private Vector2d directionVector;
 
@@ -33,7 +33,7 @@ public class GameObjectSprite extends Sprite {
 	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
 			.getLevelDimension();
 
-	public GameObjectSprite(final AbstractEntity entity,
+	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final ITextureRegion texture) {
 
@@ -71,7 +71,7 @@ public class GameObjectSprite extends Sprite {
 	/**
 	 * returns the entity this sprite is representing
 	 */
-	public AbstractEntity getEntity() {
+	public IEntity getEntity() {
 		return entity;
 	}
 
