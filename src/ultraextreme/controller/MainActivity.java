@@ -47,6 +47,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
+		initializeResources();
 		// TODO FindBugs: This instance method writes to a static field.
 		// This is tricky to get correct if multiple instances are being
 		// manipulated,
@@ -58,6 +59,11 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
 				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
+	}
+
+	private void initializeResources() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
