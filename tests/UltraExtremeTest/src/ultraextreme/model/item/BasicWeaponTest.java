@@ -58,8 +58,8 @@ public class BasicWeaponTest extends TestCase {
 				new Rotation(0), cooldown + cooldown / 1000);
 		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
-		assertEquals(bullet.getWidth(), 5);
-		assertEquals(bullet.getHeight(), 5);
+		assertEquals(bullet.getWidth(), 20);
+		assertEquals(bullet.getHeight(), 40);
 		assertEquals(bullet.getRotation(), new Rotation(0));
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 	}
