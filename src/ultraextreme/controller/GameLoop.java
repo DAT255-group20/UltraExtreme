@@ -45,7 +45,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public GameLoop(final GameScene gameScene, final GameModel gameModel,
 			final List<GameObjectSprite> gameObjectSprites,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			SpriteFactory spriteFactory, double screenWidth,
+			double screenWidth,
 			final double screenHeight) {
 
 		final Dimension screenDimension = new Dimension(screenWidth,
@@ -56,7 +56,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
-		this.spriteFactory = spriteFactory;
+		this.spriteFactory = SpriteFactory.getInstance();
 	}
 
 	@Override
