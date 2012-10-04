@@ -9,6 +9,7 @@ import java.util.Map;
 
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -44,7 +45,7 @@ public class BulletManager {
 	public void addBullet(final AbstractBullet b) {
 		bulletsMap.get(b.getPlayerId()).add(b);
 		// TODO Not entirely sure that using a raw string is so good /Plankton
-		pcs.firePropertyChange("add", null, b);
+		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null, b);
 	}
 
 	/**
@@ -79,7 +80,7 @@ public class BulletManager {
 			for (int i = 0; i < list.size(); i++) {
 				final IBullet b = list.get(i);
 				if (b.isMarkedForRemoval() || (b.isOutOfScreen(100))) {
-					pcs.firePropertyChange("remove", null, b);
+					pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null, b);
 					list.remove(i);
 					i--;
 				}

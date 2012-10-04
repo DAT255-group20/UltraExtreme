@@ -32,7 +32,7 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void addEnemy(final AbstractEnemy enemy) {
 		enemies.add(enemy);
-		pcs.firePropertyChange(Constants.EVENT_NEW_ENEMY, null, enemy.getShip());
+		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null, enemy.getShip());
 	}
 
 	public void clearDeadEnemies() {
@@ -53,7 +53,7 @@ public class EnemyManager implements PropertyChangeListener {
 	}
 
 	private void removeEnemy(int index) {
-		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENEMY, null,
+		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null,
 				enemies.get(index));
 		enemies.remove(index);
 	}

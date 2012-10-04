@@ -9,8 +9,8 @@ package ultraextreme.model.util;
 public final class Constants {
 
 	public static final String EVENT_ENEMY_KILLED = "enemyKilled";
-	public static final String EVENT_NEW_ENEMY = "newEnemy";
-	public static final String EVENT_REMOVED_ENEMY = "removedEnemy";
+	public static final String EVENT_NEW_ENTITY = "newEntity";
+	public static final String EVENT_REMOVED_ENTITY = "removedEntity";
 	
 	private Constants() {
 	}
