@@ -37,8 +37,7 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 	@Override
 	public void testGetSpeedMod() {
 		AbstractBullet bullet = newBullet();
-		assertEquals(bullet.getSpeedMod(), Constants.getInstance()
-				.getBulletSpeedModifier());
+		assertEquals(bullet.getSpeedMod(), Constants.getBulletSpeedModifier());
 	}
 
 	private AbstractBullet newBullet() {
