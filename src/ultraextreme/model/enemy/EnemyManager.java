@@ -18,9 +18,6 @@ import ultraextreme.model.util.Constants;
  */
 public class EnemyManager implements PropertyChangeListener {
 
-	public static final String NEW_ENEMY = "add";
-	public static final String REMOVED_ENEMY = "remove";
-
 	private final List<AbstractEnemy> enemies;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -35,7 +32,7 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void addEnemy(final AbstractEnemy enemy) {
 		enemies.add(enemy);
-		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
+		pcs.firePropertyChange(Constants.EVENT_NEW_ENEMY, null, enemy.getShip());
 	}
 
 	public void clearDeadEnemies() {
@@ -56,7 +53,7 @@ public class EnemyManager implements PropertyChangeListener {
 	}
 
 	private void removeEnemy(int index) {
-		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null,
+		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENEMY, null,
 				enemies.get(index));
 		enemies.remove(index);
 	}
