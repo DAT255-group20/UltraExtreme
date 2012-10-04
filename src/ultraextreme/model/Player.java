@@ -16,7 +16,6 @@ import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
-import android.util.Log;
 
 /**
  * The player. The player has a ship and an item bar containing the ship's items
@@ -176,7 +175,7 @@ public class Player implements IPlayer {
 		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_KILLED)) {
 			score += ((IEnemy) event.getNewValue()).getScoreValue();
 			notifyListeners();
-			Log.d("DEBUG", "Score: " + score);
+			// Log.d("DEBUG", "Score: " + score);
 		}
 	}
 

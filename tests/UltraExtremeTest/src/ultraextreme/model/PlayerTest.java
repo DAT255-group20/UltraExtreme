@@ -1,10 +1,16 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeSupport;
+
 import junit.framework.TestCase;
+import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 
@@ -66,6 +72,46 @@ public class PlayerTest extends TestCase {
 		int preNoOfWeapons = itemBar.getItems().size();
 		player.giveWeapon(new BasicWeapon(bulletManager));
 		assertEquals(preNoOfWeapons, itemBar.getItems().size() - 1);
+	}
+
+	public void testScore() {
+		final int scoreValue = 12;
+		PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+		pcs.addPropertyChangeListener(player);
+		IEnemy enemy = new IEnemy() {
+
+			@Override
+			public boolean shouldSpawnPickup() {
+				return false;
+			}
+
+			@Override
+			public boolean isDead() {
+				return false;
+			}
+
+			@Override
+			public AbstractWeapon getWeapon() {
+				return null;
+			}
+
+			@Override
+			public EnemyShip getShip() {
+				return null;
+			}
+
+			@Override
+			public int getScoreValue() {
+				return scoreValue;
+			}
+		};
+		assertTrue(player.getScore() == 0);
+
+		pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, enemy);
+		assertTrue(player.getScore() == scoreValue);
+
+		pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, enemy);
+		assertTrue(player.getScore() == 2 * scoreValue);
 	}
 
 	/**

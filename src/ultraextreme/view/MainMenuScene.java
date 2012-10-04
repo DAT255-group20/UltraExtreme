@@ -11,7 +11,6 @@ import org.andengine.util.color.Color;
 
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
-
 import android.util.Log;
 
 /**
