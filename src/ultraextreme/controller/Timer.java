@@ -46,9 +46,15 @@ public class Timer {
 	 * Creates a timer that has a property, a time, an object and a number of runs.
 	 * 
 	 * @param propertyName
-	 * @param time
+	 * 					The name of the property.
+	 * @param totalTime 
+	 * 					The time before a property change.
 	 * @param o
-	 * @param repeats
+	 * 					The object that is related to the property change.
+	 * @param runs
+	 * 					How many times the timer will run.
+	 * 
+	 * @throws IllegalArgumentException if the number of given runs are less than one.
 	 */
 	public Timer(String propertyName, float totalTime, Object o, int runs) throws IllegalArgumentException {
 		if(runs < 1) {
@@ -69,6 +75,14 @@ public class Timer {
 		this(propertyName, time, o, 1);
 	}
 	
+	/**
+	 * Updates the timer with the time that has elapsed since the last update.
+	 * If the totalTime has been reached, and the timer is still running, it 
+	 * will fire a propertyChange.
+	 * 
+	 * @param timeElapsed
+	 * 					The time that has elapsed since last update.
+	 */
 	public void update(float timeElapsed) {
 		if(isRunning) {
 			this.timeElapsed += timeElapsed;
@@ -84,10 +98,22 @@ public class Timer {
 		}
 	}
 	
+	/**
+	 * Adds a PropertyChangeListener to the timer.
+	 * 
+	 * @param pcl
+	 * 			The PropertyChangeListener that is to be added.
+	 */
 	public void addListener(PropertyChangeListener pcl) {
 		pcs.addPropertyChangeListener(pcl);
 	}
 	
+	/**
+	 * Removes a PropertyChangeListener from the timer.
+	 * 
+	 * @param pcl
+	 * 			The PropertyChangeListener that is to be removed.
+	 */
 	public void removeListener(PropertyChangeListener pcl) {
 		pcs.removePropertyChangeListener(pcl);
 	}
