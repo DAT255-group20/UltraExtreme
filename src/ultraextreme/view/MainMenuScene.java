@@ -28,7 +28,8 @@ public class MainMenuScene extends MenuScene {
 		super(camera);
 		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
 		final IMenuItem startButton = new TextMenuItem(MENU_START, font,
-				Resources.getInstance().getResource(ResourceName.START_GAME), vertexBufferObjectManager);
+				Resources.getInstance().getResource(ResourceName.START_GAME),
+				vertexBufferObjectManager);
 		startButton.setPosition(100, 100);
 		startButton.setColor(Color.BLACK);
 		addMenuItem(startButton);

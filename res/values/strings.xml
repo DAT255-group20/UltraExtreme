@@ -4,7 +4,7 @@
     
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">UltraExtreme</string>
-    <string name="score">Score: </string>
-    <string name="lives">Lives: </string>
+    <string name="score">Score:</string>
+    <string name="lives">Lives:</string>
 
 </resources>

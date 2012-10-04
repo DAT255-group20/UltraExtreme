@@ -8,9 +8,7 @@ public class Resources {
 	private Map<ResourceName, String> resourceMap = new HashMap<ResourceName, String>();
 
 	public enum ResourceName {
-		START_GAME,
-		SCORE,
-		LIVES;
+		START_GAME, SCORE, LIVES;
 	}
 
 	private static Resources instance;
