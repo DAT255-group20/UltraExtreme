@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
-import ultraextreme.model.item.AbstractWeapon;
-import ultraextreme.model.item.BasicWeapon;
-import ultraextreme.model.item.BulletManager;
-import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 

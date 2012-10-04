@@ -19,8 +19,7 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	private boolean markedForRemoval = false;
 
-	private static double speedMod = Constants.getInstance()
-			.getBulletSpeedModifier();
+	private static double speedMod = Constants.getBulletSpeedModifier();
 
 	/**
 	 * 
@@ -42,7 +41,6 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 * @param timePassed
 	 *            Time passed since last update.
 	 */
-	@Override
 	public abstract void doMovement(float timePassed);
 
 	@Override

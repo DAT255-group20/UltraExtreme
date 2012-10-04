@@ -7,8 +7,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.math.MathUtils;
 
-import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
@@ -23,17 +23,16 @@ public class GameObjectSprite extends Sprite {
 	/**
 	 * Reference to a bullet in the model.
 	 */
-	private final AbstractEntity entity;
+	private final IEntity entity;
 
 	private Vector2d directionVector;
 
 	// TODO PMD: Possible unsafe assignment to a non-final static field in a
 	// constructor.
 	private static Dimension screenDimension;
-	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
-			.getLevelDimension();
+	private static final Dimension MODEL_DIMENSION = Constants.getLevelDimension();
 
-	public GameObjectSprite(final AbstractEntity entity,
+	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final ITextureRegion texture) {
 
@@ -54,7 +53,7 @@ public class GameObjectSprite extends Sprite {
 				MODEL_DIMENSION, entity.getPosition());
 		this.setX((float) newPosition.getX());
 		this.setY((float) newPosition.getY());
-		if (entity instanceof AbstractBullet) {
+		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
 				directionVector = newVector;
@@ -71,7 +70,7 @@ public class GameObjectSprite extends Sprite {
 	/**
 	 * returns the entity this sprite is representing
 	 */
-	public AbstractEntity getEntity() {
+	public IEntity getEntity() {
 		return entity;
 	}
 

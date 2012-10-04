@@ -1,7 +1,7 @@
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 
@@ -49,7 +49,7 @@ public class PlayerShipTest extends AbstractEntityTest {
 	}
 
 	@Override
-	public void testGetSpeedModifier() {
+	public void testGetSpeedMod() {
 		// FIXME
 	}
 

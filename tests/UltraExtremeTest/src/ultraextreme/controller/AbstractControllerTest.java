@@ -1,6 +1,7 @@
 package ultraextreme.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.andengine.entity.scene.Scene;
 import org.junit.Test;

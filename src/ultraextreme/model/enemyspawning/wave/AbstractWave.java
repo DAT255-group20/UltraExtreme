@@ -3,7 +3,7 @@ package ultraextreme.model.enemyspawning.wave;
 import java.util.ArrayList;
 import java.util.List;
 
-import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.item.BulletManager;
 
 /**
@@ -58,7 +58,7 @@ public abstract class AbstractWave {
 	 * @param enemy
 	 *            Reference to the enemy that has spawned.
 	 */
-	protected void fireNewEnemySpawned(IEnemy enemy) {
+	protected void fireNewEnemySpawned(AbstractEnemy enemy) {
 		for (WaveListener listener : listeners) {
 			listener.enemySpawned(enemy);
 		}

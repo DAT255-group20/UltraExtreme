@@ -61,8 +61,15 @@ public abstract class AbstractEnemy implements IEnemy {
 	@Override
 	public boolean shouldSpawnPickup() {
 
-		return (randomGenerator.nextInt(99) < Constants.getInstance()
-				.getWeaponDropChance() + 1 && isDead());
+		return (randomGenerator.nextInt(99) < 
+				Constants.getWeaponDropChance() + 1 && isDead());
 	}
 
+	/**
+	 * Update method called once per loop, updating the enemy's behavior
+	 * 
+	 * @param timePassed
+	 *            since last update in (seconds?)
+	 */
+	public abstract void update(float timePassed);
 }

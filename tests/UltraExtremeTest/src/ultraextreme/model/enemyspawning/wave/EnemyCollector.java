@@ -3,6 +3,7 @@ package ultraextreme.model.enemyspawning.wave;
 import java.util.ArrayList;
 import java.util.List;
 
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.IEnemy;
 
 /**
@@ -27,7 +28,7 @@ public class EnemyCollector implements WaveListener {
 	}
 
 	@Override
-	public void enemySpawned(IEnemy enemy) {
+	public void enemySpawned(AbstractEnemy enemy) {
 		enemies.add(enemy);
 	}
 

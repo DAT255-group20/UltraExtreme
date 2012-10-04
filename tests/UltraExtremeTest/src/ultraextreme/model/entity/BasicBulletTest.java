@@ -1,8 +1,8 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.Constants;
-import ultraextreme.model.util.Rotation;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 
@@ -19,7 +19,7 @@ public class BasicBulletTest extends AbstractBulletTest {
 
 	@Override
 	public void testDoMovement() {
-		double speed = Constants.getInstance().getBulletSpeedModifier();
+		double speed = Constants.getBulletSpeedModifier();
 		AbstractBullet bullet = getNewAbstractBullet(10, 20, 30, 40,
 				PlayerID.PLAYER1, new Rotation(0));
 

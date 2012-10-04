@@ -12,7 +12,7 @@ import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.ObjectName;
@@ -25,12 +25,8 @@ import ultraextreme.model.util.ObjectName;
  */
 public class SpriteFactory {
 
-	// TODO PMD: Use explicit scoping instead of the default package private
-	// level
 	private Map<ObjectName, ITextureRegion> textureMap;
 
-	// TODO PMD: Use explicit scoping instead of the default package private
-	// level
 	// TODO not yet implemented offsets
 	private Map<ObjectName, Integer> offsetMap;
 
@@ -38,8 +34,7 @@ public class SpriteFactory {
 	// variable.
 	private Dimension screenDimension; // TODO implement scaling in this class?
 	// TODO PMD: Avoid unused private fields such as 'MODEL_DIMENSION'.
-	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
-			.getLevelDimension();
+	private static final Dimension MODEL_DIMENSION = Constants.getLevelDimension();
 
 	/**
 	 * The item bar's texture.
@@ -63,10 +58,11 @@ public class SpriteFactory {
 		textureMap = new HashMap<ObjectName, ITextureRegion>();
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		final TextureManager textureManager = activity.getTextureManager();
-		BitmapTextureAtlas textureAtlas = new BitmapTextureAtlas(textureManager, 1024, 1024,
+		BitmapTextureAtlas textureAtlas = new BitmapTextureAtlas(
+				textureManager, 1024, 1024,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		
-		//init enemies bullets and the player
+
+		// init enemies bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
 						"ship_placeholder.png", 0, 0);
@@ -81,11 +77,10 @@ public class SpriteFactory {
 				.createFromAsset(textureAtlas, activity,
 						"enemy_placeholder.png", 0, 40);
 		textureMap.put(ObjectName.BASIC_ENEMYSHIP, BasicEnemy);
-		
-		//init pickupables
+
+		// init pickupables
 		textureMap.put(ObjectName.BASIC_WEAPON, BasicEnemy);
 		textureMap.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip);
-
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
@@ -97,7 +92,8 @@ public class SpriteFactory {
 		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test
 																			// only
 
-		// What is this for?(I think it needs to be called to init the atlas, we will never know.. gramlich 2012)
+		// What is this for?(I think it needs to be called to init the atlas, we
+		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
 	}
 
@@ -112,7 +108,7 @@ public class SpriteFactory {
 	 *            what kind of sprite (picture) is desired
 	 * @return a new GameOBjectSprite
 	 */
-	public GameObjectSprite getNewSprite(final AbstractEntity entity,
+	public GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
 		textureMap.get(entity.getObjectName());
 		return new GameObjectSprite(entity, vbom, textureMap.get(entity

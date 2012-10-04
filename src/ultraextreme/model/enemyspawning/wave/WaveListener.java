@@ -1,6 +1,6 @@
 package ultraextreme.model.enemyspawning.wave;
 
-import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.enemy.AbstractEnemy;
 
 /**
  * A class that wants to get updates from a wave should implement this
@@ -26,6 +26,6 @@ public interface WaveListener {
 	 * @param enemy
 	 *            The enemy that has spawned.
 	 */
-	void enemySpawned(IEnemy enemy);
+	void enemySpawned(AbstractEnemy enemy);
 
 }

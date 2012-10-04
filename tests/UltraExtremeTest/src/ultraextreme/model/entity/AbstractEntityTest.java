@@ -1,8 +1,10 @@
 package ultraextreme.model.entity;
 
 import junit.framework.TestCase;
-import ultraextreme.model.util.Rotation;
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 
@@ -93,11 +95,61 @@ public abstract class AbstractEntityTest extends TestCase {
 	}
 
 	public void testIsOutOfScreen() {
-		fail("Not implemented");
-		// TODO Write isOutOfScreen test
+		final Dimension screen = Constants.getLevelDimension();
+		// Run through a lot of margins
+		for (int marginal = 1000; marginal > -300; --marginal) {
+			/*
+			 * Test outside top
+			 */
+			int width = 20;
+			int height = 10;
+			int x = (int) (screen.getX() / 2);
+			int y = -marginal + height - 1;
+			AbstractEntity e = getNewAbstractEntity(x, y, width, height,
+					new Rotation(0));
+			// Check it's outside
+			assertTrue(e.isOutOfScreen(marginal));
+			e = getNewAbstractEntity(x, y + 1, width, height, new Rotation(0));
+			// Check so it's now inside
+			assertFalse(e.isOutOfScreen(marginal));
+
+			/*
+			 * Test outside bottom
+			 */
+			y = (int) screen.getY() + marginal + 1;
+			e = getNewAbstractEntity(x, y, width, height, new Rotation(0));
+			// Check it's outside
+			assertTrue(e.isOutOfScreen(marginal));
+			e = getNewAbstractEntity(x, y - 1, width, height, new Rotation(0));
+			// Check so it's now inside
+			assertFalse(e.isOutOfScreen(marginal));
+
+			/*
+			 * Test outside left
+			 */
+			x = -marginal + width - 1;
+			y = (int) (screen.getX() / 2);
+			e = getNewAbstractEntity(x, y, width, height, new Rotation(0));
+			// Check it's outside
+			assertTrue(e.isOutOfScreen(marginal));
+			e = getNewAbstractEntity(x + 1, y, width, height, new Rotation(0));
+			// Check so it's now inside
+			assertFalse(e.isOutOfScreen(marginal));
+
+			/*
+			 * Test outside right
+			 */
+			x = (int) screen.getX() + marginal + 1;
+			e = getNewAbstractEntity(x, y, width, height, new Rotation(0));
+			// Check it's outside
+			assertTrue(e.isOutOfScreen(marginal));
+			e = getNewAbstractEntity(x - 1, y, width, height, new Rotation(0));
+			// Check so it's now inside
+			assertFalse(e.isOutOfScreen(marginal));
+		}
 	}
 
-	public abstract void testGetSpeedModifier();
+	public abstract void testGetSpeedMod();
 
 	private AbstractEntity newEntity() {
 		return getNewAbstractEntity(10, 20, 30, 40, new Rotation(0));
