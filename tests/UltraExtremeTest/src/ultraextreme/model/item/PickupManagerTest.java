@@ -41,24 +41,24 @@ public class PickupManagerTest extends TestCase {
 		// addPickup called in setup
 		assertTrue(manager.getPickups().get(0).equals(pickup));
 		assertTrue(manager.getPickups().get(1).equals(pickup2));
-		assertTrue(collector.getPickup().containsValue(pickup));
-		assertTrue(collector.getPickup().containsValue(pickup2));
+		assertTrue(collector.getPickupMap().get("add").equals(pickup));
+		//check if the map has stored an event for the secondary addPickup call
+		assertTrue(collector.getPickupMap().get("additionalAdd").equals(pickup2));
 	}
 
 	@Test
 	public void testRemovePickupWeaponPickup() {
 		manager.removePickUp(pickup);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertFalse(collector.getPickup().containsValue(pickup));
-		assertTrue(collector.getPickup().containsValue(pickup2));
+		assertTrue(collector.getPickupMap().get("remove").equals(pickup));
 	}
 
 	@Test
 	public void testRemovePickUpInt() {
 		manager.removePickUp(0);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertFalse(collector.getPickup().containsValue(pickup));
-		assertTrue(collector.getPickup().containsValue(pickup2));
+		assertTrue(collector.getPickupMap().get("remove").equals(pickup));
+
 	}
 
 	@Test
@@ -84,10 +84,17 @@ public class PickupManagerTest extends TestCase {
 
 		@Override
 		public void propertyChange(PropertyChangeEvent event) {
-			map.put(event.getPropertyName(), (WeaponPickup) event.getNewValue());
+			
+			//if an add has already been performed, save instead an additionalAdd in the map
+			//TODO replace "add" with the static string variable
+			if(map.containsKey(event.getPropertyName()) && (event.getPropertyName().equals("add"))) {
+				map.put("additionalAdd", (WeaponPickup)event.getNewValue());
+			} else {
+				map.put(event.getPropertyName(), (WeaponPickup) event.getNewValue());
+			}
 		}
 
-		public Map<String, WeaponPickup> getPickup() {
+		public Map<String, WeaponPickup> getPickupMap() {
 			return map;
 		}
 	}
