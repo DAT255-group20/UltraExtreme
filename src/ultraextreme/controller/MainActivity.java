@@ -53,8 +53,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		// and generally bad practice.
 		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
 		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
-		scaling = (float) (getResources().getDisplayMetrics().heightPixels / Constants
-				.getInstance().getLevelDimension().getY());
+		scaling = (float) (getResources().getDisplayMetrics().heightPixels / 
+				Constants.getLevelDimension().getY());
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
 				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);

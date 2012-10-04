@@ -22,7 +22,7 @@ public class LivesText extends Text implements IPlayerListener {
 		// According to
 		// https://sites.google.com/site/matimdevelopment/creating-text
 		super((float) textPos.getX(), (float) textPos.getY(), font, "Lives: "
-				+ Constants.getInstance().getInitShipLives() + "         ", vbo);
+				+ Constants.getInitShipLives() + "         ", vbo);
 	}
 
 	@Override

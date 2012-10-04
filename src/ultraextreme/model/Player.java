@@ -59,8 +59,7 @@ public class Player implements IPlayer {
 	/**
 	 * The time the ship will be invincible after receiving damage.
 	 */
-	private static final double invTime = Constants.getInstance()
-			.getShipInvincibilityTime();
+	private static final double invTime = Constants.getShipInvincibilityTime();
 
 	/**
 	 * A count down for the ships invincibility.
@@ -85,7 +84,7 @@ public class Player implements IPlayer {
 				Math.PI), 5);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
-		lives = Constants.getInstance().getInitShipLives();
+		lives = Constants.getInitShipLives();
 		this.score = 0;
 	}
 
@@ -167,8 +166,7 @@ public class Player implements IPlayer {
 	 * Sets the players ship to its spawn point.
 	 */
 	private void setShipToSpawn() {
-		final Dimension levelDimension = Constants.getInstance()
-				.getLevelDimension();
+		final Dimension levelDimension = Constants.getLevelDimension();
 		ship.setPosition(new Position(levelDimension.getX() * 0.5
 				- ship.getWidth() / 2, levelDimension.getY() * 0.65));
 	}
