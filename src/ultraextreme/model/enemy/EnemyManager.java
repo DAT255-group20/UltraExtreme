@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.enemyspawning.EnemySpawner;
+import ultraextreme.model.util.Constants;
 
 /**
  * 
@@ -18,7 +19,6 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
 public class EnemyManager implements PropertyChangeListener {
 
 	public static final String NEW_ENEMY = "add";
-	public static final String ENEMY_KILLED = "enemyKilled";
 	public static final String REMOVED_ENEMY = "remove";
 
 	private final List<AbstractEnemy> enemies;
@@ -43,7 +43,7 @@ public class EnemyManager implements PropertyChangeListener {
 			boolean remove = false;
 			final AbstractEnemy e = enemies.get(i);
 			if (e.isDead()) {
-				pcs.firePropertyChange(ENEMY_KILLED, null, e);
+				pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, e);
 				remove = true;
 			} else if (e.getShip().isOutOfScreen(150)) {
 				remove = true;

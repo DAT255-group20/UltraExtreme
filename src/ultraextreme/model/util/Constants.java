@@ -8,6 +8,8 @@ package ultraextreme.model.util;
  */
 public final class Constants {
 
+	public static final String EVENT_ENEMY_KILLED = "enemyKilled";
+	
 	private Constants() {
 	}
 
