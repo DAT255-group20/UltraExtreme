@@ -50,8 +50,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 		final Dimension screenDimension = new Dimension(screenWidth,
 				screenHeight);
-		this.scalingQuotient = screenDimension.getQuotient(
-				Constants.getLevelDimension());
+		this.scalingQuotient = screenDimension.getQuotient(Constants
+				.getLevelDimension());
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;

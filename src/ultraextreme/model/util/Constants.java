@@ -8,7 +8,8 @@ package ultraextreme.model.util;
  */
 public final class Constants {
 
-	private Constants() {}
+	private Constants() {
+	}
 
 	/**
 	 * @return The relative dimension of a arbitrary level.
