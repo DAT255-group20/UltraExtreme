@@ -44,7 +44,6 @@ public class BulletManager {
 	 */
 	public void addBullet(final AbstractBullet b) {
 		bulletsMap.get(b.getPlayerId()).add(b);
-		// TODO Not entirely sure that using a raw string is so good /Plankton
 		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null, b);
 	}
 
