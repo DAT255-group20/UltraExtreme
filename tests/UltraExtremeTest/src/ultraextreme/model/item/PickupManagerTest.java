@@ -49,7 +49,6 @@ public class PickupManagerTest extends TestCase {
 	public void testRemovePickupWeaponPickup() {
 		manager.removePickUp(pickup);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertTrue(manager.getPickups().get(1) == null);
 		assertFalse(collector.getPickup().containsValue(pickup));
 		assertTrue(collector.getPickup().containsValue(pickup2));
 	}
@@ -58,7 +57,6 @@ public class PickupManagerTest extends TestCase {
 	public void testRemovePickUpInt() {
 		manager.removePickUp(0);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertTrue(manager.getPickups().get(1) == null);
 		assertFalse(collector.getPickup().containsValue(pickup));
 		assertTrue(collector.getPickup().containsValue(pickup2));
 	}
