@@ -37,7 +37,11 @@ public class WeaponFactory {
 		}
 		return instance;
 	}
-
+	/**
+	 * Returns a new shallow clone of the specified weapon
+	 * @param objectName the name of the desired weapon
+	 * @return a new shallow clone of the specified weapon
+	 */
 	public AbstractWeapon getNewWeapon(ObjectName objectName) {
 		return weaponMap.get(objectName).shallowClone();
 	}

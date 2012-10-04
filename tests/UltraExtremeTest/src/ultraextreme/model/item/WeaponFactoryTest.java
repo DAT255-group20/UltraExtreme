@@ -1,19 +1,29 @@
 package ultraextreme.model.item;
 
-import static org.junit.Assert.fail;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
-public class WeaponFactoryTest {
+import ultraextreme.model.util.ObjectName;
 
+public class WeaponFactoryTest extends TestCase {
+	BulletManager manager;
+	@Override
+	public void setUp() {
+		manager = new BulletManager();
+	}
+	
 	@Test
-	public void testWeaponFactory() {
-		fail("Not yet implemented");
+	public void testInitalize() {
+		assertTrue(WeaponFactory.getInstance() == null);
+		WeaponFactory.initialize(manager);
+		assertFalse(WeaponFactory.getInstance() == null);
 	}
 
 	@Test
 	public void testGetNewWeapon() {
-		fail("Not yet implemented");
+		//TODO Finish this test
+		WeaponFactory.getInstance().getNewWeapon(ObjectName.BASIC_WEAPON);
 	}
 
 }
