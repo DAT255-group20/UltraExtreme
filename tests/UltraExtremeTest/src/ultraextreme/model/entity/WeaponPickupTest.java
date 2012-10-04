@@ -19,7 +19,7 @@ public class WeaponPickupTest extends TestCase{
 	@Test
 	public void testGetSpeedMod() {
 		assertEquals(pickup.getSpeedMod(),
-				Constants.getInstance().getPickupSpeedModifier());
+				Constants.getPickupSpeedModifier());
 	}
 
 	@Test
