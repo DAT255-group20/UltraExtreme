@@ -153,7 +153,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 					timerAction(timer.getPropertyName(), o);
 				}
 			} else {
-				timerList.remove(timer);
+				i.remove();
 			}
 		}
 	}
