@@ -173,8 +173,7 @@ public class Player implements IPlayer {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		// TODO Extract the strings
-		if (event.getPropertyName().equals("enemyKilled")) {
+		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_KILLED)) {
 			score += ((IEnemy) event.getNewValue()).getScoreValue();
 			notifyListeners();
 			Log.d("DEBUG", "Score: " + score);

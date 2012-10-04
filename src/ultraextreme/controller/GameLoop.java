@@ -84,7 +84,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if (event.getPropertyName().equals("add")) {
+		if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
 			IEntity entity;
 
 			if (event.getNewValue() instanceof IEnemy) {
@@ -98,7 +98,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				gameObjectSprites.add(newSprite);
 			}
 
-		} else if (event.getPropertyName().equals("remove")) {
+		} else if (event.getPropertyName().equals(Constants.EVENT_REMOVED_ENTITY)) {
 			IEntity entity;
 			if (event.getNewValue() instanceof IEnemy) {
 				entity = ((IEnemy) event.getNewValue()).getShip();

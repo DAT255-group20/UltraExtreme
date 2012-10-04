@@ -15,6 +15,7 @@ import org.junit.Test;
 import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.util.Constants;
 
 /**
  * 
@@ -41,7 +42,7 @@ public class EnemyManagerTest extends TestCase {
 		enemyManager.addEnemy(enemy);
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
 		assertEquals(enemy.getShip(),
-				collector.getEnemyShips().get(EnemyManager.NEW_ENEMY));
+				collector.getEnemyShips().get(Constants.EVENT_NEW_ENTITY));
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class EnemyManagerTest extends TestCase {
 
 		assertEquals(collector.getEnemyShips().size(), 2);
 		assertEquals(enemy,
-				collector.getEnemyShips().get(EnemyManager.REMOVED_ENEMY));
+				collector.getEnemyShips().get(Constants.EVENT_REMOVED_ENTITY));
 		collector.getEnemyShips().clear();
 
 		// Now check if an enemy gets removed when it is outside the map
@@ -94,7 +95,7 @@ public class EnemyManagerTest extends TestCase {
 
 		assertEquals(collector.getEnemyShips().size(), 2);
 		assertEquals(enemy,
-				collector.getEnemyShips().get(EnemyManager.REMOVED_ENEMY));
+				collector.getEnemyShips().get(Constants.EVENT_REMOVED_ENTITY));
 	}
 
 	/**
