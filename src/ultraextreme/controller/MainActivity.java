@@ -11,6 +11,8 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 
 import ultraextreme.model.util.Constants;
+import ultraextreme.util.Resources;
+import ultraextreme.util.Resources.ResourceName;
 import ultraextreme.view.SpriteFactory;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -54,16 +56,21 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		// and generally bad practice.
 		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
 		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
-		scaling = (float) (getResources().getDisplayMetrics().heightPixels / 
-				Constants.getLevelDimension().getY());
+		scaling = (float) (getResources().getDisplayMetrics().heightPixels / Constants
+				.getLevelDimension().getY());
 		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
 				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
 	}
 
 	private void initializeResources() {
-		// TODO Auto-generated method stub
-		
+		Resources res = Resources.getInstance();
+		res.setResource(ResourceName.START_GAME,
+				getString(R.string.start_game));
+		res.setResource(ResourceName.LIVES,
+				getString(R.string.lives));
+		res.setResource(ResourceName.SCORE,
+				getString(R.string.score));
 	}
 
 	@Override

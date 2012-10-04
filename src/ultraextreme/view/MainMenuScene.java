@@ -9,6 +9,9 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
 
+import ultraextreme.util.Resources;
+import ultraextreme.util.Resources.ResourceName;
+
 import android.util.Log;
 
 /**
@@ -24,10 +27,8 @@ public class MainMenuScene extends MenuScene {
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super(camera);
 		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
-		// TODO Should probably use baseGameActivity.getString(R.string.start)
-		// instead of hard coding
 		final IMenuItem startButton = new TextMenuItem(MENU_START, font,
-				"Start game", vertexBufferObjectManager);
+				Resources.getInstance().getResource(ResourceName.START_GAME), vertexBufferObjectManager);
 		startButton.setPosition(100, 100);
 		startButton.setColor(Color.BLACK);
 		addMenuItem(startButton);
