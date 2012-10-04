@@ -19,7 +19,7 @@ public class BasicBulletTest extends AbstractBulletTest {
 
 	@Override
 	public void testDoMovement() {
-		double speed = Constants.getInstance().getBulletSpeedModifier();
+		double speed = Constants.getBulletSpeedModifier();
 		AbstractBullet bullet = getNewAbstractBullet(10, 20, 30, 40,
 				PlayerID.PLAYER1, new Rotation(0));
 

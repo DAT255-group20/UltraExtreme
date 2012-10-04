@@ -28,8 +28,7 @@ public class EnemyShipTest extends AbstractEntityTest {
 
 	@Override
 	public void testGetSpeedMod() {
-		assertEquals(enemyShip.getSpeedMod(), Constants.getInstance()
-				.getEnemySpeedModifier());
+		assertEquals(enemyShip.getSpeedMod(), Constants.getEnemySpeedModifier());
 	}
 
 	@Test

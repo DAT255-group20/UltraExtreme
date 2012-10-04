@@ -95,7 +95,7 @@ public abstract class AbstractEntityTest extends TestCase {
 	}
 
 	public void testIsOutOfScreen() {
-		final Dimension screen = Constants.getInstance().getLevelDimension();
+		final Dimension screen = Constants.getLevelDimension();
 		// Run through a lot of margins
 		for (int marginal = 1000; marginal > -300; --marginal) {
 			/*
