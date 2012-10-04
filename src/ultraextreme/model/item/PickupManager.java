@@ -52,7 +52,8 @@ public class PickupManager {
 	 *            what item is to be removed [0, n]
 	 */
 	public void removePickUp(int index) {
-		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null, pickups.get(index));
+		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null,
+				pickups.get(index));
 		pickups.remove(index);
 	}
 

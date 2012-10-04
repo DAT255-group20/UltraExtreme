@@ -46,7 +46,7 @@ public class SpriteFactory {
 	 * The items' textures.
 	 */
 	private Map<ObjectName, ITextureRegion> itemTextures;
-	
+
 	private static SpriteFactory instance;
 
 	/**
@@ -99,17 +99,15 @@ public class SpriteFactory {
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
 	}
-	
-	public static void initialize(SimpleBaseGameActivity activity)
-	{
+
+	public static void initialize(SimpleBaseGameActivity activity) {
 		instance = new SpriteFactory(activity);
 	}
-	
-	public static SpriteFactory getInstance()
-	{
-		if (instance == null)
-		{
-			throw new IllegalStateException("SpriteFactory must have been initialized before it is used");
+
+	public static SpriteFactory getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException(
+					"SpriteFactory must have been initialized before it is used");
 		}
 		return instance;
 	}

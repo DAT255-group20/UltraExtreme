@@ -42,8 +42,7 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public GameScene(final IUltraExtremeModel gameModel,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final SensorManager sensorManager,
-			float scaling, Camera camera,
+			final SensorManager sensorManager, float scaling, Camera camera,
 			Font font) {
 		super();
 
@@ -51,8 +50,9 @@ public class GameScene extends Scene implements SensorEventListener {
 		setBackground(new Background(0, 0, 0));
 
 		gameObjectSprites = new LinkedList<GameObjectSprite>();
-		final GameObjectSprite playerSprite = SpriteFactory.getInstance().getNewSprite(
-				gameModel.getPlayer().getShip(), vertexBufferObjectManager);
+		final GameObjectSprite playerSprite = SpriteFactory.getInstance()
+				.getNewSprite(gameModel.getPlayer().getShip(),
+						vertexBufferObjectManager);
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);

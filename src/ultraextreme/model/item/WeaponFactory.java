@@ -13,7 +13,7 @@ import ultraextreme.model.util.ObjectName;
  */
 public class WeaponFactory {
 	private Map<ObjectName, AbstractWeapon> weaponMap;
-	
+
 	private static WeaponFactory instance;
 
 	private WeaponFactory(BulletManager manager) {
@@ -23,17 +23,15 @@ public class WeaponFactory {
 				new SpinningSpreadWeapon(manager));
 		weaponMap.put(ObjectName.BOMB, new Bomb(manager));
 	}
-	
-	public static void initialize(BulletManager bulletManager)
-	{
+
+	public static void initialize(BulletManager bulletManager) {
 		instance = new WeaponFactory(bulletManager);
 	}
-	
-	public static WeaponFactory getInstance()
-	{
-		if (instance == null)
-		{
-			throw new IllegalStateException("WeaponFactory must have been initialized before it is used");
+
+	public static WeaponFactory getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException(
+					"WeaponFactory must have been initialized before it is used");
 		}
 		return instance;
 	}

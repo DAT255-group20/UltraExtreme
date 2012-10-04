@@ -45,8 +45,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public GameLoop(final GameScene gameScene, final GameModel gameModel,
 			final List<GameObjectSprite> gameObjectSprites,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			double screenWidth,
-			final double screenHeight) {
+			double screenWidth, final double screenHeight) {
 
 		final Dimension screenDimension = new Dimension(screenWidth,
 				screenHeight);
@@ -98,7 +97,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				gameObjectSprites.add(newSprite);
 			}
 
-		} else if (event.getPropertyName().equals(Constants.EVENT_REMOVED_ENTITY)) {
+		} else if (event.getPropertyName().equals(
+				Constants.EVENT_REMOVED_ENTITY)) {
 			IEntity entity;
 			if (event.getNewValue() instanceof IEnemy) {
 				entity = ((IEnemy) event.getNewValue()).getShip();

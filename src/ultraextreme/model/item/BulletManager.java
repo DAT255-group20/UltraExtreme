@@ -79,7 +79,8 @@ public class BulletManager {
 			for (int i = 0; i < list.size(); i++) {
 				final IBullet b = list.get(i);
 				if (b.isMarkedForRemoval() || (b.isOutOfScreen(100))) {
-					pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null, b);
+					pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY,
+							null, b);
 					list.remove(i);
 					i--;
 				}
