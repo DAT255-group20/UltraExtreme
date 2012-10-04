@@ -61,8 +61,8 @@ public abstract class AbstractEnemy implements IEnemy {
 	@Override
 	public boolean shouldSpawnPickup() {
 
-		return (randomGenerator.nextInt(99) < Constants.getInstance()
-				.getWeaponDropChance() + 1 && isDead());
+		return (randomGenerator.nextInt(99) < 
+				Constants.getWeaponDropChance() + 1 && isDead());
 	}
 
 	/**

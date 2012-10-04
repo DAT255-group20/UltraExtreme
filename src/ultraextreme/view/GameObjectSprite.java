@@ -30,8 +30,7 @@ public class GameObjectSprite extends Sprite {
 	// TODO PMD: Possible unsafe assignment to a non-final static field in a
 	// constructor.
 	private static Dimension screenDimension;
-	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
-			.getLevelDimension();
+	private static final Dimension MODEL_DIMENSION = Constants.getLevelDimension();
 
 	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,

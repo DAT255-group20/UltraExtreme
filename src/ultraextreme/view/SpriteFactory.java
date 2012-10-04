@@ -25,12 +25,8 @@ import ultraextreme.model.util.ObjectName;
  */
 public class SpriteFactory {
 
-	// TODO PMD: Use explicit scoping instead of the default package private
-	// level
 	private Map<ObjectName, ITextureRegion> textureMap;
 
-	// TODO PMD: Use explicit scoping instead of the default package private
-	// level
 	// TODO not yet implemented offsets
 	private Map<ObjectName, Integer> offsetMap;
 
@@ -38,8 +34,7 @@ public class SpriteFactory {
 	// variable.
 	private Dimension screenDimension; // TODO implement scaling in this class?
 	// TODO PMD: Avoid unused private fields such as 'MODEL_DIMENSION'.
-	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
-			.getLevelDimension();
+	private static final Dimension MODEL_DIMENSION = Constants.getLevelDimension();
 
 	/**
 	 * The item bar's texture.

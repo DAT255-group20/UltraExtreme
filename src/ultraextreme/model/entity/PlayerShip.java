@@ -15,8 +15,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class PlayerShip extends AbstractDestroyableEntity {
 
-	private static double speedMod = Constants.getInstance()
-			.getPlayerSpeedModifier();
+	private static double speedMod = Constants.getPlayerSpeedModifier();
 
 	/**
 	 * If the ship is hit this update.
@@ -51,7 +50,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 *         of the level, else false.
 	 */
 	public boolean canMoveX(double deltaX) {
-		final Dimension dimension = Constants.getInstance().getLevelDimension();
+		final Dimension dimension = Constants.getLevelDimension();
 		final Position position = this.getCenteredPosition();
 		final double newX = deltaX + position.getX();
 		return newX + getWidth() / 2 < dimension.getX()
@@ -68,7 +67,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 *         of the level, else false.
 	 */
 	public boolean canMoveY(double deltaY) {
-		final Dimension dimension = Constants.getInstance().getLevelDimension();
+		final Dimension dimension = Constants.getLevelDimension();
 		final Position position = this.getCenteredPosition();
 		double newY = deltaY + position.getY();
 		return newY + getHeight() / 2 < dimension.getY()
