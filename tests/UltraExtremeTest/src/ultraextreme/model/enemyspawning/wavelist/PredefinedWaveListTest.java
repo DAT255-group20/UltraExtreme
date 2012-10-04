@@ -1,29 +1,56 @@
 package ultraextreme.model.enemyspawning.wavelist;
 
-import static org.junit.Assert.fail;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
-public class PredefinedWaveListTest {
+import ultraextreme.model.item.BulletManager;
+
+/**
+ * 
+ * @author Daniel Jonsson
+ * 
+ */
+public class PredefinedWaveListTest extends TestCase implements
+		AbstractWaveListTest {
+
+	private PredefinedWaveList waveList;
+
+	@Override
+	public void setUp() {
+		resetWaveList();
+	}
+
+	/**
+	 * Reset the instance variable waveList.
+	 */
+	private void resetWaveList() {
+		waveList = new PredefinedWaveList(new BulletManager());
+	}
+
+	@Override
+	@Test
+	public void testGetNumberOfWaves() {
+		resetWaveList();
+		assertEquals(5, waveList.getNumberOfWaves());
+	}
 
 	@Test
 	public void testNext() {
-		fail("Not yet implemented");
+		// Call next() a number of times on the wave list
+		for (int i = 1; i < waveList.getNumberOfWaves(); ++i) {
+			assertEquals(i, waveList.getCurrentWaveNumber());
+			assertTrue(waveList.hasNext());
+			waveList.next();
+		}
+		// Now there shouldn't be anything left in the list
+		assertEquals(waveList.getNumberOfWaves(),
+				waveList.getCurrentWaveNumber());
+		assertFalse(waveList.hasNext());
 	}
-
-	@Test
-	public void testPredefinedWaveList() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCurrentWave() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCurrentSpawningTime() {
-		fail("Not yet implemented");
+	
+	public void testGenerateWaves() {
+		fail("Need some implementation!!!1 maybe");
 	}
 
 }
