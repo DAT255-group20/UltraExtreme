@@ -34,8 +34,7 @@ public class SpriteFactory {
 	// variable.
 	private Dimension screenDimension; // TODO implement scaling in this class?
 	// TODO PMD: Avoid unused private fields such as 'MODEL_DIMENSION'.
-	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
-			.getLevelDimension();
+	private static final Dimension MODEL_DIMENSION = Constants.getLevelDimension();
 
 	/**
 	 * The item bar's texture.
