@@ -32,8 +32,6 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
-	private SpriteFactory spriteFactory;
-	// private GameModel gameModel;
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
@@ -72,7 +70,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected void onCreateResources() {
-		spriteFactory = new SpriteFactory(this);
+		SpriteFactory.initialize(this);
 		defaultFont = FontFactory.create(this.getFontManager(),
 				this.getTextureManager(), 256, 256,
 				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32f,
@@ -85,7 +83,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				spriteFactory, this, scaling, camera, defaultFont);
+				this, scaling, camera, defaultFont);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 
