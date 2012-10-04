@@ -35,6 +35,7 @@ public class PredefinedWaveListTest extends TestCase implements
 		assertEquals(5, waveList.getNumberOfWaves());
 	}
 
+	@Override
 	@Test
 	public void testNext() {
 		// Call next() a number of times on the wave list
@@ -48,7 +49,7 @@ public class PredefinedWaveListTest extends TestCase implements
 				waveList.getCurrentWaveNumber());
 		assertFalse(waveList.hasNext());
 	}
-	
+
 	public void testGenerateWaves() {
 		fail("Need some implementation!!!1 maybe");
 	}

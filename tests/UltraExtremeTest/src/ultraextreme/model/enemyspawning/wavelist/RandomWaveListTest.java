@@ -13,18 +13,20 @@ import ultraextreme.model.item.BulletManager;
  * @author Daniel Jonsson
  * 
  */
-public class RandomWaveListTest extends TestCase implements AbstractWaveListTest {
-	
+public class RandomWaveListTest extends TestCase implements
+		AbstractWaveListTest {
+
 	private RandomWaveList waveList;
 
 	/**
 	 * Reset the instance variable waveList.
+	 * 
 	 * @param numberOfWaves
 	 */
 	private void resetWaveList(int numberOfWaves) {
 		waveList = new RandomWaveList(numberOfWaves, new BulletManager());
 	}
-	
+
 	@Override
 	@Test
 	public void testGetNumberOfWaves() {
@@ -52,7 +54,7 @@ public class RandomWaveListTest extends TestCase implements AbstractWaveListTest
 			assertFalse(waveList.hasNext());
 		}
 	}
-	
+
 	/**
 	 * This test will create a new RandomWaveList, generate some waves and check
 	 * if they got the correct spawn time and are instance of the right wave.
@@ -97,6 +99,5 @@ public class RandomWaveListTest extends TestCase implements AbstractWaveListTest
 		assertEquals(waveList.getCurrentSpawningTime(), 34f);
 		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
 	}
-
 
 }
