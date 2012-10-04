@@ -87,7 +87,6 @@ public class PickupManagerTest extends TestCase {
 		public void propertyChange(PropertyChangeEvent event) {
 			
 			//if an add has already been performed, save instead an additionalAdd in the map
-			//TODO replace "add" with the static string variable
 			if(map.containsKey(event.getPropertyName()) && (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY))) {
 				map.put("additionalAdd", (WeaponPickup)event.getNewValue());
 			} else {
