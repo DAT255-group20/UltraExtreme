@@ -65,6 +65,7 @@ public class Timer {
 		this.runs = runs;
 		this.isRunning = true;
 		this.totalTime = totalTime;
+		this.timeElapsed = 0;
 	}
 
 	/**
@@ -90,11 +91,10 @@ public class Timer {
 			if (this.timeElapsed >= totalTime) {
 				timeReached = true;
 				runs -= 1;
+				this.timeElapsed -= totalTime;
 			}
 			if (runs == 0) {
 				isRunning = false;
-			} else {
-				this.timeElapsed -= totalTime;
 			}
 		}
 		return timeReached;

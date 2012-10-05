@@ -34,7 +34,7 @@ import android.util.Log;
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	// TODO perhaps refactor this variable?
-	private static final float blinkTime = 1;
+	private static final float blinkTime = 2;
 
 	final private GameScene gameScene;
 	final private GameModel gameModel;
@@ -74,10 +74,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		moveX = 0;
 		moveY = 0;
 		specialAttack = false;
-		updateTimers(time);
 		for (GameObjectSprite sprite : gameObjectSprites) {
 			sprite.update();
 		}
+		updateTimers(time);
 	}
 
 	@Override
@@ -146,13 +146,23 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		Iterator<Timer> i = timerList.iterator();
 		while (i.hasNext()) {
 			Timer timer = i.next();
-			if (timer.isRunning()) {
-				if (timer.update(timeElapsed)) {
-					Object o = timer.getObject();
-					timerAction(timer.getPropertyName(), o);
+			if (timer.update(timeElapsed)) {
+				Object o = timer.getObject();
+				String propertyName = timer.getPropertyName();
+				
+				// The different actions that may be performed.
+				if (propertyName.equals(Constants.EVENT_ENEMY_DAMAGED)) {
+					GameObjectSprite sprite = getSprite((IEntity) o);
+					if (sprite == null) {
+						i.remove();
+					} else {
+						sprite.blink();
+					}
+					//TODO add more actions here!
 				}
-			} else {
-				i.remove();
+				if (!timer.isRunning()) {
+					i.remove();
+				} 
 			}
 		}
 	}
@@ -172,21 +182,6 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Performs the corresponding action to the given object.
-	 * 
-	 * @param action
-	 *            The action that is to be performed on the target object.
-	 * @param o
-	 *            The target Object.
-	 */
-	private void timerAction(String action, Object o) {
-		if (action.equals(Constants.EVENT_ENEMY_DAMAGED)) {
-			getSprite((IEntity) o).blink();
-		}
-		// TODO add more actions here!
 	}
 
 	/**

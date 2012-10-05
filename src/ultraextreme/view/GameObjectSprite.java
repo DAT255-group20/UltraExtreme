@@ -75,10 +75,12 @@ public class GameObjectSprite extends Sprite {
 	 * Switches the color of this sprite between two.
 	 */
 	public void blink() {
-		if(isBlinked) {
-			this.setColor(1, 1, 1);
-		} else {
+		if(!isBlinked) {
 			this.setColor(0.5f, 0.5f, 0.5f);
+			isBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isBlinked = false;
 		}
 	}
 
