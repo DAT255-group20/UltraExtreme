@@ -33,9 +33,8 @@ import android.util.Log;
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
-	// TODO perhaps refactor these two variables?
+	// TODO perhaps refactor this variable?
 	private static final float blinkTime = 1;
-	private static final String blinkSprite = "blinkSprite";
 
 	final private GameScene gameScene;
 	final private GameModel gameModel;
@@ -94,9 +93,9 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		// TODO Refactor the "enemyHit" string.
-		if (event.getPropertyName().equals("enemyHit")) {
+		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_DAMAGED)) {
 			EnemyShip ship = (EnemyShip) event.getNewValue();
-			Timer timer = new Timer(blinkSprite, blinkTime, ship);
+			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, blinkTime, ship);
 			timerList.add(timer);
 			getSprite(ship).blink();
 		} else if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
@@ -184,7 +183,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	 *            The target Object.
 	 */
 	private void timerAction(String action, Object o) {
-		if (action.equals(blinkSprite)) {
+		if (action.equals(Constants.EVENT_ENEMY_DAMAGED)) {
 			getSprite((IEntity) o).blink();
 		}
 		// TODO add more actions here!
