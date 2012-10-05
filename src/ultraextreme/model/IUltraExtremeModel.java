@@ -1,5 +1,7 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeListener;
+
 /**
  * An interface for a GameModel that only has get methods.
  * 
@@ -15,6 +17,14 @@ public interface IUltraExtremeModel {
 	 */
 	IPlayer getPlayer();
 
+	/**
+	 * Adds a listener to the model.
+	 * 
+	 * @param listener
+	 * 				The provided listener.
+	 */
+	void addPropertyChangeListener(PropertyChangeListener listener);
+	
 	/**
 	 * Registers the provided listener to the player.
 	 * 

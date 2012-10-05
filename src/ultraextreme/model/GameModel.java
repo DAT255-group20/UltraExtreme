@@ -1,5 +1,7 @@
 package ultraextreme.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 import ultraextreme.model.enemy.AbstractEnemy;
@@ -13,6 +15,7 @@ import ultraextreme.model.entity.WeaponPickup;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -36,6 +39,8 @@ public class GameModel implements IUltraExtremeModel {
 	private PickupManager pickupManager;
 
 	private WeaponFactory weaponFactory;
+	
+	private PropertyChangeSupport pcs;
 
 	public GameModel() {
 		bulletManager = new BulletManager();
@@ -46,6 +51,7 @@ public class GameModel implements IUltraExtremeModel {
 		enemySpawner = new EnemySpawner(new RandomWaveList(1000, bulletManager));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
+		pcs = new PropertyChangeSupport(this);
 
 		// Player listens when enemies are killed
 		enemyManager.addPropertyChangeListener(player);
@@ -106,6 +112,7 @@ public class GameModel implements IUltraExtremeModel {
 			for (IEnemy e : enemyManager.getEnemies()) {
 				if (b.collidesWith(e.getShip())) {
 					e.getShip().receiveDamage(b.getDamage());
+					pcs.firePropertyChange(Constants.EVENT_ENEMY_DAMAGED, null, e.getShip());
 					b.markForRemoval();
 				}
 			}
@@ -162,5 +169,11 @@ public class GameModel implements IUltraExtremeModel {
 
 	public PickupManager getPickupManager() {
 		return pickupManager;
+	}
+
+	@Override
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+		
 	}
 }
