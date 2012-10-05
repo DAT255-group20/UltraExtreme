@@ -24,6 +24,8 @@ public class GameObjectSprite extends Sprite {
 	 * Reference to a bullet in the model.
 	 */
 	private final IEntity entity;
+	
+	private boolean isBlinked;
 
 	private Vector2d directionVector;
 
@@ -41,6 +43,7 @@ public class GameObjectSprite extends Sprite {
 				.getY(), entity.getWidth(), entity.getHeight(), texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
+		this.isBlinked = false;
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
@@ -65,6 +68,19 @@ public class GameObjectSprite extends Sprite {
 				newAngle = newAngle + 180f;
 			}
 			this.setRotation(newAngle + 90f);
+		}
+	}
+	
+	/**
+	 * Switches the color of this sprite between two.
+	 */
+	public void blink() {
+		if(!isBlinked) {
+			this.setColor(1f, 0f, 0f);
+			isBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isBlinked = false;
 		}
 	}
 

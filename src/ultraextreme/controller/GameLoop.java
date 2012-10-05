@@ -2,6 +2,8 @@ package ultraextreme.controller;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.vecmath.Vector2d;
@@ -12,6 +14,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
 import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
@@ -30,6 +33,9 @@ import android.util.Log;
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
+	// TODO perhaps refactor this variable?
+	private static final float blinkTime = 0.1f;
+
 	final private GameScene gameScene;
 	final private GameModel gameModel;
 	final private List<GameObjectSprite> gameObjectSprites;
@@ -41,6 +47,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private double moveX;
 	private double moveY;
 	private boolean specialAttack;
+
+	private List<Timer> timerList;
 
 	public GameLoop(final GameScene gameScene, final GameModel gameModel,
 			final List<GameObjectSprite> gameObjectSprites,
@@ -55,6 +63,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
+		this.timerList = new LinkedList<Timer>();
 		this.spriteFactory = SpriteFactory.getInstance();
 	}
 
@@ -65,10 +74,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		moveX = 0;
 		moveY = 0;
 		specialAttack = false;
-
 		for (GameObjectSprite sprite : gameObjectSprites) {
 			sprite.update();
 		}
+		updateTimers(time);
 	}
 
 	@Override
@@ -83,7 +92,13 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
+		// TODO Refactor the "enemyHit" string.
+		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_DAMAGED)) {
+			EnemyShip ship = (EnemyShip) event.getNewValue();
+			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, blinkTime, ship);
+			timerList.add(timer);
+			getSprite(ship).blink();
+		} else if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
 			IEntity entity;
 
 			if (event.getNewValue() instanceof IEnemy) {
@@ -120,6 +135,54 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Updates all the timers, performs actions and removes stopped timers.
+	 * 
+	 * @param timeElapsed
+	 */
+	private void updateTimers(float timeElapsed) {
+		Iterator<Timer> i = timerList.iterator();
+		while (i.hasNext()) {
+			Timer timer = i.next();
+			if (timer.update(timeElapsed)) {
+				Object o = timer.getObject();
+				String propertyName = timer.getPropertyName();
+				
+				boolean timerDeprecated = false;
+				// The different actions that may be performed.
+				if (propertyName.equals(Constants.EVENT_ENEMY_DAMAGED)) {
+					GameObjectSprite sprite = getSprite((IEntity) o);
+					if (sprite == null) {
+						timerDeprecated = true;
+					} else {
+						sprite.blink();
+					}
+					//TODO add more actions here!
+				}
+				if (!timer.isRunning() || timerDeprecated) {
+					i.remove();
+				} 
+			}
+		}
+	}
+
+	// TODO Should this method be used at more places?
+	/**
+	 * Gets the sprite that corresponds to this entity.
+	 * 
+	 * @return The sprite if it exists, else null.
+	 */
+	private GameObjectSprite getSprite(IEntity entity) {
+		Iterator<GameObjectSprite> i = gameObjectSprites.iterator();
+		while (i.hasNext()) {
+			GameObjectSprite sprite = ((GameObjectSprite) i.next());
+			if (sprite.getEntity() == entity) {
+				return sprite;
+			}
+		}
+		return null;
 	}
 
 	/**
