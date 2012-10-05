@@ -76,7 +76,7 @@ public class GameObjectSprite extends Sprite {
 	 */
 	public void blink() {
 		if(!isBlinked) {
-			this.setColor(0.5f, 0.5f, 0.5f);
+			this.setColor(1f, 0f, 0f);
 			isBlinked = true;
 		} else {
 			this.setColor(1f, 1f, 1f);
