@@ -55,6 +55,7 @@ public class GameController extends AbstractController implements
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
+		gameModel.addPropertyChangeListener(gameLoop);
 		scene.registerUpdateHandler(gameLoop);
 	}
 
