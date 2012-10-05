@@ -47,8 +47,10 @@ public abstract class AbstractEntityTest extends TestCase {
 	}
 
 	public void tetGetCenteredPosition() {
-		fail("Not implemented");
-		// TODO Write getCenteredPosition test
+		// TODO Why isn't this test appearing in the list of tests?... /Plankton
+		AbstractEntity entity = getNewAbstractEntity(20, 20, 10, 10, new Rotation(0));
+		Position centPos = entity.getCenteredPosition();
+		assertTrue(centPos.getX() == 25);
 	}
 
 	public void testGetWidth() {
