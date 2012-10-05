@@ -105,12 +105,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				entity = ((IEnemy) event.getNewValue()).getShip();
 			} else { // if item or bullet
 				entity = (IEntity) event.getNewValue();
-
-				final GameObjectSprite newSprite = spriteFactory.getNewSprite(
-						entity, vertexBufferObjectManager);
-				gameScene.attachChild(newSprite);
-				gameObjectSprites.add(newSprite);
 			}
+			final GameObjectSprite newSprite = spriteFactory.getNewSprite(
+					entity, vertexBufferObjectManager);
+			gameScene.attachChild(newSprite);
+			gameObjectSprites.add(newSprite);
 
 		} else if (event.getPropertyName().equals(
 				Constants.EVENT_REMOVED_ENTITY)) {
