@@ -97,7 +97,6 @@ public abstract class AbstractEntity implements IEntity {
 	 * @return A new position at the center of this entity.
 	 */
 	public Position getCenteredPosition() {
-		// TODO test this getCenteredPosition()
 		return new Position(position.getX() + getWidth() / 2, position.getY()
 				+ getHeight() / 2);
 	}
