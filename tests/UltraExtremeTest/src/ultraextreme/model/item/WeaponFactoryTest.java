@@ -15,15 +15,25 @@ public class WeaponFactoryTest extends TestCase {
 	
 	@Test
 	public void testInitalize() {
-		assertTrue(WeaponFactory.getInstance() == null);
+		boolean exceptionHasBeenThrown = false;
+		try {
+		WeaponFactory.getInstance();
+		} catch (IllegalStateException e) {
+			exceptionHasBeenThrown = true;
+		}
+		
+		assertTrue(exceptionHasBeenThrown);
 		WeaponFactory.initialize(manager);
 		assertFalse(WeaponFactory.getInstance() == null);
 	}
 
 	@Test
 	public void testGetNewWeapon() {
-		//TODO Finish this test
-		WeaponFactory.getInstance().getNewWeapon(ObjectName.BASIC_WEAPON);
+		WeaponFactory.initialize(manager);
+		AbstractWeapon weapon = WeaponFactory.getInstance().getNewWeapon(ObjectName.BASIC_WEAPON);
+		assertTrue(weapon != null);
+		assertEquals(weapon.getName(), ObjectName.BASIC_WEAPON);
+		assertTrue(weapon.getBulletManager().equals(manager));
 	}
 
 }
