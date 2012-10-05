@@ -34,7 +34,7 @@ import android.util.Log;
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	// TODO perhaps refactor this variable?
-	private static final float blinkTime = 2;
+	private static final float blinkTime = 0.1f;
 
 	final private GameScene gameScene;
 	final private GameModel gameModel;
@@ -150,17 +150,18 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				Object o = timer.getObject();
 				String propertyName = timer.getPropertyName();
 				
+				boolean timerDeprecated = false;
 				// The different actions that may be performed.
 				if (propertyName.equals(Constants.EVENT_ENEMY_DAMAGED)) {
 					GameObjectSprite sprite = getSprite((IEntity) o);
 					if (sprite == null) {
-						i.remove();
+						timerDeprecated = true;
 					} else {
 						sprite.blink();
 					}
 					//TODO add more actions here!
 				}
-				if (!timer.isRunning()) {
+				if (!timer.isRunning() || timerDeprecated) {
 					i.remove();
 				} 
 			}
