@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.entity.WeaponPickup;
+import ultraextreme.model.util.Constants;
 
 /**
  * In charge of storing and handling all pickups. (WeaponPickUpables)
@@ -16,9 +17,6 @@ import ultraextreme.model.entity.WeaponPickup;
 public class PickupManager {
 	private final List<WeaponPickup> pickups;
 	private final PropertyChangeSupport pcs;
-
-	private static final String NEW_PICKUP = "add";
-	private static final String REMOVE_PICKUP = "remove";
 
 	public PickupManager() {
 		pickups = new ArrayList<WeaponPickup>();
@@ -32,7 +30,7 @@ public class PickupManager {
 	 */
 	public void addPickup(final WeaponPickup pickup) {
 		pickups.add(pickup);
-		pcs.firePropertyChange(NEW_PICKUP, null, pickup);
+		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null, pickup);
 
 	}
 
@@ -43,7 +41,7 @@ public class PickupManager {
 	 *            item which is to be removed
 	 */
 	public void removePickUp(final WeaponPickup pickup) {
-		pcs.firePropertyChange(REMOVE_PICKUP, null, pickup);
+		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null, pickup);
 		pickups.remove(pickup);
 	}
 
@@ -54,7 +52,8 @@ public class PickupManager {
 	 *            what item is to be removed [0, n]
 	 */
 	public void removePickUp(int index) {
-		pcs.firePropertyChange(REMOVE_PICKUP, null, pickups.get(index));
+		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null,
+				pickups.get(index));
 		pickups.remove(index);
 	}
 

@@ -1,24 +1,36 @@
 package ultraextreme.model.entity;
 
-import static org.junit.Assert.fail;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
-public class WeaponPickupTest {
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Position;
+
+public class WeaponPickupTest extends TestCase {
+	WeaponPickup pickup;
+
+	@Override
+	public void setUp() {
+		pickup = new WeaponPickup(0, 0, ObjectName.BASIC_WEAPON);
+	}
 
 	@Test
 	public void testGetSpeedMod() {
-		fail("Not yet implemented");
+		assertEquals(pickup.getSpeedMod(), Constants.getPickupSpeedModifier());
 	}
 
 	@Test
 	public void testWeaponPickupDoubleDoubleObjectName() {
-		fail("Not yet implemented");
+		assertEquals(pickup.getPosition(), new Position(0, 0));
+		assertEquals(pickup.getHeight(), pickup.getWidth());
+		assertEquals(pickup.getObjectName(), ObjectName.BASIC_WEAPON);
 	}
 
 	@Test
 	public void testWeaponPickupPositionObjectName() {
-		fail("Not yet implemented");
+		pickup = new WeaponPickup(new Position(0, 0), ObjectName.BASIC_WEAPON);
+		testWeaponPickupDoubleDoubleObjectName();
 	}
-
 }

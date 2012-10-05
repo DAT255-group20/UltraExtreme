@@ -34,7 +34,8 @@ public class SpriteFactory {
 	// variable.
 	private Dimension screenDimension; // TODO implement scaling in this class?
 	// TODO PMD: Avoid unused private fields such as 'MODEL_DIMENSION'.
-	private static final Dimension MODEL_DIMENSION = Constants.getLevelDimension();
+	private static final Dimension MODEL_DIMENSION = Constants
+			.getLevelDimension();
 
 	/**
 	 * The item bar's texture.
@@ -46,11 +47,13 @@ public class SpriteFactory {
 	 */
 	private Map<ObjectName, ITextureRegion> itemTextures;
 
+	private static SpriteFactory instance;
+
 	/**
 	 * Creates a spriteFactory OBS: should be called during a loadResources
 	 * because this constructor might get heavy
 	 */
-	public SpriteFactory(final SimpleBaseGameActivity activity) {
+	private SpriteFactory(final SimpleBaseGameActivity activity) {
 		screenDimension = new Dimension(activity.getResources()
 				.getDisplayMetrics().widthPixels, activity.getResources()
 				.getDisplayMetrics().heightPixels);
@@ -95,6 +98,18 @@ public class SpriteFactory {
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
+	}
+
+	public static void initialize(SimpleBaseGameActivity activity) {
+		instance = new SpriteFactory(activity);
+	}
+
+	public static SpriteFactory getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException(
+					"SpriteFactory must have been initialized before it is used");
+		}
+		return instance;
 	}
 
 	/**

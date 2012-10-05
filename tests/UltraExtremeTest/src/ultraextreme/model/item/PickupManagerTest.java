@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import ultraextreme.model.entity.WeaponPickup;
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 
 /**
@@ -41,26 +42,28 @@ public class PickupManagerTest extends TestCase {
 		// addPickup called in setup
 		assertTrue(manager.getPickups().get(0).equals(pickup));
 		assertTrue(manager.getPickups().get(1).equals(pickup2));
-		assertTrue(collector.getPickup().containsValue(pickup));
-		assertTrue(collector.getPickup().containsValue(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_NEW_ENTITY)
+				.equals(pickup));
+		// check if the map has stored an event for the secondary addPickup call
+		assertTrue(collector.getPickupMap().get("additionalAdd")
+				.equals(pickup2));
 	}
 
 	@Test
 	public void testRemovePickupWeaponPickup() {
 		manager.removePickUp(pickup);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertTrue(manager.getPickups().get(1) == null);
-		assertFalse(collector.getPickup().containsValue(pickup));
-		assertTrue(collector.getPickup().containsValue(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.equals(pickup));
 	}
 
 	@Test
 	public void testRemovePickUpInt() {
 		manager.removePickUp(0);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertTrue(manager.getPickups().get(1) == null);
-		assertFalse(collector.getPickup().containsValue(pickup));
-		assertTrue(collector.getPickup().containsValue(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.equals(pickup));
+
 	}
 
 	@Test
@@ -86,10 +89,20 @@ public class PickupManagerTest extends TestCase {
 
 		@Override
 		public void propertyChange(PropertyChangeEvent event) {
-			map.put(event.getPropertyName(), (WeaponPickup) event.getNewValue());
+
+			// if an add has already been performed, save instead an
+			// additionalAdd in the map
+			if (map.containsKey(event.getPropertyName())
+					&& (event.getPropertyName()
+							.equals(Constants.EVENT_NEW_ENTITY))) {
+				map.put("additionalAdd", (WeaponPickup) event.getNewValue());
+			} else {
+				map.put(event.getPropertyName(),
+						(WeaponPickup) event.getNewValue());
+			}
 		}
 
-		public Map<String, WeaponPickup> getPickup() {
+		public Map<String, WeaponPickup> getPickupMap() {
 			return map;
 		}
 	}

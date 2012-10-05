@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.enemyspawning.EnemySpawner;
+import ultraextreme.model.util.Constants;
 
 /**
  * 
@@ -16,10 +17,6 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
  * 
  */
 public class EnemyManager implements PropertyChangeListener {
-
-	public static final String NEW_ENEMY = "add";
-	public static final String ENEMY_KILLED = "enemyKilled";
-	public static final String REMOVED_ENEMY = "remove";
 
 	private final List<AbstractEnemy> enemies;
 
@@ -35,7 +32,8 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void addEnemy(final AbstractEnemy enemy) {
 		enemies.add(enemy);
-		pcs.firePropertyChange(EnemyManager.NEW_ENEMY, null, enemy.getShip());
+		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null,
+				enemy.getShip());
 	}
 
 	public void clearDeadEnemies() {
@@ -43,7 +41,7 @@ public class EnemyManager implements PropertyChangeListener {
 			boolean remove = false;
 			final AbstractEnemy e = enemies.get(i);
 			if (e.isDead()) {
-				pcs.firePropertyChange(ENEMY_KILLED, null, e);
+				pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, e);
 				remove = true;
 			} else if (e.getShip().isOutOfScreen(150)) {
 				remove = true;
@@ -56,7 +54,7 @@ public class EnemyManager implements PropertyChangeListener {
 	}
 
 	private void removeEnemy(int index) {
-		pcs.firePropertyChange(EnemyManager.REMOVED_ENEMY, null,
+		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null,
 				enemies.get(index));
 		enemies.remove(index);
 	}

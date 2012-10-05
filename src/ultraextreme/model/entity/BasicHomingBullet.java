@@ -33,12 +33,12 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 		normDirectionVector = new Vector2d();
 		updateDirection();
 		bulletFuel = Constants.getLevelDimension().getY() * 0.8; // Will
-																				// track
-																				// 80%
-																				// of
-																				// the
-																				// levels
-																				// length.
+																	// track
+																	// 80%
+																	// of
+																	// the
+																	// levels
+																	// length.
 
 	}
 

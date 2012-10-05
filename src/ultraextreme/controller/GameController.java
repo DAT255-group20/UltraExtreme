@@ -10,7 +10,6 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.view.GameScene;
-import ultraextreme.view.SpriteFactory;
 import android.hardware.SensorManager;
 import android.view.MotionEvent;
 
@@ -40,20 +39,19 @@ public class GameController extends AbstractController implements
 	public GameController(
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
-			final SpriteFactory spriteFactory,
 			final SimpleBaseGameActivity activity, float scaling,
 			Camera camera, Font font) {
 		super();
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager, spriteFactory, scaling, camera, font);
+				sensorManager, scaling, camera, font);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
 		gameLoop = new GameLoop(scene, gameModel, scene.getGameObjectSprites(),
-				vertexBufferObjectManager, spriteFactory, activity
-						.getResources().getDisplayMetrics().widthPixels,
-				activity.getResources().getDisplayMetrics().heightPixels);
+				vertexBufferObjectManager, activity.getResources()
+						.getDisplayMetrics().widthPixels, activity
+						.getResources().getDisplayMetrics().heightPixels);
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);

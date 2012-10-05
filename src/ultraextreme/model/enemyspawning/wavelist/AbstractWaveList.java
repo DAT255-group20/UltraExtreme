@@ -57,6 +57,6 @@ public abstract class AbstractWaveList implements WaveSpawningList {
 	 */
 	@Override
 	public final boolean hasNext() {
-		return currentWaveNumber <= numberOfWaves;
+		return currentWaveNumber < numberOfWaves;
 	}
 }

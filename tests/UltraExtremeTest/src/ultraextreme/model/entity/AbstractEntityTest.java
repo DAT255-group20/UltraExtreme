@@ -46,9 +46,18 @@ public abstract class AbstractEntityTest extends TestCase {
 		assertEquals(entity.getPosition().getY(), 20.0);
 	}
 
-	public void tetGetCenteredPosition() {
-		fail("Not implemented");
-		// TODO Write getCenteredPosition test
+	public void testGetCenteredPosition() {
+		AbstractEntity entity = getNewAbstractEntity(20, 20, 10, 10, new Rotation(0));
+		Position centPos = entity.getCenteredPosition();
+		assertTrue(centPos.getX() == 25);
+		assertTrue(centPos.getY() == 25);
+		
+		entity = getNewAbstractEntity(15, 30, 6, 18, new Rotation(0));
+		centPos = entity.getCenteredPosition();
+		assertFalse(centPos.getX() == 25);
+		assertFalse(centPos.getY() == 25);
+		assertTrue(centPos.getX() == 18);
+		assertTrue(centPos.getY() == 39);
 	}
 
 	public void testGetWidth() {

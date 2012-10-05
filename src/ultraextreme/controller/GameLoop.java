@@ -33,10 +33,10 @@ import android.util.Log;
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
-	//TODO perhaps refactor these two variables?
+	// TODO perhaps refactor these two variables?
 	private static final float blinkTime = 1;
 	private static final String blinkSprite = "blinkSprite";
-	
+
 	final private GameScene gameScene;
 	final private GameModel gameModel;
 	final private List<GameObjectSprite> gameObjectSprites;
@@ -48,25 +48,24 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private double moveX;
 	private double moveY;
 	private boolean specialAttack;
-	
-	private List<Timer> timerList;	
+
+	private List<Timer> timerList;
 
 	public GameLoop(final GameScene gameScene, final GameModel gameModel,
 			final List<GameObjectSprite> gameObjectSprites,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			SpriteFactory spriteFactory, double screenWidth,
-			final double screenHeight) {
+			double screenWidth, final double screenHeight) {
 
 		final Dimension screenDimension = new Dimension(screenWidth,
 				screenHeight);
-		this.scalingQuotient = screenDimension.getQuotient(
-				Constants.getLevelDimension());
+		this.scalingQuotient = screenDimension.getQuotient(Constants
+				.getLevelDimension());
 		this.gameScene = gameScene;
 		this.gameModel = gameModel;
 		this.gameObjectSprites = gameObjectSprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
-		this.spriteFactory = spriteFactory;
 		this.timerList = new LinkedList<Timer>();
+		this.spriteFactory = SpriteFactory.getInstance();
 	}
 
 	@Override
@@ -94,13 +93,13 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		//TODO Refactor the "enemyHit" string.
-		if(event.getPropertyName().equals("enemyHit")) {
-			EnemyShip ship = (EnemyShip)event.getNewValue();
+		// TODO Refactor the "enemyHit" string.
+		if (event.getPropertyName().equals("enemyHit")) {
+			EnemyShip ship = (EnemyShip) event.getNewValue();
 			Timer timer = new Timer(blinkSprite, blinkTime, ship);
 			timerList.add(timer);
 			getSprite(ship).blink();
-		} else if (event.getPropertyName().equals("add")) {
+		} else if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
 			IEntity entity;
 
 			if (event.getNewValue() instanceof IEnemy) {
@@ -114,7 +113,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				gameObjectSprites.add(newSprite);
 			}
 
-		} else if (event.getPropertyName().equals("remove")) {
+		} else if (event.getPropertyName().equals(
+				Constants.EVENT_REMOVED_ENTITY)) {
 			IEntity entity;
 			if (event.getNewValue() instanceof IEnemy) {
 				entity = ((IEnemy) event.getNewValue()).getShip();
@@ -137,7 +137,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			}
 		}
 	}
-	
+
 	/**
 	 * Updates all the timers, performs actions and removes stopped timers.
 	 * 
@@ -145,10 +145,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	 */
 	private void updateTimers(float timeElapsed) {
 		Iterator<Timer> i = timerList.iterator();
-		while(i.hasNext()) {
+		while (i.hasNext()) {
 			Timer timer = i.next();
-			if(timer.isRunning()) {
-				if(timer.update(timeElapsed)) {
+			if (timer.isRunning()) {
+				if (timer.update(timeElapsed)) {
 					Object o = timer.getObject();
 					timerAction(timer.getPropertyName(), o);
 				}
@@ -157,8 +157,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			}
 		}
 	}
-	
-	//TODO Should this method be used at more places?
+
+	// TODO Should this method be used at more places?
 	/**
 	 * Gets the sprite that corresponds to this entity.
 	 * 
@@ -166,28 +166,28 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	 */
 	private GameObjectSprite getSprite(IEntity entity) {
 		Iterator<GameObjectSprite> i = gameObjectSprites.iterator();
-		while(i.hasNext()) {
-			GameObjectSprite sprite = ((GameObjectSprite)i.next());
-			if(sprite.getEntity() == entity) {
+		while (i.hasNext()) {
+			GameObjectSprite sprite = ((GameObjectSprite) i.next());
+			if (sprite.getEntity() == entity) {
 				return sprite;
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Performs the corresponding action to the given object.
 	 * 
 	 * @param action
-	 * 			The action that is to be performed on the target object.
+	 *            The action that is to be performed on the target object.
 	 * @param o
-	 * 			The target Object.
+	 *            The target Object.
 	 */
 	private void timerAction(String action, Object o) {
-		if(action.equals(blinkSprite)) {
+		if (action.equals(blinkSprite)) {
 			getSprite((IEntity) o).blink();
 		}
-		//TODO add more actions here!
+		// TODO add more actions here!
 	}
 
 	/**
