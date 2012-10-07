@@ -32,6 +32,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private GameController gameController;
 	private MainMenuController mainMenuController;
+	private GameOverController gameOverController;
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
@@ -87,9 +88,12 @@ public class MainActivity extends SimpleBaseGameActivity implements
 				this, scaling, camera, defaultFont);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
+		gameOverController = new GameOverController(camera, defaultFont,
+				this.getVertexBufferObjectManager());
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
+		gameOverController.addListener(this);
 
 		currentController = mainMenuController;
 		updateScene();
@@ -101,6 +105,14 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		switch (event.getEventType()) {
 		case SWITCH_TO_GAME:
 			switchControllerTo(gameController);
+			break;
+			
+		case SWITCH_TO_MENU:
+			switchControllerTo(mainMenuController);
+			break;
+			
+		case SWITCH_TO_HIGHSCORE:
+			switchControllerTo(gameOverController);
 			break;
 
 		default:
