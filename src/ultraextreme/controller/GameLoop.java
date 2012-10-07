@@ -115,7 +115,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		// TODO Refactor the "enemyHit" string.
 		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_DAMAGED)) {
 			EnemyShip ship = (EnemyShip) event.getNewValue();
-			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, blinkTime, ship);
+			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, blinkTime,
+					ship);
 			timerList.add(timer);
 			getSprite(ship).blink();
 		} else if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
@@ -168,7 +169,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			if (timer.update(timeElapsed)) {
 				Object o = timer.getObject();
 				String propertyName = timer.getPropertyName();
-				
+
 				boolean timerDeprecated = false;
 				// The different actions that may be performed.
 				if (propertyName.equals(Constants.EVENT_ENEMY_DAMAGED)) {
@@ -178,11 +179,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 					} else {
 						sprite.blink();
 					}
-					//TODO add more actions here!
+					// TODO add more actions here!
 				}
 				if (!timer.isRunning() || timerDeprecated) {
 					i.remove();
-				} 
+				}
 			}
 		}
 	}
@@ -196,7 +197,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private GameObjectSprite getSprite(IEntity entity) {
 		Iterator<GameObjectSprite> i = gameObjectSprites.iterator();
 		while (i.hasNext()) {
-			GameObjectSprite sprite = ((GameObjectSprite) i.next());
+			GameObjectSprite sprite = (i.next());
 			if (sprite.getEntity() == entity) {
 				return sprite;
 			}

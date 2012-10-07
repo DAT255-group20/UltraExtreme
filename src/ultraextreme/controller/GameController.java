@@ -172,9 +172,9 @@ public class GameController extends AbstractController implements
 
 	@Override
 	public void playerUpdate(IPlayer player) {
-		if (gameModel.isGameOver())
-		{
-			fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_HIGHSCORE));
+		if (gameModel.isGameOver()) {
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_HIGHSCORE));
 			resetGameModel();
 		}
 	}
@@ -184,11 +184,11 @@ public class GameController extends AbstractController implements
 		gameModel.reset();
 
 		/*
-		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
-		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
-		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
-		gameModel.addPropertyChangeListener(gameLoop);
-		gameModel.registerPlayerListener(this);
-		*/
+		 * gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
+		 * gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
+		 * gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
+		 * gameModel.addPropertyChangeListener(gameLoop);
+		 * gameModel.registerPlayerListener(this);
+		 */
 	}
 }

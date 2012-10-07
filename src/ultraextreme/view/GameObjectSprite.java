@@ -44,7 +44,7 @@ public class GameObjectSprite extends Sprite {
 	 * Reference to a bullet in the model.
 	 */
 	private final IEntity entity;
-	
+
 	private boolean isBlinked;
 
 	private Vector2d directionVector;
@@ -90,12 +90,12 @@ public class GameObjectSprite extends Sprite {
 			this.setRotation(newAngle + 90f);
 		}
 	}
-	
+
 	/**
 	 * Switches the color of this sprite between two.
 	 */
 	public void blink() {
-		if(!isBlinked) {
+		if (!isBlinked) {
 			this.setColor(1f, 0f, 0f);
 			isBlinked = true;
 		} else {

@@ -67,11 +67,12 @@ public abstract class AbstractEntityTest extends TestCase {
 	}
 
 	public void testGetCenteredPosition() {
-		AbstractEntity entity = getNewAbstractEntity(20, 20, 10, 10, new Rotation(0));
+		AbstractEntity entity = getNewAbstractEntity(20, 20, 10, 10,
+				new Rotation(0));
 		Position centPos = entity.getCenteredPosition();
 		assertTrue(centPos.getX() == 25);
 		assertTrue(centPos.getY() == 25);
-		
+
 		entity = getNewAbstractEntity(15, 30, 6, 18, new Rotation(0));
 		centPos = entity.getCenteredPosition();
 		assertFalse(centPos.getX() == 25);

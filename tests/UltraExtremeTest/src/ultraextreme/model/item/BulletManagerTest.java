@@ -41,7 +41,7 @@ import ultraextreme.model.util.Rotation;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class BulletManagerTest extends TestCase {
 
@@ -90,7 +90,9 @@ public class BulletManagerTest extends TestCase {
 			AbstractBullet bullet = bulletList.get(i);
 			bulletManager.addBullet(bullet);
 			assertTrue(bulletManager.getBullets().contains(bullet));
-			assertEquals(i + 1, bulletCollector.getBullets().get(Constants.EVENT_NEW_ENTITY).size());
+			assertEquals(i + 1,
+					bulletCollector.getBullets()
+							.get(Constants.EVENT_NEW_ENTITY).size());
 		}
 		assertTrue(bulletManager.getBullets().containsAll(bulletList));
 		assertTrue(bulletCollector.getBullets().get(Constants.EVENT_NEW_ENTITY)
@@ -103,8 +105,10 @@ public class BulletManagerTest extends TestCase {
 	 */
 	@Test
 	public void testGetBulletsFrom() {
-		List<AbstractBullet> playerBullets = generateBulletList(100, PlayerID.PLAYER1);
-		List<AbstractBullet> enemyBullets = generateBulletList(100, PlayerID.ENEMY);
+		List<AbstractBullet> playerBullets = generateBulletList(100,
+				PlayerID.PLAYER1);
+		List<AbstractBullet> enemyBullets = generateBulletList(100,
+				PlayerID.ENEMY);
 		for (int i = 0; i < 100; ++i) {
 			bulletManager.addBullet(playerBullets.get(i));
 			bulletManager.addBullet(enemyBullets.get(i));

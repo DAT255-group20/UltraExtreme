@@ -59,7 +59,7 @@ public class GameModel implements IUltraExtremeModel {
 	private PickupManager pickupManager;
 
 	private WeaponFactory weaponFactory;
-	
+
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
@@ -132,7 +132,8 @@ public class GameModel implements IUltraExtremeModel {
 			for (IEnemy e : enemyManager.getEnemies()) {
 				if (b.collidesWith(e.getShip())) {
 					e.getShip().receiveDamage(b.getDamage());
-					pcs.firePropertyChange(Constants.EVENT_ENEMY_DAMAGED, null, e.getShip());
+					pcs.firePropertyChange(Constants.EVENT_ENEMY_DAMAGED, null,
+							e.getShip());
 					b.markForRemoval();
 				}
 			}
@@ -194,7 +195,7 @@ public class GameModel implements IUltraExtremeModel {
 	@Override
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
-		
+
 	}
 
 	@Override
@@ -210,7 +211,7 @@ public class GameModel implements IUltraExtremeModel {
 		enemyManager.clearAllEnemies();
 		pickupManager.clearAllPickups();
 		player.reset();
-		
+
 		// TODO Reset enemymanager and enemysawner too?
 	}
 }

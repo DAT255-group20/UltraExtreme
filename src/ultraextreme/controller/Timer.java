@@ -21,8 +21,8 @@
 package ultraextreme.controller;
 
 /**
- * A timer that is dependent on an external update for the elapsed time.
- * On each update it will tell if it has reached its time.
+ * A timer that is dependent on an external update for the elapsed time. On each
+ * update it will tell if it has reached its time.
  * 
  * @author Viktor Anderling
  * 

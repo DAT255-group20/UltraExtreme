@@ -41,10 +41,10 @@ public interface IUltraExtremeModel {
 	 * Adds a listener to the model.
 	 * 
 	 * @param listener
-	 * 				The provided listener.
+	 *            The provided listener.
 	 */
 	void addPropertyChangeListener(PropertyChangeListener listener);
-	
+
 	/**
 	 * Registers the provided listener to the player.
 	 * 
@@ -60,7 +60,7 @@ public interface IUltraExtremeModel {
 	 *            Listener
 	 */
 	void unregisterPlayerListener(IPlayerListener listener);
-	
+
 	/**
 	 * @return true if and only if the game is over.
 	 */

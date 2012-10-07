@@ -87,13 +87,12 @@ public class PickupManager {
 	}
 
 	public List<WeaponPickup> getPickups() {
-		
+
 		return pickups;
 	}
 
 	public void clearAllPickups() {
-		for (int i=0; i<pickups.size(); i++)
-		{
+		for (int i = 0; i < pickups.size(); i++) {
 			removePickup(i);
 			i--;
 		}

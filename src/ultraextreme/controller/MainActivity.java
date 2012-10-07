@@ -126,11 +126,11 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		case SWITCH_TO_GAME:
 			switchControllerTo(gameController);
 			break;
-			
+
 		case SWITCH_TO_MENU:
 			switchControllerTo(mainMenuController);
 			break;
-			
+
 		case SWITCH_TO_HIGHSCORE:
 			switchControllerTo(gameOverController);
 			break;
