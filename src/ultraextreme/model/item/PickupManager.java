@@ -40,7 +40,7 @@ public class PickupManager {
 	 * @param pickup
 	 *            item which is to be removed
 	 */
-	public void removePickUp(final WeaponPickup pickup) {
+	public void removePickup(final WeaponPickup pickup) {
 		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null, pickup);
 		pickups.remove(pickup);
 	}
@@ -51,7 +51,7 @@ public class PickupManager {
 	 * @param index
 	 *            what item is to be removed [0, n]
 	 */
-	public void removePickUp(int index) {
+	public void removePickup(int index) {
 		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null,
 				pickups.get(index));
 		pickups.remove(index);
@@ -67,6 +67,16 @@ public class PickupManager {
 	}
 
 	public List<WeaponPickup> getPickups() {
+		
 		return pickups;
+	}
+
+	public void clearAllPickups() {
+		for (int i=0; i<pickups.size(); i++)
+		{
+			removePickup(i);
+			i--;
+		}
+		pickups.clear();
 	}
 }

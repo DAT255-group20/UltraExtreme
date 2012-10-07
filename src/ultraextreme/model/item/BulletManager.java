@@ -79,9 +79,7 @@ public class BulletManager {
 			for (int i = 0; i < list.size(); i++) {
 				final IBullet b = list.get(i);
 				if (b.isMarkedForRemoval() || (b.isOutOfScreen(100))) {
-					pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY,
-							null, b);
-					list.remove(i);
+					removeBullet(list, i);
 					i--;
 				}
 			}
@@ -93,8 +91,20 @@ public class BulletManager {
 	 */
 	public void clearAllBullets() {
 		for (List<AbstractBullet> list : bulletsMap.values()) {
+			for (int i=0; i<list.size(); i++)
+			{
+				removeBullet(list, i);
+				i--;
+			}
 			list.clear();
 		}
+	}
+	
+	private void removeBullet(List<AbstractBullet> list, int index)
+	{
+		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY,
+				null, list.get(index));
+		list.remove(index);
 	}
 
 	/**

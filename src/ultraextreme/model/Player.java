@@ -175,7 +175,6 @@ public class Player implements IPlayer {
 		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_KILLED)) {
 			score += ((IEnemy) event.getNewValue()).getScoreValue();
 			notifyListeners();
-			// Log.d("DEBUG", "Score: " + score);
 		}
 	}
 
@@ -203,4 +202,9 @@ public class Player implements IPlayer {
 		listeners.remove(listener);
 	}
 
+	public void reset() {
+		lives = Constants.getInitShipLives();
+		score = 0;
+		notifyListeners();
+	}
 }

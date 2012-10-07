@@ -23,12 +23,12 @@ public class LivesText extends Text implements IPlayerListener {
 		super((float) textPos.getX(), (float) textPos.getY(), font, Resources
 				.getInstance().getResource(ResourceName.LIVES)
 				+ " "
-				+ +Constants.getInitShipLives(), vbo);
+				+ Constants.getInitShipLives(), vbo);
 	}
 
 	@Override
 	public void playerUpdate(IPlayer player) {
 		setText(Resources.getInstance().getResource(ResourceName.LIVES) + " "
-				+ +player.getLives());
+				+ player.getLives());
 	}
 }

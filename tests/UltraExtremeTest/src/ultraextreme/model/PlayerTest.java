@@ -113,6 +113,11 @@ public class PlayerTest extends TestCase {
 		pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, enemy);
 		assertTrue(player.getScore() == 2 * scoreValue);
 	}
+	
+	public void testReset()
+	{
+		fail("Not yet tested");
+	}
 
 	/**
 	 * Test the update method with a lot of different values.

@@ -25,5 +25,4 @@ public class SpinningSpreadWeaponTest {
 	public void testGetInitCooldown() {
 		fail("Not yet implemented");
 	}
-
 }

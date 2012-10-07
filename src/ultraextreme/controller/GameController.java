@@ -8,7 +8,10 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.model.GameModel;
+import ultraextreme.model.IPlayer;
+import ultraextreme.model.IPlayerListener;
 import ultraextreme.view.GameScene;
 import android.hardware.SensorManager;
 import android.view.MotionEvent;
@@ -23,7 +26,7 @@ import android.view.MotionEvent;
  * 
  */
 public class GameController extends AbstractController implements
-		IOnSceneTouchListener {
+		IOnSceneTouchListener, IPlayerListener {
 
 	private static final int INVALID_POINTER_ID = -1;
 	// The 'active pointer' is the one currently moving the player.
@@ -52,10 +55,12 @@ public class GameController extends AbstractController implements
 				vertexBufferObjectManager, activity.getResources()
 						.getDisplayMetrics().widthPixels, activity
 						.getResources().getDisplayMetrics().heightPixels);
+		resetGameModel();
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
 		gameModel.addPropertyChangeListener(gameLoop);
+		gameModel.registerPlayerListener(this);
 		scene.registerUpdateHandler(gameLoop);
 	}
 
@@ -143,5 +148,27 @@ public class GameController extends AbstractController implements
 	@Override
 	public void deactivateController() {
 		scene.setHUDVisible(false);
+	}
+
+	@Override
+	public void playerUpdate(IPlayer player) {
+		if (gameModel.isGameOver())
+		{
+			fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_HIGHSCORE));
+			resetGameModel();
+		}
+	}
+
+	private void resetGameModel() {
+		gameLoop.setFiring(false);
+		gameModel.reset();
+
+		/*
+		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
+		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
+		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
+		gameModel.addPropertyChangeListener(gameLoop);
+		gameModel.registerPlayerListener(this);
+		*/
 	}
 }

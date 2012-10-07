@@ -6,5 +6,6 @@
     <string name="title_activity_main">UltraExtreme</string>
     <string name="score">Score:</string>
     <string name="lives">Lives:</string>
+    <string name="goto_menu">Continue to menu</string>
 
 </resources>
