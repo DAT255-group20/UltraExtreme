@@ -176,4 +176,9 @@ public class GameModel implements IUltraExtremeModel {
 		pcs.addPropertyChangeListener(listener);
 		
 	}
+
+	@Override
+	public boolean isGameOver() {
+		return player.getLives() < 0;
+	}
 }

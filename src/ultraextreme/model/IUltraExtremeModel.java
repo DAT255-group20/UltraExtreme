@@ -40,4 +40,9 @@ public interface IUltraExtremeModel {
 	 *            Listener
 	 */
 	void unregisterPlayerListener(IPlayerListener listener);
+	
+	/**
+	 * @return true if and only if the game is over.
+	 */
+	boolean isGameOver();
 }
