@@ -151,7 +151,7 @@ public class GameController extends AbstractController implements
 
 	@Override
 	public void playerUpdate(IPlayer player) {
-		if (player.getLives() < 0)
+		if (gameModel.isGameOver())
 		{
 			fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_HIGHSCORE));
 		}
