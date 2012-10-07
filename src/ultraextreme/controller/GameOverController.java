@@ -9,7 +9,7 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
-import ultraextreme.view.MainMenuScene;
+import ultraextreme.view.GameOverScene;
 
 /**
  * 
@@ -19,12 +19,12 @@ import ultraextreme.view.MainMenuScene;
 public class GameOverController extends AbstractController implements
 		IOnMenuItemClickListener {
 
-	private final MainMenuScene scene;
+	private final GameOverScene scene;
 
 	public GameOverController(final Camera camera, final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super();
-		scene = new MainMenuScene(camera, font, vertexBufferObjectManager);
+		scene = new GameOverScene(camera, font, vertexBufferObjectManager);
 		scene.setOnMenuItemClickListener(this);
 	}
 
@@ -32,9 +32,9 @@ public class GameOverController extends AbstractController implements
 	public boolean onMenuItemClicked(final MenuScene menuScene,
 			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
-		case MainMenuScene.MENU_START:
+		case GameOverScene.GOTO_MENU:
 			fireEvent(new ControllerEvent(this,
-					ControllerEventType.SWITCH_TO_GAME));
+					ControllerEventType.SWITCH_TO_MENU));
 			break;
 
 		default:
