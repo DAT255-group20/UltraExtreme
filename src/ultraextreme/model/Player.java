@@ -205,5 +205,6 @@ public class Player implements IPlayer {
 	public void reset() {
 		lives = Constants.getInitShipLives();
 		score = 0;
+		notifyListeners();
 	}
 }

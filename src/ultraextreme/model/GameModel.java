@@ -131,7 +131,7 @@ public class GameModel implements IUltraExtremeModel {
 			WeaponPickup wp = pickupManager.getPickups().get(i);
 			if (wp.collidesWith(player.getShip())) {
 				player.giveWeapon(weaponFactory.getNewWeapon(wp.getObjectName()));
-				pickupManager.removePickUp(i);
+				pickupManager.removePickup(i);
 				i--;
 			}
 		}
@@ -182,9 +182,15 @@ public class GameModel implements IUltraExtremeModel {
 		return player.getLives() < 0;
 	}
 
+	/**
+	 * Resets the game
+	 */
 	public void reset() {
 		bulletManager.clearAllBullets();
 		enemyManager.clearAllEnemies();
+		pickupManager.clearAllPickups();
 		player.reset();
+		
+		// TODO Reset enemymanager and enemysawner too?
 	}
 }

@@ -24,7 +24,7 @@ public class GameOverScene extends MenuScene {
 	public GameOverScene(final Camera camera, final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super(camera);
-		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
+		setBackground(new Background(0.9f, 0.1f, 0.1f));
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
 				vertexBufferObjectManager);
