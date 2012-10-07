@@ -185,5 +185,6 @@ public class GameModel implements IUltraExtremeModel {
 	public void reset() {
 		bulletManager.clearAllBullets();
 		enemyManager.clearAllEnemies();
+		player.reset();
 	}
 }
