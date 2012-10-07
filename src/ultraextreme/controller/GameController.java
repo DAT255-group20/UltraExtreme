@@ -1,14 +1,38 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.controller;
 
+import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.model.GameModel;
+import ultraextreme.model.IPlayer;
+import ultraextreme.model.IPlayerListener;
 import ultraextreme.view.GameScene;
-import ultraextreme.view.SpriteFactory;
 import android.hardware.SensorManager;
 import android.view.MotionEvent;
 
@@ -22,12 +46,12 @@ import android.view.MotionEvent;
  * 
  */
 public class GameController extends AbstractController implements
-		IOnSceneTouchListener {
+		IOnSceneTouchListener, IPlayerListener {
 
 	private static final int INVALID_POINTER_ID = -1;
 	// The 'active pointer' is the one currently moving the player.
 	private int activePointerId = INVALID_POINTER_ID;
-	
+
 	private final GameScene scene;
 	private final GameModel gameModel;
 	private final GameLoop gameLoop;
@@ -38,22 +62,25 @@ public class GameController extends AbstractController implements
 	public GameController(
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
-			final SpriteFactory spriteFactory,
-			final SimpleBaseGameActivity activity, float scaling) {
+			final SimpleBaseGameActivity activity, float scaling,
+			Camera camera, Font font) {
 		super();
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager, spriteFactory, scaling);
+				sensorManager, scaling, camera, font);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
 		gameLoop = new GameLoop(scene, gameModel, scene.getGameObjectSprites(),
-				vertexBufferObjectManager, spriteFactory, activity
-						.getResources().getDisplayMetrics().widthPixels,
-				activity.getResources().getDisplayMetrics().heightPixels);
+				vertexBufferObjectManager, activity.getResources()
+						.getDisplayMetrics().widthPixels, activity
+						.getResources().getDisplayMetrics().heightPixels);
+		resetGameModel();
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
-
+		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
+		gameModel.addPropertyChangeListener(gameLoop);
+		gameModel.registerPlayerListener(this);
 		scene.registerUpdateHandler(gameLoop);
 	}
 
@@ -131,5 +158,37 @@ public class GameController extends AbstractController implements
 	@Override
 	public Scene getScene() {
 		return this.scene;
+	}
+
+	@Override
+	public void activateController() {
+		scene.setHUDVisible(true);
+	}
+
+	@Override
+	public void deactivateController() {
+		scene.setHUDVisible(false);
+	}
+
+	@Override
+	public void playerUpdate(IPlayer player) {
+		if (gameModel.isGameOver()) {
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_HIGHSCORE));
+			resetGameModel();
+		}
+	}
+
+	private void resetGameModel() {
+		gameLoop.setFiring(false);
+		gameModel.reset();
+
+		/*
+		 * gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
+		 * gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
+		 * gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
+		 * gameModel.addPropertyChangeListener(gameLoop);
+		 * gameModel.registerPlayerListener(this);
+		 */
 	}
 }

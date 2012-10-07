@@ -1,34 +1,33 @@
-package ultraextreme.model.enemyspawning.wavelist;
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
 
-import static org.junit.Assert.*;
+package ultraextreme.model.enemyspawning.wavelist;
 
 import org.junit.Test;
 
-public class AbstractWaveListTest {
+public interface AbstractWaveListTest {
 
 	@Test
-	public void testAbstractWaveList() {
-		fail("Not yet implemented");
-	}
+	public void testNext();
 
 	@Test
-	public void testNext() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCurrentWaveNumber() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetNumberOfWaves() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHasNext() {
-		fail("Not yet implemented");
-	}
+	public void testGetNumberOfWaves();
 
 }

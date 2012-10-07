@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model.entity;
 
 import javax.vecmath.Vector2d;
@@ -97,7 +117,6 @@ public abstract class AbstractEntity implements IEntity {
 	 * @return A new position at the center of this entity.
 	 */
 	public Position getCenteredPosition() {
-		// TODO test this getCenteredPosition()
 		return new Position(position.getX() + getWidth() / 2, position.getY()
 				+ getHeight() / 2);
 	}
@@ -106,15 +125,15 @@ public abstract class AbstractEntity implements IEntity {
 	public boolean isOutOfScreen() {
 		return isOutOfScreen(0);
 	}
-	
+
 	@Override
-	public boolean isOutOfScreen(double marginal)
-	{
+	public boolean isOutOfScreen(double marginal) {
 		// TODO Change to fit reversed Y axis. (do tests)
-		final Dimension screen = Constants.getInstance().getLevelDimension();
-		return position.getY() - height < -marginal || position.getX() - width < -marginal
-				|| position.getX() > screen.getX()+marginal
-				|| position.getY() > screen.getY()+marginal;
+		final Dimension screen = Constants.getLevelDimension();
+		return position.getY() - height < -marginal
+				|| position.getX() - width < -marginal
+				|| position.getX() > screen.getX() + marginal
+				|| position.getY() > screen.getY() + marginal;
 	}
 
 	/**
@@ -153,6 +172,7 @@ public abstract class AbstractEntity implements IEntity {
 		return height;
 	}
 
+	@Override
 	public Vector2d getNormalizedDirection() {
 		Vector2d v = new Vector2d(position.getX() - prevPosition.getX(),
 				position.getY() - prevPosition.getY());
@@ -169,11 +189,7 @@ public abstract class AbstractEntity implements IEntity {
 		return rotation;
 	}
 
-	/**
-	 * Returns what kind of entity this is as an ObjectName
-	 * 
-	 * @return what kind of entity this is as an ObjectName
-	 */
+	@Override
 	public ObjectName getObjectName() {
 		return objectName;
 	}

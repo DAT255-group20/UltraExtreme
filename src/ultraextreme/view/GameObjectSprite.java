@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.view;
 
 import javax.vecmath.Vector2d;
@@ -7,8 +27,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.math.MathUtils;
 
-import ultraextreme.model.entity.AbstractBullet;
-import ultraextreme.model.entity.AbstractEntity;
+import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
@@ -23,17 +43,19 @@ public class GameObjectSprite extends Sprite {
 	/**
 	 * Reference to a bullet in the model.
 	 */
-	private final AbstractEntity entity;
+	private final IEntity entity;
+
+	private boolean isBlinked;
 
 	private Vector2d directionVector;
 
 	// TODO PMD: Possible unsafe assignment to a non-final static field in a
 	// constructor.
 	private static Dimension screenDimension;
-	private static final Dimension MODEL_DIMENSION = Constants.getInstance()
+	private static final Dimension MODEL_DIMENSION = Constants
 			.getLevelDimension();
 
-	public GameObjectSprite(final AbstractEntity entity,
+	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final ITextureRegion texture) {
 
@@ -41,6 +63,7 @@ public class GameObjectSprite extends Sprite {
 				.getY(), entity.getWidth(), entity.getHeight(), texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
+		this.isBlinked = false;
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
@@ -54,7 +77,7 @@ public class GameObjectSprite extends Sprite {
 				MODEL_DIMENSION, entity.getPosition());
 		this.setX((float) newPosition.getX());
 		this.setY((float) newPosition.getY());
-		if (entity instanceof AbstractBullet) {
+		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
 				directionVector = newVector;
@@ -69,9 +92,22 @@ public class GameObjectSprite extends Sprite {
 	}
 
 	/**
+	 * Switches the color of this sprite between two.
+	 */
+	public void blink() {
+		if (!isBlinked) {
+			this.setColor(1f, 0f, 0f);
+			isBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isBlinked = false;
+		}
+	}
+
+	/**
 	 * returns the entity this sprite is representing
 	 */
-	public AbstractEntity getEntity() {
+	public IEntity getEntity() {
 		return entity;
 	}
 

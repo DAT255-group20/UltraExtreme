@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.view;
 
 import org.andengine.entity.sprite.Sprite;
@@ -19,6 +39,8 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	private SpriteFactory spriteFactory;
 
 	private VertexBufferObjectManager vertexBufferObjectManager;
+
+	private float alpha = 0.01f;
 
 	/**
 	 * Create an ItemBarPanel.
@@ -44,6 +66,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		updateItemBar(itemBar);
 		itemBar.addListener(this);
+		setAlpha(alpha);
 	}
 
 	/**
@@ -57,8 +80,14 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 			AbstractWeapon item = itemBar.getItems().get(i);
 			int x = i * 60 + 10;
 			int y = 10;
-			this.attachChild(new Sprite(x, y, spriteFactory.getItemTexture(item
-					.getName()), vertexBufferObjectManager));
+			Sprite sprite = new Sprite(x, y, spriteFactory.getItemTexture(item
+					.getName()), vertexBufferObjectManager);
+			// TODO Need a way for setting alpha for the whole panel instead of
+			// for the background panel and the sprites individually. This
+			// causes the sprites to be hard to see because you can see the
+			// panel through the sprites.
+			// sprite.setAlpha(alpha);
+			this.attachChild(sprite);
 		}
 	}
 
@@ -66,5 +95,4 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	public void updatedItemBar(ItemBar itemBar) {
 		updateItemBar(itemBar);
 	}
-
 }
