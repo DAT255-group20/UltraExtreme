@@ -65,6 +65,11 @@ public class PickupManagerTest extends TestCase {
 				.equals(pickup));
 
 	}
+	
+	public void testClearAllPickups()
+	{
+		fail("Not yet tested");
+	}
 
 	@Test
 	public void testGetPickups() {
