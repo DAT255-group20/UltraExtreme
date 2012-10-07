@@ -55,6 +55,7 @@ public class GameController extends AbstractController implements
 				vertexBufferObjectManager, activity.getResources()
 						.getDisplayMetrics().widthPixels, activity
 						.getResources().getDisplayMetrics().heightPixels);
+		resetGameModel();
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
@@ -154,6 +155,20 @@ public class GameController extends AbstractController implements
 		if (gameModel.isGameOver())
 		{
 			fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_HIGHSCORE));
+			resetGameModel();
 		}
+	}
+
+	private void resetGameModel() {
+		gameLoop.setFiring(false);
+		gameModel.reset();
+
+		/*
+		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
+		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
+		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
+		gameModel.addPropertyChangeListener(gameLoop);
+		gameModel.registerPlayerListener(this);
+		*/
 	}
 }

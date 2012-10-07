@@ -181,4 +181,9 @@ public class GameModel implements IUltraExtremeModel {
 	public boolean isGameOver() {
 		return player.getLives() < 0;
 	}
+
+	public void reset() {
+		bulletManager.clearAllBullets();
+		enemyManager.clearAllEnemies();
+	}
 }

@@ -76,4 +76,13 @@ public class EnemyManager implements PropertyChangeListener {
 			addEnemy((AbstractEnemy) event.getNewValue());
 		}
 	}
+
+	public void clearAllEnemies() {
+		for (int i=0; i<enemies.size(); i++)
+		{
+			removeEnemy(i);
+			i--;
+		}
+		enemies.clear();
+	}
 }
