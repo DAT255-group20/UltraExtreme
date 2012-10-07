@@ -11,7 +11,7 @@ If Eclipse complains about the compiler version, do:
 1. Right-click the project in the Package Explorer.
 2. Choose `Properties` from the drop-down list.
 3. Go to the `Java Compiler` tab in the new window.
-4. Set `Comiper compliance level` to `1.6`.
+4. Set `Compiler compliance level` to `1.6`.
 
 ## How to run the tests
 
