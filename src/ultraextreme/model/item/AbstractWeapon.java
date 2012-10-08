@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model.item;
 
 import ultraextreme.model.util.ObjectName;
@@ -14,10 +34,11 @@ import ultraextreme.model.util.Rotation;
  */
 public abstract class AbstractWeapon {
 
-	private BulletManager bulletManager;
-	private ObjectName objectName;
-	
-	public AbstractWeapon(BulletManager bulletManager, ObjectName objectName) {
+	private final BulletManager bulletManager;
+	private final ObjectName objectName;
+
+	public AbstractWeapon(final BulletManager bulletManager,
+			final ObjectName objectName) {
 		this.bulletManager = bulletManager;
 		this.objectName = objectName;
 	}
@@ -30,7 +51,16 @@ public abstract class AbstractWeapon {
 	protected BulletManager getBulletManager() {
 		return bulletManager;
 	}
+
 	public ObjectName getName() {
 		return objectName;
 	}
+
+	/**
+	 * returns a shallow clone of this weapon
+	 * 
+	 * @return a shallow clone of this weapon
+	 */
+	public abstract AbstractWeapon shallowClone();
+
 }
