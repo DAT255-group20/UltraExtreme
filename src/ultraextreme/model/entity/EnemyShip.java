@@ -21,6 +21,7 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 /**
@@ -38,6 +39,13 @@ public class EnemyShip extends AbstractDestroyableEntity {
 			ObjectName objectName) {
 		super(x, y, width, height, rotation, objectName);
 		this.hitPoints = hitpoints;
+	}
+
+	public EnemyShip(Position position, int width, int height, int hitPoints,
+			ObjectName name) {
+		super(position, width, height, new Rotation(0), name);
+		this.hitPoints = hitPoints;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

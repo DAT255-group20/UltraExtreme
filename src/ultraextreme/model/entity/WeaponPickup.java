@@ -39,6 +39,6 @@ public class WeaponPickup extends AbstractEntity {
 	}
 
 	public WeaponPickup(Position position, ObjectName name) {
-		super(position, width, width, name);
+		super(position, width, width, new Rotation(0), name);
 	}
 }
