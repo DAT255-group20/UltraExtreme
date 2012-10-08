@@ -68,8 +68,9 @@ public abstract class AbstractEntity implements IEntity {
 
 	}
 
-	public AbstractEntity(Position position, int width, int height,
-			ObjectName name) {
+	public AbstractEntity(Position position, int width, int height, 
+			Rotation rotation, ObjectName name) {
+		this.rotation = rotation;
 		this.position = position;
 		this.width = width;
 		this.height = height;
