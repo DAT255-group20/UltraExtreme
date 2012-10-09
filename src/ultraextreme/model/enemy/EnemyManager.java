@@ -63,18 +63,18 @@ public class EnemyManager implements PropertyChangeListener {
 			boolean remove = false;
 			final AbstractEnemy e = enemies.get(i);
 			if (e.isDead()) {
-				Log.d("DEBUG", "isDead() : enemies.size()=" + enemies.size()
-						+ ", i=" + i);
+//				Log.d("DEBUG", "isDead() : enemies.size()=" + enemies.size()
+//						+ ", i=" + i);
 				pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, e);
 				remove = true;
 			} else if (e.getShip().isOutOfScreen(150)) {
-				Log.d("DEBUG",
-						"isOutOfScreen() : enemies.size()=" + enemies.size()
-								+ ", i=" + i);
+//				Log.d("DEBUG",
+//						"isOutOfScreen() : enemies.size()=" + enemies.size()
+//								+ ", i=" + i);
 				remove = true;
 			}
 			if (remove) {
-				Log.d("DEBUG", "enemies.size()=" + enemies.size() + ", i=" + i);
+//				Log.d("DEBUG", "enemies.size()=" + enemies.size() + ", i=" + i);
 				removeEnemy(i);
 				i--;
 			}
