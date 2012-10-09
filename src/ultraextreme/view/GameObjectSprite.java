@@ -41,7 +41,7 @@ import ultraextreme.model.util.Position;
 public class GameObjectSprite extends Sprite {
 
 	/**
-	 * Reference to a bullet in the model.
+	 * Reference to an entity in the model.
 	 */
 	private final IEntity entity;
 
@@ -60,7 +60,7 @@ public class GameObjectSprite extends Sprite {
 			final ITextureRegion texture) {
 
 		super((float) entity.getPosition().getX(), (float) entity.getPosition()
-				.getY(), entity.getWidth(), entity.getHeight(), texture,
+				.getY(), texture.getWidth(), texture.getHeight(), texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
 		this.isBlinked = false;

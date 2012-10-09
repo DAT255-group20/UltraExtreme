@@ -145,6 +145,7 @@ public class SpriteFactory {
 	 */
 	public GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
+		// TODO Why is this called twice?... Should probably be removed
 		textureMap.get(entity.getObjectName());
 		return new GameObjectSprite(entity, vbom, textureMap.get(entity
 				.getObjectName()));
