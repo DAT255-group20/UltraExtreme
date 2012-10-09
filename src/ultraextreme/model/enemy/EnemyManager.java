@@ -54,8 +54,7 @@ public class EnemyManager implements PropertyChangeListener {
 
 	public void addEnemy(final AbstractEnemy enemy) {
 		enemies.add(enemy);
-		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null,
-				enemy.getShip());
+		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null, enemy);
 
 	}
 
