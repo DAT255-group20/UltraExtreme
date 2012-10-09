@@ -205,7 +205,7 @@ public class GameModel implements IUltraExtremeModel {
 
 	@Override
 	public boolean isGameOver() {
-		return player.getLives() < 0;
+		return player.getLives() < 1;
 	}
 
 	/**
