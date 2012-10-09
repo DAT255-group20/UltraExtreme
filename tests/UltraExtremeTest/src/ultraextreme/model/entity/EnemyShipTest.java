@@ -46,11 +46,6 @@ public class EnemyShipTest extends AbstractEntityTest {
 				hitpoints, ObjectName.BASIC_ENEMYSHIP);
 	}
 
-	@Override
-	public void testGetSpeedMod() {
-		assertEquals(enemyShip.getSpeedMod(), Constants.getEnemySpeedModifier());
-	}
-
 	@Test
 	public void testReceiveDamage() {
 		// Create an enemy ship and kill it

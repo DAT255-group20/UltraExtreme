@@ -68,10 +68,6 @@ public class PlayerShipTest extends AbstractEntityTest {
 		assertEquals(playerShip.getRotation(), new Rotation(0));
 	}
 
-	@Override
-	public void testGetSpeedMod() {
-		// FIXME
-	}
 
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
