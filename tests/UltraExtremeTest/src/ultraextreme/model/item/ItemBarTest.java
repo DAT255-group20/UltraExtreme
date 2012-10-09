@@ -112,7 +112,7 @@ public class ItemBarTest extends TestCase {
 	private AbstractWeapon getNewWeapon() {
 		return new BasicWeapon(bulletManager);
 	}
-	
+
 	public void testLoseItems() {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
 		itemBar.addItem(item);
@@ -133,14 +133,29 @@ public class ItemBarTest extends TestCase {
 		assertEquals(0, itemBar.getItems().size());
 		assertEquals(0, itemBar.getMarkerPosition());
 	}
-	
+
+	/**
+	 * Fill an item bar with items, then see if the marker moves correctly when
+	 * an item is lost.
+	 */
+	public void testLoseItemsFromFullBar() {
+		BasicWeapon item = new BasicWeapon(new BulletManager());
+		resetInstanceVariables(5);
+		// Fill the item bar
+		for (int i = 0; i < 5; ++i)
+			itemBar.addItem(item);
+		assertEquals("Marker on first position", 0, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals("Marker on last position", 4, itemBar.getMarkerPosition());
+	}
+
 	/**
 	 * This test checks so the marker's position wraps correctly when the item
 	 * bar gets full.
 	 */
 	public void testMarkerPositionWraping() {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
-		
+
 		// Add items and check if it wraps
 		for (int i = 0; i < 30; ++i) {
 			assertEquals(i % 10, itemBar.getMarkerPosition());
