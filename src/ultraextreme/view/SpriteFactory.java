@@ -103,17 +103,23 @@ public class SpriteFactory {
 		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27, 40));
 
 		// init pickupables
-		putProperties(ObjectName.BASIC_WEAPON, basicEnemy, new Vector2d(27, 40));
-
-		putProperties(ObjectName.SPINNING_SPREAD_WEAPON, playerShip, new Vector2d(16.5, 13));
+		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity,
+						"enemy_placeholder.png", 56, 51);
+		putProperties(ObjectName.BASIC_WEAPON, basicWeapon, new Vector2d(20, 20));
+		
+		final TextureRegion spinningSpreadWeapon = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity,
+						"ship_placeholder.png", 97, 51);
+		putProperties(ObjectName.SPINNING_SPREAD_WEAPON, spinningSpreadWeapon, new Vector2d(20, 20));
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar.png", 80, 0);
 
 		// Init the item textures for items in the itembar
-		itemTextures.put(ObjectName.BASIC_WEAPON, basicEnemy); // Test only
-		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test only
+		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
+		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, spinningSpreadWeapon); // Test only
 
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
