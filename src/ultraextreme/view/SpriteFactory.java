@@ -88,21 +88,21 @@ public class SpriteFactory {
 		// init enemies bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"ship_placeholder.png", 0, 0);
+						"ship_blue.png", 0, 0);
 		textureMap.put(ObjectName.PLAYERSHIP, playerShip);
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"bullet_placeholder.png", 40, 0);
+						"bullet_placeholder.png", 33, 0);
 		textureMap.put(ObjectName.BASIC_BULLET, playerBullet);
 
-		final TextureRegion BasicEnemy = BitmapTextureAtlasTextureRegionFactory
+		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"enemy_placeholder.png", 0, 40);
-		textureMap.put(ObjectName.BASIC_ENEMYSHIP, BasicEnemy);
+						"enemy_placeholder.png", 0, 43);
+		textureMap.put(ObjectName.BASIC_ENEMYSHIP, basicEnemy);
 
 		// init pickupables
-		textureMap.put(ObjectName.BASIC_WEAPON, BasicEnemy);
+		textureMap.put(ObjectName.BASIC_WEAPON, basicEnemy);
 		textureMap.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip);
 
 		// Init the item bar texture
@@ -111,7 +111,7 @@ public class SpriteFactory {
 
 		// Init the item textures for items in the itembar
 		itemTextures = new HashMap<ObjectName, ITextureRegion>();
-		itemTextures.put(ObjectName.BASIC_WEAPON, BasicEnemy); // Test only
+		itemTextures.put(ObjectName.BASIC_WEAPON, basicEnemy); // Test only
 		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test
 																			// only
 
