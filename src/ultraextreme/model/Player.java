@@ -100,7 +100,7 @@ public class Player implements IPlayer {
 		setShipToSpawn();
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
-				Math.PI), 5);
+				Math.PI), 10);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
 		lives = Constants.getInitShipLives();
