@@ -23,6 +23,8 @@ package ultraextreme.view;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
@@ -32,6 +34,8 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.model.item.ItemBar;
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -62,8 +66,8 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public GameScene(final IUltraExtremeModel gameModel,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final SensorManager sensorManager, float scaling, Camera camera,
-			Font font) {
+			final SensorManager sensorManager, final double screenWidth,
+			final double screenHeight, Camera camera, Font font) {
 		super();
 
 		this.gameModel = gameModel;
@@ -76,6 +80,11 @@ public class GameScene extends Scene implements SensorEventListener {
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
+
+		final Dimension screenDimension = new Dimension(screenWidth,
+				screenHeight);
+		Vector2d scaling = screenDimension.getQuotient(Constants
+				.getLevelDimension());
 
 		ItemBar itemBar = gameModel.getPlayer().getItemBar();
 		itemBarPanel = new ItemBarPanel(itemBar, SpriteFactory.getInstance(),

@@ -37,6 +37,8 @@ import ultraextreme.model.util.Position;
 /**
  * 
  * @author Daniel Jonsson
+ * @author Bjorn Persson Mattsson
+ * @author Viktor Anderling
  * 
  */
 public class PlayerTest extends TestCase {
@@ -85,6 +87,13 @@ public class PlayerTest extends TestCase {
 		itemBar.addItem(new BasicWeapon(bulletManager));
 		assertEquals(itemBar.getItems().size(), player.getItemBar().getItems()
 				.size());
+	}
+
+	public void testItemBarSize() {
+		ItemBar itemBar = player.getItemBar();
+		for (int i = 0; i < 20; i++)
+			itemBar.addItem(new BasicWeapon(bulletManager));
+		assertEquals("Correct item bar size", 10, itemBar.getItems().size());
 	}
 
 	public void testGiveWeapon() {

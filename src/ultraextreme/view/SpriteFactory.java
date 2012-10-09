@@ -67,6 +67,11 @@ public class SpriteFactory {
 	 * The item bar's texture.
 	 */
 	private ITextureRegion itemBarTexture;
+	
+	/**
+	 * The item bar's marker texture.
+	 */
+	private ITextureRegion itemBarMarkerTexture;
 
 	private static SpriteFactory instance;
 
@@ -120,6 +125,10 @@ public class SpriteFactory {
 		// Init the item textures for items in the itembar
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
 		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, spinningSpreadWeapon); // Test only
+		
+		// Init the item bar marker
+		itemBarMarkerTexture = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "itembar_marker.png", 700, 0);
 
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
@@ -177,5 +186,13 @@ public class SpriteFactory {
 	 */
 	public ITextureRegion getItemTexture(ObjectName item) {
 		return itemTextures.get(item);
+	}
+
+	/**
+	 * 
+	 * @return The texture of the item bar's marker.
+	 */
+	public ITextureRegion getItemBarMarkerTexture() {
+		return itemBarMarkerTexture;
 	}
 }
