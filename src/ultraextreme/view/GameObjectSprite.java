@@ -40,30 +40,33 @@ import ultraextreme.model.util.Position;
  */
 public class GameObjectSprite extends Sprite {
 
+	// TODO PMD: Possible unsafe assignment to a non-final static field in a
+	// constructor.
+	private static Dimension screenDimension;
+	private static final Dimension MODEL_DIMENSION = Constants
+			.getLevelDimension();
+	
 	/**
-	 * Reference to a bullet in the model.
+	 * Reference to an entity in the model.
 	 */
 	private final IEntity entity;
 
 	private boolean isBlinked;
 
 	private Vector2d directionVector;
-
-	// TODO PMD: Possible unsafe assignment to a non-final static field in a
-	// constructor.
-	private static Dimension screenDimension;
-	private static final Dimension MODEL_DIMENSION = Constants
-			.getLevelDimension();
+	private final Vector2d imageOffset;
 
 	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final ITextureRegion texture) {
+			final ITextureRegion texture, Vector2d imageOffset) {
 
-		super((float) entity.getPosition().getX(), (float) entity.getPosition()
-				.getY(), entity.getWidth(), entity.getHeight(), texture,
+		// Change the width and height to the entity's width and height to squeeze the picture
+		super((float) (entity.getPosition().getX()-imageOffset.x), (float) (entity.getPosition()
+				.getY()-imageOffset.y), texture.getWidth(), texture.getHeight(), texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
 		this.isBlinked = false;
+		this.imageOffset = imageOffset;
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
@@ -75,8 +78,8 @@ public class GameObjectSprite extends Sprite {
 	public void update() {
 		final Position newPosition = screenDimension.scalePosition(
 				MODEL_DIMENSION, entity.getPosition());
-		this.setX((float) newPosition.getX());
-		this.setY((float) newPosition.getY());
+		this.setX((float) (newPosition.getX()-imageOffset.x));
+		this.setY((float) (newPosition.getY()-imageOffset.y));
 		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
