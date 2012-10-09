@@ -23,6 +23,8 @@ package ultraextreme.view;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import android.util.Log;
+
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.item.ItemBarUpdatedListener;

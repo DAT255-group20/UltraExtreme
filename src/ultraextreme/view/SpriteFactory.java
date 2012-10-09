@@ -120,6 +120,7 @@ public class SpriteFactory {
 		// Init the item textures for items in the itembar
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
 		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, spinningSpreadWeapon); // Test only
+		itemTextures.put(ObjectName.BASIC_SPREAD_WEAPON, spinningSpreadWeapon); // Test only
 
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
