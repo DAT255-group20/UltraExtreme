@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.controller;
 
 import java.beans.PropertyChangeEvent;
@@ -95,7 +115,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		// TODO Refactor the "enemyHit" string.
 		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_DAMAGED)) {
 			EnemyShip ship = (EnemyShip) event.getNewValue();
-			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, blinkTime, ship);
+			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, blinkTime,
+					ship);
 			timerList.add(timer);
 			getSprite(ship).blink();
 		} else if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
@@ -105,12 +126,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				entity = ((IEnemy) event.getNewValue()).getShip();
 			} else { // if item or bullet
 				entity = (IEntity) event.getNewValue();
-
-				final GameObjectSprite newSprite = spriteFactory.getNewSprite(
-						entity, vertexBufferObjectManager);
-				gameScene.attachChild(newSprite);
-				gameObjectSprites.add(newSprite);
 			}
+			final GameObjectSprite newSprite = spriteFactory.getNewSprite(
+					entity, vertexBufferObjectManager);
+			gameScene.attachChild(newSprite);
+			gameObjectSprites.add(newSprite);
 
 		} else if (event.getPropertyName().equals(
 				Constants.EVENT_REMOVED_ENTITY)) {
@@ -149,7 +169,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			if (timer.update(timeElapsed)) {
 				Object o = timer.getObject();
 				String propertyName = timer.getPropertyName();
-				
+
 				boolean timerDeprecated = false;
 				// The different actions that may be performed.
 				if (propertyName.equals(Constants.EVENT_ENEMY_DAMAGED)) {
@@ -159,11 +179,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 					} else {
 						sprite.blink();
 					}
-					//TODO add more actions here!
+					// TODO add more actions here!
 				}
 				if (!timer.isRunning() || timerDeprecated) {
 					i.remove();
-				} 
+				}
 			}
 		}
 	}
@@ -177,7 +197,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	private GameObjectSprite getSprite(IEntity entity) {
 		Iterator<GameObjectSprite> i = gameObjectSprites.iterator();
 		while (i.hasNext()) {
-			GameObjectSprite sprite = ((GameObjectSprite) i.next());
+			GameObjectSprite sprite = (i.next());
 			if (sprite.getEntity() == entity) {
 				return sprite;
 			}

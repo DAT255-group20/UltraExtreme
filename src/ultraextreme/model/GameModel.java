@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model;
 
 import java.beans.PropertyChangeListener;
@@ -39,7 +59,7 @@ public class GameModel implements IUltraExtremeModel {
 	private PickupManager pickupManager;
 
 	private WeaponFactory weaponFactory;
-	
+
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
@@ -112,7 +132,8 @@ public class GameModel implements IUltraExtremeModel {
 			for (IEnemy e : enemyManager.getEnemies()) {
 				if (b.collidesWith(e.getShip())) {
 					e.getShip().receiveDamage(b.getDamage());
-					pcs.firePropertyChange(Constants.EVENT_ENEMY_DAMAGED, null, e.getShip());
+					pcs.firePropertyChange(Constants.EVENT_ENEMY_DAMAGED, null,
+							e.getShip());
 					b.markForRemoval();
 				}
 			}
@@ -131,7 +152,7 @@ public class GameModel implements IUltraExtremeModel {
 			WeaponPickup wp = pickupManager.getPickups().get(i);
 			if (wp.collidesWith(player.getShip())) {
 				player.giveWeapon(weaponFactory.getNewWeapon(wp.getObjectName()));
-				pickupManager.removePickUp(i);
+				pickupManager.removePickup(i);
 				i--;
 			}
 		}
@@ -174,6 +195,23 @@ public class GameModel implements IUltraExtremeModel {
 	@Override
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
-		
+
+	}
+
+	@Override
+	public boolean isGameOver() {
+		return player.getLives() < 0;
+	}
+
+	/**
+	 * Resets the game
+	 */
+	public void reset() {
+		bulletManager.clearAllBullets();
+		enemyManager.clearAllEnemies();
+		pickupManager.clearAllPickups();
+		player.reset();
+
+		// TODO Reset enemymanager and enemysawner too?
 	}
 }

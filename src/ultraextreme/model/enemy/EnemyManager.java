@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model.enemy;
 
 import java.beans.PropertyChangeEvent;
@@ -5,6 +25,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.util.Log;
 
 import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.util.Constants;
@@ -34,6 +56,7 @@ public class EnemyManager implements PropertyChangeListener {
 		enemies.add(enemy);
 		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null,
 				enemy.getShip());
+
 	}
 
 	public void clearDeadEnemies() {
@@ -41,12 +64,18 @@ public class EnemyManager implements PropertyChangeListener {
 			boolean remove = false;
 			final AbstractEnemy e = enemies.get(i);
 			if (e.isDead()) {
+				Log.d("DEBUG", "isDead() : enemies.size()=" + enemies.size()
+						+ ", i=" + i);
 				pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, e);
 				remove = true;
 			} else if (e.getShip().isOutOfScreen(150)) {
+				Log.d("DEBUG",
+						"isOutOfScreen() : enemies.size()=" + enemies.size()
+								+ ", i=" + i);
 				remove = true;
 			}
 			if (remove) {
+				Log.d("DEBUG", "enemies.size()=" + enemies.size() + ", i=" + i);
 				removeEnemy(i);
 				i--;
 			}
@@ -74,5 +103,13 @@ public class EnemyManager implements PropertyChangeListener {
 		if (event.getPropertyName().equals(EnemySpawner.NEW_ENEMY)) {
 			addEnemy((AbstractEnemy) event.getNewValue());
 		}
+	}
+
+	public void clearAllEnemies() {
+		for (int i = 0; i < enemies.size(); i++) {
+			removeEnemy(i);
+			i--;
+		}
+		enemies.clear();
 	}
 }

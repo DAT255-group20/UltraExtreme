@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model.item;
 
 import java.beans.PropertyChangeListener;
@@ -40,7 +60,7 @@ public class PickupManager {
 	 * @param pickup
 	 *            item which is to be removed
 	 */
-	public void removePickUp(final WeaponPickup pickup) {
+	public void removePickup(final WeaponPickup pickup) {
 		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null, pickup);
 		pickups.remove(pickup);
 	}
@@ -51,7 +71,7 @@ public class PickupManager {
 	 * @param index
 	 *            what item is to be removed [0, n]
 	 */
-	public void removePickUp(int index) {
+	public void removePickup(int index) {
 		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null,
 				pickups.get(index));
 		pickups.remove(index);
@@ -67,6 +87,15 @@ public class PickupManager {
 	}
 
 	public List<WeaponPickup> getPickups() {
+
 		return pickups;
+	}
+
+	public void clearAllPickups() {
+		for (int i = 0; i < pickups.size(); i++) {
+			removePickup(i);
+			i--;
+		}
+		pickups.clear();
 	}
 }
