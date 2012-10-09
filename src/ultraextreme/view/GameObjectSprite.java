@@ -43,14 +43,14 @@ public class GameObjectSprite extends Sprite {
 	private static Dimension screenDimension;
 	private static final Dimension MODEL_DIMENSION = Constants
 			.getLevelDimension();
-	
+
 	/**
 	 * Reference to an entity in the model.
 	 */
 	private final IEntity entity;
 
 	private boolean isHitBlinked;
-	
+
 	private boolean isInvincibleBlinked;
 
 	private Vector2d directionVector;
@@ -60,22 +60,27 @@ public class GameObjectSprite extends Sprite {
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final ITextureRegion texture, Vector2d imageOffset) {
 
-		// Change the width and height to the entity's width and height to squeeze the picture
-		super((float) (entity.getPosition().getX()-imageOffset.x), (float) (entity.getPosition()
-				.getY()-imageOffset.y), texture.getWidth()*ultraextreme.util.Constants.SPRITE_SCALE_FACTOR, texture.getHeight()*ultraextreme.util.Constants.SPRITE_SCALE_FACTOR, texture,
-				vertexBufferObjectManager);
+		// Change the width and height to the entity's width and height to
+		// squeeze the picture
+		super((float) (entity.getPosition().getX() - imageOffset.x),
+				(float) (entity.getPosition().getY() - imageOffset.y),
+				texture.getWidth()
+						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
+				texture.getHeight()
+						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
+				texture, vertexBufferObjectManager);
 		this.entity = entity;
 
 		this.imageOffset = imageOffset;
-		
+
 		this.isHitBlinked = false;
 		this.isInvincibleBlinked = false;
 
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
-		Vector2d scalingQuotient = screenDimension.getQuotient(Constants.getLevelDimension());
-		this.setScale((float)scalingQuotient.x, (float)scalingQuotient.y);
+		Vector2d scalingQuotient = screenDimension.getQuotient(MODEL_DIMENSION);
+		this.setScale((float) scalingQuotient.x, (float) scalingQuotient.y);
 	}
 
 	/**
@@ -84,8 +89,8 @@ public class GameObjectSprite extends Sprite {
 	public void update() {
 		final Position newPosition = screenDimension.scalePosition(
 				MODEL_DIMENSION, entity.getPosition());
-		this.setX((float) (newPosition.getX()-imageOffset.x));
-		this.setY((float) (newPosition.getY()-imageOffset.y));
+		this.setX((float) (newPosition.getX() - imageOffset.x));
+		this.setY((float) (newPosition.getY() - imageOffset.y));
 		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
@@ -112,7 +117,7 @@ public class GameObjectSprite extends Sprite {
 			isHitBlinked = false;
 		}
 	}
-	
+
 	public void invincibilityBlink() {
 		if (!isInvincibleBlinked) {
 			this.setColor(0f, 0f, 1f);
