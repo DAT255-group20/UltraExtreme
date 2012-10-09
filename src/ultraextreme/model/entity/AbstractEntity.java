@@ -141,14 +141,14 @@ public abstract class AbstractEntity implements IEntity {
 	 */
 	@Override
 	public boolean collidesWith(IEntity other) {
-		// Rectangle collision detection
-		final double left1 = this.getPosition().getX();
-		final double top1 = this.getPosition().getY();
+		// Rectangle collision detection with getPosition() in the center
+		final double left1 = this.getPosition().getX()-this.getWidth()/2;
+		final double top1 = this.getPosition().getY()-this.getHeight()/2;
 		final double right1 = left1 + this.getWidth();
 		final double bottom1 = top1 + this.getHeight();
 
-		final double left2 = other.getPosition().getX();
-		final double top2 = other.getPosition().getY();
+		final double left2 = other.getPosition().getX()-other.getWidth()/2;
+		final double top2 = other.getPosition().getY()-other.getHeight()/2;
 		final double right2 = left2 + other.getWidth();
 		final double bottom2 = top2 + other.getHeight();
 
