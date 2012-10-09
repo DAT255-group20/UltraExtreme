@@ -94,8 +94,8 @@ public class SpriteFactory {
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"bullet_placeholder.png", 33, 0);
-		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d());
+						"laserGreen.png", 33, 0);
+		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5, 16.5));
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
