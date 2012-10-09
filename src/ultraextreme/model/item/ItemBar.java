@@ -45,7 +45,7 @@ public class ItemBar {
 	/**
 	 * Where the next item will be put into the item bar.
 	 */
-	private int cursorPosition;
+	private int markerPosition;
 
 	/**
 	 * A list of all items in the item bar.
@@ -100,7 +100,7 @@ public class ItemBar {
 		this.items = new ArrayList<AbstractWeapon>();
 		this.maxNumberOfItems = maxNumberOfItems;
 		this.playerRotation = playerRotation;
-		this.cursorPosition = 0;
+		this.markerPosition = 0;
 	}
 
 	/**
@@ -113,18 +113,28 @@ public class ItemBar {
 		if (items.size() < maxNumberOfItems) {
 			items.add(item);
 		} else {
-			items.set(cursorPosition, item);
+			items.set(markerPosition, item);
 		}
-		cursorPosition++;
-		cursorPosition = cursorPosition % maxNumberOfItems;
+		markerPosition++;
+		markerPosition = markerPosition % maxNumberOfItems;
 		fireItemBarUpdated();
+	}
+
+	/**
+	 * Get the current position of the marker. First position = 0 and last
+	 * position is the item bar's size minus 1.
+	 * 
+	 * @return Position of the marker.
+	 */
+	public int getMarkerPosition() {
+		return markerPosition;
 	}
 
 	public void looseItems() {
 		// TODO Should possibly remove more items? change implementation?
 		if (!items.isEmpty()) {
-			if (cursorPosition == items.size() - 1) {
-				cursorPosition--;
+			if (markerPosition == items.size() - 1) {
+				markerPosition--;
 			}
 			items.remove(items.size() - 1);
 			fireItemBarUpdated();

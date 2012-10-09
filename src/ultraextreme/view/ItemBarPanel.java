@@ -29,7 +29,9 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.item.ItemBarUpdatedListener;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
+import android.util.Log;
 
 /**
  * An item bar that is shown in the view part of the game.
@@ -82,13 +84,19 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	public void updateItemBar(ItemBar itemBar) {
 		// Clean the item bar from sprites
 		this.detachChildren();
+
+		float x = 60 * itemBar.getMarkerPosition() + 5;
+		x *= scaling.x;
+		float y = 5 * (float) scaling.y;
+		drawMarker(x, y, 60 * (float) scaling.x, 60 * (float) scaling.y);
+
 		// Repopulate it with sprites
 		for (int i = 0; i < itemBar.getItems().size(); i++) {
 			AbstractWeapon item = itemBar.getItems().get(i);
 			float width = 50 * (float) scaling.x;
 			float height = 50 * (float) scaling.y;
-			int x = i * 60 + 10;
-			int y = 10;
+			x = i * 60 + 10;
+			y = 10;
 			x *= scaling.x;
 			y *= scaling.y;
 			ITextureRegion texture = spriteFactory.getItemTexture(item
@@ -102,6 +110,13 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 			// sprite.setAlpha(alpha);
 			this.attachChild(sprite);
 		}
+	}
+
+	private void drawMarker(float x, float y, float width, float height) {
+		ITextureRegion texture = spriteFactory.getItemBarMarkerTexture();
+		Sprite sprite = new Sprite(x, y, width, height, texture,
+				vertexBufferObjectManager);
+		this.attachChild(sprite);
 	}
 
 	@Override
