@@ -134,7 +134,7 @@ public class ItemBar {
 		// TODO Should possibly remove more items? change implementation?
 		if (!items.isEmpty()) {
 			items.remove(items.size() - 1);
-			markerPosition = items.size() % maxNumberOfItems;
+			markerPosition = items.size();
 			fireItemBarUpdated();
 		}
 	}
