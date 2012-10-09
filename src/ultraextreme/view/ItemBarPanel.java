@@ -20,7 +20,10 @@
 
 package ultraextreme.view;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.item.AbstractWeapon;
@@ -42,6 +45,8 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 
 	private float alpha = 0.01f;
 
+	private Vector2d scaling;
+
 	/**
 	 * Create an ItemBarPanel.
 	 * 
@@ -58,10 +63,12 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	 */
 	public ItemBarPanel(ItemBar itemBar, SpriteFactory spriteFactory,
 			VertexBufferObjectManager vertexBufferObjectManager,
-			Position position, float scaling) {
-		super((float) position.getX() * scaling, (float) position.getY()
-				* scaling, 750 * scaling, 75 * scaling, spriteFactory
-				.getItemBarTexture(), vertexBufferObjectManager);
+			Position position, Vector2d scaling) {
+		super((float) (position.getX() * scaling.x),
+				(float) (position.getY() * scaling.y),
+				(float) (750 * scaling.x), (float) (75 * scaling.y),
+				spriteFactory.getItemBarTexture(), vertexBufferObjectManager);
+		this.scaling = scaling;
 		this.spriteFactory = spriteFactory;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		updateItemBar(itemBar);
@@ -78,10 +85,16 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 		// Repopulate it with sprites
 		for (int i = 0; i < itemBar.getItems().size(); i++) {
 			AbstractWeapon item = itemBar.getItems().get(i);
+			float width = 50 * (float) scaling.x;
+			float height = 50 * (float) scaling.y;
 			int x = i * 60 + 10;
 			int y = 10;
-			Sprite sprite = new Sprite(x, y, spriteFactory.getItemTexture(item
-					.getName()), vertexBufferObjectManager);
+			x *= scaling.x;
+			y *= scaling.y;
+			ITextureRegion texture = spriteFactory.getItemTexture(item
+					.getName());
+			Sprite sprite = new Sprite(x, y, width, height, texture,
+					vertexBufferObjectManager);
 			// TODO Need a way for setting alpha for the whole panel instead of
 			// for the background panel and the sprites individually. This
 			// causes the sprites to be hard to see because you can see the

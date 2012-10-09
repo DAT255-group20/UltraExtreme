@@ -67,7 +67,10 @@ public class GameController extends AbstractController implements
 		super();
 		gameModel = new GameModel();
 		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager, scaling, camera, font);
+				sensorManager,
+				activity.getResources().getDisplayMetrics().widthPixels,
+				activity.getResources().getDisplayMetrics().heightPixels,
+				camera, font);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
