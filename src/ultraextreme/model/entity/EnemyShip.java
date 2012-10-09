@@ -34,8 +34,6 @@ public class EnemyShip extends AbstractDestroyableEntity {
 
 	private int hitPoints;
 
-	private static double speedMod = Constants.getEnemySpeedModifier();
-
 	public EnemyShip(final double x, final double y, final int width,
 			final int height, final Rotation rotation, int hitpoints,
 			ObjectName objectName) {
@@ -46,11 +44,6 @@ public class EnemyShip extends AbstractDestroyableEntity {
 	@Override
 	public boolean isDestroyed() {
 		return hitPoints < 1;
-	}
-
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
 	}
 
 	/**

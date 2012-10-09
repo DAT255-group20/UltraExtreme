@@ -54,33 +54,11 @@ public final class Constants {
 	}
 
 	/**
-	 * @return A positive double that impacts how fast the enemy ships will move
-	 */
-	public static double getEnemySpeedModifier() {
-		return 1;
-	}
-
-	/**
 	 * @return A positive double that impacts how fast the player ships will
 	 *         move
 	 */
 	public static double getPlayerSpeedModifier() {
 		return 1;
-	}
-
-	/**
-	 * @return A positive double that impacts how fast the upgrade items will
-	 *         move
-	 */
-	public static double getPickupSpeedModifier() {
-		return 1;
-	}
-
-	/**
-	 * @return A positive double that impacts how fast the bullets will move
-	 */
-	public static double getBulletSpeedModifier() {
-		return 300;
 	}
 
 	/**

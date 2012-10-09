@@ -39,8 +39,6 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 
 	private boolean markedForRemoval = false;
 
-	private static double speedMod = Constants.getBulletSpeedModifier();
-
 	/**
 	 * 
 	 * @param playerId
@@ -68,10 +66,6 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 		return playerId;
 	}
 
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
-	}
 
 	@Override
 	public void markForRemoval() {
