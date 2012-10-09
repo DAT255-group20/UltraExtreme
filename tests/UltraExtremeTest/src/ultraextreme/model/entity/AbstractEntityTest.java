@@ -179,8 +179,6 @@ public abstract class AbstractEntityTest extends TestCase {
 		}
 	}
 
-	public abstract void testGetSpeedMod();
-
 	private AbstractEntity newEntity() {
 		return getNewAbstractEntity(10, 20, 30, 40, new Rotation(0));
 	}

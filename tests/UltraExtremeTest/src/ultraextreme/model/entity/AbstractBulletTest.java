@@ -54,12 +54,6 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 		assertEquals(bullet.getPlayerId(), PlayerID.ENEMY);
 	}
 
-	@Override
-	public void testGetSpeedMod() {
-		AbstractBullet bullet = newBullet();
-		assertEquals(bullet.getSpeedMod(), Constants.getBulletSpeedModifier());
-	}
-
 	private AbstractBullet newBullet() {
 		return newBullet(PlayerID.PLAYER1);
 	}

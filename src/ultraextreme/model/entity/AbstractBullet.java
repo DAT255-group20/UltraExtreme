@@ -20,7 +20,6 @@
 
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Rotation;
@@ -38,8 +37,6 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	private final PlayerID playerId;
 
 	private boolean markedForRemoval = false;
-
-	private static double speedMod = Constants.getBulletSpeedModifier();
 
 	/**
 	 * 
@@ -68,10 +65,6 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 		return playerId;
 	}
 
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
-	}
 
 	@Override
 	public void markForRemoval() {

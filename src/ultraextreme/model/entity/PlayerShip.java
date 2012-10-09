@@ -109,11 +109,6 @@ public class PlayerShip extends AbstractDestroyableEntity {
 		destroyed = true;
 	}
 
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
-	}
-
 	/**
 	 * Returns true if the ship got hit this update, else false.
 	 * 
