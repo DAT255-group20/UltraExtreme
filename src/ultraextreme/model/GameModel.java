@@ -140,10 +140,15 @@ public class GameModel implements IUltraExtremeModel {
 		}
 
 		// Check enemy bullets against player
-		for (IBullet b : enemyBullets) {
-			if (b.collidesWith(player.getShip())) {
-				player.getShip().receiveDamage(b.getDamage());
-				b.markForRemoval();
+		if(!player.isInvincible()) {
+			for (IBullet b : enemyBullets) {
+				if (b.collidesWith(player.getShip())) {
+					player.getShip().receiveDamage(b.getDamage());
+					pcs.firePropertyChange(Constants.EVENT_ENTITY_INVINCIBLE, 
+							null, player);
+					b.markForRemoval();
+					break;
+				}
 			}
 		}
 

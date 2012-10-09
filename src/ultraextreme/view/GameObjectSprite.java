@@ -45,7 +45,9 @@ public class GameObjectSprite extends Sprite {
 	 */
 	private final IEntity entity;
 
-	private boolean isBlinked;
+	private boolean isHitBlinked;
+	
+	private boolean isInvincibleBlinked;
 
 	private Vector2d directionVector;
 
@@ -63,7 +65,8 @@ public class GameObjectSprite extends Sprite {
 				.getY(), entity.getWidth(), entity.getHeight(), texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
-		this.isBlinked = false;
+		this.isHitBlinked = false;
+		this.isInvincibleBlinked = false;
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
@@ -94,13 +97,23 @@ public class GameObjectSprite extends Sprite {
 	/**
 	 * Switches the color of this sprite between two.
 	 */
-	public void blink() {
-		if (!isBlinked) {
+	public void onHitBlink() {
+		if (!isHitBlinked) {
 			this.setColor(1f, 0f, 0f);
-			isBlinked = true;
+			isHitBlinked = true;
 		} else {
 			this.setColor(1f, 1f, 1f);
-			isBlinked = false;
+			isHitBlinked = false;
+		}
+	}
+	
+	public void invincibilityBlink() {
+		if (!isInvincibleBlinked) {
+			this.setColor(0f, 0f, 1f);
+			isInvincibleBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isInvincibleBlinked = false;
 		}
 	}
 
