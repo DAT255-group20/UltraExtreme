@@ -47,10 +47,14 @@ import ultraextreme.model.util.ObjectName;
  */
 public class SpriteFactory {
 
-	private Map<ObjectName, ITextureRegion> textureMap;
+	private Map<ObjectName, ITextureRegion> textureMap = new HashMap<ObjectName, ITextureRegion>();
 
-	// TODO not yet implemented offsets
-	private Map<ObjectName, Vector2d> offsetMap;
+	private Map<ObjectName, Vector2d> offsetMap = new HashMap<ObjectName, Vector2d>();
+
+	/**
+	 * The items' textures.
+	 */
+	private Map<ObjectName, ITextureRegion> itemTextures = new HashMap<ObjectName, ITextureRegion>();
 
 	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
 	// variable.
@@ -63,11 +67,6 @@ public class SpriteFactory {
 	 * The item bar's texture.
 	 */
 	private ITextureRegion itemBarTexture;
-
-	/**
-	 * The items' textures.
-	 */
-	private Map<ObjectName, ITextureRegion> itemTextures;
 
 	private static SpriteFactory instance;
 
@@ -91,35 +90,40 @@ public class SpriteFactory {
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
 						"ship_blue_42px.png", 0, 0);
-		textureMap.put(ObjectName.PLAYERSHIP, playerShip);
+		putProperties(ObjectName.PLAYERSHIP, playerShip, new Vector2d(16.5, 13));
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
 						"bullet_placeholder.png", 33, 0);
-		textureMap.put(ObjectName.BASIC_BULLET, playerBullet);
+		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d());
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
 						"enemy_placeholder.png", 0, 43);
-		textureMap.put(ObjectName.BASIC_ENEMYSHIP, basicEnemy);
+		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d());
 
 		// init pickupables
-		textureMap.put(ObjectName.BASIC_WEAPON, basicEnemy);
-		textureMap.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip);
+		putProperties(ObjectName.BASIC_WEAPON, basicEnemy, new Vector2d());
+
+		putProperties(ObjectName.SPINNING_SPREAD_WEAPON, playerShip, new Vector2d());
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar.png", 80, 0);
 
 		// Init the item textures for items in the itembar
-		itemTextures = new HashMap<ObjectName, ITextureRegion>();
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicEnemy); // Test only
-		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test
-																			// only
+		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test only
 
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
+	}
+
+	private void putProperties(ObjectName objectName,
+			TextureRegion texture, Vector2d textureOffset) {
+		textureMap.put(objectName, texture);
+		offsetMap.put(objectName, textureOffset);
 	}
 
 	public static void initialize(SimpleBaseGameActivity activity) {
