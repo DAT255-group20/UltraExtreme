@@ -85,10 +85,10 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 		// Clean the item bar from sprites
 		this.detachChildren();
 
-		float x = 60 * itemBar.getMarkerPosition() + 5;
+		float x = 60 * itemBar.getMarkerPosition() + 3;
 		x *= scaling.x;
-		float y = 5 * (float) scaling.y;
-		drawMarker(x, y, 60 * (float) scaling.x, 60 * (float) scaling.y);
+		float y = 3 * (float) scaling.y;
+		drawMarker(x, y, 64 * (float) scaling.x, 64 * (float) scaling.y);
 
 		// Repopulate it with sprites
 		for (int i = 0; i < itemBar.getItems().size(); i++) {
