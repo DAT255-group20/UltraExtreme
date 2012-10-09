@@ -54,7 +54,7 @@ public class GameScene extends Scene implements SensorEventListener {
 	// FIXME These shouldn't be hard-coded in?
 	private static final Position SCORE_POS = new Position(10, 10);
 	private static final Position LIVES_POS = new Position(10, 40);
-	private static final Position ITEMBAR_POS = new Position(75, 1400);
+	private static final Position ITEMBAR_POS = new Position(145, 1400);
 
 	private final IUltraExtremeModel gameModel;
 	private GameObjectSprite shipSprite;

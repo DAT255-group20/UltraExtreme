@@ -68,7 +68,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 			Position position, Vector2d scaling) {
 		super((float) (position.getX() * scaling.x),
 				(float) (position.getY() * scaling.y),
-				(float) (750 * scaling.x), (float) (75 * scaling.y),
+				(float) (610 * scaling.x), (float) (70 * scaling.y),
 				spriteFactory.getItemBarTexture(), vertexBufferObjectManager);
 		this.scaling = scaling;
 		this.spriteFactory = spriteFactory;
