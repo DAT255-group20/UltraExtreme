@@ -139,10 +139,16 @@ public class SpriteFactory {
 	}
 
 	/**
-	 * Puts the properties into textureMap and offsetMap. Also multiplies the offset with the sprite scaling factor.
-	 * @param objectName The key in the maps.
-	 * @param texture The texture that goes into textureMap.
-	 * @param textureOffset The offset that goes into offsetMap, multiplied with the sprite scaling factor.
+	 * Puts the properties into textureMap and offsetMap. Also multiplies the
+	 * offset with the sprite scaling factor.
+	 * 
+	 * @param objectName
+	 *            The key in the maps.
+	 * @param texture
+	 *            The texture that goes into textureMap.
+	 * @param textureOffset
+	 *            The offset that goes into offsetMap, multiplied with the
+	 *            sprite scaling factor.
 	 */
 	private void putProperties(ObjectName objectName, TextureRegion texture,
 			Vector2d textureOffset) {
