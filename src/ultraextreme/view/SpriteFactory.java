@@ -88,7 +88,7 @@ public class SpriteFactory {
 		// init enemies bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"ship_blue.png", 0, 0);
+						"ship_blue_42px.png", 0, 0);
 		textureMap.put(ObjectName.PLAYERSHIP, playerShip);
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory

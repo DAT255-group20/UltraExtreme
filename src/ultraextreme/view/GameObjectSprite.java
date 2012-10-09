@@ -59,6 +59,7 @@ public class GameObjectSprite extends Sprite {
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final ITextureRegion texture) {
 
+		// Change the width and height to the entity's width and height to squeeze the picture
 		super((float) entity.getPosition().getX(), (float) entity.getPosition()
 				.getY(), texture.getWidth(), texture.getHeight(), texture,
 				vertexBufferObjectManager);
