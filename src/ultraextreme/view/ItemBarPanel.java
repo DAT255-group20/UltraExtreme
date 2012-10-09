@@ -29,9 +29,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.item.ItemBarUpdatedListener;
-import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
-import android.util.Log;
 
 /**
  * An item bar that is shown in the view part of the game.

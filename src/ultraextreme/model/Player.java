@@ -213,12 +213,12 @@ public class Player implements IPlayer {
 	public int getLives() {
 		return lives;
 	}
-	
+
 	@Override
 	public double getInvincibilityTime() {
 		return invTime;
 	}
-	
+
 	@Override
 	public boolean isInvincible() {
 		return invCountDown > 0;

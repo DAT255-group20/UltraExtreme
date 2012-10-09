@@ -65,7 +65,6 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 		return playerId;
 	}
 
-
 	@Override
 	public void markForRemoval() {
 		markedForRemoval = true;

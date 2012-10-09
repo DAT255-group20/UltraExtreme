@@ -9,7 +9,7 @@ public class TimerTest {
 
 	private Timer timer;
 	private Object o;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		timer = null;
@@ -19,21 +19,21 @@ public class TimerTest {
 	@Test
 	public void testTimerStringFloatObjectInt() {
 		boolean ticked = false;
-		
+
 		timer = new Timer("hej123", 100f, o, 1);
 		ticked = timer.update(101f);
 		assertTrue(o == timer.getObject());
 		assertTrue(ticked);
 		assertFalse(timer.isRunning());
 		assertEquals(timer.getPropertyName(), "hej123");
-		
+
 		timer = new Timer("hej321", 100f, o, 2);
 		ticked = timer.update(101f);
 		assertTrue(ticked);
 		assertTrue(o == timer.getObject());
 		assertTrue(timer.isRunning());
 		assertEquals(timer.getPropertyName(), "hej321");
-		
+
 		ticked = timer.update(101f);
 		assertTrue(ticked);
 		assertFalse(timer.isRunning());
@@ -42,16 +42,16 @@ public class TimerTest {
 	@Test
 	public void testTimerStringFloatObject() {
 		boolean ticked = false;
-		
+
 		timer = new Timer("hej123", 100f, o, 1);
 		assertTrue(o == timer.getObject());
 		assertTrue(timer.isRunning());
 		assertEquals(timer.getPropertyName(), "hej123");
-		
+
 		ticked = timer.update(60f);
 		assertFalse(ticked);
 		assertTrue(timer.isRunning());
-		
+
 		ticked = timer.update(50f);
 		assertTrue(ticked);
 		assertFalse(timer.isRunning());
@@ -62,13 +62,13 @@ public class TimerTest {
 	@Test
 	public void testUpdate() {
 		boolean ticked = false;
-		
+
 		timer = new Timer("hej123", 100f, o, 1);
 		ticked = timer.update(90f);
 		assertFalse(ticked);
 		assertTrue(timer.isRunning());
 		assertEquals(timer.getPropertyName(), "hej123");
-		
+
 		timer = new Timer("hej123", 150f, o, 2);
 		ticked = timer.update(110f);
 		assertFalse(ticked);
@@ -103,7 +103,7 @@ public class TimerTest {
 		assertTrue(timer.isRunning());
 		timer.update(2f);
 		assertFalse(timer.isRunning());
-		
+
 		timer = new Timer("", 100, o, 3);
 		assertTrue(timer.isRunning());
 		timer.update(101f);

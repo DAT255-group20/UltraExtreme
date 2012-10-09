@@ -66,12 +66,12 @@ public class BulletManager {
 		bulletsMap.get(b.getPlayerId()).add(b);
 		pcs.firePropertyChange(Constants.EVENT_NEW_ENTITY, null, b);
 	}
-	
+
 	/**
 	 * Removes a bullet from the bullet manager
 	 * 
 	 * @param b
-	 * 			the bullet that is to be removed
+	 *            the bullet that is to be removed
 	 */
 	public void removeBullet(final AbstractBullet b) {
 		pcs.firePropertyChange(Constants.EVENT_REMOVED_ENTITY, null, b);
@@ -125,15 +125,15 @@ public class BulletManager {
 			clearBulletsFromList(list);
 		}
 	}
-	
+
 	/**
-	 * clears the specified bulletList of bullets
-	 * (doesn't use the .clear() method in list,
-	 * that way events are still fired)
+	 * clears the specified bulletList of bullets (doesn't use the .clear()
+	 * method in list, that way events are still fired)
+	 * 
 	 * @param bulletList
 	 */
 	private void clearBulletsFromList(List<AbstractBullet> bulletList) {
-		while(!bulletList.isEmpty()) {
+		while (!bulletList.isEmpty()) {
 			removeBullet(bulletList.get(0));
 		}
 	}

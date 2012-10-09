@@ -58,7 +58,8 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(final double x, final double y,
 			final BulletManager bulletManager) {
-		// TODO This constructor is never used. Should it ever be used? If not, remove.
+		// TODO This constructor is never used. Should it ever be used? If not,
+		// remove.
 		this(new EnemyShip(x, y, 40, 40, new Rotation(0), 50,
 				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
 	}

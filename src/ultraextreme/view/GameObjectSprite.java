@@ -63,8 +63,8 @@ public class GameObjectSprite extends Sprite {
 		// Change the width and height to the entity's width and height to
 		// squeeze the picture
 		super((float) (entity.getPosition().getX() - imageOffset.x),
-				(float) (entity.getPosition().getY() - imageOffset.y),
-				texture.getWidth()
+				(float) (entity.getPosition().getY() - imageOffset.y), texture
+						.getWidth()
 						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
 				texture.getHeight()
 						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,

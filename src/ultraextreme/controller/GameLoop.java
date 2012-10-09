@@ -58,7 +58,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	// TODO perhaps refactor this variable?
 	private static final float onHitBlinkTime = 0.1f;
-	private static final int playerInvincibilityBlinks = 12; // Must be an even number!
+	private static final int playerInvincibilityBlinks = 12; // Must be an even
+																// number!
 
 	final private GameScene gameScene;
 	final private GameModel gameModel;
@@ -119,18 +120,20 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_DAMAGED)) {
 			EnemyShip ship = (EnemyShip) event.getNewValue();
-			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, onHitBlinkTime,
-					ship);
+			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED,
+					onHitBlinkTime, ship);
 			timerList.add(timer);
 			getSprite(ship).onHitBlink();
-		} else if(event.getPropertyName().equals(Constants.EVENT_ENTITY_INVINCIBLE)) {
+		} else if (event.getPropertyName().equals(
+				Constants.EVENT_ENTITY_INVINCIBLE)) {
 			Object o = event.getNewValue();
-			if(o instanceof Player) {
+			if (o instanceof Player) {
 				Player player = (Player) o;
 				PlayerShip ship = player.getShip();
-				Timer timer = new Timer(Constants.EVENT_ENTITY_INVINCIBLE, 
-						(float)(player.getInvincibilityTime() / playerInvincibilityBlinks), 
-						ship, playerInvincibilityBlinks -1);
+				Timer timer = new Timer(
+						Constants.EVENT_ENTITY_INVINCIBLE,
+						(float) (player.getInvincibilityTime() / playerInvincibilityBlinks),
+						ship, playerInvincibilityBlinks - 1);
 				timerList.add(timer);
 				getSprite(ship).invincibilityBlink();
 			}

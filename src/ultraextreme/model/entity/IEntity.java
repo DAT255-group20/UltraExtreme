@@ -45,7 +45,7 @@ public interface IEntity {
 	 * @return The position of this entity.
 	 */
 	Position getPosition();
-	
+
 	/**
 	 * @return A position at the center of this entity.
 	 */
