@@ -133,9 +133,7 @@ public class ItemBar {
 	public void loseItems() {
 		// TODO Should possibly remove more items? change implementation?
 		if (!items.isEmpty()) {
-			if (markerPosition == items.size() - 1) {
-				markerPosition--;
-			}
+			--markerPosition;
 			items.remove(items.size() - 1);
 			fireItemBarUpdated();
 		}
