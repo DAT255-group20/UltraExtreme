@@ -100,7 +100,7 @@ public class SpriteFactory {
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
 						"enemy_placeholder.png", 0, 43);
-		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d());
+		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(20, 20));
 
 		// init pickupables
 		putProperties(ObjectName.BASIC_WEAPON, basicEnemy, new Vector2d());
