@@ -17,11 +17,6 @@ import ultraextreme.model.util.Rotation;
 public class HitAndRunEnemy extends AbstractEnemy {
 	
 	/**
-	 * startingPoint where the enemy will spawn
-	 */
-	private Position startingPosition;
-	
-	/**
 	 * endPoint where the enemy will run off to
 	 */
 	private Position endPoint;
@@ -58,7 +53,6 @@ public class HitAndRunEnemy extends AbstractEnemy {
 				getNewWeapon(ObjectName.SPINNING_SPREAD_WEAPON));
 		this.endPoint = endPoint;
 		this.firePoint = firePoint;
-		this.startingPosition = startingPosition;
 	}
 	
 	/**
@@ -98,13 +92,42 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 * @param timePassed time passed in seconds
 	 */
 	public void goTowardPosition(Position goalPoint, float timePassed) {
+		//public for testing purposes
 		Position position = this.getShip().getPosition();
 		Vector2d directionVector = new Vector2d(
-				position.getX()-goalPoint.getX(),
+				goalPoint.getX()-position.getX(),
 				position.getY()-goalPoint.getY());
-		
 		directionVector.normalize();
-		position.setX(directionVector.x*speed*timePassed);
-		position.setY(directionVector.y*speed*timePassed);
+		
+		//saves the old position
+		Position prePos = new Position();
+		prePos.setPosition(position);
+		
+		//moves the position
+		position.setX(position.getX()+directionVector.x*speed*timePassed);
+		position.setY(position.getY()+directionVector.y*speed*timePassed);
+		this.getShip().setPosition(position);
+		
+		if (wentPastPoint(prePos.getX(), position.getX() ,goalPoint.getX())) {
+			position.setX(goalPoint.getX());
+		}
+		if (wentPastPoint(prePos.getY(), position.getY(), goalPoint.getX())) {
+			position.setX(goalPoint.getY());
+		}
+	}
+	
+	private boolean wentPastPoint(double prePos, double newPos, double goalPos) {
+		if(prePos > newPos) { //(came from right)
+			return goalPos > newPos;
+		} else {//if (prePos < newPos) { //(came from left)
+			return goalPos < newPos; 
+		}
+	}
+	/**
+	 * getter used in tests
+	 * @return the time this kind of enemy stays in place to shoot
+	 */
+	public float getWaitingTime() {
+		return waitingTime;
 	}
 }
