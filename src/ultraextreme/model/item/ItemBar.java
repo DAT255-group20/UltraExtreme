@@ -130,7 +130,7 @@ public class ItemBar {
 		return markerPosition;
 	}
 
-	public void looseItems() {
+	public void loseItems() {
 		// TODO Should possibly remove more items? change implementation?
 		if (!items.isEmpty()) {
 			if (markerPosition == items.size() - 1) {

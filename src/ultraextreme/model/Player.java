@@ -119,7 +119,7 @@ public class Player implements IPlayer {
 		double newX = 0;
 		double newY = 0;
 		if (ship.justGotHit() && invCountDown <= 0) {
-			itemBar.looseItems();
+			itemBar.loseItems();
 			if (itemBar.getItems().isEmpty()) {
 				lives -= 1;
 				this.notifyListeners();
