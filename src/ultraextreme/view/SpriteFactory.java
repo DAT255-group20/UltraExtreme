@@ -23,6 +23,8 @@ package ultraextreme.view;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.opengl.texture.TextureManager;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
@@ -48,7 +50,7 @@ public class SpriteFactory {
 	private Map<ObjectName, ITextureRegion> textureMap;
 
 	// TODO not yet implemented offsets
-	private Map<ObjectName, Integer> offsetMap;
+	private Map<ObjectName, Vector2d> offsetMap;
 
 	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
 	// variable.
@@ -145,10 +147,8 @@ public class SpriteFactory {
 	 */
 	public GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
-		// TODO Why is this called twice?... Should probably be removed
-		textureMap.get(entity.getObjectName());
-		return new GameObjectSprite(entity, vbom, textureMap.get(entity
-				.getObjectName()));
+		ObjectName objName = entity.getObjectName();
+		return new GameObjectSprite(entity, vbom, textureMap.get(objName), offsetMap.get(objName));
 	}
 
 	/**

@@ -40,6 +40,12 @@ import ultraextreme.model.util.Position;
  */
 public class GameObjectSprite extends Sprite {
 
+	// TODO PMD: Possible unsafe assignment to a non-final static field in a
+	// constructor.
+	private static Dimension screenDimension;
+	private static final Dimension MODEL_DIMENSION = Constants
+			.getLevelDimension();
+	
 	/**
 	 * Reference to an entity in the model.
 	 */
@@ -48,16 +54,11 @@ public class GameObjectSprite extends Sprite {
 	private boolean isBlinked;
 
 	private Vector2d directionVector;
-
-	// TODO PMD: Possible unsafe assignment to a non-final static field in a
-	// constructor.
-	private static Dimension screenDimension;
-	private static final Dimension MODEL_DIMENSION = Constants
-			.getLevelDimension();
+	private final Vector2d imageOffset;
 
 	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final ITextureRegion texture) {
+			final ITextureRegion texture, Vector2d imageOffset) {
 
 		// Change the width and height to the entity's width and height to squeeze the picture
 		super((float) entity.getPosition().getX(), (float) entity.getPosition()
@@ -65,6 +66,7 @@ public class GameObjectSprite extends Sprite {
 				vertexBufferObjectManager);
 		this.entity = entity;
 		this.isBlinked = false;
+		this.imageOffset = imageOffset;
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
