@@ -40,8 +40,6 @@ import ultraextreme.model.util.Position;
  */
 public class GameObjectSprite extends Sprite {
 
-	// TODO PMD: Possible unsafe assignment to a non-final static field in a
-	// constructor.
 	private static Dimension screenDimension;
 	private static final Dimension MODEL_DIMENSION = Constants
 			.getLevelDimension();
@@ -64,7 +62,7 @@ public class GameObjectSprite extends Sprite {
 
 		// Change the width and height to the entity's width and height to squeeze the picture
 		super((float) (entity.getPosition().getX()-imageOffset.x), (float) (entity.getPosition()
-				.getY()-imageOffset.y), texture.getWidth()*2, texture.getHeight()*2, texture,
+				.getY()-imageOffset.y), texture.getWidth()*ultraextreme.util.Constants.SPRITE_SCALE_FACTOR, texture.getHeight()*ultraextreme.util.Constants.SPRITE_SCALE_FACTOR, texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
 
