@@ -1,9 +1,26 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model.enemy;
 
 import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 
@@ -14,7 +31,7 @@ import ultraextreme.model.item.BulletManager;
  */
 public class AbstractEnemyTest extends TestCase {
 	BulletManager bulletManager;
-	BasicEnemy enemy;
+	AbstractEnemy enemy;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -22,7 +39,6 @@ public class AbstractEnemyTest extends TestCase {
 		resetInstanceVariables();
 	}
 
-	@Test
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
 		enemy = new BasicEnemy(5, 5, bulletManager);
@@ -31,7 +47,6 @@ public class AbstractEnemyTest extends TestCase {
 	/**
 	 * Tests the shoot() Method
 	 */
-	@Test
 	public void testShoot() {
 		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
 		assertTrue(!bulletManager.getBullets().isEmpty());
@@ -40,10 +55,9 @@ public class AbstractEnemyTest extends TestCase {
 	/**
 	 * Tests the isDead() method
 	 */
-	@Test
 	public void testIsDead() {
 		assertTrue(enemy.getShip().isDestroyed() == enemy.isDead());
-		enemy.getShip().damage(10000);
+		enemy.getShip().receiveDamage(10000);
 		assertTrue(enemy.isDead());
 	}
 

@@ -1,0 +1,132 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
+package ultraextreme.model.item;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.TestCase;
+import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
+
+/**
+ * 
+ * @author Daniel Jonsson
+ * 
+ */
+public class ItemBarTest extends TestCase {
+
+	private PlayerID playerId;
+	private BulletManager bulletManager;
+	private ItemBar itemBar;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.resetInstanceVariables(10);
+	}
+
+	private void resetInstanceVariables(int slots) {
+		bulletManager = new BulletManager();
+		playerId = PlayerID.PLAYER1;
+		itemBar = new ItemBar(playerId, bulletManager, new Rotation(0), slots);
+	}
+
+	/**
+	 * Add a lot of items to the item bar, get them from the item bar and
+	 * finally check if the size is correct.
+	 */
+	public void testAddItemsAndCheckSize() {
+		for (int i = 0; i < 1000; i += 100) {
+			resetInstanceVariables(1000);
+			addItemSizeTester(i);
+		}
+	}
+
+	private void addItemSizeTester(int numberOfItems) {
+		for (int i = 0; i < numberOfItems; i++) {
+			itemBar.addItem(new BasicWeapon(bulletManager));
+		}
+		assertEquals(itemBar.getItems().size(), numberOfItems);
+	}
+
+	/**
+	 * Add 15 items to an item bar that can only take 10 items, and then check
+	 * that the size of items is correct in the item bar.
+	 */
+	public void testAddTooManyItems() {
+		resetInstanceVariables(10);
+		for (int i = 0; i < 15; i++) {
+			itemBar.addItem(getNewItem());
+		}
+		assertEquals(itemBar.getItems().size(), 10);
+	}
+
+	/**
+	 * Add 7 items to an item bar that can only hold 5 items. Then check so it's
+	 * the last 5 added items that are in the item bar. Also check so they are
+	 * in the right order.
+	 */
+	public void testWhetherItemsAreWrittenOverCorrectly() {
+		resetInstanceVariables(5);
+		List<AbstractWeapon> items = new ArrayList<AbstractWeapon>();
+		for (int i = 0; i < 7; i++) {
+			AbstractWeapon item = getNewItem();
+			items.add(item);
+			itemBar.addItem(item);
+		}
+		assertFalse(itemBar.getItems().contains(items.get(0)));
+		assertFalse(itemBar.getItems().contains(items.get(1)));
+		assertSame(itemBar.getItems().get(0), items.get(5));
+		assertSame(itemBar.getItems().get(1), items.get(6));
+		assertSame(itemBar.getItems().get(2), items.get(2));
+		assertSame(itemBar.getItems().get(3), items.get(3));
+		assertSame(itemBar.getItems().get(4), items.get(4));
+	}
+
+	private AbstractWeapon getNewItem() {
+		return new BasicWeapon(bulletManager);
+	}
+
+	private AbstractWeapon getNewWeapon() {
+		return new BasicWeapon(bulletManager);
+	}
+
+	/**
+	 * Fire a weapon a couple of times and check if the bullets are added to the
+	 * bullet manager.
+	 */
+	public void testFireWeapon() {
+		float epsilon = 0.001f;
+		float cooldown = BasicWeapon.getInitCooldown();
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().size() == 0);
+
+		itemBar.addItem(getNewWeapon());
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
+		int bulletsShot = bulletManager.getBullets().size();
+		assertTrue(bulletsShot > 0);
+
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().size() > bulletsShot);
+	}
+}
