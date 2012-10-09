@@ -61,8 +61,8 @@ public class GameObjectSprite extends Sprite {
 			final ITextureRegion texture, Vector2d imageOffset) {
 
 		// Change the width and height to the entity's width and height to squeeze the picture
-		super((float) entity.getPosition().getX(), (float) entity.getPosition()
-				.getY(), texture.getWidth(), texture.getHeight(), texture,
+		super((float) (entity.getPosition().getX()-imageOffset.x), (float) (entity.getPosition()
+				.getY()-imageOffset.y), texture.getWidth(), texture.getHeight(), texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
 		this.isBlinked = false;
@@ -78,8 +78,8 @@ public class GameObjectSprite extends Sprite {
 	public void update() {
 		final Position newPosition = screenDimension.scalePosition(
 				MODEL_DIMENSION, entity.getPosition());
-		this.setX((float) newPosition.getX());
-		this.setY((float) newPosition.getY());
+		this.setX((float) (newPosition.getX()-imageOffset.x));
+		this.setY((float) (newPosition.getY()-imageOffset.y));
 		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
