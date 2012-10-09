@@ -44,6 +44,10 @@ public class GameObjectSprite extends Sprite {
 	private static final Dimension MODEL_DIMENSION = Constants
 			.getLevelDimension();
 
+	public static void setScreenDimension(final Dimension dimension) {
+		screenDimension = dimension;
+	}
+
 	/**
 	 * Reference to an entity in the model.
 	 */
@@ -52,8 +56,8 @@ public class GameObjectSprite extends Sprite {
 	private boolean isHitBlinked;
 
 	private boolean isInvincibleBlinked;
-
 	private Vector2d directionVector;
+
 	private final Vector2d imageOffset;
 
 	public GameObjectSprite(final IEntity entity,
@@ -84,6 +88,36 @@ public class GameObjectSprite extends Sprite {
 	}
 
 	/**
+	 * returns the entity this sprite is representing
+	 */
+	public IEntity getEntity() {
+		return entity;
+	}
+
+	public void invincibilityBlink() {
+		if (!isInvincibleBlinked) {
+			this.setColor(0f, 0f, 1f);
+			isInvincibleBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isInvincibleBlinked = false;
+		}
+	}
+
+	/**
+	 * Switches the color of this sprite between two.
+	 */
+	public void onHitBlink() {
+		if (!isHitBlinked) {
+			this.setColor(1f, 0f, 0f);
+			isHitBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isHitBlinked = false;
+		}
+	}
+
+	/**
 	 * Update the bullet sprite with data from the model.
 	 */
 	public void update() {
@@ -103,39 +137,5 @@ public class GameObjectSprite extends Sprite {
 			}
 			this.setRotation(newAngle + 90f);
 		}
-	}
-
-	/**
-	 * Switches the color of this sprite between two.
-	 */
-	public void onHitBlink() {
-		if (!isHitBlinked) {
-			this.setColor(1f, 0f, 0f);
-			isHitBlinked = true;
-		} else {
-			this.setColor(1f, 1f, 1f);
-			isHitBlinked = false;
-		}
-	}
-
-	public void invincibilityBlink() {
-		if (!isInvincibleBlinked) {
-			this.setColor(0f, 0f, 1f);
-			isInvincibleBlinked = true;
-		} else {
-			this.setColor(1f, 1f, 1f);
-			isInvincibleBlinked = false;
-		}
-	}
-
-	/**
-	 * returns the entity this sprite is representing
-	 */
-	public IEntity getEntity() {
-		return entity;
-	}
-
-	public static void setScreenDimension(final Dimension dimension) {
-		screenDimension = dimension;
 	}
 }
