@@ -109,7 +109,7 @@ public class BulletManager {
 		for (List<AbstractBullet> list : bulletsMap.values()) {
 			for (int i = 0; i < list.size(); i++) {
 				final IBullet b = list.get(i);
-				if (b.isMarkedForRemoval() || (b.isOutOfScreen(100))) {
+				if (b.isMarkedForRemoval() || (b.isOutOfScreen(200))) {
 					removeBullet(list, i);
 					i--;
 				}
