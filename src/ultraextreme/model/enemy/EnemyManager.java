@@ -65,7 +65,7 @@ public class EnemyManager implements PropertyChangeListener {
 				// + ", i=" + i);
 				pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, e);
 				remove = true;
-			} else if (e.getShip().isOutOfScreen(150)) {
+			} else if (e.getShip().isOutOfScreen(300)) {
 				// Log.d("DEBUG",
 				// "isOutOfScreen() : enemies.size()=" + enemies.size()
 				// + ", i=" + i);

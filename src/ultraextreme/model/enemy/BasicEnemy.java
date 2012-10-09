@@ -79,7 +79,7 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(double x, double y, Rotation rotation,
 			BulletManager bulletManager) {
-		this(new EnemyShip(x, y, 40, 40, rotation, 50,
+		this(new EnemyShip(x, y, 70, 70, rotation, 50,
 				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
 	}
 

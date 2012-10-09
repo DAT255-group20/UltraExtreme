@@ -53,7 +53,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	}
 
 	public PlayerShip(final double x, double y) {
-		this(x, y, 10, 10);
+		this(x, y, 20, 20);
 	}
 
 	public PlayerShip() {
