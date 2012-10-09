@@ -77,7 +77,7 @@ public class GameObjectSprite extends Sprite {
 			screenDimension = MODEL_DIMENSION;
 		}
 		Vector2d scalingQuotient = screenDimension.getQuotient(Constants.getLevelDimension());
-		this.setScale((float)scalingQuotient.x, (float)scalingQuotient.x);
+		this.setScale((float)scalingQuotient.x, (float)scalingQuotient.y);
 	}
 
 	/**
