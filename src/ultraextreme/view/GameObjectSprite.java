@@ -59,7 +59,7 @@ public class GameObjectSprite extends Sprite {
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final ITextureRegion texture) {
 
-		super((float) entity.getPosition().getX(), (float) entity.getPosition()
+		super((float) entity.getPositionClone().getX(), (float) entity.getPositionClone()
 				.getY(), entity.getWidth(), entity.getHeight(), texture,
 				vertexBufferObjectManager);
 		this.entity = entity;
@@ -74,7 +74,7 @@ public class GameObjectSprite extends Sprite {
 	 */
 	public void update() {
 		final Position newPosition = screenDimension.scalePosition(
-				MODEL_DIMENSION, entity.getPosition());
+				MODEL_DIMENSION, entity.getPositionClone());
 		this.setX((float) newPosition.getX());
 		this.setY((float) newPosition.getY());
 		if (entity instanceof IBullet) {

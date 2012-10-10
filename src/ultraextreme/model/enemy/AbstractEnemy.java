@@ -55,7 +55,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	 * Fires the weapon assigned to this enemy
 	 */
 	public void shoot(final float timeElapsed) {
-		weapon.fire(ship.getPosition(), PlayerID.ENEMY, this.enemyRotation,
+		weapon.fire(ship.getPositionClone(), PlayerID.ENEMY, this.enemyRotation,
 				timeElapsed);
 	}
 

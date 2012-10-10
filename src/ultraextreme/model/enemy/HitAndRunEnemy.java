@@ -77,10 +77,10 @@ public class HitAndRunEnemy extends AbstractEnemy {
 			goTowardPosition(endPoint, timePassed);	
 		}
 		
-		if(this.getShip().getPosition().equals(firePoint)) {
+		if(this.getShip().getPositionClone().equals(firePoint)) {
 				//while shooting
 			timeWaited += timePassed;
-			this.getWeapon().fire(this.getShip().getPosition(),
+			this.getWeapon().fire(this.getShip().getPositionClone(),
 						PlayerID.ENEMY, new Rotation(0), timePassed);
 		}
 	}
@@ -93,27 +93,31 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	public void goTowardPosition(Position goalPoint, float timePassed) {
 		//public for testing purposes
-		Position position = this.getShip().getPosition();
+		Position position = this.getShip().getPositionClone();
+		
 		Vector2d directionVector = new Vector2d(
 				goalPoint.getX()-position.getX(),
-				position.getY()-goalPoint.getY());
+				goalPoint.getY()-position.getY());
 		directionVector.normalize();
-		
+
 		//saves the old position
-		Position prePos = new Position();
-		prePos.setPosition(position);
-		
-		//moves the position
-		position.setX(position.getX()+directionVector.x*speed*timePassed);
-		position.setY(position.getY()+directionVector.y*speed*timePassed);
+		Position prePos = new Position(position.getX(), position.getY());
 		this.getShip().setPosition(position);
+
+		//moves the position
+		position.setX(position.getX() + directionVector.x*speed*timePassed);
+		position.setY(position.getY() + directionVector.y*speed*timePassed);
 		
-		if (wentPastPoint(prePos.getX(), position.getX() ,goalPoint.getX())) {
+		if (wentPastPoint(prePos.getX(), position.getX(), goalPoint.getX())) {
 			position.setX(goalPoint.getX());
 		}
-		if (wentPastPoint(prePos.getY(), position.getY(), goalPoint.getX())) {
-			position.setX(goalPoint.getY());
+		if (wentPastPoint(prePos.getY(), position.getY(), goalPoint.getY())) {
+			position.setY(goalPoint.getY());
 		}
+		this.getShip().setPosition(position);
+
+		System.out.println(this.getShip().getPositionClone().getX());
+		System.out.println(this.getShip().getPositionClone().getY());
 	}
 	
 	private boolean wentPastPoint(double prePos, double newPos, double goalPos) {

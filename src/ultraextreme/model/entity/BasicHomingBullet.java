@@ -63,8 +63,8 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 	}
 
 	private void updateDirection() {
-		final Position targetPosition = target.getPosition();
-		final Position thisPosition = this.getPosition();
+		final Position targetPosition = target.getPositionClone();
+		final Position thisPosition = this.getPositionClone();
 		normDirectionVector.normalize(new Vector2d(targetPosition.getX()
 				- thisPosition.getX(), targetPosition.getY()
 				- thisPosition.getY()));

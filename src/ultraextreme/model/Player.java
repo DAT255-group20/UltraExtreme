@@ -146,7 +146,7 @@ public class Player implements IPlayer {
 		}
 		ship.move(newX, newY);
 		if (input.fireWeapons) {
-			itemBar.fireWeapons(ship.getPosition(), timeElapsed);
+			itemBar.fireWeapons(ship.getPositionClone(), timeElapsed);
 		}
 	}
 

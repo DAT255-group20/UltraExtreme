@@ -33,9 +33,9 @@ public class BasicEnemyTest extends AbstractEnemyTest {
 	 * 
 	 */
 	public void testUpdate() {
-		Position position1 = enemy.getShip().getPosition();
+		Position position1 = enemy.getShip().getPositionClone();
 		enemy.update(10f);
-		assertTrue(position1.getY() < enemy.getShip().getPosition().getY());
+		assertTrue(position1.getY() < enemy.getShip().getPositionClone().getY());
 		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
 }
