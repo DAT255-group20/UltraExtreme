@@ -208,10 +208,10 @@ public class PlayerTest extends TestCase {
 	private void updateTester(int dX, int dY, boolean fireWeapons,
 			boolean dropBomb) {
 		this.resetInstanceVariables();
-		Position pOld = new Position(player.getShip().getPosition());
+		Position pOld = new Position(player.getShip().getPositionClone());
 		ModelInput m = new ModelInput(dX, dY, fireWeapons, dropBomb);
 		player.update(m, 1);
-		Position pNew = player.getShip().getPosition();
+		Position pNew = player.getShip().getPositionClone();
 		assertEquals(pOld.getX() + dX, pNew.getX());
 		assertEquals(pOld.getY() + dY, pNew.getY());
 		if (fireWeapons)

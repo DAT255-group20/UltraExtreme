@@ -66,13 +66,14 @@ public class GameObjectSprite extends Sprite {
 
 		// Change the width and height to the entity's width and height to
 		// squeeze the picture
-		super((float) (entity.getPosition().getX() - imageOffset.x),
-				(float) (entity.getPosition().getY() - imageOffset.y), texture
+		super((float) (entity.getPositionClone().getX() - imageOffset.x),
+				(float) (entity.getPositionClone().getY() - imageOffset.y), texture
 						.getWidth()
 						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
 				texture.getHeight()
 						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
 				texture, vertexBufferObjectManager);
+
 		this.entity = entity;
 
 		this.imageOffset = imageOffset;
@@ -122,9 +123,10 @@ public class GameObjectSprite extends Sprite {
 	 */
 	public void update() {
 		final Position newPosition = screenDimension.scalePosition(
-				MODEL_DIMENSION, entity.getPosition());
+				MODEL_DIMENSION, entity.getPositionClone());
 		this.setX((float) (newPosition.getX() - imageOffset.x));
 		this.setY((float) (newPosition.getY() - imageOffset.y));
+
 		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {

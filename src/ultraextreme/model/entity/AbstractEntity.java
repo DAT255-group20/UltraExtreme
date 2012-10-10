@@ -103,17 +103,23 @@ public abstract class AbstractEntity implements IEntity {
 	}
 
 	/**
-	 * Returns this entity's position.
+	 * Returns a deep clone of this entitiy's position.
 	 * 
-	 * @return A new position with the same values as this position.
+	 * @return A deep clone of this entitiy's position
 	 */
 	@Override
-	public Position getPosition() {
+	public Position getPositionClone() {
 		return new Position(this.position);
 	}
 
+
+	/**
+	 * Returns a deep clone position at the center of this entity.
+	 * 
+	 * @return A deep clone of the position at the center of this entity.
+	 */
 	@Override
-	public Position getCenteredPosition() {
+	public Position getCenteredPositionClone() {
 		return new Position(position.getX() + getWidth() / 2, position.getY()
 				+ getHeight() / 2);
 	}
@@ -143,13 +149,14 @@ public abstract class AbstractEntity implements IEntity {
 	@Override
 	public boolean collidesWith(IEntity other) {
 		// Rectangle collision detection with getPosition() in the center
-		final double left1 = this.getPosition().getX() - this.getWidth() / 2;
-		final double top1 = this.getPosition().getY() - this.getHeight() / 2;
+		final double left1 = this.getPositionClone().getX() - this.getWidth() / 2;
+		final double top1 = this.getPositionClone().getY() - this.getHeight() / 2;
 		final double right1 = left1 + this.getWidth();
 		final double bottom1 = top1 + this.getHeight();
 
-		final double left2 = other.getPosition().getX() - other.getWidth() / 2;
-		final double top2 = other.getPosition().getY() - other.getHeight() / 2;
+		final double left2 = other.getPositionClone().getX() - other.getWidth() / 2;
+		final double top2 = other.getPositionClone().getY() - other.getHeight() / 2;
+
 		final double right2 = left2 + other.getWidth();
 		final double bottom2 = top2 + other.getHeight();
 

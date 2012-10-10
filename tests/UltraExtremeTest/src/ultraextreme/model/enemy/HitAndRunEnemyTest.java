@@ -26,20 +26,21 @@ public class HitAndRunEnemyTest extends TestCase {
 	}
 
 	public void testGoTowardPosition() {
-		enemy.goTowardPosition(firePoint, (float) 0.01);
-		assertTrue(enemy.getShip().getPosition().getX() > 5.0);
-		assertTrue(enemy.getShip().getPosition().getY() > 10.0);
+		enemy.goTowardPosition(firePoint, (float) 10.0);
+		assertTrue(enemy.getShip().getPositionClone().getX() > 5.0);
+		assertTrue(enemy.getShip().getPositionClone().getY() > 10.0);
 		
 		enemy.goTowardPosition(firePoint, 1000);
-		assertEquals(enemy.getShip().getPosition(), endPoint);
+		System.out.println(enemy.getShip().getPositionClone().getX());
+		assertEquals(endPoint, enemy.getShip().getPositionClone());
 		
 		Position negativePosition = new Position(-5,-5);
 		enemy.goTowardPosition(negativePosition, (float) 0.005);
-		assertTrue(enemy.getShip().getPosition().getX() < 15);
-		assertTrue(enemy.getShip().getPosition().getY() < 15);
+		assertTrue(enemy.getShip().getPositionClone().getX() < 15);
+		assertTrue(enemy.getShip().getPositionClone().getY() < 15);
 		
 		enemy.goTowardPosition(negativePosition, 1000);
-		assertEquals(enemy.getShip().getPosition(), negativePosition);
+		assertEquals(enemy.getShip().getPositionClone(), negativePosition);
 	}
 
 	public void testUpdate() {
@@ -50,7 +51,7 @@ public class HitAndRunEnemyTest extends TestCase {
 		boolean shot = false;
 		for(int i = 0; i < 10000; i++) {
 			enemy.update((i*0.1f));
-			if(enemy.getShip().getPosition().equals(new Position(15,15))) {
+			if(enemy.getShip().getPositionClone().equals(new Position(15,15))) {
 				secondsStopped+=0.1;
 			}
 			if (secondsStopped == enemy.getWaitingTime() && stopped==false) {
@@ -59,7 +60,7 @@ public class HitAndRunEnemyTest extends TestCase {
 				shot = (!manager.getBullets().isEmpty());
 			}
 			if (supposedToStartMoving) {
-				if(enemy.getShip().getPosition().equals(endPoint))
+				if(enemy.getShip().getPositionClone().equals(endPoint))
 				startedMovingAgain = true;
 			}
 		}
@@ -70,6 +71,6 @@ public class HitAndRunEnemyTest extends TestCase {
 	public void testHitAndRunEnemyConstructor() {
 		assertNotNull(enemy);
 		assertNotNull(enemy.getWeapon());
-		assertEquals(startPoint, enemy.getShip().getPosition());
+		assertEquals(startPoint, enemy.getShip().getPositionClone());
 	}
 }
