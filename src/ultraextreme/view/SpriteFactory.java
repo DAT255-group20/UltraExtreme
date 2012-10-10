@@ -105,7 +105,7 @@ public class SpriteFactory {
 				16.5));
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "evil_ship.png", 0, 43);
+				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 0, 43);
 		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27, 40));
 
 		// init pickupables
@@ -113,9 +113,9 @@ public class SpriteFactory {
 				.createFromAsset(textureAtlas, activity, "cannon.png", 56, 51);
 		putProperties(ObjectName.BASIC_WEAPON, basicWeapon, new Vector2d(15, 15));
 
-		final TextureRegion spinningSpreadWeapon = BitmapTextureAtlasTextureRegionFactory
+		final TextureRegion spinningWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "spin.png", 87, 51);
-		putProperties(ObjectName.SPINNING_SPREAD_WEAPON, spinningSpreadWeapon,
+		putProperties(ObjectName.SPINNING_WEAPON, spinningWeapon,
 				new Vector2d(15, 15));
 
 		// Init the item bar texture
@@ -124,8 +124,8 @@ public class SpriteFactory {
 
 		// Init the item textures for items in the itembar
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
-		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON,
-				spinningSpreadWeapon); // Test only
+		itemTextures.put(ObjectName.SPINNING_WEAPON,
+				spinningWeapon); // Test only
 
 		// Init the item bar marker
 		itemBarMarkerTexture = BitmapTextureAtlasTextureRegionFactory
