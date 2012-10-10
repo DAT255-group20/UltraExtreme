@@ -20,6 +20,7 @@
 
 package ultraextreme.view;
 
+import java.security.InvalidKeyException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,14 +106,12 @@ public class SpriteFactory {
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship.png", 0, 43);
-		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27,
-				40));
+		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27, 40));
 
 		// init pickupables
 		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "cannon.png", 56, 51);
-		putProperties(ObjectName.BASIC_WEAPON, basicWeapon,
-				new Vector2d(15, 15));
+		putProperties(ObjectName.BASIC_WEAPON, basicWeapon, new Vector2d(15, 15));
 
 		final TextureRegion spinningSpreadWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "spin.png", 87, 51);
@@ -183,8 +182,18 @@ public class SpriteFactory {
 	public GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
 		ObjectName objName = entity.getObjectName();
-		return new GameObjectSprite(entity, vbom, textureMap.get(objName),
-				offsetMap.get(objName));
+		ITextureRegion texture = textureMap.get(objName);
+		Vector2d offset = offsetMap.get(objName);
+		if (texture == null)
+		{
+			throw new IllegalArgumentException("No texture is associated with that kind of object");
+		}
+		if (offset == null)
+		{
+			offset = new Vector2d();
+		}
+		
+		return new GameObjectSprite(entity, vbom, texture, offset);
 	}
 
 	/**
@@ -202,7 +211,12 @@ public class SpriteFactory {
 	 * @return An texture of an item that you want to show in the item bar.
 	 */
 	public ITextureRegion getItemTexture(ObjectName item) {
-		return itemTextures.get(item);
+		ITextureRegion output = itemTextures.get(item);
+		if (output == null)
+		{
+			throw new IllegalArgumentException("No texture is associated with that kind of object");
+		}
+		return output;
 	}
 
 	/**
