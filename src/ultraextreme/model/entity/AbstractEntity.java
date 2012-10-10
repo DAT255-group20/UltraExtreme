@@ -111,8 +111,7 @@ public abstract class AbstractEntity implements IEntity {
 	public Position getPositionClone() {
 		return new Position(this.position);
 	}
-
-
+	
 	/**
 	 * Returns a deep clone position at the center of this entity.
 	 * 

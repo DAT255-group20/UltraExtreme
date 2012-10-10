@@ -44,6 +44,7 @@ public interface IEntity {
 	/**
 	 * @return The position of this entity.
 	 */
+	
 	Position getPositionClone();
 
 	/**
