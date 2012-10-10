@@ -46,22 +46,13 @@ public class BasicBulletTest extends AbstractBulletTest {
 				PlayerID.PLAYER1, new Rotation(0));
 				
 		bullet.doMovement(1);
-<<<<<<< HEAD
-		assertEquals(bullet.getPositionClone().getY(), 20 + 1 * speed);
+		assertEquals((float)bullet.getPositionClone().getY(), 20 + 1 * speed);
 
 		bullet.doMovement(1);
-		assertEquals(bullet.getPositionClone().getY(), 20 + 2 * speed);
+		assertEquals((float)bullet.getPositionClone().getY(), 20 + 2 * speed);
 
 		bullet.doMovement(10);
-		assertEquals(bullet.getPositionClone().getY(), 20 + 12 * speed);
-=======
-		assertEquals((float)bullet.getPosition().getY(), 20 + 1*speed );
+		assertEquals((float)bullet.getPositionClone().getY(), 20 + 12 * speed);
 
-		bullet.doMovement(1);
-		assertEquals((float)bullet.getPosition().getY(), 20 + 2*speed );
-
-		bullet.doMovement(10);
-		assertEquals((float)bullet.getPosition().getY(), 20 + 12*speed );
->>>>>>> develop
 	}
 }
