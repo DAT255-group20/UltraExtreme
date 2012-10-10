@@ -26,13 +26,12 @@ public class HitAndRunEnemyTest extends TestCase {
 	}
 
 	public void testGoTowardPosition() {
-		enemy.goTowardPosition(firePoint, (float) 10.0);
+		enemy.goTowardPosition(firePoint, (float) 0.01);
 		assertTrue(enemy.getShip().getPositionClone().getX() > 5.0);
 		assertTrue(enemy.getShip().getPositionClone().getY() > 10.0);
 		
-		enemy.goTowardPosition(firePoint, 1000);
-		System.out.println(enemy.getShip().getPositionClone().getX());
-		assertEquals(endPoint, enemy.getShip().getPositionClone());
+		enemy.goTowardPosition(firePoint, (float)1000.0);
+		assertEquals(firePoint, enemy.getShip().getPositionClone());
 		
 		Position negativePosition = new Position(-5,-5);
 		enemy.goTowardPosition(negativePosition, (float) 0.005);
@@ -45,14 +44,14 @@ public class HitAndRunEnemyTest extends TestCase {
 
 	public void testUpdate() {
 		boolean stopped = false;
-		int secondsStopped = 0;
+		float secondsStopped = 0;
 		boolean supposedToStartMoving = false;
 		boolean startedMovingAgain = false;
 		boolean shot = false;
-		for(int i = 0; i < 10000; i++) {
-			enemy.update((i*0.1f));
-			if(enemy.getShip().getPositionClone().equals(new Position(15,15))) {
-				secondsStopped+=0.1;
+		for(int i = 0; i < 100000; i++) {
+			enemy.update((float) (1));
+			if(enemy.getShip().getPositionClone().equals(new Position(15, 15))) {
+				secondsStopped+= 1;
 			}
 			if (secondsStopped == enemy.getWaitingTime() && stopped==false) {
 				stopped = true;

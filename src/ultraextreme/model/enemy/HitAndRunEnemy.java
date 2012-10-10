@@ -102,7 +102,6 @@ public class HitAndRunEnemy extends AbstractEnemy {
 
 		//saves the old position
 		Position prePos = new Position(position.getX(), position.getY());
-		this.getShip().setPosition(position);
 
 		//moves the position
 		position.setX(position.getX() + directionVector.x*speed*timePassed);
@@ -115,9 +114,6 @@ public class HitAndRunEnemy extends AbstractEnemy {
 			position.setY(goalPoint.getY());
 		}
 		this.getShip().setPosition(position);
-
-		System.out.println(this.getShip().getPositionClone().getX());
-		System.out.println(this.getShip().getPositionClone().getY());
 	}
 	
 	private boolean wentPastPoint(double prePos, double newPos, double goalPos) {
