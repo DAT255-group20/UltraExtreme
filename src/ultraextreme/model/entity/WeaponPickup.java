@@ -33,9 +33,7 @@ import ultraextreme.model.util.Rotation;
  * 
  */
 public class WeaponPickup extends AbstractEntity {
-	private static final int width = 10;
-
-	private static final double speedMod = Constants.getPickupSpeedModifier();
+	private static final int width = 20;
 
 	public WeaponPickup(double x, double y, ObjectName weaponType) {
 		super(x, y, width, width, new Rotation(0), weaponType);
@@ -43,10 +41,5 @@ public class WeaponPickup extends AbstractEntity {
 
 	public WeaponPickup(Position position, ObjectName name) {
 		super(position, width, width, new Rotation(0), name);
-	}
-
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
 	}
 }

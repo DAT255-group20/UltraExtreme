@@ -33,8 +33,8 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicWeapon extends AbstractWeapon {
 
-	private static final int BULLET_WIDTH = 20;
-	private static final int BULLET_HEIGHT = 40;
+	private static final int BULLET_WIDTH = 5;
+	private static final int BULLET_HEIGHT = 5;
 	private static float initCooldown = 0.5f;
 	private float cooldown;
 

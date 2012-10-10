@@ -38,7 +38,8 @@ import ultraextreme.model.util.Rotation;
 public class BasicHomingBullet extends AbstractHomingBullet {
 
 	private final Vector2d normDirectionVector;
-
+	
+	private static final float speed = 300f;
 	/**
 	 * Distance left before stopping to track the enemy.
 	 */
@@ -77,9 +78,9 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 			updateDirection();
 		}
 		final double xMovement = normDirectionVector.x * timePassed
-				* this.getSpeedMod();
+				* speed;
 		final double yMovement = normDirectionVector.y * timePassed
-				* this.getSpeedMod();
+				* speed;
 		bulletFuel = bulletFuel
 				- Math.sqrt(xMovement * xMovement + yMovement * yMovement);
 

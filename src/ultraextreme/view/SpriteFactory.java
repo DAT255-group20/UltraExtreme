@@ -23,6 +23,8 @@ package ultraextreme.view;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.opengl.texture.TextureManager;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
@@ -45,10 +47,14 @@ import ultraextreme.model.util.ObjectName;
  */
 public class SpriteFactory {
 
-	private Map<ObjectName, ITextureRegion> textureMap;
+	private Map<ObjectName, ITextureRegion> textureMap = new HashMap<ObjectName, ITextureRegion>();
 
-	// TODO not yet implemented offsets
-	private Map<ObjectName, Integer> offsetMap;
+	private Map<ObjectName, Vector2d> offsetMap = new HashMap<ObjectName, Vector2d>();
+
+	/**
+	 * The items' textures.
+	 */
+	private Map<ObjectName, ITextureRegion> itemTextures = new HashMap<ObjectName, ITextureRegion>();
 
 	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
 	// variable.
@@ -61,11 +67,6 @@ public class SpriteFactory {
 	 * The item bar's texture.
 	 */
 	private ITextureRegion itemBarTexture;
-
-	/**
-	 * The items' textures.
-	 */
-	private Map<ObjectName, ITextureRegion> itemTextures;
 
 	private static SpriteFactory instance;
 
@@ -88,36 +89,47 @@ public class SpriteFactory {
 		// init enemies bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"ship_placeholder.png", 0, 0);
-		textureMap.put(ObjectName.PLAYERSHIP, playerShip);
+						"ship_blue_42px.png", 0, 0);
+		putProperties(ObjectName.PLAYERSHIP, playerShip, new Vector2d(16.5, 13));
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"bullet_placeholder.png", 40, 0);
-		textureMap.put(ObjectName.BASIC_BULLET, playerBullet);
+						"laserGreen.png", 33, 0);
+		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5, 16.5));
 
-		final TextureRegion BasicEnemy = BitmapTextureAtlasTextureRegionFactory
+		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity,
-						"enemy_placeholder.png", 0, 40);
-		textureMap.put(ObjectName.BASIC_ENEMYSHIP, BasicEnemy);
+						"evil_ship.png", 0, 43);
+		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27, 40));
 
 		// init pickupables
-		textureMap.put(ObjectName.BASIC_WEAPON, BasicEnemy);
-		textureMap.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip);
+		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity,
+						"cannon.png", 56, 51);
+		putProperties(ObjectName.BASIC_WEAPON, basicWeapon, new Vector2d(15, 15));
+		
+		final TextureRegion spinningSpreadWeapon = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity,
+						"spin.png", 87, 51);
+		putProperties(ObjectName.SPINNING_SPREAD_WEAPON, spinningSpreadWeapon, new Vector2d(15, 15));
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar.png", 80, 0);
 
 		// Init the item textures for items in the itembar
-		itemTextures = new HashMap<ObjectName, ITextureRegion>();
-		itemTextures.put(ObjectName.BASIC_WEAPON, BasicEnemy); // Test only
-		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test
-																			// only
+		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
+		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, spinningSpreadWeapon); // Test only
 
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
+	}
+
+	private void putProperties(ObjectName objectName,
+			TextureRegion texture, Vector2d textureOffset) {
+		textureMap.put(objectName, texture);
+		offsetMap.put(objectName, textureOffset);
 	}
 
 	public static void initialize(SimpleBaseGameActivity activity) {
@@ -145,9 +157,8 @@ public class SpriteFactory {
 	 */
 	public GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
-		textureMap.get(entity.getObjectName());
-		return new GameObjectSprite(entity, vbom, textureMap.get(entity
-				.getObjectName()));
+		ObjectName objName = entity.getObjectName();
+		return new GameObjectSprite(entity, vbom, textureMap.get(objName), offsetMap.get(objName));
 	}
 
 	/**

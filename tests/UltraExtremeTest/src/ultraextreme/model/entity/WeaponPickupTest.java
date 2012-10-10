@@ -37,11 +37,6 @@ public class WeaponPickupTest extends TestCase {
 	}
 
 	@Test
-	public void testGetSpeedMod() {
-		assertEquals(pickup.getSpeedMod(), Constants.getPickupSpeedModifier());
-	}
-
-	@Test
 	public void testWeaponPickupDoubleDoubleObjectName() {
 		assertEquals(pickup.getPositionClone(), new Position(0, 0));
 		assertEquals(pickup.getHeight(), pickup.getWidth());

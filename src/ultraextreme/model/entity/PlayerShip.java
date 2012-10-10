@@ -43,7 +43,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	private boolean justHit;
 
 	/**
-	 * Wether or not the ship is destroyed.
+	 * @return Whether or not the ship is destroyed.
 	 */
 	private boolean destroyed;
 
@@ -53,7 +53,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	}
 
 	public PlayerShip(final double x, double y) {
-		this(x, y, 50, 50);
+		this(x, y, 10, 10);
 	}
 
 	public PlayerShip() {
@@ -107,11 +107,6 @@ public class PlayerShip extends AbstractDestroyableEntity {
 
 	public void setDestroyed() {
 		destroyed = true;
-	}
-
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
 	}
 
 	/**
