@@ -193,37 +193,29 @@ public class BulletManagerTest extends TestCase {
 			bulletManager.addBullet(bullet);
 		}
 
-		assertTrue(listsAreEqual(bulletManager.getBullets(), allBullets));
-		// The lists do not equal even though they contain the same elements
-		//assertEquals(allBullets, bulletManager.getBullets());
+		assertTrue("No bullets have been cleared", bulletManager.getBullets()
+				.containsAll(allBullets));
+
+		// Clear the enemies bullets from the manager
 		bulletManager.clearAllBulletsFrom(PlayerID.ENEMY);
-		assertEquals(playerBullets, bulletManager.getBullets());
-		assertTrue(listsAreEqual(enemyBullets, bulletCollector.getBullets().get(Constants.EVENT_REMOVED_ENTITY)));
-		//assertEquals(enemyBullets, bulletCollector.getBullets().get(Constants.EVENT_REMOVED_ENTITY));
 
-		bulletManager.clearAllBulletsFrom(PlayerID.PLAYER1);
-		assertEquals(0, bulletManager.getBullets().size());
-		assertEquals(allBullets,
+		assertTrue("Only player bullets left in the manager",
+				playerBullets.containsAll(bulletManager.getBullets()));
+		assertTrue(
+				"Enemy bullets are in the collector",
 				bulletCollector.getBullets()
-						.get(Constants.EVENT_REMOVED_ENTITY));
-	}
+						.get(Constants.EVENT_REMOVED_ENTITY)
+						.containsAll(enemyBullets));
 
-	private <E, T> boolean listsAreEqual(List<E> list1, List<T> list2) {
-		for (E e : list1)
-		{
-			if (!list2.contains(e))
-			{
-				return false;
-			}
-		}
-		for (T t : list2)
-		{
-			if (!list1.contains(t))
-			{
-				return false;
-			}
-		}
-		return true;
+		// Clear the player bullets from the manager
+		bulletManager.clearAllBulletsFrom(PlayerID.PLAYER1);
+		assertEquals("No bullets left in the manager", 0, bulletManager
+				.getBullets().size());
+		assertTrue(
+				"All removed entity events have been sent",
+				bulletCollector.getBullets()
+						.get(Constants.EVENT_REMOVED_ENTITY)
+						.containsAll(allBullets));
 	}
 
 	/**

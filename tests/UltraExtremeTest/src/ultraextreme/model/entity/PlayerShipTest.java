@@ -68,7 +68,6 @@ public class PlayerShipTest extends AbstractEntityTest {
 		assertEquals(playerShip.getRotation(), new Rotation(0));
 	}
 
-
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
 			int width, int height, Rotation direction) {

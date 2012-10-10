@@ -22,7 +22,6 @@ package ultraextreme.model.entity;
 
 import org.junit.Test;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Rotation;
 
