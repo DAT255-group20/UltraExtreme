@@ -55,5 +55,6 @@ public class BasicBulletTest extends AbstractBulletTest {
 		bullet.doMovement(10);
 		assertEquals((float) bullet.getPositionClone().getY(), 20 + 12 * speed);
 
+
 	}
 }
