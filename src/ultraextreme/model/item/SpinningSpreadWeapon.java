@@ -46,6 +46,7 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 	public SpinningSpreadWeapon(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.SPINNING_WEAPON);
 		cooldown = initCooldown;
+		angleStep = Math.PI / 12;
 		currentAngle = 0;
 	}
 
