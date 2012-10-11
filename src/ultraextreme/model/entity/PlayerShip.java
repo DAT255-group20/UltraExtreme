@@ -53,7 +53,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	}
 
 	public PlayerShip(final double x, double y) {
-		this(x, y, 10, 10);
+		this(x, y, 20, 20);
 	}
 
 	public PlayerShip() {
@@ -71,7 +71,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	public boolean canMoveX(double deltaX) {
 		final Dimension dimension = Constants.getLevelDimension();
-		final Position position = this.getCenteredPosition();
+		final Position position = this.getCenteredPositionClone();
 		final double newX = deltaX + position.getX();
 		return newX + getWidth() / 2 < dimension.getX()
 				&& newX - getWidth() / 2 > 0;
@@ -88,7 +88,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	public boolean canMoveY(double deltaY) {
 		final Dimension dimension = Constants.getLevelDimension();
-		final Position position = this.getCenteredPosition();
+		final Position position = this.getCenteredPositionClone();
 		double newY = deltaY + position.getY();
 		return newY + getHeight() / 2 < dimension.getY()
 				&& newY - getHeight() / 2 > 0;
@@ -107,11 +107,6 @@ public class PlayerShip extends AbstractDestroyableEntity {
 
 	public void setDestroyed() {
 		destroyed = true;
-	}
-
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
 	}
 
 	/**

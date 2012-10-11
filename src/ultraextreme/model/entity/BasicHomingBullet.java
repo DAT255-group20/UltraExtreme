@@ -39,6 +39,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	private final Vector2d normDirectionVector;
 
+	private static final float speed = 300f;
 	/**
 	 * Distance left before stopping to track the enemy.
 	 */
@@ -63,8 +64,8 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 	}
 
 	private void updateDirection() {
-		final Position targetPosition = target.getPosition();
-		final Position thisPosition = this.getPosition();
+		final Position targetPosition = target.getPositionClone();
+		final Position thisPosition = this.getPositionClone();
 		normDirectionVector.normalize(new Vector2d(targetPosition.getX()
 				- thisPosition.getX(), targetPosition.getY()
 				- thisPosition.getY()));
@@ -76,10 +77,8 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 				|| bulletFuel < 0) {
 			updateDirection();
 		}
-		final double xMovement = normDirectionVector.x * timePassed
-				* this.getSpeedMod();
-		final double yMovement = normDirectionVector.y * timePassed
-				* this.getSpeedMod();
+		final double xMovement = normDirectionVector.x * timePassed * speed;
+		final double yMovement = normDirectionVector.y * timePassed * speed;
 		bulletFuel = bulletFuel
 				- Math.sqrt(xMovement * xMovement + yMovement * yMovement);
 

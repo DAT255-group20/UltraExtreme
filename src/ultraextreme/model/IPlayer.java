@@ -65,12 +65,12 @@ public interface IPlayer extends PropertyChangeListener {
 	 * @return The number of lives the player has left.
 	 */
 	public int getLives();
-	
+
 	/**
 	 * @return True if the player is currently invincible, false otherwise.
 	 */
 	public boolean isInvincible();
-	
+
 	/**
 	 * @return The total time which the ship will be invincible.
 	 */

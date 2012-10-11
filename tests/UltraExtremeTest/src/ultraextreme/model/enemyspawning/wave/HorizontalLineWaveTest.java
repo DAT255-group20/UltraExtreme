@@ -103,14 +103,14 @@ public class HorizontalLineWaveTest extends TestCase {
 		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
 				.getShip();
 		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
-		assertEquals(enemyShip.getPosition().getX(), 0.0);
-		assertEquals(enemyShip.getPosition().getY(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
 
 		initWave(1, 1, 2, 100, 200);
 		wave.update(0);
 		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
 		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
-		assertEquals(enemyShip.getPosition().getX(), 100.0);
-		assertEquals(enemyShip.getPosition().getY(), 200.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
 	}
 }

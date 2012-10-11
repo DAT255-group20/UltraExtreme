@@ -101,7 +101,7 @@ public class Player implements IPlayer {
 		setShipToSpawn();
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
-				Math.PI), 5);
+				Math.PI), 10);
 		this.itemBar.addItem(new BasicWeapon(bulletManager));
 		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
 		this.itemBar.addItem(new BasicSpreadWeapon(bulletManager));
@@ -121,7 +121,7 @@ public class Player implements IPlayer {
 		double newX = 0;
 		double newY = 0;
 		if (ship.justGotHit() && invCountDown <= 0) {
-			itemBar.looseItems();
+			itemBar.loseItems();
 			if (itemBar.getItems().isEmpty()) {
 				lives -= 1;
 				this.notifyListeners();
@@ -148,7 +148,7 @@ public class Player implements IPlayer {
 		}
 		ship.move(newX, newY);
 		if (input.fireWeapons) {
-			itemBar.fireWeapons(ship.getPosition(), timeElapsed);
+			itemBar.fireWeapons(ship.getPositionClone(), timeElapsed);
 		}
 	}
 
@@ -215,12 +215,12 @@ public class Player implements IPlayer {
 	public int getLives() {
 		return lives;
 	}
-	
+
 	@Override
 	public double getInvincibilityTime() {
 		return invTime;
 	}
-	
+
 	@Override
 	public boolean isInvincible() {
 		return invCountDown > 0;

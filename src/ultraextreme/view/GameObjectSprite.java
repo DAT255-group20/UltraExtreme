@@ -40,63 +40,68 @@ import ultraextreme.model.util.Position;
  */
 public class GameObjectSprite extends Sprite {
 
-	// TODO PMD: Possible unsafe assignment to a non-final static field in a
-	// constructor.
 	private static Dimension screenDimension;
 	private static final Dimension MODEL_DIMENSION = Constants
 			.getLevelDimension();
-	
+
+	public static void setScreenDimension(final Dimension dimension) {
+		screenDimension = dimension;
+	}
+
 	/**
 	 * Reference to an entity in the model.
 	 */
 	private final IEntity entity;
 
 	private boolean isHitBlinked;
-	
-	private boolean isInvincibleBlinked;
 
+	private boolean isInvincibleBlinked;
 	private Vector2d directionVector;
+
 	private final Vector2d imageOffset;
 
 	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final ITextureRegion texture, Vector2d imageOffset) {
 
-		// Change the width and height to the entity's width and height to squeeze the picture
-		super((float) (entity.getPosition().getX()-imageOffset.x), (float) (entity.getPosition()
-				.getY()-imageOffset.y), texture.getWidth(), texture.getHeight(), texture,
-				vertexBufferObjectManager);
+		// Change the width and height to the entity's width and height to
+		// squeeze the picture
+		super((float) (entity.getPositionClone().getX() - imageOffset.x),
+				(float) (entity.getPositionClone().getY() - imageOffset.y), texture
+						.getWidth()
+						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
+				texture.getHeight()
+						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
+				texture, vertexBufferObjectManager);
+
 		this.entity = entity;
 
 		this.imageOffset = imageOffset;
-		
+
 		this.isHitBlinked = false;
 		this.isInvincibleBlinked = false;
 
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
+		Vector2d scalingQuotient = screenDimension.getQuotient(MODEL_DIMENSION);
+		this.setScale((float) scalingQuotient.x, (float) scalingQuotient.y);
 	}
 
 	/**
-	 * Update the bullet sprite with data from the model.
+	 * returns the entity this sprite is representing
 	 */
-	public void update() {
-		final Position newPosition = screenDimension.scalePosition(
-				MODEL_DIMENSION, entity.getPosition());
-		this.setX((float) (newPosition.getX()-imageOffset.x));
-		this.setY((float) (newPosition.getY()-imageOffset.y));
-		if (entity instanceof IBullet) {
-			final Vector2d newVector = entity.getNormalizedDirection();
-			if (!(newVector.x == 0 && newVector.y == 0)) {
-				directionVector = newVector;
-			}
-			float newAngle = MathUtils.radToDeg((float) (Math
-					.atan(directionVector.y / directionVector.x)));
-			if (directionVector.x < 0) {
-				newAngle = newAngle + 180f;
-			}
-			this.setRotation(newAngle + 90f);
+	public IEntity getEntity() {
+		return entity;
+	}
+
+	public void invincibilityBlink() {
+		if (!isInvincibleBlinked) {
+			this.setColor(0f, 0f, 1f);
+			isInvincibleBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isInvincibleBlinked = false;
 		}
 	}
 
@@ -112,25 +117,27 @@ public class GameObjectSprite extends Sprite {
 			isHitBlinked = false;
 		}
 	}
-	
-	public void invincibilityBlink() {
-		if (!isInvincibleBlinked) {
-			this.setColor(0f, 0f, 1f);
-			isInvincibleBlinked = true;
-		} else {
-			this.setColor(1f, 1f, 1f);
-			isInvincibleBlinked = false;
-		}
-	}
 
 	/**
-	 * returns the entity this sprite is representing
+	 * Update the bullet sprite with data from the model.
 	 */
-	public IEntity getEntity() {
-		return entity;
-	}
+	public void update() {
+		final Position newPosition = screenDimension.scalePosition(
+				MODEL_DIMENSION, entity.getPositionClone());
+		this.setX((float) (newPosition.getX() - imageOffset.x));
+		this.setY((float) (newPosition.getY() - imageOffset.y));
 
-	public static void setScreenDimension(final Dimension dimension) {
-		screenDimension = dimension;
+		if (entity instanceof IBullet) {
+			final Vector2d newVector = entity.getNormalizedDirection();
+			if (!(newVector.x == 0 && newVector.y == 0)) {
+				directionVector = newVector;
+			}
+			float newAngle = MathUtils.radToDeg((float) (Math
+					.atan(directionVector.y / directionVector.x)));
+			if (directionVector.x < 0) {
+				newAngle = newAngle + 180f;
+			}
+			this.setRotation(newAngle + 90f);
+		}
 	}
 }
