@@ -47,6 +47,10 @@ public class SpreadWeapon extends AbstractWeapon {
 			}
 		}
 	}
+	
+	public static float getInitCooldown() {
+		return initCooldown;
+	}
 
 	@Override
 	public AbstractWeapon shallowClone() {

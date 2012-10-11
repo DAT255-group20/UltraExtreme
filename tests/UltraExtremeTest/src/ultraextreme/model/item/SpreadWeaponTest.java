@@ -39,7 +39,7 @@ public class SpreadWeaponTest extends TestCase {
 	public void testFire() {
 		float epsilon = 0.001f;
 		assertTrue(bulletManager.getBullets().size() == 0);
-		float cooldown = BasicWeapon.getInitCooldown();
+		float cooldown = SpreadWeapon.getInitCooldown();
 
 		spreadWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
 				cooldown * (1 + epsilon));
@@ -58,7 +58,7 @@ public class SpreadWeaponTest extends TestCase {
 	 * Test so the properties of the bullet that the weapon fires are correct.
 	 */
 	public void testBulletProperties() {
-		float cooldown = BasicWeapon.getInitCooldown();
+		float cooldown = SpreadWeapon.getInitCooldown();
 		spreadWeapon.fire(new Position(10, 5), PlayerID.PLAYER1,
 				new Rotation(0), cooldown + cooldown / 1000);
 		IBullet bullet = bulletManager.getBullets().get(0);
