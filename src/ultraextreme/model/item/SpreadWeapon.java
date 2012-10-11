@@ -9,7 +9,7 @@ import ultraextreme.model.util.Rotation;
 /**
  * @author Viktor Anderling
  */
-public class BasicSpreadWeapon extends AbstractWeapon {
+public class SpreadWeapon extends AbstractWeapon {
 
 	private static final int BULLET_WIDTH = 20;
 	private static final int BULLET_HEIGHT = 40;
@@ -18,7 +18,7 @@ public class BasicSpreadWeapon extends AbstractWeapon {
 	private static final float initCooldown = 0.5f;
 	private float cooldown;
 	
-	public BasicSpreadWeapon(BulletManager bulletManager) {
+	public SpreadWeapon(BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BASIC_SPREAD_WEAPON);
 		cooldown = initCooldown;
 	}

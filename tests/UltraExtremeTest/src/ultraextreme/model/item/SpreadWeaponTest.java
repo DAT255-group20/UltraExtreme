@@ -22,7 +22,7 @@ import ultraextreme.model.util.Rotation;
 public class SpreadWeaponTest extends TestCase {
 
 	BulletManager bulletManager;
-	BasicSpreadWeapon spreadWeapon;
+	SpreadWeapon spreadWeapon;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -32,7 +32,7 @@ public class SpreadWeaponTest extends TestCase {
 
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
-		spreadWeapon = new BasicSpreadWeapon(bulletManager);
+		spreadWeapon = new SpreadWeapon(bulletManager);
 	}
 
 	@Test
