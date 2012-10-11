@@ -1,14 +1,28 @@
 package ultraextreme.model.item;
 
 import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class SpreadWeaponTest {
+/**
+ * @author Viktor Anderling
+ */
+public class SpreadWeaponTest extends TestCase {
 
-	@Before
-	public void setUp() throws Exception {
+	BulletManager bulletManager;
+	BasicSpreadWeapon spreadWeapon;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.resetInstanceVariables();
+	}
+
+	private void resetInstanceVariables() {
+		bulletManager = new BulletManager();
+		spreadWeapon = new BasicSpreadWeapon(bulletManager);
 	}
 
 	@Test

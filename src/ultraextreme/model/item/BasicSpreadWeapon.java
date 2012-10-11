@@ -6,6 +6,9 @@ import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
+/**
+ * @author Viktor Anderling
+ */
 public class BasicSpreadWeapon extends AbstractWeapon {
 
 	private static final int BULLET_WIDTH = 20;

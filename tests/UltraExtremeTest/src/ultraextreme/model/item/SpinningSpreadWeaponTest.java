@@ -21,14 +21,27 @@
 package ultraextreme.model.item;
 
 import static org.junit.Assert.fail;
+import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class SpinningSpreadWeaponTest {
+/**
+ * @author Viktor Anderling
+ */
+public class SpinningSpreadWeaponTest extends TestCase {
+	BulletManager bulletManager;
+	SpinningSpreadWeapon spinningWeapon;
 
-	@Before
-	public void setUp() throws Exception {
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.resetInstanceVariables();
+	}
+
+	private void resetInstanceVariables() {
+		bulletManager = new BulletManager();
+		spinningWeapon = new SpinningSpreadWeapon(bulletManager);
 	}
 
 	@Test
