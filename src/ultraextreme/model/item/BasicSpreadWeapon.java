@@ -12,7 +12,7 @@ public class BasicSpreadWeapon extends AbstractWeapon {
 	private static final int BULLET_HEIGHT = 40;
 	private static final double angleDelta = Math.PI/8;
 	private static final int numberOfShots = 5;
-	private static final float initCooldown = 1/6f;
+	private static final float initCooldown = 0.5f;
 	private float cooldown;
 	
 	public BasicSpreadWeapon(BulletManager bulletManager) {
@@ -36,11 +36,11 @@ public class BasicSpreadWeapon extends AbstractWeapon {
 			for(int i = 1; i <= shotToFire / 2; i++) {
 				this.getBulletManager().addBullet(
 						new BasicBullet(shipPosition.getX(), shipPosition.getY(), 
-								BULLET_WIDTH, BULLET_HEIGHT, playerId, new Rotation(rotation.getAngle() + angleDelta)));
+								BULLET_WIDTH, BULLET_HEIGHT, playerId, new Rotation(rotation.getAngle() + angleDelta * i)));
 				
 				this.getBulletManager().addBullet(
 						new BasicBullet(shipPosition.getX(), shipPosition.getY(), 
-								BULLET_WIDTH, BULLET_HEIGHT, playerId, new Rotation(rotation.getAngle() - angleDelta)));
+								BULLET_WIDTH, BULLET_HEIGHT, playerId, new Rotation(rotation.getAngle() - angleDelta * i)));
 			}
 		}
 	}
