@@ -27,6 +27,8 @@ import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.util.Constants;
+import android.util.Log;
 
 /**
  * This wave list return a specified number of random enemy waves.
@@ -45,6 +47,8 @@ public class RandomWaveList extends AbstractWaveList {
 	private int counter;
 
 	private AbstractRandomGenerator randomGenerator;
+	
+	private int screenWidth;
 
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
@@ -82,6 +86,7 @@ public class RandomWaveList extends AbstractWaveList {
 			final BulletManager bulletManager,
 			final AbstractRandomGenerator randomGenerator) {
 		super(numberOfWaves);
+		this.screenWidth = (int) Constants.getLevelDimension().getX();
 		this.randomGenerator = randomGenerator;
 		this.counter = 0;
 		this.bulletManager = bulletManager;
@@ -93,19 +98,22 @@ public class RandomWaveList extends AbstractWaveList {
 	 * Update currentWave with a new random wave.
 	 */
 	private void generateNewWave() {
-		// TODO: This needs some more work.
 		counter %= 3;
 		switch (counter) {
-		// TODO PMD: Switch statements should have a default label
 		case 0:
-			currentWave = new VWave(0, 200, -100, bulletManager);
+			float x;
+			x = (randomGenerator.nextFloat() * (screenWidth - 740)) + 370;
+			Log.e("kalle", "" + x);
+			currentWave = new VWave(0, (int)x, -100, bulletManager);
 			break;
 		case 1:
-			currentWave = new HorizontalLineWave(5, 3, Math.PI / 8, 400, -100,
+			currentWave = new HorizontalLineWave(1, 3, Math.PI / 8, 400, -100,
 					bulletManager);
 			break;
 		case 2:
 			currentWave = new VerticalLineWave(2, 0, 200, -100, bulletManager);
+			break;
+		default:
 			break;
 		}
 		counter++;
