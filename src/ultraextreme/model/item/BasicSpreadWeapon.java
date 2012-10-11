@@ -14,7 +14,7 @@ public class BasicSpreadWeapon extends AbstractWeapon {
 	private static final int BULLET_WIDTH = 20;
 	private static final int BULLET_HEIGHT = 40;
 	private static final double angleDelta = Math.PI/8;
-	private static final int numberOfShots = 5;
+	private static final int numberOfShots = 4;
 	private static final float initCooldown = 0.5f;
 	private float cooldown;
 	
