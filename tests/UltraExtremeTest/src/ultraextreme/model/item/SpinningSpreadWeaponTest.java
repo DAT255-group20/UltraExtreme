@@ -20,11 +20,18 @@
 
 package ultraextreme.model.item;
 
-import static org.junit.Assert.fail;
-import junit.framework.TestCase;
 
-import org.junit.Before;
+import java.util.List;
+
+import junit.framework.TestCase;
 import org.junit.Test;
+
+import ultraextreme.model.entity.AbstractBullet;
+import ultraextreme.model.entity.BasicBullet;
+import ultraextreme.model.entity.IBullet;
+import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * @author Viktor Anderling
@@ -46,7 +53,50 @@ public class SpinningSpreadWeaponTest extends TestCase {
 
 	@Test
 	public void testFire() {
-		fail("Not yet implemented");
+		float epsilon = 0.001f;
+		assertTrue(bulletManager.getBullets().size() == 0);
+		float cooldown = SpinningSpreadWeapon.getInitCooldown();
+
+		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
+				cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().size() == 1);
+
+		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
+				cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().size() == 2);
+
+		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
+				cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().size() == 3);
+	}
+	
+	/**
+	 * Test so the properties of the bullet that the weapon fires are correct.
+	 */
+	public void testBulletProperties() {
+		float cooldown = SpinningSpreadWeapon.getInitCooldown();
+		spinningWeapon.fire(new Position(10, 5), PlayerID.PLAYER1,
+				new Rotation(0), cooldown + cooldown / 1000);
+		IBullet bullet = bulletManager.getBullets().get(0);
+		assertTrue(bullet instanceof BasicBullet);
+		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
+		
+		List<AbstractBullet> bulletList = bulletManager.getBullets();
+		
+		// Make sure the bullets move a bit.
+		for(AbstractBullet b : bulletList) {
+			b.doMovement(0.1f);
+		}
+		
+		// Check so that the bullets are not along the same line.
+		for(AbstractBullet b1 : bulletList) {
+			for(AbstractBullet b2 : bulletList) {
+				if(b1 != b2) {
+					assertFalse(b1.getPositionClone().getX() 
+							== b2.getPositionClone().getX());
+				}
+			}
+		}
 	}
 
 	@Test
