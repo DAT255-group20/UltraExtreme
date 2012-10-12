@@ -21,7 +21,6 @@
 package ultraextreme.model.enemyspawning.wave;
 
 import ultraextreme.model.enemy.BasicEnemy;
-import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -62,13 +61,9 @@ public class HorizontalLineWave extends AbstractWave {
 	 *            X position where the enemies should spawn.
 	 * @param y
 	 *            Y position where the enemies should spawn.
-	 * @param bulletManager
-	 *            Reference to a bullet manager so the enemies can be created.
 	 */
 	public HorizontalLineWave(final int enemiesInLines, final int maxLines,
-			final double rotation, final int x, final int y,
-			final BulletManager bulletManager) {
-		super(bulletManager);
+			final double rotation, final int x, final int y) {
 		timer = 2;
 		lineCounter = 0;
 		this.enemiesInLines = enemiesInLines;
@@ -100,7 +95,7 @@ public class HorizontalLineWave extends AbstractWave {
 		for (int i = 0; i < enemiesInLines; i++) {
 			fireNewEnemySpawned(new BasicEnemy(
 					spawningPosition.getX() + i * 75, spawningPosition.getY(),
-					rotation, this.bulletManager));
+					rotation));
 		}
 	}
 }
