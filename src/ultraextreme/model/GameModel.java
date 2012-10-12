@@ -68,7 +68,7 @@ public class GameModel implements IUltraExtremeModel {
 		pickupManager = new PickupManager();
 		WeaponFactory.initialize(bulletManager);
 		weaponFactory = WeaponFactory.getInstance();
-		enemySpawner = new EnemySpawner(new RandomWaveList(1000, bulletManager));
+		enemySpawner = new EnemySpawner(new RandomWaveList(1000));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 		pcs = new PropertyChangeSupport(this);

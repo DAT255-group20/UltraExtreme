@@ -26,23 +26,14 @@ import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
-import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Constants;
 import android.util.Log;
 
-/**
- * This wave list return a specified number of random enemy waves.
- * 
- * @author Daniel Jonsson
- * 
- */
 public class RandomWaveList extends AbstractWaveList {
 
 	private AbstractWave currentWave;
 
 	private float currentSpawningTime;
-
-	private BulletManager bulletManager;
 
 	private int counter;
 
@@ -55,13 +46,9 @@ public class RandomWaveList extends AbstractWaveList {
 	 * 
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
-	 * @param bulletManager
-	 *            Reference to a BulletManager that the enemies will add their
-	 *            bullets to.
 	 */
-	public RandomWaveList(final int numberOfWaves,
-			final BulletManager bulletManager) {
-		this(numberOfWaves, bulletManager, new AbstractRandomGenerator() {
+	public RandomWaveList(final int numberOfWaves) {
+		this(numberOfWaves, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
 				final Random random = new Random();
@@ -75,21 +62,16 @@ public class RandomWaveList extends AbstractWaveList {
 	 * 
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
-	 * @param bulletManager
-	 *            Reference to a BulletManager that the enemies will add their
-	 *            bullets to.
 	 * @param randomGenerator
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
 	 */
 	public RandomWaveList(final int numberOfWaves,
-			final BulletManager bulletManager,
 			final AbstractRandomGenerator randomGenerator) {
 		super(numberOfWaves);
 		this.screenWidth = (int) Constants.getLevelDimension().getX();
 		this.randomGenerator = randomGenerator;
 		this.counter = 0;
-		this.bulletManager = bulletManager;
 		this.generateNewWave();
 		this.currentSpawningTime = 0;
 	}
@@ -104,14 +86,13 @@ public class RandomWaveList extends AbstractWaveList {
 			float x;
 			x = (randomGenerator.nextFloat() * (screenWidth - 740)) + 370;
 			Log.e("kalle", "" + x);
-			currentWave = new VWave(0, (int)x, -100, bulletManager);
+			currentWave = new VWave(0, (int)x, -100);
 			break;
 		case 1:
-			currentWave = new HorizontalLineWave(1, 3, Math.PI / 8, 400, -100,
-					bulletManager);
+			currentWave = new HorizontalLineWave(1, 3, Math.PI / 8, 400, -100);
 			break;
 		case 2:
-			currentWave = new VerticalLineWave(2, 0, 200, -100, bulletManager);
+			currentWave = new VerticalLineWave(2, 0, 200, -100);
 			break;
 		default:
 			break;

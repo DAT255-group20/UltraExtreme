@@ -51,13 +51,13 @@ public class PredefinedWaveList extends AbstractWaveList {
 		super(5);
 		this.waves = new ArrayList<AbstractWave>();
 		this.spawningTimes = new ArrayList<Float>();
-		add(1.0f, new VerticalLineWave(2, 0, 200, -10, bulletManager));
-		add(1.0f, new HorizontalLineWave(5, 3, Math.PI / 8, 400, -10,
-				bulletManager));
-		add(5.0f, new VerticalLineWave(5, Math.PI / 8, 100, -10, bulletManager));
-		add(5.0f, new VerticalLineWave(10, -Math.PI / 2, -100, 400,
-				bulletManager));
-		add(10.0f, new VWave(0, 200, -10, bulletManager));
+//		add(1.0f, new VerticalLineWave(2, 0, 200, -10, bulletManager));
+//		add(1.0f, new HorizontalLineWave(5, 3, Math.PI / 8, 400, -10,
+//				bulletManager));
+//		add(5.0f, new VerticalLineWave(5, Math.PI / 8, 100, -10, bulletManager));
+//		add(5.0f, new VerticalLineWave(10, -Math.PI / 2, -100, 400,
+//				bulletManager));
+//		add(10.0f, new VWave(0, 200, -10, bulletManager));
 	}
 
 	/**
