@@ -24,7 +24,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
+import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
 import ultraextreme.model.item.BulletManager;
@@ -108,7 +108,7 @@ public class RandomWaveListTest extends TestCase implements
 
 		// 5.5
 		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
-		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
@@ -126,7 +126,7 @@ public class RandomWaveListTest extends TestCase implements
 
 		// 5.5 + 7.5 + 9.5 + 11.5 = 34
 		assertEquals(waveList.getCurrentSpawningTime(), 34f);
-		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 	}
 
 }

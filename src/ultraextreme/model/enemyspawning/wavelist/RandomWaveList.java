@@ -20,14 +20,19 @@
 
 package ultraextreme.model.enemyspawning.wavelist;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
+import ultraextreme.model.enemy.AbstractEnemy;
+import ultraextreme.model.enemy.BasicEnemy;
+import ultraextreme.model.enemy.HitAndRunEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
-import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
+import ultraextreme.model.enemyspawning.wave.EnemyProvider;
+import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
-import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
 import ultraextreme.model.util.Constants;
-import android.util.Log;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 public class RandomWaveList extends AbstractWaveList {
 
@@ -35,10 +40,8 @@ public class RandomWaveList extends AbstractWaveList {
 
 	private float currentSpawningTime;
 
-	private int counter;
-
 	private AbstractRandomGenerator randomGenerator;
-	
+
 	private int screenWidth;
 
 	/**
@@ -51,7 +54,10 @@ public class RandomWaveList extends AbstractWaveList {
 		this(numberOfWaves, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
-				final Random random = new Random();
+				// Using SecureRandom instead of Random because Random was
+				// notably not random enough. I'm not sure, but it may differ
+				// between different devices.
+				final Random random = new SecureRandom();
 				return random.nextFloat();
 			}
 		});
@@ -71,7 +77,6 @@ public class RandomWaveList extends AbstractWaveList {
 		super(numberOfWaves);
 		this.screenWidth = (int) Constants.getLevelDimension().getX();
 		this.randomGenerator = randomGenerator;
-		this.counter = 0;
 		this.generateNewWave();
 		this.currentSpawningTime = 0;
 	}
@@ -80,24 +85,60 @@ public class RandomWaveList extends AbstractWaveList {
 	 * Update currentWave with a new random wave.
 	 */
 	private void generateNewWave() {
-		counter %= 3;
-		switch (counter) {
+		// Randomize which wave will spawn
+		int wave = (int) (randomGenerator.nextFloat() * 3);
+		switch (wave) {
+		/**
+		 * VWave spawned with some randomness along the x axis
+		 */
 		case 0:
 			float x;
-			x = (randomGenerator.nextFloat() * (screenWidth - 740)) + 370;
-			Log.e("kalle", "" + x);
-			currentWave = new VWave(0, (int)x, -100);
+			x = (randomGenerator.nextFloat() * (screenWidth - 700)) + 350;
+			currentWave = new VWave(0, (int) x, -100);
 			break;
+		/**
+		 * A horizontal line of 3 HitAndRunEnemies that fly to the middle of the
+		 * screen and then back
+		 */
 		case 1:
-			currentWave = new HorizontalLineWave(1, 3, Math.PI / 8, 400, -100);
+			currentWave = new RectangleWave(3, 1, 0, 300, -100,
+					new EnemyProvider() {
+						// Counter so the enemies will fly to different
+						// positions
+						private int counter = 0;
+
+						@Override
+						public AbstractEnemy getEnemy(
+								Position spawningPosition, Rotation rotation) {
+							Position firePoint = new Position(
+									250 + counter * 200, 800);
+							Position endPoint = new Position(450, -1000);
+							++counter;
+							counter %= 3;
+							return new HitAndRunEnemy(spawningPosition,
+									firePoint, endPoint);
+						}
+					});
 			break;
+		/**
+		 * Vertical line of 3 enemies with a slight randomized rotation and
+		 * position
+		 */
 		case 2:
-			currentWave = new VerticalLineWave(2, 0, 200, -100);
+			float rotation = (randomGenerator.nextFloat() * 6 - 3) / 8;
+			x = 450 + (randomGenerator.nextFloat() * 800 - 400);
+			currentWave = new RectangleWave(1, 3, rotation, (int) x, -100,
+					new EnemyProvider() {
+						@Override
+						public AbstractEnemy getEnemy(
+								Position spawningPosition, Rotation rotation) {
+							return new BasicEnemy(spawningPosition, rotation);
+						}
+					});
 			break;
 		default:
 			break;
 		}
-		counter++;
 	}
 
 	/**
