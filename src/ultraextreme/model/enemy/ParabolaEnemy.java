@@ -4,7 +4,9 @@ import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 /**
  * Class representing an enemy which moves in a parabola-like pattern
  * this is simulated by making the enemy move in an elliptic pattern
@@ -86,5 +88,6 @@ public class ParabolaEnemy extends AbstractEnemy {
 		newPosition.setX(startingPosition.getX()*Math.cos(angle));
 		newPosition.setY(endPosition.getY()*Math.sin(angle));
 		this.getShip().setPosition(newPosition);
+		this.getWeapon().fire(this.getShip().getCenteredPositionClone(), PlayerID.ENEMY, new Rotation(0), timePassed);
 	}
 }
