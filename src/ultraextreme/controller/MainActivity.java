@@ -57,6 +57,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private Camera camera;
 	private Scene currentScene;
 	private AbstractController currentController;
+	private HighscoreDBOpenHelper highscoreDBOpenHelper;
 
 	// TODO PMD: The field name indicates a constant but its modifiers do not
 	// These two should either be final, or not be in capital letters.
@@ -102,6 +103,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected Scene onCreateScene() {
+		highscoreDBOpenHelper = new HighscoreDBOpenHelper(getApplicationContext());
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
@@ -109,7 +111,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 		gameOverController = new GameOverController(camera, defaultFont,
-				this.getVertexBufferObjectManager());
+				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);

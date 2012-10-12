@@ -7,17 +7,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class HighscoreDBOpenHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 2;
-    private static final String TABLE_NAME = "highscore";
-	private static final String KEY_WORD = null;
-	private static final String KEY_DEFINITION = null;
-	private static final String DATABASE_NAME = null;
+    public static final String TABLE_NAME = "highscoreTable";
+	public static final String NAME = "name";
+	public static final String HIGHSCORE = "highscore";
+	private static final String DATABASE_NAME = "highscoreDatabase";
 	
     private static final String HIGHSCORE_TABLE_CREATE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
-                KEY_WORD + " TEXT, " +
-                KEY_DEFINITION + " TEXT);";
+                NAME + " TEXT, " +
+                HIGHSCORE + " TEXT);";
 
-    HighscoreDBOpenHelper(Context context) {
+    public HighscoreDBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

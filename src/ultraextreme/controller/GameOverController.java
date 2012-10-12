@@ -28,6 +28,9 @@ import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.view.GameOverScene;
 
@@ -40,12 +43,15 @@ public class GameOverController extends AbstractController implements
 		IOnMenuItemClickListener {
 
 	private final GameOverScene scene;
+	private HighscoreDBOpenHelper dbOpenHelper;
 
 	public GameOverController(final Camera camera, final Font font,
-			final VertexBufferObjectManager vertexBufferObjectManager) {
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			HighscoreDBOpenHelper dbOpenHelper) {
 		super();
 		scene = new GameOverScene(camera, font, vertexBufferObjectManager);
 		scene.setOnMenuItemClickListener(this);
+		this.dbOpenHelper = dbOpenHelper;
 	}
 
 	@Override
@@ -53,6 +59,16 @@ public class GameOverController extends AbstractController implements
 			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case GameOverScene.GOTO_MENU:
+			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+			String nameTag = "";
+			String score = "";
+			String sqlCommand = "INSERT INTO "
+					+ HighscoreDBOpenHelper.TABLE_NAME + " ("
+					+ HighscoreDBOpenHelper.NAME + ", "
+					+ HighscoreDBOpenHelper.HIGHSCORE + ") VALUES (" + nameTag
+					+ ", " + score + ")";
+			Log.d("DEBUG", "Saving highscore: " + sqlCommand);
+			database.execSQL(sqlCommand);
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
 			break;
