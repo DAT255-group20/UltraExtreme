@@ -33,7 +33,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	private float waitingTime = 5;
 	
-	private int speed = 10;
+	private int speed = 100;
 	
 	protected HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
