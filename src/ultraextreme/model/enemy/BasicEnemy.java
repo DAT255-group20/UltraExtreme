@@ -24,6 +24,7 @@ import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 /**
@@ -48,6 +49,17 @@ public class BasicEnemy extends AbstractEnemy {
 	 * Constructor for an enemy with predetermined ship and weapon. Specific to
 	 * this type of enemy
 	 * 
+	 * @param position
+	 *            Coordinate for the enemyShip
+	 */
+	public BasicEnemy(final Position position) {
+		this(position.getX(), position.getY());
+	}
+
+	/**
+	 * Constructor for an enemy with predetermined ship and weapon. Specific to
+	 * this type of enemy
+	 * 
 	 * @param x
 	 *            coordinate for the enemyShip
 	 * @param y
@@ -63,6 +75,19 @@ public class BasicEnemy extends AbstractEnemy {
 	 * Constructor for an enemy with predetermined ship and weapon. Specific to
 	 * this type of enemy
 	 * 
+	 * @param position
+	 *            Coordinate for the enemyShip
+	 * @param rotation
+	 *            Rotation modifier of the enemy's flying path.
+	 */
+	public BasicEnemy(final Position position, final Rotation rotation) {
+		this(position.getX(), position.getY(), rotation);
+	}
+
+	/**
+	 * Constructor for an enemy with predetermined ship and weapon. Specific to
+	 * this type of enemy
+	 * 
 	 * @param x
 	 *            coordinate for the enemyShip
 	 * @param y
@@ -72,8 +97,8 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(double x, double y, Rotation rotation) {
 		this(new EnemyShip(x, y, 70, 70, rotation, 50,
-				ObjectName.BASIC_ENEMYSHIP), WeaponFactory.getInstance().
-				getNewWeapon(ObjectName.BASIC_WEAPON));
+				ObjectName.BASIC_ENEMYSHIP), WeaponFactory.getInstance()
+				.getNewWeapon(ObjectName.BASIC_WEAPON));
 	}
 
 	@Override
