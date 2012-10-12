@@ -73,11 +73,12 @@ public class SpreadWeaponTest extends TestCase {
 		}
 		
 		// Check so that the bullets are not along the same line.
+		double epsilon = 0.00001;
 		for(AbstractBullet b1 : bulletList) {
 			for(AbstractBullet b2 : bulletList) {
 				if(b1 != b2) {
-					assertFalse(b1.getPositionClone().getX() 
-							== b2.getPositionClone().getX());
+					assertFalse(Math.abs(b1.getPositionClone().getX() 
+							- b2.getPositionClone().getX()) < epsilon);
 				}
 			}
 		}

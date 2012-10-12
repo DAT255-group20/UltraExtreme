@@ -56,18 +56,29 @@ public class SpinningSpreadWeaponTest extends TestCase {
 		float epsilon = 0.001f;
 		assertTrue(bulletManager.getBullets().size() == 0);
 		float cooldown = SpinningSpreadWeapon.getInitCooldown();
+		Rotation lastAngle;
+		Rotation currentAngle;
+		List<AbstractBullet> bulletList;
+		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
+				cooldown * (1 + epsilon));
+		bulletList = bulletManager.getBullets();
+		assertTrue(bulletList.size() == 1);
+		lastAngle = bulletList.get(bulletList.size() - 1).getRotation();
 
 		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
 				cooldown * (1 + epsilon));
-		assertTrue(bulletManager.getBullets().size() == 1);
+		bulletList = bulletManager.getBullets();
+		assertTrue(bulletList.size() == 2);
+		currentAngle = bulletList.get(bulletList.size() - 1).getRotation();
+		assertTrue(lastAngle.getAngle() < currentAngle.getAngle());
+		lastAngle = currentAngle;
 
 		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
 				cooldown * (1 + epsilon));
-		assertTrue(bulletManager.getBullets().size() == 2);
-
-		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
-				cooldown * (1 + epsilon));
-		assertTrue(bulletManager.getBullets().size() == 3);
+		bulletList = bulletManager.getBullets();
+		assertTrue(bulletList.size() == 3);
+		currentAngle = bulletList.get(bulletList.size() - 1).getRotation();
+		assertTrue(lastAngle.getAngle() < currentAngle.getAngle());
 	}
 	
 	/**
@@ -89,11 +100,12 @@ public class SpinningSpreadWeaponTest extends TestCase {
 		}
 		
 		// Check so that the bullets are not along the same line.
+		double epsilon = 0.00001;
 		for(AbstractBullet b1 : bulletList) {
 			for(AbstractBullet b2 : bulletList) {
 				if(b1 != b2) {
-					assertFalse(b1.getPositionClone().getX() 
-							== b2.getPositionClone().getX());
+					assertFalse(Math.abs(b1.getPositionClone().getX() 
+							- b2.getPositionClone().getX()) < epsilon);
 				}
 			}
 		}
@@ -101,11 +113,20 @@ public class SpinningSpreadWeaponTest extends TestCase {
 
 	@Test
 	public void testSpinningSpreadWeapon() {
-		fail("Not yet implemented");
+		float epsilon = 0.001f;
+		float cooldown = SpinningSpreadWeapon.getInitCooldown();
+		spinningWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
+				cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().get(0).getRotation().getAngle() < epsilon);
 	}
 
 	@Test
 	public void testGetInitCooldown() {
+		assertTrue(Math.abs(spinningWeapon.getInitCooldown() - 1/6f) < 0.00001);
+	}
+	
+	@Test
+	public void testShallowClone() {
 		fail("Not yet implemented");
 	}
 }
