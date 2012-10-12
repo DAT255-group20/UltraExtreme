@@ -51,5 +51,6 @@ public class GameOverScene extends MenuScene {
 		gotoMenuButton.setPosition(100, 100);
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
+		
 	}
 }
