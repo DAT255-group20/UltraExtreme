@@ -23,6 +23,7 @@ package ultraextreme.model.enemyspawning.wave;
 import junit.framework.TestCase;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 
 /**
  * 
@@ -40,13 +41,13 @@ public class HorizontalLineWaveTest extends TestCase {
 	@Override
 	public void setUp() {
 		bulletManager = new BulletManager();
+		WeaponFactory.initialize(bulletManager);
 		enemyCollector = new EnemyCollector();
 	}
 
 	private void initWave(int numOfEnemies, int numOfLines, double rotation,
 			int x, int y) {
-		wave = new HorizontalLineWave(numOfEnemies, numOfLines, rotation, x, y,
-				bulletManager);
+		wave = new HorizontalLineWave(numOfEnemies, numOfLines, rotation, x, y);
 		wave.addListener(enemyCollector);
 	}
 

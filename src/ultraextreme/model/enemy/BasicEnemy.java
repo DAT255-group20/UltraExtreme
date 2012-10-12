@@ -22,8 +22,7 @@ package ultraextreme.model.enemy;
 
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
-import ultraextreme.model.item.BasicWeapon;
-import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Rotation;
 
@@ -53,15 +52,11 @@ public class BasicEnemy extends AbstractEnemy {
 	 *            coordinate for the enemyShip
 	 * @param y
 	 *            coordinate for the enemyShip
-	 * @param bulletManager
-	 *            A reference to the bullet manager.
 	 */
-	public BasicEnemy(final double x, final double y,
-			final BulletManager bulletManager) {
+	public BasicEnemy(final double x, final double y) {
 		// TODO This constructor is never used. Should it ever be used? If not,
 		// remove.
-		this(new EnemyShip(x, y, 40, 40, new Rotation(0), 50,
-				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
+		this(x, y, new Rotation(0));
 	}
 
 	/**
@@ -74,13 +69,11 @@ public class BasicEnemy extends AbstractEnemy {
 	 *            coordinate for the enemyShip
 	 * @param rotation
 	 *            Rotation modifier of the enemy's flying path.
-	 * @param bulletManager
-	 *            A reference to the bullet manager.
 	 */
-	public BasicEnemy(double x, double y, Rotation rotation,
-			BulletManager bulletManager) {
+	public BasicEnemy(double x, double y, Rotation rotation) {
 		this(new EnemyShip(x, y, 70, 70, rotation, 50,
-				ObjectName.BASIC_ENEMYSHIP), new BasicWeapon(bulletManager));
+				ObjectName.BASIC_ENEMYSHIP), WeaponFactory.getInstance().
+				getNewWeapon(ObjectName.BASIC_WEAPON));
 	}
 
 	@Override
