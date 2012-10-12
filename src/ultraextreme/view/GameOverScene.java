@@ -25,8 +25,10 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.helperclasses.InputText;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.util.color.Color;
 
 import ultraextreme.util.Resources;
@@ -42,7 +44,7 @@ public class GameOverScene extends MenuScene {
 	public static final int GOTO_MENU = 0;
 
 	public GameOverScene(final Camera camera, final Font font,
-			final VertexBufferObjectManager vertexBufferObjectManager) {
+			final VertexBufferObjectManager vertexBufferObjectManager, BaseGameActivity activity) {
 		super(camera);
 		setBackground(new Background(0.9f, 0.1f, 0.1f));
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
@@ -52,5 +54,8 @@ public class GameOverScene extends MenuScene {
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
 		
+		InputText nameInput = new InputText(100, 200, "Input name", "Input name", null, font, 17, 19, vertexBufferObjectManager, activity);
+		this.attachChild(nameInput);
+		this.registerTouchArea(nameInput);
 	}
 }

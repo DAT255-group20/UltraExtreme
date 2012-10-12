@@ -27,6 +27,7 @@ import org.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.activity.BaseGameActivity;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -48,9 +49,9 @@ public class GameOverController extends AbstractController implements
 
 	public GameOverController(final Camera camera, final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			HighscoreDBOpenHelper dbOpenHelper) {
+			HighscoreDBOpenHelper dbOpenHelper, BaseGameActivity activity) {
 		super();
-		scene = new GameOverScene(camera, font, vertexBufferObjectManager);
+		scene = new GameOverScene(camera, font, vertexBufferObjectManager, activity);
 		scene.setOnMenuItemClickListener(this);
 		this.dbOpenHelper = dbOpenHelper;
 	}

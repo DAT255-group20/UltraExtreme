@@ -111,7 +111,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
 		gameOverController = new GameOverController(camera, defaultFont,
-				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
+				this.getVertexBufferObjectManager(), highscoreDBOpenHelper, this);
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
