@@ -33,7 +33,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	private float waitingTime = 5;
 	
-	private int speed = 10;
+	private int speed = 100;
 	
 	protected HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
@@ -49,7 +49,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	public HitAndRunEnemy(Position startingPosition, Position firePoint,
 			Position endPoint) {
 		super(new EnemyShip(startingPosition, 30, 30, 5,
-				ObjectName.HITANDRUN_ENEMY), WeaponFactory.getInstance().
+				ObjectName.HITANDRUN_ENEMYSHIP), WeaponFactory.getInstance().
 				getNewWeapon(ObjectName.SPINNING_WEAPON));
 		this.endPoint = endPoint;
 		this.firePoint = firePoint;
