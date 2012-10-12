@@ -103,7 +103,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected Scene onCreateScene() {
-		highscoreDBOpenHelper = new HighscoreDBOpenHelper(getApplicationContext());
+		highscoreDBOpenHelper = new HighscoreDBOpenHelper(this);
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),

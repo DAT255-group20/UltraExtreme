@@ -69,6 +69,7 @@ public class GameOverController extends AbstractController implements
 					+ "', '" + score + "')";
 			Log.d("DEBUG", "Saving highscore: " + sqlCommand);
 			database.execSQL(sqlCommand);
+			dbOpenHelper.close();
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
 			break;
