@@ -62,7 +62,7 @@ public class GameOverController extends AbstractController implements
 		switch (menuItem.getID()) {
 		case GameOverScene.GOTO_MENU:
 			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
-			String nameTag = "test";
+			String nameTag = scene.getName();
 			String score = "test";
 			String sqlCommand = "INSERT INTO "
 					+ HighscoreDBOpenHelper.TABLE_NAME + " ("

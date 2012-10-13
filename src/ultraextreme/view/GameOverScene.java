@@ -57,6 +57,7 @@ public class GameOverScene extends MenuScene {
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
 
+		// TODO Extract strings
 		nameInput = new InputText(100, 300, "Highscore name",
 				"Enter your name for the highscore list", SpriteFactory
 						.getInstance().getTextInputBackground(), font, 0, 0,
@@ -65,5 +66,12 @@ public class GameOverScene extends MenuScene {
 		nameInput.getChildByIndex(0).setColor(Color.BLACK);
 		this.attachChild(nameInput);
 		this.registerTouchArea(nameInput);
+	}
+
+	/**
+	 * @return the nameInput
+	 */
+	public String getName() {
+		return nameInput.getText();
 	}
 }
