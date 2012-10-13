@@ -75,7 +75,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	public HitAndRunEnemy(Position startingPosition, Position firePoint,
 			Position endPoint) {
-		super(new EnemyShip(startingPosition, 30, 30, 5,
+		super(new EnemyShip(startingPosition, 30, 30, 40,
 				ObjectName.HITANDRUN_ENEMYSHIP), WeaponFactory.getInstance()
 				.getNewWeapon(ObjectName.SPINNING_WEAPON));
 		this.endPoint = endPoint;
@@ -87,7 +87,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	@Override
 	public int getScoreValue() {
-		return 100;
+		return 50;
 	}
 
 	/**
