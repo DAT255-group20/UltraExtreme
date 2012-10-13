@@ -48,13 +48,32 @@ public class GameOverController extends AbstractController implements
 	private final GameOverScene scene;
 	private HighscoreDBOpenHelper dbOpenHelper;
 
-	public GameOverController(IUltraExtremeModel gameModel, final Camera camera, final Font font,
+	public GameOverController(IUltraExtremeModel gameModel,
+			final Camera camera, final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			HighscoreDBOpenHelper dbOpenHelper, BaseGameActivity activity) {
 		super();
-		scene = new GameOverScene(gameModel, camera, font, vertexBufferObjectManager, activity);
+		scene = new GameOverScene(gameModel, camera, font,
+				vertexBufferObjectManager, activity);
 		scene.setOnMenuItemClickListener(this);
 		this.dbOpenHelper = dbOpenHelper;
+	}
+
+	@Override
+	public void activateController() {
+		// Auto-generated method stub
+
+	}
+
+	@Override
+	public void deactivateController() {
+		// Auto-generated method stub
+
+	}
+
+	@Override
+	public Scene getScene() {
+		return scene;
 	}
 
 	@Override
@@ -73,19 +92,19 @@ public class GameOverController extends AbstractController implements
 			Log.d("DEBUG", "Saving highscore: " + sqlCommand);
 			database.execSQL(sqlCommand);
 			dbOpenHelper.close();
-			
+
 			// Testing the database
 			SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
 			String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
 			Cursor cursor = readableDb.rawQuery(query, null);
 			cursor.moveToFirst();
-			while (!cursor.isAfterLast())
-			{
-				Log.d("DEBUG", "Cursor pointing on: " + cursor.getString(0) + ", " + cursor.getString(1));
+			while (!cursor.isAfterLast()) {
+				Log.d("DEBUG", "Cursor pointing on: " + cursor.getString(0)
+						+ ", " + cursor.getString(1));
 				cursor.moveToNext();
 			}
 			// End of database test
-			
+
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
 			break;
@@ -94,22 +113,5 @@ public class GameOverController extends AbstractController implements
 			break;
 		}
 		return true;
-	}
-
-	@Override
-	public Scene getScene() {
-		return scene;
-	}
-
-	@Override
-	public void activateController() {
-		// Auto-generated method stub
-
-	}
-
-	@Override
-	public void deactivateController() {
-		// Auto-generated method stub
-
 	}
 }

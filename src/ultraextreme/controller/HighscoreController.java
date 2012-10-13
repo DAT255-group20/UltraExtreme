@@ -8,7 +8,11 @@ import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.view.HighscoreScene;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class HighscoreController extends AbstractController implements
 		IOnMenuItemClickListener {
@@ -39,9 +43,30 @@ public class HighscoreController extends AbstractController implements
 	}
 
 	@Override
-	public boolean onMenuItemClicked(MenuScene arg0, IMenuItem arg1,
-			float arg2, float arg3) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean onMenuItemClicked(final MenuScene menuScene,
+			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
+		switch (menuItem.getID()) {
+		case HighscoreScene.GOTO_MENU:
+
+			// Testing the database
+			SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
+			String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
+			Cursor cursor = readableDb.rawQuery(query, null);
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				Log.d("DEBUG", "Cursor pointing on: " + cursor.getString(0)
+						+ ", " + cursor.getString(1));
+				cursor.moveToNext();
+			}
+			// End of database test
+
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_MENU));
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 }

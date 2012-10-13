@@ -14,7 +14,7 @@ import ultraextreme.util.Resources.ResourceName;
 
 public class HighscoreScene extends MenuScene {
 
-	private static final int GOTO_MENU = 0;
+	public static final int GOTO_MENU = 0;
 
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {
