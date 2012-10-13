@@ -80,7 +80,7 @@ public class GameObjectSprite extends Sprite {
 
 		this.isHitBlinked = false;
 		this.isInvincibleBlinked = false;
-
+		
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}
