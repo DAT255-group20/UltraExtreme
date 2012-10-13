@@ -34,6 +34,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
+import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameOverScene;
 
 /**
@@ -47,11 +48,11 @@ public class GameOverController extends AbstractController implements
 	private final GameOverScene scene;
 	private HighscoreDBOpenHelper dbOpenHelper;
 
-	public GameOverController(final Camera camera, final Font font,
+	public GameOverController(IUltraExtremeModel gameModel, final Camera camera, final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			HighscoreDBOpenHelper dbOpenHelper, BaseGameActivity activity) {
 		super();
-		scene = new GameOverScene(camera, font, vertexBufferObjectManager, activity);
+		scene = new GameOverScene(gameModel, camera, font, vertexBufferObjectManager, activity);
 		scene.setOnMenuItemClickListener(this);
 		this.dbOpenHelper = dbOpenHelper;
 	}
@@ -63,7 +64,7 @@ public class GameOverController extends AbstractController implements
 		case GameOverScene.GOTO_MENU:
 			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
 			String nameTag = scene.getName();
-			String score = "test";
+			String score = Integer.toString(scene.getScore());
 			String sqlCommand = "INSERT INTO "
 					+ HighscoreDBOpenHelper.TABLE_NAME + " ("
 					+ HighscoreDBOpenHelper.NAME + ", "

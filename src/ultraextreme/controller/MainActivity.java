@@ -110,7 +110,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 				this, scaling, camera, defaultFont);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
-		gameOverController = new GameOverController(camera, defaultFont,
+		gameOverController = new GameOverController(gameController.getGameModel(), camera, defaultFont,
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper, this);
 
 		gameController.addListener(this);
