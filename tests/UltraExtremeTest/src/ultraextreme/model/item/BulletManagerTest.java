@@ -45,23 +45,39 @@ import ultraextreme.model.util.Rotation;
  */
 public class BulletManagerTest extends TestCase {
 
-	private BulletManager bulletManager;
-	private BulletCollector bulletCollector;
+	/**
+	 * Add this as a listener to the bullet manager and collects its bullets.
+	 * 
+	 * @author Daniel Jonsson
+	 * 
+	 */
+	public class BulletCollector implements PropertyChangeListener {
 
-	@Override
-	public void setUp() {
-		bulletManager = new BulletManager();
-		bulletCollector = new BulletCollector();
-		bulletManager.addPropertyChangeListener(bulletCollector);
+		private Map<String, List<IBullet>> map;
+
+		public BulletCollector() {
+			map = new HashMap<String, List<IBullet>>();
+		}
+
+		public Map<String, List<IBullet>> getBullets() {
+			return map;
+		}
+
+		@Override
+		public void propertyChange(PropertyChangeEvent event) {
+			if (!map.containsKey(event.getPropertyName())) {
+				map.put(event.getPropertyName(), new ArrayList<IBullet>());
+			}
+			map.get(event.getPropertyName()).add((IBullet) event.getNewValue());
+		}
+
 	}
+	private BulletManager bulletManager;
+
+	private BulletCollector bulletCollector;
 
 	private List<AbstractBullet> generateBulletList(int bullets) {
 		return generateBulletList(bullets, 0, 0, PlayerID.PLAYER1);
-	}
-
-	private List<AbstractBullet> generateBulletList(int bullets,
-			PlayerID playerId) {
-		return generateBulletList(bullets, 0, 0, playerId);
 	}
 
 	private List<AbstractBullet> generateBulletList(int bullets, int x, int y) {
@@ -77,6 +93,56 @@ public class BulletManagerTest extends TestCase {
 			bulletList.add(bullet);
 		}
 		return bulletList;
+	}
+
+	private List<AbstractBullet> generateBulletList(int bullets,
+			PlayerID playerId) {
+		return generateBulletList(bullets, 0, 0, playerId);
+	}
+
+	@Override
+	public void setUp() {
+		bulletManager = new BulletManager();
+		bulletCollector = new BulletCollector();
+		bulletManager.addPropertyChangeListener(bulletCollector);
+	}
+
+	/**
+	 * Create listeners, fire a bullet and check if it's the collectors. Then
+	 * remove the listeners, fire a bullet and check so it hasn't been added to
+	 * the collectors.
+	 */
+	@Test
+	public void testAddAndRemoveListener() {
+		// Add collectors and add them as listeners
+		List<BulletCollector> collectors = new ArrayList<BulletCollector>();
+		for (int i = 0; i < 100; i++) {
+			BulletCollector collector = new BulletCollector();
+			collectors.add(collector);
+			bulletManager.addPropertyChangeListener(collector);
+		}
+		// Fire a bullet
+		bulletManager.addBullet(new BasicBullet(0, 0, 0, 0, PlayerID.PLAYER1,
+				new Rotation(0)));
+		// Check so it's in the collectors
+		for (BulletCollector collector : collectors) {
+			assertEquals(1,
+					collector.getBullets().get(Constants.EVENT_NEW_ENTITY)
+							.size());
+		}
+		// Remove the collectors as listeners
+		for (BulletCollector collector : collectors) {
+			bulletManager.removeListener(collector);
+		}
+		// Fire a bullet
+		bulletManager.addBullet(new BasicBullet(0, 0, 0, 0, PlayerID.PLAYER1,
+				new Rotation(0)));
+		// Check so it hasn't been added to the collectors
+		for (BulletCollector collector : collectors) {
+			assertEquals(1,
+					collector.getBullets().get(Constants.EVENT_NEW_ENTITY)
+							.size());
+		}
 	}
 
 	/**
@@ -97,64 +163,6 @@ public class BulletManagerTest extends TestCase {
 		assertTrue(bulletManager.getBullets().containsAll(bulletList));
 		assertTrue(bulletCollector.getBullets().get(Constants.EVENT_NEW_ENTITY)
 				.containsAll(bulletList));
-	}
-
-	/**
-	 * Add player and enemy bullets to the manager, and then check so the bullet
-	 * manager's method getBulletsFrom() works correctly.
-	 */
-	@Test
-	public void testGetBulletsFrom() {
-		List<AbstractBullet> playerBullets = generateBulletList(100,
-				PlayerID.PLAYER1);
-		List<AbstractBullet> enemyBullets = generateBulletList(100,
-				PlayerID.ENEMY);
-		for (int i = 0; i < 100; ++i) {
-			bulletManager.addBullet(playerBullets.get(i));
-			bulletManager.addBullet(enemyBullets.get(i));
-		}
-		assertTrue(bulletManager.getBulletsFrom(PlayerID.PLAYER1).containsAll(
-				playerBullets));
-		assertEquals(playerBullets.size(),
-				bulletManager.getBulletsFrom(PlayerID.PLAYER1).size());
-		assertTrue(bulletManager.getBulletsFrom(PlayerID.ENEMY).containsAll(
-				enemyBullets));
-		assertEquals(enemyBullets.size(),
-				bulletManager.getBulletsFrom(PlayerID.ENEMY).size());
-	}
-
-	/**
-	 * Add bullets to the bullet manager and try to clear the bullets that are
-	 * outside the screen.
-	 */
-	@Test
-	public void testClearBulletsOffScreen() {
-		// Init stuff
-		List<AbstractBullet> insideBullets = generateBulletList(100, 200, 200);
-		List<AbstractBullet> outsideBullets = generateBulletList(100, -200,
-				-200);
-		List<AbstractBullet> allBullets = new ArrayList<AbstractBullet>();
-		allBullets.addAll(insideBullets);
-		allBullets.addAll(outsideBullets);
-		BulletCollector bulletCollector = new BulletCollector();
-		bulletManager.addPropertyChangeListener(bulletCollector);
-
-		for (AbstractBullet bullet : allBullets) {
-			bulletManager.addBullet(bullet);
-		}
-
-		// Make sure that the bullets are in the manager
-		assertTrue(bulletManager.getBullets().containsAll(allBullets));
-
-		bulletManager.clearBulletsOffScreen();
-
-		assertTrue(bulletManager.getBullets().containsAll(insideBullets));
-		assertEquals(outsideBullets,
-				bulletCollector.getBullets()
-						.get(Constants.EVENT_REMOVED_ENTITY));
-		for (AbstractBullet outsideBullet : outsideBullets) {
-			assertFalse(bulletManager.getBullets().contains(outsideBullet));
-		}
 	}
 
 	/**
@@ -219,6 +227,40 @@ public class BulletManagerTest extends TestCase {
 	}
 
 	/**
+	 * Add bullets to the bullet manager and try to clear the bullets that are
+	 * outside the screen.
+	 */
+	@Test
+	public void testClearBulletsOffScreen() {
+		// Init stuff
+		List<AbstractBullet> insideBullets = generateBulletList(100, 200, 200);
+		List<AbstractBullet> outsideBullets = generateBulletList(100, -200,
+				-200);
+		List<AbstractBullet> allBullets = new ArrayList<AbstractBullet>();
+		allBullets.addAll(insideBullets);
+		allBullets.addAll(outsideBullets);
+		BulletCollector bulletCollector = new BulletCollector();
+		bulletManager.addPropertyChangeListener(bulletCollector);
+
+		for (AbstractBullet bullet : allBullets) {
+			bulletManager.addBullet(bullet);
+		}
+
+		// Make sure that the bullets are in the manager
+		assertTrue(bulletManager.getBullets().containsAll(allBullets));
+
+		bulletManager.clearBulletsOffScreen();
+
+		assertTrue(bulletManager.getBullets().containsAll(insideBullets));
+		assertEquals(outsideBullets,
+				bulletCollector.getBullets()
+						.get(Constants.EVENT_REMOVED_ENTITY));
+		for (AbstractBullet outsideBullet : outsideBullets) {
+			assertFalse(bulletManager.getBullets().contains(outsideBullet));
+		}
+	}
+
+	/**
 	 * Drop some bombs and check so the the feature behaves correctly.
 	 */
 	@Test
@@ -241,68 +283,26 @@ public class BulletManagerTest extends TestCase {
 	}
 
 	/**
-	 * Create listeners, fire a bullet and check if it's the collectors. Then
-	 * remove the listeners, fire a bullet and check so it hasn't been added to
-	 * the collectors.
+	 * Add player and enemy bullets to the manager, and then check so the bullet
+	 * manager's method getBulletsFrom() works correctly.
 	 */
 	@Test
-	public void testAddAndRemoveListener() {
-		// Add collectors and add them as listeners
-		List<BulletCollector> collectors = new ArrayList<BulletCollector>();
-		for (int i = 0; i < 100; i++) {
-			BulletCollector collector = new BulletCollector();
-			collectors.add(collector);
-			bulletManager.addPropertyChangeListener(collector);
+	public void testGetBulletsFrom() {
+		List<AbstractBullet> playerBullets = generateBulletList(100,
+				PlayerID.PLAYER1);
+		List<AbstractBullet> enemyBullets = generateBulletList(100,
+				PlayerID.ENEMY);
+		for (int i = 0; i < 100; ++i) {
+			bulletManager.addBullet(playerBullets.get(i));
+			bulletManager.addBullet(enemyBullets.get(i));
 		}
-		// Fire a bullet
-		bulletManager.addBullet(new BasicBullet(0, 0, 0, 0, PlayerID.PLAYER1,
-				new Rotation(0)));
-		// Check so it's in the collectors
-		for (BulletCollector collector : collectors) {
-			assertEquals(1,
-					collector.getBullets().get(Constants.EVENT_NEW_ENTITY)
-							.size());
-		}
-		// Remove the collectors as listeners
-		for (BulletCollector collector : collectors) {
-			bulletManager.removeListener(collector);
-		}
-		// Fire a bullet
-		bulletManager.addBullet(new BasicBullet(0, 0, 0, 0, PlayerID.PLAYER1,
-				new Rotation(0)));
-		// Check so it hasn't been added to the collectors
-		for (BulletCollector collector : collectors) {
-			assertEquals(1,
-					collector.getBullets().get(Constants.EVENT_NEW_ENTITY)
-							.size());
-		}
-	}
-
-	/**
-	 * Add this as a listener to the bullet manager and collects its bullets.
-	 * 
-	 * @author Daniel Jonsson
-	 * 
-	 */
-	public class BulletCollector implements PropertyChangeListener {
-
-		private Map<String, List<IBullet>> map;
-
-		public BulletCollector() {
-			map = new HashMap<String, List<IBullet>>();
-		}
-
-		@Override
-		public void propertyChange(PropertyChangeEvent event) {
-			if (!map.containsKey(event.getPropertyName())) {
-				map.put(event.getPropertyName(), new ArrayList<IBullet>());
-			}
-			map.get(event.getPropertyName()).add((IBullet) event.getNewValue());
-		}
-
-		public Map<String, List<IBullet>> getBullets() {
-			return map;
-		}
-
+		assertTrue(bulletManager.getBulletsFrom(PlayerID.PLAYER1).containsAll(
+				playerBullets));
+		assertEquals(playerBullets.size(),
+				bulletManager.getBulletsFrom(PlayerID.PLAYER1).size());
+		assertTrue(bulletManager.getBulletsFrom(PlayerID.ENEMY).containsAll(
+				enemyBullets));
+		assertEquals(enemyBullets.size(),
+				bulletManager.getBulletsFrom(PlayerID.ENEMY).size());
 	}
 }

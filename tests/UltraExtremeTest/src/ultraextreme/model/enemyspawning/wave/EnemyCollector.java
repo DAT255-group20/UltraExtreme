@@ -39,8 +39,12 @@ public class EnemyCollector implements WaveListener {
 	private List<IEnemy> enemies = new ArrayList<IEnemy>();
 
 	@Override
-	public void waveEnded(AbstractWave wave) {
-		this.hasWaveEnded = true;
+	public void enemySpawned(AbstractEnemy enemy) {
+		enemies.add(enemy);
+	}
+
+	public List<IEnemy> getSpawnedEnemies() {
+		return this.enemies;
 	}
 
 	public boolean hasWaveEnded() {
@@ -48,12 +52,8 @@ public class EnemyCollector implements WaveListener {
 	}
 
 	@Override
-	public void enemySpawned(AbstractEnemy enemy) {
-		enemies.add(enemy);
-	}
-
-	public List<IEnemy> getSpawnedEnemies() {
-		return this.enemies;
+	public void waveEnded(AbstractWave wave) {
+		this.hasWaveEnded = true;
 	}
 
 }

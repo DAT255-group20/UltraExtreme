@@ -25,9 +25,9 @@ import org.junit.Test;
 public interface AbstractWaveListTest {
 
 	@Test
-	public void testNext();
+	public void testGetNumberOfWaves();
 
 	@Test
-	public void testGetNumberOfWaves();
+	public void testNext();
 
 }

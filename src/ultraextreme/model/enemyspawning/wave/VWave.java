@@ -41,7 +41,8 @@ public class VWave extends AbstractWave {
 	private final Position spawningPositon;
 
 	/**
-	 * Create a enemy wave flying like a V. There are 7 enemies in the wave and it's 700 units wide.
+	 * Create a enemy wave flying like a V. There are 7 enemies in the wave and
+	 * it's 700 units wide.
 	 * 
 	 * @param rotation
 	 *            How much you want to rotate the formation.

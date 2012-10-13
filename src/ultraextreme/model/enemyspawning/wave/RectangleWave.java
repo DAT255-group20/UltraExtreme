@@ -63,7 +63,7 @@ public class RectangleWave extends AbstractWave {
 	 * @param y
 	 *            Y position where the enemies should spawn.
 	 * @param enemyProvider
-	 * 			  The class that will create the RectangleWave its enemies.
+	 *            The class that will create the RectangleWave its enemies.
 	 */
 	public RectangleWave(final int enemiesInLines, final int lines,
 			final double rotation, final int x, final int y,
@@ -103,9 +103,10 @@ public class RectangleWave extends AbstractWave {
 			// rotation, this.bulletManager));
 			// fireNewEnemySpawned(new HitAndRunEnemy(spawningPosition,
 			// spawningPosition, spawningPosition, this.bulletManager));
-//			fireNewEnemySpawned(new HitAndRunEnemy(spawningPosition,
-//					new Position(500, 500), spawningPosition));
-			Position p = new Position(spawningPosition.getX() + i * 75, spawningPosition.getY());
+			// fireNewEnemySpawned(new HitAndRunEnemy(spawningPosition,
+			// new Position(500, 500), spawningPosition));
+			Position p = new Position(spawningPosition.getX() + i * 75,
+					spawningPosition.getY());
 			fireNewEnemySpawned(enemyProvider.getEnemy(p, rotation));
 		}
 	}

@@ -44,8 +44,37 @@ import ultraextreme.model.util.Constants;
  */
 public class EnemyManagerTest extends TestCase {
 
+	/**
+	 * Add this as a listener to the enemy manager and collects its enemies.
+	 * 
+	 * @author Daniel Jonsson
+	 * 
+	 */
+	public class EnemyCollector implements PropertyChangeListener {
+
+		private Map<String, List<AbstractEnemy>> map;
+
+		public EnemyCollector() {
+			map = new HashMap<String, List<AbstractEnemy>>();
+		}
+
+		public Map<String, List<AbstractEnemy>> getEnemies() {
+			return map;
+		}
+
+		@Override
+		public void propertyChange(PropertyChangeEvent event) {
+			if (!map.containsKey(event.getPropertyName())) {
+				map.put(event.getPropertyName(), new ArrayList<AbstractEnemy>());
+			}
+			map.get(event.getPropertyName()).add(
+					(AbstractEnemy) event.getNewValue());
+		}
+
+	}
 	private EnemyManager enemyManager;
 	private EnemyCollector collector;
+
 	private BulletManager manager;
 
 	@Override
@@ -147,35 +176,6 @@ public class EnemyManagerTest extends TestCase {
 		assertTrue("Enemy was added",
 				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY)
 						.contains(enemy));
-	}
-
-	/**
-	 * Add this as a listener to the enemy manager and collects its enemies.
-	 * 
-	 * @author Daniel Jonsson
-	 * 
-	 */
-	public class EnemyCollector implements PropertyChangeListener {
-
-		private Map<String, List<AbstractEnemy>> map;
-
-		public EnemyCollector() {
-			map = new HashMap<String, List<AbstractEnemy>>();
-		}
-
-		@Override
-		public void propertyChange(PropertyChangeEvent event) {
-			if (!map.containsKey(event.getPropertyName())) {
-				map.put(event.getPropertyName(), new ArrayList<AbstractEnemy>());
-			}
-			map.get(event.getPropertyName()).add(
-					(AbstractEnemy) event.getNewValue());
-		}
-
-		public Map<String, List<AbstractEnemy>> getEnemies() {
-			return map;
-		}
-
 	}
 
 }

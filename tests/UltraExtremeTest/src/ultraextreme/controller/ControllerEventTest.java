@@ -41,16 +41,16 @@ public class ControllerEventTest {
 		AbstractController testController = new AbstractController() {
 
 			@Override
-			public Scene getScene() {
-				return null;
-			}
-
-			@Override
 			public void activateController() {
 			}
 
 			@Override
 			public void deactivateController() {
+			}
+
+			@Override
+			public Scene getScene() {
+				return null;
 			}
 		};
 		ControllerEvent event = new ControllerEvent(null, null);

@@ -42,6 +42,20 @@ public class HorizontalLineWaveTest extends TestCase {
 
 	private AbstractWave wave;
 
+	private void initWave(int numOfEnemies, int numOfLines, double rotation,
+			int x, int y) {
+		wave = new RectangleWave(numOfEnemies, numOfLines, rotation, x, y,
+				new EnemyProvider() {
+					@Override
+					public AbstractEnemy getEnemy(Position spawningPosition,
+							Rotation rotation) {
+						return new BasicEnemy(0, 0);
+					}
+
+				});
+		wave.addListener(enemyCollector);
+	}
+
 	@Override
 	public void setUp() {
 		bulletManager = new BulletManager();
@@ -49,17 +63,25 @@ public class HorizontalLineWaveTest extends TestCase {
 		enemyCollector = new EnemyCollector();
 	}
 
-	private void initWave(int numOfEnemies, int numOfLines, double rotation,
-			int x, int y) {
-		wave = new RectangleWave(numOfEnemies, numOfLines, rotation, x, y, new EnemyProvider() {
-			@Override
-			public AbstractEnemy getEnemy(Position spawningPosition,
-					Rotation rotation) {
-				return new BasicEnemy(0, 0);
-			}
-			
-		});
-		wave.addListener(enemyCollector);
+	/**
+	 * Create a new wave and see if the enemy spawned has the correct
+	 * properties.
+	 */
+	public void testSpawnedEnemyPropteries() {
+		initWave(1, 1, 0, 0, 0);
+		wave.update(0);
+		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
+				.getShip();
+		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
+
+		initWave(1, 1, 2, 100, 200);
+		wave.update(0);
+		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
+		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
 	}
 
 	/**
@@ -103,26 +125,5 @@ public class HorizontalLineWaveTest extends TestCase {
 
 		assertTrue(enemyCollector.hasWaveEnded());
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 15);
-	}
-
-	/**
-	 * Create a new wave and see if the enemy spawned has the correct
-	 * properties.
-	 */
-	public void testSpawnedEnemyPropteries() {
-		initWave(1, 1, 0, 0, 0);
-		wave.update(0);
-		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
-				.getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
-
-		initWave(1, 1, 2, 100, 200);
-		wave.update(0);
-		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
 	}
 }

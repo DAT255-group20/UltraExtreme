@@ -31,15 +31,9 @@ import ultraextreme.model.item.WeaponFactory;
  * 
  */
 public class AbstractEnemyTest extends TestCase {
-	
+
 	BulletManager bulletManager;
 	AbstractEnemy enemy;
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		resetInstanceVariables();
-	}
 
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
@@ -47,12 +41,10 @@ public class AbstractEnemyTest extends TestCase {
 		enemy = new BasicEnemy(5, 5);
 	}
 
-	/**
-	 * Tests the shoot() Method
-	 */
-	public void testShoot() {
-		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
-		assertTrue(!bulletManager.getBullets().isEmpty());
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		resetInstanceVariables();
 	}
 
 	/**
@@ -62,6 +54,14 @@ public class AbstractEnemyTest extends TestCase {
 		assertTrue(enemy.getShip().isDestroyed() == enemy.isDead());
 		enemy.getShip().receiveDamage(10000);
 		assertTrue(enemy.isDead());
+	}
+
+	/**
+	 * Tests the shoot() Method
+	 */
+	public void testShoot() {
+		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
+		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
 
 }
