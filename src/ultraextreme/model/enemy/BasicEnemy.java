@@ -39,7 +39,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicEnemy extends AbstractEnemy {
 
-	private static final int Y_SPEED = 50;
+	private static final int Y_SPEED = 150;
 
 	private BasicEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
 		super(ship, weapon);

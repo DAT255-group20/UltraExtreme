@@ -33,7 +33,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicBullet extends AbstractBullet {
 	// public for test reasons
-	public final static float speed = 300f;
+	public final static float speed = 700f;
 
 	public BasicBullet(final double x, final double y, final int width,
 			final int height, PlayerID playerId, final Rotation rotation) {

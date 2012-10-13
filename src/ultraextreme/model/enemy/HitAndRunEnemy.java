@@ -51,9 +51,9 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	/**
 	 * for how long the enemy will be firing in seconds
 	 */
-	private float waitingTime = 5;
+	private float waitingTime = 6;
 	
-	private int speed = 100;
+	private int speed = 400;
 	
 	protected HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
