@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model.enemy;
 
 import javax.vecmath.Vector2d;
@@ -33,7 +53,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	private float waitingTime = 5;
 	
-	private int speed = 10;
+	private int speed = 100;
 	
 	protected HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
@@ -49,7 +69,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	public HitAndRunEnemy(Position startingPosition, Position firePoint,
 			Position endPoint) {
 		super(new EnemyShip(startingPosition, 30, 30, 5,
-				ObjectName.HITANDRUN_ENEMY), WeaponFactory.getInstance().
+				ObjectName.HITANDRUN_ENEMYSHIP), WeaponFactory.getInstance().
 				getNewWeapon(ObjectName.SPINNING_WEAPON));
 		this.endPoint = endPoint;
 		this.firePoint = firePoint;

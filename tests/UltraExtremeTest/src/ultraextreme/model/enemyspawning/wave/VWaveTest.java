@@ -23,6 +23,7 @@ package ultraextreme.model.enemyspawning.wave;
 import junit.framework.TestCase;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 
 /**
  * 
@@ -31,20 +32,21 @@ import ultraextreme.model.item.BulletManager;
  */
 public class VWaveTest extends TestCase {
 
-	private BulletManager bulletManager;
-
 	private EnemyCollector enemyCollector;
 
 	private AbstractWave wave;
+	
+	private BulletManager bulletManager;
 
 	@Override
 	public void setUp() {
 		bulletManager = new BulletManager();
+		WeaponFactory.initialize(bulletManager);
 		enemyCollector = new EnemyCollector();
 	}
 
 	private void initWave(double rotation, int x, int y) {
-		wave = new VWave(rotation, x, y, bulletManager);
+		wave = new VWave(rotation, x, y);
 		wave.addListener(enemyCollector);
 	}
 

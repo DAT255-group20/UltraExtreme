@@ -34,6 +34,7 @@ import org.junit.Test;
 
 import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
 
 /**
@@ -45,12 +46,15 @@ public class EnemyManagerTest extends TestCase {
 
 	private EnemyManager enemyManager;
 	private EnemyCollector collector;
+	private BulletManager manager;
 
 	@Override
 	public void setUp() {
 		enemyManager = new EnemyManager();
 		collector = new EnemyCollector();
 		enemyManager.addPropertyChangeListener(collector);
+		manager = new BulletManager();
+		WeaponFactory.initialize(manager);
 	}
 
 	/**
@@ -58,7 +62,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testAddEnemy() {
-		AbstractEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
+		AbstractEnemy enemy = new BasicEnemy(0, 0);
 		enemyManager.addEnemy(enemy);
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
 		assertEquals(enemy,
@@ -71,11 +75,10 @@ public class EnemyManagerTest extends TestCase {
 	@Test
 	public void testAddEnemy2() {
 		List<IEnemy> addedEnemies = new ArrayList<IEnemy>();
-		BulletManager bulletManager = new BulletManager();
 
 		// Add a lot of enemies to the enemy manager and to a local list.
 		for (int i = 0; i < 10000; i++) {
-			AbstractEnemy enemy = new BasicEnemy(0, 0, bulletManager);
+			AbstractEnemy enemy = new BasicEnemy(0, 0);
 			enemyManager.addEnemy(enemy);
 			addedEnemies.add(enemy);
 		}
@@ -94,7 +97,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testClearDeadEnemies() {
-		AbstractEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
+		AbstractEnemy enemy = new BasicEnemy(0, 0);
 		enemyManager.addEnemy(enemy);
 
 		// kill the ship
@@ -117,7 +120,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testClearDeadEnemies2() {
-		AbstractEnemy enemy = new BasicEnemy(-500, -500, new BulletManager());
+		AbstractEnemy enemy = new BasicEnemy(-500, -500);
 		enemyManager.addEnemy(enemy);
 
 		enemyManager.clearDeadEnemies();
@@ -136,7 +139,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testPropertyChange() {
-		IEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
+		IEnemy enemy = new BasicEnemy(0, 0);
 		PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 		pcs.addPropertyChangeListener(enemyManager);
 		pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, enemy);

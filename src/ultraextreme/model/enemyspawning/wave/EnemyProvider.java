@@ -18,13 +18,30 @@
  * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
  * ============================================================ */
 
-package ultraextreme.util;
+package ultraextreme.model.enemyspawning.wave;
 
-public class Constants {
+import ultraextreme.model.enemy.AbstractEnemy;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
+
+/**
+ * This class is used by RandomWaveList and RectangleWave so there can be
+ * rectangles with different enemies.
+ * 
+ * @author Daniel Jonsson
+ * 
+ */
+public abstract class EnemyProvider {
 
 	/**
-	 * Lets the sprites have a different size than their file picture
-	 * counterparts.
+	 * Build an enemy.
+	 * 
+	 * @param spawningPosition
+	 *            The enemy ship's spawning position.
+	 * @param rotation
+	 *            Rotation of the enemy ship.
+	 * @return AbstractEnemy
 	 */
-	public static final float SPRITE_SCALE_FACTOR = 1.75f;
+	public abstract AbstractEnemy getEnemy(Position spawningPosition,
+			Rotation rotation);
 }

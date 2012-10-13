@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ultraextreme.model.enemy.AbstractEnemy;
-import ultraextreme.model.item.BulletManager;
 
 /**
  * This is an abstract wave that handles stuff that all child waves will need,
@@ -39,21 +38,6 @@ public abstract class AbstractWave {
 	 * The classes that listen to the wave.
 	 */
 	private List<WaveListener> listeners = new ArrayList<WaveListener>();
-
-	/**
-	 * Reference to a bullet manager. This is kept so enemies can be created.
-	 */
-	protected BulletManager bulletManager;
-
-	/**
-	 * Create a new enemy wave.
-	 * 
-	 * @param bulletManager
-	 *            Reference to a bullet manager.
-	 */
-	public AbstractWave(BulletManager bulletManager) {
-		this.bulletManager = bulletManager;
-	}
 
 	/**
 	 * Update the wave's logic.

@@ -23,6 +23,7 @@ package ultraextreme.model.enemy;
 import junit.framework.TestCase;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 
 /**
  * 
@@ -30,6 +31,7 @@ import ultraextreme.model.item.BulletManager;
  * 
  */
 public class AbstractEnemyTest extends TestCase {
+	
 	BulletManager bulletManager;
 	AbstractEnemy enemy;
 
@@ -41,7 +43,8 @@ public class AbstractEnemyTest extends TestCase {
 
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
-		enemy = new BasicEnemy(5, 5, bulletManager);
+		WeaponFactory.initialize(bulletManager);
+		enemy = new BasicEnemy(5, 5);
 	}
 
 	/**
