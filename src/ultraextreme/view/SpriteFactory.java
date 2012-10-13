@@ -31,6 +31,7 @@ import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegion;
+import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
@@ -72,6 +73,15 @@ public class SpriteFactory {
 	 * The item bar's marker texture.
 	 */
 	private ITextureRegion itemBarMarkerTexture;
+	
+	private TiledTextureRegion textInputBackground;
+
+	/**
+	 * @return the textInputBackground
+	 */
+	public TiledTextureRegion getTextInputBackground() {
+		return textInputBackground;
+	}
 
 	private static SpriteFactory instance;
 
@@ -135,7 +145,11 @@ public class SpriteFactory {
 		itemBarMarkerTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar_marker.png",
 						700, 0);
-
+		
+		// Init the textinput background
+		textInputBackground = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(textureAtlas, activity, "ship_blue_42px.png", 0, 0, 1, 1);
+		
+		
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);

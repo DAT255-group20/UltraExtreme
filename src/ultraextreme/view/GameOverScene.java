@@ -54,7 +54,7 @@ public class GameOverScene extends MenuScene {
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
 		
-		InputText nameInput = new InputText(100, 200, "Input name", "Input name", null, font, 17, 19, vertexBufferObjectManager, activity);
+		InputText nameInput = new InputText(100, 200, "Input name", "Input name", SpriteFactory.getInstance().getTextInputBackground(), font, 17, 19, vertexBufferObjectManager, activity);
 		this.attachChild(nameInput);
 		this.registerTouchArea(nameInput);
 	}
