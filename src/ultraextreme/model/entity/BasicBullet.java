@@ -33,7 +33,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicBullet extends AbstractBullet {
 	// public for test reasons
-	public final static float speed = 720f;
+	public final static float SPEED = 720f;
 
 	public BasicBullet(final double x, final double y, final int width,
 			final int height, PlayerID playerId, final Rotation rotation,
@@ -44,7 +44,7 @@ public class BasicBullet extends AbstractBullet {
 
 	@Override
 	public void doMovement(float timePassed) {
-		this.move(0, timePassed * speed);
+		this.move(0, timePassed * SPEED);
 	}
 
 }

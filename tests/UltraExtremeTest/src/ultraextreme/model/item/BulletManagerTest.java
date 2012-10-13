@@ -75,6 +75,8 @@ public class BulletManagerTest extends TestCase {
 	private BulletManager bulletManager;
 
 	private BulletCollector bulletCollector;
+	
+	private int bulletDamage = 10;
 
 	private List<AbstractBullet> generateBulletList(int bullets) {
 		return generateBulletList(bullets, 0, 0, PlayerID.PLAYER1);
@@ -89,7 +91,7 @@ public class BulletManagerTest extends TestCase {
 		List<AbstractBullet> bulletList = new ArrayList<AbstractBullet>();
 		for (int i = 0; i < bullets; i++) {
 			AbstractBullet bullet = new BasicBullet(x, y, 0, 0, playerId,
-					new Rotation(0));
+					new Rotation(0), bulletDamage);
 			bulletList.add(bullet);
 		}
 		return bulletList;
@@ -123,7 +125,7 @@ public class BulletManagerTest extends TestCase {
 		}
 		// Fire a bullet
 		bulletManager.addBullet(new BasicBullet(0, 0, 0, 0, PlayerID.PLAYER1,
-				new Rotation(0)));
+				new Rotation(0), bulletDamage));
 		// Check so it's in the collectors
 		for (BulletCollector collector : collectors) {
 			assertEquals(1,
@@ -136,7 +138,7 @@ public class BulletManagerTest extends TestCase {
 		}
 		// Fire a bullet
 		bulletManager.addBullet(new BasicBullet(0, 0, 0, 0, PlayerID.PLAYER1,
-				new Rotation(0)));
+				new Rotation(0), bulletDamage));
 		// Check so it hasn't been added to the collectors
 		for (BulletCollector collector : collectors) {
 			assertEquals(1,
