@@ -32,8 +32,10 @@ import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.model.GameModel;
 import ultraextreme.model.IPlayer;
 import ultraextreme.model.IPlayerListener;
+import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameScene;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.MotionEvent;
 
 /**
@@ -165,6 +167,7 @@ public class GameController extends AbstractController implements
 
 	@Override
 	public void activateController() {
+		resetGameModel();
 		scene.setHUDVisible(true);
 	}
 
@@ -177,12 +180,12 @@ public class GameController extends AbstractController implements
 	public void playerUpdate(IPlayer player) {
 		if (gameModel.isGameOver()) {
 			fireEvent(new ControllerEvent(this,
-					ControllerEventType.SWITCH_TO_HIGHSCORE));
-			resetGameModel();
+					ControllerEventType.SWITCH_TO_GAMEOVER));
 		}
 	}
 
 	private void resetGameModel() {
+		Log.d("DEBUG", "Resetting the game model");
 		gameLoop.setFiring(false);
 		gameModel.reset();
 
@@ -193,5 +196,13 @@ public class GameController extends AbstractController implements
 		 * gameModel.addPropertyChangeListener(gameLoop);
 		 * gameModel.registerPlayerListener(this);
 		 */
+	}
+	
+	/**
+	 * @return An interface of the game model.
+	 */
+	public IUltraExtremeModel getGameModel()
+	{
+		return gameModel;
 	}
 }
