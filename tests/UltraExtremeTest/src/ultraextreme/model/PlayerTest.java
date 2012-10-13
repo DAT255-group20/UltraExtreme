@@ -37,6 +37,8 @@ import ultraextreme.model.util.Position;
 /**
  * 
  * @author Daniel Jonsson
+ * @author Bjorn Persson Mattsson
+ * @author Viktor Anderling
  * 
  */
 public class PlayerTest extends TestCase {
@@ -85,6 +87,13 @@ public class PlayerTest extends TestCase {
 		itemBar.addItem(new BasicWeapon(bulletManager));
 		assertEquals(itemBar.getItems().size(), player.getItemBar().getItems()
 				.size());
+	}
+
+	public void testItemBarSize() {
+		ItemBar itemBar = player.getItemBar();
+		for (int i = 0; i < 20; i++)
+			itemBar.addItem(new BasicWeapon(bulletManager));
+		assertEquals("Correct item bar size", 10, itemBar.getItems().size());
 	}
 
 	public void testGiveWeapon() {
@@ -199,10 +208,10 @@ public class PlayerTest extends TestCase {
 	private void updateTester(int dX, int dY, boolean fireWeapons,
 			boolean dropBomb) {
 		this.resetInstanceVariables();
-		Position pOld = new Position(player.getShip().getPosition());
+		Position pOld = new Position(player.getShip().getPositionClone());
 		ModelInput m = new ModelInput(dX, dY, fireWeapons, dropBomb);
 		player.update(m, 1);
-		Position pNew = player.getShip().getPosition();
+		Position pNew = player.getShip().getPositionClone();
 		assertEquals(pOld.getX() + dX, pNew.getX());
 		assertEquals(pOld.getY() + dY, pNew.getY());
 		if (fireWeapons)

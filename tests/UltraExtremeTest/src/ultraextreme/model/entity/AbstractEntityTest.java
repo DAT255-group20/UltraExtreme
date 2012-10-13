@@ -41,40 +41,40 @@ public abstract class AbstractEntityTest extends TestCase {
 	public void testMove() {
 		AbstractEntity entity = newEntity();
 		entity.move(0, 0);
-		assertEquals(entity.getPosition(), new Position(10.0, 20.0));
+		assertEquals(entity.getPositionClone(), new Position(10.0, 20.0));
 
 		entity.move(10, 100);
-		assertEquals(entity.getPosition(), new Position(20.0, 120.0));
+		assertEquals(entity.getPositionClone(), new Position(20.0, 120.0));
 
 		entity.move(-100, -1000);
-		assertEquals(entity.getPosition(), new Position(-80.0, -880.0));
+		assertEquals(entity.getPositionClone(), new Position(-80.0, -880.0));
 	}
 
 	public void testSetPosition() {
 		AbstractEntity entity = newEntity();
 		entity.setPosition(new Position(40, 50));
-		assertEquals(entity.getPosition().getX(), 40.0);
-		assertEquals(entity.getPosition().getY(), 50.0);
+		assertEquals(entity.getPositionClone().getX(), 40.0);
+		assertEquals(entity.getPositionClone().getY(), 50.0);
 		entity.setPosition(new Position(-40, -50));
-		assertEquals(entity.getPosition().getX(), -40.0);
-		assertEquals(entity.getPosition().getY(), -50.0);
+		assertEquals(entity.getPositionClone().getX(), -40.0);
+		assertEquals(entity.getPositionClone().getY(), -50.0);
 	}
 
 	public void testGetPosition() {
 		AbstractEntity entity = newEntity();
-		assertEquals(entity.getPosition().getX(), 10.0);
-		assertEquals(entity.getPosition().getY(), 20.0);
+		assertEquals(entity.getPositionClone().getX(), 10.0);
+		assertEquals(entity.getPositionClone().getY(), 20.0);
 	}
 
 	public void testGetCenteredPosition() {
 		AbstractEntity entity = getNewAbstractEntity(20, 20, 10, 10,
 				new Rotation(0));
-		Position centPos = entity.getCenteredPosition();
+		Position centPos = entity.getCenteredPositionClone();
 		assertTrue(centPos.getX() == 25);
 		assertTrue(centPos.getY() == 25);
 
 		entity = getNewAbstractEntity(15, 30, 6, 18, new Rotation(0));
-		centPos = entity.getCenteredPosition();
+		centPos = entity.getCenteredPositionClone();
 		assertFalse(centPos.getX() == 25);
 		assertFalse(centPos.getY() == 25);
 		assertTrue(centPos.getX() == 18);
@@ -178,8 +178,6 @@ public abstract class AbstractEntityTest extends TestCase {
 			assertFalse(e.isOutOfScreen(marginal));
 		}
 	}
-
-	public abstract void testGetSpeedMod();
 
 	private AbstractEntity newEntity() {
 		return getNewAbstractEntity(10, 20, 30, 40, new Rotation(0));

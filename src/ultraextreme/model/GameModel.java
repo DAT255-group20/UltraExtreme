@@ -68,7 +68,7 @@ public class GameModel implements IUltraExtremeModel {
 		pickupManager = new PickupManager();
 		WeaponFactory.initialize(bulletManager);
 		weaponFactory = WeaponFactory.getInstance();
-		enemySpawner = new EnemySpawner(new RandomWaveList(1000, bulletManager));
+		enemySpawner = new EnemySpawner(new RandomWaveList(1000));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 		pcs = new PropertyChangeSupport(this);
@@ -116,7 +116,7 @@ public class GameModel implements IUltraExtremeModel {
 		for (IEnemy enemy : enemyManager.getEnemies()) {
 			if (enemy.shouldSpawnPickup()) {
 				pickupManager.addPickup(new WeaponPickup(enemy.getShip()
-						.getPosition(), enemy.getWeapon().getName()));
+						.getPositionClone(), enemy.getWeapon().getName()));
 			}
 		}
 	}
@@ -140,11 +140,11 @@ public class GameModel implements IUltraExtremeModel {
 		}
 
 		// Check enemy bullets against player
-		if(!player.isInvincible()) {
+		if (!player.isInvincible()) {
 			for (IBullet b : enemyBullets) {
 				if (b.collidesWith(player.getShip())) {
 					player.getShip().receiveDamage(b.getDamage());
-					pcs.firePropertyChange(Constants.EVENT_ENTITY_INVINCIBLE, 
+					pcs.firePropertyChange(Constants.EVENT_ENTITY_INVINCIBLE,
 							null, player);
 					b.markForRemoval();
 					break;
@@ -205,7 +205,7 @@ public class GameModel implements IUltraExtremeModel {
 
 	@Override
 	public boolean isGameOver() {
-		return player.getLives() < 0;
+		return player.getLives() < 1;
 	}
 
 	/**

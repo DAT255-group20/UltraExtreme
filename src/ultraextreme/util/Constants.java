@@ -18,24 +18,13 @@
  * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
  * ============================================================ */
 
-package ultraextreme.model.enemy;
+package ultraextreme.util;
 
-import ultraextreme.model.util.Position;
-
-/**
- * @author Johan Gronvall
- */
-public class BasicEnemyTest extends AbstractEnemyTest {
+public class Constants {
 
 	/**
-	 * Tests if the enemy has moved forward and test if he has shot after a
-	 * period of 10seconds
-	 * 
+	 * Lets the sprites have a different size than their file picture
+	 * counterparts.
 	 */
-	public void testUpdate() {
-		Position position1 = enemy.getShip().getPositionClone();
-		enemy.update(10f);
-		assertTrue(position1.getY() < enemy.getShip().getPositionClone().getY());
-		assertTrue(!bulletManager.getBullets().isEmpty());
-	}
+	public static final float SPRITE_SCALE_FACTOR = 1.75f;
 }

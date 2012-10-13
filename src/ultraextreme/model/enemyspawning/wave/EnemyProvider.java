@@ -18,24 +18,30 @@
  * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
  * ============================================================ */
 
-package ultraextreme.model.enemy;
+package ultraextreme.model.enemyspawning.wave;
 
+import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
- * @author Johan Gronvall
+ * This class is used by RandomWaveList and RectangleWave so there can be
+ * rectangles with different enemies.
+ * 
+ * @author Daniel Jonsson
+ * 
  */
-public class BasicEnemyTest extends AbstractEnemyTest {
+public abstract class EnemyProvider {
 
 	/**
-	 * Tests if the enemy has moved forward and test if he has shot after a
-	 * period of 10seconds
+	 * Build an enemy.
 	 * 
+	 * @param spawningPosition
+	 *            The enemy ship's spawning position.
+	 * @param rotation
+	 *            Rotation of the enemy ship.
+	 * @return AbstractEnemy
 	 */
-	public void testUpdate() {
-		Position position1 = enemy.getShip().getPositionClone();
-		enemy.update(10f);
-		assertTrue(position1.getY() < enemy.getShip().getPositionClone().getY());
-		assertTrue(!bulletManager.getBullets().isEmpty());
-	}
+	public abstract AbstractEnemy getEnemy(Position spawningPosition,
+			Rotation rotation);
 }

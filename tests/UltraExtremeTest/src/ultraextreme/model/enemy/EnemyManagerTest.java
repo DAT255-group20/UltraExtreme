@@ -33,8 +33,8 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import ultraextreme.model.enemyspawning.EnemySpawner;
-import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
 
 /**
@@ -45,10 +45,16 @@ import ultraextreme.model.util.Constants;
 public class EnemyManagerTest extends TestCase {
 
 	private EnemyManager enemyManager;
+	private EnemyCollector collector;
+	private BulletManager manager;
 
 	@Override
 	public void setUp() {
 		enemyManager = new EnemyManager();
+		collector = new EnemyCollector();
+		enemyManager.addPropertyChangeListener(collector);
+		manager = new BulletManager();
+		WeaponFactory.initialize(manager);
 	}
 
 	/**
@@ -56,13 +62,11 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testAddEnemy() {
-		EnemyCollector collector = new EnemyCollector();
-		AbstractEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
-		enemyManager.addPropertyChangeListener(collector);
+		AbstractEnemy enemy = new BasicEnemy(0, 0);
 		enemyManager.addEnemy(enemy);
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
-		assertEquals(enemy.getShip(),
-				collector.getEnemyShips().get(Constants.EVENT_NEW_ENTITY));
+		assertEquals(enemy,
+				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY).get(0));
 	}
 
 	/**
@@ -70,29 +74,30 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testAddEnemy2() {
-		EnemyCollector collector = new EnemyCollector();
 		List<IEnemy> addedEnemies = new ArrayList<IEnemy>();
-		List<EnemyShip> addedShips = new ArrayList<EnemyShip>();
-		BulletManager bulletManager = new BulletManager();
-		enemyManager.addPropertyChangeListener(collector);
+
 		// Add a lot of enemies to the enemy manager and to a local list.
 		for (int i = 0; i < 10000; i++) {
-			AbstractEnemy enemy = new BasicEnemy(0, 0, bulletManager);
+			AbstractEnemy enemy = new BasicEnemy(0, 0);
 			enemyManager.addEnemy(enemy);
 			addedEnemies.add(enemy);
-			addedShips.add(enemy.getShip());
 		}
 		// Check so the enemy manager fired events for all added ships.
-		assertTrue(addedShips.containsAll(collector.getEnemyShips().values()));
+		assertTrue("Enemy manager fired events for all added enemies",
+				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY)
+						.containsAll(addedEnemies));
 		// Check so the enemy manager contains the enemies.
-		assertTrue(addedEnemies.containsAll(enemyManager.getEnemies()));
+		assertTrue("Enemy manager has all enemies", enemyManager.getEnemies()
+				.containsAll(addedEnemies));
 	}
 
+	/**
+	 * Test to clear a dead enemy from the manager with the method
+	 * clearDeadEnemies().
+	 */
 	@Test
 	public void testClearDeadEnemies() {
-		EnemyCollector collector = new EnemyCollector();
-		AbstractEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
-		enemyManager.addPropertyChangeListener(collector);
+		AbstractEnemy enemy = new BasicEnemy(0, 0);
 		enemyManager.addEnemy(enemy);
 
 		// kill the ship
@@ -100,22 +105,33 @@ public class EnemyManagerTest extends TestCase {
 
 		enemyManager.clearDeadEnemies();
 
-		assertEquals(collector.getEnemyShips().size(), 2);
-		assertEquals(enemy,
-				collector.getEnemyShips().get(Constants.EVENT_REMOVED_ENTITY));
-		collector.getEnemyShips().clear();
+		assertTrue("Enemy was killed",
+				collector.getEnemies().get(Constants.EVENT_ENEMY_KILLED)
+						.contains(enemy));
+		assertTrue("Enemy was removed",
+				collector.getEnemies().get(Constants.EVENT_REMOVED_ENTITY)
+						.contains(enemy));
+		assertEquals("No enemies in manager", 0, enemyManager.getEnemies()
+				.size());
+	}
 
-		// Now check if an enemy gets removed when it is outside the map
-		enemy = new BasicEnemy(0, 0, new BulletManager());
+	/**
+	 * Test to clear an enemy that is outside the map.
+	 */
+	@Test
+	public void testClearDeadEnemies2() {
+		AbstractEnemy enemy = new BasicEnemy(-500, -500);
 		enemyManager.addEnemy(enemy);
-
-		enemy.getShip().move(-500, -500);
 
 		enemyManager.clearDeadEnemies();
 
-		assertEquals(collector.getEnemyShips().size(), 2);
-		assertEquals(enemy,
-				collector.getEnemyShips().get(Constants.EVENT_REMOVED_ENTITY));
+		assertNull("Enemy wasn't killed",
+				collector.getEnemies().get(Constants.EVENT_ENEMY_KILLED));
+		assertTrue("Enemy was removed",
+				collector.getEnemies().get(Constants.EVENT_REMOVED_ENTITY)
+						.contains(enemy));
+		assertEquals("No enemies in manager", 0, enemyManager.getEnemies()
+				.size());
 	}
 
 	/**
@@ -123,11 +139,14 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testPropertyChange() {
-		IEnemy enemy = new BasicEnemy(0, 0, new BulletManager());
+		IEnemy enemy = new BasicEnemy(0, 0);
 		PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 		pcs.addPropertyChangeListener(enemyManager);
 		pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, enemy);
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
+		assertTrue("Enemy was added",
+				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY)
+						.contains(enemy));
 	}
 
 	/**
@@ -138,18 +157,22 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	public class EnemyCollector implements PropertyChangeListener {
 
-		private Map<String, EnemyShip> map;
+		private Map<String, List<AbstractEnemy>> map;
 
 		public EnemyCollector() {
-			map = new HashMap<String, EnemyShip>();
+			map = new HashMap<String, List<AbstractEnemy>>();
 		}
 
 		@Override
 		public void propertyChange(PropertyChangeEvent event) {
-			map.put(event.getPropertyName(), (EnemyShip) event.getNewValue());
+			if (!map.containsKey(event.getPropertyName())) {
+				map.put(event.getPropertyName(), new ArrayList<AbstractEnemy>());
+			}
+			map.get(event.getPropertyName()).add(
+					(AbstractEnemy) event.getNewValue());
 		}
 
-		public Map<String, EnemyShip> getEnemyShips() {
+		public Map<String, List<AbstractEnemy>> getEnemies() {
 			return map;
 		}
 

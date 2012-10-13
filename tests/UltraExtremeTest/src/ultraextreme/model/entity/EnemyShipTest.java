@@ -22,7 +22,6 @@ package ultraextreme.model.entity;
 
 import org.junit.Test;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Rotation;
 
@@ -44,11 +43,6 @@ public class EnemyShipTest extends AbstractEntityTest {
 			double rotation, int hitpoints) {
 		enemyShip = new EnemyShip(x, y, width, height, new Rotation(rotation),
 				hitpoints, ObjectName.BASIC_ENEMYSHIP);
-	}
-
-	@Override
-	public void testGetSpeedMod() {
-		assertEquals(enemyShip.getSpeedMod(), Constants.getEnemySpeedModifier());
 	}
 
 	@Test

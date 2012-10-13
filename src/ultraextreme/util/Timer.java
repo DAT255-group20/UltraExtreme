@@ -18,7 +18,7 @@
  * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
  * ============================================================ */
 
-package ultraextreme.controller;
+package ultraextreme.util;
 
 /**
  * A timer that is dependent on an external update for the elapsed time. On each

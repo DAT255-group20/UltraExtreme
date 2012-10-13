@@ -33,7 +33,7 @@ import ultraextreme.model.util.Rotation;
 public interface IBullet extends IEntity {
 
 	@Override
-	Position getPosition();
+	Position getPositionClone();
 
 	@Override
 	int getWidth();

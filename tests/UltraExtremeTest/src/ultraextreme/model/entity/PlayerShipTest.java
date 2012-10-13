@@ -44,13 +44,13 @@ public class PlayerShipTest extends AbstractEntityTest {
 	public void testMove() {
 		resetInstanceVariables(10, 20, 30, 40);
 		playerShip.move(0, 0);
-		assertEquals(playerShip.getPosition(), new Position(10.0, 20.0));
+		assertEquals(playerShip.getPositionClone(), new Position(10.0, 20.0));
 
 		playerShip.move(10, 100);
-		assertEquals(playerShip.getPosition(), new Position(20.0, 120.0));
+		assertEquals(playerShip.getPositionClone(), new Position(20.0, 120.0));
 
 		playerShip.move(-100, -1000);
-		assertEquals(playerShip.getPosition(), new Position(-80.0, -880.0));
+		assertEquals(playerShip.getPositionClone(), new Position(-80.0, -880.0));
 	}
 
 	/**
@@ -66,11 +66,6 @@ public class PlayerShipTest extends AbstractEntityTest {
 	public void testGetDirection() {
 		resetInstanceVariables(0, 0, 0, 0);
 		assertEquals(playerShip.getRotation(), new Rotation(0));
-	}
-
-	@Override
-	public void testGetSpeedMod() {
-		// FIXME
 	}
 
 	@Override

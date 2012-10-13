@@ -73,16 +73,11 @@ public class BasicWeaponTest extends TestCase {
 	 * Test so the properties of the bullet that the weapon fires are correct.
 	 */
 	public void testBulletProperties() {
-		// TODO I honestly don't think that we are supposed to test this.
-		// We would have to update the test class every time we tweaked the bullet...
 		float cooldown = BasicWeapon.getInitCooldown();
 		basicWeapon.fire(new Position(10, 5), PlayerID.PLAYER1,
 				new Rotation(0), cooldown + cooldown / 1000);
 		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
-		assertEquals(bullet.getWidth(), 20);
-		assertEquals(bullet.getHeight(), 40);
-		assertEquals(bullet.getRotation(), new Rotation(0));
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 	}
 }

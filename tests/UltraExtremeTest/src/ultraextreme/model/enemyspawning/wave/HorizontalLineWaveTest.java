@@ -21,8 +21,13 @@
 package ultraextreme.model.enemyspawning.wave;
 
 import junit.framework.TestCase;
+import ultraextreme.model.enemy.AbstractEnemy;
+import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 
@@ -40,13 +45,20 @@ public class HorizontalLineWaveTest extends TestCase {
 	@Override
 	public void setUp() {
 		bulletManager = new BulletManager();
+		WeaponFactory.initialize(bulletManager);
 		enemyCollector = new EnemyCollector();
 	}
 
 	private void initWave(int numOfEnemies, int numOfLines, double rotation,
 			int x, int y) {
-		wave = new HorizontalLineWave(numOfEnemies, numOfLines, rotation, x, y,
-				bulletManager);
+		wave = new RectangleWave(numOfEnemies, numOfLines, rotation, x, y, new EnemyProvider() {
+			@Override
+			public AbstractEnemy getEnemy(Position spawningPosition,
+					Rotation rotation) {
+				return new BasicEnemy(0, 0);
+			}
+			
+		});
 		wave.addListener(enemyCollector);
 	}
 
@@ -103,14 +115,14 @@ public class HorizontalLineWaveTest extends TestCase {
 		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
 				.getShip();
 		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
-		assertEquals(enemyShip.getPosition().getX(), 0.0);
-		assertEquals(enemyShip.getPosition().getY(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
 
 		initWave(1, 1, 2, 100, 200);
 		wave.update(0);
 		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
 		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
-		assertEquals(enemyShip.getPosition().getX(), 100.0);
-		assertEquals(enemyShip.getPosition().getY(), 200.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
 	}
 }

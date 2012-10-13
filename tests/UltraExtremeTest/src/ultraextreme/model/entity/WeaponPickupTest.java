@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 
@@ -37,13 +36,8 @@ public class WeaponPickupTest extends TestCase {
 	}
 
 	@Test
-	public void testGetSpeedMod() {
-		assertEquals(pickup.getSpeedMod(), Constants.getPickupSpeedModifier());
-	}
-
-	@Test
 	public void testWeaponPickupDoubleDoubleObjectName() {
-		assertEquals(pickup.getPosition(), new Position(0, 0));
+		assertEquals(pickup.getPositionClone(), new Position(0, 0));
 		assertEquals(pickup.getHeight(), pickup.getWidth());
 		assertEquals(pickup.getObjectName(), ObjectName.BASIC_WEAPON);
 	}

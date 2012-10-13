@@ -20,7 +20,6 @@
 
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Rotation;
 
@@ -52,12 +51,6 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 
 		bullet = newBullet(PlayerID.ENEMY);
 		assertEquals(bullet.getPlayerId(), PlayerID.ENEMY);
-	}
-
-	@Override
-	public void testGetSpeedMod() {
-		AbstractBullet bullet = newBullet();
-		assertEquals(bullet.getSpeedMod(), Constants.getBulletSpeedModifier());
 	}
 
 	private AbstractBullet newBullet() {
