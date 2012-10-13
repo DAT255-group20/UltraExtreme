@@ -80,7 +80,6 @@ public class GameController extends AbstractController implements
 				vertexBufferObjectManager, activity.getResources()
 						.getDisplayMetrics().widthPixels, activity
 						.getResources().getDisplayMetrics().heightPixels);
-		resetGameModel();
 		gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
 		gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
 		gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
