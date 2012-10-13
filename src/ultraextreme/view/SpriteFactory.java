@@ -73,7 +73,7 @@ public class SpriteFactory {
 	 * The item bar's marker texture.
 	 */
 	private ITextureRegion itemBarMarkerTexture;
-	
+
 	private TiledTextureRegion textInputBackground;
 
 	/**
@@ -114,23 +114,28 @@ public class SpriteFactory {
 				16.5));
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 0, 43);
-		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27, 40));
-		
+				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 0,
+						43);
+		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27,
+				40));
+
 		final TextureRegion hitAndRunEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "evil_ship_2.png", 770, 0);
-		
-		putProperties(ObjectName.HITANDRUN_ENEMYSHIP, hitAndRunEnemy, new Vector2d(27, 40));
+				.createFromAsset(textureAtlas, activity, "evil_ship_2.png",
+						770, 0);
+
+		putProperties(ObjectName.HITANDRUN_ENEMYSHIP, hitAndRunEnemy,
+				new Vector2d(27, 40));
 
 		// init pickupables
 		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "cannon.png", 56, 51);
-		putProperties(ObjectName.BASIC_WEAPON, basicWeapon, new Vector2d(15, 15));
+		putProperties(ObjectName.BASIC_WEAPON, basicWeapon,
+				new Vector2d(15, 15));
 
 		final TextureRegion spinningWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "spin.png", 87, 51);
-		putProperties(ObjectName.SPINNING_WEAPON, spinningWeapon,
-				new Vector2d(15, 15));
+		putProperties(ObjectName.SPINNING_WEAPON, spinningWeapon, new Vector2d(
+				15, 15));
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
@@ -138,18 +143,19 @@ public class SpriteFactory {
 
 		// Init the item textures for items in the itembar
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
-		itemTextures.put(ObjectName.SPINNING_WEAPON,
-				spinningWeapon); // Test only
+		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon); // Test
+																		// only
 
 		// Init the item bar marker
 		itemBarMarkerTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar_marker.png",
 						700, 0);
-		
+
 		// Init the textinput background
-		textInputBackground = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(textureAtlas, activity, "ship_blue_42px.png", 0, 0, 1, 1);
-		
-		
+		textInputBackground = BitmapTextureAtlasTextureRegionFactory
+				.createTiledFromAsset(textureAtlas, activity, "button_1.png",
+						100, 100, 1, 1);
+
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
@@ -202,15 +208,14 @@ public class SpriteFactory {
 		ObjectName objName = entity.getObjectName();
 		ITextureRegion texture = textureMap.get(objName);
 		Vector2d offset = offsetMap.get(objName);
-		if (texture == null)
-		{
-			throw new IllegalArgumentException("No texture is associated with that kind of object");
+		if (texture == null) {
+			throw new IllegalArgumentException(
+					"No texture is associated with that kind of object");
 		}
-		if (offset == null)
-		{
+		if (offset == null) {
 			offset = new Vector2d();
 		}
-		
+
 		return new GameObjectSprite(entity, vbom, texture, offset);
 	}
 
@@ -230,9 +235,9 @@ public class SpriteFactory {
 	 */
 	public ITextureRegion getItemTexture(ObjectName item) {
 		ITextureRegion output = itemTextures.get(item);
-		if (output == null)
-		{
-			throw new IllegalArgumentException("No texture is associated with that kind of object");
+		if (output == null) {
+			throw new IllegalArgumentException(
+					"No texture is associated with that kind of object");
 		}
 		return output;
 	}

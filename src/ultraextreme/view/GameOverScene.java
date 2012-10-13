@@ -42,9 +42,12 @@ import ultraextreme.util.Resources.ResourceName;
 public class GameOverScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
+	
+	private InputText nameInput;
 
 	public GameOverScene(final Camera camera, final Font font,
-			final VertexBufferObjectManager vertexBufferObjectManager, BaseGameActivity activity) {
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			BaseGameActivity activity) {
 		super(camera);
 		setBackground(new Background(0.9f, 0.1f, 0.1f));
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
@@ -53,8 +56,13 @@ public class GameOverScene extends MenuScene {
 		gotoMenuButton.setPosition(100, 100);
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
-		
-		InputText nameInput = new InputText(100, 200, "Input name", "Input name", SpriteFactory.getInstance().getTextInputBackground(), font, 17, 19, vertexBufferObjectManager, activity);
+
+		nameInput = new InputText(100, 300, "Highscore name",
+				"Enter your name for the highscore list", SpriteFactory
+						.getInstance().getTextInputBackground(), font, 0, 0,
+				vertexBufferObjectManager, activity);
+		nameInput.setText("Mr. Anon");
+		nameInput.getChildByIndex(0).setColor(Color.BLACK);
 		this.attachChild(nameInput);
 		this.registerTouchArea(nameInput);
 	}
