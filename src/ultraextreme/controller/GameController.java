@@ -180,7 +180,7 @@ public class GameController extends AbstractController implements
 	public void playerUpdate(IPlayer player) {
 		if (gameModel.isGameOver()) {
 			fireEvent(new ControllerEvent(this,
-					ControllerEventType.SWITCH_TO_HIGHSCORE));
+					ControllerEventType.SWITCH_TO_GAMEOVER));
 		}
 	}
 
