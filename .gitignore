@@ -6,6 +6,9 @@ Thumbs.db
 # files for the dex VM
 *.dex
 
+# created when running "android update project -p ."
+local.properties
+
 # Java class files
 *.class
 
