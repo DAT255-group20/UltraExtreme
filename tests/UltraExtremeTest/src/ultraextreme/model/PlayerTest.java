@@ -37,6 +37,8 @@ import ultraextreme.model.util.Position;
 /**
  * 
  * @author Daniel Jonsson
+ * @author Bjorn Persson Mattsson
+ * @author Viktor Anderling
  * 
  */
 public class PlayerTest extends TestCase {
@@ -45,24 +47,23 @@ public class PlayerTest extends TestCase {
 	private BulletManager bulletManager;
 	private PlayerID playerId;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		this.resetInstanceVariables();
-	}
-
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
 		player = new Player(playerId, bulletManager);
 	}
 
-	/**
-	 * Test if the get method works.
-	 */
-	public void testGetShip() {
-		AbstractEntity playerShip = player.getShip();
-		assertTrue(playerShip == player.getShip());
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.resetInstanceVariables();
+	}
+
+	public void testGetItemBar() {
+		ItemBar itemBar = player.getItemBar();
+		itemBar.addItem(new BasicWeapon(bulletManager));
+		assertEquals(itemBar.getItems().size(), player.getItemBar().getItems()
+				.size());
 	}
 
 	/**
@@ -80,11 +81,12 @@ public class PlayerTest extends TestCase {
 		assertEquals(player.getPlayerId(), PlayerID.PLAYER1);
 	}
 
-	public void testGetItemBar() {
-		ItemBar itemBar = player.getItemBar();
-		itemBar.addItem(new BasicWeapon(bulletManager));
-		assertEquals(itemBar.getItems().size(), player.getItemBar().getItems()
-				.size());
+	/**
+	 * Test if the get method works.
+	 */
+	public void testGetShip() {
+		AbstractEntity playerShip = player.getShip();
+		assertTrue(playerShip == player.getShip());
 	}
 
 	public void testGiveWeapon() {
@@ -94,6 +96,17 @@ public class PlayerTest extends TestCase {
 		assertEquals(preNoOfWeapons, itemBar.getItems().size() - 1);
 	}
 
+	public void testItemBarSize() {
+		ItemBar itemBar = player.getItemBar();
+		for (int i = 0; i < 20; i++)
+			itemBar.addItem(new BasicWeapon(bulletManager));
+		assertEquals("Correct item bar size", 10, itemBar.getItems().size());
+	}
+
+	public void testReset() {
+		fail("Not yet tested");
+	}
+
 	public void testScore() {
 		final int scoreValue = 12;
 		PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -101,18 +114,8 @@ public class PlayerTest extends TestCase {
 		IEnemy enemy = new IEnemy() {
 
 			@Override
-			public boolean shouldSpawnPickup() {
-				return false;
-			}
-
-			@Override
-			public boolean isDead() {
-				return false;
-			}
-
-			@Override
-			public AbstractWeapon getWeapon() {
-				return null;
+			public int getScoreValue() {
+				return scoreValue;
 			}
 
 			@Override
@@ -121,8 +124,18 @@ public class PlayerTest extends TestCase {
 			}
 
 			@Override
-			public int getScoreValue() {
-				return scoreValue;
+			public AbstractWeapon getWeapon() {
+				return null;
+			}
+
+			@Override
+			public boolean isDead() {
+				return false;
+			}
+
+			@Override
+			public boolean shouldSpawnPickup() {
+				return false;
 			}
 		};
 		assertTrue(player.getScore() == 0);
@@ -132,10 +145,6 @@ public class PlayerTest extends TestCase {
 
 		pcs.firePropertyChange(Constants.EVENT_ENEMY_KILLED, null, enemy);
 		assertTrue(player.getScore() == 2 * scoreValue);
-	}
-
-	public void testReset() {
-		fail("Not yet tested");
 	}
 
 	/**
@@ -199,10 +208,10 @@ public class PlayerTest extends TestCase {
 	private void updateTester(int dX, int dY, boolean fireWeapons,
 			boolean dropBomb) {
 		this.resetInstanceVariables();
-		Position pOld = new Position(player.getShip().getPosition());
+		Position pOld = new Position(player.getShip().getPositionClone());
 		ModelInput m = new ModelInput(dX, dY, fireWeapons, dropBomb);
 		player.update(m, 1);
-		Position pNew = player.getShip().getPosition();
+		Position pNew = player.getShip().getPositionClone();
 		assertEquals(pOld.getX() + dX, pNew.getX());
 		assertEquals(pOld.getY() + dY, pNew.getY());
 		if (fireWeapons)

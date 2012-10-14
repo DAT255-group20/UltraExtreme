@@ -21,6 +21,7 @@
 package ultraextreme.model.entity;
 
 import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 /**
@@ -34,6 +35,11 @@ public abstract class AbstractDestroyableEntity extends AbstractEntity {
 	public AbstractDestroyableEntity(double x, double y, int width, int height,
 			Rotation direction, ObjectName objectName) {
 		super(x, y, width, height, direction, objectName);
+	}
+
+	public AbstractDestroyableEntity(Position position, int width, int height,
+			Rotation rotation, ObjectName name) {
+		super(position, width, height, rotation, name);
 	}
 
 	/**

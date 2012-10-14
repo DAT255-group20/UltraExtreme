@@ -40,32 +40,81 @@ import ultraextreme.model.util.Position;
  */
 public class GameObjectSprite extends Sprite {
 
-	/**
-	 * Reference to a bullet in the model.
-	 */
-	private final IEntity entity;
-
-	private boolean isBlinked;
-
-	private Vector2d directionVector;
-
-	// TODO PMD: Possible unsafe assignment to a non-final static field in a
-	// constructor.
 	private static Dimension screenDimension;
 	private static final Dimension MODEL_DIMENSION = Constants
 			.getLevelDimension();
 
+	public static void setScreenDimension(final Dimension dimension) {
+		screenDimension = dimension;
+	}
+
+	/**
+	 * Reference to an entity in the model.
+	 */
+	private final IEntity entity;
+
+	private boolean isHitBlinked;
+
+	private boolean isInvincibleBlinked;
+	private Vector2d directionVector;
+
+	private final Vector2d imageOffset;
+
 	public GameObjectSprite(final IEntity entity,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final ITextureRegion texture) {
+			final ITextureRegion texture, Vector2d imageOffset) {
 
-		super((float) entity.getPosition().getX(), (float) entity.getPosition()
-				.getY(), entity.getWidth(), entity.getHeight(), texture,
-				vertexBufferObjectManager);
+		// Change the width and height to the entity's width and height to
+		// squeeze the picture
+		super((float) (entity.getPositionClone().getX() - imageOffset.x),
+				(float) (entity.getPositionClone().getY() - imageOffset.y),
+				texture.getWidth()
+						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
+				texture.getHeight()
+						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
+				texture, vertexBufferObjectManager);
+
 		this.entity = entity;
-		this.isBlinked = false;
+
+		this.imageOffset = imageOffset;
+
+		this.isHitBlinked = false;
+		this.isInvincibleBlinked = false;
+
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
+		}
+		Vector2d scalingQuotient = screenDimension.getQuotient(MODEL_DIMENSION);
+		this.setScale((float) scalingQuotient.x, (float) scalingQuotient.y);
+	}
+
+	/**
+	 * returns the entity this sprite is representing
+	 */
+	public IEntity getEntity() {
+		return entity;
+	}
+
+	public void invincibilityBlink() {
+		if (!isInvincibleBlinked) {
+			this.setColor(0f, 0f, 1f);
+			isInvincibleBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isInvincibleBlinked = false;
+		}
+	}
+
+	/**
+	 * Switches the color of this sprite between two.
+	 */
+	public void onHitBlink() {
+		if (!isHitBlinked) {
+			this.setColor(1f, 0f, 0f);
+			isHitBlinked = true;
+		} else {
+			this.setColor(1f, 1f, 1f);
+			isHitBlinked = false;
 		}
 	}
 
@@ -74,9 +123,10 @@ public class GameObjectSprite extends Sprite {
 	 */
 	public void update() {
 		final Position newPosition = screenDimension.scalePosition(
-				MODEL_DIMENSION, entity.getPosition());
-		this.setX((float) newPosition.getX());
-		this.setY((float) newPosition.getY());
+				MODEL_DIMENSION, entity.getPositionClone());
+		this.setX((float) (newPosition.getX() - imageOffset.x));
+		this.setY((float) (newPosition.getY() - imageOffset.y));
+
 		if (entity instanceof IBullet) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
@@ -89,29 +139,5 @@ public class GameObjectSprite extends Sprite {
 			}
 			this.setRotation(newAngle + 90f);
 		}
-	}
-
-	/**
-	 * Switches the color of this sprite between two.
-	 */
-	public void blink() {
-		if (!isBlinked) {
-			this.setColor(1f, 0f, 0f);
-			isBlinked = true;
-		} else {
-			this.setColor(1f, 1f, 1f);
-			isBlinked = false;
-		}
-	}
-
-	/**
-	 * returns the entity this sprite is representing
-	 */
-	public IEntity getEntity() {
-		return entity;
-	}
-
-	public static void setScreenDimension(final Dimension dimension) {
-		screenDimension = dimension;
 	}
 }

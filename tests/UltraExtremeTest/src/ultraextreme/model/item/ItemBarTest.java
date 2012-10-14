@@ -39,16 +39,32 @@ public class ItemBarTest extends TestCase {
 	private BulletManager bulletManager;
 	private ItemBar itemBar;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		this.resetInstanceVariables(10);
+	private void addItemSizeTester(int numberOfItems) {
+		for (int i = 0; i < numberOfItems; i++) {
+			itemBar.addItem(new BasicWeapon(bulletManager));
+			assertEquals(i + 1, itemBar.getMarkerPosition());
+		}
+		assertEquals(itemBar.getItems().size(), numberOfItems);
+	}
+
+	private AbstractWeapon getNewItem() {
+		return new BasicWeapon(bulletManager);
+	}
+
+	private AbstractWeapon getNewWeapon() {
+		return new BasicWeapon(bulletManager);
 	}
 
 	private void resetInstanceVariables(int slots) {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
 		itemBar = new ItemBar(playerId, bulletManager, new Rotation(0), slots);
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.resetInstanceVariables(10);
 	}
 
 	/**
@@ -62,13 +78,6 @@ public class ItemBarTest extends TestCase {
 		}
 	}
 
-	private void addItemSizeTester(int numberOfItems) {
-		for (int i = 0; i < numberOfItems; i++) {
-			itemBar.addItem(new BasicWeapon(bulletManager));
-		}
-		assertEquals(itemBar.getItems().size(), numberOfItems);
-	}
-
 	/**
 	 * Add 15 items to an item bar that can only take 10 items, and then check
 	 * that the size of items is correct in the item bar.
@@ -79,36 +88,6 @@ public class ItemBarTest extends TestCase {
 			itemBar.addItem(getNewItem());
 		}
 		assertEquals(itemBar.getItems().size(), 10);
-	}
-
-	/**
-	 * Add 7 items to an item bar that can only hold 5 items. Then check so it's
-	 * the last 5 added items that are in the item bar. Also check so they are
-	 * in the right order.
-	 */
-	public void testWhetherItemsAreWrittenOverCorrectly() {
-		resetInstanceVariables(5);
-		List<AbstractWeapon> items = new ArrayList<AbstractWeapon>();
-		for (int i = 0; i < 7; i++) {
-			AbstractWeapon item = getNewItem();
-			items.add(item);
-			itemBar.addItem(item);
-		}
-		assertFalse(itemBar.getItems().contains(items.get(0)));
-		assertFalse(itemBar.getItems().contains(items.get(1)));
-		assertSame(itemBar.getItems().get(0), items.get(5));
-		assertSame(itemBar.getItems().get(1), items.get(6));
-		assertSame(itemBar.getItems().get(2), items.get(2));
-		assertSame(itemBar.getItems().get(3), items.get(3));
-		assertSame(itemBar.getItems().get(4), items.get(4));
-	}
-
-	private AbstractWeapon getNewItem() {
-		return new BasicWeapon(bulletManager);
-	}
-
-	private AbstractWeapon getNewWeapon() {
-		return new BasicWeapon(bulletManager);
 	}
 
 	/**
@@ -128,5 +107,78 @@ public class ItemBarTest extends TestCase {
 
 		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() > bulletsShot);
+	}
+
+	public void testLoseItems() {
+		BasicWeapon item = new BasicWeapon(new BulletManager());
+		itemBar.addItem(item);
+		itemBar.addItem(item);
+		itemBar.addItem(item);
+		assertEquals(3, itemBar.getItems().size());
+		assertEquals(3, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(2, itemBar.getItems().size());
+		assertEquals(2, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(1, itemBar.getItems().size());
+		assertEquals(1, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(0, itemBar.getItems().size());
+		assertEquals(0, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(0, itemBar.getItems().size());
+		assertEquals(0, itemBar.getMarkerPosition());
+	}
+
+	/**
+	 * Fill an item bar with items, then see if the marker moves correctly when
+	 * an item is lost.
+	 */
+	public void testLoseItemsFromFullBar() {
+		BasicWeapon item = new BasicWeapon(new BulletManager());
+		resetInstanceVariables(5);
+		// Fill the item bar
+		for (int i = 0; i < 5; ++i)
+			itemBar.addItem(item);
+		assertEquals("Marker on first position", 0, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals("Marker on last position", 4, itemBar.getMarkerPosition());
+	}
+
+	/**
+	 * This test checks so the marker's position wraps correctly when the item
+	 * bar gets full.
+	 */
+	public void testMarkerPositionWraping() {
+		BasicWeapon item = new BasicWeapon(new BulletManager());
+
+		// Add items and check if it wraps
+		for (int i = 0; i < 30; ++i) {
+			assertEquals(i % 10, itemBar.getMarkerPosition());
+			itemBar.addItem(item);
+		}
+	}
+
+	/**
+	 * Add 7 items to an item bar that can only hold 5 items. Then check so it's
+	 * the last 5 added items that are in the item bar. Also check so they are
+	 * in the right order.
+	 */
+	public void testWhetherItemsAreWrittenOverCorrectly() {
+		resetInstanceVariables(5);
+		List<AbstractWeapon> items = new ArrayList<AbstractWeapon>();
+		for (int i = 0; i < 7; i++) {
+			AbstractWeapon item = getNewItem();
+			items.add(item);
+			itemBar.addItem(item);
+			assertEquals((i + 1) % 5, itemBar.getMarkerPosition());
+		}
+		assertFalse(itemBar.getItems().contains(items.get(0)));
+		assertFalse(itemBar.getItems().contains(items.get(1)));
+		assertSame(itemBar.getItems().get(0), items.get(5));
+		assertSame(itemBar.getItems().get(1), items.get(6));
+		assertSame(itemBar.getItems().get(2), items.get(2));
+		assertSame(itemBar.getItems().get(3), items.get(3));
+		assertSame(itemBar.getItems().get(4), items.get(4));
 	}
 }

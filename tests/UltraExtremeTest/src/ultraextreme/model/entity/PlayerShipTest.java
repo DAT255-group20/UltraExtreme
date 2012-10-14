@@ -32,25 +32,21 @@ public class PlayerShipTest extends AbstractEntityTest {
 
 	PlayerShip playerShip;
 
+	@Override
+	protected AbstractEntity getNewAbstractEntity(double x, double y,
+			int width, int height, Rotation direction) {
+		return new PlayerShip(x, y, width, height);
+	}
+
 	private void resetInstanceVariables(double x, double y, int width,
 			int height) {
 		playerShip = new PlayerShip(x, y, width, height);
 	}
 
-	/**
-	 * Test if it's possible to move the ship.
-	 */
 	@Override
-	public void testMove() {
-		resetInstanceVariables(10, 20, 30, 40);
-		playerShip.move(0, 0);
-		assertEquals(playerShip.getPosition(), new Position(10.0, 20.0));
-
-		playerShip.move(10, 100);
-		assertEquals(playerShip.getPosition(), new Position(20.0, 120.0));
-
-		playerShip.move(-100, -1000);
-		assertEquals(playerShip.getPosition(), new Position(-80.0, -880.0));
+	public void testGetDirection() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertEquals(playerShip.getRotation(), new Rotation(0));
 	}
 
 	/**
@@ -62,20 +58,19 @@ public class PlayerShipTest extends AbstractEntityTest {
 		assertEquals(playerShip.isDestroyed(), false);
 	}
 
+	/**
+	 * Test if it's possible to move the ship.
+	 */
 	@Override
-	public void testGetDirection() {
-		resetInstanceVariables(0, 0, 0, 0);
-		assertEquals(playerShip.getRotation(), new Rotation(0));
-	}
+	public void testMove() {
+		resetInstanceVariables(10, 20, 30, 40);
+		playerShip.move(0, 0);
+		assertEquals(playerShip.getPositionClone(), new Position(10.0, 20.0));
 
-	@Override
-	public void testGetSpeedMod() {
-		// FIXME
-	}
+		playerShip.move(10, 100);
+		assertEquals(playerShip.getPositionClone(), new Position(20.0, 120.0));
 
-	@Override
-	protected AbstractEntity getNewAbstractEntity(double x, double y,
-			int width, int height, Rotation direction) {
-		return new PlayerShip(x, y, width, height);
+		playerShip.move(-100, -1000);
+		assertEquals(playerShip.getPositionClone(), new Position(-80.0, -880.0));
 	}
 }

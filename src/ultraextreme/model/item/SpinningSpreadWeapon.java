@@ -38,13 +38,18 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 
 	private static final int BULLET_WIDTH = 20;
 	private static final int BULLET_HEIGHT = 40;
+	private static final int BULLET_DAMAGE = 5;
 	private static float initCooldown = 1 / 6f;
+	public static float getInitCooldown() {
+		return initCooldown;
+	}
 	private float cooldown;
 	private double angleStep;
+
 	private double currentAngle;
 
 	public SpinningSpreadWeapon(final BulletManager bulletManager) {
-		super(bulletManager, ObjectName.SPINNING_SPREAD_WEAPON);
+		super(bulletManager, ObjectName.SPINNING_WEAPON);
 		cooldown = initCooldown;
 		angleStep = Math.PI / 12;
 		currentAngle = 0;
@@ -59,13 +64,10 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 			this.getBulletManager().addBullet(
 					new BasicBullet(shipPosition.getX(), shipPosition.getY(),
 							BULLET_WIDTH, BULLET_HEIGHT, playerId,
-							new Rotation(rotation.getAngle() + currentAngle)));
+							new Rotation(rotation.getAngle() + currentAngle),
+							BULLET_DAMAGE));
 			currentAngle = currentAngle + angleStep;
 		}
-	}
-
-	public static float getInitCooldown() {
-		return initCooldown;
 	}
 
 	@Override

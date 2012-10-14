@@ -23,12 +23,15 @@ package ultraextreme.view;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.opengl.texture.TextureManager;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegion;
+import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
@@ -45,10 +48,14 @@ import ultraextreme.model.util.ObjectName;
  */
 public class SpriteFactory {
 
-	private Map<ObjectName, ITextureRegion> textureMap;
+	private Map<ObjectName, ITextureRegion> textureMap = new HashMap<ObjectName, ITextureRegion>();
 
-	// TODO not yet implemented offsets
-	private Map<ObjectName, Integer> offsetMap;
+	private Map<ObjectName, Vector2d> offsetMap = new HashMap<ObjectName, Vector2d>();
+
+	/**
+	 * The items' textures.
+	 */
+	private Map<ObjectName, ITextureRegion> itemTextures = new HashMap<ObjectName, ITextureRegion>();
 
 	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
 	// variable.
@@ -63,9 +70,18 @@ public class SpriteFactory {
 	private ITextureRegion itemBarTexture;
 
 	/**
-	 * The items' textures.
+	 * The item bar's marker texture.
 	 */
-	private Map<ObjectName, ITextureRegion> itemTextures;
+	private ITextureRegion itemBarMarkerTexture;
+
+	private TiledTextureRegion textInputBackground;
+
+	/**
+	 * @return the textInputBackground
+	 */
+	public TiledTextureRegion getTextInputBackground() {
+		return textInputBackground;
+	}
 
 	private static SpriteFactory instance;
 
@@ -87,37 +103,81 @@ public class SpriteFactory {
 
 		// init enemies bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity,
-						"ship_placeholder.png", 0, 0);
-		textureMap.put(ObjectName.PLAYERSHIP, playerShip);
+				.createFromAsset(textureAtlas, activity, "ship_blue_42px.png",
+						0, 0);
+		putProperties(ObjectName.PLAYERSHIP, playerShip, new Vector2d(16.5, 13));
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity,
-						"bullet_placeholder.png", 40, 0);
-		textureMap.put(ObjectName.BASIC_BULLET, playerBullet);
+				.createFromAsset(textureAtlas, activity, "laserGreen.png", 33,
+						0);
+		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
+				16.5));
 
-		final TextureRegion BasicEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity,
-						"enemy_placeholder.png", 0, 40);
-		textureMap.put(ObjectName.BASIC_ENEMYSHIP, BasicEnemy);
+		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 0,
+						43);
+		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27,
+				40));
+
+		final TextureRegion hitAndRunEnemy = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "evil_ship_2.png",
+						770, 0);
+
+		putProperties(ObjectName.HITANDRUN_ENEMYSHIP, hitAndRunEnemy,
+				new Vector2d(27, 40));
 
 		// init pickupables
-		textureMap.put(ObjectName.BASIC_WEAPON, BasicEnemy);
-		textureMap.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip);
+		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "cannon.png", 56, 51);
+		putProperties(ObjectName.BASIC_WEAPON, basicWeapon,
+				new Vector2d(15, 15));
+
+		final TextureRegion spinningWeapon = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "spin.png", 87, 51);
+		putProperties(ObjectName.SPINNING_WEAPON, spinningWeapon, new Vector2d(
+				15, 15));
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar.png", 80, 0);
 
 		// Init the item textures for items in the itembar
-		itemTextures = new HashMap<ObjectName, ITextureRegion>();
-		itemTextures.put(ObjectName.BASIC_WEAPON, BasicEnemy); // Test only
-		itemTextures.put(ObjectName.SPINNING_SPREAD_WEAPON, playerShip); // Test
-																			// only
+		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
+		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon); // Test
+																		// only
+
+		// Init the item bar marker
+		itemBarMarkerTexture = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "itembar_marker.png",
+						700, 0);
+
+		// Init the textinput background
+		textInputBackground = BitmapTextureAtlasTextureRegionFactory
+				.createTiledFromAsset(textureAtlas, activity, "button_1.png",
+						100, 100, 1, 1);
 
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
+	}
+
+	/**
+	 * Puts the properties into textureMap and offsetMap. Also multiplies the
+	 * offset with the sprite scaling factor.
+	 * 
+	 * @param objectName
+	 *            The key in the maps.
+	 * @param texture
+	 *            The texture that goes into textureMap.
+	 * @param textureOffset
+	 *            The offset that goes into offsetMap, multiplied with the
+	 *            sprite scaling factor.
+	 */
+	private void putProperties(ObjectName objectName, TextureRegion texture,
+			Vector2d textureOffset) {
+		textureOffset.scale(ultraextreme.util.Constants.SPRITE_SCALE_FACTOR);
+		textureMap.put(objectName, texture);
+		offsetMap.put(objectName, textureOffset);
 	}
 
 	public static void initialize(SimpleBaseGameActivity activity) {
@@ -145,9 +205,18 @@ public class SpriteFactory {
 	 */
 	public GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
-		textureMap.get(entity.getObjectName());
-		return new GameObjectSprite(entity, vbom, textureMap.get(entity
-				.getObjectName()));
+		ObjectName objName = entity.getObjectName();
+		ITextureRegion texture = textureMap.get(objName);
+		Vector2d offset = offsetMap.get(objName);
+		if (texture == null) {
+			throw new IllegalArgumentException(
+					"No texture is associated with that kind of object");
+		}
+		if (offset == null) {
+			offset = new Vector2d();
+		}
+
+		return new GameObjectSprite(entity, vbom, texture, offset);
 	}
 
 	/**
@@ -165,6 +234,19 @@ public class SpriteFactory {
 	 * @return An texture of an item that you want to show in the item bar.
 	 */
 	public ITextureRegion getItemTexture(ObjectName item) {
-		return itemTextures.get(item);
+		ITextureRegion output = itemTextures.get(item);
+		if (output == null) {
+			throw new IllegalArgumentException(
+					"No texture is associated with that kind of object");
+		}
+		return output;
+	}
+
+	/**
+	 * 
+	 * @return The texture of the item bar's marker.
+	 */
+	public ITextureRegion getItemBarMarkerTexture() {
+		return itemBarMarkerTexture;
 	}
 }

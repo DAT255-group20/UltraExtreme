@@ -33,11 +33,14 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.GameModel;
 import ultraextreme.model.ModelInput;
+import ultraextreme.model.Player;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.entity.IEntity;
+import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
+import ultraextreme.util.Timer;
 import ultraextreme.view.GameObjectSprite;
 import ultraextreme.view.GameScene;
 import ultraextreme.view.SpriteFactory;
@@ -54,7 +57,9 @@ import android.util.Log;
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	// TODO perhaps refactor this variable?
-	private static final float blinkTime = 0.1f;
+	private static final float onHitBlinkTime = 0.1f;
+	private static final int playerInvincibilityBlinks = 12; // Must be an even
+																// number!
 
 	final private GameScene gameScene;
 	final private GameModel gameModel;
@@ -102,8 +107,9 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void reset() {
-		// Auto-generated method stub
-
+		// TODO Shouldn't we do something more here?
+		// FIXME The method doesn't seem to be called ever!
+		timerList.clear();
 	}
 
 	/**
@@ -112,13 +118,25 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		// TODO Refactor the "enemyHit" string.
 		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_DAMAGED)) {
 			EnemyShip ship = (EnemyShip) event.getNewValue();
-			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED, blinkTime,
-					ship);
+			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED,
+					onHitBlinkTime, ship);
 			timerList.add(timer);
-			getSprite(ship).blink();
+			getSprite(ship).onHitBlink();
+		} else if (event.getPropertyName().equals(
+				Constants.EVENT_ENTITY_INVINCIBLE)) {
+			Object o = event.getNewValue();
+			if (o instanceof Player) {
+				Player player = (Player) o;
+				PlayerShip ship = player.getShip();
+				Timer timer = new Timer(
+						Constants.EVENT_ENTITY_INVINCIBLE,
+						(float) (player.getInvincibilityTime() / playerInvincibilityBlinks),
+						ship, playerInvincibilityBlinks - 1);
+				timerList.add(timer);
+				getSprite(ship).invincibilityBlink();
+			}
 		} else if (event.getPropertyName().equals(Constants.EVENT_NEW_ENTITY)) {
 			IEntity entity;
 
@@ -177,10 +195,18 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 					if (sprite == null) {
 						timerDeprecated = true;
 					} else {
-						sprite.blink();
+						sprite.onHitBlink();
 					}
-					// TODO add more actions here!
 				}
+				if (propertyName.equals(Constants.EVENT_ENTITY_INVINCIBLE)) {
+					GameObjectSprite sprite = getSprite((IEntity) o);
+					if (sprite == null) {
+						timerDeprecated = true;
+					} else {
+						sprite.invincibilityBlink();
+					}
+				}
+				// TODO add more actions here!
 				if (!timer.isRunning() || timerDeprecated) {
 					i.remove();
 				}

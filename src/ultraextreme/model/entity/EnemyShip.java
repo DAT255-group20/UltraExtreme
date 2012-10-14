@@ -20,8 +20,8 @@
 
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 /**
@@ -34,8 +34,6 @@ public class EnemyShip extends AbstractDestroyableEntity {
 
 	private int hitPoints;
 
-	private static double speedMod = Constants.getEnemySpeedModifier();
-
 	public EnemyShip(final double x, final double y, final int width,
 			final int height, final Rotation rotation, int hitpoints,
 			ObjectName objectName) {
@@ -43,14 +41,16 @@ public class EnemyShip extends AbstractDestroyableEntity {
 		this.hitPoints = hitpoints;
 	}
 
-	@Override
-	public boolean isDestroyed() {
-		return hitPoints < 1;
+	public EnemyShip(Position position, int width, int height, int hitPoints,
+			ObjectName name) {
+		super(position, width, height, new Rotation(0), name);
+		this.hitPoints = hitPoints;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public double getSpeedMod() {
-		return speedMod;
+	public boolean isDestroyed() {
+		return hitPoints < 1;
 	}
 
 	/**

@@ -20,7 +20,6 @@
 
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Rotation;
@@ -37,9 +36,9 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	// What player shot this bullet
 	private final PlayerID playerId;
 
-	private boolean markedForRemoval = false;
+	private final int bulletDamage;
 
-	private static double speedMod = Constants.getBulletSpeedModifier();
+	private boolean markedForRemoval = false;
 
 	/**
 	 * 
@@ -50,9 +49,10 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	 */
 	public AbstractBullet(final double x, final double y, final int width,
 			final int height, PlayerID playerId, Rotation rotation,
-			final ObjectName bulletType) {
+			final ObjectName bulletType, final int bulletDamage) {
 		super(x, y, width, height, rotation, bulletType);
 		this.playerId = playerId;
+		this.bulletDamage = bulletDamage;
 	}
 
 	/**
@@ -64,18 +64,13 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	public abstract void doMovement(float timePassed);
 
 	@Override
+	public int getDamage() {
+		return bulletDamage;
+	}
+
+	@Override
 	public PlayerID getPlayerId() {
 		return playerId;
-	}
-
-	@Override
-	public double getSpeedMod() {
-		return speedMod;
-	}
-
-	@Override
-	public void markForRemoval() {
-		markedForRemoval = true;
 	}
 
 	@Override
@@ -84,7 +79,7 @@ public abstract class AbstractBullet extends AbstractEntity implements IBullet {
 	}
 
 	@Override
-	public int getDamage() {
-		return 10;
+	public void markForRemoval() {
+		markedForRemoval = true;
 	}
 }

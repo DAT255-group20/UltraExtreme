@@ -39,6 +39,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	private final Vector2d normDirectionVector;
 
+	private static final float speed = 300f;
 	/**
 	 * Distance left before stopping to track the enemy.
 	 */
@@ -46,9 +47,9 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	public BasicHomingBullet(final double x, final double y, final int width,
 			final int height, final PlayerID playerId,
-			AbstractDestroyableEntity target) {
+			AbstractDestroyableEntity target, int bulletDamage) {
 		super(x, y, width, height, playerId, new Rotation(0),
-				ObjectName.BASIC_HOMING_BULLET);
+				ObjectName.BASIC_HOMING_BULLET, bulletDamage);
 		this.setTarget(target);
 		normDirectionVector = new Vector2d();
 		updateDirection();
@@ -62,24 +63,14 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	}
 
-	private void updateDirection() {
-		final Position targetPosition = target.getPosition();
-		final Position thisPosition = this.getPosition();
-		normDirectionVector.normalize(new Vector2d(targetPosition.getX()
-				- thisPosition.getX(), targetPosition.getY()
-				- thisPosition.getY()));
-	}
-
 	@Override
 	public void doMovement(float timePassed) {
 		if (!((AbstractDestroyableEntity) target).isDestroyed()
 				|| bulletFuel < 0) {
 			updateDirection();
 		}
-		final double xMovement = normDirectionVector.x * timePassed
-				* this.getSpeedMod();
-		final double yMovement = normDirectionVector.y * timePassed
-				* this.getSpeedMod();
+		final double xMovement = normDirectionVector.x * timePassed * speed;
+		final double yMovement = normDirectionVector.y * timePassed * speed;
 		bulletFuel = bulletFuel
 				- Math.sqrt(xMovement * xMovement + yMovement * yMovement);
 
@@ -90,6 +81,14 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 	public Vector2d getNormalizedDirection() {
 		return normDirectionVector;
 
+	}
+
+	private void updateDirection() {
+		final Position targetPosition = target.getPositionClone();
+		final Position thisPosition = this.getPositionClone();
+		normDirectionVector.normalize(new Vector2d(targetPosition.getX()
+				- thisPosition.getX(), targetPosition.getY()
+				- thisPosition.getY()));
 	}
 
 }

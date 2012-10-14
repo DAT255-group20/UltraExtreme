@@ -20,7 +20,6 @@
 
 package ultraextreme.model.entity;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Rotation;
 
@@ -31,6 +30,9 @@ import ultraextreme.model.util.Rotation;
  */
 public abstract class AbstractBulletTest extends AbstractEntityTest {
 
+	protected abstract AbstractBullet getNewAbstractBullet(double x, double y,
+			int width, int height, PlayerID playerId, Rotation direction);
+
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
 			int width, int height, Rotation direction) {
@@ -38,8 +40,13 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 				direction);
 	}
 
-	protected abstract AbstractBullet getNewAbstractBullet(double x, double y,
-			int width, int height, PlayerID playerId, Rotation direction);
+	private AbstractBullet newBullet() {
+		return newBullet(PlayerID.PLAYER1);
+	}
+
+	private AbstractBullet newBullet(PlayerID playerId) {
+		return getNewAbstractBullet(10, 20, 30, 40, playerId, new Rotation(0));
+	}
 
 	public abstract void testDoMovement();
 
@@ -52,19 +59,5 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 
 		bullet = newBullet(PlayerID.ENEMY);
 		assertEquals(bullet.getPlayerId(), PlayerID.ENEMY);
-	}
-
-	@Override
-	public void testGetSpeedMod() {
-		AbstractBullet bullet = newBullet();
-		assertEquals(bullet.getSpeedMod(), Constants.getBulletSpeedModifier());
-	}
-
-	private AbstractBullet newBullet() {
-		return newBullet(PlayerID.PLAYER1);
-	}
-
-	private AbstractBullet newBullet(PlayerID playerId) {
-		return getNewAbstractBullet(10, 20, 30, 40, playerId, new Rotation(0));
 	}
 }

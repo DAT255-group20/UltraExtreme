@@ -18,16 +18,13 @@
  * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
  * ============================================================ */
 
-package ultraextreme.model.enemy;
+package ultraextreme.util;
 
-/**
- * A level boss.
- * 
- * @author Bjorn Persson Mattsson
- * 
- */
-public class Boss {
+public class Constants {
 
-	// TODO This class is not used and not implemented
-	private AbstractEnemy enemyController;
+	/**
+	 * Lets the sprites have a different size than their file picture
+	 * counterparts.
+	 */
+	public static final float SPRITE_SCALE_FACTOR = 1.75f;
 }
