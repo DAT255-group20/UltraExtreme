@@ -18,16 +18,30 @@
  * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
  * ============================================================ */
 
-package ultraextreme.model.enemy;
+package ultraextreme.model.enemyspawning.wave;
+
+import ultraextreme.model.enemy.AbstractEnemy;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
- * A level boss.
+ * This class is used by RandomWaveList and RectangleWave so there can be
+ * rectangles with different enemies.
  * 
- * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
-public class Boss {
+public abstract class EnemyProvider {
 
-	// TODO This class is not used and not implemented
-	private AbstractEnemy enemyController;
+	/**
+	 * Build an enemy.
+	 * 
+	 * @param spawningPosition
+	 *            The enemy ship's spawning position.
+	 * @param rotation
+	 *            Rotation of the enemy ship.
+	 * @return AbstractEnemy
+	 */
+	public abstract AbstractEnemy getEnemy(Position spawningPosition,
+			Rotation rotation);
 }

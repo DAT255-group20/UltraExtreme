@@ -38,21 +38,9 @@ import ultraextreme.model.util.PlayerID;
 public interface IPlayer extends PropertyChangeListener {
 
 	/**
-	 * Return a reference to the player's ship.
+	 * @return The total time which the ship will be invincible.
 	 */
-	PlayerShip getShip();
-
-	/**
-	 * Return the ID of the player.
-	 * 
-	 * @return The player's ID.
-	 */
-	PlayerID getPlayerId();
-
-	/**
-	 * @return The score of the player.
-	 */
-	int getScore();
+	public double getInvincibilityTime();
 
 	/**
 	 * @return A reference to the player's item bar
@@ -67,12 +55,24 @@ public interface IPlayer extends PropertyChangeListener {
 	public int getLives();
 
 	/**
+	 * Return the ID of the player.
+	 * 
+	 * @return The player's ID.
+	 */
+	PlayerID getPlayerId();
+
+	/**
+	 * @return The score of the player.
+	 */
+	int getScore();
+
+	/**
+	 * Return a reference to the player's ship.
+	 */
+	PlayerShip getShip();
+
+	/**
 	 * @return True if the player is currently invincible, false otherwise.
 	 */
 	public boolean isInvincible();
-
-	/**
-	 * @return The total time which the ship will be invincible.
-	 */
-	public double getInvincibilityTime();
 }

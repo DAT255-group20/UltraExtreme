@@ -39,16 +39,32 @@ public class ItemBarTest extends TestCase {
 	private BulletManager bulletManager;
 	private ItemBar itemBar;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		this.resetInstanceVariables(10);
+	private void addItemSizeTester(int numberOfItems) {
+		for (int i = 0; i < numberOfItems; i++) {
+			itemBar.addItem(new BasicWeapon(bulletManager));
+			assertEquals(i + 1, itemBar.getMarkerPosition());
+		}
+		assertEquals(itemBar.getItems().size(), numberOfItems);
+	}
+
+	private AbstractWeapon getNewItem() {
+		return new BasicWeapon(bulletManager);
+	}
+
+	private AbstractWeapon getNewWeapon() {
+		return new BasicWeapon(bulletManager);
 	}
 
 	private void resetInstanceVariables(int slots) {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
 		itemBar = new ItemBar(playerId, bulletManager, new Rotation(0), slots);
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.resetInstanceVariables(10);
 	}
 
 	/**
@@ -60,14 +76,6 @@ public class ItemBarTest extends TestCase {
 			resetInstanceVariables(1000);
 			addItemSizeTester(i);
 		}
-	}
-
-	private void addItemSizeTester(int numberOfItems) {
-		for (int i = 0; i < numberOfItems; i++) {
-			itemBar.addItem(new BasicWeapon(bulletManager));
-			assertEquals(i + 1, itemBar.getMarkerPosition());
-		}
-		assertEquals(itemBar.getItems().size(), numberOfItems);
 	}
 
 	/**
@@ -83,34 +91,22 @@ public class ItemBarTest extends TestCase {
 	}
 
 	/**
-	 * Add 7 items to an item bar that can only hold 5 items. Then check so it's
-	 * the last 5 added items that are in the item bar. Also check so they are
-	 * in the right order.
+	 * Fire a weapon a couple of times and check if the bullets are added to the
+	 * bullet manager.
 	 */
-	public void testWhetherItemsAreWrittenOverCorrectly() {
-		resetInstanceVariables(5);
-		List<AbstractWeapon> items = new ArrayList<AbstractWeapon>();
-		for (int i = 0; i < 7; i++) {
-			AbstractWeapon item = getNewItem();
-			items.add(item);
-			itemBar.addItem(item);
-			assertEquals((i + 1) % 5, itemBar.getMarkerPosition());
-		}
-		assertFalse(itemBar.getItems().contains(items.get(0)));
-		assertFalse(itemBar.getItems().contains(items.get(1)));
-		assertSame(itemBar.getItems().get(0), items.get(5));
-		assertSame(itemBar.getItems().get(1), items.get(6));
-		assertSame(itemBar.getItems().get(2), items.get(2));
-		assertSame(itemBar.getItems().get(3), items.get(3));
-		assertSame(itemBar.getItems().get(4), items.get(4));
-	}
+	public void testFireWeapon() {
+		float epsilon = 0.001f;
+		float cooldown = BasicWeapon.getInitCooldown();
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().size() == 0);
 
-	private AbstractWeapon getNewItem() {
-		return new BasicWeapon(bulletManager);
-	}
+		itemBar.addItem(getNewWeapon());
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
+		int bulletsShot = bulletManager.getBullets().size();
+		assertTrue(bulletsShot > 0);
 
-	private AbstractWeapon getNewWeapon() {
-		return new BasicWeapon(bulletManager);
+		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
+		assertTrue(bulletManager.getBullets().size() > bulletsShot);
 	}
 
 	public void testLoseItems() {
@@ -164,21 +160,25 @@ public class ItemBarTest extends TestCase {
 	}
 
 	/**
-	 * Fire a weapon a couple of times and check if the bullets are added to the
-	 * bullet manager.
+	 * Add 7 items to an item bar that can only hold 5 items. Then check so it's
+	 * the last 5 added items that are in the item bar. Also check so they are
+	 * in the right order.
 	 */
-	public void testFireWeapon() {
-		float epsilon = 0.001f;
-		float cooldown = BasicWeapon.getInitCooldown();
-		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
-		assertTrue(bulletManager.getBullets().size() == 0);
-
-		itemBar.addItem(getNewWeapon());
-		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
-		int bulletsShot = bulletManager.getBullets().size();
-		assertTrue(bulletsShot > 0);
-
-		itemBar.fireWeapons(new Position(), cooldown * (1 + epsilon));
-		assertTrue(bulletManager.getBullets().size() > bulletsShot);
+	public void testWhetherItemsAreWrittenOverCorrectly() {
+		resetInstanceVariables(5);
+		List<AbstractWeapon> items = new ArrayList<AbstractWeapon>();
+		for (int i = 0; i < 7; i++) {
+			AbstractWeapon item = getNewItem();
+			items.add(item);
+			itemBar.addItem(item);
+			assertEquals((i + 1) % 5, itemBar.getMarkerPosition());
+		}
+		assertFalse(itemBar.getItems().contains(items.get(0)));
+		assertFalse(itemBar.getItems().contains(items.get(1)));
+		assertSame(itemBar.getItems().get(0), items.get(5));
+		assertSame(itemBar.getItems().get(1), items.get(6));
+		assertSame(itemBar.getItems().get(2), items.get(2));
+		assertSame(itemBar.getItems().get(3), items.get(3));
+		assertSame(itemBar.getItems().get(4), items.get(4));
 	}
 }

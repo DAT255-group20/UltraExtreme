@@ -37,12 +37,12 @@ public class SpinningSpreadWeaponTest {
 	}
 
 	@Test
-	public void testSpinningSpreadWeapon() {
+	public void testGetInitCooldown() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetInitCooldown() {
+	public void testSpinningSpreadWeapon() {
 		fail("Not yet implemented");
 	}
 }

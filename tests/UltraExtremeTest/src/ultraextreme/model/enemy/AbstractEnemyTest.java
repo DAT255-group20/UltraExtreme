@@ -23,6 +23,7 @@ package ultraextreme.model.enemy;
 import junit.framework.TestCase;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 
 /**
  * 
@@ -30,26 +31,20 @@ import ultraextreme.model.item.BulletManager;
  * 
  */
 public class AbstractEnemyTest extends TestCase {
+
 	BulletManager bulletManager;
 	AbstractEnemy enemy;
+
+	private void resetInstanceVariables() {
+		bulletManager = new BulletManager();
+		WeaponFactory.initialize(bulletManager);
+		enemy = new BasicEnemy(5, 5);
+	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		resetInstanceVariables();
-	}
-
-	private void resetInstanceVariables() {
-		bulletManager = new BulletManager();
-		enemy = new BasicEnemy(5, 5, bulletManager);
-	}
-
-	/**
-	 * Tests the shoot() Method
-	 */
-	public void testShoot() {
-		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
-		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
 
 	/**
@@ -59,6 +54,14 @@ public class AbstractEnemyTest extends TestCase {
 		assertTrue(enemy.getShip().isDestroyed() == enemy.isDead());
 		enemy.getShip().receiveDamage(10000);
 		assertTrue(enemy.isDead());
+	}
+
+	/**
+	 * Tests the shoot() Method
+	 */
+	public void testShoot() {
+		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
+		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
 
 }

@@ -20,8 +20,6 @@
 
 package ultraextreme.model.enemyspawning.wave;
 
-import ultraextreme.model.enemy.BasicEnemy;
-import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -35,7 +33,7 @@ import ultraextreme.model.util.Rotation;
  * @author Daniel Jonsson
  * 
  */
-public class HorizontalLineWave extends AbstractWave {
+public class RectangleWave extends AbstractWave {
 
 	private float timer;
 
@@ -49,12 +47,14 @@ public class HorizontalLineWave extends AbstractWave {
 
 	private final Position spawningPosition;
 
+	private EnemyProvider enemyProvider;
+
 	/**
 	 * Create a new vertical enemy line.
 	 * 
 	 * @param enemiesInLines
 	 *            How many enemies a horizontal line should consist of.
-	 * @param maxLines
+	 * @param lines
 	 *            Number of horizontal lines.
 	 * @param rotation
 	 *            How much you want to rotate the line.
@@ -62,19 +62,19 @@ public class HorizontalLineWave extends AbstractWave {
 	 *            X position where the enemies should spawn.
 	 * @param y
 	 *            Y position where the enemies should spawn.
-	 * @param bulletManager
-	 *            Reference to a bullet manager so the enemies can be created.
+	 * @param enemyProvider
+	 *            The class that will create the RectangleWave its enemies.
 	 */
-	public HorizontalLineWave(final int enemiesInLines, final int maxLines,
+	public RectangleWave(final int enemiesInLines, final int lines,
 			final double rotation, final int x, final int y,
-			final BulletManager bulletManager) {
-		super(bulletManager);
+			final EnemyProvider enemyProvider) {
 		timer = 2;
 		lineCounter = 0;
 		this.enemiesInLines = enemiesInLines;
-		this.maxLines = maxLines;
+		this.maxLines = lines;
 		this.rotation = new Rotation(rotation);
 		this.spawningPosition = new Position(x, y);
+		this.enemyProvider = enemyProvider;
 	}
 
 	/**
@@ -98,9 +98,17 @@ public class HorizontalLineWave extends AbstractWave {
 	 */
 	private void spawnLine() {
 		for (int i = 0; i < enemiesInLines; i++) {
-			fireNewEnemySpawned(new BasicEnemy(
-					spawningPosition.getX() + i * 75, spawningPosition.getY(),
-					rotation, this.bulletManager));
+			// fireNewEnemySpawned(new BasicEnemy(
+			// spawningPosition.getX() + i * 75, spawningPosition.getY(),
+			// rotation, this.bulletManager));
+			// fireNewEnemySpawned(new HitAndRunEnemy(spawningPosition,
+			// spawningPosition, spawningPosition, this.bulletManager));
+			// fireNewEnemySpawned(new HitAndRunEnemy(spawningPosition,
+			// new Position(500, 500), spawningPosition));
+			Position p = new Position(spawningPosition.getX() + i * 75,
+					spawningPosition.getY());
+			fireNewEnemySpawned(enemyProvider.getEnemy(p, rotation));
 		}
 	}
+
 }

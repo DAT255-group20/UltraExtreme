@@ -24,10 +24,10 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import ultraextreme.model.enemyspawning.wave.HorizontalLineWave;
+import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
-import ultraextreme.model.enemyspawning.wave.VerticalLineWave;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 
 /**
  * 
@@ -39,13 +39,65 @@ public class RandomWaveListTest extends TestCase implements
 
 	private RandomWaveList waveList;
 
+	private BulletManager bulletManager;
+
 	/**
 	 * Reset the instance variable waveList.
 	 * 
 	 * @param numberOfWaves
 	 */
 	private void resetWaveList(int numberOfWaves) {
-		waveList = new RandomWaveList(numberOfWaves, new BulletManager());
+		waveList = new RandomWaveList(numberOfWaves);
+	}
+
+	@Override
+	public void setUp() {
+		bulletManager = new BulletManager();
+		WeaponFactory.initialize(bulletManager);
+	}
+
+	/**
+	 * This test will create a new RandomWaveList, generate some waves and check
+	 * if they got the correct spawn time and are instance of the right wave.
+	 */
+	public void testGeneratingNewWaves() {
+		RandomWaveList waveList = new RandomWaveList(100,
+				new AbstractRandomGenerator() {
+					private int counter;
+
+					@Override
+					public float nextFloat() {
+						return ++counter;
+					}
+				});
+
+		// 0
+		assertEquals(waveList.getCurrentSpawningTime(), 0f);
+		assertTrue(waveList.getCurrentWave() instanceof VWave);
+
+		waveList.next();
+
+		// 5.5
+		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
+
+		waveList.next();
+
+		// 5.5 + 7.5 = 13
+		assertEquals(waveList.getCurrentSpawningTime(), 13f);
+		// assertTrue(waveList.getCurrentWave() instanceof VerticalLineWave);
+
+		waveList.next();
+
+		// 5.5 + 7.5 + 9.5 = 22.5
+		assertEquals(waveList.getCurrentSpawningTime(), 22.5f);
+		assertTrue(waveList.getCurrentWave() instanceof VWave);
+
+		waveList.next();
+
+		// 5.5 + 7.5 + 9.5 + 11.5 = 34
+		assertEquals(waveList.getCurrentSpawningTime(), 34f);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 	}
 
 	@Override
@@ -74,51 +126,6 @@ public class RandomWaveListTest extends TestCase implements
 			assertEquals(waves, waveList.getCurrentWaveNumber());
 			assertFalse(waveList.hasNext());
 		}
-	}
-
-	/**
-	 * This test will create a new RandomWaveList, generate some waves and check
-	 * if they got the correct spawn time and are instance of the right wave.
-	 */
-	public void testGeneratingNewWaves() {
-		BulletManager bulletManager = new BulletManager();
-		RandomWaveList waveList = new RandomWaveList(100, bulletManager,
-				new AbstractRandomGenerator() {
-					private int counter;
-
-					@Override
-					public float nextFloat() {
-						return ++counter;
-					}
-				});
-
-		// 0
-		assertEquals(waveList.getCurrentSpawningTime(), 0f);
-		assertTrue(waveList.getCurrentWave() instanceof VWave);
-
-		waveList.next();
-
-		// 5.5
-		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
-		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
-
-		waveList.next();
-
-		// 5.5 + 7.5 = 13
-		assertEquals(waveList.getCurrentSpawningTime(), 13f);
-		assertTrue(waveList.getCurrentWave() instanceof VerticalLineWave);
-
-		waveList.next();
-
-		// 5.5 + 7.5 + 9.5 = 22.5
-		assertEquals(waveList.getCurrentSpawningTime(), 22.5f);
-		assertTrue(waveList.getCurrentWave() instanceof VWave);
-
-		waveList.next();
-
-		// 5.5 + 7.5 + 9.5 + 11.5 = 34
-		assertEquals(waveList.getCurrentSpawningTime(), 34f);
-		assertTrue(waveList.getCurrentWave() instanceof HorizontalLineWave);
 	}
 
 }

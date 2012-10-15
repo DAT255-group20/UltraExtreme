@@ -40,9 +40,43 @@ import ultraextreme.model.util.ObjectName;
  * 
  */
 public class PickupManagerTest extends TestCase {
+	/**
+	 * Add this as a listener to the pickupManager and collects its pickups
+	 * 
+	 * @author Daniel Jonsson, Johan Gronvall
+	 * 
+	 */
+	public class PickupCollector implements PropertyChangeListener {
+
+		private Map<String, WeaponPickup> map;
+
+		public PickupCollector() {
+			map = new HashMap<String, WeaponPickup>();
+		}
+
+		public Map<String, WeaponPickup> getPickupMap() {
+			return map;
+		}
+
+		@Override
+		public void propertyChange(PropertyChangeEvent event) {
+
+			// if an add has already been performed, save instead an
+			// additionalAdd in the map
+			if (map.containsKey(event.getPropertyName())
+					&& (event.getPropertyName()
+							.equals(Constants.EVENT_NEW_ENTITY))) {
+				map.put("additionalAdd", (WeaponPickup) event.getNewValue());
+			} else {
+				map.put(event.getPropertyName(),
+						(WeaponPickup) event.getNewValue());
+			}
+		}
+	}
 	PickupManager manager;
 	WeaponPickup pickup;
 	WeaponPickup pickup2;
+
 	PickupCollector collector;
 
 	@Override
@@ -69,23 +103,6 @@ public class PickupManagerTest extends TestCase {
 				.equals(pickup2));
 	}
 
-	@Test
-	public void testRemovePickupWeaponPickup() {
-		manager.removePickup(pickup);
-		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
-				.equals(pickup));
-	}
-
-	@Test
-	public void testRemovePickUpInt() {
-		manager.removePickup(0);
-		assertTrue(manager.getPickups().get(0).equals(pickup2));
-		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
-				.equals(pickup));
-
-	}
-
 	public void testClearAllPickups() {
 		fail("Not yet tested");
 	}
@@ -97,37 +114,20 @@ public class PickupManagerTest extends TestCase {
 		assertTrue(manager.getPickups().get(1).equals(pickup2));
 	}
 
-	/**
-	 * Add this as a listener to the pickupManager and collects its pickups
-	 * 
-	 * @author Daniel Jonsson, Johan Gronvall
-	 * 
-	 */
-	public class PickupCollector implements PropertyChangeListener {
+	@Test
+	public void testRemovePickUpInt() {
+		manager.removePickup(0);
+		assertTrue(manager.getPickups().get(0).equals(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.equals(pickup));
 
-		private Map<String, WeaponPickup> map;
+	}
 
-		public PickupCollector() {
-			map = new HashMap<String, WeaponPickup>();
-		}
-
-		@Override
-		public void propertyChange(PropertyChangeEvent event) {
-
-			// if an add has already been performed, save instead an
-			// additionalAdd in the map
-			if (map.containsKey(event.getPropertyName())
-					&& (event.getPropertyName()
-							.equals(Constants.EVENT_NEW_ENTITY))) {
-				map.put("additionalAdd", (WeaponPickup) event.getNewValue());
-			} else {
-				map.put(event.getPropertyName(),
-						(WeaponPickup) event.getNewValue());
-			}
-		}
-
-		public Map<String, WeaponPickup> getPickupMap() {
-			return map;
-		}
+	@Test
+	public void testRemovePickupWeaponPickup() {
+		manager.removePickup(pickup);
+		assertTrue(manager.getPickups().get(0).equals(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.equals(pickup));
 	}
 }
