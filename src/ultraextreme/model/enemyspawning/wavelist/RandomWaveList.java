@@ -120,6 +120,7 @@ public class RandomWaveList extends AbstractWaveList {
 						}
 					});
 			break;
+
 		/**
 		 * Vertical line of 3 enemies with a slight randomized rotation and
 		 * position
