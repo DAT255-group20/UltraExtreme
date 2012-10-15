@@ -54,8 +54,7 @@ public class SpreadWeapon extends AbstractWeapon {
 
 	@Override
 	public AbstractWeapon shallowClone() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SpreadWeapon(this.getBulletManager());
 	}
 
 
