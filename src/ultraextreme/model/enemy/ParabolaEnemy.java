@@ -14,11 +14,11 @@ import ultraextreme.model.util.Rotation;
  * @author Johan Gronvall
  */
 public class ParabolaEnemy extends AbstractEnemy {
-	private double angle;
-	private Position endPosition;
-	private Position startingPosition;
-	private float angleSpeed;
-	
+
+	private Position startPoint;
+	private Position midPoint;
+	private Position endPoint;
+	private float speed = 100f;
 	
 	protected ParabolaEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
@@ -27,47 +27,41 @@ public class ParabolaEnemy extends AbstractEnemy {
 	/**
 	 * Creates a new ParabolaEnemy
 	 * OBS: endPosition should be placed outside screen so that the enemy gets removed
-	 * @param startingPos where the ParabolaEnemy will appear
+	 * @param startPoint where the ParabolaEnemy will appear
+	 * @param midPoint a point between the startPoint and the endPoint (in x coordinate), 
+	 * 			specifying the look of the movement curve 
 	 * @param endPosition where the ParabolaEnemy will move towards
 	 * @param weaponName what kind of weapon this enemy will wield
 	 */
-	public ParabolaEnemy(Position startingPosition, Position endPosition, ObjectName weaponName) {
-		super(new EnemyShip(startingPosition, 10, 10, 15, weaponName),
+	public ParabolaEnemy(Position startPoint, Position midPoint,
+			Position endPoint, ObjectName weaponName) throws IllegalArgumentException {
+		super(new EnemyShip(startPoint, 10, 10, 15, ObjectName.PARABOLA_ENEMY),
 				WeaponFactory.getInstance().getNewWeapon(weaponName));
+		if(!midPointIsInMiddle(startPoint.getX(), midPoint.getX(),
+				endPoint.getX())) {
+			throw new IllegalArgumentException(
+					"MidPoints x-coordinate must lie between startPoints" +
+					" x-coordinate and endPoints x-coordinate");
+		}
+		this.startPoint = startPoint;
+		this.midPoint = midPoint;
+		this.endPoint = endPoint;
 		
-		this.endPosition = endPosition;
-		this.startingPosition = startingPosition;
-		
-		this.angleSpeed = 30f;
-		
-		
-		
-		this.angle = 3*Math.PI/4;
-		double startX = startingPosition.getX();
-		double startY = startingPosition.getY();
-		double endX = endPosition.getX();
-		double endY = endPosition.getY();
-		
-		//set startingAngle and angleSpeed depending on
-		//what positions were given to simulate the movement of
-		//a semi-ellipse
-		if (startX < endX && startY < endY) {
-			this.angle = Math.PI;
-			
-		}else if (startX < endX && startY > endY) {
-			this.angle = Math.PI*3/4;
-			
-		}else if (startX > endX && startY < endY) {
-			angleSpeed*=-1;
-			this.angle=0;
-			
-		}else if (startX > endX && startY > endY) {
-			this.angle=Math.PI*3/4;
-			this.angleSpeed*=-1;
+		//negate speed if the curve goes from right to left
+		if(endPoint.getX() - startPoint.getX() < 0) {
+			speed*=-1;
 		}
 	}
 
-	
+	/**
+	 * returns true if and only if midX lies between startX and endX
+	 * @return true if and only if midX lies between startX and endX
+	 */
+	private boolean midPointIsInMiddle(double startX, double midX, double endX) {
+		return (Math.abs(startX) > Math.abs(midX) && Math.abs(midX) > Math.abs(endX)) ||
+				(Math.abs(startX) < Math.abs(midX) && Math.abs(midX) < Math.abs(endX));
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -83,11 +77,27 @@ public class ParabolaEnemy extends AbstractEnemy {
 	 */
 	@Override
 	public void update(float timePassed) {
-		angle += angleSpeed*timePassed;
 		Position newPosition = this.getShip().getPositionClone();
-		newPosition.setX(startingPosition.getX()*Math.cos(angle));
-		newPosition.setY(endPosition.getY()*Math.sin(angle));
+		double newX = newPosition.getX()+speed*timePassed;
+		newPosition.setX(newX);
+		newPosition.setY(CalcY(newX));
 		this.getShip().setPosition(newPosition);
 		this.getWeapon().fire(this.getShip().getCenteredPositionClone(), PlayerID.ENEMY, new Rotation(0), timePassed);
+	}
+	/**
+	 * Calculates a vertical value for a quadratic function
+	 * using Lagrange's from of the interpolation polynomial 
+	 * The formula takes a flipped Y axis in consideration
+	 * @param x the horizontal coordinate
+	 * @return a new value for Y
+	 */
+	private double CalcY(double x) {
+		double x0 = startPoint.getX();
+		double x1 = midPoint.getX();
+		double x2 = endPoint.getX();
+		double l0 = ((x-x1)*(x-x2))/((x0-x1)*(x0-x2));
+		double l1 = ((x-x0)*(x-x2))/((x1-x0)*(x1-x2));
+		double l2 = ((x-x0)*(x-x1))/((x2-x0)*(x2-x1));
+		return startPoint.getY()*l0 + midPoint.getY()*l1 + endPoint.getY()*l2;
 	}
 }
