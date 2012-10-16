@@ -29,7 +29,7 @@ public class Highscore implements Comparable<Highscore> {
 
 	@Override
 	public int compareTo(Highscore another) {
-		return this.getScore()-another.getScore();
+		return another.getScore()-this.getScore();
 	}
 	
 	public String toString()

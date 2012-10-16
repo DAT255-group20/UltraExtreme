@@ -54,9 +54,6 @@ public class HighscoreController extends AbstractController implements
 			} catch (NumberFormatException e) {
 				
 			}
-			
-			Log.d("DEBUG", "Cursor pointing on: " + cursor.getString(0) + ", "
-					+ cursor.getString(1));
 			cursor.moveToNext();
 		}
 		// End of database test
