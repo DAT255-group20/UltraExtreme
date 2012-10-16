@@ -38,4 +38,9 @@ public class BasicEnemyTest extends AbstractEnemyTest {
 		assertTrue(position1.getY() < enemy.getShip().getPositionClone().getY());
 		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
+	
+	public void testGetScoreValue()
+	{
+		fail("Not yet tested");
+	}
 }

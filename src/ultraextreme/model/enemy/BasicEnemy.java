@@ -49,25 +49,12 @@ public class BasicEnemy extends AbstractEnemy {
 	 * Constructor for an enemy with predetermined ship and weapon. Specific to
 	 * this type of enemy
 	 * 
-	 * @param position
-	 *            Coordinate for the enemyShip
-	 */
-	public BasicEnemy(final Position position) {
-		this(position.getX(), position.getY());
-	}
-
-	/**
-	 * Constructor for an enemy with predetermined ship and weapon. Specific to
-	 * this type of enemy
-	 * 
 	 * @param x
 	 *            coordinate for the enemyShip
 	 * @param y
 	 *            coordinate for the enemyShip
 	 */
 	public BasicEnemy(final double x, final double y) {
-		// TODO This constructor is never used. Should it ever be used? If not,
-		// remove.
 		this(x, y, new Rotation(0));
 	}
 
