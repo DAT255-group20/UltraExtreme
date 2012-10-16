@@ -112,6 +112,8 @@ public class RandomWaveListTest extends TestCase implements
 	@Override
 	@Test
 	public void testNext() {
+		
+		// FIXME This test takes extremely long time to run
 		// Run through a number of tests where the maximum number of waves are
 		// different
 		for (int waves = 1; waves < 1000; ++waves) {

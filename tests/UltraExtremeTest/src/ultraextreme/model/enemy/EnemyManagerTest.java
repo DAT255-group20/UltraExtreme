@@ -97,20 +97,15 @@ public class EnemyManagerTest extends TestCase {
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
 		assertEquals(enemy,
 				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY).get(0));
-	}
-
-	/**
-	 * Test to add a lot of enemies to the manager.
-	 */
-	@Test
-	public void testAddEnemy2() {
+		
+		// Test to add a lot of enemies to the manager.
 		List<IEnemy> addedEnemies = new ArrayList<IEnemy>();
 
 		// Add a lot of enemies to the enemy manager and to a local list.
 		for (int i = 0; i < 10000; i++) {
-			AbstractEnemy enemy = new BasicEnemy(0, 0);
-			enemyManager.addEnemy(enemy);
-			addedEnemies.add(enemy);
+			AbstractEnemy e = new BasicEnemy(0, 0);
+			enemyManager.addEnemy(e);
+			addedEnemies.add(e);
 		}
 		// Check so the enemy manager fired events for all added ships.
 		assertTrue("Enemy manager fired events for all added enemies",
@@ -179,4 +174,8 @@ public class EnemyManagerTest extends TestCase {
 						.contains(enemy));
 	}
 
+	public void testClearAllEnemies()
+	{
+		fail("Not yet tested");
+	}
 }
