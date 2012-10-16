@@ -96,4 +96,14 @@ public class HitAndRunEnemyTest extends TestCase {
 		assertTrue(startedMovingAgain);
 		assertTrue(shot);
 	}
+	
+	public void testGetScoreValue()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testGetWaitingTime()
+	{
+		fail("Not yet tested");
+	}
 }
