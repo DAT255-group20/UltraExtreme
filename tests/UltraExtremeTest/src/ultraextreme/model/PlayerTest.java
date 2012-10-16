@@ -60,6 +60,7 @@ public class PlayerTest extends TestCase {
 	}
 
 	public void testGetItemBar() {
+		// TODO Maybe not the best test?
 		ItemBar itemBar = player.getItemBar();
 		itemBar.addItem(new BasicWeapon(bulletManager));
 		assertEquals(itemBar.getItems().size(), player.getItemBar().getItems()
@@ -70,6 +71,8 @@ public class PlayerTest extends TestCase {
 	 * Test if the get method works.
 	 */
 	public void testGetLives() {
+		// TODO What the... The only thing that is tested is that the method returns the same answer twice...
+		fail("See comment above");
 		int lives = player.getLives();
 		assertTrue(lives == player.getLives());
 	}
@@ -78,18 +81,33 @@ public class PlayerTest extends TestCase {
 	 * Test if it's possible to get the player ID.
 	 */
 	public void testGetPlayerId() {
-		assertEquals(player.getPlayerId(), PlayerID.PLAYER1);
+		assertEquals(player.getPlayerId(), playerId);
+	}
+	
+	public void testGetInvincibilityTime() {
+		fail("Not yet tested");
+	}
+	
+	public void testIsInvincible() {
+		fail("Not yet tested");
+	}
+	
+	public void testPlayerListener() {
+		fail("Not yet tested");
 	}
 
 	/**
 	 * Test if the get method works.
 	 */
 	public void testGetShip() {
+		// TODO What the... The only thing that is tested is that the method returns the same answer twice...
+		fail("See comment above");
 		AbstractEntity playerShip = player.getShip();
 		assertTrue(playerShip == player.getShip());
 	}
 
 	public void testGiveWeapon() {
+		// TODO Only checking the amount of weapons is correct. Better test maybe?
 		ItemBar itemBar = player.getItemBar();
 		int preNoOfWeapons = itemBar.getItems().size();
 		player.giveWeapon(new BasicWeapon(bulletManager));
