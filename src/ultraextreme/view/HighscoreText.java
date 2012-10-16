@@ -15,7 +15,7 @@ public class HighscoreText extends Text {
 		super((float) textPos.getX(), (float) textPos.getY(), font, "                       ", vbo);
 		this.setColor(Color.BLACK);
 		this.index = index;
-		this.setHighscore(new Highscore("", 0));
+		this.setHighscore(Highscore.EMPTY_HIGHSCORE);
 	}
 	
 	public void setHighscore(Highscore highscore)

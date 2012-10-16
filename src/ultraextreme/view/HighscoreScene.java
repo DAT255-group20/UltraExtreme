@@ -68,10 +68,16 @@ public class HighscoreScene extends MenuScene {
 	{
 		Collections.sort(highscores);
 		
-		int nrOfItems = Math.min(this.highscores.length, highscores.size());
-		for (int i=0; i<nrOfItems; i++)
+		for (int i=0; i<this.highscores.length; i++)
 		{
-			this.highscores[i].setHighscore(highscores.get(i));
+			if (i<highscores.size())
+			{
+				this.highscores[i].setHighscore(highscores.get(i));
+			}
+			else
+			{
+				this.highscores[i].setHighscore(Highscore.EMPTY_HIGHSCORE);
+			}
 		}
 	}
 }

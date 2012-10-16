@@ -8,6 +8,8 @@ package ultraextreme.view;
  */
 public class Highscore implements Comparable<Highscore> {
 
+	public static final Highscore EMPTY_HIGHSCORE = new Highscore("Empty", 0);
+	
 	private final String name;
 	private final int score;
 	
