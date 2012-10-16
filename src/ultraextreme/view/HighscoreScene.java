@@ -39,7 +39,8 @@ public class HighscoreScene extends MenuScene {
 		addMenuItem(gotoMenuButton);
 		for (int i=0; i<highscores.length; i++)
 		{
-			highscores[i] = new HighscoreText(new Position(HIGHSCORE_LIST_POS.getX(), HIGHSCORE_LIST_POS.getY() + i*HIGHSCORE_DISPERSION), font, vbo, i);
+			highscores[i] = new HighscoreText(new Position(HIGHSCORE_LIST_POS.getX(), HIGHSCORE_LIST_POS.getY() + i*HIGHSCORE_DISPERSION), font, vbo, i+1);
+			attachChild(highscores[i]);
 		}
 	}
 	
