@@ -18,7 +18,7 @@ public class HighscoreText extends Text {
 	
 	public void setHighscore(Highscore highscore)
 	{
-		//Log.d("DEBUG", "highscore: " + highscore);
-		this.setText("" + index + ".\t" + highscore.getName() + "\t" + highscore.getScore());
+		// TODO "points" should be extracted
+		this.setText("" + index + ".  |  " + highscore.getName() + "  |  " + highscore.getScore() + " points");
 	}
 }

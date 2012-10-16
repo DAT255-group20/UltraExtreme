@@ -16,7 +16,6 @@ import ultraextreme.view.Highscore;
 import ultraextreme.view.HighscoreScene;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class HighscoreController extends AbstractController implements
 		IOnMenuItemClickListener {
