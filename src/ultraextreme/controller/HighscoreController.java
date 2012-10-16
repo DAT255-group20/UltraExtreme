@@ -17,7 +17,6 @@ import ultraextreme.view.Highscore;
 import ultraextreme.view.HighscoreScene;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class HighscoreController extends AbstractController implements
 		IOnMenuItemClickListener {
@@ -37,36 +36,6 @@ public class HighscoreController extends AbstractController implements
 		loadFromDatabase();
 	}
 
-	private void loadFromDatabase() {
-		
-		List<Highscore> highscores = new ArrayList<Highscore>();
-
-		// Reading from the database
-		SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
-		String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
-		Cursor cursor = readableDb.rawQuery(query, null);
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			
-			String highscoreName = cursor.getString(cursor
-					.getColumnIndex(HighscoreDBOpenHelper.NAME));
-			String scoreString = cursor.getString(cursor
-					.getColumnIndex(HighscoreDBOpenHelper.HIGHSCORE));
-			try {
-				int highscoreValue = Integer.parseInt(scoreString);
-				
-				highscores.add(new Highscore(highscoreName, highscoreValue));
-				
-			} catch (NumberFormatException e) {
-				
-			}
-			cursor.moveToNext();
-		}
-		dbOpenHelper.close();
-
-		scene.displayHighscore(highscores);
-	}
-
 	@Override
 	public void deactivateController() {
 		// Auto-generated method stub
@@ -75,6 +44,36 @@ public class HighscoreController extends AbstractController implements
 	@Override
 	public Scene getScene() {
 		return scene;
+	}
+
+	private void loadFromDatabase() {
+
+		List<Highscore> highscores = new ArrayList<Highscore>();
+
+		// Reading from the database
+		SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
+		String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
+		Cursor cursor = readableDb.rawQuery(query, null);
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+
+			String highscoreName = cursor.getString(cursor
+					.getColumnIndex(HighscoreDBOpenHelper.NAME));
+			String scoreString = cursor.getString(cursor
+					.getColumnIndex(HighscoreDBOpenHelper.HIGHSCORE));
+			try {
+				int highscoreValue = Integer.parseInt(scoreString);
+
+				highscores.add(new Highscore(highscoreName, highscoreValue));
+
+			} catch (NumberFormatException e) {
+
+			}
+			cursor.moveToNext();
+		}
+		dbOpenHelper.close();
+
+		scene.displayHighscore(highscores);
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class HighscoreController extends AbstractController implements
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
 			break;
-			
+
 		case HighscoreScene.CLEAR_LIST:
 
 			// Delete the database file
@@ -94,7 +93,7 @@ public class HighscoreController extends AbstractController implements
 			dbOpenHelper.close();
 			db.delete();
 			loadFromDatabase();
-			
+
 			break;
 
 		default:

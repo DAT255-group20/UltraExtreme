@@ -28,54 +28,56 @@ public class HighscoreScene extends MenuScene {
 	private static final Position HIGHSCORE_HEADER_POS = new Position(135, 160);
 	private static final Position HIGHSCORE_LIST_POS = new Position(80, 220);
 	private static final int HIGHSCORE_DISPERSION = 50;
-	
+
 	private HighscoreText[] highscores = new HighscoreText[10];
 
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {
 		super(camera);
 		setBackground(new Background(0.1f, 0.9f, 0.1f));
-		
+
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
 				vbo);
-		gotoMenuButton.setPosition((float)GOTOMENU_BTN_POS.getX(), (float)GOTOMENU_BTN_POS.getY());
+		gotoMenuButton.setPosition((float) GOTOMENU_BTN_POS.getX(),
+				(float) GOTOMENU_BTN_POS.getY());
 		gotoMenuButton.setColor(Color.BLUE);
 		addMenuItem(gotoMenuButton);
-		
+
 		final IMenuItem clearListButton = new TextMenuItem(CLEAR_LIST, font,
-				Resources.getInstance().getResource(ResourceName.CLEAR_HIGHSCORE),
-				vbo);
-		clearListButton.setPosition((float)CLEARLIST_BTN_POS.getX(), (float)CLEARLIST_BTN_POS.getY());
+				Resources.getInstance().getResource(
+						ResourceName.CLEAR_HIGHSCORE), vbo);
+		clearListButton.setPosition((float) CLEARLIST_BTN_POS.getX(),
+				(float) CLEARLIST_BTN_POS.getY());
 		clearListButton.setColor(Color.BLUE);
 		addMenuItem(clearListButton);
-		
-		Text highscoreHeader = new Text((float)HIGHSCORE_HEADER_POS.getX(), (float)HIGHSCORE_HEADER_POS.getY(), font, "Name  |  Score", vbo);
+
+		Text highscoreHeader = new Text((float) HIGHSCORE_HEADER_POS.getX(),
+				(float) HIGHSCORE_HEADER_POS.getY(), font, "Name  |  Score",
+				vbo);
 		highscoreHeader.setColor(Color.BLACK);
 		attachChild(highscoreHeader);
-		for (int i=0; i<highscores.length; i++)
-		{
-			highscores[i] = new HighscoreText(new Position(HIGHSCORE_LIST_POS.getX(), HIGHSCORE_LIST_POS.getY() + i*HIGHSCORE_DISPERSION), font, vbo, i+1);
+		for (int i = 0; i < highscores.length; i++) {
+			highscores[i] = new HighscoreText(new Position(
+					HIGHSCORE_LIST_POS.getX(), HIGHSCORE_LIST_POS.getY() + i
+							* HIGHSCORE_DISPERSION), font, vbo, i + 1);
 			attachChild(highscores[i]);
 		}
 	}
-	
+
 	/**
 	 * Displays the highscores on the screen.
-	 * @param highscores The list of highscores.
+	 * 
+	 * @param highscores
+	 *            The list of highscores.
 	 */
-	public void displayHighscore(List<Highscore> highscores)
-	{
+	public void displayHighscore(List<Highscore> highscores) {
 		Collections.sort(highscores);
-		
-		for (int i=0; i<this.highscores.length; i++)
-		{
-			if (i<highscores.size())
-			{
+
+		for (int i = 0; i < this.highscores.length; i++) {
+			if (i < highscores.size()) {
 				this.highscores[i].setHighscore(highscores.get(i));
-			}
-			else
-			{
+			} else {
 				this.highscores[i].setHighscore(Highscore.EMPTY_HIGHSCORE);
 			}
 		}
