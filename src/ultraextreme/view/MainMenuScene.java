@@ -20,6 +20,8 @@
 
 package ultraextreme.view;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -28,6 +30,8 @@ import org.andengine.entity.scene.menu.item.SpriteMenuItem;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+
+import ultraextreme.model.util.Dimension;
 
 /**
  * 
@@ -49,13 +53,21 @@ public class MainMenuScene extends MenuScene {
 		/*
 		 * Add the background.
 		 */
-		final float width = camera.getWidth();
-		final float height = camera.getHeight();
+		final float screenWidth = camera.getWidth();
+		final float screenHeight = camera.getHeight();
 		final SpriteBackground background = new SpriteBackground(new Sprite(0,
-				0, width, height, SpriteFactory.getInstance()
+				0, screenWidth, screenHeight, SpriteFactory.getInstance()
 						.getMainMenuBackgroundTexture(),
 				vertexBufferObjectManager));
 		setBackground(background);
+
+		/*
+		 * Scaling
+		 */
+		final Dimension screenDimension = new Dimension(screenWidth,
+				screenHeight);
+		Vector2d scaling = screenDimension
+				.getQuotient(new Dimension(800, 1280));
 
 		/*
 		 * Add the start button. /*
@@ -63,11 +75,11 @@ public class MainMenuScene extends MenuScene {
 		final IMenuItem startButton = new SpriteMenuItem(MENU_START,
 				SpriteFactory.getInstance().getMainMenuStartButtonTexture(),
 				vertexBufferObjectManager);
-		final float scale = width / 800;
-		startButton.setWidth(scale * startButton.getWidth());
-		startButton.setHeight(scale * startButton.getHeight());
-		startButton.setX(scale * (width - startButton.getWidth()) / 2);
-		startButton.setY(scale * 400);
+		startButton.setWidth((float) scaling.x * startButton.getWidth());
+		startButton.setHeight((float) scaling.y * startButton.getHeight());
+		startButton.setX((float) scaling.x
+				* (screenWidth - startButton.getWidth()) / 2);
+		startButton.setY((float) scaling.y * 450);
 		addMenuItem(startButton);
 
 		/*
@@ -77,11 +89,13 @@ public class MainMenuScene extends MenuScene {
 				SpriteFactory.getInstance()
 						.getMainMenuHighScoresButtonTexture(),
 				vertexBufferObjectManager);
-		highScoresButton.setWidth(scale * highScoresButton.getWidth());
-		highScoresButton.setHeight(scale * highScoresButton.getHeight());
-		highScoresButton
-				.setX(scale * (width - highScoresButton.getWidth()) / 2);
-		highScoresButton.setY(scale * 550);
+		highScoresButton.setWidth((float) scaling.x
+				* highScoresButton.getWidth());
+		highScoresButton.setHeight((float) scaling.y
+				* highScoresButton.getHeight());
+		highScoresButton.setX((float) scaling.x
+				* (screenWidth - highScoresButton.getWidth()) / 2);
+		highScoresButton.setY((float) scaling.y * 600);
 		addMenuItem(highScoresButton);
 
 		/*
@@ -90,10 +104,11 @@ public class MainMenuScene extends MenuScene {
 		final IMenuItem exitButton = new SpriteMenuItem(MENU_EXIT,
 				SpriteFactory.getInstance().getMainMenuExitButtonTexture(),
 				vertexBufferObjectManager);
-		exitButton.setWidth(scale * exitButton.getWidth());
-		exitButton.setHeight(scale * exitButton.getHeight());
-		exitButton.setX(scale * (width - exitButton.getWidth()) / 2);
-		exitButton.setY(scale * 700);
+		exitButton.setWidth((float) scaling.x * exitButton.getWidth());
+		exitButton.setHeight((float) scaling.y * exitButton.getHeight());
+		exitButton.setX((float) scaling.x
+				* (screenWidth - exitButton.getWidth()) / 2);
+		exitButton.setY((float) scaling.y * 750);
 		addMenuItem(exitButton);
 	}
 }
