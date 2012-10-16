@@ -10,7 +10,7 @@ public class HighscoreDBOpenHelper extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "highscoreTable";
 	public static final String NAME = "name";
 	public static final String HIGHSCORE = "highscore";
-	private static final String DATABASE_NAME = "highscoreDatabase";
+	public static final String DATABASE_NAME = "highscoreDatabase";
 
 	private static final String HIGHSCORE_TABLE_CREATE = "CREATE TABLE "
 			+ TABLE_NAME + " (" + NAME + " TEXT, " + HIGHSCORE + " TEXT);";

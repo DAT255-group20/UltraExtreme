@@ -29,8 +29,6 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import android.util.Log;
-
 /**
  * 
  * @author Bjorn Persson Mattsson
@@ -39,10 +37,9 @@ import android.util.Log;
  */
 public class MainMenuScene extends MenuScene {
 
+	// Button IDs
 	public static final int MENU_START = 0;
-
-	public static final int MENU_HIGH_SCORES = 1;
-
+	public static final int MENU_HIGHSCORE = 1;
 	public static final int MENU_EXIT = 2;
 
 	public MainMenuScene(final Camera camera, final Font font,
@@ -76,7 +73,7 @@ public class MainMenuScene extends MenuScene {
 		/*
 		 * Add the high score button. /*
 		 */
-		final IMenuItem highScoresButton = new SpriteMenuItem(MENU_HIGH_SCORES,
+		final IMenuItem highScoresButton = new SpriteMenuItem(MENU_HIGHSCORE,
 				SpriteFactory.getInstance()
 						.getMainMenuHighScoresButtonTexture(),
 				vertexBufferObjectManager);
@@ -98,7 +95,5 @@ public class MainMenuScene extends MenuScene {
 		exitButton.setX(scale * (width - exitButton.getWidth()) / 2);
 		exitButton.setY(scale * 700);
 		addMenuItem(exitButton);
-
-		Log.d("DEBUG", "onCreateScene");
 	}
 }
