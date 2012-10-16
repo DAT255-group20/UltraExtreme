@@ -68,7 +68,7 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 	public static float getInitCooldown() {
 		return initCooldown;
 	}
-	
+
 	@Override
 	public AbstractWeapon shallowClone() {
 		return new SpinningSpreadWeapon(this.getBulletManager());

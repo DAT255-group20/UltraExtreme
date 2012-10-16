@@ -178,23 +178,27 @@ public class SpriteFactory {
 				textureManager, 800, 1730, TextureOptions.DEFAULT);
 
 		// Init the main menu background
-		mainMenuTextures.put("background", BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlasMainMenu, activity,
-						"main_menu_bg.jpg", 0, 0));
+		mainMenuTextures.put("background",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity, "main_menu_bg.jpg", 0,
+						0));
 
 		// Init main menu's start button
-		mainMenuTextures.put("startButton", BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlasMainMenu, activity,
+		mainMenuTextures.put("startButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity,
 						"main_menu_start_button.png", 0, 1281));
 
 		// Init main menu's high scores button
-		mainMenuTextures.put("highScoresButton", BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlasMainMenu, activity,
+		mainMenuTextures.put("highScoresButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity,
 						"main_menu_high_scores_button.png", 0, 1431));
 
 		// Init main menu's exit button
-		mainMenuTextures.put("exitButton", BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlasMainMenu, activity,
+		mainMenuTextures.put("exitButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity,
 						"main_menu_exit_button.png", 0, 1581));
 		textureManager.loadTexture(textureAtlasMainMenu);
 	}
