@@ -48,6 +48,14 @@ public class HitAndRunEnemyTest extends TestCase {
 		enemy = new HitAndRunEnemy(startPoint, firePoint, endPoint);
 	}
 
+	public void testGetScoreValue() {
+		fail("Not yet tested");
+	}
+
+	public void testGetWaitingTime() {
+		fail("Not yet tested");
+	}
+
 	public void testGoTowardPosition() {
 		enemy.goTowardPosition(firePoint, (float) 0.01);
 		assertTrue(enemy.getShip().getPositionClone().getX() > 5.0);
@@ -95,15 +103,5 @@ public class HitAndRunEnemyTest extends TestCase {
 		assertTrue(stopped);
 		assertTrue(startedMovingAgain);
 		assertTrue(shot);
-	}
-	
-	public void testGetScoreValue()
-	{
-		fail("Not yet tested");
-	}
-	
-	public void testGetWaitingTime()
-	{
-		fail("Not yet tested");
 	}
 }

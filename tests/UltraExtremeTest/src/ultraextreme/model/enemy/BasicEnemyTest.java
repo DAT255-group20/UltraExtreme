@@ -27,6 +27,10 @@ import ultraextreme.model.util.Position;
  */
 public class BasicEnemyTest extends AbstractEnemyTest {
 
+	public void testGetScoreValue() {
+		fail("Not yet tested");
+	}
+
 	/**
 	 * Tests if the enemy has moved forward and test if he has shot after a
 	 * period of 10seconds
@@ -37,10 +41,5 @@ public class BasicEnemyTest extends AbstractEnemyTest {
 		enemy.update(10f);
 		assertTrue(position1.getY() < enemy.getShip().getPositionClone().getY());
 		assertTrue(!bulletManager.getBullets().isEmpty());
-	}
-	
-	public void testGetScoreValue()
-	{
-		fail("Not yet tested");
 	}
 }

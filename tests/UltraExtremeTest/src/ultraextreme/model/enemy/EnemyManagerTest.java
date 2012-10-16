@@ -97,7 +97,7 @@ public class EnemyManagerTest extends TestCase {
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
 		assertEquals(enemy,
 				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY).get(0));
-		
+
 		// Test to add a lot of enemies to the manager.
 		List<IEnemy> addedEnemies = new ArrayList<IEnemy>();
 
@@ -114,6 +114,10 @@ public class EnemyManagerTest extends TestCase {
 		// Check so the enemy manager contains the enemies.
 		assertTrue("Enemy manager has all enemies", enemyManager.getEnemies()
 				.containsAll(addedEnemies));
+	}
+
+	public void testClearAllEnemies() {
+		fail("Not yet tested");
 	}
 
 	/**
@@ -172,10 +176,5 @@ public class EnemyManagerTest extends TestCase {
 		assertTrue("Enemy was added",
 				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY)
 						.contains(enemy));
-	}
-
-	public void testClearAllEnemies()
-	{
-		fail("Not yet tested");
 	}
 }
