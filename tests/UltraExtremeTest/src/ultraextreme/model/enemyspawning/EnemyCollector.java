@@ -41,15 +41,15 @@ public class EnemyCollector implements PropertyChangeListener {
 		enemies = new ArrayList<IEnemy>();
 	}
 
+	public List<IEnemy> getSpawnedEnemies() {
+		return enemies;
+	}
+
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName().equals(EnemySpawner.NEW_ENEMY)) {
 			enemies.add((IEnemy) event.getNewValue());
 		}
-	}
-
-	public List<IEnemy> getSpawnedEnemies() {
-		return enemies;
 	}
 
 }

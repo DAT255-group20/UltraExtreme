@@ -143,6 +143,10 @@ public class SpriteFactory {
 
 		// Init the item textures for items in the itembar
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
+
+		itemTextures.put(ObjectName.BASIC_SPREAD_WEAPON, spinningWeapon); // Test only
+
+
 		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon); // Test
 																		// only
 

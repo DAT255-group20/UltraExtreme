@@ -43,11 +43,12 @@ import ultraextreme.util.Resources.ResourceName;
 public class GameOverScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
-	
+
 	private IUltraExtremeModel gameModel;
 	private InputText nameInput;
 
-	public GameOverScene(IUltraExtremeModel gameModel, final Camera camera, final Font font,
+	public GameOverScene(IUltraExtremeModel gameModel, final Camera camera,
+			final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			BaseGameActivity activity) {
 		super(camera);
@@ -77,7 +78,7 @@ public class GameOverScene extends MenuScene {
 	public String getName() {
 		return nameInput.getText();
 	}
-	
+
 	/**
 	 * @return the score
 	 */

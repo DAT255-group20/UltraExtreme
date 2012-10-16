@@ -93,9 +93,10 @@ public class Position {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "x = " + coordinates.x + " y = " + coordinates.y;
-		
+
 	}
 }

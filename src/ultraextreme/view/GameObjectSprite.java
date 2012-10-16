@@ -67,8 +67,8 @@ public class GameObjectSprite extends Sprite {
 		// Change the width and height to the entity's width and height to
 		// squeeze the picture
 		super((float) (entity.getPositionClone().getX() - imageOffset.x),
-				(float) (entity.getPositionClone().getY() - imageOffset.y), texture
-						.getWidth()
+				(float) (entity.getPositionClone().getY() - imageOffset.y),
+				texture.getWidth()
 						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
 				texture.getHeight()
 						* ultraextreme.util.Constants.SPRITE_SCALE_FACTOR,
@@ -80,7 +80,7 @@ public class GameObjectSprite extends Sprite {
 
 		this.isHitBlinked = false;
 		this.isInvincibleBlinked = false;
-		
+
 		if (screenDimension == null) {
 			screenDimension = MODEL_DIMENSION;
 		}

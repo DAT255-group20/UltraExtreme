@@ -26,16 +26,17 @@ import java.util.List;
 
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.PlayerShip;
+import ultraextreme.model.item.SpreadWeapon;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.item.SpinningSpreadWeapon;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
+import android.util.Log;
 
 /**
  * The player. The player has a ship and an item bar containing the ship's items
@@ -78,12 +79,13 @@ public class Player implements IPlayer {
 	/**
 	 * The time the ship will be invincible after receiving damage.
 	 */
-	private static final double invTime = Constants.getShipInvincibilityTime();
+	private static final double INVINCIBILITY_TIME = Constants
+			.getShipInvincibilityTime();
 
 	/**
 	 * A count down for the ships invincibility.
 	 */
-	private double invCountDown;
+	private double invincCountdown;
 
 	/**
 	 * Create a new player.
@@ -97,14 +99,105 @@ public class Player implements IPlayer {
 	public Player(final PlayerID playerId, final BulletManager bulletManager) {
 		this.bulletManager = bulletManager;
 		this.ship = new PlayerShip();
-		setShipToSpawn();
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
 				Math.PI), 10);
-		this.itemBar.addItem(new BasicWeapon(bulletManager));
-		this.itemBar.addItem(new SpinningSpreadWeapon(bulletManager));
+		//this.itemBar.addItem(new BasicWeapon(bulletManager));
 		lives = Constants.getInitShipLives();
 		this.score = 0;
+	}
+
+	@Override
+	public double getInvincibilityTime() {
+		return INVINCIBILITY_TIME;
+	}
+
+	// test
+	@Override
+	public ItemBar getItemBar() {
+		return itemBar;
+	}
+
+	@Override
+	public int getLives() {
+		return lives;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PlayerID getPlayerId() {
+		return playerId;
+	}
+
+	@Override
+	public int getScore() {
+		return score;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PlayerShip getShip() {
+		return ship;
+	}
+
+	/**
+	 * adds a weapon (or bomb) to this player's ItemBar
+	 * 
+	 * @param weapon
+	 */
+	public void giveWeapon(final AbstractWeapon weapon) {
+		itemBar.addItem(weapon);
+	}
+
+	@Override
+	public boolean isInvincible() {
+		return invincCountdown > 0;
+	}
+
+	private void notifyListeners() {
+		for (IPlayerListener l : listeners) {
+			l.playerUpdate(this);
+		}
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_KILLED)) {
+			score += ((IEnemy) event.getNewValue()).getScoreValue();
+			notifyListeners();
+		}
+	}
+
+	public void registerListener(IPlayerListener listener) {
+		listeners.add(listener);
+	}
+
+	public void reset() {
+		lives = Constants.getInitShipLives();
+		score = 0;
+		setShipToSpawn();
+		notifyListeners();
+	}
+
+	/**
+	 * Sets the players ship to its spawn point.
+	 */
+	private void setShipToSpawn() {
+		giveWeapon(new BasicWeapon(bulletManager));
+		final Dimension levelDimension = Constants.getLevelDimension();
+		ship.setPosition(new Position(levelDimension.getX() * 0.5
+				- ship.getWidth() / 2, levelDimension.getY() * 0.65));
+
+		Log.d("DEBUG",
+				"Ship has been set to spawn point and been given a basic weapon");
+	}
+
+	public void unregisterListener(IPlayerListener listener) {
+		listeners.remove(listener);
 	}
 
 	/**
@@ -118,7 +211,7 @@ public class Player implements IPlayer {
 	public void update(final ModelInput input, final float timeElapsed) {
 		double newX = 0;
 		double newY = 0;
-		if (ship.justGotHit() && invCountDown <= 0) {
+		if (ship.justGotHit() && invincCountdown <= 0) {
 			itemBar.loseItems();
 			if (itemBar.getItems().isEmpty()) {
 				lives -= 1;
@@ -126,16 +219,15 @@ public class Player implements IPlayer {
 				if (lives == 0) {
 					ship.setDestroyed();
 				} else {
-					itemBar.addItem(new BasicWeapon(bulletManager));
 					setShipToSpawn();
 				}
 			}
 			if (!ship.isDestroyed()) {
-				invCountDown = invTime;
+				invincCountdown = INVINCIBILITY_TIME;
 			}
 		}
-		if (invCountDown > 0) {
-			invCountDown -= timeElapsed;
+		if (invincCountdown > 0) {
+			invincCountdown -= timeElapsed;
 		}
 
 		if (ship.canMoveX(input.dX)) {
@@ -148,91 +240,5 @@ public class Player implements IPlayer {
 		if (input.fireWeapons) {
 			itemBar.fireWeapons(ship.getPositionClone(), timeElapsed);
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public PlayerShip getShip() {
-		return ship;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public PlayerID getPlayerId() {
-		return playerId;
-	}
-
-	// test
-	@Override
-	public ItemBar getItemBar() {
-		return itemBar;
-	}
-
-	/**
-	 * adds a weapon (or bomb) to this player's ItemBar
-	 * 
-	 * @param weapon
-	 */
-	public void giveWeapon(final AbstractWeapon weapon) {
-		itemBar.addItem(weapon);
-	}
-
-	/**
-	 * Sets the players ship to its spawn point.
-	 */
-	private void setShipToSpawn() {
-		final Dimension levelDimension = Constants.getLevelDimension();
-		ship.setPosition(new Position(levelDimension.getX() * 0.5
-				- ship.getWidth() / 2, levelDimension.getY() * 0.65));
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_KILLED)) {
-			score += ((IEnemy) event.getNewValue()).getScoreValue();
-			notifyListeners();
-		}
-	}
-
-	private void notifyListeners() {
-		for (IPlayerListener l : listeners) {
-			l.playerUpdate(this);
-		}
-	}
-
-	@Override
-	public int getScore() {
-		return score;
-	}
-
-	@Override
-	public int getLives() {
-		return lives;
-	}
-	
-	public double getInvincibilityTime() {
-		return invTime;
-	}
-	
-	public boolean isInvincible() {
-		return invCountDown > 0;
-	}
-
-	public void registerListener(IPlayerListener listener) {
-		listeners.add(listener);
-	}
-
-	public void unregisterListener(IPlayerListener listener) {
-		listeners.remove(listener);
-	}
-
-	public void reset() {
-		lives = Constants.getInitShipLives();
-		score = 0;
-		notifyListeners();
 	}
 }

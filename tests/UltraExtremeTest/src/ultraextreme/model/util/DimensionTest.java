@@ -42,20 +42,6 @@ public class DimensionTest extends TestCase {
 		otherDimension = null;
 	}
 
-	public void testGetX() {
-		dimension = new Dimension(10, 20);
-		assertTrue(Math.abs(dimension.getX() - 10) < epsilon);
-		dimension = new Dimension(120, 300);
-		assertTrue(Math.abs(dimension.getX() - 120) < epsilon);
-	}
-
-	public void testGetY() {
-		dimension = new Dimension(10, 20);
-		assertTrue(Math.abs(dimension.getY() - 20) < epsilon);
-		dimension = new Dimension(120, 300);
-		assertTrue(Math.abs(dimension.getY() - 300) < epsilon);
-	}
-
 	public void testEquals() {
 		dimension = new Dimension(10, 20);
 		otherDimension = new Dimension(10, 30);
@@ -77,6 +63,20 @@ public class DimensionTest extends TestCase {
 		qVec = otherDimension.getQuotient(dimension);
 		assertTrue(Math.abs(qVec.x - 0.5) < epsilon
 				&& Math.abs(qVec.y - 4) < epsilon);
+	}
+
+	public void testGetX() {
+		dimension = new Dimension(10, 20);
+		assertTrue(Math.abs(dimension.getX() - 10) < epsilon);
+		dimension = new Dimension(120, 300);
+		assertTrue(Math.abs(dimension.getX() - 120) < epsilon);
+	}
+
+	public void testGetY() {
+		dimension = new Dimension(10, 20);
+		assertTrue(Math.abs(dimension.getY() - 20) < epsilon);
+		dimension = new Dimension(120, 300);
+		assertTrue(Math.abs(dimension.getY() - 300) < epsilon);
 	}
 
 	public void testScalePosition() {

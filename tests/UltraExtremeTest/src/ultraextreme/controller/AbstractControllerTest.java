@@ -35,14 +35,13 @@ public class AbstractControllerTest {
 
 	private static boolean listenerUpdated;
 
+	private static void setListenerUpdated(boolean b) {
+		listenerUpdated = b;
+	}
+
 	@Test
 	public void testAddListener() {
 		AbstractController testController = new AbstractController() {
-
-			@Override
-			public Scene getScene() {
-				return null;
-			}
 
 			@Override
 			public void activateController() {
@@ -50,6 +49,11 @@ public class AbstractControllerTest {
 
 			@Override
 			public void deactivateController() {
+			}
+
+			@Override
+			public Scene getScene() {
+				return null;
 			}
 		};
 		IControllerListener testListener = new IControllerListener() {
@@ -71,9 +75,5 @@ public class AbstractControllerTest {
 		testController.fireEvent(null);
 
 		assertFalse(listenerUpdated);
-	}
-
-	private static void setListenerUpdated(boolean b) {
-		listenerUpdated = b;
 	}
 }

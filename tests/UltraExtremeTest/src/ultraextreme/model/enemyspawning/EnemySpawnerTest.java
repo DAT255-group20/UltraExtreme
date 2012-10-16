@@ -34,13 +34,13 @@ import ultraextreme.model.item.WeaponFactory;
 public class EnemySpawnerTest extends TestCase {
 
 	private BulletManager bulletManager;
-	
+
 	@Override
 	public void setUp() {
 		bulletManager = new BulletManager();
 		WeaponFactory.initialize(bulletManager);
 	}
-	
+
 	/**
 	 * Create a EnemySpawner, give it a RandomWaveList with a custom
 	 * RandomGenerator and see if the EnemySpawner behaves correctly.
