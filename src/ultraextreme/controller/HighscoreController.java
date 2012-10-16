@@ -91,9 +91,9 @@ public class HighscoreController extends AbstractController implements
 
 			// Delete the database file
 			File db = new File(dbOpenHelper.getWritableDatabase().getPath());
-			Log.d("DEBUG", "Database deleted: " + db.delete());
-			loadFromDatabase();
 			dbOpenHelper.close();
+			db.delete();
+			loadFromDatabase();
 			
 			break;
 

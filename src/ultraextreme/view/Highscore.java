@@ -37,6 +37,5 @@ public class Highscore implements Comparable<Highscore> {
 	public String toString()
 	{
 		return "Highscore[name:" + name + ", score:" + score + "]";
-		
 	}
 }
