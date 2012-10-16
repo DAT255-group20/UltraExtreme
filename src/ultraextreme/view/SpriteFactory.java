@@ -74,6 +74,12 @@ public class SpriteFactory {
 	 */
 	private ITextureRegion itemBarMarkerTexture;
 
+	/**
+	 * A map containing the main menu's textures, which are its background and
+	 * buttons.
+	 */
+	private Map<String, ITextureRegion> mainMenuTextures;
+
 	private TiledTextureRegion textInputBackground;
 
 	/**
@@ -144,8 +150,8 @@ public class SpriteFactory {
 		// Init the item textures for items in the itembar
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
 
-		itemTextures.put(ObjectName.BASIC_SPREAD_WEAPON, spinningWeapon); // Test only
-
+		itemTextures.put(ObjectName.BASIC_SPREAD_WEAPON, spinningWeapon); // Test
+																			// only
 
 		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon); // Test
 																		// only
@@ -156,6 +162,7 @@ public class SpriteFactory {
 						700, 0);
 
 		// Init the textinput background
+		// TODO: why is this tiled?
 		textInputBackground = BitmapTextureAtlasTextureRegionFactory
 				.createTiledFromAsset(textureAtlas, activity, "button_1.png",
 						100, 100, 1, 1);
@@ -163,6 +170,33 @@ public class SpriteFactory {
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
+
+		// Init main menu atlas and texture map
+		mainMenuTextures = new HashMap<String, ITextureRegion>();
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menus/");
+		BitmapTextureAtlas textureAtlasMainMenu = new BitmapTextureAtlas(
+				textureManager, 800, 1730, TextureOptions.DEFAULT);
+
+		// Init the main menu background
+		mainMenuTextures.put("background", BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlasMainMenu, activity,
+						"main_menu_bg.jpg", 0, 0));
+
+		// Init main menu's start button
+		mainMenuTextures.put("startButton", BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlasMainMenu, activity,
+						"main_menu_start_button.png", 0, 1281));
+
+		// Init main menu's high scores button
+		mainMenuTextures.put("highScoresButton", BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlasMainMenu, activity,
+						"main_menu_high_scores_button.png", 0, 1431));
+
+		// Init main menu's exit button
+		mainMenuTextures.put("exitButton", BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlasMainMenu, activity,
+						"main_menu_exit_button.png", 0, 1581));
+		textureManager.loadTexture(textureAtlasMainMenu);
 	}
 
 	/**
@@ -252,5 +286,37 @@ public class SpriteFactory {
 	 */
 	public ITextureRegion getItemBarMarkerTexture() {
 		return itemBarMarkerTexture;
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's background.
+	 */
+	public ITextureRegion getMainMenuBackgroundTexture() {
+		return mainMenuTextures.get("background");
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's start button.
+	 */
+	public ITextureRegion getMainMenuStartButtonTexture() {
+		return mainMenuTextures.get("startButton");
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's high scores button.
+	 */
+	public ITextureRegion getMainMenuHighScoresButtonTexture() {
+		return mainMenuTextures.get("highScoresButton");
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's exit button.
+	 */
+	public ITextureRegion getMainMenuExitButtonTexture() {
+		return mainMenuTextures.get("exitButton");
 	}
 }
