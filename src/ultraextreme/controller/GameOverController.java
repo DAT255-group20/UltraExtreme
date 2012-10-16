@@ -29,13 +29,12 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.BaseGameActivity;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameOverScene;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * 

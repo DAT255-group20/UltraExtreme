@@ -37,6 +37,7 @@ public class BasicWeapon extends AbstractWeapon {
 	private static final int BULLET_HEIGHT = 5;
 	private static final int BULLET_DAMAGE = 10;
 	private static float initCooldown = 0.5f;
+
 	public static float getInitCooldown() {
 		return initCooldown;
 	}

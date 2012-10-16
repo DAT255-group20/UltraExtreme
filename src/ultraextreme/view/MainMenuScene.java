@@ -82,7 +82,8 @@ public class MainMenuScene extends MenuScene {
 				vertexBufferObjectManager);
 		highScoresButton.setWidth(scale * highScoresButton.getWidth());
 		highScoresButton.setHeight(scale * highScoresButton.getHeight());
-		highScoresButton.setX(scale * (width - highScoresButton.getWidth()) / 2);
+		highScoresButton
+				.setX(scale * (width - highScoresButton.getWidth()) / 2);
 		highScoresButton.setY(scale * 550);
 		addMenuItem(highScoresButton);
 
