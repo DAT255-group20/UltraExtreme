@@ -40,10 +40,6 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 				direction);
 	}
 
-	private AbstractBullet newBullet() {
-		return newBullet(PlayerID.PLAYER1);
-	}
-
 	private AbstractBullet newBullet(PlayerID playerId) {
 		return getNewAbstractBullet(10, 20, 30, 40, playerId, new Rotation(0));
 	}

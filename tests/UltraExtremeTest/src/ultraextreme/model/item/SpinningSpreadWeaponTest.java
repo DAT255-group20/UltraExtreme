@@ -20,7 +20,6 @@
 
 package ultraextreme.model.item;
 
-
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -80,7 +79,7 @@ public class SpinningSpreadWeaponTest extends TestCase {
 		currentAngle = bulletList.get(bulletList.size() - 1).getRotation();
 		assertTrue(lastAngle.getAngle() < currentAngle.getAngle());
 	}
-	
+
 	/**
 	 * Test so the properties of the bullet that the weapon fires are correct.
 	 */
@@ -91,20 +90,20 @@ public class SpinningSpreadWeaponTest extends TestCase {
 		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
-		
+
 		List<AbstractBullet> bulletList = bulletManager.getBullets();
-		
+
 		// Make sure the bullets move a bit.
-		for(AbstractBullet b : bulletList) {
+		for (AbstractBullet b : bulletList) {
 			b.doMovement(0.1f);
 		}
-		
+
 		// Check so that the bullets are not along the same line.
 		double epsilon = 0.00001;
-		for(AbstractBullet b1 : bulletList) {
-			for(AbstractBullet b2 : bulletList) {
-				if(b1 != b2) {
-					assertFalse(Math.abs(b1.getPositionClone().getX() 
+		for (AbstractBullet b1 : bulletList) {
+			for (AbstractBullet b2 : bulletList) {
+				if (b1 != b2) {
+					assertFalse(Math.abs(b1.getPositionClone().getX()
 							- b2.getPositionClone().getX()) < epsilon);
 				}
 			}
@@ -122,9 +121,9 @@ public class SpinningSpreadWeaponTest extends TestCase {
 
 	@Test
 	public void testGetInitCooldown() {
-		assertTrue(Math.abs(spinningWeapon.getInitCooldown() - 1/6f) < 0.00001);
+		assertTrue(Math.abs(SpinningSpreadWeapon.getInitCooldown() - 1 / 6f) < 0.00001);
 	}
-	
+
 	@Test
 	public void testShallowClone() {
 		fail("Not yet implemented");

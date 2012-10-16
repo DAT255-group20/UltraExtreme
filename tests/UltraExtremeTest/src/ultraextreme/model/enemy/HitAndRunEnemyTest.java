@@ -38,6 +38,7 @@ public class HitAndRunEnemyTest extends TestCase {
 	HitAndRunEnemy enemy;
 	BulletManager manager;
 
+	@Override
 	public void setUp() {
 		manager = new BulletManager();
 		WeaponFactory.initialize(manager);
@@ -77,7 +78,7 @@ public class HitAndRunEnemyTest extends TestCase {
 		boolean startedMovingAgain = false;
 		boolean shot = false;
 		for (int i = 0; i < 100000; i++) {
-			enemy.update((float) (1));
+			enemy.update((1));
 			if (enemy.getShip().getPositionClone().equals(new Position(15, 15))) {
 				secondsStopped += 1;
 			}

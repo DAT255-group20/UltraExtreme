@@ -73,6 +73,7 @@ public class PickupManagerTest extends TestCase {
 			}
 		}
 	}
+
 	PickupManager manager;
 	WeaponPickup pickup;
 	WeaponPickup pickup2;

@@ -72,10 +72,11 @@ public class BulletManagerTest extends TestCase {
 		}
 
 	}
+
 	private BulletManager bulletManager;
 
 	private BulletCollector bulletCollector;
-	
+
 	private int bulletDamage = 10;
 
 	private List<AbstractBullet> generateBulletList(int bullets) {

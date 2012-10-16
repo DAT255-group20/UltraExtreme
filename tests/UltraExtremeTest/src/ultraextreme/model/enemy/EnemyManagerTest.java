@@ -72,6 +72,7 @@ public class EnemyManagerTest extends TestCase {
 		}
 
 	}
+
 	private EnemyManager enemyManager;
 	private EnemyCollector collector;
 
