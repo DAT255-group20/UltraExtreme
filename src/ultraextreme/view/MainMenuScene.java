@@ -29,9 +29,9 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
 
+import ultraextreme.model.util.Position;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
-import android.util.Log;
 
 /**
  * 
@@ -40,18 +40,31 @@ import android.util.Log;
  */
 public class MainMenuScene extends MenuScene {
 
+	// Button IDs
 	public static final int MENU_START = 0;
+	public static final int MENU_HIGHSCORE = 1;
+	
+	// TODO Make these centered on the screen
+	private static final Position START_BTN_POS = new Position(100, 100);
+	private static final Position HIGHSCORE_BTN_POS = new Position(100, 200);
 
 	public MainMenuScene(final Camera camera, final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super(camera);
 		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
+		
 		final IMenuItem startButton = new TextMenuItem(MENU_START, font,
-				Resources.getInstance().getResource(ResourceName.START_GAME),
+				Resources.getInstance().getResource(ResourceName.MENU_START_GAME_TEXT),
 				vertexBufferObjectManager);
-		startButton.setPosition(100, 100);
+		startButton.setPosition((float)START_BTN_POS.getX(), (float)START_BTN_POS.getY());
 		startButton.setColor(Color.BLACK);
 		addMenuItem(startButton);
-		Log.d("DEBUG", "onCreateScene");
+		
+		final IMenuItem highscoreButton = new TextMenuItem(MENU_HIGHSCORE, font,
+				Resources.getInstance().getResource(ResourceName.MENU_HIGHSCORE_TEXT),
+				vertexBufferObjectManager);
+		highscoreButton.setPosition((float)HIGHSCORE_BTN_POS.getX(), (float)HIGHSCORE_BTN_POS.getY());
+		highscoreButton.setColor(Color.BLACK);
+		addMenuItem(highscoreButton);
 	}
 }
