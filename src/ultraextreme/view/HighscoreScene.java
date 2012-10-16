@@ -19,7 +19,7 @@ public class HighscoreScene extends MenuScene {
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {
 		super(camera);
-		setBackground(new Background(0.9f, 0.1f, 0.1f));
+		setBackground(new Background(0.1f, 0.9f, 0.1f));
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
 				vbo);
