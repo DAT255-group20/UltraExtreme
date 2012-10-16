@@ -20,9 +20,11 @@ import ultraextreme.util.Resources.ResourceName;
 public class HighscoreScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
+	public static final int CLEAR_LIST = 1;
 
 	// TODO Make these centered on the screen
 	private static final Position GOTOMENU_BTN_POS = new Position(100, 100);
+	private static final Position CLEARLIST_BTN_POS = new Position(100, 750);
 	private static final Position HIGHSCORE_HEADER_POS = new Position(135, 160);
 	private static final Position HIGHSCORE_LIST_POS = new Position(80, 220);
 	private static final int HIGHSCORE_DISPERSION = 50;
@@ -33,12 +35,20 @@ public class HighscoreScene extends MenuScene {
 			VertexBufferObjectManager vbo) {
 		super(camera);
 		setBackground(new Background(0.1f, 0.9f, 0.1f));
+		
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
 				vbo);
 		gotoMenuButton.setPosition((float)GOTOMENU_BTN_POS.getX(), (float)GOTOMENU_BTN_POS.getY());
-		gotoMenuButton.setColor(Color.BLACK);
+		gotoMenuButton.setColor(Color.BLUE);
 		addMenuItem(gotoMenuButton);
+		
+		final IMenuItem clearListButton = new TextMenuItem(CLEAR_LIST, font,
+				Resources.getInstance().getResource(ResourceName.CLEAR_HIGHSCORE),
+				vbo);
+		clearListButton.setPosition((float)CLEARLIST_BTN_POS.getX(), (float)CLEARLIST_BTN_POS.getY());
+		clearListButton.setColor(Color.BLUE);
+		addMenuItem(clearListButton);
 		
 		Text highscoreHeader = new Text((float)HIGHSCORE_HEADER_POS.getX(), (float)HIGHSCORE_HEADER_POS.getY(), font, "Name  |  Score", vbo);
 		highscoreHeader.setColor(Color.BLACK);

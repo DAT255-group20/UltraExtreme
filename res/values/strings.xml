@@ -6,6 +6,7 @@
     <string name="title_activity_main">UltraExtreme</string><string name="menu_start_game">Start the game!</string>
     <string name="menu_highscore_text">Highscores</string><string name="goto_menu">Go to menu</string><string name="score">Score:</string>
     <string name="lives">Lives:</string>
+    <string name="clear_highscore">Clear highscore list</string>
     
     
 
