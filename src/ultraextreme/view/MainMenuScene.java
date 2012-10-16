@@ -21,21 +21,18 @@
 package ultraextreme.view;
 
 import org.andengine.engine.camera.Camera;
-import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
-import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.entity.scene.menu.item.SpriteMenuItem;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.util.color.Color;
-
-import ultraextreme.model.util.Position;
-import ultraextreme.util.Resources;
-import ultraextreme.util.Resources.ResourceName;
 
 /**
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class MainMenuScene extends MenuScene {
@@ -43,28 +40,59 @@ public class MainMenuScene extends MenuScene {
 	// Button IDs
 	public static final int MENU_START = 0;
 	public static final int MENU_HIGHSCORE = 1;
-	
-	// TODO Make these centered on the screen
-	private static final Position START_BTN_POS = new Position(100, 100);
-	private static final Position HIGHSCORE_BTN_POS = new Position(100, 200);
+	public static final int MENU_EXIT = 2;
 
 	public MainMenuScene(final Camera camera, final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super(camera);
-		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
-		
-		final IMenuItem startButton = new TextMenuItem(MENU_START, font,
-				Resources.getInstance().getResource(ResourceName.MENU_START_GAME_TEXT),
+
+		/*
+		 * Add the background.
+		 */
+		final float width = camera.getWidth();
+		final float height = camera.getHeight();
+		final SpriteBackground background = new SpriteBackground(new Sprite(0,
+				0, width, height, SpriteFactory.getInstance()
+						.getMainMenuBackgroundTexture(),
+				vertexBufferObjectManager));
+		setBackground(background);
+
+		/*
+		 * Add the start button. /*
+		 */
+		final IMenuItem startButton = new SpriteMenuItem(MENU_START,
+				SpriteFactory.getInstance().getMainMenuStartButtonTexture(),
 				vertexBufferObjectManager);
-		startButton.setPosition((float)START_BTN_POS.getX(), (float)START_BTN_POS.getY());
-		startButton.setColor(Color.BLACK);
+		final float scale = width / 800;
+		startButton.setWidth(scale * startButton.getWidth());
+		startButton.setHeight(scale * startButton.getHeight());
+		startButton.setX(scale * (width - startButton.getWidth()) / 2);
+		startButton.setY(scale * 400);
 		addMenuItem(startButton);
-		
-		final IMenuItem highscoreButton = new TextMenuItem(MENU_HIGHSCORE, font,
-				Resources.getInstance().getResource(ResourceName.MENU_HIGHSCORE_TEXT),
+
+		/*
+		 * Add the high score button. /*
+		 */
+		final IMenuItem highScoresButton = new SpriteMenuItem(MENU_HIGHSCORE,
+				SpriteFactory.getInstance()
+						.getMainMenuHighScoresButtonTexture(),
 				vertexBufferObjectManager);
-		highscoreButton.setPosition((float)HIGHSCORE_BTN_POS.getX(), (float)HIGHSCORE_BTN_POS.getY());
-		highscoreButton.setColor(Color.BLACK);
-		addMenuItem(highscoreButton);
+		highScoresButton.setWidth(scale * highScoresButton.getWidth());
+		highScoresButton.setHeight(scale * highScoresButton.getHeight());
+		highScoresButton.setX(scale * (width - highScoresButton.getWidth()) / 2);
+		highScoresButton.setY(scale * 550);
+		addMenuItem(highScoresButton);
+
+		/*
+		 * Add the exit button. /*
+		 */
+		final IMenuItem exitButton = new SpriteMenuItem(MENU_EXIT,
+				SpriteFactory.getInstance().getMainMenuExitButtonTexture(),
+				vertexBufferObjectManager);
+		exitButton.setWidth(scale * exitButton.getWidth());
+		exitButton.setHeight(scale * exitButton.getHeight());
+		exitButton.setX(scale * (width - exitButton.getWidth()) / 2);
+		exitButton.setY(scale * 700);
+		addMenuItem(exitButton);
 	}
 }
