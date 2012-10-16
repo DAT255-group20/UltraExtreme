@@ -1,5 +1,6 @@
 package ultraextreme.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import ultraextreme.view.Highscore;
 import ultraextreme.view.HighscoreScene;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class HighscoreController extends AbstractController implements
 		IOnMenuItemClickListener {
@@ -32,9 +34,14 @@ public class HighscoreController extends AbstractController implements
 
 	@Override
 	public void activateController() {
+		loadFromDatabase();
+	}
+
+	private void loadFromDatabase() {
+		
 		List<Highscore> highscores = new ArrayList<Highscore>();
 
-		// Testing the database
+		// Reading from the database
 		SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
 		String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
 		Cursor cursor = readableDb.rawQuery(query, null);
@@ -55,7 +62,7 @@ public class HighscoreController extends AbstractController implements
 			}
 			cursor.moveToNext();
 		}
-		// End of database test
+		dbOpenHelper.close();
 
 		scene.displayHighscore(highscores);
 	}
@@ -78,6 +85,16 @@ public class HighscoreController extends AbstractController implements
 
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
+			break;
+			
+		case HighscoreScene.CLEAR_LIST:
+
+			// Delete the database file
+			File db = new File(dbOpenHelper.getWritableDatabase().getPath());
+			Log.d("DEBUG", "Database deleted: " + db.delete());
+			loadFromDatabase();
+			dbOpenHelper.close();
+			
 			break;
 
 		default:
