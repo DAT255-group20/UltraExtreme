@@ -1,5 +1,8 @@
 package ultraextreme.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -9,6 +12,7 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
+import ultraextreme.view.Highscore;
 import ultraextreme.view.HighscoreScene;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,7 +33,8 @@ public class HighscoreController extends AbstractController implements
 
 	@Override
 	public void activateController() {
-		// Auto-generated method stub
+		List<Highscore> highscores = new ArrayList<Highscore>();
+		scene.displayHighscore(highscores);
 	}
 
 	@Override

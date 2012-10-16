@@ -1,5 +1,8 @@
 package ultraextreme.view;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -9,12 +12,20 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
 
+import ultraextreme.model.util.Position;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
 
 public class HighscoreScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
+
+	// TODO Make these centered on the screen
+	private static final Position GOTOMENU_BTN_POS = new Position(100, 100);
+	private static final Position HIGHSCORE_LIST_POS = new Position(100, 200);
+	private static final int HIGHSCORE_DISPERSION = 50;
+	
+	private HighscoreText[] highscores = new HighscoreText[10];
 
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {
@@ -23,8 +34,27 @@ public class HighscoreScene extends MenuScene {
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
 				vbo);
-		gotoMenuButton.setPosition(100, 100);
+		gotoMenuButton.setPosition((float)GOTOMENU_BTN_POS.getX(), (float)GOTOMENU_BTN_POS.getY());
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
+		for (int i=0; i<highscores.length; i++)
+		{
+			highscores[i] = new HighscoreText(new Position(HIGHSCORE_LIST_POS.getX(), HIGHSCORE_LIST_POS.getY() + i*HIGHSCORE_DISPERSION), font, vbo, i);
+		}
+	}
+	
+	/**
+	 * Displays the highscores on the screen.
+	 * @param highscores The list of highscores.
+	 */
+	public void displayHighscore(List<Highscore> highscores)
+	{
+		Collections.sort(highscores);
+		
+		int nrOfItems = Math.min(this.highscores.length, highscores.size());
+		for (int i=0; i<nrOfItems; i++)
+		{
+			this.highscores[i].setHighscore(highscores.get(i));
+		}
 	}
 }
