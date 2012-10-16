@@ -8,6 +8,7 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
@@ -22,7 +23,8 @@ public class HighscoreScene extends MenuScene {
 
 	// TODO Make these centered on the screen
 	private static final Position GOTOMENU_BTN_POS = new Position(100, 100);
-	private static final Position HIGHSCORE_LIST_POS = new Position(100, 200);
+	private static final Position HIGHSCORE_HEADER_POS = new Position(135, 160);
+	private static final Position HIGHSCORE_LIST_POS = new Position(80, 220);
 	private static final int HIGHSCORE_DISPERSION = 50;
 	
 	private HighscoreText[] highscores = new HighscoreText[10];
@@ -37,6 +39,10 @@ public class HighscoreScene extends MenuScene {
 		gotoMenuButton.setPosition((float)GOTOMENU_BTN_POS.getX(), (float)GOTOMENU_BTN_POS.getY());
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
+		
+		Text highscoreHeader = new Text((float)HIGHSCORE_HEADER_POS.getX(), (float)HIGHSCORE_HEADER_POS.getY(), font, "Name  |  Score", vbo);
+		highscoreHeader.setColor(Color.BLACK);
+		attachChild(highscoreHeader);
 		for (int i=0; i<highscores.length; i++)
 		{
 			highscores[i] = new HighscoreText(new Position(HIGHSCORE_LIST_POS.getX(), HIGHSCORE_LIST_POS.getY() + i*HIGHSCORE_DISPERSION), font, vbo, i+1);
