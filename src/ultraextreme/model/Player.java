@@ -102,7 +102,6 @@ public class Player implements IPlayer {
 		this.playerId = playerId;
 		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
 				Math.PI), 10);
-		//this.itemBar.addItem(new BasicWeapon(bulletManager));
 		lives = Constants.getInitShipLives();
 		this.score = 0;
 	}

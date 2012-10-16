@@ -44,6 +44,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
  * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public class GameModel implements IUltraExtremeModel {
@@ -93,12 +94,9 @@ public class GameModel implements IUltraExtremeModel {
 		for (AbstractEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
-
-		// TODO Decide if we want pickups to move around. If so, the following
-		// commented code is necessary.
-		// for(WeaponPickup pickup : pickupManager.getPickups()) {
-		// pickup.doMovement(timeElapsed);
-		// }
+		for(WeaponPickup pickup : pickupManager.getPickups()) {
+			pickup.doMovement(timeElapsed);
+		}
 
 		enemySpawner.update(timeElapsed);
 

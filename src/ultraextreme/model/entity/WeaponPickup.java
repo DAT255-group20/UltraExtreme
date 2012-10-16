@@ -29,10 +29,12 @@ import ultraextreme.model.util.Rotation;
  * saved as its ObjectName
  * 
  * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public class WeaponPickup extends AbstractEntity {
 	private static final int width = 30;
+	public final static float SPEED = 200f;
 
 	public WeaponPickup(double x, double y, ObjectName weaponType) {
 		super(x, y, width, width, new Rotation(0), weaponType);
@@ -40,5 +42,9 @@ public class WeaponPickup extends AbstractEntity {
 
 	public WeaponPickup(Position position, ObjectName name) {
 		super(position, width, width, new Rotation(0), name);
+	}
+
+	public void doMovement(float timeElapsed) {
+		this.move(0, timeElapsed * SPEED);		
 	}
 }
