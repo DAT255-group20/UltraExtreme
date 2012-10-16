@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="libs/andengine.jar"/>
 	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="libs/andengine-helperclasses.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

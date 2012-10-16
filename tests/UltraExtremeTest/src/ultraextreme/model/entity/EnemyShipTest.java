@@ -35,14 +35,21 @@ public class EnemyShipTest extends AbstractEntityTest {
 	private EnemyShip enemyShip;
 
 	@Override
-	public void setUp() {
-		resetShip(0, 0, 100, 50, 0, 10);
+	protected AbstractEntity getNewAbstractEntity(double x, double y,
+			int width, int height, Rotation direction) {
+		resetShip(x, y, width, height, 0, 5);
+		return enemyShip;
 	}
 
 	private void resetShip(double x, double y, int width, int height,
 			double rotation, int hitpoints) {
 		enemyShip = new EnemyShip(x, y, width, height, new Rotation(rotation),
 				hitpoints, ObjectName.BASIC_ENEMYSHIP);
+	}
+
+	@Override
+	public void setUp() {
+		resetShip(0, 0, 100, 50, 0, 10);
 	}
 
 	@Test
@@ -69,13 +76,6 @@ public class EnemyShipTest extends AbstractEntityTest {
 		}
 		enemyShip.receiveDamage(1);
 		assertTrue(enemyShip.isDestroyed());
-	}
-
-	@Override
-	protected AbstractEntity getNewAbstractEntity(double x, double y,
-			int width, int height, Rotation direction) {
-		resetShip(x, y, width, height, 0, 5);
-		return enemyShip;
 	}
 
 }

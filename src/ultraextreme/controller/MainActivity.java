@@ -53,10 +53,12 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private GameController gameController;
 	private MainMenuController mainMenuController;
 	private GameOverController gameOverController;
+	private HighscoreController highscoreController;
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
 	private AbstractController currentController;
+	private HighscoreDBOpenHelper highscoreDBOpenHelper;
 
 	// TODO PMD: The field name indicates a constant but its modifiers do not
 	// These two should either be final, or not be in capital letters.
@@ -65,6 +67,38 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private static int CAMERA_HEIGHT;
 
 	private float scaling;
+
+	@Override
+	public void controllerListenerUpdate(final ControllerEvent event) {
+		switch (event.getEventType()) {
+		case SWITCH_TO_GAME:
+			switchControllerTo(gameController);
+			break;
+
+		case SWITCH_TO_MENU:
+			switchControllerTo(mainMenuController);
+			break;
+
+		case SWITCH_TO_GAMEOVER:
+			switchControllerTo(gameOverController);
+			break;
+
+		case SWITCH_TO_HIGHSCORE:
+			switchControllerTo(highscoreController);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	private void initializeResources() {
+		Resources res = Resources.getInstance();
+		res.setResource(ResourceName.START_GAME, getString(R.string.start_game));
+		res.setResource(ResourceName.LIVES, getString(R.string.lives));
+		res.setResource(ResourceName.SCORE, getString(R.string.score));
+		res.setResource(ResourceName.GOTO_MENU, getString(R.string.goto_menu));
+	}
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
@@ -82,14 +116,6 @@ public class MainActivity extends SimpleBaseGameActivity implements
 				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
 	}
 
-	private void initializeResources() {
-		Resources res = Resources.getInstance();
-		res.setResource(ResourceName.START_GAME, getString(R.string.start_game));
-		res.setResource(ResourceName.LIVES, getString(R.string.lives));
-		res.setResource(ResourceName.SCORE, getString(R.string.score));
-		res.setResource(ResourceName.GOTO_MENU, getString(R.string.goto_menu));
-	}
-
 	@Override
 	protected void onCreateResources() {
 		SpriteFactory.initialize(this);
@@ -102,47 +128,28 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	@Override
 	protected Scene onCreateScene() {
+		highscoreDBOpenHelper = new HighscoreDBOpenHelper(this);
 		gameController = new GameController(
 				this.getVertexBufferObjectManager(),
 				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
 				this, scaling, camera, defaultFont);
 		mainMenuController = new MainMenuController(camera, defaultFont,
 				this.getVertexBufferObjectManager());
-		gameOverController = new GameOverController(camera, defaultFont,
-				this.getVertexBufferObjectManager());
+		gameOverController = new GameOverController(
+				gameController.getGameModel(), camera, defaultFont,
+				this.getVertexBufferObjectManager(), highscoreDBOpenHelper,
+				this);
+		highscoreController = new HighscoreController(camera, defaultFont,
+				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
 		gameOverController.addListener(this);
+		highscoreController.addListener(this);
 
 		currentController = mainMenuController;
 		updateScene();
 		return currentScene;
-	}
-
-	@Override
-	public void controllerListenerUpdate(final ControllerEvent event) {
-		switch (event.getEventType()) {
-		case SWITCH_TO_GAME:
-			switchControllerTo(gameController);
-			break;
-
-		case SWITCH_TO_MENU:
-			switchControllerTo(mainMenuController);
-			break;
-
-		case SWITCH_TO_HIGHSCORE:
-			switchControllerTo(gameOverController);
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	private void updateScene() {
-		currentScene = currentController.getScene();
-		getEngine().setScene(currentScene);
 	}
 
 	private void switchControllerTo(AbstractController newController) {
@@ -150,5 +157,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		currentController = newController;
 		currentController.activateController();
 		updateScene();
+	}
+
+	private void updateScene() {
+		currentScene = currentController.getScene();
+		getEngine().setScene(currentScene);
 	}
 }

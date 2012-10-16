@@ -35,6 +35,16 @@ public class WeaponFactoryTest extends TestCase {
 	}
 
 	@Test
+	public void testGetNewWeapon() {
+		WeaponFactory.initialize(manager);
+		AbstractWeapon weapon = WeaponFactory.getInstance().getNewWeapon(
+				ObjectName.BASIC_WEAPON);
+		assertTrue(weapon != null);
+		assertEquals(weapon.getName(), ObjectName.BASIC_WEAPON);
+		assertTrue(weapon.getBulletManager().equals(manager));
+	}
+
+	@Test
 	public void testInitalize() {
 		boolean exceptionHasBeenThrown = false;
 		try {
@@ -46,16 +56,6 @@ public class WeaponFactoryTest extends TestCase {
 		assertTrue(exceptionHasBeenThrown);
 		WeaponFactory.initialize(manager);
 		assertFalse(WeaponFactory.getInstance() == null);
-	}
-
-	@Test
-	public void testGetNewWeapon() {
-		WeaponFactory.initialize(manager);
-		AbstractWeapon weapon = WeaponFactory.getInstance().getNewWeapon(
-				ObjectName.BASIC_WEAPON);
-		assertTrue(weapon != null);
-		assertEquals(weapon.getName(), ObjectName.BASIC_WEAPON);
-		assertTrue(weapon.getBulletManager().equals(manager));
 	}
 
 }

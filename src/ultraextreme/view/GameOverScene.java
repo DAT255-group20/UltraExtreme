@@ -25,10 +25,13 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.helperclasses.InputText;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.util.color.Color;
 
+import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
 
@@ -41,9 +44,15 @@ public class GameOverScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
 
-	public GameOverScene(final Camera camera, final Font font,
-			final VertexBufferObjectManager vertexBufferObjectManager) {
+	private IUltraExtremeModel gameModel;
+	private InputText nameInput;
+
+	public GameOverScene(IUltraExtremeModel gameModel, final Camera camera,
+			final Font font,
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			BaseGameActivity activity) {
 		super(camera);
+		this.gameModel = gameModel;
 		setBackground(new Background(0.9f, 0.1f, 0.1f));
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
@@ -51,5 +60,29 @@ public class GameOverScene extends MenuScene {
 		gotoMenuButton.setPosition(100, 100);
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
+
+		// TODO Extract strings
+		nameInput = new InputText(100, 300, "Highscore name",
+				"Enter your name for the highscore list", SpriteFactory
+						.getInstance().getTextInputBackground(), font, 0, 0,
+				vertexBufferObjectManager, activity);
+		nameInput.setText("Mr. Anon");
+		nameInput.getChildByIndex(0).setColor(Color.BLACK); // Change text color
+		this.attachChild(nameInput);
+		this.registerTouchArea(nameInput);
+	}
+
+	/**
+	 * @return the nameInput
+	 */
+	public String getName() {
+		return nameInput.getText();
+	}
+
+	/**
+	 * @return the score
+	 */
+	public int getScore() {
+		return gameModel.getPlayer().getScore();
 	}
 }

@@ -37,15 +37,27 @@ public class BasicWeaponTest extends TestCase {
 	BulletManager bulletManager;
 	BasicWeapon basicWeapon;
 
+	private void resetInstanceVariables() {
+		bulletManager = new BulletManager();
+		basicWeapon = new BasicWeapon(bulletManager);
+	}
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		this.resetInstanceVariables();
 	}
 
-	private void resetInstanceVariables() {
-		bulletManager = new BulletManager();
-		basicWeapon = new BasicWeapon(bulletManager);
+	/**
+	 * Test so the properties of the bullet that the weapon fires are correct.
+	 */
+	public void testBulletProperties() {
+		float cooldown = BasicWeapon.getInitCooldown();
+		basicWeapon.fire(new Position(10, 5), PlayerID.PLAYER1,
+				new Rotation(0), cooldown + cooldown / 1000);
+		IBullet bullet = bulletManager.getBullets().get(0);
+		assertTrue(bullet instanceof BasicBullet);
+		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 	}
 
 	/**
@@ -67,17 +79,5 @@ public class BasicWeaponTest extends TestCase {
 		basicWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
 				cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() == 3);
-	}
-
-	/**
-	 * Test so the properties of the bullet that the weapon fires are correct.
-	 */
-	public void testBulletProperties() {
-		float cooldown = BasicWeapon.getInitCooldown();
-		basicWeapon.fire(new Position(10, 5), PlayerID.PLAYER1,
-				new Rotation(0), cooldown + cooldown / 1000);
-		IBullet bullet = bulletManager.getBullets().get(0);
-		assertTrue(bullet instanceof BasicBullet);
-		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 	}
 }

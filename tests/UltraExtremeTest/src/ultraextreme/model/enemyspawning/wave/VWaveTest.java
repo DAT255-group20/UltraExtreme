@@ -23,6 +23,7 @@ package ultraextreme.model.enemyspawning.wave;
 import junit.framework.TestCase;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
+import ultraextreme.model.item.WeaponFactory;
 
 /**
  * 
@@ -31,21 +32,43 @@ import ultraextreme.model.item.BulletManager;
  */
 public class VWaveTest extends TestCase {
 
-	private BulletManager bulletManager;
-
 	private EnemyCollector enemyCollector;
 
 	private AbstractWave wave;
 
+	private BulletManager bulletManager;
+
+	private void initWave(double rotation, int x, int y) {
+		wave = new VWave(rotation, x, y);
+		wave.addListener(enemyCollector);
+	}
+
 	@Override
 	public void setUp() {
 		bulletManager = new BulletManager();
+		WeaponFactory.initialize(bulletManager);
 		enemyCollector = new EnemyCollector();
 	}
 
-	private void initWave(double rotation, int x, int y) {
-		wave = new VWave(rotation, x, y, bulletManager);
-		wave.addListener(enemyCollector);
+	/**
+	 * Create a new wave and see if the enemy spawned has the correct
+	 * properties.
+	 */
+	public void testSpawnedEnemyPropteries() {
+		initWave(0, 0, 0);
+		wave.update(0);
+		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
+				.getShip();
+		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
+
+		initWave(2, 100, 200);
+		wave.update(0);
+		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
+		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
+		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
+		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
 	}
 
 	/**
@@ -82,26 +105,5 @@ public class VWaveTest extends TestCase {
 
 		assertTrue(enemyCollector.hasWaveEnded());
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 7);
-	}
-
-	/**
-	 * Create a new wave and see if the enemy spawned has the correct
-	 * properties.
-	 */
-	public void testSpawnedEnemyPropteries() {
-		initWave(0, 0, 0);
-		wave.update(0);
-		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
-				.getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
-
-		initWave(2, 100, 200);
-		wave.update(0);
-		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
 	}
 }

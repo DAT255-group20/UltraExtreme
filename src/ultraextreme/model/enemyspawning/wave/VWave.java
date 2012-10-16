@@ -21,7 +21,6 @@
 package ultraextreme.model.enemyspawning.wave;
 
 import ultraextreme.model.enemy.BasicEnemy;
-import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -42,7 +41,8 @@ public class VWave extends AbstractWave {
 	private final Position spawningPositon;
 
 	/**
-	 * Create a enemy wave flying like a V.
+	 * Create a enemy wave flying like a V. There are 7 enemies in the wave and
+	 * it's 700 units wide.
 	 * 
 	 * @param rotation
 	 *            How much you want to rotate the formation.
@@ -50,12 +50,8 @@ public class VWave extends AbstractWave {
 	 *            X position where the enemies should spawn.
 	 * @param y
 	 *            Y position where the enemies should spawn.
-	 * @param bulletManager
-	 *            Reference to a bullet manager so the enemies can be created.
 	 */
-	public VWave(final double rotation, final int x, final int y,
-			final BulletManager bulletManager) {
-		super(bulletManager);
+	public VWave(final double rotation, final int x, final int y) {
 		timer = 2;
 		counter = 0;
 		this.rotation = new Rotation(rotation);
@@ -71,15 +67,12 @@ public class VWave extends AbstractWave {
 		if (timer >= 2) {
 			if (counter == 0) {
 				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
-						spawningPositon.getY(), this.rotation,
-						this.bulletManager));
+						spawningPositon.getY(), this.rotation));
 			} else {
 				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						- counter * 60, spawningPositon.getY(), rotation,
-						this.bulletManager));
+						- counter * 100, spawningPositon.getY(), rotation));
 				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						+ counter * 60, spawningPositon.getY(), rotation,
-						this.bulletManager));
+						+ counter * 100, spawningPositon.getY(), rotation));
 			}
 			timer -= 2;
 			counter++;

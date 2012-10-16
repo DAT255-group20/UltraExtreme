@@ -32,9 +32,30 @@ public class PlayerShipTest extends AbstractEntityTest {
 
 	PlayerShip playerShip;
 
+	@Override
+	protected AbstractEntity getNewAbstractEntity(double x, double y,
+			int width, int height, Rotation direction) {
+		return new PlayerShip(x, y, width, height);
+	}
+
 	private void resetInstanceVariables(double x, double y, int width,
 			int height) {
 		playerShip = new PlayerShip(x, y, width, height);
+	}
+
+	@Override
+	public void testGetDirection() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertEquals(playerShip.getRotation(), new Rotation(0));
+	}
+
+	/**
+	 * Test if it's possible to destroy the ship. FIXME: Not implemented yet.
+	 */
+	public void testIsDestroyed() {
+		// FIXME: Since the ship can't get hurt yet this is hard to test.
+		resetInstanceVariables(0, 0, 0, 0);
+		assertEquals(playerShip.isDestroyed(), false);
 	}
 
 	/**
@@ -51,26 +72,5 @@ public class PlayerShipTest extends AbstractEntityTest {
 
 		playerShip.move(-100, -1000);
 		assertEquals(playerShip.getPositionClone(), new Position(-80.0, -880.0));
-	}
-
-	/**
-	 * Test if it's possible to destroy the ship. FIXME: Not implemented yet.
-	 */
-	public void testIsDestroyed() {
-		// FIXME: Since the ship can't get hurt yet this is hard to test.
-		resetInstanceVariables(0, 0, 0, 0);
-		assertEquals(playerShip.isDestroyed(), false);
-	}
-
-	@Override
-	public void testGetDirection() {
-		resetInstanceVariables(0, 0, 0, 0);
-		assertEquals(playerShip.getRotation(), new Rotation(0));
-	}
-
-	@Override
-	protected AbstractEntity getNewAbstractEntity(double x, double y,
-			int width, int height, Rotation direction) {
-		return new PlayerShip(x, y, width, height);
 	}
 }

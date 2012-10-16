@@ -27,8 +27,14 @@ import org.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.activity.BaseGameActivity;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
+import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameOverScene;
 
 /**
@@ -40,32 +46,17 @@ public class GameOverController extends AbstractController implements
 		IOnMenuItemClickListener {
 
 	private final GameOverScene scene;
+	private HighscoreDBOpenHelper dbOpenHelper;
 
-	public GameOverController(final Camera camera, final Font font,
-			final VertexBufferObjectManager vertexBufferObjectManager) {
+	public GameOverController(IUltraExtremeModel gameModel,
+			final Camera camera, final Font font,
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			HighscoreDBOpenHelper dbOpenHelper, BaseGameActivity activity) {
 		super();
-		scene = new GameOverScene(camera, font, vertexBufferObjectManager);
+		scene = new GameOverScene(gameModel, camera, font,
+				vertexBufferObjectManager, activity);
 		scene.setOnMenuItemClickListener(this);
-	}
-
-	@Override
-	public boolean onMenuItemClicked(final MenuScene menuScene,
-			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
-		switch (menuItem.getID()) {
-		case GameOverScene.GOTO_MENU:
-			fireEvent(new ControllerEvent(this,
-					ControllerEventType.SWITCH_TO_MENU));
-			break;
-
-		default:
-			break;
-		}
-		return true;
-	}
-
-	@Override
-	public Scene getScene() {
-		return scene;
+		this.dbOpenHelper = dbOpenHelper;
 	}
 
 	@Override
@@ -78,5 +69,49 @@ public class GameOverController extends AbstractController implements
 	public void deactivateController() {
 		// Auto-generated method stub
 
+	}
+
+	@Override
+	public Scene getScene() {
+		return scene;
+	}
+
+	@Override
+	public boolean onMenuItemClicked(final MenuScene menuScene,
+			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
+		switch (menuItem.getID()) {
+		case GameOverScene.GOTO_MENU:
+			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+			String nameTag = scene.getName();
+			String score = Integer.toString(scene.getScore());
+			String sqlCommand = "INSERT INTO "
+					+ HighscoreDBOpenHelper.TABLE_NAME + " ("
+					+ HighscoreDBOpenHelper.NAME + ", "
+					+ HighscoreDBOpenHelper.HIGHSCORE + ") VALUES ('" + nameTag
+					+ "', '" + score + "')";
+			Log.d("DEBUG", "Saving highscore: " + sqlCommand);
+			database.execSQL(sqlCommand);
+			dbOpenHelper.close();
+
+			// Testing the database
+			SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
+			String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
+			Cursor cursor = readableDb.rawQuery(query, null);
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				Log.d("DEBUG", "Cursor pointing on: " + cursor.getString(0)
+						+ ", " + cursor.getString(1));
+				cursor.moveToNext();
+			}
+			// End of database test
+
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_MENU));
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 }
