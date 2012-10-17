@@ -27,7 +27,7 @@ package ultraextreme.model.enemyspawning.wavelist;
  * @author Daniel Jonsson
  * 
  */
-public abstract class AbstractWaveList implements WaveSpawningList {
+public abstract class AbstractWaveList implements IWaveSpawningList {
 
 	/**
 	 * The number of waves that this wave list has spawned.

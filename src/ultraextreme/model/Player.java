@@ -26,7 +26,6 @@ import java.util.List;
 
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.PlayerShip;
-import ultraextreme.model.item.SpreadWeapon;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
@@ -100,8 +99,9 @@ public class Player implements IPlayer {
 		this.bulletManager = bulletManager;
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
+		this.itemBar = new ItemBar(playerId, new Rotation(
 				Math.PI), 10);
+
 		lives = Constants.getInitShipLives();
 		this.score = 0;
 	}

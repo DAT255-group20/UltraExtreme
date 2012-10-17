@@ -47,10 +47,19 @@ public class AbstractEnemyTest extends TestCase {
 		resetInstanceVariables();
 	}
 
+	public void testGetShip() {
+		fail("Not yet tested");
+	}
+
+	public void testGetWeapon() {
+		fail("Not yet tested");
+	}
+
 	/**
 	 * Tests the isDead() method
 	 */
 	public void testIsDead() {
+		// TODO What does this first code line do?
 		assertTrue(enemy.getShip().isDestroyed() == enemy.isDead());
 		enemy.getShip().receiveDamage(10000);
 		assertTrue(enemy.isDead());
@@ -64,4 +73,7 @@ public class AbstractEnemyTest extends TestCase {
 		assertTrue(!bulletManager.getBullets().isEmpty());
 	}
 
+	public void testShouldSpawnPickup() {
+		fail("Not yet tested");
+	}
 }

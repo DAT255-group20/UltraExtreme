@@ -27,7 +27,7 @@ import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.HitAndRunEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
-import ultraextreme.model.enemyspawning.wave.EnemyProvider;
+import ultraextreme.model.enemyspawning.wave.AbstractEnemyProvider;
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.util.Constants;
@@ -102,7 +102,7 @@ public class RandomWaveList extends AbstractWaveList {
 		 */
 		case 1:
 			currentWave = new RectangleWave(3, 1, 0, 300, -100,
-					new EnemyProvider() {
+					new AbstractEnemyProvider() {
 						// Counter so the enemies will fly to different
 						// positions
 						private int counter = 0;
@@ -128,7 +128,7 @@ public class RandomWaveList extends AbstractWaveList {
 			float rotation = (randomGenerator.nextFloat() * 6 - 3) / 8;
 			x = 450 + (randomGenerator.nextFloat() * 800 - 400);
 			currentWave = new RectangleWave(1, 3, rotation, (int) x, -100,
-					new EnemyProvider() {
+					new AbstractEnemyProvider() {
 						@Override
 						public AbstractEnemy getEnemy(
 								Position spawningPosition, Rotation rotation) {

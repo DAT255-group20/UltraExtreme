@@ -34,7 +34,7 @@ import ultraextreme.model.util.Rotation;
  * @author Daniel Jonsson
  * 
  */
-public class HorizontalLineWaveTest extends TestCase {
+public class RectangleWaveTest extends TestCase {
 
 	private BulletManager bulletManager;
 
@@ -45,7 +45,7 @@ public class HorizontalLineWaveTest extends TestCase {
 	private void initWave(int numOfEnemies, int numOfLines, double rotation,
 			int x, int y) {
 		wave = new RectangleWave(numOfEnemies, numOfLines, rotation, x, y,
-				new EnemyProvider() {
+				new AbstractEnemyProvider() {
 					@Override
 					public AbstractEnemy getEnemy(Position spawningPosition,
 							Rotation rotation) {

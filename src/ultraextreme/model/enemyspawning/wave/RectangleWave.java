@@ -47,7 +47,7 @@ public class RectangleWave extends AbstractWave {
 
 	private final Position spawningPosition;
 
-	private EnemyProvider enemyProvider;
+	private AbstractEnemyProvider enemyProvider;
 
 	/**
 	 * Create a new vertical enemy line.
@@ -67,7 +67,7 @@ public class RectangleWave extends AbstractWave {
 	 */
 	public RectangleWave(final int enemiesInLines, final int lines,
 			final double rotation, final int x, final int y,
-			final EnemyProvider enemyProvider) {
+			final AbstractEnemyProvider enemyProvider) {
 		timer = 2;
 		lineCounter = 0;
 		this.enemiesInLines = enemiesInLines;

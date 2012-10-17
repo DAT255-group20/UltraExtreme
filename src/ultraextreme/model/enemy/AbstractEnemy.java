@@ -43,7 +43,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	private final EnemyShip ship;
 	private final AbstractWeapon weapon;
 	private final Rotation enemyRotation;
-	private final static Random randomGenerator = new Random();
+	private final static Random RANDOM_GENERATOR = new Random();
 
 	protected AbstractEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
 		this.ship = ship;
@@ -81,7 +81,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	@Override
 	public boolean shouldSpawnPickup() {
 
-		return (randomGenerator.nextInt(99) < Constants.getWeaponDropChance() + 1 && isDead());
+		return (RANDOM_GENERATOR.nextInt(99) < Constants.getWeaponDropChance() + 1 && isDead());
 	}
 
 	/**

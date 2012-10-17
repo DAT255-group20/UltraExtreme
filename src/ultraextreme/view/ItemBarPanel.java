@@ -26,11 +26,9 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import android.util.Log;
-
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.item.ItemBarUpdatedListener;
+import ultraextreme.model.item.ItemBarUpdateListener;
 import ultraextreme.model.util.Position;
 
 /**
@@ -39,7 +37,7 @@ import ultraextreme.model.util.Position;
  * @author Daniel Jonsson
  * 
  */
-public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
+public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 
 	private SpriteFactory spriteFactory;
 
@@ -81,7 +79,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	/**
 	 * Make the item bar update itself.
 	 */
-	public void updateItemBar(ItemBar itemBar) {
+	public final void updateItemBar(ItemBar itemBar) {
 		// Clean the item bar from sprites
 		this.detachChildren();
 
@@ -103,7 +101,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 					.getName());
 			Sprite sprite = new Sprite(x, y, width, height, texture,
 					vertexBufferObjectManager);
-			// TODO Need a way for setting alpha for the whole panel instead of
+			// Need a way for setting alpha for the whole panel instead of
 			// for the background panel and the sprites individually. This
 			// causes the sprites to be hard to see because you can see the
 			// panel through the sprites.
@@ -120,7 +118,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	}
 
 	@Override
-	public void updatedItemBar(ItemBar itemBar) {
+	public void itemBarUpdated(ItemBar itemBar) {
 		updateItemBar(itemBar);
 	}
 }

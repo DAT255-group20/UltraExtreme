@@ -36,7 +36,6 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import ultraextreme.model.entity.IEntity;
-import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.ObjectName;
 
@@ -46,7 +45,19 @@ import ultraextreme.model.util.ObjectName;
  * @author Johan Gronvall
  * 
  */
-public class SpriteFactory {
+public final class SpriteFactory {
+
+	public static SpriteFactory getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException(
+					"SpriteFactory must have been initialized before it is used");
+		}
+		return instance;
+	}
+
+	public static void initialize(SimpleBaseGameActivity activity) {
+		instance = new SpriteFactory(activity);
+	}
 
 	private Map<ObjectName, ITextureRegion> textureMap = new HashMap<ObjectName, ITextureRegion>();
 
@@ -56,13 +67,6 @@ public class SpriteFactory {
 	 * The items' textures.
 	 */
 	private Map<ObjectName, ITextureRegion> itemTextures = new HashMap<ObjectName, ITextureRegion>();
-
-	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
-	// variable.
-	private Dimension screenDimension; // TODO implement scaling in this class?
-	// TODO PMD: Avoid unused private fields such as 'MODEL_DIMENSION'.
-	private static final Dimension MODEL_DIMENSION = Constants
-			.getLevelDimension();
 
 	/**
 	 * The item bar's texture.
@@ -74,14 +78,13 @@ public class SpriteFactory {
 	 */
 	private ITextureRegion itemBarMarkerTexture;
 
-	private TiledTextureRegion textInputBackground;
-
 	/**
-	 * @return the textInputBackground
+	 * A map containing the main menu's textures, which are its background and
+	 * buttons.
 	 */
-	public TiledTextureRegion getTextInputBackground() {
-		return textInputBackground;
-	}
+	private Map<String, ITextureRegion> mainMenuTextures;
+
+	private TiledTextureRegion textInputBackground;
 
 	private static SpriteFactory instance;
 
@@ -90,7 +93,7 @@ public class SpriteFactory {
 	 * because this constructor might get heavy
 	 */
 	private SpriteFactory(final SimpleBaseGameActivity activity) {
-		screenDimension = new Dimension(activity.getResources()
+		Dimension screenDimension = new Dimension(activity.getResources()
 				.getDisplayMetrics().widthPixels, activity.getResources()
 				.getDisplayMetrics().heightPixels);
 		GameObjectSprite.setScreenDimension(screenDimension);
@@ -144,8 +147,8 @@ public class SpriteFactory {
 		// Init the item textures for items in the itembar
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
 
-		itemTextures.put(ObjectName.BASIC_SPREAD_WEAPON, spinningWeapon); // Test only
-
+		itemTextures.put(ObjectName.BASIC_SPREAD_WEAPON, spinningWeapon); // Test
+																			// only
 
 		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon); // Test
 																		// only
@@ -163,37 +166,100 @@ public class SpriteFactory {
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
+
+		// Init main menu atlas and texture map
+		mainMenuTextures = new HashMap<String, ITextureRegion>();
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menus/");
+		BitmapTextureAtlas textureAtlasMainMenu = new BitmapTextureAtlas(
+				textureManager, 800, 1730, TextureOptions.DEFAULT);
+
+		// Init the main menu background
+		mainMenuTextures.put("background",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity, "main_menu_bg.jpg", 0,
+						0));
+
+		// Init main menu's start button
+		mainMenuTextures.put("startButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity,
+						"main_menu_start_button.png", 0, 1281));
+
+		// Init main menu's high scores button
+		mainMenuTextures.put("highScoresButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity,
+						"main_menu_high_scores_button.png", 0, 1431));
+
+		// Init main menu's exit button
+		mainMenuTextures.put("exitButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity,
+						"main_menu_exit_button.png", 0, 1581));
+		textureManager.loadTexture(textureAtlasMainMenu);
 	}
 
 	/**
-	 * Puts the properties into textureMap and offsetMap. Also multiplies the
-	 * offset with the sprite scaling factor.
 	 * 
-	 * @param objectName
-	 *            The key in the maps.
-	 * @param texture
-	 *            The texture that goes into textureMap.
-	 * @param textureOffset
-	 *            The offset that goes into offsetMap, multiplied with the
-	 *            sprite scaling factor.
+	 * @return The texture of the item bar's marker.
 	 */
-	private void putProperties(ObjectName objectName, TextureRegion texture,
-			Vector2d textureOffset) {
-		textureOffset.scale(ultraextreme.util.Constants.SPRITE_SCALE_FACTOR);
-		textureMap.put(objectName, texture);
-		offsetMap.put(objectName, textureOffset);
+	public ITextureRegion getItemBarMarkerTexture() {
+		return itemBarMarkerTexture;
 	}
 
-	public static void initialize(SimpleBaseGameActivity activity) {
-		instance = new SpriteFactory(activity);
+	/**
+	 * 
+	 * @return The texture of the item bar.
+	 */
+	public ITextureRegion getItemBarTexture() {
+		return itemBarTexture;
 	}
 
-	public static SpriteFactory getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException(
-					"SpriteFactory must have been initialized before it is used");
+	/**
+	 * 
+	 * @param item
+	 *            The item you want an image of.
+	 * @return An texture of an item that you want to show in the item bar.
+	 */
+	public ITextureRegion getItemTexture(ObjectName item) {
+		ITextureRegion output = itemTextures.get(item);
+		if (output == null) {
+			throw new IllegalArgumentException(
+					"No texture is associated with that kind of object");
 		}
-		return instance;
+		return output;
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's background.
+	 */
+	public ITextureRegion getMainMenuBackgroundTexture() {
+		return mainMenuTextures.get("background");
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's exit button.
+	 */
+	public ITextureRegion getMainMenuExitButtonTexture() {
+		return mainMenuTextures.get("exitButton");
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's high scores button.
+	 */
+	public ITextureRegion getMainMenuHighScoresButtonTexture() {
+		return mainMenuTextures.get("highScoresButton");
+	}
+
+	/**
+	 * 
+	 * @return The texture of the main menu scene's start button.
+	 */
+	public ITextureRegion getMainMenuStartButtonTexture() {
+		return mainMenuTextures.get("startButton");
 	}
 
 	/**
@@ -224,33 +290,28 @@ public class SpriteFactory {
 	}
 
 	/**
-	 * 
-	 * @return The texture of the item bar.
+	 * @return the textInputBackground
 	 */
-	public ITextureRegion getItemBarTexture() {
-		return itemBarTexture;
+	public TiledTextureRegion getTextInputBackground() {
+		return textInputBackground;
 	}
 
 	/**
+	 * Puts the properties into textureMap and offsetMap. Also multiplies the
+	 * offset with the sprite scaling factor.
 	 * 
-	 * @param item
-	 *            The item you want an image of.
-	 * @return An texture of an item that you want to show in the item bar.
+	 * @param objectName
+	 *            The key in the maps.
+	 * @param texture
+	 *            The texture that goes into textureMap.
+	 * @param textureOffset
+	 *            The offset that goes into offsetMap, multiplied with the
+	 *            sprite scaling factor.
 	 */
-	public ITextureRegion getItemTexture(ObjectName item) {
-		ITextureRegion output = itemTextures.get(item);
-		if (output == null) {
-			throw new IllegalArgumentException(
-					"No texture is associated with that kind of object");
-		}
-		return output;
-	}
-
-	/**
-	 * 
-	 * @return The texture of the item bar's marker.
-	 */
-	public ITextureRegion getItemBarMarkerTexture() {
-		return itemBarMarkerTexture;
+	private void putProperties(ObjectName objectName, TextureRegion texture,
+			Vector2d textureOffset) {
+		textureOffset.scale(ultraextreme.util.Constants.SPRITE_SCALE_FACTOR);
+		textureMap.put(objectName, texture);
+		offsetMap.put(objectName, textureOffset);
 	}
 }

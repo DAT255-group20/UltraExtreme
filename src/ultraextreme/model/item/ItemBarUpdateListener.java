@@ -18,30 +18,22 @@
  * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
  * ============================================================ */
 
-package ultraextreme.model.enemyspawning.wave;
-
-import ultraextreme.model.enemy.AbstractEnemy;
-import ultraextreme.model.util.Position;
-import ultraextreme.model.util.Rotation;
+package ultraextreme.model.item;
 
 /**
- * This class is used by RandomWaveList and RectangleWave so there can be
- * rectangles with different enemies.
+ * A class that wants to know when an ItemBar has been updated/changed needs to
+ * implement this add add itself ass a listener to the ItemBar.
  * 
  * @author Daniel Jonsson
  * 
  */
-public abstract class EnemyProvider {
+public interface ItemBarUpdateListener {
 
 	/**
-	 * Build an enemy.
+	 * An item bar has been updated.
 	 * 
-	 * @param spawningPosition
-	 *            The enemy ship's spawning position.
-	 * @param rotation
-	 *            Rotation of the enemy ship.
-	 * @return AbstractEnemy
+	 * @param itemBar
+	 *            The item bar that has been updated.
 	 */
-	public abstract AbstractEnemy getEnemy(Position spawningPosition,
-			Rotation rotation);
+	public void itemBarUpdated(ItemBar itemBar);
 }

@@ -33,6 +33,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class Bomb extends AbstractWeapon {
 
+	// NOTE: This class is not yet implemented and not present in the game
 	public Bomb(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BOMB);
 	}
@@ -40,12 +41,12 @@ public class Bomb extends AbstractWeapon {
 	@Override
 	public void fire(final Position shipPosition, final PlayerID playerId,
 			final Rotation rotation, final float timeElapsed) {
-		// TODO Bomb.fire()
+		// Bomb.fire()
 
 	}
 
 	@Override
-	public AbstractWeapon shallowClone() {
+	public AbstractWeapon getNewInstance() {
 		return new Bomb(this.getBulletManager());
 	}
 

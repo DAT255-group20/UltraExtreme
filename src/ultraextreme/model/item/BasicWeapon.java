@@ -36,16 +36,17 @@ public class BasicWeapon extends AbstractWeapon {
 	private static final int BULLET_WIDTH = 5;
 	private static final int BULLET_HEIGHT = 5;
 	private static final int BULLET_DAMAGE = 10;
-	private static float initCooldown = 0.5f;
+	private static final float INIT_COOLDOWN = 0.5f;
+
 	public static float getInitCooldown() {
-		return initCooldown;
+		return INIT_COOLDOWN;
 	}
 
 	private float cooldown;
 
 	public BasicWeapon(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BASIC_WEAPON);
-		cooldown = initCooldown;
+		cooldown = INIT_COOLDOWN;
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class BasicWeapon extends AbstractWeapon {
 			final Rotation rotation, final float timeElapsed) {
 		cooldown = cooldown - timeElapsed;
 		if (cooldown < 0) {
-			cooldown = cooldown + initCooldown;
+			cooldown = cooldown + INIT_COOLDOWN;
 			this.getBulletManager().addBullet(
 					new BasicBullet(shipPosition.getX(), shipPosition.getY(),
 							BULLET_WIDTH, BULLET_HEIGHT, playerId, rotation,
@@ -62,7 +63,7 @@ public class BasicWeapon extends AbstractWeapon {
 	}
 
 	@Override
-	public AbstractWeapon shallowClone() {
+	public AbstractWeapon getNewInstance() {
 		return new BasicWeapon(this.getBulletManager());
 	}
 }

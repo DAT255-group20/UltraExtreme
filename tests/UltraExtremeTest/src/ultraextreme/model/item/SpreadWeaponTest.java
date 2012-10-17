@@ -1,12 +1,9 @@
 package ultraextreme.model.item;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ultraextreme.model.entity.AbstractBullet;
@@ -53,7 +50,7 @@ public class SpreadWeaponTest extends TestCase {
 				cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() == 12);
 	}
-	
+
 	/**
 	 * Test so the properties of the bullet that the weapon fires are correct.
 	 */
@@ -64,20 +61,20 @@ public class SpreadWeaponTest extends TestCase {
 		IBullet bullet = bulletManager.getBullets().get(0);
 		assertTrue(bullet instanceof BasicBullet);
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
-		
+
 		List<AbstractBullet> bulletList = bulletManager.getBullets();
-		
+
 		// Make sure the bullets move a bit.
-		for(AbstractBullet b : bulletList) {
+		for (AbstractBullet b : bulletList) {
 			b.doMovement(0.1f);
 		}
-		
+
 		// Check so that the bullets are not along the same line.
 		double epsilon = 0.00001;
-		for(AbstractBullet b1 : bulletList) {
-			for(AbstractBullet b2 : bulletList) {
-				if(b1 != b2) {
-					assertFalse(Math.abs(b1.getPositionClone().getX() 
+		for (AbstractBullet b1 : bulletList) {
+			for (AbstractBullet b2 : bulletList) {
+				if (b1 != b2) {
+					assertFalse(Math.abs(b1.getPositionClone().getX()
 							- b2.getPositionClone().getX()) < epsilon);
 				}
 			}
@@ -86,6 +83,6 @@ public class SpreadWeaponTest extends TestCase {
 
 	@Test
 	public void testShallowClone() {
-		fail("Not yet implemented");
+		fail("Not yet tested");
 	}
 }

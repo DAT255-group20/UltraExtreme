@@ -60,12 +60,6 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private AbstractController currentController;
 	private HighscoreDBOpenHelper highscoreDBOpenHelper;
 
-	// TODO PMD: The field name indicates a constant but its modifiers do not
-	// These two should either be final, or not be in capital letters.
-	// Capital letters indicates a constant, but constants MUST be final.
-	private static int CAMERA_WIDTH;
-	private static int CAMERA_HEIGHT;
-
 	private float scaling;
 
 	@Override
@@ -94,7 +88,9 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private void initializeResources() {
 		Resources res = Resources.getInstance();
-		res.setResource(ResourceName.START_GAME, getString(R.string.start_game));
+		res.setResource(ResourceName.MENU_START_GAME_TEXT, getString(R.string.menu_start_game));
+		res.setResource(ResourceName.MENU_HIGHSCORE_TEXT, getString(R.string.menu_highscore_text));
+		res.setResource(ResourceName.CLEAR_HIGHSCORE, getString(R.string.clear_highscore));
 		res.setResource(ResourceName.LIVES, getString(R.string.lives));
 		res.setResource(ResourceName.SCORE, getString(R.string.score));
 		res.setResource(ResourceName.GOTO_MENU, getString(R.string.goto_menu));
@@ -103,17 +99,13 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		initializeResources();
-		// TODO FindBugs: This instance method writes to a static field.
-		// This is tricky to get correct if multiple instances are being
-		// manipulated,
-		// and generally bad practice.
-		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
-		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
+		int cameraWidth = getResources().getDisplayMetrics().widthPixels;
+		int cameraHeight = getResources().getDisplayMetrics().heightPixels;
 		scaling = (float) (getResources().getDisplayMetrics().heightPixels / Constants
 				.getLevelDimension().getY());
-		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		camera = new Camera(0, 0, cameraWidth, cameraHeight);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
-				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
+				new RatioResolutionPolicy(cameraWidth, cameraHeight), camera);
 	}
 
 	@Override

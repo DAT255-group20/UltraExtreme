@@ -215,6 +215,6 @@ public class GameModel implements IUltraExtremeModel {
 		pickupManager.clearAllPickups();
 		player.reset();
 
-		// TODO Reset enemymanager and enemysawner too?
+		// TODO(matachi) Reset enemyspawner too?
 	}
 }

@@ -31,7 +31,7 @@ import ultraextreme.model.util.ObjectName;
  * @author Johan Gronvall
  * 
  */
-public class WeaponFactory {
+public final class WeaponFactory {
 	private Map<ObjectName, AbstractWeapon> weaponMap;
 
 	private static WeaponFactory instance;
@@ -39,7 +39,7 @@ public class WeaponFactory {
 	private WeaponFactory(BulletManager manager) {
 		weaponMap = new HashMap<ObjectName, AbstractWeapon>();
 		weaponMap.put(ObjectName.BASIC_WEAPON, new BasicWeapon(manager));
-		weaponMap.put(ObjectName.SPINNING_WEAPON, new SpinningSpreadWeapon(
+		weaponMap.put(ObjectName.SPINNING_WEAPON, new SpinningWeapon(
 				manager));
 		weaponMap.put(ObjectName.BOMB, new Bomb(manager));
 	}
@@ -57,13 +57,13 @@ public class WeaponFactory {
 	}
 
 	/**
-	 * Returns a new shallow clone of the specified weapon
+	 * Returns a new instance of the specified weapon
 	 * 
 	 * @param objectName
 	 *            the name of the desired weapon
-	 * @return a new shallow clone of the specified weapon
+	 * @return a new instance of the specified weapon
 	 */
 	public AbstractWeapon getNewWeapon(ObjectName objectName) {
-		return weaponMap.get(objectName).shallowClone();
+		return weaponMap.get(objectName).getNewInstance();
 	}
 }

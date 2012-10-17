@@ -34,19 +34,19 @@ import ultraextreme.model.util.Rotation;
  * @author Viktor Anderling
  * 
  */
-public class SpinningSpreadWeapon extends AbstractWeapon {
+public class SpinningWeapon extends AbstractWeapon {
 
 	private static final int BULLET_WIDTH = 20;
 	private static final int BULLET_HEIGHT = 40;
 	private static final int BULLET_DAMAGE = 5;
-	private static float initCooldown = 1 / 6f;
-	private static final double angleStep = Math.PI / 12;
+	private static final float INIT_COOLDOWN = 1 / 6f;
+	private static final double ANGLE_STEP = Math.PI / 12;
 	private float cooldown;
 	private double currentAngle;
 
-	public SpinningSpreadWeapon(final BulletManager bulletManager) {
+	public SpinningWeapon(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.SPINNING_WEAPON);
-		cooldown = initCooldown;
+		cooldown = INIT_COOLDOWN;
 		currentAngle = 0;
 	}
 
@@ -55,23 +55,23 @@ public class SpinningSpreadWeapon extends AbstractWeapon {
 			final Rotation rotation, final float timeElapsed) {
 		cooldown = cooldown - timeElapsed;
 		if (cooldown < 0) {
-			cooldown = cooldown + initCooldown;
+			cooldown = cooldown + INIT_COOLDOWN;
 			this.getBulletManager().addBullet(
 					new BasicBullet(shipPosition.getX(), shipPosition.getY(),
 							BULLET_WIDTH, BULLET_HEIGHT, playerId,
 							new Rotation(rotation.getAngle() + currentAngle),
 							BULLET_DAMAGE));
-			currentAngle = currentAngle + angleStep;
+			currentAngle = currentAngle + ANGLE_STEP;
 		}
 	}
 
 	public static float getInitCooldown() {
-		return initCooldown;
+		return INIT_COOLDOWN;
 	}
-	
+
 	@Override
-	public AbstractWeapon shallowClone() {
-		return new SpinningSpreadWeapon(this.getBulletManager());
+	public AbstractWeapon getNewInstance() {
+		return new SpinningWeapon(this.getBulletManager());
 	}
 
 }

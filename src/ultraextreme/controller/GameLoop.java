@@ -56,9 +56,9 @@ import android.util.Log;
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
-	// TODO perhaps refactor this variable?
-	private static final float onHitBlinkTime = 0.1f;
-	private static final int playerInvincibilityBlinks = 12; // Must be an even
+	// TODO(natan) perhaps refactor this variable?
+	private static final float ON_HIT_BLINK_TIME = 0.1f;
+	private static final int PLAYER_INVINCIBILITY_BLINKS = 12; // Must be an even
 																// number!
 
 	final private GameScene gameScene;
@@ -107,7 +107,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void reset() {
-		// TODO Shouldn't we do something more here?
+		// TODO(natan) Shouldn't we do something more here?
 		// FIXME The method doesn't seem to be called ever!
 		timerList.clear();
 	}
@@ -121,7 +121,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		if (event.getPropertyName().equals(Constants.EVENT_ENEMY_DAMAGED)) {
 			EnemyShip ship = (EnemyShip) event.getNewValue();
 			Timer timer = new Timer(Constants.EVENT_ENEMY_DAMAGED,
-					onHitBlinkTime, ship);
+					ON_HIT_BLINK_TIME, ship);
 			timerList.add(timer);
 			getSprite(ship).onHitBlink();
 		} else if (event.getPropertyName().equals(
@@ -132,8 +132,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 				PlayerShip ship = player.getShip();
 				Timer timer = new Timer(
 						Constants.EVENT_ENTITY_INVINCIBLE,
-						(float) (player.getInvincibilityTime() / playerInvincibilityBlinks),
-						ship, playerInvincibilityBlinks - 1);
+						(float) (player.getInvincibilityTime() / PLAYER_INVINCIBILITY_BLINKS),
+						ship, PLAYER_INVINCIBILITY_BLINKS - 1);
 				timerList.add(timer);
 				getSprite(ship).invincibilityBlink();
 			}
@@ -206,7 +206,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 						sprite.invincibilityBlink();
 					}
 				}
-				// TODO add more actions here!
+				// TODO(natan) add more actions here!
 				if (!timer.isRunning() || timerDeprecated) {
 					i.remove();
 				}
@@ -214,7 +214,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		}
 	}
 
-	// TODO Should this method be used at more places?
+	// TODO(natan) Should this method be used at more places?
+	// What do you mean? /Plankton
 	/**
 	 * Gets the sprite that corresponds to this entity.
 	 * 
