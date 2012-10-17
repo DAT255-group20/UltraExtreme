@@ -62,7 +62,7 @@ public class ItemBar {
 	/**
 	 * The classes that listen to the item bar.
 	 */
-	private List<ItemBarUpdatedListener> listeners = new ArrayList<ItemBarUpdatedListener>();
+	private List<ItemBarUpdateListener> listeners = new ArrayList<ItemBarUpdateListener>();
 
 	// private Bomb bomb;
 
@@ -131,7 +131,6 @@ public class ItemBar {
 	}
 
 	public void loseItems() {
-		// TODO Should possibly remove more items? change implementation?
 		if (!items.isEmpty()) {
 			items.remove(items.size() - 1);
 			markerPosition = items.size();
@@ -143,8 +142,8 @@ public class ItemBar {
 	 * Tell the listeners that this item bar has been updated.
 	 */
 	private void fireItemBarUpdated() {
-		for (ItemBarUpdatedListener listener : listeners) {
-			listener.updatedItemBar(this);
+		for (ItemBarUpdateListener listener : listeners) {
+			listener.itemBarUpdated(this);
 		}
 	}
 
@@ -175,7 +174,7 @@ public class ItemBar {
 	 * @param listener
 	 *            The listener to be added.
 	 */
-	public void addListener(ItemBarUpdatedListener listener) {
+	public void addListener(ItemBarUpdateListener listener) {
 		this.listeners.add(listener);
 	}
 
@@ -185,7 +184,7 @@ public class ItemBar {
 	 * @param listener
 	 *            The listener to be removed.
 	 */
-	public void removeListener(ItemBarUpdatedListener listener) {
+	public void removeListener(ItemBarUpdateListener listener) {
 		this.listeners.remove(listener);
 	}
 }

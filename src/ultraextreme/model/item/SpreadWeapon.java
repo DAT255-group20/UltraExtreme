@@ -14,14 +14,14 @@ public class SpreadWeapon extends AbstractWeapon {
 	private static final int BULLET_WIDTH = 20;
 	private static final int BULLET_HEIGHT = 40;
 	private static final int BULLET_DAMAGE = 10;
-	private static final double angleDelta = Math.PI / 8;
-	private static final int numberOfShots = 4;
-	private static final float initCooldown = 0.5f;
+	private static final double ANGLE_DELTA = Math.PI / 8;
+	private static final int NR_OF_SHOTS = 4;
+	private static final float INIT_COOLDOWN = 0.5f;
 	private float cooldown;
 
 	public SpreadWeapon(BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BASIC_SPREAD_WEAPON);
-		cooldown = initCooldown;
+		cooldown = INIT_COOLDOWN;
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class SpreadWeapon extends AbstractWeapon {
 			Rotation rotation, float timeElapsed) {
 		cooldown = cooldown - timeElapsed;
 		if (cooldown < 0) {
-			cooldown = cooldown + initCooldown;
-			int shotToFire = numberOfShots;
+			cooldown = cooldown + INIT_COOLDOWN;
+			int shotToFire = NR_OF_SHOTS;
 			if (shotToFire % 2 == 1) { // Shoots one straight forward if shots
 										// are uneven;
 				this.getBulletManager().addBullet(
@@ -43,20 +43,20 @@ public class SpreadWeapon extends AbstractWeapon {
 				this.getBulletManager().addBullet(
 						new BasicBullet(shipPosition.getX(), shipPosition
 								.getY(), BULLET_WIDTH, BULLET_HEIGHT, playerId,
-								new Rotation(rotation.getAngle() + angleDelta
+								new Rotation(rotation.getAngle() + ANGLE_DELTA
 										* i), BULLET_DAMAGE));
 
 				this.getBulletManager().addBullet(
 						new BasicBullet(shipPosition.getX(), shipPosition
 								.getY(), BULLET_WIDTH, BULLET_HEIGHT, playerId,
-								new Rotation(rotation.getAngle() - angleDelta
+								new Rotation(rotation.getAngle() - ANGLE_DELTA
 										* i), BULLET_DAMAGE));
 			}
 		}
 	}
 
 	public static float getInitCooldown() {
-		return initCooldown;
+		return INIT_COOLDOWN;
 	}
 
 	@Override

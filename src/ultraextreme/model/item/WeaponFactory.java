@@ -39,7 +39,7 @@ public class WeaponFactory {
 	private WeaponFactory(BulletManager manager) {
 		weaponMap = new HashMap<ObjectName, AbstractWeapon>();
 		weaponMap.put(ObjectName.BASIC_WEAPON, new BasicWeapon(manager));
-		weaponMap.put(ObjectName.SPINNING_WEAPON, new SpinningSpreadWeapon(
+		weaponMap.put(ObjectName.SPINNING_WEAPON, new SpinningWeapon(
 				manager));
 		weaponMap.put(ObjectName.BOMB, new Bomb(manager));
 	}

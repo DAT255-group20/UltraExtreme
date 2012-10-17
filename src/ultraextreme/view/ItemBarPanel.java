@@ -28,7 +28,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.item.ItemBarUpdatedListener;
+import ultraextreme.model.item.ItemBarUpdateListener;
 import ultraextreme.model.util.Position;
 
 /**
@@ -37,7 +37,7 @@ import ultraextreme.model.util.Position;
  * @author Daniel Jonsson
  * 
  */
-public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
+public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 
 	private SpriteFactory spriteFactory;
 
@@ -118,7 +118,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	}
 
 	@Override
-	public void updatedItemBar(ItemBar itemBar) {
+	public void itemBarUpdated(ItemBar itemBar) {
 		updateItemBar(itemBar);
 	}
 }

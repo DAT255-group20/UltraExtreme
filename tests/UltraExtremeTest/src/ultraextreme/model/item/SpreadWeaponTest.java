@@ -83,6 +83,6 @@ public class SpreadWeaponTest extends TestCase {
 
 	@Test
 	public void testShallowClone() {
-		fail("Not yet implemented");
+		fail("Not yet tested");
 	}
 }

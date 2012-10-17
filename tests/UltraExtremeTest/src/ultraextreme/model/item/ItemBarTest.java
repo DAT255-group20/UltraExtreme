@@ -149,7 +149,7 @@ public class ItemBarTest extends TestCase {
 	 * This test checks so the marker's position wraps correctly when the item
 	 * bar gets full.
 	 */
-	public void testMarkerPositionWraping() {
+	public void testMarkerPositionWrapping() {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
 
 		// Add items and check if it wraps

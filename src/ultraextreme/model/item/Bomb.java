@@ -33,6 +33,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class Bomb extends AbstractWeapon {
 
+	// NOTE: This class is not yet implemented and not present in the game
 	public Bomb(final BulletManager bulletManager) {
 		super(bulletManager, ObjectName.BOMB);
 	}

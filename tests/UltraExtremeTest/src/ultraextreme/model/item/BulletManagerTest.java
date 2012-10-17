@@ -167,6 +167,11 @@ public class BulletManagerTest extends TestCase {
 		assertTrue(bulletCollector.getBullets().get(Constants.EVENT_NEW_ENTITY)
 				.containsAll(bulletList));
 	}
+	
+	public void testRemoveBullet()
+	{
+		fail("Not yet tested");
+	}
 
 	/**
 	 * Create bullets, add them to the manager, clear them and check so they
@@ -307,5 +312,10 @@ public class BulletManagerTest extends TestCase {
 				enemyBullets));
 		assertEquals(enemyBullets.size(),
 				bulletManager.getBulletsFrom(PlayerID.ENEMY).size());
+	}
+	
+	public void testGetBullets()
+	{
+		fail("Not yet tested");
 	}
 }

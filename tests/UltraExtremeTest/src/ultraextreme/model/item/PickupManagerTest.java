@@ -40,10 +40,12 @@ import ultraextreme.model.util.ObjectName;
  * 
  */
 public class PickupManagerTest extends TestCase {
+	
 	/**
 	 * Add this as a listener to the pickupManager and collects its pickups
 	 * 
-	 * @author Daniel Jonsson, Johan Gronvall
+	 * @author Daniel Jonsson
+	 * @author Johan Gronvall
 	 * 
 	 */
 	public class PickupCollector implements PropertyChangeListener {
@@ -74,15 +76,13 @@ public class PickupManagerTest extends TestCase {
 		}
 	}
 
-	PickupManager manager;
-	WeaponPickup pickup;
-	WeaponPickup pickup2;
-
-	PickupCollector collector;
+	private PickupManager manager;
+	private WeaponPickup pickup;
+	private WeaponPickup pickup2;
+	private PickupCollector collector;
 
 	@Override
 	public void setUp() {
-
 		manager = new PickupManager();
 		pickup = new WeaponPickup(0, 0, ObjectName.BOMB);
 		pickup2 = new WeaponPickup(0, 0, ObjectName.BASIC_WEAPON);

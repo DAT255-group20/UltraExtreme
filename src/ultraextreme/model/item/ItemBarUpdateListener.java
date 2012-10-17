@@ -27,7 +27,7 @@ package ultraextreme.model.item;
  * @author Daniel Jonsson
  * 
  */
-public interface ItemBarUpdatedListener {
+public interface ItemBarUpdateListener {
 
 	/**
 	 * An item bar has been updated.
@@ -35,5 +35,5 @@ public interface ItemBarUpdatedListener {
 	 * @param itemBar
 	 *            The item bar that has been updated.
 	 */
-	public void updatedItemBar(ItemBar itemBar);
+	public void itemBarUpdated(ItemBar itemBar);
 }
