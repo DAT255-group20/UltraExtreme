@@ -101,4 +101,10 @@ public class HighscoreController extends AbstractController implements
 		}
 		return true;
 	}
+
+	@Override
+	public void backButtonPressed() {
+		fireEvent(new ControllerEvent(this,
+				ControllerEventType.SWITCH_TO_MENU));
+	}
 }

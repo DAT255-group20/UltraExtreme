@@ -80,6 +80,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		case SWITCH_TO_HIGHSCORE:
 			switchControllerTo(highscoreController);
 			break;
+			
+		case EXIT_GAME:
+			finish();
+			break;
 
 		default:
 			break;
@@ -154,5 +158,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private void updateScene() {
 		currentScene = currentController.getScene();
 		getEngine().setScene(currentScene);
+	}
+
+	@Override
+	public void onBackPressed() {
+		currentController.backButtonPressed();
 	}
 }

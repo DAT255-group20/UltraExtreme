@@ -151,7 +151,7 @@ public class GameController extends AbstractController implements
 			gameLoop.fireSpecialAttack();
 			break;
 		}
-
+		
 		default:
 			break;
 		}
@@ -202,5 +202,11 @@ public class GameController extends AbstractController implements
 	 */
 	public IUltraExtremeModel getGameModel() {
 		return gameModel;
+	}
+
+	@Override
+	public void backButtonPressed() {
+		fireEvent(new ControllerEvent(this,
+				ControllerEventType.SWITCH_TO_MENU));
 	}
 }
