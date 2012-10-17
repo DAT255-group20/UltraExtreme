@@ -105,6 +105,7 @@ public class GameModel implements IUltraExtremeModel {
 		spawnPickups();
 		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
+		pickupManager.clearPickupsOffScreen();
 	}
 
 	/**
