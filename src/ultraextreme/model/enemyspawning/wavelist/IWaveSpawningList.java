@@ -29,7 +29,7 @@ import ultraextreme.model.enemyspawning.wave.AbstractWave;
  * @author Daniel Jonsson
  * 
  */
-public interface WaveSpawningList {
+public interface IWaveSpawningList {
 
 	/**
 	 * Get the current wave.

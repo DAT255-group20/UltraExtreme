@@ -31,7 +31,7 @@ import ultraextreme.model.util.Rotation;
  * @author Daniel Jonsson
  * 
  */
-public abstract class EnemyProvider {
+public abstract class AbstractEnemyProvider {
 
 	/**
 	 * Build an enemy.

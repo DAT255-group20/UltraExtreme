@@ -29,7 +29,7 @@ import java.util.List;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.WaveListener;
-import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
+import ultraextreme.model.enemyspawning.wavelist.IWaveSpawningList;
 
 /**
  * This class is responsible for managing the waves of enemies. It takes one or
@@ -60,7 +60,7 @@ public class EnemySpawner implements WaveListener {
 	 * The wave lists that the enemy spawner is working with and grabbing waves
 	 * from.
 	 */
-	private final List<WaveSpawningList> waveLists;
+	private final List<IWaveSpawningList> waveLists;
 
 	/**
 	 * The waves of enemies that are currently spawning enemies.
@@ -80,9 +80,9 @@ public class EnemySpawner implements WaveListener {
 	 *            EnemySpawner keep track of and spawn the enemies from their
 	 *            waves.
 	 */
-	public EnemySpawner(final WaveSpawningList... waveLists) {
-		this.waveLists = new ArrayList<WaveSpawningList>();
-		for (WaveSpawningList waveList : waveLists) {
+	public EnemySpawner(final IWaveSpawningList... waveLists) {
+		this.waveLists = new ArrayList<IWaveSpawningList>();
+		for (IWaveSpawningList waveList : waveLists) {
 			if (waveList != null) {
 				this.waveLists.add(waveList);
 			}
@@ -117,7 +117,7 @@ public class EnemySpawner implements WaveListener {
 	private void addNewWaves() {
 		// TODO: This method could use some optimization.
 		for (int i = 0; i < waveLists.size(); i++) {
-			final WaveSpawningList waveList = waveLists.get(i);
+			final IWaveSpawningList waveList = waveLists.get(i);
 			if (waveList.hasNext()) {
 				if (waveList.getCurrentSpawningTime() <= timer) {
 					activeWaves.add(waveList.getCurrentWave());

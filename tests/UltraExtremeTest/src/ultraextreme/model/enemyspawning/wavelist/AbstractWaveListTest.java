@@ -20,14 +20,21 @@
 
 package ultraextreme.model.enemyspawning.wavelist;
 
-import org.junit.Test;
+import junit.framework.TestCase;
 
-public interface AbstractWaveListTest {
+public abstract class AbstractWaveListTest extends TestCase {
 
-	@Test
-	public void testGetNumberOfWaves();
+	public abstract void testGetNumberOfWaves();
 
-	@Test
-	public void testNext();
-
+	public abstract void testNext();
+	
+	public void testGetCurrentWaveNumber()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testHasNext()
+	{
+		fail("Not yet tested");
+	}
 }
