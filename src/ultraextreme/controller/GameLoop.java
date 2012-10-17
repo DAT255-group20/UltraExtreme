@@ -106,9 +106,11 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void reset() {
-		// TODO(natan) Shouldn't we do something more here?
-		// FIXME The method doesn't seem to be called ever!
+		setFiring(false);
 		timerList.clear();
+		for(GameObjectSprite gOS : gameObjectSprites) {
+			gOS.reset();
+		}
 	}
 
 	/**

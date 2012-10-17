@@ -185,7 +185,7 @@ public class GameController extends AbstractController implements
 
 	private void resetGameModel() {
 		Log.d("DEBUG", "Resetting the game model");
-		gameLoop.setFiring(false);
+		gameLoop.reset();
 		gameModel.reset();
 
 		/*
