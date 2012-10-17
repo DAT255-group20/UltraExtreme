@@ -130,7 +130,6 @@ public abstract class AbstractEntity implements IEntity {
 
 	@Override
 	public boolean isOutOfScreen(double marginal) {
-		// TODO Change to fit reversed Y axis. (do tests)
 		final Dimension screen = Constants.getLevelDimension();
 		return position.getY() - height < -marginal
 				|| position.getX() - width < -marginal

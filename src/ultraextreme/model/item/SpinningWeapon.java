@@ -70,7 +70,7 @@ public class SpinningWeapon extends AbstractWeapon {
 	}
 
 	@Override
-	public AbstractWeapon shallowClone() {
+	public AbstractWeapon getNewInstance() {
 		return new SpinningWeapon(this.getBulletManager());
 	}
 

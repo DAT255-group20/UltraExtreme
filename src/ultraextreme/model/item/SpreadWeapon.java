@@ -60,7 +60,7 @@ public class SpreadWeapon extends AbstractWeapon {
 	}
 
 	@Override
-	public AbstractWeapon shallowClone() {
+	public AbstractWeapon getNewInstance() {
 		return new SpreadWeapon(this.getBulletManager());
 	}
 

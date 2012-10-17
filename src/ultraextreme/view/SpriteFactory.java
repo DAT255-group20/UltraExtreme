@@ -68,10 +68,6 @@ public class SpriteFactory {
 	 */
 	private Map<ObjectName, ITextureRegion> itemTextures = new HashMap<ObjectName, ITextureRegion>();
 
-	// TODO PMD: Perhaps 'screenDimension' could be replaced by a local
-	// variable.
-	private Dimension screenDimension; // TODO implement scaling in this class?
-
 	/**
 	 * The item bar's texture.
 	 */
@@ -97,7 +93,7 @@ public class SpriteFactory {
 	 * because this constructor might get heavy
 	 */
 	private SpriteFactory(final SimpleBaseGameActivity activity) {
-		screenDimension = new Dimension(activity.getResources()
+		Dimension screenDimension = new Dimension(activity.getResources()
 				.getDisplayMetrics().widthPixels, activity.getResources()
 				.getDisplayMetrics().heightPixels);
 		GameObjectSprite.setScreenDimension(screenDimension);

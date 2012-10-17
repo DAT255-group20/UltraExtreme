@@ -41,12 +41,12 @@ public class Bomb extends AbstractWeapon {
 	@Override
 	public void fire(final Position shipPosition, final PlayerID playerId,
 			final Rotation rotation, final float timeElapsed) {
-		// TODO Bomb.fire()
+		// Bomb.fire()
 
 	}
 
 	@Override
-	public AbstractWeapon shallowClone() {
+	public AbstractWeapon getNewInstance() {
 		return new Bomb(this.getBulletManager());
 	}
 

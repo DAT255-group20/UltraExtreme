@@ -57,10 +57,8 @@ public abstract class AbstractWeapon {
 	}
 
 	/**
-	 * returns a shallow clone of this weapon
-	 * 
-	 * @return a shallow clone of this weapon
+	 * @return A new weapon of the same sort as this weapon.
 	 */
-	public abstract AbstractWeapon shallowClone();
+	public abstract AbstractWeapon getNewInstance();
 
 }

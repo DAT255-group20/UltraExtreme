@@ -76,9 +76,9 @@ public class ItemBar {
 	 * @param bulletManager
 	 *            Reference to the bullet manager.
 	 */
-	public ItemBar(final PlayerID playerId, BulletManager bulletManager,
+	public ItemBar(final PlayerID playerId,
 			final Rotation playerRotation) {
-		this(playerId, bulletManager, playerRotation, 1);
+		this(playerId, playerRotation, 1);
 	}
 
 	/**
@@ -91,12 +91,8 @@ public class ItemBar {
 	 * @param maxNumberOfItems
 	 *            Maximum number of items that fit in the item bar.
 	 */
-	public ItemBar(final PlayerID playerId, BulletManager bulletManager,
-			Rotation playerRotation, int maxNumberOfItems) {
-		// TODO PMD: Avoid passing parameters to methods or constructors and
-		// then not using those parameters. (bulletManager)
+	public ItemBar(final PlayerID playerId,	Rotation playerRotation, int maxNumberOfItems) {
 		this.playerId = playerId;
-		// this.bulletManager = bulletManager;
 		this.items = new ArrayList<AbstractWeapon>();
 		this.maxNumberOfItems = maxNumberOfItems;
 		this.playerRotation = playerRotation;
