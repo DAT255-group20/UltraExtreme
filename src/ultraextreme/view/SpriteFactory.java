@@ -159,7 +159,6 @@ public class SpriteFactory {
 						700, 0);
 
 		// Init the textinput background
-		// TODO: why is this tiled?
 		textInputBackground = BitmapTextureAtlasTextureRegionFactory
 				.createTiledFromAsset(textureAtlas, activity, "button_1.png",
 						100, 100, 1, 1);

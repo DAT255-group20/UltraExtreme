@@ -22,7 +22,7 @@ public class HighscoreScene extends MenuScene {
 	public static final int GOTO_MENU = 0;
 	public static final int CLEAR_LIST = 1;
 
-	// TODO Make these centered on the screen
+	// TODO(plankton) Make these centered on the screen
 	private static final Position GOTOMENU_BTN_POS = new Position(100, 100);
 	private static final Position CLEARLIST_BTN_POS = new Position(100, 750);
 	private static final Position HIGHSCORE_HEADER_POS = new Position(135, 160);

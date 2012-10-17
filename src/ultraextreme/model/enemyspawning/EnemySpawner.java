@@ -115,7 +115,7 @@ public class EnemySpawner implements WaveListener {
 	 * itself.
 	 */
 	private void addNewWaves() {
-		// TODO: This method could use some optimization.
+		// TODO(matachi) This method could use some optimization.
 		for (int i = 0; i < waveLists.size(); i++) {
 			final IWaveSpawningList waveList = waveLists.get(i);
 			if (waveList.hasNext()) {

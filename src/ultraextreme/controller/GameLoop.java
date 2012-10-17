@@ -56,7 +56,7 @@ import android.util.Log;
  */
 public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
-	// TODO perhaps refactor this variable?
+	// TODO(natan) perhaps refactor this variable?
 	private static final float ON_HIT_BLINK_TIME = 0.1f;
 	private static final int PLAYER_INVINCIBILITY_BLINKS = 12; // Must be an even
 																// number!
@@ -107,7 +107,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	@Override
 	public void reset() {
-		// TODO Shouldn't we do something more here?
+		// TODO(natan) Shouldn't we do something more here?
 		// FIXME The method doesn't seem to be called ever!
 		timerList.clear();
 	}
@@ -206,7 +206,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 						sprite.invincibilityBlink();
 					}
 				}
-				// TODO add more actions here!
+				// TODO(natan) add more actions here!
 				if (!timer.isRunning() || timerDeprecated) {
 					i.remove();
 				}
@@ -214,7 +214,8 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		}
 	}
 
-	// TODO Should this method be used at more places?
+	// TODO(natan) Should this method be used at more places?
+	// What do you mean? /Plankton
 	/**
 	 * Gets the sprite that corresponds to this entity.
 	 * 
