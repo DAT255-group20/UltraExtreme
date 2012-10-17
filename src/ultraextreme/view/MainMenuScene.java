@@ -66,6 +66,8 @@ public class MainMenuScene extends MenuScene {
 		 */
 		final Dimension screenDimension = new Dimension(screenWidth,
 				screenHeight);
+		// The following resolution is what the background and buttons were made
+		// for
 		Vector2d scaling = screenDimension
 				.getQuotient(new Dimension(800, 1280));
 
@@ -77,8 +79,7 @@ public class MainMenuScene extends MenuScene {
 				vertexBufferObjectManager);
 		startButton.setWidth((float) scaling.x * startButton.getWidth());
 		startButton.setHeight((float) scaling.y * startButton.getHeight());
-		startButton.setX((float) scaling.x
-				* (screenWidth - startButton.getWidth()) / 2);
+		startButton.setX((screenWidth - startButton.getWidth()) / 2);
 		startButton.setY((float) scaling.y * 450);
 		addMenuItem(startButton);
 
@@ -92,8 +93,7 @@ public class MainMenuScene extends MenuScene {
 				* highScoresButton.getWidth());
 		highScoresButton.setHeight((float) scaling.y
 				* highScoresButton.getHeight());
-		highScoresButton.setX((float) scaling.x
-				* (screenWidth - highScoresButton.getWidth()) / 2);
+		highScoresButton.setX((screenWidth - highScoresButton.getWidth()) / 2);
 		highScoresButton.setY((float) scaling.y * 600);
 		addMenuItem(highScoresButton);
 
@@ -105,8 +105,7 @@ public class MainMenuScene extends MenuScene {
 				vertexBufferObjectManager);
 		exitButton.setWidth((float) scaling.x * exitButton.getWidth());
 		exitButton.setHeight((float) scaling.y * exitButton.getHeight());
-		exitButton.setX((float) scaling.x
-				* (screenWidth - exitButton.getWidth()) / 2);
+		exitButton.setX((screenWidth - exitButton.getWidth()) / 2);
 		exitButton.setY((float) scaling.y * 750);
 		addMenuItem(exitButton);
 	}
