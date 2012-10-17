@@ -84,7 +84,7 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(double x, double y, Rotation rotation) {
 		this(new EnemyShip(x, y, 70, 70, rotation, 50,
-				ObjectName.BASIC_ENEMYSHIP), WeaponFactory.getInstance()
+				ObjectName.BASIC_ENEMYSHIP), WeaponFactory
 				.getNewWeapon(ObjectName.BASIC_WEAPON));
 	}
 

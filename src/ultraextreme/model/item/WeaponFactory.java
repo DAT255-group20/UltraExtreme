@@ -32,6 +32,7 @@ import ultraextreme.model.util.ObjectName;
  * 
  */
 public final class WeaponFactory {
+
 	private Map<ObjectName, AbstractWeapon> weaponMap;
 
 	private static WeaponFactory instance;
@@ -39,21 +40,18 @@ public final class WeaponFactory {
 	private WeaponFactory(BulletManager manager) {
 		weaponMap = new HashMap<ObjectName, AbstractWeapon>();
 		weaponMap.put(ObjectName.BASIC_WEAPON, new BasicWeapon(manager));
-		weaponMap.put(ObjectName.SPINNING_WEAPON, new SpinningWeapon(
-				manager));
+		weaponMap.put(ObjectName.SPINNING_WEAPON, new SpinningWeapon(manager));
 		weaponMap.put(ObjectName.BOMB, new Bomb(manager));
 	}
 
+	/**
+	 * WeaponFactory must have been initialized before it can be used;
+	 * 
+	 * @param bulletManager
+	 *            A reference to a bullet manager.
+	 */
 	public static void initialize(BulletManager bulletManager) {
 		instance = new WeaponFactory(bulletManager);
-	}
-
-	public static WeaponFactory getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException(
-					"WeaponFactory must have been initialized before it is used");
-		}
-		return instance;
 	}
 
 	/**
@@ -63,7 +61,7 @@ public final class WeaponFactory {
 	 *            the name of the desired weapon
 	 * @return a new instance of the specified weapon
 	 */
-	public AbstractWeapon getNewWeapon(ObjectName objectName) {
-		return weaponMap.get(objectName).getNewInstance();
+	public static AbstractWeapon getNewWeapon(ObjectName objectName) {
+		return instance.weaponMap.get(objectName).getNewInstance();
 	}
 }
