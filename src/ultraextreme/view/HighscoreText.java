@@ -20,7 +20,7 @@ public class HighscoreText extends Text {
 		this.setHighscore(Highscore.EMPTY_HIGHSCORE);
 	}
 
-	public void setHighscore(Highscore highscore) {
+	public final void setHighscore(Highscore highscore) {
 		this.setText("" + index + ".  |  " + highscore.getName() + "  |  "
 				+ highscore.getScore());
 	}

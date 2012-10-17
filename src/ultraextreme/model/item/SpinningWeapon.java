@@ -39,7 +39,7 @@ public class SpinningWeapon extends AbstractWeapon {
 	private static final int BULLET_WIDTH = 20;
 	private static final int BULLET_HEIGHT = 40;
 	private static final int BULLET_DAMAGE = 5;
-	private static float INIT_COOLDOWN = 1 / 6f;
+	private static final float INIT_COOLDOWN = 1 / 6f;
 	private static final double ANGLE_STEP = Math.PI / 12;
 	private float cooldown;
 	private double currentAngle;

@@ -79,7 +79,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 	/**
 	 * Make the item bar update itself.
 	 */
-	public void updateItemBar(ItemBar itemBar) {
+	public final void updateItemBar(ItemBar itemBar) {
 		// Clean the item bar from sprites
 		this.detachChildren();
 

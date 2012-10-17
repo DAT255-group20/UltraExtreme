@@ -45,7 +45,7 @@ import ultraextreme.model.util.ObjectName;
  * @author Johan Gronvall
  * 
  */
-public class SpriteFactory {
+public final class SpriteFactory {
 
 	public static SpriteFactory getInstance() {
 		if (instance == null) {

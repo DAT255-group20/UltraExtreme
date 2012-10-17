@@ -23,7 +23,7 @@ package ultraextreme.util;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Resources {
+public final class Resources {
 
 	private Map<ResourceName, String> resourceMap = new HashMap<ResourceName, String>();
 

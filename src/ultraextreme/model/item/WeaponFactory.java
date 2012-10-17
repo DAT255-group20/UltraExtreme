@@ -31,7 +31,7 @@ import ultraextreme.model.util.ObjectName;
  * @author Johan Gronvall
  * 
  */
-public class WeaponFactory {
+public final class WeaponFactory {
 	private Map<ObjectName, AbstractWeapon> weaponMap;
 
 	private static WeaponFactory instance;
