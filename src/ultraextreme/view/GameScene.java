@@ -68,9 +68,8 @@ public class GameScene extends Scene implements SensorEventListener {
 		setBackground(new Background(0, 0, 0));
 
 		gameObjectSprites = new LinkedList<GameObjectSprite>();
-		final GameObjectSprite playerSprite = SpriteFactory.getInstance()
-				.getNewSprite(gameModel.getPlayer().getShip(),
-						vertexBufferObjectManager);
+		final GameObjectSprite playerSprite = SpriteFactory.getNewSprite(
+				gameModel.getPlayer().getShip(), vertexBufferObjectManager);
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
@@ -81,8 +80,8 @@ public class GameScene extends Scene implements SensorEventListener {
 				.getLevelDimension());
 
 		ItemBar itemBar = gameModel.getPlayer().getItemBar();
-		itemBarPanel = new ItemBarPanel(itemBar, SpriteFactory.getInstance(),
-				vertexBufferObjectManager, ITEMBAR_POS, scaling);
+		itemBarPanel = new ItemBarPanel(itemBar, vertexBufferObjectManager,
+				ITEMBAR_POS, scaling);
 
 		ScoreText scoreText = new ScoreText(SCORE_POS, font,
 				vertexBufferObjectManager);

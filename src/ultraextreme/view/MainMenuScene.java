@@ -56,8 +56,8 @@ public class MainMenuScene extends MenuScene {
 		final float screenWidth = camera.getWidth();
 		final float screenHeight = camera.getHeight();
 		final SpriteBackground background = new SpriteBackground(new Sprite(0,
-				0, screenWidth, screenHeight, SpriteFactory.getInstance()
-						.getMainMenuBackgroundTexture(),
+				0, screenWidth, screenHeight,
+				SpriteFactory.getMainMenuBackgroundTexture(),
 				vertexBufferObjectManager));
 		setBackground(background);
 
@@ -73,7 +73,7 @@ public class MainMenuScene extends MenuScene {
 		 * Add the start button. /*
 		 */
 		final IMenuItem startButton = new SpriteMenuItem(MENU_START,
-				SpriteFactory.getInstance().getMainMenuStartButtonTexture(),
+				SpriteFactory.getMainMenuStartButtonTexture(),
 				vertexBufferObjectManager);
 		startButton.setWidth((float) scaling.x * startButton.getWidth());
 		startButton.setHeight((float) scaling.y * startButton.getHeight());
@@ -86,8 +86,7 @@ public class MainMenuScene extends MenuScene {
 		 * Add the high score button. /*
 		 */
 		final IMenuItem highScoresButton = new SpriteMenuItem(MENU_HIGHSCORE,
-				SpriteFactory.getInstance()
-						.getMainMenuHighScoresButtonTexture(),
+				SpriteFactory.getMainMenuHighScoresButtonTexture(),
 				vertexBufferObjectManager);
 		highScoresButton.setWidth((float) scaling.x
 				* highScoresButton.getWidth());
@@ -102,7 +101,7 @@ public class MainMenuScene extends MenuScene {
 		 * Add the exit button. /*
 		 */
 		final IMenuItem exitButton = new SpriteMenuItem(MENU_EXIT,
-				SpriteFactory.getInstance().getMainMenuExitButtonTexture(),
+				SpriteFactory.getMainMenuExitButtonTexture(),
 				vertexBufferObjectManager);
 		exitButton.setWidth((float) scaling.x * exitButton.getWidth());
 		exitButton.setHeight((float) scaling.y * exitButton.getHeight());

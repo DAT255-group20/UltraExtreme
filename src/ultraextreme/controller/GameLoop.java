@@ -58,14 +58,14 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 
 	// TODO(natan) perhaps refactor this variable?
 	private static final float ON_HIT_BLINK_TIME = 0.1f;
-	private static final int PLAYER_INVINCIBILITY_BLINKS = 12; // Must be an even
+	private static final int PLAYER_INVINCIBILITY_BLINKS = 12; // Must be an
+																// even
 																// number!
 
 	final private GameScene gameScene;
 	final private GameModel gameModel;
 	final private List<GameObjectSprite> gameObjectSprites;
 	final private VertexBufferObjectManager vertexBufferObjectManager;
-	final private SpriteFactory spriteFactory;
 	private Vector2d scalingQuotient;
 
 	private boolean firing;
@@ -89,7 +89,6 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		this.gameObjectSprites = gameObjectSprites;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		this.timerList = new LinkedList<Timer>();
-		this.spriteFactory = SpriteFactory.getInstance();
 	}
 
 	@Override
@@ -145,7 +144,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			} else { // if item or bullet
 				entity = (IEntity) event.getNewValue();
 			}
-			final GameObjectSprite newSprite = spriteFactory.getNewSprite(
+			final GameObjectSprite newSprite = SpriteFactory.getNewSprite(
 					entity, vertexBufferObjectManager);
 			gameScene.attachChild(newSprite);
 			gameObjectSprites.add(newSprite);

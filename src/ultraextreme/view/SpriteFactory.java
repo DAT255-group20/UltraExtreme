@@ -47,14 +47,6 @@ import ultraextreme.model.util.ObjectName;
  */
 public final class SpriteFactory {
 
-	public static SpriteFactory getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException(
-					"SpriteFactory must have been initialized before it is used");
-		}
-		return instance;
-	}
-
 	public static void initialize(SimpleBaseGameActivity activity) {
 		instance = new SpriteFactory(activity);
 	}
@@ -86,6 +78,9 @@ public final class SpriteFactory {
 
 	private TiledTextureRegion textInputBackground;
 
+	/**
+	 * Reference to a sprite factory, making this a singleton.
+	 */
 	private static SpriteFactory instance;
 
 	/**
@@ -203,16 +198,16 @@ public final class SpriteFactory {
 	 * 
 	 * @return The texture of the item bar's marker.
 	 */
-	public ITextureRegion getItemBarMarkerTexture() {
-		return itemBarMarkerTexture;
+	public static ITextureRegion getItemBarMarkerTexture() {
+		return instance.itemBarMarkerTexture;
 	}
 
 	/**
 	 * 
 	 * @return The texture of the item bar.
 	 */
-	public ITextureRegion getItemBarTexture() {
-		return itemBarTexture;
+	public static ITextureRegion getItemBarTexture() {
+		return instance.itemBarTexture;
 	}
 
 	/**
@@ -221,8 +216,8 @@ public final class SpriteFactory {
 	 *            The item you want an image of.
 	 * @return An texture of an item that you want to show in the item bar.
 	 */
-	public ITextureRegion getItemTexture(ObjectName item) {
-		ITextureRegion output = itemTextures.get(item);
+	public static ITextureRegion getItemTexture(ObjectName item) {
+		ITextureRegion output = instance.itemTextures.get(item);
 		if (output == null) {
 			throw new IllegalArgumentException(
 					"No texture is associated with that kind of object");
@@ -234,32 +229,32 @@ public final class SpriteFactory {
 	 * 
 	 * @return The texture of the main menu scene's background.
 	 */
-	public ITextureRegion getMainMenuBackgroundTexture() {
-		return mainMenuTextures.get("background");
+	public static ITextureRegion getMainMenuBackgroundTexture() {
+		return instance.mainMenuTextures.get("background");
 	}
 
 	/**
 	 * 
 	 * @return The texture of the main menu scene's exit button.
 	 */
-	public ITextureRegion getMainMenuExitButtonTexture() {
-		return mainMenuTextures.get("exitButton");
+	public static ITextureRegion getMainMenuExitButtonTexture() {
+		return instance.mainMenuTextures.get("exitButton");
 	}
 
 	/**
 	 * 
 	 * @return The texture of the main menu scene's high scores button.
 	 */
-	public ITextureRegion getMainMenuHighScoresButtonTexture() {
-		return mainMenuTextures.get("highScoresButton");
+	public static ITextureRegion getMainMenuHighScoresButtonTexture() {
+		return instance.mainMenuTextures.get("highScoresButton");
 	}
 
 	/**
 	 * 
 	 * @return The texture of the main menu scene's start button.
 	 */
-	public ITextureRegion getMainMenuStartButtonTexture() {
-		return mainMenuTextures.get("startButton");
+	public static ITextureRegion getMainMenuStartButtonTexture() {
+		return instance.mainMenuTextures.get("startButton");
 	}
 
 	/**
@@ -273,11 +268,11 @@ public final class SpriteFactory {
 	 *            what kind of sprite (picture) is desired
 	 * @return a new GameOBjectSprite
 	 */
-	public GameObjectSprite getNewSprite(final IEntity entity,
+	public static GameObjectSprite getNewSprite(final IEntity entity,
 			final VertexBufferObjectManager vbom) {
 		ObjectName objName = entity.getObjectName();
-		ITextureRegion texture = textureMap.get(objName);
-		Vector2d offset = offsetMap.get(objName);
+		ITextureRegion texture = instance.textureMap.get(objName);
+		Vector2d offset = instance.offsetMap.get(objName);
 		if (texture == null) {
 			throw new IllegalArgumentException(
 					"No texture is associated with that kind of object");
@@ -292,8 +287,8 @@ public final class SpriteFactory {
 	/**
 	 * @return the textInputBackground
 	 */
-	public TiledTextureRegion getTextInputBackground() {
-		return textInputBackground;
+	public static TiledTextureRegion getTextInputBackground() {
+		return instance.textInputBackground;
 	}
 
 	/**

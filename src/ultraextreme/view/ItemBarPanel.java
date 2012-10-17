@@ -39,8 +39,6 @@ import ultraextreme.model.util.Position;
  */
 public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 
-	private SpriteFactory spriteFactory;
-
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
 	private float alpha = 0.01f;
@@ -61,15 +59,14 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 	 * @param scaling
 	 *            Scaling so the position and size become correct.
 	 */
-	public ItemBarPanel(ItemBar itemBar, SpriteFactory spriteFactory,
+	public ItemBarPanel(ItemBar itemBar,
 			VertexBufferObjectManager vertexBufferObjectManager,
 			Position position, Vector2d scaling) {
 		super((float) (position.getX() * scaling.x),
 				(float) (position.getY() * scaling.y),
 				(float) (610 * scaling.x), (float) (70 * scaling.y),
-				spriteFactory.getItemBarTexture(), vertexBufferObjectManager);
+				SpriteFactory.getItemBarTexture(), vertexBufferObjectManager);
 		this.scaling = scaling;
-		this.spriteFactory = spriteFactory;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		updateItemBar(itemBar);
 		itemBar.addListener(this);
@@ -97,7 +94,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 			y = 10;
 			x *= scaling.x;
 			y *= scaling.y;
-			ITextureRegion texture = spriteFactory.getItemTexture(item
+			ITextureRegion texture = SpriteFactory.getItemTexture(item
 					.getName());
 			Sprite sprite = new Sprite(x, y, width, height, texture,
 					vertexBufferObjectManager);
@@ -111,7 +108,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 	}
 
 	private void drawMarker(float x, float y, float width, float height) {
-		ITextureRegion texture = spriteFactory.getItemBarMarkerTexture();
+		ITextureRegion texture = SpriteFactory.getItemBarMarkerTexture();
 		Sprite sprite = new Sprite(x, y, width, height, texture,
 				vertexBufferObjectManager);
 		this.attachChild(sprite);
