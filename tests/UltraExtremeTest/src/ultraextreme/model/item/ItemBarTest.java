@@ -58,7 +58,7 @@ public class ItemBarTest extends TestCase {
 	private void resetInstanceVariables(int slots) {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
-		itemBar = new ItemBar(playerId, bulletManager, new Rotation(0), slots);
+		itemBar = new ItemBar(playerId, new Rotation(0), slots);
 	}
 
 	@Override
