@@ -35,11 +35,18 @@ import ultraextreme.model.util.Rotation;
  */
 public abstract class AbstractEntityTest extends TestCase {
 
+	private static final double INIT_X = 10;
+	private static final double INIT_Y = 20;
+	private static final int INIT_WIDTH = 30;
+	private static final int INIT_HEIGHT = 40;
+	private static final double INIT_ROT_ANGLE = 0;
+	
+	
 	protected abstract AbstractEntity getNewAbstractEntity(double x, double y,
 			int width, int height, Rotation direction);
 
 	private AbstractEntity newEntity() {
-		return getNewAbstractEntity(10, 20, 30, 40, new Rotation(0));
+		return getNewAbstractEntity(INIT_X, INIT_Y, INIT_WIDTH, INIT_HEIGHT, new Rotation(INIT_ROT_ANGLE));
 	}
 
 	public void testCollidesWith() {
@@ -92,18 +99,18 @@ public abstract class AbstractEntityTest extends TestCase {
 
 	public void testGetHeight() {
 		AbstractEntity entity = newEntity();
-		assertEquals(entity.getHeight(), 40);
+		assertEquals(entity.getHeight(), INIT_HEIGHT);
 	}
 
 	public void testGetPosition() {
 		AbstractEntity entity = newEntity();
-		assertEquals(entity.getPositionClone().getX(), 10.0);
-		assertEquals(entity.getPositionClone().getY(), 20.0);
+		assertEquals(entity.getPositionClone().getX(), INIT_X);
+		assertEquals(entity.getPositionClone().getY(), INIT_Y);
 	}
 
 	public void testGetWidth() {
 		AbstractEntity entity = newEntity();
-		assertEquals(entity.getWidth(), 30);
+		assertEquals(entity.getWidth(), INIT_WIDTH);
 	}
 
 	public void testIsOutOfScreen() {
@@ -164,13 +171,13 @@ public abstract class AbstractEntityTest extends TestCase {
 	public void testMove() {
 		AbstractEntity entity = newEntity();
 		entity.move(0, 0);
-		assertEquals(entity.getPositionClone(), new Position(10.0, 20.0));
+		assertEquals(entity.getPositionClone(), new Position(INIT_X, INIT_Y));
 
 		entity.move(10, 100);
-		assertEquals(entity.getPositionClone(), new Position(20.0, 120.0));
+		assertEquals(entity.getPositionClone(), new Position(INIT_X+10, INIT_Y+100));
 
 		entity.move(-100, -1000);
-		assertEquals(entity.getPositionClone(), new Position(-80.0, -880.0));
+		assertEquals(entity.getPositionClone(), new Position(INIT_X-90.0, INIT_Y-900.0));
 	}
 
 	public void testSetPosition() {
@@ -181,5 +188,20 @@ public abstract class AbstractEntityTest extends TestCase {
 		entity.setPosition(new Position(-40, -50));
 		assertEquals(entity.getPositionClone().getX(), -40.0);
 		assertEquals(entity.getPositionClone().getY(), -50.0);
+	}
+	
+	public void testGetNormalizedDirection()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testGetRotation()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testGetObjectName()
+	{
+		fail("Not yet tested");
 	}
 }

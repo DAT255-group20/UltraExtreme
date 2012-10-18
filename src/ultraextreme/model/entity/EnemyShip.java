@@ -45,7 +45,6 @@ public class EnemyShip extends AbstractDestroyableEntity {
 			ObjectName name) {
 		super(position, width, height, new Rotation(0), name);
 		this.hitPoints = hitPoints;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

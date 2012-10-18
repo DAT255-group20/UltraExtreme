@@ -55,11 +55,6 @@ public class GameScene extends Scene implements SensorEventListener {
 	private static final Position SCORE_POS = new Position(10, 10);
 	private static final Position LIVES_POS = new Position(10, 40);
 	private static final Position ITEMBAR_POS = new Position(145, 1400);
-
-	private final IUltraExtremeModel gameModel;
-	private GameObjectSprite shipSprite;
-
-	private final SensorManager sensorManager;
 	private final List<GameObjectSprite> gameObjectSprites;
 	private ItemBarPanel itemBarPanel;
 	private final HUD hud;
@@ -70,13 +65,11 @@ public class GameScene extends Scene implements SensorEventListener {
 			final double screenHeight, Camera camera, Font font) {
 		super();
 
-		this.gameModel = gameModel;
 		setBackground(new Background(0, 0, 0));
 
 		gameObjectSprites = new LinkedList<GameObjectSprite>();
-		final GameObjectSprite playerSprite = SpriteFactory.getInstance()
-				.getNewSprite(gameModel.getPlayer().getShip(),
-						vertexBufferObjectManager);
+		final GameObjectSprite playerSprite = SpriteFactory.getNewSprite(
+				gameModel.getPlayer().getShip(), vertexBufferObjectManager);
 
 		gameObjectSprites.add(playerSprite);
 		attachChild(playerSprite);
@@ -87,8 +80,8 @@ public class GameScene extends Scene implements SensorEventListener {
 				.getLevelDimension());
 
 		ItemBar itemBar = gameModel.getPlayer().getItemBar();
-		itemBarPanel = new ItemBarPanel(itemBar, SpriteFactory.getInstance(),
-				vertexBufferObjectManager, ITEMBAR_POS, scaling);
+		itemBarPanel = new ItemBarPanel(itemBar, vertexBufferObjectManager,
+				ITEMBAR_POS, scaling);
 
 		ScoreText scoreText = new ScoreText(SCORE_POS, font,
 				vertexBufferObjectManager);
@@ -104,10 +97,17 @@ public class GameScene extends Scene implements SensorEventListener {
 		hud.attachChild(livesText);
 		camera.setHUD(hud);
 
-		this.sensorManager = sensorManager;
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
+	}
+
+	public List<GameObjectSprite> getGameObjectSprites() {
+		return gameObjectSprites;
+	}
+
+	public ItemBarPanel getItemBarPanel() {
+		return itemBarPanel;
 	}
 
 	@Override
@@ -119,14 +119,6 @@ public class GameScene extends Scene implements SensorEventListener {
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// shipSprite.setX(shipSprite.getX() + event.values[1]);
-	}
-
-	public List<GameObjectSprite> getGameObjectSprites() {
-		return gameObjectSprites;
-	}
-
-	public ItemBarPanel getItemBarPanel() {
-		return itemBarPanel;
 	}
 
 	public void setHUDVisible(boolean b) {

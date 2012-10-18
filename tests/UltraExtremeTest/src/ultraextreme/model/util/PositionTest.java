@@ -111,5 +111,14 @@ public class PositionTest extends TestCase {
 			assertEquals(i, p.getY());
 		}
 	}
-
+	
+	public void testEquals()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testHashcode()
+	{
+		fail("Not yet tested");
+	}
 }

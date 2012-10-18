@@ -20,10 +20,6 @@
 
 package ultraextreme.model.enemyspawning.wavelist;
 
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.item.BulletManager;
@@ -34,8 +30,7 @@ import ultraextreme.model.item.WeaponFactory;
  * @author Daniel Jonsson
  * 
  */
-public class RandomWaveListTest extends TestCase implements
-		AbstractWaveListTest {
+public class RandomWaveListTest extends AbstractWaveListTest {
 
 	private RandomWaveList waveList;
 
@@ -101,7 +96,6 @@ public class RandomWaveListTest extends TestCase implements
 	}
 
 	@Override
-	@Test
 	public void testGetNumberOfWaves() {
 		for (int waves = 1; waves < 100000; ++waves) {
 			resetWaveList(waves);
@@ -110,8 +104,9 @@ public class RandomWaveListTest extends TestCase implements
 	}
 
 	@Override
-	@Test
 	public void testNext() {
+		
+		// FIXME This test takes extremely long time to run
 		// Run through a number of tests where the maximum number of waves are
 		// different
 		for (int waves = 1; waves < 1000; ++waves) {
@@ -127,5 +122,14 @@ public class RandomWaveListTest extends TestCase implements
 			assertFalse(waveList.hasNext());
 		}
 	}
-
+	
+	public void testGetCurrentSpawningTime()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testGetCurrentWave()
+	{
+		fail("Not yet tested");
+	}
 }

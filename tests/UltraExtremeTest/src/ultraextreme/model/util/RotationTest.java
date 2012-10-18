@@ -53,4 +53,14 @@ public class RotationTest extends TestCase {
 		vec = rotation.getRotatedCoordinates(1, 1);
 		assertTrue(-1 - vec.x < epsilon && 1 - vec.y < epsilon);
 	}
+	
+	public void testEquals()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testHashcode()
+	{
+		fail("Not yet tested");
+	}
 }

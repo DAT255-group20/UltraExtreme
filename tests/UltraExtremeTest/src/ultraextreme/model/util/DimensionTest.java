@@ -88,4 +88,9 @@ public class DimensionTest extends TestCase {
 		assertTrue(Math.abs(qVec.x * 5 - newPos.getX()) < epsilon
 				&& Math.abs(qVec.y * 20 - newPos.getY()) < epsilon);
 	}
+	
+	public void testHashcode()
+	{
+		fail("Not yet tested");
+	}
 }

@@ -34,7 +34,11 @@ public final class Constants {
 	public static final String EVENT_NEW_ENTITY = "newEntity";
 	public static final String EVENT_REMOVED_ENTITY = "removedEntity";
 
-	private Constants() {
+	/**
+	 * @return The number of lives the ship will start with.
+	 */
+	public static int getInitShipLives() {
+		return 3;
 	}
 
 	/**
@@ -42,23 +46,6 @@ public final class Constants {
 	 */
 	public static Dimension getLevelDimension() {
 		return new Dimension(900, 1600);
-	}
-
-	/**
-	 * returns the dropChance of a weaponPickup upon enemy death as a percentage
-	 * 
-	 * @return
-	 */
-	public static int getWeaponDropChance() {
-		return 10;
-	}
-
-	/**
-	 * @return A positive double that impacts how fast the player ships will
-	 *         move
-	 */
-	public static double getPlayerSpeedModifier() {
-		return 1;
 	}
 
 	/**
@@ -70,9 +57,14 @@ public final class Constants {
 	}
 
 	/**
-	 * @return The number of lives the ship will start with.
+	 * returns the dropChance of a weaponPickup upon enemy death as a percentage
+	 * 
+	 * @return
 	 */
-	public static int getInitShipLives() {
-		return 3;
+	public static int getWeaponDropChance() {
+		return 10;
+	}
+
+	private Constants() {
 	}
 }

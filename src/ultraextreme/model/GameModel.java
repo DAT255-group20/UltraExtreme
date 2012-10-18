@@ -44,6 +44,7 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
  * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public class GameModel implements IUltraExtremeModel {
@@ -58,8 +59,6 @@ public class GameModel implements IUltraExtremeModel {
 
 	private PickupManager pickupManager;
 
-	private WeaponFactory weaponFactory;
-
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
@@ -67,7 +66,6 @@ public class GameModel implements IUltraExtremeModel {
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
 		WeaponFactory.initialize(bulletManager);
-		weaponFactory = WeaponFactory.getInstance();
 		enemySpawner = new EnemySpawner(new RandomWaveList(1000));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
@@ -93,12 +91,9 @@ public class GameModel implements IUltraExtremeModel {
 		for (AbstractEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
-
-		// TODO Decide if we want pickups to move around. If so, the following
-		// commented code is necessary.
-		// for(WeaponPickup pickup : pickupManager.getPickups()) {
-		// pickup.doMovement(timeElapsed);
-		// }
+		for(WeaponPickup pickup : pickupManager.getPickups()) {
+			pickup.doMovement(timeElapsed);
+		}
 
 		enemySpawner.update(timeElapsed);
 
@@ -107,6 +102,7 @@ public class GameModel implements IUltraExtremeModel {
 		spawnPickups();
 		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
+		pickupManager.clearPickupsOffScreen();
 	}
 
 	/**
@@ -156,7 +152,7 @@ public class GameModel implements IUltraExtremeModel {
 		for (int i = 0; i < pickupManager.getPickups().size(); i++) {
 			WeaponPickup wp = pickupManager.getPickups().get(i);
 			if (wp.collidesWith(player.getShip())) {
-				player.giveWeapon(weaponFactory.getNewWeapon(wp.getObjectName()));
+				player.giveWeapon(WeaponFactory.getNewWeapon(wp.getObjectName()));
 				pickupManager.removePickup(i);
 				i--;
 			}
@@ -217,6 +213,6 @@ public class GameModel implements IUltraExtremeModel {
 		pickupManager.clearAllPickups();
 		player.reset();
 
-		// TODO Reset enemymanager and enemysawner too?
+		// TODO(matachi) Reset enemyspawner too?
 	}
 }
