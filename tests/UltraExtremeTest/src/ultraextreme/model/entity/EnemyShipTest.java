@@ -82,4 +82,10 @@ public class EnemyShipTest extends AbstractEntityTest {
 	{
 		fail("Not yet tested");
 	}
+	
+	@Override
+	@Test
+	public void testGetObjectName() {
+		fail("lol");
+	}
 }

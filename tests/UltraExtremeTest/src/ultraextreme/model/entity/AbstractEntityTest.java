@@ -20,7 +20,12 @@
 
 package ultraextreme.model.entity;
 
+import javax.vecmath.Vector2d;
+
 import junit.framework.TestCase;
+
+import org.junit.Test;
+
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
@@ -40,15 +45,21 @@ public abstract class AbstractEntityTest extends TestCase {
 	private static final int INIT_WIDTH = 30;
 	private static final int INIT_HEIGHT = 40;
 	private static final double INIT_ROT_ANGLE = 0;
-	
-	
+
 	protected abstract AbstractEntity getNewAbstractEntity(double x, double y,
 			int width, int height, Rotation direction);
-
-	private AbstractEntity newEntity() {
-		return getNewAbstractEntity(INIT_X, INIT_Y, INIT_WIDTH, INIT_HEIGHT, new Rotation(INIT_ROT_ANGLE));
+	
+	private AbstractEntity getNewAbstractEntity(double x, double y,
+			int width, int height) {
+		return getNewAbstractEntity(x, y, width, height, new Rotation(0));
 	}
 
+	private AbstractEntity newEntity() {
+		return getNewAbstractEntity(INIT_X, INIT_Y, INIT_WIDTH, INIT_HEIGHT,
+				new Rotation(INIT_ROT_ANGLE));
+	}
+
+	@Test
 	public void testCollidesWith() {
 		AbstractEntity e1 = getNewAbstractEntity(10, 10, 10, 10,
 				new Rotation(0));
@@ -77,6 +88,7 @@ public abstract class AbstractEntityTest extends TestCase {
 		assertFalse(e2.collidesWith(e1));
 	}
 
+	@Test
 	public void testGetCenteredPosition() {
 		AbstractEntity entity = getNewAbstractEntity(20, 20, 10, 10,
 				new Rotation(0));
@@ -92,27 +104,32 @@ public abstract class AbstractEntityTest extends TestCase {
 		assertTrue(centPos.getY() == 39);
 	}
 
+	@Test
 	public void testGetDirection() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getRotation(), new Rotation(0));
 	}
 
+	@Test
 	public void testGetHeight() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getHeight(), INIT_HEIGHT);
 	}
 
+	@Test
 	public void testGetPosition() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getPositionClone().getX(), INIT_X);
 		assertEquals(entity.getPositionClone().getY(), INIT_Y);
 	}
 
+	@Test
 	public void testGetWidth() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getWidth(), INIT_WIDTH);
 	}
 
+	@Test
 	public void testIsOutOfScreen() {
 		final Dimension screen = Constants.getLevelDimension();
 		// Run through a lot of margins
@@ -168,18 +185,22 @@ public abstract class AbstractEntityTest extends TestCase {
 		}
 	}
 
+	@Test
 	public void testMove() {
 		AbstractEntity entity = newEntity();
 		entity.move(0, 0);
 		assertEquals(entity.getPositionClone(), new Position(INIT_X, INIT_Y));
 
 		entity.move(10, 100);
-		assertEquals(entity.getPositionClone(), new Position(INIT_X+10, INIT_Y+100));
+		assertEquals(entity.getPositionClone(), new Position(INIT_X + 10,
+				INIT_Y + 100));
 
 		entity.move(-100, -1000);
-		assertEquals(entity.getPositionClone(), new Position(INIT_X-90.0, INIT_Y-900.0));
+		assertEquals(entity.getPositionClone(), new Position(INIT_X - 90.0,
+				INIT_Y - 900.0));
 	}
 
+	@Test
 	public void testSetPosition() {
 		AbstractEntity entity = newEntity();
 		entity.setPosition(new Position(40, 50));
@@ -189,19 +210,36 @@ public abstract class AbstractEntityTest extends TestCase {
 		assertEquals(entity.getPositionClone().getX(), -40.0);
 		assertEquals(entity.getPositionClone().getY(), -50.0);
 	}
-	
-	public void testGetNormalizedDirection()
-	{
-		fail("Not yet tested");
+
+	@Test
+	public void testGetNormalizedDirection() {
+		AbstractEntity e = getNewAbstractEntity(0, 0, 10, 10);
+		
+		e.move(10, 10);
+		Vector2d direction = e.getNormalizedDirection();
+		assertEquals(Math.sqrt(1.0/2.0), direction.x, 0.0000001);
+		assertEquals(Math.sqrt(1.0/2.0), direction.y, 0.0000001);
+		
+		e.move(-10, -10);
+		direction = e.getNormalizedDirection();
+		assertEquals(-Math.sqrt(1.0/2.0), direction.x, 0.0000001);
+		assertEquals(-Math.sqrt(1.0/2.0), direction.y, 0.0000001);
+		
+		e.move(1, 0);
+		direction = e.getNormalizedDirection();
+		assertEquals(1.0, direction.x);
+		assertEquals(0.0, direction.y);
 	}
-	
-	public void testGetRotation()
-	{
-		fail("Not yet tested");
+
+	@Test
+	public void testGetRotation() {
+		for (double i = 0; i < 2 * Math.PI; i += Math.PI / 10) {
+			Rotation r = new Rotation(i);
+			AbstractEntity e = getNewAbstractEntity(10, 10, 10, 10, r);
+			assertEquals(r.getAngle(), e.getRotation().getAngle());
+		}
 	}
-	
-	public void testGetObjectName()
-	{
-		fail("Not yet tested");
-	}
+
+	@Test
+	public abstract void testGetObjectName();
 }

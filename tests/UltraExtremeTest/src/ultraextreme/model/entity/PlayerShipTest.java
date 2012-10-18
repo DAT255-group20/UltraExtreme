@@ -20,6 +20,9 @@
 
 package ultraextreme.model.entity;
 
+import org.junit.Test;
+
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -30,7 +33,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class PlayerShipTest extends AbstractEntityTest {
 
-	PlayerShip playerShip;
+	private PlayerShip playerShip;
 
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
@@ -75,6 +78,12 @@ public class PlayerShipTest extends AbstractEntityTest {
 		assertEquals(playerShip.getPositionClone(), new Position(-80.0, -880.0));
 	}
 	
+	@Override
+	public void testGetRotation() {
+		resetInstanceVariables(10, 20, 30, 40);
+		assertEquals(0, playerShip.getRotation().getAngle());
+	}
+	
 	public void testCanMove()
 	{
 		fail("Not yet tested");
@@ -93,5 +102,12 @@ public class PlayerShipTest extends AbstractEntityTest {
 	public void testSetDestroyed()
 	{
 		fail("Not yet tested");
+	}
+
+	@Override
+	@Test
+	public void testGetObjectName() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertEquals(ObjectName.PLAYERSHIP, playerShip.getObjectName());
 	}
 }
