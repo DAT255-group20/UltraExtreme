@@ -36,8 +36,9 @@ import ultraextreme.model.util.Rotation;
  * @author Viktor Anderling
  */
 public class SpinningWeaponTest extends TestCase {
-	BulletManager bulletManager;
-	SpinningWeapon spinningWeapon;
+	
+	private BulletManager bulletManager;
+	private SpinningWeapon spinningWeapon;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -125,7 +126,10 @@ public class SpinningWeaponTest extends TestCase {
 	}
 
 	@Test
-	public void testShallowClone() {
-		fail("Not yet tested");
+	public void testGetNewInstance() {
+		AbstractWeapon s2 = spinningWeapon.getNewInstance();
+		assertTrue(s2 instanceof SpinningWeapon);
+		assertNotSame(s2, spinningWeapon);
 	}
+
 }

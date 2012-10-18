@@ -21,6 +21,9 @@
 package ultraextreme.model.item;
 
 import junit.framework.TestCase;
+
+import org.junit.Test;
+
 import ultraextreme.model.entity.BasicBullet;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.util.PlayerID;
@@ -34,8 +37,8 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicWeaponTest extends TestCase {
 
-	BulletManager bulletManager;
-	BasicWeapon basicWeapon;
+	private BulletManager bulletManager;
+	private BasicWeapon basicWeapon;
 
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
@@ -79,5 +82,12 @@ public class BasicWeaponTest extends TestCase {
 		basicWeapon.fire(new Position(), PlayerID.PLAYER1, new Rotation(0),
 				cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() == 3);
+	}
+	
+	@Test
+	public void testGetNewInstance() {
+		AbstractWeapon s2 = basicWeapon.getNewInstance();
+		assertTrue(s2 instanceof BasicWeapon);
+		assertNotSame(s2, basicWeapon);
 	}
 }

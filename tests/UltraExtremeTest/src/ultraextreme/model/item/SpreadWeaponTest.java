@@ -18,8 +18,8 @@ import ultraextreme.model.util.Rotation;
  */
 public class SpreadWeaponTest extends TestCase {
 
-	BulletManager bulletManager;
-	SpreadWeapon spreadWeapon;
+	private BulletManager bulletManager;
+	private SpreadWeapon spreadWeapon;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -82,7 +82,9 @@ public class SpreadWeaponTest extends TestCase {
 	}
 
 	@Test
-	public void testShallowClone() {
-		fail("Not yet tested");
+	public void testGetNewInstance() {
+		AbstractWeapon s2 = spreadWeapon.getNewInstance();
+		assertTrue(s2 instanceof SpreadWeapon);
+		assertNotSame(s2, spreadWeapon);
 	}
 }
