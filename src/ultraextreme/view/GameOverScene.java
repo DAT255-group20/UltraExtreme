@@ -61,9 +61,9 @@ public class GameOverScene extends MenuScene {
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
 
-		// TODO(plankton) Extract strings
-		nameInput = new InputText(100, 300, "Highscore name",
-				"Enter your name for the highscore list",
+		nameInput = new InputText(100, 300, Resources.getInstance()
+				.getResource(ResourceName.HIGHSCORE_INPUT_TITLE), Resources
+				.getInstance().getResource(ResourceName.HIGHSCORE_INPUT_TEXT),
 				SpriteFactory.getTextInputBackground(), font, 0, 0,
 				vertexBufferObjectManager, activity);
 		nameInput.setText(Resources.getInstance().getResource(
