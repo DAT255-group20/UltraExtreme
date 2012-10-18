@@ -131,7 +131,7 @@ public class PlayerTest extends TestCase {
 
 	public void testReset() {
 		WeaponFactory.initialize(bulletManager);
-		BasicEnemy enemy = new BasicEnemy(0, 0);
+		BasicEnemy enemy = new BasicEnemy(new Position(0, 0));
 		PropertyChangeEvent event = new PropertyChangeEvent(new Object(), 
 				Constants.EVENT_ENEMY_KILLED, null, enemy);
 		player.propertyChange(event);
