@@ -26,11 +26,12 @@ import java.util.Random;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.HitAndRunEnemy;
-import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.AbstractEnemyProvider;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -116,10 +117,12 @@ public class RandomWaveList extends AbstractWaveList {
 							++counter;
 							counter %= 3;
 							return new HitAndRunEnemy(spawningPosition,
-									firePoint, endPoint);
+									firePoint, endPoint,
+									ObjectName.SPINNING_WEAPON);
 						}
 					});
 			break;
+
 		/**
 		 * Vertical line of 3 enemies with a slight randomized rotation and
 		 * position
@@ -132,7 +135,8 @@ public class RandomWaveList extends AbstractWaveList {
 						@Override
 						public AbstractEnemy getEnemy(
 								Position spawningPosition, Rotation rotation) {
-							return new BasicEnemy(spawningPosition, rotation);
+							return new BasicEnemy(spawningPosition, rotation,
+									ObjectName.BASIC_WEAPON);
 						}
 					});
 			break;

@@ -46,6 +46,6 @@ public class WeaponPickup extends AbstractEntity {
 	}
 
 	public void doMovement(float timeElapsed) {
-		this.move(0, timeElapsed * SPEED);		
+		this.move(0, timeElapsed * SPEED);
 	}
 }

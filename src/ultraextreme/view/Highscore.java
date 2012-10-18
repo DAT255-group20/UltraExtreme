@@ -30,6 +30,7 @@ public class Highscore implements Comparable<Highscore> {
 		return score;
 	}
 
+	@Override
 	public String toString() {
 		return "Highscore[name:" + name + ", score:" + score + "]";
 	}

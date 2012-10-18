@@ -36,6 +36,7 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Position;
 
 /**
  * 
@@ -92,7 +93,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testAddEnemy() {
-		AbstractEnemy enemy = new BasicEnemy(0, 0);
+		AbstractEnemy enemy = new BasicEnemy(new Position());
 		enemyManager.addEnemy(enemy);
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
 		assertEquals(enemy,
@@ -103,7 +104,7 @@ public class EnemyManagerTest extends TestCase {
 
 		// Add a lot of enemies to the enemy manager and to a local list.
 		for (int i = 0; i < 10000; i++) {
-			AbstractEnemy e = new BasicEnemy(0, 0);
+			AbstractEnemy e = new BasicEnemy(new Position());
 			enemyManager.addEnemy(e);
 			addedEnemies.add(e);
 		}
@@ -126,7 +127,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testClearDeadEnemies() {
-		AbstractEnemy enemy = new BasicEnemy(0, 0);
+		AbstractEnemy enemy = new BasicEnemy(new Position());
 		enemyManager.addEnemy(enemy);
 
 		// kill the ship
@@ -149,7 +150,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testClearDeadEnemies2() {
-		AbstractEnemy enemy = new BasicEnemy(-500, -500);
+		AbstractEnemy enemy = new BasicEnemy(new Position(-500, -500));
 		enemyManager.addEnemy(enemy);
 
 		enemyManager.clearDeadEnemies();
@@ -168,7 +169,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testPropertyChange() {
-		IEnemy enemy = new BasicEnemy(0, 0);
+		IEnemy enemy = new BasicEnemy(new Position());
 		PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 		pcs.addPropertyChangeListener(enemyManager);
 		pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, enemy);

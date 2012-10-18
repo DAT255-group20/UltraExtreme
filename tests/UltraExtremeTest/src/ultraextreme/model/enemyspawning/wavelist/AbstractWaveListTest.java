@@ -27,14 +27,12 @@ public abstract class AbstractWaveListTest extends TestCase {
 	public abstract void testGetNumberOfWaves();
 
 	public abstract void testNext();
-	
-	public void testGetCurrentWaveNumber()
-	{
+
+	public void testGetCurrentWaveNumber() {
 		fail("Not yet tested");
 	}
-	
-	public void testHasNext()
-	{
+
+	public void testHasNext() {
 		fail("Not yet tested");
 	}
 }

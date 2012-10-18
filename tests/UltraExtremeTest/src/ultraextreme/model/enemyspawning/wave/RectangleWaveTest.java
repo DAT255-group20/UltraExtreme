@@ -49,7 +49,7 @@ public class RectangleWaveTest extends TestCase {
 					@Override
 					public AbstractEnemy getEnemy(Position spawningPosition,
 							Rotation rotation) {
-						return new BasicEnemy(0, 0);
+						return new BasicEnemy(new Position());
 					}
 
 				});

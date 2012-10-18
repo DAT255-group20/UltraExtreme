@@ -91,7 +91,7 @@ public class GameModel implements IUltraExtremeModel {
 		for (AbstractEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
-		for(WeaponPickup pickup : pickupManager.getPickups()) {
+		for (WeaponPickup pickup : pickupManager.getPickups()) {
 			pickup.doMovement(timeElapsed);
 		}
 

@@ -23,6 +23,7 @@ package ultraextreme.model.enemy;
 import junit.framework.TestCase;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 
 /**
@@ -45,7 +46,8 @@ public class HitAndRunEnemyTest extends TestCase {
 		startPoint = new Position(5, 10);
 		endPoint = new Position(20, 20);
 		firePoint = new Position(15, 15);
-		enemy = new HitAndRunEnemy(startPoint, firePoint, endPoint);
+		enemy = new HitAndRunEnemy(startPoint, firePoint, endPoint,
+				ObjectName.SPINNING_WEAPON);
 	}
 
 	public void testGetScoreValue() {

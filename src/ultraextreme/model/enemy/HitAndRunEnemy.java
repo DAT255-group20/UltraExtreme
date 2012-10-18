@@ -38,6 +38,9 @@ import ultraextreme.model.util.Rotation;
  */
 public class HitAndRunEnemy extends AbstractEnemy {
 
+	private static final int SHIP_SIZE = 40;
+	private static final int SCORE = 50;
+
 	/**
 	 * endPoint where the enemy will run off to
 	 */
@@ -57,7 +60,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 
 	private int speed = 400;
 
-	protected HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
+	private HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
 	}
 
@@ -74,10 +77,10 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 *            where the enemy will run off to
 	 */
 	public HitAndRunEnemy(Position startingPosition, Position firePoint,
-			Position endPoint) {
-		super(new EnemyShip(startingPosition, 30, 30, 40,
+			Position endPoint, ObjectName weaponName) {
+		super(new EnemyShip(startingPosition, SHIP_SIZE, SHIP_SIZE, 35,
 				ObjectName.HITANDRUN_ENEMYSHIP), WeaponFactory
-				.getNewWeapon(ObjectName.SPINNING_WEAPON));
+				.getNewWeapon(weaponName));
 		this.endPoint = endPoint;
 		this.firePoint = firePoint;
 	}
@@ -87,7 +90,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	@Override
 	public int getScoreValue() {
-		return 50;
+		return SCORE;
 	}
 
 	/**

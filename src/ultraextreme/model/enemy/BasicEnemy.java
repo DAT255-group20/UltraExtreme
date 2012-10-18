@@ -39,6 +39,8 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicEnemy extends AbstractEnemy {
 
+	private static final int SHIP_SIZE = 80;
+	private static final int SCORE = 10;
 	private static final int Y_SPEED = 170;
 
 	private BasicEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
@@ -49,13 +51,11 @@ public class BasicEnemy extends AbstractEnemy {
 	 * Constructor for an enemy with predetermined ship and weapon. Specific to
 	 * this type of enemy
 	 * 
-	 * @param x
-	 *            coordinate for the enemyShip
-	 * @param y
-	 *            coordinate for the enemyShip
+	 * @param position
+	 *            Coordinate for the enemyShip
 	 */
-	public BasicEnemy(final double x, final double y) {
-		this(x, y, new Rotation(0));
+	public BasicEnemy(final Position position) {
+		this(position, new Rotation(0), ObjectName.BASIC_WEAPON);
 	}
 
 	/**
@@ -67,25 +67,11 @@ public class BasicEnemy extends AbstractEnemy {
 	 * @param rotation
 	 *            Rotation modifier of the enemy's flying path.
 	 */
-	public BasicEnemy(final Position position, final Rotation rotation) {
-		this(position.getX(), position.getY(), rotation);
-	}
-
-	/**
-	 * Constructor for an enemy with predetermined ship and weapon. Specific to
-	 * this type of enemy
-	 * 
-	 * @param x
-	 *            coordinate for the enemyShip
-	 * @param y
-	 *            coordinate for the enemyShip
-	 * @param rotation
-	 *            Rotation modifier of the enemy's flying path.
-	 */
-	public BasicEnemy(double x, double y, Rotation rotation) {
-		this(new EnemyShip(x, y, 70, 70, rotation, 50,
-				ObjectName.BASIC_ENEMYSHIP), WeaponFactory
-				.getNewWeapon(ObjectName.BASIC_WEAPON));
+	public BasicEnemy(final Position position, final Rotation rotation,
+			ObjectName weaponName) {
+		this(new EnemyShip(position.getX(), position.getY(), SHIP_SIZE,
+				SHIP_SIZE, rotation, 40, ObjectName.BASIC_ENEMYSHIP),
+				WeaponFactory.getNewWeapon(weaponName));
 	}
 
 	@Override
@@ -96,6 +82,6 @@ public class BasicEnemy extends AbstractEnemy {
 
 	@Override
 	public int getScoreValue() {
-		return 10;
+		return SCORE;
 	}
 }

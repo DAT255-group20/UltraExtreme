@@ -90,7 +90,7 @@ public class PickupManager {
 
 		return pickups;
 	}
-	
+
 	/**
 	 * Removes all pickups that are off the gameScreen.
 	 */

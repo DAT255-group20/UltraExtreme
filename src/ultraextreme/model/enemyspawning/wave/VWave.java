@@ -21,6 +21,7 @@
 package ultraextreme.model.enemyspawning.wave;
 
 import ultraextreme.model.enemy.BasicEnemy;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -66,13 +67,17 @@ public class VWave extends AbstractWave {
 		timer += timeElapsed;
 		if (timer >= 2) {
 			if (counter == 0) {
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
-						spawningPositon.getY(), this.rotation));
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon,
+						this.rotation, ObjectName.BASIC_WEAPON));
 			} else {
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						- counter * 100, spawningPositon.getY(), rotation));
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						+ counter * 100, spawningPositon.getY(), rotation));
+				fireNewEnemySpawned(new BasicEnemy(new Position(
+						spawningPositon.getX() - counter * 100,
+						spawningPositon.getY()), rotation,
+						ObjectName.BASIC_WEAPON));
+				fireNewEnemySpawned(new BasicEnemy(new Position(
+						spawningPositon.getX() + counter * 100,
+						spawningPositon.getY()), rotation,
+						ObjectName.BASIC_WEAPON));
 			}
 			timer -= 2;
 			counter++;

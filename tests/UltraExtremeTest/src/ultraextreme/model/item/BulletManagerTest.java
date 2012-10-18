@@ -167,9 +167,8 @@ public class BulletManagerTest extends TestCase {
 		assertTrue(bulletCollector.getBullets().get(Constants.EVENT_NEW_ENTITY)
 				.containsAll(bulletList));
 	}
-	
-	public void testRemoveBullet()
-	{
+
+	public void testRemoveBullet() {
 		fail("Not yet tested");
 	}
 
@@ -313,9 +312,8 @@ public class BulletManagerTest extends TestCase {
 		assertEquals(enemyBullets.size(),
 				bulletManager.getBulletsFrom(PlayerID.ENEMY).size());
 	}
-	
-	public void testGetBullets()
-	{
+
+	public void testGetBullets() {
 		fail("Not yet tested");
 	}
 }

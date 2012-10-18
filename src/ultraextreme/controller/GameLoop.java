@@ -108,7 +108,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 	public void reset() {
 		setFiring(false);
 		timerList.clear();
-		for(GameObjectSprite gOS : gameObjectSprites) {
+		for (GameObjectSprite gOS : gameObjectSprites) {
 			gOS.reset();
 		}
 	}

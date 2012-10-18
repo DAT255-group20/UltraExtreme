@@ -28,7 +28,7 @@ public final class Resources {
 	private Map<ResourceName, String> resourceMap = new HashMap<ResourceName, String>();
 
 	public enum ResourceName {
-		MENU_START_GAME_TEXT, SCORE, LIVES, GOTO_MENU, MENU_HIGHSCORE_TEXT, CLEAR_HIGHSCORE;
+		MENU_START_GAME_TEXT, SCORE, LIVES, GOTO_MENU, MENU_HIGHSCORE_TEXT, CLEAR_HIGHSCORE, DEFAULT_HIGHSCORE_NAME;
 	}
 
 	private static Resources instance;
