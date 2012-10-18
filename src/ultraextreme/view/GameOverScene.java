@@ -25,6 +25,7 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.entity.text.Text;
 import org.andengine.helperclasses.InputText;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -47,6 +48,8 @@ public class GameOverScene extends MenuScene {
 	private IUltraExtremeModel gameModel;
 	private InputText nameInput;
 
+	private Text scoreText;
+
 	public GameOverScene(IUltraExtremeModel gameModel, final Camera camera,
 			final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager,
@@ -54,12 +57,17 @@ public class GameOverScene extends MenuScene {
 		super(camera);
 		this.gameModel = gameModel;
 		setBackground(new Background(0.9f, 0.1f, 0.1f));
+		
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
 				vertexBufferObjectManager);
 		gotoMenuButton.setPosition(100, 100);
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
+		
+		scoreText = new Text(140, 140, font, "                  ",
+				vertexBufferObjectManager);
+		attachChild(scoreText);
 
 		nameInput = new InputText(100, 300, Resources.getInstance()
 				.getResource(ResourceName.HIGHSCORE_INPUT_TITLE), Resources
@@ -85,5 +93,9 @@ public class GameOverScene extends MenuScene {
 	 */
 	public int getScore() {
 		return gameModel.getPlayer().getScore();
+	}
+
+	public void updateScene() {
+		scoreText.setText("Your score: " + getScore());
 	}
 }

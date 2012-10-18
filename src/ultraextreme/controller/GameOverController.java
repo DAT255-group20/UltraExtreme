@@ -59,8 +59,7 @@ public class GameOverController extends AbstractController implements
 
 	@Override
 	public void activateController() {
-		// Auto-generated method stub
-
+		scene.updateScene();
 	}
 
 	@Override
