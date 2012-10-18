@@ -32,6 +32,7 @@ import ultraextreme.model.util.Rotation;
  * 
  */
 public class BasicBulletTest extends AbstractBulletTest {
+	
 	private float speed;
 	private int bulletDamage = 10;
 
@@ -67,5 +68,12 @@ public class BasicBulletTest extends AbstractBulletTest {
 		AbstractBullet bullet = getNewAbstractBullet(10, 20, 30, 40,
 				PlayerID.PLAYER1, new Rotation(0));
 		assertEquals(ObjectName.BASIC_BULLET, bullet.getObjectName());
+	}
+
+	@Override
+	public void testGetDamage() {
+		AbstractBullet bullet = getNewAbstractBullet(10, 20, 30, 40,
+				PlayerID.PLAYER1, new Rotation(0));
+		assertEquals(bulletDamage, bullet.getDamage());
 	}
 }

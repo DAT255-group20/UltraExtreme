@@ -37,7 +37,7 @@ public class EnemyShipTest extends AbstractEntityTest {
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
 			int width, int height, Rotation direction) {
-		resetShip(x, y, width, height, 0, 5);
+		resetShip(x, y, width, height, direction.getAngle(), 5);
 		return enemyShip;
 	}
 
@@ -57,7 +57,7 @@ public class EnemyShipTest extends AbstractEntityTest {
 	}
 
 	@Test
-	public void testReceiveDamage() {
+	public void testRecieveDamageAndIsDestroyed() {
 		// Create an enemy ship and kill it
 		resetShip(0, 0, 100, 100, 0, 100);
 		enemyShip.receiveDamage(100);
@@ -80,10 +80,6 @@ public class EnemyShipTest extends AbstractEntityTest {
 		}
 		enemyShip.receiveDamage(1);
 		assertTrue(enemyShip.isDestroyed());
-	}
-
-	public void testIsDestroyed() {
-		fail("Not yet tested");
 	}
 
 	@Override
