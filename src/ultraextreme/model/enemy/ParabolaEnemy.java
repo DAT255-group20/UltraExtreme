@@ -35,8 +35,8 @@ public class ParabolaEnemy extends AbstractEnemy {
 	 */
 	public ParabolaEnemy(Position startPoint, Position midPoint,
 			Position endPoint, ObjectName weaponName) throws IllegalArgumentException {
-		super(new EnemyShip(startPoint, 10, 10, 15, ObjectName.PARABOLA_ENEMY),
-				WeaponFactory.getInstance().getNewWeapon(weaponName));
+		super(new EnemyShip(startPoint, 10, 10, 15, ObjectName.PARABOLA_ENEMYSHIP),
+				WeaponFactory.getNewWeapon(weaponName));
 		if(!midPointIsInMiddle(startPoint.getX(), midPoint.getX(),
 				endPoint.getX())) {
 			throw new IllegalArgumentException(

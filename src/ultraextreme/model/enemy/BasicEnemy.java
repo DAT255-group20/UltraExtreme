@@ -49,13 +49,11 @@ public class BasicEnemy extends AbstractEnemy {
 	 * Constructor for an enemy with predetermined ship and weapon. Specific to
 	 * this type of enemy
 	 * 
-	 * @param x
-	 *            coordinate for the enemyShip
-	 * @param y
-	 *            coordinate for the enemyShip
+	 * @param position
+	 *            Coordinate for the enemyShip
 	 */
-	public BasicEnemy(final double x, final double y) {
-		this(x, y, new Rotation(0));
+	public BasicEnemy(final Position position) {
+		this(position, new Rotation(0));
 	}
 
 	/**
@@ -68,22 +66,7 @@ public class BasicEnemy extends AbstractEnemy {
 	 *            Rotation modifier of the enemy's flying path.
 	 */
 	public BasicEnemy(final Position position, final Rotation rotation) {
-		this(position.getX(), position.getY(), rotation);
-	}
-
-	/**
-	 * Constructor for an enemy with predetermined ship and weapon. Specific to
-	 * this type of enemy
-	 * 
-	 * @param x
-	 *            coordinate for the enemyShip
-	 * @param y
-	 *            coordinate for the enemyShip
-	 * @param rotation
-	 *            Rotation modifier of the enemy's flying path.
-	 */
-	public BasicEnemy(double x, double y, Rotation rotation) {
-		this(new EnemyShip(x, y, 70, 70, rotation, 50,
+		this(new EnemyShip(position.getX(), position.getY(), 70, 70, rotation, 50,
 				ObjectName.BASIC_ENEMYSHIP), WeaponFactory
 				.getNewWeapon(ObjectName.BASIC_WEAPON));
 	}

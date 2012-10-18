@@ -66,13 +66,12 @@ public class VWave extends AbstractWave {
 		timer += timeElapsed;
 		if (timer >= 2) {
 			if (counter == 0) {
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
-						spawningPositon.getY(), this.rotation));
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon, this.rotation));
 			} else {
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						- counter * 100, spawningPositon.getY(), rotation));
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						+ counter * 100, spawningPositon.getY(), rotation));
+				fireNewEnemySpawned(new BasicEnemy(new Position(spawningPositon.getX()
+						- counter * 100, spawningPositon.getY()), rotation));
+				fireNewEnemySpawned(new BasicEnemy(new Position(spawningPositon.getX()
+						+ counter * 100, spawningPositon.getY()), rotation));
 			}
 			timer -= 2;
 			counter++;

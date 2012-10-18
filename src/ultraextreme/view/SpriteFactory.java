@@ -128,7 +128,7 @@ public final class SpriteFactory {
 		final TextureRegion parabolaEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship_3.png", 900, 0);
 		
-		putProperties(ObjectName.PARABOLA_ENEMY, parabolaEnemy, new Vector2d(
+		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy, new Vector2d(
 				56, 59));
 		
 		// init pickupables
