@@ -22,6 +22,7 @@ package ultraextreme.model.entity;
 
 import org.junit.Test;
 
+import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
@@ -53,16 +54,6 @@ public class PlayerShipTest extends AbstractEntityTest {
 	}
 
 	/**
-	 * Test if it's possible to destroy the ship. FIXME: Not implemented yet.
-	 */
-	public void testIsDestroyed() {
-		// FIXME: Since the ship can't get hurt yet this is hard to test.
-		fail("See above comment");
-		resetInstanceVariables(0, 0, 0, 0);
-		assertEquals(playerShip.isDestroyed(), false);
-	}
-
-	/**
 	 * Test if it's possible to move the ship.
 	 */
 	@Override
@@ -77,31 +68,57 @@ public class PlayerShipTest extends AbstractEntityTest {
 		playerShip.move(-100, -1000);
 		assertEquals(playerShip.getPositionClone(), new Position(-80.0, -880.0));
 	}
-	
+
 	@Override
 	public void testGetRotation() {
 		resetInstanceVariables(10, 20, 30, 40);
-		assertEquals(0, playerShip.getRotation().getAngle());
+		assertEquals(0.0, playerShip.getRotation().getAngle());
 	}
-	
-	public void testCanMove()
-	{
-		fail("Not yet tested");
+
+	public void testCanMove() {
+		// Ship is on the left border of the model
+		resetInstanceVariables(0, 0, 10, 10);
+		assertFalse(playerShip.canMoveX(-1));
+		assertTrue(playerShip.canMoveX(1));
+		
+		// Ship is on the right border of the model
+		resetInstanceVariables(Constants.getLevelDimension().getX() - 10, 0, 10, 10);
+		assertTrue(playerShip.canMoveX(-1));
+		assertFalse(playerShip.canMoveX(1));
+		
+		// Ship is on the top border of the model
+		resetInstanceVariables(0, 0, 10, 10);
+		assertFalse(playerShip.canMoveY(-1));
+		assertTrue(playerShip.canMoveY(1));
+		
+		// Ship is on the bottom border of the model
+		resetInstanceVariables(0, Constants.getLevelDimension().getY() - 10, 10, 10);
+		assertTrue(playerShip.canMoveY(-1));
+		assertFalse(playerShip.canMoveY(1));
 	}
-	
-	public void testJustGotHit()
-	{
-		fail("Not yet tested");
+
+	/**
+	 * Test the methods recieveDamage and justGotHit.
+	 */
+	public void testReceiveDamageAndJustGotHit() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertFalse(playerShip.justGotHit());
+		assertFalse(playerShip.justGotHit());
+		playerShip.receiveDamage(1);
+		assertTrue(playerShip.justGotHit());
+		assertTrue(playerShip.justGotHit());
+		playerShip.move(0, 0);
+		assertFalse(playerShip.justGotHit());
+		assertFalse(playerShip.justGotHit());
 	}
-	
-	public void testReceiveDamage()
-	{
-		fail("Not yet tested");
-	}
-	
-	public void testSetDestroyed()
-	{
-		fail("Not yet tested");
+
+	public void testSetDestroyedAndIsDestroyed() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertFalse(playerShip.isDestroyed());
+		assertFalse(playerShip.isDestroyed());
+		playerShip.setDestroyed();
+		assertTrue(playerShip.isDestroyed());
+		assertTrue(playerShip.isDestroyed());
 	}
 
 	@Override
