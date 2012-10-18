@@ -41,6 +41,7 @@ public final class WeaponFactory {
 		weaponMap = new HashMap<ObjectName, AbstractWeapon>();
 		weaponMap.put(ObjectName.BASIC_WEAPON, new BasicWeapon(manager));
 		weaponMap.put(ObjectName.SPINNING_WEAPON, new SpinningWeapon(manager));
+		weaponMap.put(ObjectName.BASIC_SPREAD_WEAPON, new SpreadWeapon(manager));
 		weaponMap.put(ObjectName.BOMB, new Bomb(manager));
 	}
 
