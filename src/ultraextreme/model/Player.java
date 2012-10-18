@@ -85,7 +85,7 @@ public class Player implements IPlayer {
 	 * A count down for the ships invincibility.
 	 */
 	private double invincCountdown;
-
+	
 	/**
 	 * Create a new player.
 	 * 
@@ -177,6 +177,8 @@ public class Player implements IPlayer {
 	public void reset() {
 		lives = Constants.getInitShipLives();
 		score = 0;
+		ship.reset();
+		invincCountdown = 0;
 		setShipToSpawn();
 		notifyListeners();
 	}
@@ -189,9 +191,6 @@ public class Player implements IPlayer {
 		final Dimension levelDimension = Constants.getLevelDimension();
 		ship.setPosition(new Position(levelDimension.getX() * 0.5
 				- ship.getWidth() / 2, levelDimension.getY() * 0.65));
-
-		Log.d("DEBUG",
-				"Ship has been set to spawn point and been given a basic weapon");
 	}
 
 	public void unregisterListener(IPlayerListener listener) {

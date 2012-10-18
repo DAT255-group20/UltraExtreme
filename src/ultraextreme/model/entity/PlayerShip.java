@@ -121,4 +121,13 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	public void setDestroyed() {
 		destroyed = true;
 	}
+	
+	/**
+	 * Resets values for the ship.
+	 * Position will not be changed.
+	 */
+	public void reset() {
+		justHit = false;
+		destroyed = false;
+	}
 }

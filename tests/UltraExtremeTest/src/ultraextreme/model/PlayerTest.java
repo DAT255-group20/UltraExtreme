@@ -20,16 +20,20 @@
 
 package ultraextreme.model;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 
 import junit.framework.TestCase;
+import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.IEnemy;
 import ultraextreme.model.entity.AbstractEntity;
 import ultraextreme.model.entity.EnemyShip;
+import ultraextreme.model.entity.PlayerShip;
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.ItemBar;
+import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
@@ -60,7 +64,9 @@ public class PlayerTest extends TestCase {
 	}
 
 	public void testGetInvincibilityTime() {
-		fail("Not yet tested");
+		double epsilon = 0.00001;
+		assertTrue(Math.abs(player.getInvincibilityTime() 
+				- Constants.getShipInvincibilityTime()) < epsilon);
 	}
 
 	public void testGetItemBar() {
@@ -75,11 +81,10 @@ public class PlayerTest extends TestCase {
 	 * Test if the get method works.
 	 */
 	public void testGetLives() {
-		// TODO What the... The only thing that is tested is that the method
-		// returns the same answer twice...
-		fail("See comment above");
-		int lives = player.getLives();
-		assertTrue(lives == player.getLives());
+		assertTrue(player.getLives() == Constants.getInitShipLives());
+		player.getShip().receiveDamage(1);
+		player.update(new ModelInput(0, 0, false, false), 1);
+		assertTrue(player.getLives() == Constants.getInitShipLives() - 1);
 	}
 
 	/**
@@ -93,11 +98,9 @@ public class PlayerTest extends TestCase {
 	 * Test if the get method works.
 	 */
 	public void testGetShip() {
-		// TODO What the... The only thing that is tested is that the method
-		// returns the same answer twice...
-		fail("See comment above");
-		AbstractEntity playerShip = player.getShip();
-		assertTrue(playerShip == player.getShip());
+		PlayerShip shipBefore = player.getShip();
+		player.getShip().receiveDamage(1);
+		assertTrue(shipBefore == player.getShip());
 	}
 
 	public void testGiveWeapon() {
@@ -110,7 +113,9 @@ public class PlayerTest extends TestCase {
 	}
 
 	public void testIsInvincible() {
-		fail("Not yet tested");
+		player.getShip().receiveDamage(1);
+		player.update(new ModelInput(0, 0, false, false), 
+				(float)(Constants.getShipInvincibilityTime() / 2));
 	}
 
 	public void testItemBarSize() {
@@ -125,7 +130,29 @@ public class PlayerTest extends TestCase {
 	}
 
 	public void testReset() {
-		fail("Not yet tested");
+		WeaponFactory.initialize(bulletManager);
+		BasicEnemy enemy = new BasicEnemy(new Position(0, 0));
+		PropertyChangeEvent event = new PropertyChangeEvent(new Object(), 
+				Constants.EVENT_ENEMY_KILLED, null, enemy);
+		player.propertyChange(event);
+		
+		for(int i = 0; i < Constants.getInitShipLives(); i++) {
+			player.getShip().receiveDamage(1);
+			player.update(new ModelInput(0, 0, false, false), 
+					(float)(Constants.getShipInvincibilityTime() + 0.001));
+		}		
+		assertEquals(player.getLives(), 0);
+		assertEquals(player.getScore(), enemy.getScoreValue());
+		assertTrue(player.getShip().isDestroyed());
+		
+		
+		player.reset();
+		
+		assertEquals(player.getLives(), Constants.getInitShipLives());
+		assertEquals(player.getScore(), 0);
+		
+		assertFalse(player.getShip().isDestroyed());
+		assertFalse(player.getShip().justGotHit());
 	}
 
 	public void testScore() {
