@@ -85,7 +85,7 @@ public class Player implements IPlayer {
 	 * A count down for the ships invincibility.
 	 */
 	private double invincCountdown;
-
+	
 	/**
 	 * Create a new player.
 	 * 
@@ -178,6 +178,7 @@ public class Player implements IPlayer {
 	public void reset() {
 		lives = Constants.getInitShipLives();
 		score = 0;
+		ship.reset();
 		setShipToSpawn();
 		notifyListeners();
 	}
