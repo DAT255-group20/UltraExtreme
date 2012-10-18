@@ -9,6 +9,7 @@ import ultraextreme.model.util.Position;
 public class ParabolaEnemyTest extends TestCase {
 	private BulletManager manager;
 
+	@Override
 	public void setUp() {
 		manager = new BulletManager();
 		WeaponFactory.initialize(manager);

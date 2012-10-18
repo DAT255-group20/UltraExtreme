@@ -23,6 +23,7 @@ package ultraextreme.model.item;
 import java.util.List;
 
 import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import ultraextreme.model.entity.AbstractBullet;

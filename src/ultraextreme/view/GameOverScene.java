@@ -57,14 +57,14 @@ public class GameOverScene extends MenuScene {
 		super(camera);
 		this.gameModel = gameModel;
 		setBackground(new Background(0.9f, 0.1f, 0.1f));
-		
+
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
 				vertexBufferObjectManager);
 		gotoMenuButton.setPosition(100, 100);
 		gotoMenuButton.setColor(Color.BLACK);
 		addMenuItem(gotoMenuButton);
-		
+
 		scoreText = new Text(140, 140, font, "                  ",
 				vertexBufferObjectManager);
 		attachChild(scoreText);

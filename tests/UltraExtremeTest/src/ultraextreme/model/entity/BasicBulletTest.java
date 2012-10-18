@@ -32,7 +32,7 @@ import ultraextreme.model.util.Rotation;
  * 
  */
 public class BasicBulletTest extends AbstractBulletTest {
-	
+
 	private float speed;
 	private int bulletDamage = 10;
 

@@ -112,10 +112,9 @@ public final class SpriteFactory {
 						34);
 		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
 				16.5));
-		
+
 		final TextureRegion enemyBullet = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "laserRed.png", 0,
-						34);
+				.createFromAsset(textureAtlas, activity, "laserRed.png", 0, 34);
 		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
 				16.5));
 
@@ -134,30 +133,30 @@ public final class SpriteFactory {
 
 		final TextureRegion parabolaEnemy = BitmapTextureAtlasTextureRegionFactory
 
-				.createFromAsset(textureAtlas, activity, "evil_ship_3.png", 275, 0);
-		
-		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy, new Vector2d(
-				56, 59));
-		
+		.createFromAsset(textureAtlas, activity, "evil_ship_3.png", 275, 0);
+
+		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy,
+				new Vector2d(56, 59));
+
 		// init pickupables
 		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "cannon.png", 73, 31);
 		putProperties(ObjectName.BASIC_WEAPON, basicWeapon,
 				new Vector2d(15, 15));
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon);
-		
+
 		final TextureRegion spinningWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "spin.png", 9, 31);
 		putProperties(ObjectName.SPINNING_WEAPON, spinningWeapon, new Vector2d(
 				15, 15));
 		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon);
-		
-		final TextureRegion spreadWeapon = BitmapTextureAtlasTextureRegionFactory.
-				createFromAsset(textureAtlas, activity, "spread.png", 73, 0);
-		putProperties(ObjectName.SPREAD_WEAPON, spreadWeapon, new Vector2d(
-				15, 15));
+
+		final TextureRegion spreadWeapon = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "spread.png", 73, 0);
+		putProperties(ObjectName.SPREAD_WEAPON, spreadWeapon, new Vector2d(15,
+				15));
 		itemTextures.put(ObjectName.SPREAD_WEAPON, spinningWeapon);
-		
+
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar.png", 0, 68);
