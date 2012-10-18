@@ -94,4 +94,16 @@ public class PlayerShipTest extends AbstractEntityTest {
 	{
 		fail("Not yet tested");
 	}
+	
+	public void testReset() {
+		resetInstanceVariables(0, 0, 0, 0);
+		playerShip.setDestroyed();
+		playerShip.receiveDamage(1);
+		assertTrue(playerShip.isDestroyed());
+		assertTrue(playerShip.justGotHit());
+		
+		playerShip.reset();
+		assertFalse(playerShip.isDestroyed());
+		assertFalse(playerShip.justGotHit());
+	}
 }
