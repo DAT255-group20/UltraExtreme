@@ -33,6 +33,11 @@ import java.beans.PropertyChangeListener;
 public interface IUltraExtremeModel {
 
 	/**
+	 * @return The Settings of this game.
+	 */
+	Settings getSettings();
+	
+	/**
 	 * @return The human player in the game.
 	 */
 	IPlayer getPlayer();

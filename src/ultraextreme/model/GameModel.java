@@ -58,10 +58,13 @@ public class GameModel implements IUltraExtremeModel {
 	final private EnemySpawner enemySpawner;
 
 	private PickupManager pickupManager;
+	
+	final private Settings settings;
 
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
+		settings = new Settings();
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
@@ -162,6 +165,11 @@ public class GameModel implements IUltraExtremeModel {
 	@Override
 	public IPlayer getPlayer() {
 		return player;
+	}
+	
+	@Override
+	public Settings getSettings() {
+		return settings;
 	}
 
 	/**
