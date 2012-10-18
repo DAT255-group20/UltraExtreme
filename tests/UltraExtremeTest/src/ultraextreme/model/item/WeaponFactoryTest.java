@@ -54,8 +54,8 @@ public class WeaponFactoryTest extends TestCase {
 		assertEquals(ObjectName.SPINNING_WEAPON, weapon.getName());
 		assertTrue(weapon.getBulletManager().equals(manager));
 		
-		weapon = WeaponFactory.getNewWeapon(ObjectName.BASIC_SPREAD_WEAPON);
-		assertEquals(ObjectName.BASIC_SPREAD_WEAPON, weapon.getName());
+		weapon = WeaponFactory.getNewWeapon(ObjectName.SPREAD_WEAPON);
+		assertEquals(ObjectName.SPREAD_WEAPON, weapon.getName());
 		assertTrue(weapon.getBulletManager().equals(manager));
 	}
 

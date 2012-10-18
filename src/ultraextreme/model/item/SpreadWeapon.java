@@ -20,7 +20,7 @@ public class SpreadWeapon extends AbstractWeapon {
 	private float cooldown;
 
 	public SpreadWeapon(BulletManager bulletManager) {
-		super(bulletManager, ObjectName.BASIC_SPREAD_WEAPON);
+		super(bulletManager, ObjectName.SPREAD_WEAPON);
 		cooldown = INIT_COOLDOWN;
 	}
 
