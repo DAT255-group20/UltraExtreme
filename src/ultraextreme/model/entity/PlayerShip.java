@@ -35,6 +35,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class PlayerShip extends AbstractDestroyableEntity {
 
+	private static final int HITBOX_SIZE = 10;
 	/**
 	 * If the ship is hit this update.
 	 */
@@ -50,7 +51,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	}
 
 	public PlayerShip(final double x, double y) {
-		this(x, y, 20, 20);
+		this(x, y, HITBOX_SIZE, HITBOX_SIZE);
 	}
 
 	public PlayerShip(final double x, final double y, final int width,

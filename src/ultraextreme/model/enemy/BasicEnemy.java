@@ -39,6 +39,8 @@ import ultraextreme.model.util.Rotation;
  */
 public class BasicEnemy extends AbstractEnemy {
 
+	private static final int SHIP_SIZE = 80;
+	private static final int SCORE = 10;
 	private static final int Y_SPEED = 170;
 
 	private BasicEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
@@ -68,8 +70,8 @@ public class BasicEnemy extends AbstractEnemy {
 	 */
 	public BasicEnemy(final Position position, final Rotation rotation,
 			AbstractWeapon weapon) {
-		this(new EnemyShip(position.getX(), position.getY(), 70, 70, rotation,
-				50, ObjectName.BASIC_ENEMYSHIP), weapon);
+		this(new EnemyShip(position.getX(), position.getY(), SHIP_SIZE,
+				SHIP_SIZE, rotation, 40, ObjectName.BASIC_ENEMYSHIP), weapon);
 	}
 
 	@Override
@@ -80,6 +82,6 @@ public class BasicEnemy extends AbstractEnemy {
 
 	@Override
 	public int getScoreValue() {
-		return 10;
+		return SCORE;
 	}
 }
