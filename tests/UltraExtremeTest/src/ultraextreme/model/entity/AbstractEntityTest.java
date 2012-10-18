@@ -51,9 +51,10 @@ public abstract class AbstractEntityTest extends TestCase {
 
 	private AbstractEntity getNewAbstractEntity(double x, double y, int width,
 			int height) {
-		return getNewAbstractEntity(x, y, width, height, new Rotation(INIT_ROT_ANGLE));
+		return getNewAbstractEntity(x, y, width, height, new Rotation(
+				INIT_ROT_ANGLE));
 	}
-	
+
 	private AbstractEntity newEntity() {
 		return getNewAbstractEntity(INIT_X, INIT_Y, INIT_WIDTH, INIT_HEIGHT,
 				new Rotation(INIT_ROT_ANGLE));

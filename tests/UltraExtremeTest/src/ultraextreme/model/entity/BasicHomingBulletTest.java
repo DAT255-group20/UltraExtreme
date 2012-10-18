@@ -7,9 +7,8 @@ public class BasicHomingBulletTest extends TestCase {
 	public void testDoMovement() {
 		fail("Not yet tested");
 	}
-	
-	public void testGetNormalizedDirection()
-	{
+
+	public void testGetNormalizedDirection() {
 		fail("Not yet tested");
 	}
 }

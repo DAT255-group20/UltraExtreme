@@ -36,7 +36,7 @@ import ultraextreme.model.util.Rotation;
  * @author Viktor Anderling
  */
 public class SpinningWeaponTest extends TestCase {
-	
+
 	private BulletManager bulletManager;
 	private SpinningWeapon spinningWeapon;
 

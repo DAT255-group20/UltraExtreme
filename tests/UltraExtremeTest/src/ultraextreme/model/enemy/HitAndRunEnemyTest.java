@@ -46,7 +46,8 @@ public class HitAndRunEnemyTest extends TestCase {
 		startPoint = new Position(5, 10);
 		endPoint = new Position(20, 20);
 		firePoint = new Position(15, 15);
-		enemy = new HitAndRunEnemy(startPoint, firePoint, endPoint, WeaponFactory.getNewWeapon(ObjectName.SPINNING_WEAPON));
+		enemy = new HitAndRunEnemy(startPoint, firePoint, endPoint,
+				ObjectName.SPINNING_WEAPON);
 	}
 
 	public void testGetScoreValue() {

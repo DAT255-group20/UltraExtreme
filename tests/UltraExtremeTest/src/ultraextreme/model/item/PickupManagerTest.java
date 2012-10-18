@@ -40,7 +40,7 @@ import ultraextreme.model.util.ObjectName;
  * 
  */
 public class PickupManagerTest extends TestCase {
-	
+
 	/**
 	 * Add this as a listener to the pickupManager and collects its pickups
 	 * 
@@ -130,13 +130,13 @@ public class PickupManagerTest extends TestCase {
 		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
 				.equals(pickup));
 	}
-	
+
 	@Test
 	public void testRemovePickupsOffScreen() {
 		manager.clearPickupsOffScreen();
 		assertTrue(manager.getPickups().contains(pickup));
 		assertTrue(manager.getPickups().contains(pickup2));
-		
+
 		pickup.doMovement(1000);
 		pickup2.doMovement(1000);
 		manager.clearPickupsOffScreen();

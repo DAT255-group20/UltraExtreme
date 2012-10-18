@@ -83,7 +83,7 @@ public class BasicWeaponTest extends TestCase {
 				cooldown * (1 + epsilon));
 		assertTrue(bulletManager.getBullets().size() == 3);
 	}
-	
+
 	@Test
 	public void testGetNewInstance() {
 		AbstractWeapon s2 = basicWeapon.getNewInstance();

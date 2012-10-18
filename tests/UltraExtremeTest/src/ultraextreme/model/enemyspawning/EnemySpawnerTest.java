@@ -88,20 +88,17 @@ public class EnemySpawnerTest extends TestCase {
 
 		assertEquals(enemyCollector.getSpawnedEnemies().size(), 7);
 	}
-	
-	public void testGetCurrentWave()
-	{
+
+	public void testGetCurrentWave() {
 		fail("Not yet tested");
 	}
-	
-	public void testWaveEnded()
-	{
+
+	public void testWaveEnded() {
 		// TODO Is this even testable?
 		fail("Not yet tested");
 	}
-	
-	public void testEnemySpawned()
-	{
+
+	public void testEnemySpawned() {
 		// TODO Is this even testable?
 		fail("Not yet tested");
 	}

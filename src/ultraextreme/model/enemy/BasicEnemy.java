@@ -55,8 +55,7 @@ public class BasicEnemy extends AbstractEnemy {
 	 *            Coordinate for the enemyShip
 	 */
 	public BasicEnemy(final Position position) {
-		this(position, new Rotation(0), WeaponFactory
-				.getNewWeapon(ObjectName.BASIC_WEAPON));
+		this(position, new Rotation(0), ObjectName.BASIC_WEAPON);
 	}
 
 	/**
@@ -69,9 +68,10 @@ public class BasicEnemy extends AbstractEnemy {
 	 *            Rotation modifier of the enemy's flying path.
 	 */
 	public BasicEnemy(final Position position, final Rotation rotation,
-			AbstractWeapon weapon) {
+			ObjectName weaponName) {
 		this(new EnemyShip(position.getX(), position.getY(), SHIP_SIZE,
-				SHIP_SIZE, rotation, 40, ObjectName.BASIC_ENEMYSHIP), weapon);
+				SHIP_SIZE, rotation, 40, ObjectName.BASIC_ENEMYSHIP),
+				WeaponFactory.getNewWeapon(weaponName));
 	}
 
 	@Override

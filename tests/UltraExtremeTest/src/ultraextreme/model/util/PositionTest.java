@@ -113,8 +113,8 @@ public class PositionTest extends TestCase {
 	}
 
 	/**
-	 * Create a lot of couples of positions and check if the equals methods are the
-	 * same if they have been created with the same coordinates.
+	 * Create a lot of couples of positions and check if the equals methods are
+	 * the same if they have been created with the same coordinates.
 	 */
 	@Test
 	public void testEquals() {
@@ -122,22 +122,22 @@ public class PositionTest extends TestCase {
 			// Init positions
 			Position p1 = new Position(i, i);
 			Position p2 = new Position(i, i);
-			
+
 			// They refer to the same objects
 			assertTrue(p1.equals(p1));
-			
+
 			// They have the same coordinates
 			assertTrue(p1.equals(p2));
-			
+
 			// They don't have the same coordinates
 			p2 = new Position(i, i + 1);
 			assertFalse(p1.equals(p2));
 			p2 = new Position(i + 1, i);
 			assertFalse(p1.equals(p2));
-			
+
 			// The other position is null
 			assertFalse(p1.equals(null));
-			
+
 			// The other object is of another class
 			assertFalse(p1.equals(new Object()));
 		}

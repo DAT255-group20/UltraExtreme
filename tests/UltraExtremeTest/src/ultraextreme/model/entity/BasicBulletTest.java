@@ -60,7 +60,7 @@ public class BasicBulletTest extends AbstractBulletTest {
 		assertEquals((float) bullet.getPositionClone().getY(), 20 + 12 * speed);
 
 	}
-	
+
 	@Override
 	@Test
 	public void testGetObjectName() {

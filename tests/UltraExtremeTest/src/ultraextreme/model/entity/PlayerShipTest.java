@@ -80,19 +80,21 @@ public class PlayerShipTest extends AbstractEntityTest {
 		resetInstanceVariables(0, 0, 10, 10);
 		assertFalse(playerShip.canMoveX(-1));
 		assertTrue(playerShip.canMoveX(1));
-		
+
 		// Ship is on the right border of the model
-		resetInstanceVariables(Constants.getLevelDimension().getX() - 10, 0, 10, 10);
+		resetInstanceVariables(Constants.getLevelDimension().getX() - 10, 0,
+				10, 10);
 		assertTrue(playerShip.canMoveX(-1));
 		assertFalse(playerShip.canMoveX(1));
-		
+
 		// Ship is on the top border of the model
 		resetInstanceVariables(0, 0, 10, 10);
 		assertFalse(playerShip.canMoveY(-1));
 		assertTrue(playerShip.canMoveY(1));
-		
+
 		// Ship is on the bottom border of the model
-		resetInstanceVariables(0, Constants.getLevelDimension().getY() - 10, 10, 10);
+		resetInstanceVariables(0, Constants.getLevelDimension().getY() - 10,
+				10, 10);
 		assertTrue(playerShip.canMoveY(-1));
 		assertFalse(playerShip.canMoveY(1));
 	}

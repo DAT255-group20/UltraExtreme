@@ -105,7 +105,7 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 
 	@Override
 	public void testNext() {
-		
+
 		// FIXME This test takes extremely long time to run
 		// Run through a number of tests where the maximum number of waves are
 		// different
@@ -122,14 +122,12 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 			assertFalse(waveList.hasNext());
 		}
 	}
-	
-	public void testGetCurrentSpawningTime()
-	{
+
+	public void testGetCurrentSpawningTime() {
 		fail("Not yet tested");
 	}
-	
-	public void testGetCurrentWave()
-	{
+
+	public void testGetCurrentWave() {
 		fail("Not yet tested");
 	}
 }

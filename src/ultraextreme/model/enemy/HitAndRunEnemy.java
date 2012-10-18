@@ -24,6 +24,7 @@ import javax.vecmath.Vector2d;
 
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.AbstractWeapon;
+import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
@@ -76,9 +77,10 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 *            where the enemy will run off to
 	 */
 	public HitAndRunEnemy(Position startingPosition, Position firePoint,
-			Position endPoint, AbstractWeapon weapon) {
+			Position endPoint, ObjectName weaponName) {
 		super(new EnemyShip(startingPosition, SHIP_SIZE, SHIP_SIZE, 35,
-				ObjectName.HITANDRUN_ENEMYSHIP), weapon);
+				ObjectName.HITANDRUN_ENEMYSHIP), WeaponFactory
+				.getNewWeapon(weaponName));
 		this.endPoint = endPoint;
 		this.firePoint = firePoint;
 	}

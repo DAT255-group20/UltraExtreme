@@ -26,11 +26,10 @@ import java.util.Random;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.HitAndRunEnemy;
-import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.AbstractEnemyProvider;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
-import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
@@ -117,12 +116,9 @@ public class RandomWaveList extends AbstractWaveList {
 							Position endPoint = new Position(450, -1000);
 							++counter;
 							counter %= 3;
-							return new HitAndRunEnemy(
-									spawningPosition,
-									firePoint,
-									endPoint,
-									WeaponFactory
-											.getNewWeapon(ObjectName.SPINNING_WEAPON));
+							return new HitAndRunEnemy(spawningPosition,
+									firePoint, endPoint,
+									ObjectName.SPINNING_WEAPON);
 						}
 					});
 			break;
@@ -139,11 +135,8 @@ public class RandomWaveList extends AbstractWaveList {
 						@Override
 						public AbstractEnemy getEnemy(
 								Position spawningPosition, Rotation rotation) {
-							return new BasicEnemy(
-									spawningPosition,
-									rotation,
-									WeaponFactory
-											.getNewWeapon(ObjectName.BASIC_WEAPON));
+							return new BasicEnemy(spawningPosition, rotation,
+									ObjectName.BASIC_WEAPON);
 						}
 					});
 			break;

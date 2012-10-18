@@ -56,14 +56,12 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 		bullet = newBullet(PlayerID.ENEMY);
 		assertEquals(bullet.getPlayerId(), PlayerID.ENEMY);
 	}
-	
-	public void testGetDamage()
-	{
+
+	public void testGetDamage() {
 		fail("Not yet tested");
 	}
-	
-	public void testMarkForRemoval()
-	{
+
+	public void testMarkForRemoval() {
 		fail("Not yet tested");
 	}
 }
