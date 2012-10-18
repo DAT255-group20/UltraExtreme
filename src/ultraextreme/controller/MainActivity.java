@@ -101,6 +101,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		res.setResource(ResourceName.LIVES, getString(R.string.lives));
 		res.setResource(ResourceName.SCORE, getString(R.string.score));
 		res.setResource(ResourceName.GOTO_MENU, getString(R.string.goto_menu));
+		res.setResource(ResourceName.DEFAULT_HIGHSCORE_NAME,
+				getString(R.string.default_highscore_name));
 	}
 
 	@Override

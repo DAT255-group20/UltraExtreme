@@ -39,7 +39,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 
 	private static final int SHIP_SIZE = 40;
 	private static final int SCORE = 50;
-	
+
 	/**
 	 * endPoint where the enemy will run off to
 	 */

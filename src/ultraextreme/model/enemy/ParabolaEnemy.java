@@ -18,7 +18,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 
 	private static final int SHIP_SIZE = 30;
 	private static final int SCORE = 40;
-	
+
 	private Position startPoint;
 	private Position midPoint;
 	private Position endPoint;

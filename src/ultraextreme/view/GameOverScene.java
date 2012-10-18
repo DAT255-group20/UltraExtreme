@@ -66,7 +66,8 @@ public class GameOverScene extends MenuScene {
 				"Enter your name for the highscore list",
 				SpriteFactory.getTextInputBackground(), font, 0, 0,
 				vertexBufferObjectManager, activity);
-		nameInput.setText("Mr. Anon");
+		nameInput.setText(Resources.getInstance().getResource(
+				ResourceName.DEFAULT_HIGHSCORE_NAME));
 		nameInput.getChildByIndex(0).setColor(Color.BLACK); // Change text color
 		this.attachChild(nameInput);
 		this.registerTouchArea(nameInput);
