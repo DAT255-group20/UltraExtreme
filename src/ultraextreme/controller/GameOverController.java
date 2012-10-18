@@ -103,7 +103,6 @@ public class GameOverController extends AbstractController implements
 
 	@Override
 	public void backButtonPressed() {
-		fireEvent(new ControllerEvent(this,
-				ControllerEventType.SWITCH_TO_MENU));
+		fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_MENU));
 	}
 }

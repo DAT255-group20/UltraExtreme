@@ -80,7 +80,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		case SWITCH_TO_HIGHSCORE:
 			switchControllerTo(highscoreController);
 			break;
-			
+
 		case EXIT_GAME:
 			finish();
 			break;
@@ -92,9 +92,12 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private void initializeResources() {
 		Resources res = Resources.getInstance();
-		res.setResource(ResourceName.MENU_START_GAME_TEXT, getString(R.string.menu_start_game));
-		res.setResource(ResourceName.MENU_HIGHSCORE_TEXT, getString(R.string.menu_highscore_text));
-		res.setResource(ResourceName.CLEAR_HIGHSCORE, getString(R.string.clear_highscore));
+		res.setResource(ResourceName.MENU_START_GAME_TEXT,
+				getString(R.string.menu_start_game));
+		res.setResource(ResourceName.MENU_HIGHSCORE_TEXT,
+				getString(R.string.menu_highscore_text));
+		res.setResource(ResourceName.CLEAR_HIGHSCORE,
+				getString(R.string.clear_highscore));
 		res.setResource(ResourceName.LIVES, getString(R.string.lives));
 		res.setResource(ResourceName.SCORE, getString(R.string.score));
 		res.setResource(ResourceName.GOTO_MENU, getString(R.string.goto_menu));

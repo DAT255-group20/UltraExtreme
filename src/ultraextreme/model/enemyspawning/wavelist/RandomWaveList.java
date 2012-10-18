@@ -30,7 +30,9 @@ import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.AbstractEnemyProvider;
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
+import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -133,7 +135,11 @@ public class RandomWaveList extends AbstractWaveList {
 						@Override
 						public AbstractEnemy getEnemy(
 								Position spawningPosition, Rotation rotation) {
-							return new BasicEnemy(spawningPosition, rotation);
+							return new BasicEnemy(
+									spawningPosition,
+									rotation,
+									WeaponFactory
+											.getNewWeapon(ObjectName.BASIC_WEAPON));
 						}
 					});
 			break;

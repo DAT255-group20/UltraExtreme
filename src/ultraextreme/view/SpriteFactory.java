@@ -98,7 +98,8 @@ public final class SpriteFactory {
 		BitmapTextureAtlas textureAtlas = new BitmapTextureAtlas(
 				textureManager, 1024, 1024,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		//TODO make textureAtlas as small as possible (also play tetris with the textures to make it smaller)
+		// TODO make textureAtlas as small as possible (also play tetris with
+		// the textures to make it smaller)
 
 		// init enemies, bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
@@ -124,13 +125,14 @@ public final class SpriteFactory {
 
 		putProperties(ObjectName.HITANDRUN_ENEMYSHIP, hitAndRunEnemy,
 				new Vector2d(27, 40));
-		
+
 		final TextureRegion parabolaEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "evil_ship_3.png", 900, 0);
-		
-		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy, new Vector2d(
-				56, 59));
-		
+				.createFromAsset(textureAtlas, activity, "evil_ship_3.png",
+						900, 0);
+
+		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy,
+				new Vector2d(56, 59));
+
 		// init pickupables
 		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "cannon.png", 56, 51);
@@ -150,7 +152,7 @@ public final class SpriteFactory {
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
 
 		itemTextures.put(ObjectName.SPREAD_WEAPON, spinningWeapon); // Test
-																			// only
+																	// only
 
 		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon); // Test
 																		// only

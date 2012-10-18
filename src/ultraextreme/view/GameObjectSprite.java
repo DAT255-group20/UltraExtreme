@@ -96,13 +96,13 @@ public class GameObjectSprite extends Sprite {
 	}
 
 	/**
-	 * Blinks the sprite between two states of colour
-	 * representing invincibility.
+	 * Blinks the sprite between two states of colour representing
+	 * invincibility.
 	 */
 	public void invincibilityBlink() {
 		setInvincibleBlinked(!isInvincibleBlinked);
 	}
-	
+
 	private void setInvincibleBlinked(boolean b) {
 		if (b) {
 			this.setColor(0f, 0f, 1f);
@@ -113,13 +113,13 @@ public class GameObjectSprite extends Sprite {
 	}
 
 	/**
-	 * Blinks the sprite between two states of colour
-	 * representing that it is hit.
+	 * Blinks the sprite between two states of colour representing that it is
+	 * hit.
 	 */
 	public void onHitBlink() {
 		setOnHitBlink(!isHitBlinked);
 	}
-	
+
 	private void setOnHitBlink(boolean b) {
 		if (b) {
 			this.setColor(1f, 0f, 0f);
@@ -128,7 +128,8 @@ public class GameObjectSprite extends Sprite {
 		}
 		isHitBlinked = b;
 	}
-	
+
+	@Override
 	public void reset() {
 		setInvincibleBlinked(false);
 		setOnHitBlink(false);

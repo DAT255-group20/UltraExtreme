@@ -151,7 +151,7 @@ public class GameController extends AbstractController implements
 			gameLoop.fireSpecialAttack();
 			break;
 		}
-		
+
 		default:
 			break;
 		}
@@ -206,7 +206,6 @@ public class GameController extends AbstractController implements
 
 	@Override
 	public void backButtonPressed() {
-		fireEvent(new ControllerEvent(this,
-				ControllerEventType.SWITCH_TO_MENU));
+		fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_MENU));
 	}
 }
