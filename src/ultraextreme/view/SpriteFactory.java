@@ -96,7 +96,7 @@ public final class SpriteFactory {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		final TextureManager textureManager = activity.getTextureManager();
 		BitmapTextureAtlas textureAtlas = new BitmapTextureAtlas(
-				textureManager, 1024, 1024,
+				textureManager, 500, 118,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		// TODO make textureAtlas as small as possible (also play tetris with
 		// the textures to make it smaller)
@@ -104,68 +104,73 @@ public final class SpriteFactory {
 		// init enemies, bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "ship_blue_42px.png",
-						0, 0);
+						40, 0);
 		putProperties(ObjectName.PLAYERSHIP, playerShip, new Vector2d(16.5, 13));
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "laserGreen.png", 33,
-						0);
+				.createFromAsset(textureAtlas, activity, "laserGreen.png", 0,
+						34);
+		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
+				16.5));
+		
+		final TextureRegion enemyBullet = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlas, activity, "laserRed.png", 0,
+						34);
 		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
 				16.5));
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 0,
-						43);
+						165);
 		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27,
 				40));
 
 		final TextureRegion hitAndRunEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship_2.png",
-						770, 0);
+						221, 0);
 
 		putProperties(ObjectName.HITANDRUN_ENEMYSHIP, hitAndRunEnemy,
 				new Vector2d(27, 40));
 
 		final TextureRegion parabolaEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "evil_ship_3.png",
-						900, 0);
 
-		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy,
-				new Vector2d(56, 59));
-
+				.createFromAsset(textureAtlas, activity, "evil_ship_3.png", 275, 0);
+		
+		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy, new Vector2d(
+				56, 59));
+		
 		// init pickupables
 		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "cannon.png", 56, 51);
+				.createFromAsset(textureAtlas, activity, "cannon.png", 73, 31);
 		putProperties(ObjectName.BASIC_WEAPON, basicWeapon,
 				new Vector2d(15, 15));
-
+		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon);
+		
 		final TextureRegion spinningWeapon = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "spin.png", 87, 51);
+				.createFromAsset(textureAtlas, activity, "spin.png", 9, 31);
 		putProperties(ObjectName.SPINNING_WEAPON, spinningWeapon, new Vector2d(
 				15, 15));
-
+		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon);
+		
+		final TextureRegion spreadWeapon = BitmapTextureAtlasTextureRegionFactory.
+				createFromAsset(textureAtlas, activity, "spread.png", 73, 0);
+		putProperties(ObjectName.SPREAD_WEAPON, spreadWeapon, new Vector2d(
+				15, 15));
+		itemTextures.put(ObjectName.SPREAD_WEAPON, spinningWeapon);
+		
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "itembar.png", 80, 0);
-
-		// Init the item textures for items in the itembar
-		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon); // Test only
-
-		itemTextures.put(ObjectName.SPREAD_WEAPON, spinningWeapon); // Test
-																	// only
-
-		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon); // Test
-																		// only
+				.createFromAsset(textureAtlas, activity, "itembar.png", 0, 68);
 
 		// Init the item bar marker
 		itemBarMarkerTexture = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "itembar_marker.png",
-						700, 0);
+						104, 0);
 
 		// Init the textinput background
 		textInputBackground = BitmapTextureAtlasTextureRegionFactory
 				.createTiledFromAsset(textureAtlas, activity, "button_1.png",
-						100, 100, 1, 1);
+						331, 0, 1, 1);
 
 		// What is this for?(I think it needs to be called to init the atlas, we
 		// will never know.. gramlich 2012)

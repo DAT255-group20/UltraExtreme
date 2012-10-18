@@ -207,7 +207,7 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 						sprite.invincibilityBlink();
 					}
 				}
-				// TODO(natan) add more actions here!
+				// add more actions here!
 				if (!timer.isRunning() || timerDeprecated) {
 					i.remove();
 				}
