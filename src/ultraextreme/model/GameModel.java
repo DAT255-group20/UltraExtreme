@@ -59,12 +59,11 @@ public class GameModel implements IUltraExtremeModel {
 
 	private PickupManager pickupManager;
 	
-	final private Settings settings;
+	final static private Settings SETTINGS = new Settings();
 
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
-		settings = new Settings();
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
@@ -167,9 +166,8 @@ public class GameModel implements IUltraExtremeModel {
 		return player;
 	}
 	
-	@Override
-	public Settings getSettings() {
-		return settings;
+	public static Settings getSettings() {
+		return SETTINGS;
 	}
 
 	/**
