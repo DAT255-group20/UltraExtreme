@@ -15,7 +15,7 @@ public class Settings {
 	/**
 	 * Creates a Settings with normal difficulty.
 	 */
-	private Settings() {
+	public Settings() {
 		this.difficulty = Difficulty.NORMAL;
 	}
 	
@@ -25,7 +25,7 @@ public class Settings {
 	 * @param difficulty
 	 * 				The chosen difficulty.
 	 */
-	private Settings(Difficulty difficulty) {
+	public Settings(Difficulty difficulty) {
 		this.difficulty = difficulty;
 	}
 	
