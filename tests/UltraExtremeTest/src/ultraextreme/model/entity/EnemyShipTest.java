@@ -77,5 +77,9 @@ public class EnemyShipTest extends AbstractEntityTest {
 		enemyShip.receiveDamage(1);
 		assertTrue(enemyShip.isDestroyed());
 	}
-
+	
+	public void testIsDestroyed()
+	{
+		fail("Not yet tested");
+	}
 }

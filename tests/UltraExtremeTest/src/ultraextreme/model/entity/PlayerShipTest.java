@@ -54,6 +54,7 @@ public class PlayerShipTest extends AbstractEntityTest {
 	 */
 	public void testIsDestroyed() {
 		// FIXME: Since the ship can't get hurt yet this is hard to test.
+		fail("See above comment");
 		resetInstanceVariables(0, 0, 0, 0);
 		assertEquals(playerShip.isDestroyed(), false);
 	}
@@ -72,5 +73,25 @@ public class PlayerShipTest extends AbstractEntityTest {
 
 		playerShip.move(-100, -1000);
 		assertEquals(playerShip.getPositionClone(), new Position(-80.0, -880.0));
+	}
+	
+	public void testCanMove()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testJustGotHit()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testReceiveDamage()
+	{
+		fail("Not yet tested");
+	}
+	
+	public void testSetDestroyed()
+	{
+		fail("Not yet tested");
 	}
 }

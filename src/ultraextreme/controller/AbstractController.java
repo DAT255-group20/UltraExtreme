@@ -82,4 +82,10 @@ public abstract class AbstractController {
 	 * inactive.
 	 */
 	public abstract void deactivateController();
+
+	/**
+	 * Android's back button has been pressed.
+	 */
+	public abstract void backButtonPressed();
+
 }

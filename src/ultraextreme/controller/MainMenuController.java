@@ -57,6 +57,14 @@ public class MainMenuController extends AbstractController implements
 					ControllerEventType.SWITCH_TO_GAME));
 			break;
 
+		case MainMenuScene.MENU_HIGHSCORE:
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_HIGHSCORE));
+			break;
+
+		case MainMenuScene.MENU_EXIT:
+			fireEvent(new ControllerEvent(this, ControllerEventType.EXIT_GAME));
+
 		default:
 			break;
 		}
@@ -78,5 +86,10 @@ public class MainMenuController extends AbstractController implements
 	public void deactivateController() {
 		// Auto-generated method stub
 
+	}
+
+	@Override
+	public void backButtonPressed() {
+		fireEvent(new ControllerEvent(this, ControllerEventType.EXIT_GAME));
 	}
 }

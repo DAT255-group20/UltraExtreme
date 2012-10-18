@@ -35,8 +35,6 @@ import ultraextreme.model.util.Rotation;
  */
 public class PlayerShip extends AbstractDestroyableEntity {
 
-	private static double speedMod = Constants.getPlayerSpeedModifier();
-
 	/**
 	 * If the ship is hit this update.
 	 */
@@ -47,17 +45,17 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	private boolean destroyed;
 
-	public PlayerShip(final double x, final double y, final int width,
-			final int height) {
-		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
+	public PlayerShip() {
+		this(0, 0);
 	}
 
 	public PlayerShip(final double x, double y) {
 		this(x, y, 20, 20);
 	}
 
-	public PlayerShip() {
-		this(0, 0);
+	public PlayerShip(final double x, final double y, final int width,
+			final int height) {
+		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
 	}
 
 	/**
@@ -95,18 +93,8 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	}
 
 	@Override
-	public void move(double x, double y) {
-		justHit = false;
-		super.move(x, y);
-	}
-
-	@Override
 	public boolean isDestroyed() {
 		return destroyed;
-	}
-
-	public void setDestroyed() {
-		destroyed = true;
 	}
 
 	/**
@@ -119,7 +107,17 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	}
 
 	@Override
+	public void move(double x, double y) {
+		justHit = false;
+		super.move(x, y);
+	}
+
+	@Override
 	public void receiveDamage(int damage) {
 		justHit = true;
+	}
+
+	public void setDestroyed() {
+		destroyed = true;
 	}
 }

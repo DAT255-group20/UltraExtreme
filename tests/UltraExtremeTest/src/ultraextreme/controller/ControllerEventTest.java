@@ -52,6 +52,10 @@ public class ControllerEventTest {
 			public Scene getScene() {
 				return null;
 			}
+
+			@Override
+			public void backButtonPressed() {
+			}
 		};
 		ControllerEvent event = new ControllerEvent(null, null);
 		assertNull(event.getSource());

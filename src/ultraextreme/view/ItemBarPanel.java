@@ -28,7 +28,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.item.AbstractWeapon;
 import ultraextreme.model.item.ItemBar;
-import ultraextreme.model.item.ItemBarUpdatedListener;
+import ultraextreme.model.item.ItemBarUpdateListener;
 import ultraextreme.model.util.Position;
 
 /**
@@ -37,9 +37,7 @@ import ultraextreme.model.util.Position;
  * @author Daniel Jonsson
  * 
  */
-public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
-
-	private SpriteFactory spriteFactory;
+public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
@@ -61,15 +59,14 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	 * @param scaling
 	 *            Scaling so the position and size become correct.
 	 */
-	public ItemBarPanel(ItemBar itemBar, SpriteFactory spriteFactory,
+	public ItemBarPanel(ItemBar itemBar,
 			VertexBufferObjectManager vertexBufferObjectManager,
 			Position position, Vector2d scaling) {
 		super((float) (position.getX() * scaling.x),
 				(float) (position.getY() * scaling.y),
 				(float) (610 * scaling.x), (float) (70 * scaling.y),
-				spriteFactory.getItemBarTexture(), vertexBufferObjectManager);
+				SpriteFactory.getItemBarTexture(), vertexBufferObjectManager);
 		this.scaling = scaling;
-		this.spriteFactory = spriteFactory;
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		updateItemBar(itemBar);
 		itemBar.addListener(this);
@@ -79,7 +76,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	/**
 	 * Make the item bar update itself.
 	 */
-	public void updateItemBar(ItemBar itemBar) {
+	public final void updateItemBar(ItemBar itemBar) {
 		// Clean the item bar from sprites
 		this.detachChildren();
 
@@ -97,11 +94,11 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 			y = 10;
 			x *= scaling.x;
 			y *= scaling.y;
-			ITextureRegion texture = spriteFactory.getItemTexture(item
+			ITextureRegion texture = SpriteFactory.getItemTexture(item
 					.getName());
 			Sprite sprite = new Sprite(x, y, width, height, texture,
 					vertexBufferObjectManager);
-			// TODO Need a way for setting alpha for the whole panel instead of
+			// Need a way for setting alpha for the whole panel instead of
 			// for the background panel and the sprites individually. This
 			// causes the sprites to be hard to see because you can see the
 			// panel through the sprites.
@@ -111,14 +108,14 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdatedListener {
 	}
 
 	private void drawMarker(float x, float y, float width, float height) {
-		ITextureRegion texture = spriteFactory.getItemBarMarkerTexture();
+		ITextureRegion texture = SpriteFactory.getItemBarMarkerTexture();
 		Sprite sprite = new Sprite(x, y, width, height, texture,
 				vertexBufferObjectManager);
 		this.attachChild(sprite);
 	}
 
 	@Override
-	public void updatedItemBar(ItemBar itemBar) {
+	public void itemBarUpdated(ItemBar itemBar) {
 		updateItemBar(itemBar);
 	}
 }

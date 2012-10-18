@@ -54,7 +54,7 @@ public class VWaveTest extends TestCase {
 	 * Create a new wave and see if the enemy spawned has the correct
 	 * properties.
 	 */
-	public void testSpawnedEnemyPropteries() {
+	public void testSpawnedEnemyProperties() {
 		initWave(0, 0, 0);
 		wave.update(0);
 		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
@@ -72,7 +72,7 @@ public class VWaveTest extends TestCase {
 	}
 
 	/**
-	 * Create a new Vwave and see if it spawns its enemies and if the wave
+	 * Create a new VWave and see if it spawns its enemies and if the wave
 	 * eventually ends.
 	 */
 	public void testUpdate1() {

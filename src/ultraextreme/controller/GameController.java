@@ -151,7 +151,7 @@ public class GameController extends AbstractController implements
 			gameLoop.fireSpecialAttack();
 			break;
 		}
-
+		
 		default:
 			break;
 		}
@@ -185,7 +185,7 @@ public class GameController extends AbstractController implements
 
 	private void resetGameModel() {
 		Log.d("DEBUG", "Resetting the game model");
-		gameLoop.setFiring(false);
+		gameLoop.reset();
 		gameModel.reset();
 
 		/*
@@ -202,5 +202,11 @@ public class GameController extends AbstractController implements
 	 */
 	public IUltraExtremeModel getGameModel() {
 		return gameModel;
+	}
+
+	@Override
+	public void backButtonPressed() {
+		fireEvent(new ControllerEvent(this,
+				ControllerEventType.SWITCH_TO_MENU));
 	}
 }

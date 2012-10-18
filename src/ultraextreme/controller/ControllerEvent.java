@@ -31,7 +31,7 @@ public class ControllerEvent {
 	private final ControllerEventType eventType;
 
 	public enum ControllerEventType {
-		SWITCH_TO_GAME, SWITCH_TO_MENU, SWITCH_TO_HIGHSCORE, SWITCH_TO_GAMEOVER;
+		SWITCH_TO_GAME, SWITCH_TO_MENU, SWITCH_TO_HIGHSCORE, SWITCH_TO_GAMEOVER, EXIT_GAME;
 	}
 
 	public ControllerEvent(final AbstractController source,

@@ -29,13 +29,11 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.BaseGameActivity;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameOverScene;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * 
@@ -93,18 +91,6 @@ public class GameOverController extends AbstractController implements
 			database.execSQL(sqlCommand);
 			dbOpenHelper.close();
 
-			// Testing the database
-			SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
-			String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
-			Cursor cursor = readableDb.rawQuery(query, null);
-			cursor.moveToFirst();
-			while (!cursor.isAfterLast()) {
-				Log.d("DEBUG", "Cursor pointing on: " + cursor.getString(0)
-						+ ", " + cursor.getString(1));
-				cursor.moveToNext();
-			}
-			// End of database test
-
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
 			break;
@@ -113,5 +99,11 @@ public class GameOverController extends AbstractController implements
 			break;
 		}
 		return true;
+	}
+
+	@Override
+	public void backButtonPressed() {
+		fireEvent(new ControllerEvent(this,
+				ControllerEventType.SWITCH_TO_MENU));
 	}
 }

@@ -95,27 +95,43 @@ public class GameObjectSprite extends Sprite {
 		return entity;
 	}
 
+	/**
+	 * Blinks the sprite between two states of colour
+	 * representing invincibility.
+	 */
 	public void invincibilityBlink() {
-		if (!isInvincibleBlinked) {
+		setInvincibleBlinked(!isInvincibleBlinked);
+	}
+	
+	private void setInvincibleBlinked(boolean b) {
+		if (b) {
 			this.setColor(0f, 0f, 1f);
-			isInvincibleBlinked = true;
 		} else {
 			this.setColor(1f, 1f, 1f);
-			isInvincibleBlinked = false;
 		}
+		isInvincibleBlinked = b;
 	}
 
 	/**
-	 * Switches the color of this sprite between two.
+	 * Blinks the sprite between two states of colour
+	 * representing that it is hit.
 	 */
 	public void onHitBlink() {
-		if (!isHitBlinked) {
+		setOnHitBlink(!isHitBlinked);
+	}
+	
+	private void setOnHitBlink(boolean b) {
+		if (b) {
 			this.setColor(1f, 0f, 0f);
-			isHitBlinked = true;
 		} else {
 			this.setColor(1f, 1f, 1f);
-			isHitBlinked = false;
 		}
+		isHitBlinked = b;
+	}
+	
+	public void reset() {
+		setInvincibleBlinked(false);
+		setOnHitBlink(false);
 	}
 
 	/**

@@ -45,8 +45,6 @@ public interface IPlayer extends PropertyChangeListener {
 	/**
 	 * @return A reference to the player's item bar
 	 */
-	// TODO Should not return the item bar itself, but instead an interface of
-	// the item bar or something
 	public ItemBar getItemBar();
 
 	/**

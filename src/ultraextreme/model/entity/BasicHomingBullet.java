@@ -39,7 +39,7 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 
 	private final Vector2d normDirectionVector;
 
-	private static final float speed = 300f;
+	private static final float SPEED = 300f;
 	/**
 	 * Distance left before stopping to track the enemy.
 	 */
@@ -69,8 +69,8 @@ public class BasicHomingBullet extends AbstractHomingBullet {
 				|| bulletFuel < 0) {
 			updateDirection();
 		}
-		final double xMovement = normDirectionVector.x * timePassed * speed;
-		final double yMovement = normDirectionVector.y * timePassed * speed;
+		final double xMovement = normDirectionVector.x * timePassed * SPEED;
+		final double yMovement = normDirectionVector.y * timePassed * SPEED;
 		bulletFuel = bulletFuel
 				- Math.sqrt(xMovement * xMovement + yMovement * yMovement);
 

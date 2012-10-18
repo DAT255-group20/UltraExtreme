@@ -55,6 +55,10 @@ public class AbstractControllerTest {
 			public Scene getScene() {
 				return null;
 			}
+
+			@Override
+			public void backButtonPressed() {
+			}
 		};
 		IControllerListener testListener = new IControllerListener() {
 
