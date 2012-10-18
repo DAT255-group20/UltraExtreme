@@ -23,6 +23,7 @@ package ultraextreme.model.enemyspawning.wavelist;
 import java.security.SecureRandom;
 import java.util.Random;
 
+import ultraextreme.model.GameModel;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.HitAndRunEnemy;
@@ -31,12 +32,25 @@ import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 public class RandomWaveList extends AbstractWaveList {
 
+	/**
+	 * How much the difficulty will be increased for each wave.
+	 * Should be a number greater than 1.
+	 */
+	private double difficultyRiseSpeed;
+	
+	/**
+	 * Modifies the duration between waves.
+	 * Higher value means higher difficulty.
+	 */
+	private double currentDifficultyMod;
+	
 	private AbstractWave currentWave;
 
 	private float currentSpawningTime;
@@ -76,10 +90,35 @@ public class RandomWaveList extends AbstractWaveList {
 	public RandomWaveList(final int numberOfWaves,
 			final AbstractRandomGenerator randomGenerator) {
 		super(numberOfWaves);
+		scaleToDifficulty(GameModel.getSettings().getDifficulty());
+		this.currentDifficultyMod = 1;
 		this.screenWidth = (int) Constants.getLevelDimension().getX();
 		this.randomGenerator = randomGenerator;
 		this.generateNewWave();
 		this.currentSpawningTime = 0;
+	}
+	
+	private void scaleToDifficulty(Difficulty difficulty) {
+		switch(difficulty) {
+		case EASY:
+			difficultyRiseSpeed = 1.01;
+			break;
+		
+		case NORMAL:
+			difficultyRiseSpeed = 1.05;
+			break;
+			
+		case HARD:
+			difficultyRiseSpeed = 1.07;
+			break;
+			
+		case ULTRAEXTREME:
+			difficultyRiseSpeed = 1.12;
+			break;
+			
+		default:
+			difficultyRiseSpeed = 1;
+		}
 	}
 
 	/**
@@ -149,7 +188,8 @@ public class RandomWaveList extends AbstractWaveList {
 	 * Update the currentSpawningTime with a random number.
 	 */
 	private void generateNewSpawningTime() {
-		currentSpawningTime += randomGenerator.nextFloat() * 2 + 3.5;
+		currentSpawningTime += (randomGenerator.nextFloat() * 2 + 10) / currentDifficultyMod;
+		currentDifficultyMod = currentDifficultyMod * difficultyRiseSpeed;
 	}
 
 	/**

@@ -36,6 +36,7 @@ import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
 import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -64,6 +65,7 @@ public class GameModel implements IUltraExtremeModel {
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
+		SETTINGS.setDifficulty(Difficulty.NORMAL);
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
@@ -166,6 +168,9 @@ public class GameModel implements IUltraExtremeModel {
 		return player;
 	}
 	
+	/**
+	 * @return The settings for this game.
+	 */
 	public static Settings getSettings() {
 		return SETTINGS;
 	}
