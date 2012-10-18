@@ -53,13 +53,14 @@ public class ParabolaEnemy extends AbstractEnemy {
 		}
 	}
 
+
 	/**
 	 * returns true if and only if midX lies between startX and endX
 	 * @return true if and only if midX lies between startX and endX
 	 */
 	private boolean midPointIsInMiddle(double startX, double midX, double endX) {
-		return (Math.abs(startX) > Math.abs(midX) && Math.abs(midX) > Math.abs(endX)) ||
-				(Math.abs(startX) < Math.abs(midX) && Math.abs(midX) < Math.abs(endX));
+		return (startX > midX && midX > endX) ||
+				(startX < midX && midX < endX);
 	}
 
 	/**
