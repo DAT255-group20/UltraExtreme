@@ -117,8 +117,12 @@ public class RandomWaveList extends AbstractWaveList {
 							Position endPoint = new Position(450, -1000);
 							++counter;
 							counter %= 3;
-							return new HitAndRunEnemy(spawningPosition,
-									firePoint, endPoint);
+							return new HitAndRunEnemy(
+									spawningPosition,
+									firePoint,
+									endPoint,
+									WeaponFactory
+											.getNewWeapon(ObjectName.SPINNING_WEAPON));
 						}
 					});
 			break;
