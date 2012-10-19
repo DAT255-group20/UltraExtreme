@@ -56,7 +56,7 @@ public class GameModel implements IUltraExtremeModel {
 
 	final private EnemyManager enemyManager;
 
-	final private EnemySpawner enemySpawner;
+	private EnemySpawner enemySpawner;
 
 	private PickupManager pickupManager;
 	
@@ -222,6 +222,8 @@ public class GameModel implements IUltraExtremeModel {
 		bulletManager.clearAllBullets();
 		enemyManager.clearAllEnemies();
 		pickupManager.clearAllPickups();
+		enemySpawner = new EnemySpawner(new RandomWaveList(1000));
+		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
 
 		// TODO(matachi) Reset enemyspawner too?
