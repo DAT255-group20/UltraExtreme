@@ -36,6 +36,7 @@ import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
 import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -55,13 +56,16 @@ public class GameModel implements IUltraExtremeModel {
 
 	final private EnemyManager enemyManager;
 
-	final private EnemySpawner enemySpawner;
+	private EnemySpawner enemySpawner;
 
 	private PickupManager pickupManager;
+	
+	final static private Settings SETTINGS = new Settings();
 
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
+		SETTINGS.setDifficulty(Difficulty.NORMAL);
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
@@ -163,6 +167,13 @@ public class GameModel implements IUltraExtremeModel {
 	public IPlayer getPlayer() {
 		return player;
 	}
+	
+	/**
+	 * @return The settings for this game.
+	 */
+	public static Settings getSettings() {
+		return SETTINGS;
+	}
 
 	/**
 	 * @return A model interface with only get methods.
@@ -211,6 +222,8 @@ public class GameModel implements IUltraExtremeModel {
 		bulletManager.clearAllBullets();
 		enemyManager.clearAllEnemies();
 		pickupManager.clearAllPickups();
+		enemySpawner = new EnemySpawner(new RandomWaveList(1000));
+		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
 
 		// TODO(matachi) Reset enemyspawner too?
