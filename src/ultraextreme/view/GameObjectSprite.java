@@ -27,6 +27,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.math.MathUtils;
 
+import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
@@ -144,7 +145,7 @@ public class GameObjectSprite extends Sprite {
 		this.setX((float) (newPosition.getX() - imageOffset.x));
 		this.setY((float) (newPosition.getY() - imageOffset.y));
 
-		if (entity instanceof IBullet) {
+		if (entity instanceof IBullet || entity instanceof EnemyShip) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
 				directionVector = newVector;
@@ -154,7 +155,7 @@ public class GameObjectSprite extends Sprite {
 			if (directionVector.x < 0) {
 				newAngle = newAngle + 180f;
 			}
-			this.setRotation(newAngle + 90f);
+			this.setRotation(newAngle - 90f);
 		}
 	}
 }
