@@ -75,6 +75,12 @@ public final class SpriteFactory {
 	 * buttons.
 	 */
 	private Map<String, ITextureRegion> mainMenuTextures;
+	
+	/**
+	 * A map containing the game over scene's textures, which are its background
+	 * and buttons.
+	 */
+	private Map<String, ITextureRegion> gameOverTextures;
 
 	private TiledTextureRegion textInputBackground;
 
@@ -205,6 +211,27 @@ public final class SpriteFactory {
 						textureAtlasMainMenu, activity,
 						"main_menu_exit_button.png", 0, 1581));
 		textureManager.loadTexture(textureAtlasMainMenu);
+		
+		// Init game over scene atlas and texture map
+		gameOverTextures = new HashMap<String, ITextureRegion>();
+		BitmapTextureAtlas textureAtlasGameOver = new BitmapTextureAtlas(
+				textureManager, 800, 1984, TextureOptions.DEFAULT);
+		// Init the game over scene background
+		gameOverTextures.put("background",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasGameOver, activity, "game_over_bg.jpg", 0,
+						0));
+		// Init game over text
+		gameOverTextures.put("text",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasGameOver, activity,
+						"game_over_text.png", 0, 1281));
+		// Init game over save button
+		gameOverTextures.put("saveButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasGameOver, activity,
+						"game_over_save_button.png", 0, 1770));
+		textureManager.loadTexture(textureAtlasGameOver);
 	}
 
 	/**
@@ -268,6 +295,30 @@ public final class SpriteFactory {
 	 */
 	public static ITextureRegion getMainMenuStartButtonTexture() {
 		return instance.mainMenuTextures.get("startButton");
+	}
+
+	/**
+	 * 
+	 * @return The texture of the game over scene's background.
+	 */
+	public static ITextureRegion getGameOverBackgroundTexture() {
+		return instance.gameOverTextures.get("background");
+	}
+	
+	/**
+	 * 
+	 * @return The texture of the game over scene's text.
+	 */
+	public static ITextureRegion getGameOverTextTexture() {
+		return instance.gameOverTextures.get("text");
+	}
+	
+	/**
+	 * 
+	 * @return The texture of the game over scene's save button.
+	 */
+	public static ITextureRegion getGameOverSaveButtonTexture() {
+		return instance.gameOverTextures.get("saveButton");
 	}
 
 	/**
