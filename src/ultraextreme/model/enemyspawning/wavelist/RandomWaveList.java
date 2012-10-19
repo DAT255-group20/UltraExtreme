@@ -27,6 +27,7 @@ import ultraextreme.model.GameModel;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.HitAndRunEnemy;
+import ultraextreme.model.enemy.ParabolaEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractEnemyProvider;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
@@ -40,17 +41,17 @@ import ultraextreme.model.util.Rotation;
 public class RandomWaveList extends AbstractWaveList {
 
 	/**
-	 * How much the difficulty will be increased for each wave.
-	 * Should be a number greater than 1.
+	 * How much the difficulty will be increased for each wave. Should be a
+	 * number greater than 1.
 	 */
 	private double difficultyRiseSpeed;
-	
+
 	/**
-	 * Modifies the duration between waves.
-	 * Higher value means higher difficulty.
+	 * Modifies the duration between waves. Higher value means higher
+	 * difficulty.
 	 */
 	private double currentDifficultyMod;
-	
+
 	private AbstractWave currentWave;
 
 	private float currentSpawningTime;
@@ -97,25 +98,25 @@ public class RandomWaveList extends AbstractWaveList {
 		this.generateNewWave();
 		this.currentSpawningTime = 0;
 	}
-	
+
 	private void scaleToDifficulty(Difficulty difficulty) {
-		switch(difficulty) {
+		switch (difficulty) {
 		case EASY:
 			difficultyRiseSpeed = 1.01;
 			break;
-		
+
 		case NORMAL:
 			difficultyRiseSpeed = 1.05;
 			break;
-			
+
 		case HARD:
 			difficultyRiseSpeed = 1.07;
 			break;
-			
+
 		case ULTRAEXTREME:
 			difficultyRiseSpeed = 1.12;
 			break;
-			
+
 		default:
 			difficultyRiseSpeed = 1;
 		}
@@ -126,7 +127,7 @@ public class RandomWaveList extends AbstractWaveList {
 	 */
 	private void generateNewWave() {
 		// Randomize which wave will spawn
-		int wave = (int) (randomGenerator.nextFloat() * 3);
+		int wave = (int) (randomGenerator.nextFloat() * 4);
 		switch (wave) {
 		/**
 		 * VWave spawned with some randomness along the x axis
@@ -179,6 +180,23 @@ public class RandomWaveList extends AbstractWaveList {
 						}
 					});
 			break;
+
+		/**
+		 * 3 parabola enemies with spread weapons that spawns one after another
+		 */
+		case 3:
+			currentWave = new RectangleWave(1, 3, 0, 100, -100,
+					new AbstractEnemyProvider() {
+						@Override
+						public AbstractEnemy getEnemy(
+								Position spawningPosition, Rotation rotation) {
+							return new ParabolaEnemy(spawningPosition,
+									new Position(400, 400), new Position(900,
+											-400), ObjectName.SPREAD_WEAPON);
+						}
+					});
+			break;
+
 		default:
 			break;
 		}
@@ -188,7 +206,8 @@ public class RandomWaveList extends AbstractWaveList {
 	 * Update the currentSpawningTime with a random number.
 	 */
 	private void generateNewSpawningTime() {
-		currentSpawningTime += (randomGenerator.nextFloat() * 2 + 10) / currentDifficultyMod;
+		currentSpawningTime += (randomGenerator.nextFloat() * 2 + 10)
+				/ currentDifficultyMod;
 		currentDifficultyMod = currentDifficultyMod * difficultyRiseSpeed;
 	}
 
