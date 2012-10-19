@@ -96,7 +96,7 @@ public final class SpriteFactory {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		final TextureManager textureManager = activity.getTextureManager();
 		BitmapTextureAtlas textureAtlas = new BitmapTextureAtlas(
-				textureManager, 500, 118,
+				textureManager, 502, 119,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		// TODO make textureAtlas as small as possible (also play tetris with
 		// the textures to make it smaller)
@@ -113,14 +113,14 @@ public final class SpriteFactory {
 		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
 				16.5));
 
-		final TextureRegion enemyBullet = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "laserRed.png", 0, 34);
-		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
-				16.5));
+//		final TextureRegion enemyBullet = BitmapTextureAtlasTextureRegionFactory
+//				.createFromAsset(textureAtlas, activity, "laserRed.png", 0, 34);
+//		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
+//				16.5));
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 0,
-						165);
+				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 165,
+						0);
 		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27,
 				40));
 
