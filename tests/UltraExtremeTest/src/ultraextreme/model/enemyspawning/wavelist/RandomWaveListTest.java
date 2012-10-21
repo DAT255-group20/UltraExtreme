@@ -59,45 +59,52 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 	public void testGeneratingNewWaves() {
 		waveList = new RandomWaveList(100, Difficulty.NORMAL,
 				new AbstractRandomGenerator() {
-					private int counter;
+					private int counter = 0;
+					// 0.0f - make it pick 1st wave
+					// 0.25f make it pick 2nd wave
+					// 0.5f make it pick 3rd wave
+					// 0.75f make it pick 4th wave
+					private float numbers[] = { 0.0f, 1, 0.25f, 1, 0.5f, 1, 1,
+							1, 0.75f, 1, 0.0f, 1, 1 };
 
 					@Override
 					public float nextFloat() {
-						return ++counter;
+						return numbers[counter++];
 					}
 				});
 
-		// 0
-		assertEquals(waveList.getCurrentSpawningTime(), 0f);
+		// First wave
+		assertEquals(0f, waveList.getCurrentSpawningTime());
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
 
 		waveList.next();
 
-		// 5.5
-		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
+		// Second wave
+		assertEquals(12f, waveList.getCurrentSpawningTime());
 		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
-		// 5.5 + 7.5 = 13
-		assertEquals(waveList.getCurrentSpawningTime(), 13f);
+		// Third wave
+		assertEquals(24f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
-		// 5.5 + 7.5 + 9.5 = 22.5
-		assertEquals(waveList.getCurrentSpawningTime(), 22.5f);
+		// Fourth wave
+		assertEquals(35.5f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
+
+		waveList.next();
+
+		// First wave again
+		assertEquals(47.3f, waveList.getCurrentSpawningTime(), 0.3f);
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
-
-		waveList.next();
-
-		// 5.5 + 7.5 + 9.5 + 11.5 = 34
-		assertEquals(waveList.getCurrentSpawningTime(), 34f);
-		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 	}
 
 	@Override
 	public void testGetNumberOfWaves() {
-		for (int waves = 1; waves < 100000; ++waves) {
+		for (int waves = 1; waves < 1000; waves += 10) {
 			resetWaveList(waves);
 			assertEquals(waves, waveList.getNumberOfWaves());
 		}
@@ -105,11 +112,8 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 
 	@Override
 	public void testNext() {
-
-		// FIXME This test takes extremely long time to run
-		// Run through a number of tests where the maximum number of waves are
-		// different
-		for (int waves = 1; waves < 1000; ++waves) {
+		// Test with different maximum number of waves
+		for (int waves = 1; waves < 1000; waves += 200) {
 			resetWaveList(waves);
 			// Call next() a number of times on the wave list
 			for (int i = 1; i < waves; ++i) {
