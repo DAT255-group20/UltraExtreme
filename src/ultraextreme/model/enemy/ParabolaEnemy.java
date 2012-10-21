@@ -38,11 +38,13 @@ public class ParabolaEnemy extends AbstractEnemy {
 
 	private static final int SHIP_SIZE = 30;
 	private static final int SCORE = 40;
+	private static final float INIT_SPEED = 100;
+	private static final int HITPOINTS = 15;
 
 	private Position startPoint;
 	private Position midPoint;
 	private Position endPoint;
-	private float speed = 100f;
+	private float speed = INIT_SPEED;
 
 	private ParabolaEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
@@ -63,9 +65,8 @@ public class ParabolaEnemy extends AbstractEnemy {
 	 *            what kind of weapon this enemy will wield
 	 */
 	public ParabolaEnemy(Position startPoint, Position midPoint,
-			Position endPoint, ObjectName weaponName)
-			throws IllegalArgumentException {
-		super(new EnemyShip(startPoint, SHIP_SIZE, SHIP_SIZE, 15,
+			Position endPoint, ObjectName weaponName) {
+		super(new EnemyShip(startPoint, SHIP_SIZE, SHIP_SIZE, HITPOINTS,
 				ObjectName.PARABOLA_ENEMYSHIP), WeaponFactory
 				.getNewWeapon(weaponName));
 		if (!midPointIsInMiddle(startPoint.getX(), midPoint.getX(),

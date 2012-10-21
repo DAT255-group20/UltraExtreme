@@ -62,10 +62,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 																// even
 																// number!
 
-	final private GameScene gameScene;
-	final private GameModel gameModel;
-	final private List<GameObjectSprite> gameObjectSprites;
-	final private VertexBufferObjectManager vertexBufferObjectManager;
+	private final GameScene gameScene;
+	private final GameModel gameModel;
+	private final List<GameObjectSprite> gameObjectSprites;
+	private final VertexBufferObjectManager vertexBufferObjectManager;
 	private Vector2d scalingQuotient;
 
 	private boolean firing;

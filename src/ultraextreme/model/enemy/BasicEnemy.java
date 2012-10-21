@@ -42,6 +42,7 @@ public class BasicEnemy extends AbstractEnemy {
 	private static final int SHIP_SIZE = 80;
 	private static final int SCORE = 10;
 	private static final int Y_SPEED = 170;
+	private static final int HITPOINTS = 40;
 
 	private BasicEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
 		super(ship, weapon);
@@ -70,7 +71,7 @@ public class BasicEnemy extends AbstractEnemy {
 	public BasicEnemy(final Position position, final Rotation rotation,
 			ObjectName weaponName) {
 		this(new EnemyShip(position.getX(), position.getY(), SHIP_SIZE,
-				SHIP_SIZE, rotation, 40, ObjectName.BASIC_ENEMYSHIP),
+				SHIP_SIZE, rotation, HITPOINTS, ObjectName.BASIC_ENEMYSHIP),
 				WeaponFactory.getNewWeapon(weaponName));
 	}
 

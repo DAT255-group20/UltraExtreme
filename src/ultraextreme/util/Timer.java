@@ -75,8 +75,7 @@ public class Timer {
 	 * @throws IllegalArgumentException
 	 *             if the number of given runs are less than one.
 	 */
-	public Timer(String propertyName, float totalTime, Object o, int runs)
-			throws IllegalArgumentException {
+	public Timer(String propertyName, float totalTime, Object o, int runs) {
 		if (runs < 1) {
 			throw new IllegalArgumentException("Must run at least one time");
 		}

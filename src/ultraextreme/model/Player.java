@@ -52,21 +52,21 @@ public class Player implements IPlayer {
 	/**
 	 * Reference to the player's ship.
 	 */
-	final private PlayerShip ship;
+	private final PlayerShip ship;
 
 	/**
 	 * The player's ID. This is used in the view to differentiate player ships
 	 * from each other.
 	 */
-	final private PlayerID playerId;
+	private final PlayerID playerId;
 
 	/**
 	 * Item bar containing the items that the player's ship is currently
 	 * holding.
 	 */
-	final private ItemBar itemBar;
+	private final ItemBar itemBar;
 
-	final private BulletManager bulletManager;
+	private final BulletManager bulletManager;
 
 	/**
 	 * The lives the player has left.

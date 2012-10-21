@@ -35,5 +35,5 @@ public interface ItemBarUpdateListener {
 	 * @param itemBar
 	 *            The item bar that has been updated.
 	 */
-	public void itemBarUpdated(ItemBar itemBar);
+	void itemBarUpdated(ItemBar itemBar);
 }

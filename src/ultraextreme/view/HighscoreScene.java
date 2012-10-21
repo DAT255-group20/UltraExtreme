@@ -41,6 +41,8 @@ public class HighscoreScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
 	public static final int CLEAR_LIST = 1;
+	
+	private static final int NR_OF_HIGHSCORES = 10;
 
 	// TODO(plankton) Make these centered on the screen
 	private static final Position GOTOMENU_BTN_POS = new Position(100, 100);
@@ -49,7 +51,7 @@ public class HighscoreScene extends MenuScene {
 	private static final Position HIGHSCORE_LIST_POS = new Position(80, 220);
 	private static final int HIGHSCORE_DISPERSION = 50;
 
-	private HighscoreText[] highscores = new HighscoreText[10];
+	private HighscoreText[] highscores = new HighscoreText[NR_OF_HIGHSCORES];
 
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {

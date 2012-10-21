@@ -50,11 +50,11 @@ import ultraextreme.model.util.PlayerID;
  */
 public class GameModel implements IUltraExtremeModel {
 
-	final private Player player;
+	private final Player player;
 
-	final private BulletManager bulletManager;
+	private final BulletManager bulletManager;
 
-	final private EnemyManager enemyManager;
+	private final EnemyManager enemyManager;
 
 	private EnemySpawner enemySpawner;
 
