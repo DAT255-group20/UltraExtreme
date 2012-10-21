@@ -67,7 +67,7 @@ public class RectangleWaveTest extends TestCase {
 	 * Create a new wave and see if the enemy spawned has the correct
 	 * properties.
 	 */
-	public void testSpawnedEnemyPropteries() {
+	public void testSpawnedEnemyProperties() {
 		initWave(1, 1, 0, 0, 0);
 		wave.update(0);
 		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
