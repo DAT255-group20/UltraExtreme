@@ -22,6 +22,8 @@ package ultraextreme.util;
 
 public class Constants {
 
+	private Constants() {}
+	
 	/**
 	 * Lets the sprites have a different size than their file picture
 	 * counterparts.

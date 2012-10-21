@@ -43,8 +43,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 	 *            what kind of weapon this enemy will wield
 	 */
 	public ParabolaEnemy(Position startPoint, Position midPoint,
-			Position endPoint, ObjectName weaponName)
-			throws IllegalArgumentException {
+			Position endPoint, ObjectName weaponName) {
 		super(new EnemyShip(startPoint, SHIP_SIZE, SHIP_SIZE, 15,
 				ObjectName.PARABOLA_ENEMYSHIP), WeaponFactory
 				.getNewWeapon(weaponName));

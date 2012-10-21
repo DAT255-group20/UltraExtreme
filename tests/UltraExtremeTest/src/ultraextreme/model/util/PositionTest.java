@@ -136,7 +136,7 @@ public class PositionTest extends TestCase {
 			assertFalse(p1.equals(p2));
 
 			// The other position is null
-			assertFalse(p1.equals(null));
+			assertFalse(p1 == null);
 
 			// The other object is of another class
 			assertFalse(p1.equals(new Object()));
