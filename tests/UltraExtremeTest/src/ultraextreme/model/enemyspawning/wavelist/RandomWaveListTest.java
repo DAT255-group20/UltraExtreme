@@ -56,7 +56,7 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 	 * if they got the correct spawn time and are instance of the right wave.
 	 */
 	public void testGeneratingNewWaves() {
-		RandomWaveList waveList = new RandomWaveList(100,
+		RandomWaveList waveList1 = new RandomWaveList(100,
 				new AbstractRandomGenerator() {
 					private int counter;
 
@@ -67,32 +67,32 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 				});
 
 		// 0
-		assertEquals(waveList.getCurrentSpawningTime(), 0f);
-		assertTrue(waveList.getCurrentWave() instanceof VWave);
+		assertEquals(waveList1.getCurrentSpawningTime(), 0f);
+		assertTrue(waveList1.getCurrentWave() instanceof VWave);
 
-		waveList.next();
+		waveList1.next();
 
 		// 5.5
-		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
-		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
+		assertEquals(waveList1.getCurrentSpawningTime(), 5.5f);
+		assertTrue(waveList1.getCurrentWave() instanceof RectangleWave);
 
-		waveList.next();
+		waveList1.next();
 
 		// 5.5 + 7.5 = 13
-		assertEquals(waveList.getCurrentSpawningTime(), 13f);
+		assertEquals(waveList1.getCurrentSpawningTime(), 13f);
 		// assertTrue(waveList.getCurrentWave() instanceof VerticalLineWave);
 
-		waveList.next();
+		waveList1.next();
 
 		// 5.5 + 7.5 + 9.5 = 22.5
-		assertEquals(waveList.getCurrentSpawningTime(), 22.5f);
-		assertTrue(waveList.getCurrentWave() instanceof VWave);
+		assertEquals(waveList1.getCurrentSpawningTime(), 22.5f);
+		assertTrue(waveList1.getCurrentWave() instanceof VWave);
 
-		waveList.next();
+		waveList1.next();
 
 		// 5.5 + 7.5 + 9.5 + 11.5 = 34
-		assertEquals(waveList.getCurrentSpawningTime(), 34f);
-		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
+		assertEquals(waveList1.getCurrentSpawningTime(), 34f);
+		assertTrue(waveList1.getCurrentWave() instanceof RectangleWave);
 	}
 
 	@Override

@@ -86,8 +86,8 @@ public class GameOverController extends AbstractController implements
 		case GameOverScene.GOTO_MENU:
 			// It's only possible to switch from the game over view after 1.5
 			// seconds
-			Long time = Calendar.getInstance().getTimeInMillis();
-			if (time < this.time + 1500) {
+			Long time1 = Calendar.getInstance().getTimeInMillis();
+			if (time1 < this.time + 1500) {
 				break;
 			}
 			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();

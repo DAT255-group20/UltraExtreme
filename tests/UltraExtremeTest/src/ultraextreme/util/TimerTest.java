@@ -40,9 +40,9 @@ public class TimerTest {
 
 	@Test
 	public void testGetObject() {
-		Object o = new Object();
-		timer = new Timer("", 100, o);
-		assertTrue(o == timer.getObject());
+		Object o1 = new Object();
+		timer = new Timer("", 100, o1);
+		assertTrue(o1 == timer.getObject());
 	}
 
 	@Test
