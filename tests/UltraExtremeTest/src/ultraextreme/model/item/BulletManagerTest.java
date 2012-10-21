@@ -169,7 +169,11 @@ public class BulletManagerTest extends TestCase {
 	}
 
 	public void testRemoveBullet() {
-		fail("Not yet tested");
+		BasicBullet bullet = new BasicBullet(10, 10, 10, 10, PlayerID.ENEMY, new Rotation(0), 10);
+		bulletManager.addBullet(bullet);
+		bulletManager.removeBullet(bullet);
+		assertFalse(bulletManager.getBullets().contains(bullet));
+		assertTrue(bulletCollector.getBullets().containsKey(Constants.EVENT_REMOVED_ENTITY));
 	}
 
 	/**
