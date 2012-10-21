@@ -34,6 +34,7 @@ import ultraextreme.model.util.Rotation;
 public class VWave extends AbstractWave {
 
 	private static final int DISPERSION = 100;
+	private static final int NR_OF_ENEMY_ROWS = 4;
 	private float timer;
 	private int counter;
 	private final Rotation rotation;
@@ -79,7 +80,7 @@ public class VWave extends AbstractWave {
 			}
 			timer -= 2;
 			counter++;
-			if (counter > 3) {
+			if (counter >= NR_OF_ENEMY_ROWS) {
 				this.fireWaveEnded();
 			}
 		}
