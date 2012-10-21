@@ -20,6 +20,8 @@
 
 package ultraextreme.controller;
 
+import java.util.Calendar;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -45,6 +47,7 @@ public class GameOverController extends AbstractController implements
 
 	private final GameOverScene scene;
 	private HighscoreDBOpenHelper dbOpenHelper;
+	private Long time;
 
 	public GameOverController(IUltraExtremeModel gameModel,
 			final Camera camera, final Font font,
@@ -59,8 +62,10 @@ public class GameOverController extends AbstractController implements
 
 	@Override
 	public void activateController() {
-		// Auto-generated method stub
-
+		scene.updateScene();
+		// Store the time when this view was switched to
+		Calendar c = Calendar.getInstance();
+		this.time = c.getTimeInMillis();
 	}
 
 	@Override
@@ -79,6 +84,12 @@ public class GameOverController extends AbstractController implements
 			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case GameOverScene.GOTO_MENU:
+			// It's only possible to switch from the game over view after 1.5
+			// seconds
+			Long time1 = Calendar.getInstance().getTimeInMillis();
+			if (time1 < this.time + 1500) {
+				break;
+			}
 			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
 			String nameTag = scene.getName();
 			String score = Integer.toString(scene.getScore());
@@ -103,7 +114,6 @@ public class GameOverController extends AbstractController implements
 
 	@Override
 	public void backButtonPressed() {
-		fireEvent(new ControllerEvent(this,
-				ControllerEventType.SWITCH_TO_MENU));
+		fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_MENU));
 	}
 }

@@ -28,7 +28,7 @@ import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 
 public class WeaponPickupTest extends TestCase {
-	WeaponPickup pickup;
+	private WeaponPickup pickup;
 
 	@Override
 	public void setUp() {
@@ -47,19 +47,19 @@ public class WeaponPickupTest extends TestCase {
 		pickup = new WeaponPickup(new Position(0, 0), ObjectName.BASIC_WEAPON);
 		testWeaponPickupDoubleDoubleObjectName();
 	}
-	
+
 	@Test
 	public void testDoMovement() {
 		double epsilon = 0.00001;
 		Position oldPosition = pickup.getPositionClone();
 		pickup.doMovement(1);
 		Position newPosition = pickup.getPositionClone();
-		
+
 		// Check so that it still has the same x value.
 		assertTrue(Math.abs(oldPosition.getX() - newPosition.getX()) < epsilon);
-		
+
 		// Check so that it has moved along the y-axis.
 		assertTrue(oldPosition.getY() < newPosition.getY());
-		
+
 	}
 }

@@ -21,6 +21,7 @@
 package ultraextreme.model.enemyspawning.wave;
 
 import ultraextreme.model.enemy.BasicEnemy;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -32,12 +33,11 @@ import ultraextreme.model.util.Rotation;
  */
 public class VWave extends AbstractWave {
 
+	private static final int DISPERSION = 100;
+	private static final int NR_OF_ENEMY_ROWS = 4;
 	private float timer;
-
 	private int counter;
-
 	private final Rotation rotation;
-
 	private final Position spawningPositon;
 
 	/**
@@ -66,17 +66,21 @@ public class VWave extends AbstractWave {
 		timer += timeElapsed;
 		if (timer >= 2) {
 			if (counter == 0) {
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX(),
-						spawningPositon.getY(), this.rotation));
+				fireNewEnemySpawned(new BasicEnemy(spawningPositon,
+						this.rotation, ObjectName.BASIC_WEAPON));
 			} else {
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						- counter * 100, spawningPositon.getY(), rotation));
-				fireNewEnemySpawned(new BasicEnemy(spawningPositon.getX()
-						+ counter * 100, spawningPositon.getY(), rotation));
+				fireNewEnemySpawned(new BasicEnemy(new Position(
+						spawningPositon.getX() - counter * DISPERSION,
+						spawningPositon.getY()), rotation,
+						ObjectName.BASIC_WEAPON));
+				fireNewEnemySpawned(new BasicEnemy(new Position(
+						spawningPositon.getX() + counter * DISPERSION,
+						spawningPositon.getY()), rotation,
+						ObjectName.BASIC_WEAPON));
 			}
 			timer -= 2;
 			counter++;
-			if (counter > 3) {
+			if (counter >= NR_OF_ENEMY_ROWS) {
 				this.fireWaveEnded();
 			}
 		}

@@ -20,11 +20,24 @@
 
 package ultraextreme.model.enemyspawning;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import junit.framework.TestCase;
-import ultraextreme.model.enemyspawning.wavelist.AbstractRandomGenerator;
-import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
+import ultraextreme.model.enemy.AbstractEnemy;
+import ultraextreme.model.enemy.BasicEnemy;
+import ultraextreme.model.enemy.IEnemy;
+import ultraextreme.model.enemyspawning.wave.AbstractEnemyProvider;
+import ultraextreme.model.enemyspawning.wave.AbstractWave;
+import ultraextreme.model.enemyspawning.wave.RectangleWave;
+import ultraextreme.model.enemyspawning.wave.VWave;
+import ultraextreme.model.enemyspawning.wavelist.IWaveSpawningList;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.Position;
+import ultraextreme.model.util.Rotation;
 
 /**
  * 
@@ -42,67 +55,114 @@ public class EnemySpawnerTest extends TestCase {
 	}
 
 	/**
-	 * Create a EnemySpawner, give it a RandomWaveList with a custom
-	 * RandomGenerator and see if the EnemySpawner behaves correctly.
+	 * Create a EnemySpawner, give it a custom IWaveSpawningList and see if t
+	 * behaves correctly. Which means that the EnemySpawner gets waves from the
+	 * wave list and throws enemies to the listeners.
 	 */
 	public void testUpdateMethod() {
-		RandomWaveList waveList = new RandomWaveList(1,
-				new AbstractRandomGenerator() {
-					private int counter = 0;
+		IWaveSpawningList list = new IWaveSpawningList() {
 
-					@Override
-					public float nextFloat() {
-						return ++counter;
-					}
-				});
-		EnemySpawner enemySpawner = new EnemySpawner(waveList);
+			// Array with 2 different waves
+			private AbstractWave[] waves = {
+					new VWave(0, 0, 0),
+					new RectangleWave(0, 0, 0, 0, 0,
+							new AbstractEnemyProvider() {
+								@Override
+								public AbstractEnemy getEnemy(
+										Position spawningPosition,
+										Rotation rotation) {
+									return new BasicEnemy(new Position(
+											spawningPosition));
+								}
+							}) };
+
+			// Current wave
+			private int currentWave = 1;
+
+			@Override
+			public void next() {
+				++currentWave;
+			}
+
+			@Override
+			public boolean hasNext() {
+				// FIXME not needed
+				return true;
+			}
+
+			@Override
+			public int getNumberOfWaves() {
+				// FIXME not needed
+				return 100;
+			}
+
+			@Override
+			public int getCurrentWaveNumber() {
+				return currentWave;
+			}
+
+			@Override
+			public AbstractWave getCurrentWave() {
+				return waves[currentWave % 1];
+			}
+
+			@Override
+			public float getCurrentSpawningTime() {
+				return currentWave;
+			}
+		};
+
+		EnemySpawner enemySpawner = new EnemySpawner(list);
 		EnemyCollector enemyCollector = new EnemyCollector();
 		enemySpawner.addPropertyChangeListener(enemyCollector);
 
-		assertEquals(enemySpawner.getCurrentWave(), 0);
+		assertEquals(0, enemySpawner.getCurrentWave());
 
-		enemySpawner.update(0); // A VWave has spawned
+		enemySpawner.update(1); // A second has passed
 
-		assertEquals(enemySpawner.getCurrentWave(), 1);
+		assertEquals("First wave has spawned", 1, enemySpawner.getCurrentWave());
+		assertEquals("First wave spawned an enemy", 1, enemyCollector
+				.getSpawnedEnemies().size());
 
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
+		enemySpawner.update(1); // An additional second has passed
 
-		enemySpawner.update(1.98f); // Timer in VWave is ~1.98
+		assertEquals("An additional wave has spawned", 2,
+				enemySpawner.getCurrentWave());
+		assertEquals("5 enemies has spawned in total", 5, enemyCollector
+				.getSpawnedEnemies().size());
 
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
+		enemySpawner.update(1); // A third second has passed
 
-		enemySpawner.update(0.03f); // Timer in VWave is ~2.01 and 2 enemies
-									// spawn
-
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 3);
-
-		enemySpawner.update(2f); // 2 New enemies spawn
-
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 5);
-
-		enemySpawner.update(2f); // 2 New enemies spawn
-
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 7);
-
-		enemySpawner.update(2f); // No new enemies spawn
-
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 7);
+		assertEquals("A third wave has spawned", 3,
+				enemySpawner.getCurrentWave());
+		assertEquals("17 enemies has spawned in total", 17, enemyCollector
+				.getSpawnedEnemies().size());
 	}
-	
-	public void testGetCurrentWave()
-	{
-		fail("Not yet tested");
-	}
-	
-	public void testWaveEnded()
-	{
-		// TODO Is this even testable?
-		fail("Not yet tested");
-	}
-	
-	public void testEnemySpawned()
-	{
-		// TODO Is this even testable?
-		fail("Not yet tested");
+
+	/**
+	 * Used to collect the spawned enemies.
+	 * 
+	 * @author Daniel Jonsson
+	 * 
+	 */
+	public class EnemyCollector implements PropertyChangeListener {
+
+		private List<IEnemy> enemies;
+
+		public EnemyCollector() {
+			enemies = new ArrayList<IEnemy>();
+		}
+
+		public List<IEnemy> getSpawnedEnemies() {
+			return enemies;
+		}
+
+		@Override
+		public void propertyChange(PropertyChangeEvent event) {
+			if (event.getPropertyName().equals(EnemySpawner.NEW_ENEMY)) {
+				enemies.add((IEnemy) event.getNewValue());
+			}
+		}
+
 	}
 }

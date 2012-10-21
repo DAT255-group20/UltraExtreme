@@ -27,6 +27,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.math.MathUtils;
 
+import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Constants;
@@ -96,13 +97,13 @@ public class GameObjectSprite extends Sprite {
 	}
 
 	/**
-	 * Blinks the sprite between two states of colour
-	 * representing invincibility.
+	 * Blinks the sprite between two states of colour representing
+	 * invincibility.
 	 */
 	public void invincibilityBlink() {
 		setInvincibleBlinked(!isInvincibleBlinked);
 	}
-	
+
 	private void setInvincibleBlinked(boolean b) {
 		if (b) {
 			this.setColor(0f, 0f, 1f);
@@ -113,13 +114,13 @@ public class GameObjectSprite extends Sprite {
 	}
 
 	/**
-	 * Blinks the sprite between two states of colour
-	 * representing that it is hit.
+	 * Blinks the sprite between two states of colour representing that it is
+	 * hit.
 	 */
 	public void onHitBlink() {
 		setOnHitBlink(!isHitBlinked);
 	}
-	
+
 	private void setOnHitBlink(boolean b) {
 		if (b) {
 			this.setColor(1f, 0f, 0f);
@@ -128,7 +129,8 @@ public class GameObjectSprite extends Sprite {
 		}
 		isHitBlinked = b;
 	}
-	
+
+	@Override
 	public void reset() {
 		setInvincibleBlinked(false);
 		setOnHitBlink(false);
@@ -143,17 +145,18 @@ public class GameObjectSprite extends Sprite {
 		this.setX((float) (newPosition.getX() - imageOffset.x));
 		this.setY((float) (newPosition.getY() - imageOffset.y));
 
-		if (entity instanceof IBullet) {
+		if (entity instanceof IBullet || entity instanceof EnemyShip) {
 			final Vector2d newVector = entity.getNormalizedDirection();
 			if (!(newVector.x == 0 && newVector.y == 0)) {
 				directionVector = newVector;
 			}
+			//FIXME derp
 			float newAngle = MathUtils.radToDeg((float) (Math
-					.atan(directionVector.y / directionVector.x)));
+					.atan2(directionVector.y, directionVector.x)));
 			if (directionVector.x < 0) {
 				newAngle = newAngle + 180f;
 			}
-			this.setRotation(newAngle + 90f);
+			this.setRotation(newAngle - 90f);
 		}
 	}
 }

@@ -167,10 +167,15 @@ public class BulletManagerTest extends TestCase {
 		assertTrue(bulletCollector.getBullets().get(Constants.EVENT_NEW_ENTITY)
 				.containsAll(bulletList));
 	}
-	
-	public void testRemoveBullet()
-	{
-		fail("Not yet tested");
+
+	public void testRemoveBullet() {
+		BasicBullet bullet = new BasicBullet(10, 10, 10, 10, PlayerID.ENEMY,
+				new Rotation(0), 10);
+		bulletManager.addBullet(bullet);
+		bulletManager.removeBullet(bullet);
+		assertFalse(bulletManager.getBullets().contains(bullet));
+		assertTrue(bulletCollector.getBullets().containsKey(
+				Constants.EVENT_REMOVED_ENTITY));
 	}
 
 	/**
@@ -242,13 +247,13 @@ public class BulletManagerTest extends TestCase {
 	public void testClearBulletsOffScreen() {
 		// Init stuff
 		List<AbstractBullet> insideBullets = generateBulletList(100, 200, 200);
-		List<AbstractBullet> outsideBullets = generateBulletList(100, -200,
-				-200);
+		List<AbstractBullet> outsideBullets = generateBulletList(100, -5000,
+				-5000);
 		List<AbstractBullet> allBullets = new ArrayList<AbstractBullet>();
 		allBullets.addAll(insideBullets);
 		allBullets.addAll(outsideBullets);
-		BulletCollector bulletCollector = new BulletCollector();
-		bulletManager.addPropertyChangeListener(bulletCollector);
+		BulletCollector bulletCollector1 = new BulletCollector();
+		bulletManager.addPropertyChangeListener(bulletCollector1);
 
 		for (AbstractBullet bullet : allBullets) {
 			bulletManager.addBullet(bullet);
@@ -260,9 +265,10 @@ public class BulletManagerTest extends TestCase {
 		bulletManager.clearBulletsOffScreen();
 
 		assertTrue(bulletManager.getBullets().containsAll(insideBullets));
-		assertEquals(outsideBullets,
-				bulletCollector.getBullets()
-						.get(Constants.EVENT_REMOVED_ENTITY));
+		assertEquals(
+				outsideBullets,
+				bulletCollector1.getBullets().get(
+						Constants.EVENT_REMOVED_ENTITY));
 		for (AbstractBullet outsideBullet : outsideBullets) {
 			assertFalse(bulletManager.getBullets().contains(outsideBullet));
 		}
@@ -313,9 +319,5 @@ public class BulletManagerTest extends TestCase {
 		assertEquals(enemyBullets.size(),
 				bulletManager.getBulletsFrom(PlayerID.ENEMY).size());
 	}
-	
-	public void testGetBullets()
-	{
-		fail("Not yet tested");
-	}
+
 }

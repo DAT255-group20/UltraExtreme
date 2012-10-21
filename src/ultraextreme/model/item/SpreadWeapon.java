@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.model.item;
 
 import ultraextreme.model.entity.BasicBullet;
@@ -20,7 +40,7 @@ public class SpreadWeapon extends AbstractWeapon {
 	private float cooldown;
 
 	public SpreadWeapon(BulletManager bulletManager) {
-		super(bulletManager, ObjectName.BASIC_SPREAD_WEAPON);
+		super(bulletManager, ObjectName.SPREAD_WEAPON);
 		cooldown = INIT_COOLDOWN;
 	}
 
@@ -31,8 +51,8 @@ public class SpreadWeapon extends AbstractWeapon {
 		if (cooldown < 0) {
 			cooldown = cooldown + INIT_COOLDOWN;
 			int shotToFire = NR_OF_SHOTS;
-			if (shotToFire % 2 == 1) { // Shoots one straight forward if shots
-										// are uneven;
+			if (shotToFire % 2 == 1) {
+				// Shoots one straight forward if shots are uneven
 				this.getBulletManager().addBullet(
 						new BasicBullet(shipPosition.getX(), shipPosition
 								.getY(), BULLET_WIDTH, BULLET_HEIGHT, playerId,

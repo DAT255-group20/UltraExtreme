@@ -28,6 +28,17 @@ package ultraextreme.model;
  */
 public class ModelInput {
 
+	/*
+	 * Sonar is complaining about these public variables. I just want to assure
+	 * that I am fully aware of that and that it is designed with this in mind.
+	 * Since the variables are final, they must be declared in the constructor.
+	 * After that you can only use their "publicness" to read from them (and
+	 * since they are primitives there are no references that can be
+	 * manipulated). There is no way that they can be set in any other way then
+	 * the constructor. The reason for this design is simply that it is shorter
+	 * to write "input.dX" instead of "input.getDX()" and nothing is lost in
+	 * this shortcut. >> Bjorn P M (Plankton)
+	 */
 	/** The player movement change on the x axis. */
 	public final double dX;
 

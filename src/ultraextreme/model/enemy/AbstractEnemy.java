@@ -43,7 +43,7 @@ public abstract class AbstractEnemy implements IEnemy {
 	private final EnemyShip ship;
 	private final AbstractWeapon weapon;
 	private final Rotation enemyRotation;
-	private final static Random RANDOM_GENERATOR = new Random();
+	private static final Random RANDOM_GENERATOR = new Random();
 
 	protected AbstractEnemy(final EnemyShip ship, final AbstractWeapon weapon) {
 		this.ship = ship;

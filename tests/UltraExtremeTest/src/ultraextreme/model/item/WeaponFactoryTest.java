@@ -44,18 +44,18 @@ public class WeaponFactoryTest extends TestCase {
 	@Test
 	public void testGetNewWeapon() {
 		WeaponFactory.initialize(manager);
-		
+
 		AbstractWeapon weapon = WeaponFactory
 				.getNewWeapon(ObjectName.BASIC_WEAPON);
 		assertEquals(ObjectName.BASIC_WEAPON, weapon.getName());
 		assertTrue(weapon.getBulletManager().equals(manager));
-		
+
 		weapon = WeaponFactory.getNewWeapon(ObjectName.SPINNING_WEAPON);
 		assertEquals(ObjectName.SPINNING_WEAPON, weapon.getName());
 		assertTrue(weapon.getBulletManager().equals(manager));
-		
-		weapon = WeaponFactory.getNewWeapon(ObjectName.BASIC_SPREAD_WEAPON);
-		assertEquals(ObjectName.BASIC_SPREAD_WEAPON, weapon.getName());
+
+		weapon = WeaponFactory.getNewWeapon(ObjectName.SPREAD_WEAPON);
+		assertEquals(ObjectName.SPREAD_WEAPON, weapon.getName());
 		assertTrue(weapon.getBulletManager().equals(manager));
 	}
 

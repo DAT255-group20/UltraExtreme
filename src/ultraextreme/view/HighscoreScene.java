@@ -1,3 +1,23 @@
+/* ============================================================
+ * Copyright 2012 Bjorn Persson Mattsson, Johan Gronvall, Daniel Jonsson,
+ * Viktor Anderling
+ *
+ * This file is part of UltraExtreme.
+ *
+ * UltraExtreme is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * UltraExtreme is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with UltraExtreme. If not, see <http://www.gnu.org/licenses/>.
+ * ============================================================ */
+
 package ultraextreme.view;
 
 import java.util.Collections;
@@ -21,6 +41,8 @@ public class HighscoreScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
 	public static final int CLEAR_LIST = 1;
+	
+	private static final int NR_OF_HIGHSCORES = 10;
 
 	// TODO(plankton) Make these centered on the screen
 	private static final Position GOTOMENU_BTN_POS = new Position(100, 100);
@@ -29,7 +51,7 @@ public class HighscoreScene extends MenuScene {
 	private static final Position HIGHSCORE_LIST_POS = new Position(80, 220);
 	private static final int HIGHSCORE_DISPERSION = 50;
 
-	private HighscoreText[] highscores = new HighscoreText[10];
+	private HighscoreText[] highscores = new HighscoreText[NR_OF_HIGHSCORES];
 
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {

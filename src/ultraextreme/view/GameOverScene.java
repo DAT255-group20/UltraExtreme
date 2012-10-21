@@ -20,11 +20,15 @@
 
 package ultraextreme.view;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.engine.camera.Camera;
-import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
-import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.entity.scene.menu.item.SpriteMenuItem;
+import org.andengine.entity.sprite.Sprite;
+import org.andengine.entity.text.Text;
 import org.andengine.helperclasses.InputText;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -32,12 +36,14 @@ import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.util.color.Color;
 
 import ultraextreme.model.IUltraExtremeModel;
+import ultraextreme.model.util.Dimension;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
 
 /**
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class GameOverScene extends MenuScene {
@@ -47,29 +53,85 @@ public class GameOverScene extends MenuScene {
 	private IUltraExtremeModel gameModel;
 	private InputText nameInput;
 
+	private Text scoreText;
+
 	public GameOverScene(IUltraExtremeModel gameModel, final Camera camera,
 			final Font font,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			BaseGameActivity activity) {
 		super(camera);
 		this.gameModel = gameModel;
-		setBackground(new Background(0.9f, 0.1f, 0.1f));
-		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
-				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
-				vertexBufferObjectManager);
-		gotoMenuButton.setPosition(100, 100);
-		gotoMenuButton.setColor(Color.BLACK);
-		addMenuItem(gotoMenuButton);
 
-		// TODO(plankton) Extract strings
-		nameInput = new InputText(100, 300, "Highscore name",
-				"Enter your name for the highscore list",
+		/*
+		 * Add the background.
+		 */
+		final float screenWidth = camera.getWidth();
+		final float screenHeight = camera.getHeight();
+		final SpriteBackground background = new SpriteBackground(new Sprite(0,
+				0, screenWidth, screenHeight,
+				SpriteFactory.getGameOverBackgroundTexture(),
+				vertexBufferObjectManager));
+		setBackground(background);
+
+		/*
+		 * Scaling
+		 */
+		final Dimension screenDimension = new Dimension(screenWidth,
+				screenHeight);
+		// The following resolution is what the background and buttons were made
+		// for
+		Vector2d scaling = screenDimension
+				.getQuotient(new Dimension(800, 1280));
+
+		/*
+		 * Add the save button.
+		 */
+		final IMenuItem saveButton = new SpriteMenuItem(GOTO_MENU,
+				SpriteFactory.getGameOverSaveButtonTexture(),
+				vertexBufferObjectManager);
+		saveButton.setWidth((float) scaling.x * saveButton.getWidth());
+		saveButton.setHeight((float) scaling.y * saveButton.getHeight());
+		saveButton.setX((screenWidth - saveButton.getWidth()) / 2);
+		saveButton.setY((float) scaling.y * 950);
+		addMenuItem(saveButton);
+
+		/*
+		 * Add static tag and score text.
+		 */
+		final Sprite staticText = new Sprite(0, 0,
+				SpriteFactory.getGameOverTextTexture(),
+				vertexBufferObjectManager);
+		staticText.setWidth((float) scaling.x * staticText.getWidth());
+		staticText.setHeight((float) scaling.y * staticText.getHeight());
+		staticText.setX((screenWidth - staticText.getWidth()) / 2);
+		staticText.setY((float) scaling.y * 450);
+		attachChild(staticText);
+
+		// TODO: ResourceName.GOTO_MENU not needed anymore
+
+		/*
+		 * Add dynamic score.
+		 */
+		scoreText = new Text((float) scaling.x * 240, (float) scaling.y * 605,
+				font, "                  ", vertexBufferObjectManager);
+		scoreText.setColor(Color.BLACK);
+		attachChild(scoreText);
+
+		/*
+		 * Field where the player can type his name/tag
+		 */
+		nameInput = new InputText((float) scaling.x * 240,
+				(float) scaling.y * 855, Resources.getInstance().getResource(
+						ResourceName.HIGHSCORE_INPUT_TITLE), Resources
+						.getInstance().getResource(
+								ResourceName.HIGHSCORE_INPUT_TEXT),
 				SpriteFactory.getTextInputBackground(), font, 0, 0,
 				vertexBufferObjectManager, activity);
-		nameInput.setText("Mr. Anon");
+		nameInput.setText(Resources.getInstance().getResource(
+				ResourceName.DEFAULT_HIGHSCORE_NAME));
 		nameInput.getChildByIndex(0).setColor(Color.BLACK); // Change text color
-		this.attachChild(nameInput);
-		this.registerTouchArea(nameInput);
+		attachChild(nameInput);
+		registerTouchArea(nameInput);
 	}
 
 	/**
@@ -84,5 +146,9 @@ public class GameOverScene extends MenuScene {
 	 */
 	public int getScore() {
 		return gameModel.getPlayer().getScore();
+	}
+
+	public void updateScene() {
+		scoreText.setText(Integer.toString(getScore()));
 	}
 }

@@ -138,8 +138,9 @@ public class ItemBarTest extends TestCase {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
 		resetInstanceVariables(5);
 		// Fill the item bar
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < 5; ++i) {
 			itemBar.addItem(item);
+		}
 		assertEquals("Marker on first position", 0, itemBar.getMarkerPosition());
 		itemBar.loseItems();
 		assertEquals("Marker on last position", 4, itemBar.getMarkerPosition());

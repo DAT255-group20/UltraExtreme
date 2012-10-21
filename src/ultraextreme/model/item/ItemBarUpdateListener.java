@@ -22,7 +22,7 @@ package ultraextreme.model.item;
 
 /**
  * A class that wants to know when an ItemBar has been updated/changed needs to
- * implement this add add itself ass a listener to the ItemBar.
+ * implement this and add itself as a listener to the ItemBar.
  * 
  * @author Daniel Jonsson
  * 
@@ -35,5 +35,5 @@ public interface ItemBarUpdateListener {
 	 * @param itemBar
 	 *            The item bar that has been updated.
 	 */
-	public void itemBarUpdated(ItemBar itemBar);
+	void itemBarUpdated(ItemBar itemBar);
 }

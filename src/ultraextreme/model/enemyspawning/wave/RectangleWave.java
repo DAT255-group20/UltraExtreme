@@ -98,13 +98,6 @@ public class RectangleWave extends AbstractWave {
 	 */
 	private void spawnLine() {
 		for (int i = 0; i < enemiesInLines; i++) {
-			// fireNewEnemySpawned(new BasicEnemy(
-			// spawningPosition.getX() + i * 75, spawningPosition.getY(),
-			// rotation, this.bulletManager));
-			// fireNewEnemySpawned(new HitAndRunEnemy(spawningPosition,
-			// spawningPosition, spawningPosition, this.bulletManager));
-			// fireNewEnemySpawned(new HitAndRunEnemy(spawningPosition,
-			// new Position(500, 500), spawningPosition));
 			Position p = new Position(spawningPosition.getX() + i * 75,
 					spawningPosition.getY());
 			fireNewEnemySpawned(enemyProvider.getEnemy(p, rotation));

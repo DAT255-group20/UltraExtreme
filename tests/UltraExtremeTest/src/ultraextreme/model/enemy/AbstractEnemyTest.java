@@ -24,6 +24,7 @@ import junit.framework.TestCase;
 import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.Position;
 
 /**
  * 
@@ -32,27 +33,19 @@ import ultraextreme.model.item.WeaponFactory;
  */
 public class AbstractEnemyTest extends TestCase {
 
-	BulletManager bulletManager;
-	AbstractEnemy enemy;
+	protected BulletManager bulletManager;
+	protected AbstractEnemy enemy;
 
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();
 		WeaponFactory.initialize(bulletManager);
-		enemy = new BasicEnemy(5, 5);
+		enemy = new BasicEnemy(new Position(5, 5));
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		resetInstanceVariables();
-	}
-
-	public void testGetShip() {
-		fail("Not yet tested");
-	}
-
-	public void testGetWeapon() {
-		fail("Not yet tested");
 	}
 
 	/**
@@ -71,9 +64,5 @@ public class AbstractEnemyTest extends TestCase {
 	public void testShoot() {
 		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
 		assertTrue(!bulletManager.getBullets().isEmpty());
-	}
-
-	public void testShouldSpawnPickup() {
-		fail("Not yet tested");
 	}
 }
