@@ -32,6 +32,7 @@ import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.entity.WeaponPickup;
+import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
 import ultraextreme.model.item.WeaponFactory;
@@ -217,6 +218,7 @@ public class GameModel implements IUltraExtremeModel {
 				Difficulty.NORMAL));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
+		player.giveWeapon(new BasicWeapon(bulletManager));
 
 		// TODO(matachi) Reset enemyspawner too?
 	}

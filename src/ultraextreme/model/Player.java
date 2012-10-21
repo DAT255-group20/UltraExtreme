@@ -187,7 +187,6 @@ public class Player implements IPlayer {
 	 * Sets the players ship to its spawn point.
 	 */
 	private void setShipToSpawn() {
-		giveWeapon(new BasicWeapon(bulletManager));
 		final Dimension levelDimension = Constants.getLevelDimension();
 		ship.setPosition(new Position(levelDimension.getX() * 0.5
 				- ship.getWidth() / 2, levelDimension.getY() * 0.65));
@@ -217,6 +216,7 @@ public class Player implements IPlayer {
 					ship.setDestroyed();
 				} else {
 					setShipToSpawn();
+					giveWeapon(new BasicWeapon(bulletManager));
 				}
 			}
 			if (!ship.isDestroyed()) {
