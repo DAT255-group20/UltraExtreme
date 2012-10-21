@@ -224,7 +224,7 @@ public class PlayerTest extends TestCase {
 
 		player.getShip().receiveDamage(1);
 		player.update(m, 1);
-		assertEquals(preLives, player.getLives());
+		assertEquals(preLives - 1, player.getLives());
 		assertFalse(player.getShip().isDestroyed());
 
 		while (player.getLives() > 0) {
@@ -250,12 +250,22 @@ public class PlayerTest extends TestCase {
 	private void updateTester(int dX, int dY, boolean fireWeapons,
 			boolean dropBomb) {
 		this.resetInstanceVariables();
+		player.giveWeapon(new BasicWeapon(bulletManager));
 		Position pOld = new Position(player.getShip().getPositionClone());
 		ModelInput m = new ModelInput(dX, dY, fireWeapons, dropBomb);
 		player.update(m, 1);
 		Position pNew = player.getShip().getPositionClone();
-		assertEquals(pOld.getX() + dX, pNew.getX());
-		assertEquals(pOld.getY() + dY, pNew.getY());
+		if(dX > 0) {
+			assertEquals(pOld.getX() + dX, pNew.getX());
+		} else {
+			assertEquals(pOld.getX(), pNew.getX());
+		}
+		if(dY > 0) {
+			assertEquals(pOld.getY() + dY, pNew.getY());
+		} else {
+			assertEquals(pOld.getY(), pNew.getY());
+		}
+
 		if (fireWeapons) {
 			assertTrue(bulletManager.getBullets().size() > 0);
 		} else {
