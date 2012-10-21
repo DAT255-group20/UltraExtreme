@@ -35,13 +35,15 @@ import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IEntity;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.ObjectName;
+import ultraextreme.model.util.PlayerID;
 
 /**
  * Class in charge of creating new GameObjectSprites
- * 
+ * as well as instantiating them
  * @author Johan Gronvall
  * 
  */
@@ -54,6 +56,8 @@ public final class SpriteFactory {
 	private static final String BACKGROUND = "background";
 
 	private Map<ObjectName, ITextureRegion> textureMap = new HashMap<ObjectName, ITextureRegion>();
+	
+	private Map<ObjectName, ITextureRegion> enemyBulletTextureMap = new HashMap<ObjectName, ITextureRegion>();
 
 	private Map<ObjectName, Vector2d> offsetMap = new HashMap<ObjectName, Vector2d>();
 
@@ -106,65 +110,63 @@ public final class SpriteFactory {
 		BitmapTextureAtlas textureAtlas = new BitmapTextureAtlas(
 				textureManager, 502, 119,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		// TODO make textureAtlas as small as possible (also play tetris with
-		// the textures to make it smaller)
 
 		// init enemies, bullets and the player
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "ship_blue_42px.png",
 						40, 0);
-		putProperties(ObjectName.PLAYERSHIP, playerShip, new Vector2d(16.5, 13));
+		putProperties(ObjectName.PLAYERSHIP, playerShip, new Vector2d(16.5, 13)
+		, false);
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "laserGreen.png", 0,
 						34);
 		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
-				16.5));
-
-		// final TextureRegion enemyBullet =
-		// BitmapTextureAtlasTextureRegionFactory
-		// .createFromAsset(textureAtlas, activity, "laserRed.png", 0, 34);
-		// putProperties(ObjectName.BASIC_BULLET, playerBullet, new
-		// Vector2d(4.5,
-		// 16.5));
+				16.5), false);
+		
+		//create a texture for enemy bullets
+		final TextureRegion enemyBullet = BitmapTextureAtlasTextureRegionFactory
+		 .createFromAsset(textureAtlas, activity, "laserRed.png", 0, 0);
+		 putProperties(ObjectName.BASIC_BULLET, enemyBullet, new Vector2d(
+				 4.5, 16.5), true);
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship_1.png",
 						165, 0);
 		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27,
-				40));
+				40), false);
 
 		final TextureRegion hitAndRunEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship_2.png",
 						221, 0);
 
 		putProperties(ObjectName.HITANDRUN_ENEMYSHIP, hitAndRunEnemy,
-				new Vector2d(27, 40));
+				new Vector2d(27, 40), false);
 
 		final TextureRegion parabolaEnemy = BitmapTextureAtlasTextureRegionFactory
 
 		.createFromAsset(textureAtlas, activity, "evil_ship_3.png", 275, 0);
 
 		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy,
-				new Vector2d(56, 59));
+				new Vector2d(56, 59), false);
 
 		// init pickupables
 		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "cannon.png", 73, 31);
 		putProperties(ObjectName.BASIC_WEAPON, basicWeapon,
-				new Vector2d(15, 15));
+				new Vector2d(15, 15), false);
 		itemTextures.put(ObjectName.BASIC_WEAPON, basicWeapon);
 
 		final TextureRegion spinningWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "spin.png", 9, 31);
 		putProperties(ObjectName.SPINNING_WEAPON, spinningWeapon, new Vector2d(
-				15, 15));
+				15, 15), false);
 		itemTextures.put(ObjectName.SPINNING_WEAPON, spinningWeapon);
 
 		final TextureRegion spreadWeapon = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "spread.png", 73, 0);
 		putProperties(ObjectName.SPREAD_WEAPON, spreadWeapon, new Vector2d(15,
-				15));
+				15), false);
 		itemTextures.put(ObjectName.SPREAD_WEAPON, spinningWeapon);
 
 		// Init the item bar texture
@@ -181,8 +183,6 @@ public final class SpriteFactory {
 				.createTiledFromAsset(textureAtlas, activity, "button_1.png",
 						331, 0, 1, 1);
 
-		// What is this for?(I think it needs to be called to init the atlas, we
-		// will never know.. gramlich 2012)
 		textureManager.loadTexture(textureAtlas);
 
 		// Init main menu atlas and texture map
@@ -338,6 +338,13 @@ public final class SpriteFactory {
 		ObjectName objName = entity.getObjectName();
 		ITextureRegion texture = instance.textureMap.get(objName);
 		Vector2d offset = instance.offsetMap.get(objName);
+		
+		if(entity instanceof AbstractBullet) {
+			if (((AbstractBullet) entity).getPlayerId().equals(PlayerID.ENEMY)) {
+				texture = instance.enemyBulletTextureMap.get(objName);
+			}
+		}
+		
 		if (texture == null) {
 			throw new IllegalArgumentException(
 					"No texture is associated with that kind of object");
@@ -367,11 +374,19 @@ public final class SpriteFactory {
 	 * @param textureOffset
 	 *            The offset that goes into offsetMap, multiplied with the
 	 *            sprite scaling factor.
+	 * @param enemyBulletTexture
+	 * 			  Whether this texture is of an enemyBullet, in which case
+	 * 			  certain changes will be made
 	 */
 	private void putProperties(ObjectName objectName, TextureRegion texture,
-			Vector2d textureOffset) {
+			Vector2d textureOffset, boolean enemyBulletTexture) {
+		
 		textureOffset.scale(ultraextreme.util.Constants.SPRITE_SCALE_FACTOR);
-		textureMap.put(objectName, texture);
-		offsetMap.put(objectName, textureOffset);
+		if(enemyBulletTexture) {
+			enemyBulletTextureMap.put(objectName, texture);
+		} else {
+			textureMap.put(objectName, texture);
+			offsetMap.put(objectName, textureOffset);
+		}
 	}
 }
