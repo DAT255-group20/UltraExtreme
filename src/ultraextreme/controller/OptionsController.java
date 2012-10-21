@@ -11,6 +11,11 @@ import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.model.util.Difficulty;
 import ultraextreme.view.OptionsScene;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class OptionsController extends AbstractController implements
 		IOnMenuItemClickListener {
 	
@@ -24,9 +29,25 @@ public class OptionsController extends AbstractController implements
 	}
 	
 	@Override
-	public boolean onMenuItemClicked(MenuScene arg0, IMenuItem arg1,
-			float arg2, float arg3) {
-		// TODO Auto-generated method stub
+	public boolean onMenuItemClicked(final MenuScene menuScene,
+			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
+		switch (menuItem.getID()) {
+		case OptionsScene.CHANGE_DIFFICULTY:
+			scene.updateDifficultyButton(Difficulty.HARD);
+			break;
+
+		case OptionsScene.RESET_HIGH_SCORES:
+			// FIXME
+			break;
+
+		case OptionsScene.RETURN_TO_MAIN_MENU:
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_MENU));
+			break;
+
+		default:
+			break;
+		}
 		return true;
 	}
 

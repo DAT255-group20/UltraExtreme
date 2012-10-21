@@ -12,12 +12,19 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.Dimension;
-import ultraextreme.view.SpriteFactory.OPTIONS_TEXTURES;
+import ultraextreme.view.SpriteFactory.OptionsTexture;
 
 public class OptionsScene extends MenuScene {
 
 	// Button IDs
 	public static final int CHANGE_DIFFICULTY = 0;
+	public static final int RESET_HIGH_SCORES = 1;
+	public static final int RETURN_TO_MAIN_MENU = 2;
+	
+	IMenuItem button;
+	VertexBufferObjectManager vertexBufferObjectManager;
+	Vector2d scaling;
+	float screenWidth;
 
 	public OptionsScene(final Camera camera,
 			final VertexBufferObjectManager vertexBufferObjectManager,
@@ -28,12 +35,14 @@ public class OptionsScene extends MenuScene {
 		 * Add the background.
 		 */
 		final float screenWidth = camera.getWidth();
+		this.screenWidth = screenWidth;
 		final float screenHeight = camera.getHeight();
 		final SpriteBackground background = new SpriteBackground(new Sprite(0,
 				0, screenWidth, screenHeight,
-				SpriteFactory.getOptionsTexture(OPTIONS_TEXTURES.BACKGROUND),
+				SpriteFactory.getOptionsTexture(OptionsTexture.BACKGROUND),
 				vertexBufferObjectManager));
 		setBackground(background);
+		this.vertexBufferObjectManager = vertexBufferObjectManager;
 
 		/*
 		 * Scaling
@@ -44,22 +53,38 @@ public class OptionsScene extends MenuScene {
 		// for
 		Vector2d scaling = screenDimension
 				.getQuotient(new Dimension(800, 1280));
+		this.scaling = scaling;
 
 		/*
 		 * Add the difficulty button.
 		 */
-		addButton(CHANGE_DIFFICULTY, 950, OPTIONS_TEXTURES.NORMAL_DIFFICULTY,
+		button = addButton(CHANGE_DIFFICULTY, 350, OptionsTexture.NORMAL_DIFFICULTY,
 				scaling, screenWidth, vertexBufferObjectManager);
 
 		/*
 		 * Add the reset button.
 		 */
-		addButton(CHANGE_DIFFICULTY, 650, OPTIONS_TEXTURES.RESET_BUTTON,
+		addButton(RESET_HIGH_SCORES, 650, OptionsTexture.RESET_BUTTON,
+				scaling, screenWidth, vertexBufferObjectManager);
+		
+		/*
+		 * Add the return button.
+		 */
+		addButton(RETURN_TO_MAIN_MENU, 950, OptionsTexture.RETURN_BUTTON,
 				scaling, screenWidth, vertexBufferObjectManager);
 	}
 
-	private void addButton(final int destination, final int y,
-			final OPTIONS_TEXTURES texture, final Vector2d scaling,
+	/**
+	 * Add a button the the scene
+	 * @param destination
+	 * @param y
+	 * @param texture
+	 * @param scaling
+	 * @param screenWidth
+	 * @param vertexBufferObjectManager
+	 */
+	private IMenuItem addButton(final int destination, final int y,
+			final OptionsTexture texture, final Vector2d scaling,
 			final float screenWidth,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		final IMenuItem button = new SpriteMenuItem(destination,
@@ -70,9 +95,18 @@ public class OptionsScene extends MenuScene {
 		button.setX((screenWidth - button.getWidth()) / 2);
 		button.setY((float) scaling.y * y);
 		addMenuItem(button);
+		return button;
 	}
 
 	public void updateDifficultyButton(Difficulty difficulty) {
-
+		detachChild(button);
+		button = new SpriteMenuItem(CHANGE_DIFFICULTY,
+				SpriteFactory.getOptionsTexture(OptionsTexture.EXTREME_DIFFICULTY),
+				vertexBufferObjectManager);
+		button.setWidth((float) scaling.x * button.getWidth());
+		button.setHeight((float) scaling.y * button.getHeight());
+		button.setX((screenWidth - button.getWidth()) / 2);
+		button.setY((float) scaling.y * 350);
+		addMenuItem(button);
 	}
 }
