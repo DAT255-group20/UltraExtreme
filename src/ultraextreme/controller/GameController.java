@@ -64,7 +64,7 @@ public class GameController extends AbstractController implements
 	public GameController(
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			final SensorManager sensorManager,
-			final SimpleBaseGameActivity activity, float scaling,
+			final SimpleBaseGameActivity activity,
 			Camera camera, Font font) {
 		super();
 		gameModel = new GameModel();
