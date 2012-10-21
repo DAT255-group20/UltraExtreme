@@ -88,8 +88,16 @@ public class DimensionTest extends TestCase {
 		assertTrue(Math.abs(qVec.x * 5 - newPos.getX()) < epsilon
 				&& Math.abs(qVec.y * 20 - newPos.getY()) < epsilon);
 	}
-
+	/**
+	 * makes sure the hashCode method returns a number
+	 */
+	@SuppressWarnings("unused")
 	public void testHashcode() {
-		fail("Not yet tested");
+		try {
+			dimension = new Dimension(1,1);
+			int number = (int)dimension.hashCode();
+		}catch(ClassCastException e) {
+			fail();
+		}
 	}
 }
