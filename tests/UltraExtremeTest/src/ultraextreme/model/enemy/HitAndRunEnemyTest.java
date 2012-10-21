@@ -33,11 +33,11 @@ import ultraextreme.model.util.Position;
  * 
  */
 public class HitAndRunEnemyTest extends TestCase {
-	Position startPoint;
-	Position endPoint;
-	Position firePoint;
-	HitAndRunEnemy enemy;
-	BulletManager manager;
+	private Position startPoint;
+	private Position endPoint;
+	private Position firePoint;
+	private HitAndRunEnemy enemy;
+	private BulletManager manager;
 
 	@Override
 	public void setUp() {

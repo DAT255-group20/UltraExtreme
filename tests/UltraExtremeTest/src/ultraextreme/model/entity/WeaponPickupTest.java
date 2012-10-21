@@ -28,7 +28,7 @@ import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 
 public class WeaponPickupTest extends TestCase {
-	WeaponPickup pickup;
+	private WeaponPickup pickup;
 
 	@Override
 	public void setUp() {
