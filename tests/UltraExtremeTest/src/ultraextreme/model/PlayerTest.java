@@ -197,7 +197,6 @@ public class PlayerTest extends TestCase {
 	 * Test the update method with a lot of different values.
 	 */
 	public void testUpdate() {
-		// FIXME: Doesn't test the drop bomb feature yet.
 		updateTester(0, 0, false, false);
 		updateTester(5, 10, false, false);
 		updateTester(-5, -10, false, false);

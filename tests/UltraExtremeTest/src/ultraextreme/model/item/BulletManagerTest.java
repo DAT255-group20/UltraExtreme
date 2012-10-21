@@ -317,7 +317,4 @@ public class BulletManagerTest extends TestCase {
 				bulletManager.getBulletsFrom(PlayerID.ENEMY).size());
 	}
 
-	public void testGetBullets() {
-		fail("Not yet tested");
-	}
 }
