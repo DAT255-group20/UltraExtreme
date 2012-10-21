@@ -50,14 +50,6 @@ public class HitAndRunEnemyTest extends TestCase {
 				ObjectName.SPINNING_WEAPON);
 	}
 
-	public void testGetScoreValue() {
-		fail("Not yet tested");
-	}
-
-	public void testGetWaitingTime() {
-		fail("Not yet tested");
-	}
-
 	public void testGoTowardPosition() {
 		enemy.goTowardPosition(firePoint, (float) 0.01);
 		assertTrue(enemy.getShip().getPositionClone().getX() > 5.0);

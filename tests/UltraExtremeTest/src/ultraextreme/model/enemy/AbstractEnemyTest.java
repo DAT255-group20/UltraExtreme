@@ -47,15 +47,6 @@ public class AbstractEnemyTest extends TestCase {
 		super.setUp();
 		resetInstanceVariables();
 	}
-
-	public void testGetShip() {
-		fail("Not yet tested");
-	}
-
-	public void testGetWeapon() {
-		fail("Not yet tested");
-	}
-
 	/**
 	 * Tests the isDead() method
 	 */
@@ -72,9 +63,5 @@ public class AbstractEnemyTest extends TestCase {
 	public void testShoot() {
 		enemy.shoot(BasicWeapon.getInitCooldown() + 0.0000001f);
 		assertTrue(!bulletManager.getBullets().isEmpty());
-	}
-
-	public void testShouldSpawnPickup() {
-		fail("Not yet tested");
 	}
 }

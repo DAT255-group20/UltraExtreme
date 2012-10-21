@@ -122,12 +122,4 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 			assertFalse(waveList.hasNext());
 		}
 	}
-
-	public void testGetCurrentSpawningTime() {
-		fail("Not yet tested");
-	}
-
-	public void testGetCurrentWave() {
-		fail("Not yet tested");
-	}
 }
