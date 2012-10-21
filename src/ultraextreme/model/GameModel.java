@@ -38,6 +38,7 @@ import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Settings;
 
 /**
  * The main class for a running game.
@@ -59,13 +60,11 @@ public class GameModel implements IUltraExtremeModel {
 	private EnemySpawner enemySpawner;
 
 	private PickupManager pickupManager;
-	
-	final static private Settings SETTINGS = new Settings();
 
 	private PropertyChangeSupport pcs;
 
 	public GameModel() {
-		SETTINGS.setDifficulty(Difficulty.NORMAL);
+		Settings.setDifficulty(Difficulty.NORMAL);
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
@@ -166,13 +165,6 @@ public class GameModel implements IUltraExtremeModel {
 	@Override
 	public IPlayer getPlayer() {
 		return player;
-	}
-	
-	/**
-	 * @return The settings for this game.
-	 */
-	public static Settings getSettings() {
-		return SETTINGS;
 	}
 
 	/**

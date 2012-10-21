@@ -23,7 +23,6 @@ package ultraextreme.model.enemyspawning.wavelist;
 import java.security.SecureRandom;
 import java.util.Random;
 
-import ultraextreme.model.GameModel;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.HitAndRunEnemy;
@@ -37,6 +36,7 @@ import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
+import ultraextreme.model.util.Settings;
 
 public class RandomWaveList extends AbstractWaveList {
 
@@ -91,7 +91,7 @@ public class RandomWaveList extends AbstractWaveList {
 	public RandomWaveList(final int numberOfWaves,
 			final AbstractRandomGenerator randomGenerator) {
 		super(numberOfWaves);
-		scaleToDifficulty(GameModel.getSettings().getDifficulty());
+		scaleToDifficulty(Settings.getDifficulty());
 		this.currentDifficultyMod = 1;
 		this.screenWidth = (int) Constants.getLevelDimension().getX();
 		this.randomGenerator = randomGenerator;
