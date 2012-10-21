@@ -265,9 +265,10 @@ public class BulletManagerTest extends TestCase {
 		bulletManager.clearBulletsOffScreen();
 
 		assertTrue(bulletManager.getBullets().containsAll(insideBullets));
-		assertEquals(outsideBullets,
-				bulletCollector1.getBullets()
-						.get(Constants.EVENT_REMOVED_ENTITY));
+		assertEquals(
+				outsideBullets,
+				bulletCollector1.getBullets().get(
+						Constants.EVENT_REMOVED_ENTITY));
 		for (AbstractBullet outsideBullet : outsideBullets) {
 			assertFalse(bulletManager.getBullets().contains(outsideBullet));
 		}

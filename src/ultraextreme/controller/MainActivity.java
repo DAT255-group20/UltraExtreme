@@ -33,9 +33,7 @@ import org.andengine.util.color.Color;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
 import ultraextreme.view.SpriteFactory;
-import android.content.Context;
 import android.graphics.Typeface;
-import android.hardware.SensorManager;
 
 /**
  * This is the main class of the game.
@@ -130,9 +128,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	protected Scene onCreateScene() {
 		highscoreDBOpenHelper = new HighscoreDBOpenHelper(this);
 		gameController = new GameController(
-				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				this, camera, defaultFont);
+				this.getVertexBufferObjectManager(), this, camera, defaultFont);
 		mainMenuController = new MainMenuController(camera,
 				this.getVertexBufferObjectManager());
 		gameOverController = new GameOverController(

@@ -50,8 +50,8 @@ public final class SpriteFactory {
 	public static void initialize(SimpleBaseGameActivity activity) {
 		instance = new SpriteFactory(activity);
 	}
-	
-	private static final String BACKGROUND = "background"; 
+
+	private static final String BACKGROUND = "background";
 
 	private Map<ObjectName, ITextureRegion> textureMap = new HashMap<ObjectName, ITextureRegion>();
 
@@ -192,10 +192,9 @@ public final class SpriteFactory {
 				textureManager, 800, 1730, TextureOptions.DEFAULT);
 
 		// Init the main menu background
-		mainMenuTextures.put(BACKGROUND,
-				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
-						textureAtlasMainMenu, activity, "main_menu_bg.jpg", 0,
-						0));
+		mainMenuTextures.put(BACKGROUND, BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlasMainMenu, activity,
+						"main_menu_bg.jpg", 0, 0));
 
 		// Init main menu's start button
 		mainMenuTextures.put("startButton",
@@ -221,10 +220,9 @@ public final class SpriteFactory {
 		BitmapTextureAtlas textureAtlasGameOver = new BitmapTextureAtlas(
 				textureManager, 800, 1984, TextureOptions.DEFAULT);
 		// Init the game over scene background
-		gameOverTextures.put(BACKGROUND,
-				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
-						textureAtlasGameOver, activity, "game_over_bg.jpg", 0,
-						0));
+		gameOverTextures.put(BACKGROUND, BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlasGameOver, activity,
+						"game_over_bg.jpg", 0, 0));
 		// Init game over text
 		gameOverTextures.put("text", BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlasGameOver, activity,

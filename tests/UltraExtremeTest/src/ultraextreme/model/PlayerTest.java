@@ -261,6 +261,5 @@ public class PlayerTest extends TestCase {
 		} else {
 			assertTrue(bulletManager.getBullets().size() == 0);
 		}
-		// assertEquals(bulletManager.isBombDropped(), dropBomb);
 	}
 }

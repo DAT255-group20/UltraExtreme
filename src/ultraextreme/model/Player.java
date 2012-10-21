@@ -48,7 +48,7 @@ import ultraextreme.model.util.Rotation;
 public class Player implements IPlayer {
 
 	private List<IPlayerListener> listeners = new ArrayList<IPlayerListener>();
-	
+
 	/**
 	 * Reference to the player's ship.
 	 */

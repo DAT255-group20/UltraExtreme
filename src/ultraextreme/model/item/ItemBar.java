@@ -64,10 +64,6 @@ public class ItemBar {
 	 */
 	private List<ItemBarUpdateListener> listeners = new ArrayList<ItemBarUpdateListener>();
 
-	// private Bomb bomb;
-
-	// private BulletManager bulletManager;
-
 	/**
 	 * Create an item bar.
 	 * 

@@ -151,7 +151,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	private boolean wentPastPoint(double prePos, double newPos, double goalPos) {
 		if (prePos > newPos) { // (came from right)
 			return goalPos > newPos;
-		} else {// if (prePos < newPos) { //(came from left)
+		} else /* if (prePos < newPos) */{ // (came from left)
 			return goalPos < newPos;
 		}
 	}

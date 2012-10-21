@@ -96,7 +96,7 @@ public class DimensionTest extends TestCase {
 	public void testHashcode() {
 		try {
 			dimension = new Dimension(1, 1);
-			int number = (int) dimension.hashCode();
+			int number = dimension.hashCode();
 		} catch (ClassCastException e) {
 			fail();
 		}
