@@ -124,10 +124,6 @@ public class PlayerTest extends TestCase {
 		assertEquals("Correct item bar size", 10, itemBar.getItems().size());
 	}
 
-	public void testPlayerListener() {
-		fail("Not yet tested");
-	}
-
 	public void testReset() {
 		WeaponFactory.initialize(bulletManager);
 		BasicEnemy enemy = new BasicEnemy(new Position(0, 0));
