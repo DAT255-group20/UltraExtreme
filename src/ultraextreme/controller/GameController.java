@@ -34,7 +34,6 @@ import ultraextreme.model.IPlayer;
 import ultraextreme.model.IPlayerListener;
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameScene;
-import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -63,16 +62,12 @@ public class GameController extends AbstractController implements
 
 	public GameController(
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final SensorManager sensorManager,
-			final SimpleBaseGameActivity activity, float scaling,
-			Camera camera, Font font) {
+			final SimpleBaseGameActivity activity, Camera camera, Font font) {
 		super();
 		gameModel = new GameModel();
-		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager,
-				activity.getResources().getDisplayMetrics().widthPixels,
-				activity.getResources().getDisplayMetrics().heightPixels,
-				camera, font);
+		scene = new GameScene(gameModel, vertexBufferObjectManager, activity
+				.getResources().getDisplayMetrics().widthPixels, activity
+				.getResources().getDisplayMetrics().heightPixels, camera, font);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
@@ -187,14 +182,6 @@ public class GameController extends AbstractController implements
 		Log.d("DEBUG", "Resetting the game model");
 		gameLoop.reset();
 		gameModel.reset();
-
-		/*
-		 * gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
-		 * gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
-		 * gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
-		 * gameModel.addPropertyChangeListener(gameLoop);
-		 * gameModel.registerPlayerListener(this);
-		 */
 	}
 
 	/**

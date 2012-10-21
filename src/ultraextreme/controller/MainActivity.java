@@ -30,13 +30,10 @@ import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
 import ultraextreme.view.SpriteFactory;
-import android.content.Context;
 import android.graphics.Typeface;
-import android.hardware.SensorManager;
 
 /**
  * This is the main class of the game.
@@ -59,8 +56,6 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private Scene currentScene;
 	private AbstractController currentController;
 	private HighscoreDBOpenHelper highscoreDBOpenHelper;
-
-	private float scaling;
 
 	@Override
 	public void controllerListenerUpdate(final ControllerEvent event) {
@@ -114,8 +109,6 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		initializeResources();
 		int cameraWidth = getResources().getDisplayMetrics().widthPixels;
 		int cameraHeight = getResources().getDisplayMetrics().heightPixels;
-		scaling = (float) (getResources().getDisplayMetrics().heightPixels / Constants
-				.getLevelDimension().getY());
 		camera = new Camera(0, 0, cameraWidth, cameraHeight);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
 				new RatioResolutionPolicy(cameraWidth, cameraHeight), camera);
@@ -135,10 +128,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	protected Scene onCreateScene() {
 		highscoreDBOpenHelper = new HighscoreDBOpenHelper(this);
 		gameController = new GameController(
-				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				this, scaling, camera, defaultFont);
-		mainMenuController = new MainMenuController(camera, defaultFont,
+				this.getVertexBufferObjectManager(), this, camera, defaultFont);
+		mainMenuController = new MainMenuController(camera,
 				this.getVertexBufferObjectManager());
 		gameOverController = new GameOverController(
 				gameController.getGameModel(), camera, defaultFont,

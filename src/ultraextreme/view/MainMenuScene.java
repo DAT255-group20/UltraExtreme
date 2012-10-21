@@ -28,7 +28,6 @@ import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.SpriteMenuItem;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.model.util.Dimension;
@@ -46,7 +45,7 @@ public class MainMenuScene extends MenuScene {
 	public static final int MENU_HIGHSCORE = 1;
 	public static final int MENU_EXIT = 2;
 
-	public MainMenuScene(final Camera camera, final Font font,
+	public MainMenuScene(final Camera camera,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super(camera);
 

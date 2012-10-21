@@ -31,8 +31,8 @@ public class SpreadWeapon extends AbstractWeapon {
 		if (cooldown < 0) {
 			cooldown = cooldown + INIT_COOLDOWN;
 			int shotToFire = NR_OF_SHOTS;
-			if (shotToFire % 2 == 1) { // Shoots one straight forward if shots
-										// are uneven;
+			if (shotToFire % 2 == 1) {
+				// Shoots one straight forward if shots are uneven
 				this.getBulletManager().addBullet(
 						new BasicBullet(shipPosition.getX(), shipPosition
 								.getY(), BULLET_WIDTH, BULLET_HEIGHT, playerId,

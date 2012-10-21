@@ -98,11 +98,6 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 					.getName());
 			Sprite sprite = new Sprite(x, y, width, height, texture,
 					vertexBufferObjectManager);
-			// Need a way for setting alpha for the whole panel instead of
-			// for the background panel and the sprites individually. This
-			// causes the sprites to be hard to see because you can see the
-			// panel through the sprites.
-			// sprite.setAlpha(alpha);
 			this.attachChild(sprite);
 		}
 	}

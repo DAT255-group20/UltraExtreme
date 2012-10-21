@@ -31,12 +31,7 @@ import junit.framework.TestCase;
  */
 public class RotationTest extends TestCase {
 
-	Rotation rotation;
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+	private Rotation rotation;
 
 	public void testGetRotatedCoordinates() {
 		rotation = new Rotation(0);

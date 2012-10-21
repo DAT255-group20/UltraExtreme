@@ -90,7 +90,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 		Position newPosition = this.getShip().getPositionClone();
 		double newX = newPosition.getX() + speed * timePassed;
 		newPosition.setX(newX);
-		newPosition.setY(CalcY(newX));
+		newPosition.setY(calcY(newX));
 		this.getShip().setPosition(newPosition);
 		this.getWeapon().fire(this.getShip().getCenteredPositionClone(),
 				PlayerID.ENEMY, new Rotation(0), timePassed);
@@ -105,7 +105,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 	 *            the horizontal coordinate
 	 * @return a new value for Y
 	 */
-	private double CalcY(double x) {
+	private double calcY(double x) {
 		double x0 = startPoint.getX();
 		double x1 = midPoint.getX();
 		double x2 = endPoint.getX();

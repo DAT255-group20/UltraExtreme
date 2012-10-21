@@ -64,7 +64,7 @@ public class RandomWaveList extends AbstractWaveList {
 	 * 
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
-	 * @param difficulty 
+	 * @param difficulty
 	 */
 	public RandomWaveList(final int numberOfWaves, Difficulty difficulty) {
 		this(numberOfWaves, new AbstractRandomGenerator() {
@@ -87,7 +87,7 @@ public class RandomWaveList extends AbstractWaveList {
 	 * @param randomGenerator
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
-	 * @param difficulty 
+	 * @param difficulty
 	 */
 	public RandomWaveList(final int numberOfWaves,
 			final AbstractRandomGenerator randomGenerator, Difficulty difficulty) {

@@ -33,11 +33,11 @@ import ultraextreme.model.util.Position;
  * 
  */
 public class HitAndRunEnemyTest extends TestCase {
-	Position startPoint;
-	Position endPoint;
-	Position firePoint;
-	HitAndRunEnemy enemy;
-	BulletManager manager;
+	private Position startPoint;
+	private Position endPoint;
+	private Position firePoint;
+	private HitAndRunEnemy enemy;
+	private BulletManager manager;
 
 	@Override
 	public void setUp() {
@@ -84,7 +84,7 @@ public class HitAndRunEnemyTest extends TestCase {
 			if (enemy.getShip().getPositionClone().equals(new Position(15, 15))) {
 				secondsStopped += 1;
 			}
-			if (secondsStopped == enemy.getWaitingTime() && stopped == false) {
+			if (!stopped && secondsStopped == enemy.getWaitingTime()) {
 				stopped = true;
 				supposedToStartMoving = true;
 				shot = (!manager.getBullets().isEmpty());

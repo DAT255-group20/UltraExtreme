@@ -43,8 +43,6 @@ public abstract class AbstractWeapon {
 		this.objectName = objectName;
 	}
 
-	// bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(),
-	// shipPosition.getY(), width, height, playerId));
 	public abstract void fire(Position shipPosition, PlayerID playerId,
 			Rotation rotation, float timeElapsed);
 

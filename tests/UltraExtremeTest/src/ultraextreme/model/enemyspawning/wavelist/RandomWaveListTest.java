@@ -81,7 +81,6 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 
 		// 5.5 + 7.5 = 13
 		assertEquals(waveList1.getCurrentSpawningTime(), 13f);
-		// assertTrue(waveList.getCurrentWave() instanceof VerticalLineWave);
 
 		waveList1.next();
 

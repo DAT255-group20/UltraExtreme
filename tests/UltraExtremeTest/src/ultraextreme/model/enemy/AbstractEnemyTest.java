@@ -33,8 +33,8 @@ import ultraextreme.model.util.Position;
  */
 public class AbstractEnemyTest extends TestCase {
 
-	BulletManager bulletManager;
-	AbstractEnemy enemy;
+	protected BulletManager bulletManager;
+	protected AbstractEnemy enemy;
 
 	private void resetInstanceVariables() {
 		bulletManager = new BulletManager();

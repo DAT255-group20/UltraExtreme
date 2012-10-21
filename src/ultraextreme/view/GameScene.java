@@ -37,10 +37,6 @@ import ultraextreme.model.item.ItemBar;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 
 /**
  * Class responsible for reflecting the model with a graphical representation
@@ -49,7 +45,7 @@ import android.hardware.SensorManager;
  * @author Daniel Jonsson
  * 
  */
-public class GameScene extends Scene implements SensorEventListener {
+public class GameScene extends Scene {
 
 	// FIXME These shouldn't be hard-coded in?
 	private static final Position SCORE_POS = new Position(10, 10);
@@ -61,8 +57,8 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public GameScene(final IUltraExtremeModel gameModel,
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final SensorManager sensorManager, final double screenWidth,
-			final double screenHeight, Camera camera, Font font) {
+			final double screenWidth, final double screenHeight, Camera camera,
+			Font font) {
 		super();
 
 		setBackground(new Background(0, 0, 0));
@@ -96,10 +92,6 @@ public class GameScene extends Scene implements SensorEventListener {
 		hud.attachChild(scoreText);
 		hud.attachChild(livesText);
 		camera.setHUD(hud);
-
-		sensorManager.registerListener(this,
-				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-				SensorManager.SENSOR_DELAY_GAME);
 	}
 
 	public List<GameObjectSprite> getGameObjectSprites() {
@@ -108,17 +100,6 @@ public class GameScene extends Scene implements SensorEventListener {
 
 	public ItemBarPanel getItemBarPanel() {
 		return itemBarPanel;
-	}
-
-	@Override
-	public void onAccuracyChanged(Sensor sensor, final int accuracy) {
-		// Auto-generated method stub
-
-	}
-
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-		// shipSprite.setX(shipSprite.getX() + event.values[1]);
 	}
 
 	public void setHUDVisible(boolean b) {
