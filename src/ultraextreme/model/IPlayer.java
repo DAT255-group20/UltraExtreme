@@ -40,17 +40,17 @@ public interface IPlayer extends PropertyChangeListener {
 	/**
 	 * @return The total time which the ship will be invincible.
 	 */
-	public double getInvincibilityTime();
+	double getInvincibilityTime();
 
 	/**
 	 * @return A reference to the player's item bar
 	 */
-	public ItemBar getItemBar();
+	ItemBar getItemBar();
 
 	/**
 	 * @return The number of lives the player has left.
 	 */
-	public int getLives();
+	int getLives();
 
 	/**
 	 * Return the ID of the player.
@@ -72,5 +72,5 @@ public interface IPlayer extends PropertyChangeListener {
 	/**
 	 * @return True if the player is currently invincible, false otherwise.
 	 */
-	public boolean isInvincible();
+	boolean isInvincible();
 }
