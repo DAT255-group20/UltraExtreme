@@ -23,7 +23,6 @@ package ultraextreme.model.item;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 import junit.framework.TestCase;

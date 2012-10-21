@@ -245,8 +245,8 @@ public class BulletManagerTest extends TestCase {
 	public void testClearBulletsOffScreen() {
 		// Init stuff
 		List<AbstractBullet> insideBullets = generateBulletList(100, 200, 200);
-		List<AbstractBullet> outsideBullets = generateBulletList(100, -200,
-				-200);
+		List<AbstractBullet> outsideBullets = generateBulletList(100, -5000,
+				-5000);
 		List<AbstractBullet> allBullets = new ArrayList<AbstractBullet>();
 		allBullets.addAll(insideBullets);
 		allBullets.addAll(outsideBullets);
