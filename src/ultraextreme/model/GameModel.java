@@ -69,7 +69,7 @@ public class GameModel implements IUltraExtremeModel {
 		pickupManager = new PickupManager();
 		WeaponFactory.initialize(bulletManager);
 		enemySpawner = new EnemySpawner(new RandomWaveList(1000,
-				Difficulty.NORMAL));
+				Difficulty.HARD));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 		pcs = new PropertyChangeSupport(this);
@@ -215,7 +215,7 @@ public class GameModel implements IUltraExtremeModel {
 		enemyManager.clearAllEnemies();
 		pickupManager.clearAllPickups();
 		enemySpawner = new EnemySpawner(new RandomWaveList(1000,
-				Difficulty.NORMAL));
+				Difficulty.HARD));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
 		player.giveWeapon(new BasicWeapon(bulletManager));
