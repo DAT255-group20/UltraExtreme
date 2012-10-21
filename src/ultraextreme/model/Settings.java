@@ -31,6 +31,4 @@ public class Settings {
 	public static Difficulty getDifficulty() {
 		return difficulty;
 	}
-	
 }
-
