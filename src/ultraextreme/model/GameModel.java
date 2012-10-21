@@ -38,6 +38,7 @@ import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
 import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.PlayerID;
+import ultraextreme.model.util.Settings;
 
 /**
  * The main class for a running game.

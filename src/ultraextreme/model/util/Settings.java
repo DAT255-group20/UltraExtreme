@@ -1,6 +1,5 @@
-package ultraextreme.model;
+package ultraextreme.model.util;
 
-import ultraextreme.model.util.Difficulty;
 
 /**
  * A class capable of containing a number of settings for the game.
