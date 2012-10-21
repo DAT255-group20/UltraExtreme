@@ -1,5 +1,7 @@
 package ultraextreme.controller;
 
+import java.io.File;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -20,12 +22,14 @@ public class OptionsController extends AbstractController implements
 		IOnMenuItemClickListener {
 	
 	private final OptionsScene scene;
+	private HighscoreDBOpenHelper dbOpenHelper;
 
 	public OptionsController(final Camera camera,
-			final VertexBufferObjectManager vertexBufferObjectManager) {
+			final VertexBufferObjectManager vertexBufferObjectManager, HighscoreDBOpenHelper dbOpenHelper) {
 		super();
 		scene = new OptionsScene(camera, vertexBufferObjectManager, Difficulty.NORMAL);
 		scene.setOnMenuItemClickListener(this);
+		this.dbOpenHelper = dbOpenHelper;
 	}
 	
 	@Override
@@ -37,7 +41,11 @@ public class OptionsController extends AbstractController implements
 			break;
 
 		case OptionsScene.RESET_HIGH_SCORES:
-			// FIXME
+			
+			// Delete the database file
+			File db = new File(dbOpenHelper.getWritableDatabase().getPath());
+			dbOpenHelper.close();
+			db.delete();
 			break;
 
 		case OptionsScene.RETURN_TO_MAIN_MENU:

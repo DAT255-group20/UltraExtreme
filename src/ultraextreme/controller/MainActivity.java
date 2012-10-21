@@ -143,7 +143,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		highscoreController = new HighscoreController(camera, defaultFont,
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
 		optionsController = new OptionsController(camera,
-				this.getVertexBufferObjectManager());
+				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
