@@ -150,8 +150,9 @@ public class GameObjectSprite extends Sprite {
 			if (!(newVector.x == 0 && newVector.y == 0)) {
 				directionVector = newVector;
 			}
+			//FIXME derp
 			float newAngle = MathUtils.radToDeg((float) (Math
-					.atan(directionVector.y / directionVector.x)));
+					.atan2(directionVector.y, directionVector.x)));
 			if (directionVector.x < 0) {
 				newAngle = newAngle + 180f;
 			}
