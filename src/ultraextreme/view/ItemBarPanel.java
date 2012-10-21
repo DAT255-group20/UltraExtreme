@@ -41,7 +41,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 
 	private VertexBufferObjectManager vertexBufferObjectManager;
 
-	private float alpha = 0.01f;
+	private static final float ALPHA = 0.01f;
 
 	private Vector2d scaling;
 
@@ -70,7 +70,7 @@ public class ItemBarPanel extends Sprite implements ItemBarUpdateListener {
 		this.vertexBufferObjectManager = vertexBufferObjectManager;
 		updateItemBar(itemBar);
 		itemBar.addListener(this);
-		setAlpha(alpha);
+		setAlpha(ALPHA);
 	}
 
 	/**

@@ -33,12 +33,10 @@ import ultraextreme.model.util.Rotation;
  */
 public class VWave extends AbstractWave {
 
+	private static final int DISPERSION = 100;
 	private float timer;
-
 	private int counter;
-
 	private final Rotation rotation;
-
 	private final Position spawningPositon;
 
 	/**
@@ -71,11 +69,11 @@ public class VWave extends AbstractWave {
 						this.rotation, ObjectName.BASIC_WEAPON));
 			} else {
 				fireNewEnemySpawned(new BasicEnemy(new Position(
-						spawningPositon.getX() - counter * 100,
+						spawningPositon.getX() - counter * DISPERSION,
 						spawningPositon.getY()), rotation,
 						ObjectName.BASIC_WEAPON));
 				fireNewEnemySpawned(new BasicEnemy(new Position(
-						spawningPositon.getX() + counter * 100,
+						spawningPositon.getX() + counter * DISPERSION,
 						spawningPositon.getY()), rotation,
 						ObjectName.BASIC_WEAPON));
 			}
