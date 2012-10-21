@@ -59,7 +59,7 @@ public class RotationTest extends TestCase {
 		Rotation rot2 = new Rotation(3.85);
 		Rotation rot3 = new Rotation(5);
 		Rotation rot4 = new Rotation(3.85);
-		
+
 		assertTrue(rot1.equals(rot3));
 		assertFalse(rot1.equals(rot2));
 		assertTrue(rot3.equals(rot1));
@@ -72,7 +72,7 @@ public class RotationTest extends TestCase {
 		Rotation rot2 = new Rotation(3.85);
 		Rotation rot3 = new Rotation(5);
 		Rotation rot4 = new Rotation(3.85);
-		
+
 		assertEquals(rot1.hashCode(), rot3.hashCode());
 		assertEquals(rot2.hashCode(), rot4.hashCode());
 	}

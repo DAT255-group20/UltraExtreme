@@ -47,6 +47,7 @@ public class AbstractEnemyTest extends TestCase {
 		super.setUp();
 		resetInstanceVariables();
 	}
+
 	/**
 	 * Tests the isDead() method
 	 */

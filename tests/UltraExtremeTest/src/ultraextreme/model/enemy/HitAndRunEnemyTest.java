@@ -89,9 +89,9 @@ public class HitAndRunEnemyTest extends TestCase {
 				supposedToStartMoving = true;
 				shot = (!manager.getBullets().isEmpty());
 			}
-			if (supposedToStartMoving) {
-				if (enemy.getShip().getPositionClone().equals(endPoint))
-					startedMovingAgain = true;
+			if (supposedToStartMoving
+					&& (enemy.getShip().getPositionClone().equals(endPoint))) {
+				startedMovingAgain = true;
 			}
 		}
 		assertTrue(stopped);

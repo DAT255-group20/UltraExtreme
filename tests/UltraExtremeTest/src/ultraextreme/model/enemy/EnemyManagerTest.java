@@ -118,13 +118,14 @@ public class EnemyManagerTest extends TestCase {
 	}
 
 	public void testClearAllEnemies() {
-		for(int i = 0; i < 10; i++)  {
+		for (int i = 0; i < 10; i++) {
 			enemyManager.addEnemy(new BasicEnemy(new Position(0, 1)));
 		}
 		enemyManager.clearAllEnemies();
-		
-		assertTrue((collector.getEnemies().get(Constants.EVENT_REMOVED_ENTITY).size() == 10));
-		}
+
+		assertTrue((collector.getEnemies().get(Constants.EVENT_REMOVED_ENTITY)
+				.size() == 10));
+	}
 
 	/**
 	 * Test to clear a dead enemy from the manager with the method

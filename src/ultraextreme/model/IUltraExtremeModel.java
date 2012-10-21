@@ -31,7 +31,7 @@ import java.beans.PropertyChangeListener;
  * 
  */
 public interface IUltraExtremeModel {
-	
+
 	/**
 	 * @return The human player in the game.
 	 */

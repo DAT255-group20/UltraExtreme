@@ -50,13 +50,13 @@ public class PickupManagerTest extends TestCase {
 	 */
 	public class PickupCollector implements PropertyChangeListener {
 
-		private HashMap<String,ArrayList<WeaponPickup>> map;
+		private HashMap<String, ArrayList<WeaponPickup>> map;
 
 		public PickupCollector() {
 			map = new HashMap<String, ArrayList<WeaponPickup>>();
 		}
 
-		public HashMap<String,ArrayList<WeaponPickup>> getPickupMap() {
+		public HashMap<String, ArrayList<WeaponPickup>> getPickupMap() {
 			return map;
 		}
 
@@ -101,8 +101,10 @@ public class PickupManagerTest extends TestCase {
 
 	public void testClearAllPickups() {
 		manager.clearAllPickups();
-		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY).contains(pickup));
-		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY).contains(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup2));
 	}
 
 	@Test
@@ -139,7 +141,9 @@ public class PickupManagerTest extends TestCase {
 		manager.clearPickupsOffScreen();
 		assertFalse(manager.getPickups().contains(pickup));
 		assertFalse(manager.getPickups().contains(pickup2));
-		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY).contains(pickup));
-		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY).contains(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup2));
 	}
 }

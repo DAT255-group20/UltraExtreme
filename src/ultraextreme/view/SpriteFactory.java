@@ -75,7 +75,7 @@ public final class SpriteFactory {
 	 * buttons.
 	 */
 	private Map<String, ITextureRegion> mainMenuTextures;
-	
+
 	/**
 	 * A map containing the game over scene's textures, which are its background
 	 * and buttons.
@@ -119,14 +119,16 @@ public final class SpriteFactory {
 		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
 				16.5));
 
-//		final TextureRegion enemyBullet = BitmapTextureAtlasTextureRegionFactory
-//				.createFromAsset(textureAtlas, activity, "laserRed.png", 0, 34);
-//		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
-//				16.5));
+		// final TextureRegion enemyBullet =
+		// BitmapTextureAtlasTextureRegionFactory
+		// .createFromAsset(textureAtlas, activity, "laserRed.png", 0, 34);
+		// putProperties(ObjectName.BASIC_BULLET, playerBullet, new
+		// Vector2d(4.5,
+		// 16.5));
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(textureAtlas, activity, "evil_ship_1.png", 165,
-						0);
+				.createFromAsset(textureAtlas, activity, "evil_ship_1.png",
+						165, 0);
 		putProperties(ObjectName.BASIC_ENEMYSHIP, basicEnemy, new Vector2d(27,
 				40));
 
@@ -211,7 +213,7 @@ public final class SpriteFactory {
 						textureAtlasMainMenu, activity,
 						"main_menu_exit_button.png", 0, 1581));
 		textureManager.loadTexture(textureAtlasMainMenu);
-		
+
 		// Init game over scene atlas and texture map
 		gameOverTextures = new HashMap<String, ITextureRegion>();
 		BitmapTextureAtlas textureAtlasGameOver = new BitmapTextureAtlas(
@@ -222,9 +224,8 @@ public final class SpriteFactory {
 						textureAtlasGameOver, activity, "game_over_bg.jpg", 0,
 						0));
 		// Init game over text
-		gameOverTextures.put("text",
-				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
-						textureAtlasGameOver, activity,
+		gameOverTextures.put("text", BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(textureAtlasGameOver, activity,
 						"game_over_text.png", 0, 1281));
 		// Init game over save button
 		gameOverTextures.put("saveButton",
@@ -304,7 +305,7 @@ public final class SpriteFactory {
 	public static ITextureRegion getGameOverBackgroundTexture() {
 		return instance.gameOverTextures.get("background");
 	}
-	
+
 	/**
 	 * 
 	 * @return The texture of the game over scene's text.
@@ -312,7 +313,7 @@ public final class SpriteFactory {
 	public static ITextureRegion getGameOverTextTexture() {
 		return instance.gameOverTextures.get("text");
 	}
-	
+
 	/**
 	 * 
 	 * @return The texture of the game over scene's save button.
