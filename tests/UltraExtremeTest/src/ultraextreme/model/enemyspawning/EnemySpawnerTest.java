@@ -47,7 +47,7 @@ public class EnemySpawnerTest extends TestCase {
 	 * RandomGenerator and see if the EnemySpawner behaves correctly.
 	 */
 	public void testUpdateMethod() {
-		RandomWaveList waveList = new RandomWaveList(1,
+		RandomWaveList waveList = new RandomWaveList(1, Difficulty.NORMAL,
 				new AbstractRandomGenerator() {
 					private int counter = 0;
 
@@ -55,7 +55,7 @@ public class EnemySpawnerTest extends TestCase {
 					public float nextFloat() {
 						return ++counter;
 					}
-				}, Difficulty.NORMAL);
+				});
 		EnemySpawner enemySpawner = new EnemySpawner(waveList);
 		EnemyCollector enemyCollector = new EnemyCollector();
 		enemySpawner.addPropertyChangeListener(enemyCollector);

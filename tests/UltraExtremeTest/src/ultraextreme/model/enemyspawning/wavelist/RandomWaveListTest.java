@@ -57,7 +57,7 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 	 * if they got the correct spawn time and are instance of the right wave.
 	 */
 	public void testGeneratingNewWaves() {
-		RandomWaveList waveList1 = new RandomWaveList(100,
+		RandomWaveList waveList1 = new RandomWaveList(100, Difficulty.NORMAL,
 				new AbstractRandomGenerator() {
 					private int counter;
 
@@ -65,7 +65,7 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 					public float nextFloat() {
 						return ++counter;
 					}
-				}, Difficulty.NORMAL);
+				});
 
 		// 0
 		assertEquals(waveList1.getCurrentSpawningTime(), 0f);

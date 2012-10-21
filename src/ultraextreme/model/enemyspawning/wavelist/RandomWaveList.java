@@ -60,14 +60,27 @@ public class RandomWaveList extends AbstractWaveList {
 	private int screenWidth;
 
 	/**
-	 * Create a wave list that returns random waves with random spawn times.
+	 * Create a wave list that returns random waves with random spawn times, and
+	 * with normal difficulty.
 	 * 
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
 	 * @param difficulty
 	 */
-	public RandomWaveList(final int numberOfWaves, Difficulty difficulty) {
-		this(numberOfWaves, new AbstractRandomGenerator() {
+	public RandomWaveList(final int numberOfWaves) {
+		this(numberOfWaves, Difficulty.NORMAL);
+	}
+
+	/**
+	 * Create a wave list that returns random waves with random spawn times.
+	 * 
+	 * @param numberOfWaves
+	 *            Maximum number of waves this will return.
+	 * @param difficulty
+	 *            Difficulty of the spawning waves
+	 */
+	public RandomWaveList(final int numberOfWaves, final Difficulty difficulty) {
+		this(numberOfWaves, difficulty, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
 				// Using SecureRandom instead of Random because Random was
@@ -76,7 +89,7 @@ public class RandomWaveList extends AbstractWaveList {
 				final Random random = new SecureRandom();
 				return random.nextFloat();
 			}
-		}, difficulty);
+		});
 	}
 
 	/**
@@ -84,13 +97,15 @@ public class RandomWaveList extends AbstractWaveList {
 	 * 
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
+	 * @param difficulty
+	 *            Difficulty of the spawning waves
 	 * @param randomGenerator
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
 	 * @param difficulty
 	 */
-	public RandomWaveList(final int numberOfWaves,
-			final AbstractRandomGenerator randomGenerator, Difficulty difficulty) {
+	public RandomWaveList(final int numberOfWaves, final Difficulty difficulty,
+			final AbstractRandomGenerator randomGenerator) {
 		super(numberOfWaves);
 		scaleToDifficulty(difficulty);
 		this.currentDifficultyMod = 1;
@@ -102,15 +117,15 @@ public class RandomWaveList extends AbstractWaveList {
 
 	private void scaleToDifficulty(Difficulty difficulty) {
 		switch (difficulty) {
-		case EASY:
+		case NORMAL:
 			difficultyRiseSpeed = 1.01;
 			break;
 
-		case NORMAL:
+		case HARD:
 			difficultyRiseSpeed = 1.05;
 			break;
 
-		case HARD:
+		case EXTREME:
 			difficultyRiseSpeed = 1.07;
 			break;
 

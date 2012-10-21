@@ -1,11 +1,16 @@
 package ultraextreme.model.util;
 
 /**
- * A Simple enumerator describing the difficulty of the game.
+ * A simple enumerator describing the difficulty of the game.
  * 
  * @author Viktor Anderling
+<<<<<<< HEAD
  * 
+=======
+ * @author Daniel Jonsson
+ *
+>>>>>>> Changed how you set RandomWaveList's difficulty
  */
 public enum Difficulty {
-	EASY, NORMAL, HARD, ULTRAEXTREME;
+	NORMAL, HARD, EXTREME, ULTRAEXTREME;
 }
