@@ -25,6 +25,7 @@ import ultraextreme.model.enemyspawning.wavelist.AbstractRandomGenerator;
 import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.Difficulty;
 
 /**
  * 
@@ -54,7 +55,7 @@ public class EnemySpawnerTest extends TestCase {
 					public float nextFloat() {
 						return ++counter;
 					}
-				});
+				}, Difficulty.NORMAL);
 		EnemySpawner enemySpawner = new EnemySpawner(waveList);
 		EnemyCollector enemyCollector = new EnemyCollector();
 		enemySpawner.addPropertyChangeListener(enemyCollector);

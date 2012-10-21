@@ -252,8 +252,8 @@ public class BulletManagerTest extends TestCase {
 		List<AbstractBullet> allBullets = new ArrayList<AbstractBullet>();
 		allBullets.addAll(insideBullets);
 		allBullets.addAll(outsideBullets);
-		BulletCollector bulletCollector = new BulletCollector();
-		bulletManager.addPropertyChangeListener(bulletCollector);
+		BulletCollector bulletCollector1 = new BulletCollector();
+		bulletManager.addPropertyChangeListener(bulletCollector1);
 
 		for (AbstractBullet bullet : allBullets) {
 			bulletManager.addBullet(bullet);
@@ -266,7 +266,7 @@ public class BulletManagerTest extends TestCase {
 
 		assertTrue(bulletManager.getBullets().containsAll(insideBullets));
 		assertEquals(outsideBullets,
-				bulletCollector.getBullets()
+				bulletCollector1.getBullets()
 						.get(Constants.EVENT_REMOVED_ENTITY));
 		for (AbstractBullet outsideBullet : outsideBullets) {
 			assertFalse(bulletManager.getBullets().contains(outsideBullet));

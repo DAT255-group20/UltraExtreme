@@ -119,8 +119,9 @@ public class PlayerTest extends TestCase {
 
 	public void testItemBarSize() {
 		ItemBar itemBar = player.getItemBar();
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 20; i++) {
 			itemBar.addItem(new BasicWeapon(bulletManager));
+		}
 		assertEquals("Correct item bar size", 10, itemBar.getItems().size());
 	}
 
@@ -255,10 +256,11 @@ public class PlayerTest extends TestCase {
 		Position pNew = player.getShip().getPositionClone();
 		assertEquals(pOld.getX() + dX, pNew.getX());
 		assertEquals(pOld.getY() + dY, pNew.getY());
-		if (fireWeapons)
+		if (fireWeapons) {
 			assertTrue(bulletManager.getBullets().size() > 0);
-		else
+		} else {
 			assertTrue(bulletManager.getBullets().size() == 0);
+		}
 		// assertEquals(bulletManager.isBombDropped(), dropBomb);
 	}
 }

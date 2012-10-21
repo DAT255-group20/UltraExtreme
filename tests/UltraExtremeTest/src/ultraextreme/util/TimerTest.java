@@ -29,6 +29,7 @@ import org.junit.Test;
 
 public class TimerTest {
 
+	private static final String TEXT = "hej123";
 	private Timer timer;
 	private Object o;
 
@@ -40,28 +41,27 @@ public class TimerTest {
 
 	@Test
 	public void testGetObject() {
-		Object o = new Object();
-		timer = new Timer("", 100, o);
-		assertTrue(o == timer.getObject());
+		Object o1 = new Object();
+		timer = new Timer(TEXT, 100, o1);
+		assertTrue(o1 == timer.getObject());
 	}
 
 	@Test
 	public void testGetPropertyName() {
-		String s = "123";
-		timer = new Timer(s, 100, o);
-		assertTrue(s == timer.getPropertyName());
+		timer = new Timer(TEXT, 100, o);
+		assertTrue(TEXT == timer.getPropertyName());
 	}
 
 	@Test
 	public void testIsRunning() {
-		timer = new Timer("", 100, o, 1);
+		timer = new Timer(TEXT, 100, o, 1);
 		assertTrue(timer.isRunning());
 		timer.update(99f);
 		assertTrue(timer.isRunning());
 		timer.update(2f);
 		assertFalse(timer.isRunning());
 
-		timer = new Timer("", 100, o, 3);
+		timer = new Timer(TEXT, 100, o, 3);
 		assertTrue(timer.isRunning());
 		timer.update(101f);
 		assertTrue(timer.isRunning());
@@ -79,10 +79,10 @@ public class TimerTest {
 	public void testTimerStringFloatObject() {
 		boolean ticked = false;
 
-		timer = new Timer("hej123", 100f, o, 1);
+		timer = new Timer(TEXT, 100f, o, 1);
 		assertTrue(o == timer.getObject());
 		assertTrue(timer.isRunning());
-		assertEquals(timer.getPropertyName(), "hej123");
+		assertEquals(timer.getPropertyName(), TEXT);
 
 		ticked = timer.update(60f);
 		assertFalse(ticked);
@@ -91,7 +91,7 @@ public class TimerTest {
 		ticked = timer.update(50f);
 		assertTrue(ticked);
 		assertFalse(timer.isRunning());
-		assertEquals(timer.getPropertyName(), "hej123");
+		assertEquals(timer.getPropertyName(), TEXT);
 		assertTrue(o == timer.getObject());
 	}
 
@@ -99,19 +99,19 @@ public class TimerTest {
 	public void testTimerStringFloatObjectInt() {
 		boolean ticked = false;
 
-		timer = new Timer("hej123", 100f, o, 1);
+		timer = new Timer(TEXT, 100f, o, 1);
 		ticked = timer.update(101f);
 		assertTrue(o == timer.getObject());
 		assertTrue(ticked);
 		assertFalse(timer.isRunning());
-		assertEquals(timer.getPropertyName(), "hej123");
+		assertEquals(timer.getPropertyName(), TEXT);
 
-		timer = new Timer("hej321", 100f, o, 2);
+		timer = new Timer(TEXT, 100f, o, 2);
 		ticked = timer.update(101f);
 		assertTrue(ticked);
 		assertTrue(o == timer.getObject());
 		assertTrue(timer.isRunning());
-		assertEquals(timer.getPropertyName(), "hej321");
+		assertEquals(timer.getPropertyName(), TEXT);
 
 		ticked = timer.update(101f);
 		assertTrue(ticked);
@@ -122,13 +122,13 @@ public class TimerTest {
 	public void testUpdate() {
 		boolean ticked = false;
 
-		timer = new Timer("hej123", 100f, o, 1);
+		timer = new Timer(TEXT, 100f, o, 1);
 		ticked = timer.update(90f);
 		assertFalse(ticked);
 		assertTrue(timer.isRunning());
-		assertEquals(timer.getPropertyName(), "hej123");
+		assertEquals(timer.getPropertyName(), TEXT);
 
-		timer = new Timer("hej123", 150f, o, 2);
+		timer = new Timer(TEXT, 150f, o, 2);
 		ticked = timer.update(110f);
 		assertFalse(ticked);
 		assertTrue(timer.isRunning());
