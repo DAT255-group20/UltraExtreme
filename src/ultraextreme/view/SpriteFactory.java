@@ -20,6 +20,7 @@
 
 package ultraextreme.view;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,9 +43,11 @@ import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.PlayerID;
 
 /**
- * Class in charge of creating new GameObjectSprites
- * as well as instantiating them
+ * Class in charge of creating new GameObjectSprites as well as instantiating
+ * them
+ * 
  * @author Johan Gronvall
+ * @author Daniel Jonsson
  * 
  */
 public final class SpriteFactory {
@@ -56,7 +59,7 @@ public final class SpriteFactory {
 	private static final String BACKGROUND = "background";
 
 	private Map<ObjectName, ITextureRegion> textureMap = new HashMap<ObjectName, ITextureRegion>();
-	
+
 	private Map<ObjectName, ITextureRegion> enemyBulletTextureMap = new HashMap<ObjectName, ITextureRegion>();
 
 	private Map<ObjectName, Vector2d> offsetMap = new HashMap<ObjectName, Vector2d>();
@@ -88,6 +91,16 @@ public final class SpriteFactory {
 	 */
 	private Map<String, ITextureRegion> gameOverTextures;
 
+	/**
+	 * A map containing the options scene's textures, which are its background
+	 * and buttons.
+	 */
+	private Map<OPTIONS_TEXTURES, ITextureRegion> optionsTextures;
+
+	public static enum OPTIONS_TEXTURES {
+		BACKGROUND, NORMAL_DIFFICULTY, HARD_DIFFICULTY, EXTREME_DIFFICULTY, ULTRAEXTREME_DIFFICULTY, RESET_BUTTON, RETURN_BUTTON
+	};
+
 	private TiledTextureRegion textInputBackground;
 
 	/**
@@ -115,20 +128,20 @@ public final class SpriteFactory {
 		final TextureRegion playerShip = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "ship_blue_42px.png",
 						40, 0);
-		putProperties(ObjectName.PLAYERSHIP, playerShip, new Vector2d(16.5, 13)
-		, false);
+		putProperties(ObjectName.PLAYERSHIP, playerShip,
+				new Vector2d(16.5, 13), false);
 
 		final TextureRegion playerBullet = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "laserGreen.png", 0,
 						34);
 		putProperties(ObjectName.BASIC_BULLET, playerBullet, new Vector2d(4.5,
 				16.5), false);
-		
-		//create a texture for enemy bullets
+
+		// create a texture for enemy bullets
 		final TextureRegion enemyBullet = BitmapTextureAtlasTextureRegionFactory
-		 .createFromAsset(textureAtlas, activity, "laserRed.png", 0, 0);
-		 putProperties(ObjectName.BASIC_BULLET, enemyBullet, new Vector2d(
-				 4.5, 16.5), true);
+				.createFromAsset(textureAtlas, activity, "laserRed.png", 0, 0);
+		putProperties(ObjectName.BASIC_BULLET, enemyBullet, new Vector2d(4.5,
+				16.5), true);
 
 		final TextureRegion basicEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship_1.png",
@@ -189,30 +202,31 @@ public final class SpriteFactory {
 		mainMenuTextures = new HashMap<String, ITextureRegion>();
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menus/");
 		BitmapTextureAtlas textureAtlasMainMenu = new BitmapTextureAtlas(
-				textureManager, 800, 1730, TextureOptions.DEFAULT);
-
+				textureManager, 800, 1854, TextureOptions.DEFAULT);
 		// Init the main menu background
 		mainMenuTextures.put(BACKGROUND, BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlasMainMenu, activity,
 						"main_menu_bg.jpg", 0, 0));
-
 		// Init main menu's start button
 		mainMenuTextures.put("startButton",
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasMainMenu, activity,
 						"main_menu_start_button.png", 0, 1281));
-
 		// Init main menu's high scores button
 		mainMenuTextures.put("highScoresButton",
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasMainMenu, activity,
 						"main_menu_high_scores_button.png", 0, 1431));
-
 		// Init main menu's exit button
 		mainMenuTextures.put("exitButton",
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasMainMenu, activity,
 						"main_menu_exit_button.png", 0, 1581));
+		// Init main menu's options button
+		mainMenuTextures.put("optionsButton",
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasMainMenu, activity,
+						"main_menu_options_button.png", 0, 1711));
 		textureManager.loadTexture(textureAtlasMainMenu);
 
 		// Init game over scene atlas and texture map
@@ -233,6 +247,46 @@ public final class SpriteFactory {
 						textureAtlasGameOver, activity,
 						"game_over_save_button.png", 0, 1770));
 		textureManager.loadTexture(textureAtlasGameOver);
+
+		// Init options scene atlas and texture map
+		optionsTextures = new EnumMap<OPTIONS_TEXTURES, ITextureRegion>(
+				OPTIONS_TEXTURES.class);
+		// FIXME: AndEngine can't handle a atlas with this enormous size...
+		// BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
+		// textureManager, 800, 2696, TextureOptions.DEFAULT);
+		BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
+				textureManager, 800, 1753, TextureOptions.DEFAULT);
+		BitmapTextureAtlas textureAtlasOptions2 = new BitmapTextureAtlas(
+				textureManager, 800, 944, TextureOptions.DEFAULT);
+		optionsTextures.put(OPTIONS_TEXTURES.BACKGROUND,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasOptions, activity, "options_bg.jpg", 0, 0));
+		optionsTextures.put(OPTIONS_TEXTURES.NORMAL_DIFFICULTY,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasOptions, activity,
+						"options_difficulty_normal.png", 0, 1281));
+		optionsTextures.put(OPTIONS_TEXTURES.HARD_DIFFICULTY,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasOptions, activity,
+						"options_difficulty_hard.png", 0, 1517));
+		optionsTextures.put(OPTIONS_TEXTURES.EXTREME_DIFFICULTY,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasOptions2, activity,
+						"options_difficulty_extreme.png", 0, 0));
+		optionsTextures.put(OPTIONS_TEXTURES.ULTRAEXTREME_DIFFICULTY,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasOptions2, activity,
+						"options_difficulty_ultraextreme.png", 0, 236));
+		optionsTextures.put(OPTIONS_TEXTURES.RESET_BUTTON,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasOptions2, activity,
+						"options_reset_button.png", 0, 472));
+		optionsTextures.put(OPTIONS_TEXTURES.RETURN_BUTTON,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasOptions2, activity,
+						"options_return_button.png", 0, 708));
+		textureManager.loadTexture(textureAtlasOptions);
+		textureManager.loadTexture(textureAtlasOptions2);
 	}
 
 	/**
@@ -300,6 +354,14 @@ public final class SpriteFactory {
 
 	/**
 	 * 
+	 * @return The texture of the main menu scene's start button.
+	 */
+	public static ITextureRegion getMainMenuOptionsButtonTexture() {
+		return instance.mainMenuTextures.get("optionsButton");
+	}
+
+	/**
+	 * 
 	 * @return The texture of the game over scene's background.
 	 */
 	public static ITextureRegion getGameOverBackgroundTexture() {
@@ -322,6 +384,10 @@ public final class SpriteFactory {
 		return instance.gameOverTextures.get("saveButton");
 	}
 
+	public static ITextureRegion getOptionsTexture(OPTIONS_TEXTURES texture) {
+		return instance.optionsTextures.get(texture);
+	}
+
 	/**
 	 * Creates and returns a sprite of the specified type
 	 * 
@@ -338,13 +404,13 @@ public final class SpriteFactory {
 		ObjectName objName = entity.getObjectName();
 		ITextureRegion texture = instance.textureMap.get(objName);
 		Vector2d offset = instance.offsetMap.get(objName);
-		
-		if(entity instanceof AbstractBullet) {
+
+		if (entity instanceof AbstractBullet) {
 			if (((AbstractBullet) entity).getPlayerId().equals(PlayerID.ENEMY)) {
 				texture = instance.enemyBulletTextureMap.get(objName);
 			}
 		}
-		
+
 		if (texture == null) {
 			throw new IllegalArgumentException(
 					"No texture is associated with that kind of object");
@@ -375,14 +441,14 @@ public final class SpriteFactory {
 	 *            The offset that goes into offsetMap, multiplied with the
 	 *            sprite scaling factor.
 	 * @param enemyBulletTexture
-	 * 			  Whether this texture is of an enemyBullet, in which case
-	 * 			  certain changes will be made
+	 *            Whether this texture is of an enemyBullet, in which case
+	 *            certain changes will be made
 	 */
 	private void putProperties(ObjectName objectName, TextureRegion texture,
 			Vector2d textureOffset, boolean enemyBulletTexture) {
-		
+
 		textureOffset.scale(ultraextreme.util.Constants.SPRITE_SCALE_FACTOR);
-		if(enemyBulletTexture) {
+		if (enemyBulletTexture) {
 			enemyBulletTextureMap.put(objectName, texture);
 		} else {
 			textureMap.put(objectName, texture);

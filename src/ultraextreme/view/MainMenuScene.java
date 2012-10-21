@@ -43,7 +43,8 @@ public class MainMenuScene extends MenuScene {
 	// Button IDs
 	public static final int MENU_START = 0;
 	public static final int MENU_HIGHSCORE = 1;
-	public static final int MENU_EXIT = 2;
+	public static final int MENU_OPTIONS = 2;
+	public static final int MENU_EXIT = 3;
 
 	public MainMenuScene(final Camera camera,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
@@ -95,6 +96,20 @@ public class MainMenuScene extends MenuScene {
 		highScoresButton.setX((screenWidth - highScoresButton.getWidth()) / 2);
 		highScoresButton.setY((float) scaling.y * 600);
 		addMenuItem(highScoresButton);
+		
+		/*
+		 * Add the options button. /*
+		 */
+		final IMenuItem optionsButton = new SpriteMenuItem(MENU_OPTIONS,
+				SpriteFactory.getMainMenuOptionsButtonTexture(),
+				vertexBufferObjectManager);
+		optionsButton.setWidth((float) scaling.x
+				* optionsButton.getWidth());
+		optionsButton.setHeight((float) scaling.y
+				* optionsButton.getHeight());
+		optionsButton.setX((screenWidth - optionsButton.getWidth()) / 2);
+		optionsButton.setY((float) scaling.y * 750);
+		addMenuItem(optionsButton);
 
 		/*
 		 * Add the exit button. /*
@@ -105,7 +120,7 @@ public class MainMenuScene extends MenuScene {
 		exitButton.setWidth((float) scaling.x * exitButton.getWidth());
 		exitButton.setHeight((float) scaling.y * exitButton.getHeight());
 		exitButton.setX((screenWidth - exitButton.getWidth()) / 2);
-		exitButton.setY((float) scaling.y * 750);
+		exitButton.setY((float) scaling.y * 900);
 		addMenuItem(exitButton);
 	}
 }

@@ -51,6 +51,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private MainMenuController mainMenuController;
 	private GameOverController gameOverController;
 	private HighscoreController highscoreController;
+	private OptionsController optionsController;
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
@@ -74,6 +75,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 		case SWITCH_TO_HIGHSCORE:
 			switchControllerTo(highscoreController);
+			break;
+
+		case SWITCH_TO_OPTIONS:
+			switchControllerTo(optionsController);
 			break;
 
 		case EXIT_GAME:
@@ -137,11 +142,14 @@ public class MainActivity extends SimpleBaseGameActivity implements
 				this);
 		highscoreController = new HighscoreController(camera, defaultFont,
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
+		optionsController = new OptionsController(camera,
+				this.getVertexBufferObjectManager());
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
 		gameOverController.addListener(this);
 		highscoreController.addListener(this);
+		optionsController.addListener(this);
 
 		currentController = mainMenuController;
 		updateScene();
