@@ -36,7 +36,6 @@ import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
-import ultraextreme.model.util.Settings;
 
 public class RandomWaveList extends AbstractWaveList {
 
@@ -65,8 +64,9 @@ public class RandomWaveList extends AbstractWaveList {
 	 * 
 	 * @param numberOfWaves
 	 *            Maximum number of waves this will return.
+	 * @param difficulty 
 	 */
-	public RandomWaveList(final int numberOfWaves) {
+	public RandomWaveList(final int numberOfWaves, Difficulty difficulty) {
 		this(numberOfWaves, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
@@ -76,7 +76,7 @@ public class RandomWaveList extends AbstractWaveList {
 				final Random random = new SecureRandom();
 				return random.nextFloat();
 			}
-		});
+		}, difficulty);
 	}
 
 	/**
@@ -87,11 +87,12 @@ public class RandomWaveList extends AbstractWaveList {
 	 * @param randomGenerator
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
+	 * @param difficulty 
 	 */
 	public RandomWaveList(final int numberOfWaves,
-			final AbstractRandomGenerator randomGenerator) {
+			final AbstractRandomGenerator randomGenerator, Difficulty difficulty) {
 		super(numberOfWaves);
-		scaleToDifficulty(Settings.getDifficulty());
+		scaleToDifficulty(difficulty);
 		this.currentDifficultyMod = 1;
 		this.screenWidth = (int) Constants.getLevelDimension().getX();
 		this.randomGenerator = randomGenerator;

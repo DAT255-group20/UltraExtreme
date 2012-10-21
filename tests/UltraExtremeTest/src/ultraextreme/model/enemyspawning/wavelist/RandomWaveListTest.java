@@ -24,6 +24,7 @@ import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.Difficulty;
 
 /**
  * 
@@ -42,7 +43,7 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 	 * @param numberOfWaves
 	 */
 	private void resetWaveList(int numberOfWaves) {
-		waveList = new RandomWaveList(numberOfWaves);
+		waveList = new RandomWaveList(numberOfWaves, Difficulty.NORMAL);
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 					public float nextFloat() {
 						return ++counter;
 					}
-				});
+				}, Difficulty.NORMAL);
 
 		// 0
 		assertEquals(waveList1.getCurrentSpawningTime(), 0f);

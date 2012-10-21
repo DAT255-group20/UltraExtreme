@@ -65,6 +65,5 @@ public final class Constants {
 		return 10;
 	}
 
-	private Constants() {
-	}
+	private Constants() { }
 }
