@@ -24,8 +24,6 @@ import junit.framework.TestCase;
 
 public abstract class AbstractWaveListTest extends TestCase {
 
-	public abstract void testGetNumberOfWaves();
-
 	public abstract void testNext();
 
 }
