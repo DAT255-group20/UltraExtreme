@@ -24,6 +24,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -50,13 +51,13 @@ public class PickupManagerTest extends TestCase {
 	 */
 	public class PickupCollector implements PropertyChangeListener {
 
-		private HashMap<String, ArrayList<WeaponPickup>> map;
+		private Map<String, ArrayList<WeaponPickup>> map;
 
 		public PickupCollector() {
 			map = new HashMap<String, ArrayList<WeaponPickup>>();
 		}
 
-		public HashMap<String, ArrayList<WeaponPickup>> getPickupMap() {
+		public Map<String, ArrayList<WeaponPickup>> getPickupMap() {
 			return map;
 		}
 
