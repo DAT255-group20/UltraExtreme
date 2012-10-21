@@ -30,7 +30,7 @@ import ultraextreme.model.enemy.AbstractEnemy;
  * @author Daniel Jonsson
  * 
  */
-public interface WaveListener {
+public interface IWaveListener {
 
 	/**
 	 * A wave that has ended (i.e. spawned all its enemies).

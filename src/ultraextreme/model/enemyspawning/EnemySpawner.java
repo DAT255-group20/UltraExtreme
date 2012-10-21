@@ -28,7 +28,7 @@ import java.util.List;
 
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
-import ultraextreme.model.enemyspawning.wave.WaveListener;
+import ultraextreme.model.enemyspawning.wave.IWaveListener;
 import ultraextreme.model.enemyspawning.wavelist.IWaveSpawningList;
 
 /**
@@ -40,7 +40,7 @@ import ultraextreme.model.enemyspawning.wavelist.IWaveSpawningList;
  * @author Daniel Jonsson
  * 
  */
-public class EnemySpawner implements WaveListener {
+public class EnemySpawner implements IWaveListener {
 
 	public static final String NEW_ENEMY = "nE";
 
