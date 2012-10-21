@@ -255,7 +255,7 @@ public final class SpriteFactory {
 		// BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
 		// textureManager, 800, 2696, TextureOptions.DEFAULT);
 		BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
-				textureManager, 800, 1753, TextureOptions.DEFAULT);
+				textureManager, 800, 1754, TextureOptions.DEFAULT);
 		BitmapTextureAtlas textureAtlasOptions2 = new BitmapTextureAtlas(
 				textureManager, 800, 944, TextureOptions.DEFAULT);
 		optionsTextures.put(OptionsTexture.BACKGROUND,
@@ -268,7 +268,7 @@ public final class SpriteFactory {
 		optionsTextures.put(OptionsTexture.HARD_DIFFICULTY,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions, activity,
-						"options_difficulty_hard.png", 0, 1517));
+						"options_difficulty_hard.png", 0, 1518));
 		optionsTextures.put(OptionsTexture.EXTREME_DIFFICULTY,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions2, activity,
