@@ -153,9 +153,6 @@ public class GameObjectSprite extends Sprite {
 			//FIXME derp
 			float newAngle = MathUtils.radToDeg((float) (Math
 					.atan2(directionVector.y, directionVector.x)));
-			if (directionVector.x < 0) {
-				newAngle = newAngle + 180f;
-			}
 			this.setRotation(newAngle - 90f);
 		}
 	}
