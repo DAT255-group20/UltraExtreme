@@ -33,11 +33,6 @@ public class RotationTest extends TestCase {
 
 	Rotation rotation;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
 	public void testGetRotatedCoordinates() {
 		rotation = new Rotation(0);
 		Vector2d vec = rotation.getRotatedCoordinates(1, 1);

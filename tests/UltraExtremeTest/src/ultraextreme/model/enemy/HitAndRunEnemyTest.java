@@ -84,7 +84,7 @@ public class HitAndRunEnemyTest extends TestCase {
 			if (enemy.getShip().getPositionClone().equals(new Position(15, 15))) {
 				secondsStopped += 1;
 			}
-			if (secondsStopped == enemy.getWaitingTime() && stopped == false) {
+			if (!stopped && secondsStopped == enemy.getWaitingTime()) {
 				stopped = true;
 				supposedToStartMoving = true;
 				shot = (!manager.getBullets().isEmpty());
