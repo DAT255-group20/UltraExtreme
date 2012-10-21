@@ -32,6 +32,7 @@ import ultraextreme.model.item.WeaponFactory;
  */
 public class VWaveTest extends TestCase {
 
+	// EnemyCollector will listen to the wave and collect the enemies it spawns
 	private EnemyCollector enemyCollector;
 
 	private AbstractWave wave;
@@ -55,20 +56,26 @@ public class VWaveTest extends TestCase {
 	 * properties.
 	 */
 	public void testSpawnedEnemyProperties() {
-		initWave(0, 0, 0);
+		double angle = 0;
+		int x = 0;
+		int y = 0;
+		initWave(angle, x, y);
 		wave.update(0);
 		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
 				.getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
+		assertEquals(angle, enemyShip.getRotation().getAngle());
+		assertEquals((double) x, enemyShip.getPositionClone().getX());
+		assertEquals((double) y, enemyShip.getPositionClone().getY());
 
+		angle = 2;
+		x = 100;
+		y = 200;
 		initWave(2, 100, 200);
 		wave.update(0);
 		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
+		assertEquals(angle, enemyShip.getRotation().getAngle());
+		assertEquals((double) x, enemyShip.getPositionClone().getX());
+		assertEquals((double) y, enemyShip.getPositionClone().getY());
 	}
 
 	/**
@@ -78,32 +85,38 @@ public class VWaveTest extends TestCase {
 	public void testUpdate1() {
 		initWave(0, 0, 0);
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 0);
+		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertEquals("0 enemies has spawned", 0, enemyCollector
+				.getSpawnedEnemies().size());
 
 		wave.update(0);
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
+		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertEquals("1 enemy has spawned", 1, enemyCollector
+				.getSpawnedEnemies().size());
 
 		wave.update(1.98f);
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
+		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertEquals("No new enemies", enemyCollector.getSpawnedEnemies()
+				.size(), 1);
 
 		wave.update(0.03f);
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 3);
+		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertEquals("2 new enemies has spawned", enemyCollector
+				.getSpawnedEnemies().size(), 3);
 
 		wave.update(2);
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 5);
+		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertEquals("An additional 2 enemies has spawned", enemyCollector
+				.getSpawnedEnemies().size(), 5);
 
 		wave.update(2);
 
-		assertTrue(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 7);
+		assertTrue("Wave has ended", enemyCollector.hasWaveEnded());
+		assertEquals("All 7 enemies in the VWave has spawned", enemyCollector
+				.getSpawnedEnemies().size(), 7);
 	}
 }
