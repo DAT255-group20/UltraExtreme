@@ -52,8 +52,7 @@ public class AbstractEnemyTest extends TestCase {
 	 * Tests the isDead() method
 	 */
 	public void testIsDead() {
-		// TODO What does this first code line do?
-		assertTrue(enemy.getShip().isDestroyed() == enemy.isDead());
+		assertFalse(enemy.isDead());
 		enemy.getShip().receiveDamage(10000);
 		assertTrue(enemy.isDead());
 	}
