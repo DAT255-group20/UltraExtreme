@@ -48,11 +48,6 @@ public interface IEntity {
 	Position getPositionClone();
 
 	/**
-	 * @return A position at the center of this entity.
-	 */
-	Position getCenteredPositionClone();
-
-	/**
 	 * @return The height of this entity.
 	 */
 	int getHeight();
