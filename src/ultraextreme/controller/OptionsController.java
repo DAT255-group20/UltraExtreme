@@ -21,19 +21,43 @@ import ultraextreme.view.OptionsScene;
 public class OptionsController extends AbstractController implements
 		IOnMenuItemClickListener {
 
+	/**
+	 * Reference to the scene.
+	 */
 	private final OptionsScene scene;
-	private HighscoreDBOpenHelper dbOpenHelper;
-	private OptionsDatabase optionsDatabase;
-	private Difficulty difficulty;
 
+	/**
+	 * Reference to the High scores database handler, so it's possible to reset
+	 * the database from the Options view.
+	 */
+	private HighscoreDBOpenHelper dbOpenHelper;
+
+	/**
+	 * Reference to the OptionsDatabse, so it's possible to change difficulty
+	 * level from the Options view.
+	 */
+	private OptionsDatabase optionsDatabase;
+	
+	/**
+	 * What the difficulty is currently set to.
+	 */
+	private Difficulty currentSetDifficulty;
+
+	/**
+	 * 
+	 * @param camera
+	 * @param vertexBufferObjectManager
+	 * @param optionsDatabase
+	 * @param dbOpenHelper
+	 */
 	public OptionsController(final Camera camera,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			OptionsDatabase optionsDatabase, HighscoreDBOpenHelper dbOpenHelper) {
 		super();
 		this.dbOpenHelper = dbOpenHelper;
 		this.optionsDatabase = optionsDatabase;
-		difficulty = optionsDatabase.getDifficultyLevel();
-		scene = new OptionsScene(camera, vertexBufferObjectManager, difficulty);
+		currentSetDifficulty = optionsDatabase.getDifficultyLevel();
+		scene = new OptionsScene(camera, vertexBufferObjectManager, currentSetDifficulty);
 		scene.setOnMenuItemClickListener(this);
 	}
 
@@ -41,10 +65,10 @@ public class OptionsController extends AbstractController implements
 	public boolean onMenuItemClicked(final MenuScene menuScene,
 			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
-		
+
 		case OptionsScene.CHANGE_DIFFICULTY:
 			Difficulty newDifficulty;
-			switch (difficulty) {
+			switch (currentSetDifficulty) {
 			case NORMAL:
 				newDifficulty = Difficulty.HARD;
 				break;
@@ -63,12 +87,12 @@ public class OptionsController extends AbstractController implements
 			}
 			scene.updateDifficultyButton(newDifficulty);
 			optionsDatabase.setDifficultyLevel(newDifficulty);
-			difficulty = newDifficulty;
+			currentSetDifficulty = newDifficulty;
 			break;
 
 		case OptionsScene.RESET_HIGH_SCORES:
 
-			// Delete the database file
+			// Delete the high score database file
 			File db = new File(dbOpenHelper.getWritableDatabase().getPath());
 			dbOpenHelper.close();
 			db.delete();

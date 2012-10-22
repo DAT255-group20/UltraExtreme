@@ -20,7 +20,7 @@ import ultraextreme.view.SpriteFactory.OptionsTexture;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class OptionsScene extends MenuScene {
 
@@ -74,7 +74,8 @@ public class OptionsScene extends MenuScene {
 				.getQuotient(new Dimension(800, 1280));
 
 		/*
-		 * Add the difficulty button.
+		 * Store all difficulty buttons in a map and add the current difficulty
+		 * button to the scene.
 		 */
 		difficultyButtons = new EnumMap<Difficulty, IMenuItem>(Difficulty.class);
 		difficultyButtons.put(
