@@ -51,8 +51,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 	}
 
 	/**
-	 * Creates a new ParabolaEnemy OBS: endPosition should be placed outside
-	 * screen so that the enemy gets removed
+	 * Creates a new ParabolaEnemy
 	 * 
 	 * @param startPoint
 	 *            where the ParabolaEnemy will appear
@@ -113,7 +112,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 		newPosition.setX(newX);
 		newPosition.setY(calcY(newX));
 		this.getShip().setPosition(newPosition);
-		this.getWeapon().fire(this.getShip().getCenteredPositionClone(),
+		this.getWeapon().fire(this.getShip().getPositionClone(),
 				PlayerID.ENEMY, new Rotation(0), timePassed);
 	}
 
