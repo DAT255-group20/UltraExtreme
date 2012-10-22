@@ -32,6 +32,7 @@ import ultraextreme.model.item.WeaponFactory;
  */
 public class VWaveTest extends TestCase {
 
+	private static final String WAVE_NOT_ENDED = "Wave hasn't ended";
 	// EnemyCollector will listen to the wave and collect the enemies it spawns
 	private EnemyCollector enemyCollector;
 
@@ -85,31 +86,31 @@ public class VWaveTest extends TestCase {
 	public void testUpdate1() {
 		initWave(0, 0, 0);
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("0 enemies has spawned", 0, enemyCollector
 				.getSpawnedEnemies().size());
 
 		wave.update(0);
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("1 enemy has spawned", 1, enemyCollector
 				.getSpawnedEnemies().size());
 
 		wave.update(1.98f);
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("No new enemies", enemyCollector.getSpawnedEnemies()
 				.size(), 1);
 
 		wave.update(0.03f);
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("2 new enemies has spawned", enemyCollector
 				.getSpawnedEnemies().size(), 3);
 
 		wave.update(2);
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("An additional 2 enemies has spawned", enemyCollector
 				.getSpawnedEnemies().size(), 5);
 

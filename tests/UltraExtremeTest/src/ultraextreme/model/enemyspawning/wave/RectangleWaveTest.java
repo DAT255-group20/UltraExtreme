@@ -37,6 +37,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class RectangleWaveTest extends TestCase {
 
+	private static final String WAVE_NOT_ENDED = "Wave hasn't ended";
 	private BulletManager bulletManager;
 
 	// EnemyCollector will listen to the wave and collect the enemies it spawns
@@ -100,11 +101,11 @@ public class RectangleWaveTest extends TestCase {
 	 */
 	public void testUpdate1() {
 		initWave(1, 1, 0, 0, 0);
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("No spawned enemies", 0, enemyCollector
 				.getSpawnedEnemies().size());
 		wave.update(0); // Update the wave and let it spawn it first enemy
-		assertTrue("The wave has eneded", enemyCollector.hasWaveEnded());
+		assertTrue("The wave has ended", enemyCollector.hasWaveEnded());
 		assertEquals("One spawned enemy", 1, enemyCollector.getSpawnedEnemies()
 				.size());
 	}
@@ -117,25 +118,25 @@ public class RectangleWaveTest extends TestCase {
 		int enemiesInRow = 5; // Number of enemies in a row
 
 		initWave(enemiesInRow, 3, 0, 0, 0);
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("No enemies has spawned yet", 0, enemyCollector
 				.getSpawnedEnemies().size());
 
 		wave.update(0.01f); // Run an update
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals(Integer.toString(enemiesInRow) + " enemies has spawned",
 				enemiesInRow, enemyCollector.getSpawnedEnemies().size());
 
 		wave.update(1.98f);
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals("No new enemies has spawned", enemiesInRow, enemyCollector
 				.getSpawnedEnemies().size());
 
 		wave.update(0.03f);
 
-		assertFalse("Wave hasn't ended", enemyCollector.hasWaveEnded());
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
 		assertEquals(Integer.toString(enemiesInRow)
 				+ " new enemies has spawned", enemiesInRow * 2, enemyCollector
 				.getSpawnedEnemies().size());
