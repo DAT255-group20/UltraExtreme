@@ -249,9 +249,6 @@ public final class SpriteFactory {
 		// Init options scene atlas and texture map
 		optionsTextures = new EnumMap<OptionsTexture, ITextureRegion>(
 				OptionsTexture.class);
-		// FIXME: AndEngine can't handle a atlas with this enormous size...
-		// BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
-		// textureManager, 800, 2696, TextureOptions.DEFAULT);
 		BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
 				textureManager, 800, 1754, TextureOptions.DEFAULT);
 		BitmapTextureAtlas textureAtlasOptions2 = new BitmapTextureAtlas(
