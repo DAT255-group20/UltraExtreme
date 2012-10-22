@@ -95,9 +95,9 @@ public final class SpriteFactory {
 	 * A map containing the options scene's textures, which are its background
 	 * and buttons.
 	 */
-	private Map<OPTIONS_TEXTURES, ITextureRegion> optionsTextures;
+	private Map<OptionsTexture, ITextureRegion> optionsTextures;
 
-	public static enum OPTIONS_TEXTURES {
+	public static enum OptionsTexture {
 		BACKGROUND, NORMAL_DIFFICULTY, HARD_DIFFICULTY, EXTREME_DIFFICULTY, ULTRAEXTREME_DIFFICULTY, RESET_BUTTON, RETURN_BUTTON
 	};
 
@@ -249,39 +249,39 @@ public final class SpriteFactory {
 		textureManager.loadTexture(textureAtlasGameOver);
 
 		// Init options scene atlas and texture map
-		optionsTextures = new EnumMap<OPTIONS_TEXTURES, ITextureRegion>(
-				OPTIONS_TEXTURES.class);
+		optionsTextures = new EnumMap<OptionsTexture, ITextureRegion>(
+				OptionsTexture.class);
 		// FIXME: AndEngine can't handle a atlas with this enormous size...
 		// BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
 		// textureManager, 800, 2696, TextureOptions.DEFAULT);
 		BitmapTextureAtlas textureAtlasOptions = new BitmapTextureAtlas(
-				textureManager, 800, 1753, TextureOptions.DEFAULT);
+				textureManager, 800, 1754, TextureOptions.DEFAULT);
 		BitmapTextureAtlas textureAtlasOptions2 = new BitmapTextureAtlas(
 				textureManager, 800, 944, TextureOptions.DEFAULT);
-		optionsTextures.put(OPTIONS_TEXTURES.BACKGROUND,
+		optionsTextures.put(OptionsTexture.BACKGROUND,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions, activity, "options_bg.jpg", 0, 0));
-		optionsTextures.put(OPTIONS_TEXTURES.NORMAL_DIFFICULTY,
+		optionsTextures.put(OptionsTexture.NORMAL_DIFFICULTY,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions, activity,
 						"options_difficulty_normal.png", 0, 1281));
-		optionsTextures.put(OPTIONS_TEXTURES.HARD_DIFFICULTY,
+		optionsTextures.put(OptionsTexture.HARD_DIFFICULTY,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions, activity,
-						"options_difficulty_hard.png", 0, 1517));
-		optionsTextures.put(OPTIONS_TEXTURES.EXTREME_DIFFICULTY,
+						"options_difficulty_hard.png", 0, 1518));
+		optionsTextures.put(OptionsTexture.EXTREME_DIFFICULTY,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions2, activity,
 						"options_difficulty_extreme.png", 0, 0));
-		optionsTextures.put(OPTIONS_TEXTURES.ULTRAEXTREME_DIFFICULTY,
+		optionsTextures.put(OptionsTexture.ULTRAEXTREME_DIFFICULTY,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions2, activity,
 						"options_difficulty_ultraextreme.png", 0, 236));
-		optionsTextures.put(OPTIONS_TEXTURES.RESET_BUTTON,
+		optionsTextures.put(OptionsTexture.RESET_BUTTON,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions2, activity,
 						"options_reset_button.png", 0, 472));
-		optionsTextures.put(OPTIONS_TEXTURES.RETURN_BUTTON,
+		optionsTextures.put(OptionsTexture.RETURN_BUTTON,
 				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
 						textureAtlasOptions2, activity,
 						"options_return_button.png", 0, 708));
@@ -384,7 +384,7 @@ public final class SpriteFactory {
 		return instance.gameOverTextures.get("saveButton");
 	}
 
-	public static ITextureRegion getOptionsTexture(OPTIONS_TEXTURES texture) {
+	public static ITextureRegion getOptionsTexture(OptionsTexture texture) {
 		return instance.optionsTextures.get(texture);
 	}
 

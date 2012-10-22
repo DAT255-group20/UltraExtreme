@@ -57,6 +57,7 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private Scene currentScene;
 	private AbstractController currentController;
 	private HighscoreDBOpenHelper highscoreDBOpenHelper;
+	private OptionsDatabase optionsDatabase;
 
 	@Override
 	public void controllerListenerUpdate(final ControllerEvent event) {
@@ -132,8 +133,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	@Override
 	protected Scene onCreateScene() {
 		highscoreDBOpenHelper = new HighscoreDBOpenHelper(this);
+		optionsDatabase = new OptionsDatabase(this);
 		gameController = new GameController(
-				this.getVertexBufferObjectManager(), this, camera, defaultFont);
+				this.getVertexBufferObjectManager(), this, camera, defaultFont,
+				optionsDatabase);
 		mainMenuController = new MainMenuController(camera,
 				this.getVertexBufferObjectManager());
 		gameOverController = new GameOverController(
@@ -143,7 +146,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 		highscoreController = new HighscoreController(camera, defaultFont,
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
 		optionsController = new OptionsController(camera,
-				this.getVertexBufferObjectManager());
+				this.getVertexBufferObjectManager(), optionsDatabase,
+				highscoreDBOpenHelper);
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
