@@ -64,7 +64,7 @@ public class HighscoreScene extends MenuScene {
 	/**
 	 * Distance between two high score entries in the list.
 	 */
-	private static final int HIGHSCORE_DISPERSION = 40;
+	private static final int HIGHSCORE_DISPERSION = 50;
 
 	/**
 	 * References to the high score list entries.
@@ -135,8 +135,8 @@ public class HighscoreScene extends MenuScene {
 		 * text yet and aren't placed correctly along the x axis.
 		 */
 		for (int i = 0; i < highscores.length; i++) {
-			highscores[i] = new HighscoreText(new Position(0, scaling.y * 420
-					+ i * HIGHSCORE_DISPERSION), font, vbo, i + 1);
+			highscores[i] = new HighscoreText(new Position(0, scaling.y * (420
+					+ i * HIGHSCORE_DISPERSION)), font, vbo, i + 1);
 			attachChild(highscores[i]);
 		}
 	}
