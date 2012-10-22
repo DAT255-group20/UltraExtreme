@@ -28,7 +28,8 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.andengine.entity.scene.menu.item.IMenuItem;
-import org.andengine.opengl.font.Font;
+import org.andengine.opengl.font.FontManager;
+import org.andengine.opengl.texture.TextureManager;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
@@ -37,15 +38,36 @@ import ultraextreme.view.HighscoreScene;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ * 
+ */
 public class HighscoreController extends AbstractController implements
 		IOnMenuItemClickListener {
+	
 	private final HighscoreScene scene;
 	private HighscoreDBOpenHelper dbOpenHelper;
 
-	public HighscoreController(Camera camera, Font font,
-			VertexBufferObjectManager vbo, HighscoreDBOpenHelper dbOpenHelper) {
+	/**
+	 * @param camera
+	 * @param fontManager
+	 *            Needed so the scene can create its own Font with a appropriate
+	 *            font size.
+	 * @param textureManager
+	 *            Needed so the scene can create its own Font with a appropriate
+	 *            font size.
+	 * @param vbo
+	 * @param dbOpenHelper
+	 *            Used to pull high score data from.
+	 */
+	public HighscoreController(Camera camera, FontManager fontManager,
+			TextureManager textureManager, VertexBufferObjectManager vbo,
+			HighscoreDBOpenHelper dbOpenHelper) {
 		super();
-		this.scene = new HighscoreScene(camera, font, vbo);
+		this.scene = new HighscoreScene(camera, fontManager, textureManager,
+				vbo);
 		scene.setOnMenuItemClickListener(this);
 		this.dbOpenHelper = dbOpenHelper;
 	}
@@ -100,11 +122,9 @@ public class HighscoreController extends AbstractController implements
 			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case HighscoreScene.GOTO_MENU:
-
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
 			break;
-
 		default:
 			break;
 		}
