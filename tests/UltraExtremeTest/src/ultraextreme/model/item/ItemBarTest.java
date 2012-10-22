@@ -77,6 +77,14 @@ public class ItemBarTest extends TestCase {
 			addItemSizeTester(i);
 		}
 	}
+	
+	public void testClear() {
+		itemBar.addItem(getNewWeapon());
+		itemBar.addItem(getNewWeapon());
+		itemBar.clear();
+		assertTrue(itemBar.getItems().isEmpty());
+		assertEquals(itemBar.getMarkerPosition(), 0);
+	}
 
 	/**
 	 * Add 15 items to an item bar that can only take 10 items, and then check

@@ -94,6 +94,16 @@ public class ItemBar {
 		this.playerRotation = playerRotation;
 		this.markerPosition = 0;
 	}
+	
+	/**
+	 * Clears the itembar from all weapons 
+	 * and resets the marker position.
+	 */
+	public void clear() {
+		this.items = new ArrayList<AbstractWeapon>();
+		this.markerPosition = 0;
+		fireItemBarUpdated();
+	}
 
 	/**
 	 * Add an item to the item bar.
