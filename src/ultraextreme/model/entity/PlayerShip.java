@@ -70,7 +70,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	public boolean canMoveX(double deltaX) {
 		final Dimension dimension = Constants.getLevelDimension();
-		final Position position = this.getCenteredPositionClone();
+		final Position position = this.getPositionClone();
 		final double newX = deltaX + position.getX();
 		return newX + getWidth() / 2 < dimension.getX()
 				&& newX - getWidth() / 2 > 0;
@@ -87,7 +87,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	public boolean canMoveY(double deltaY) {
 		final Dimension dimension = Constants.getLevelDimension();
-		final Position position = this.getCenteredPositionClone();
+		final Position position = this.getPositionClone();
 		double newY = deltaY + position.getY();
 		return newY + getHeight() / 2 < dimension.getY()
 				&& newY - getHeight() / 2 > 0;
