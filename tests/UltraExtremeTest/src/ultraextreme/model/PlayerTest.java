@@ -145,6 +145,8 @@ public class PlayerTest extends TestCase {
 
 		assertEquals(player.getLives(), Constants.getInitShipLives());
 		assertEquals(player.getScore(), 0);
+		
+		assertTrue(player.getItemBar().getItems().isEmpty());
 
 		assertFalse(player.getShip().isDestroyed());
 		assertFalse(player.getShip().justGotHit());
