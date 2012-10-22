@@ -200,7 +200,7 @@ public final class SpriteFactory {
 
 		// Init the textinput background
 		textInputBackground = BitmapTextureAtlasTextureRegionFactory
-				.createTiledFromAsset(textureAtlas, activity, "button_1.png",
+				.createTiledFromAsset(textureAtlas, activity, "itembar_marker.png",
 						331, 0, 1, 1);
 
 		textureManager.loadTexture(textureAtlas);
