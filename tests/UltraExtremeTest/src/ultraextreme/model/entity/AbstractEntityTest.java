@@ -88,21 +88,6 @@ public abstract class AbstractEntityTest extends TestCase {
 	}
 
 	@Test
-	public void testGetCenteredPosition() {
-		AbstractEntity entity = getNewAbstractEntity(20, 20, 10, 10);
-		Position centPos = entity.getCenteredPositionClone();
-		assertTrue(centPos.getX() == 25);
-		assertTrue(centPos.getY() == 25);
-
-		entity = getNewAbstractEntity(15, 30, 6, 18);
-		centPos = entity.getCenteredPositionClone();
-		assertFalse(centPos.getX() == 25);
-		assertFalse(centPos.getY() == 25);
-		assertTrue(centPos.getX() == 18);
-		assertTrue(centPos.getY() == 39);
-	}
-
-	@Test
 	public void testGetDirection() {
 		AbstractEntity entity = newEntity();
 		assertEquals(entity.getRotation(), new Rotation(0));

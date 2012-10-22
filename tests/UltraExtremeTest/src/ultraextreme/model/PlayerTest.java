@@ -254,16 +254,9 @@ public class PlayerTest extends TestCase {
 		ModelInput m = new ModelInput(dX, dY, fireWeapons, dropBomb);
 		player.update(m, 1);
 		Position pNew = player.getShip().getPositionClone();
-		if(dX > 0) {
-			assertEquals(pOld.getX() + dX, pNew.getX());
-		} else {
-			assertEquals(pOld.getX(), pNew.getX());
-		}
-		if(dY > 0) {
-			assertEquals(pOld.getY() + dY, pNew.getY());
-		} else {
-			assertEquals(pOld.getY(), pNew.getY());
-		}
+
+		assertEquals(pOld.getX() + dX, pNew.getX());
+		assertEquals(pOld.getY() + dY, pNew.getY());
 
 		if (fireWeapons) {
 			assertTrue(bulletManager.getBullets().size() > 0);

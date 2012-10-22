@@ -113,17 +113,6 @@ public abstract class AbstractEntity implements IEntity {
 		return new Position(this.position);
 	}
 
-	/**
-	 * Returns a deep clone position at the center of this entity.
-	 * 
-	 * @return A deep clone of the position at the center of this entity.
-	 */
-	@Override
-	public Position getCenteredPositionClone() {
-		return new Position(position.getX() + getWidth() / 2, position.getY()
-				+ getHeight() / 2);
-	}
-
 	@Override
 	public boolean isOutOfScreen() {
 		return isOutOfScreen(0);
