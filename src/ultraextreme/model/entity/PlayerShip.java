@@ -72,8 +72,8 @@ public class PlayerShip extends AbstractDestroyableEntity {
 		final Dimension dimension = Constants.getLevelDimension();
 		final Position position = this.getPositionClone();
 		final double newX = deltaX + position.getX();
-		return newX + getWidth() / 2 < dimension.getX()
-				&& newX - getWidth() / 2 > 0;
+		return newX + getWidth() < dimension.getX()
+				&& newX > 0;
 	}
 
 	/**
@@ -89,8 +89,8 @@ public class PlayerShip extends AbstractDestroyableEntity {
 		final Dimension dimension = Constants.getLevelDimension();
 		final Position position = this.getPositionClone();
 		double newY = deltaY + position.getY();
-		return newY + getHeight() / 2 < dimension.getY()
-				&& newY - getHeight() / 2 > 0;
+		return newY + getHeight() < dimension.getY()
+				&& newY > 0;
 	}
 
 	@Override
