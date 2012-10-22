@@ -9,6 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class OptionsDatabase {
 
 	private Context context;

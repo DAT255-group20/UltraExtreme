@@ -16,32 +16,58 @@ import ultraextreme.view.OptionsScene;
 /**
  * 
  * @author Daniel Jonsson
- *
+ * 
  */
 public class OptionsController extends AbstractController implements
 		IOnMenuItemClickListener {
-	
+
 	private final OptionsScene scene;
 	private HighscoreDBOpenHelper dbOpenHelper;
+	private OptionsDatabase optionsDatabase;
+	private Difficulty difficulty;
 
 	public OptionsController(final Camera camera,
-			final VertexBufferObjectManager vertexBufferObjectManager, HighscoreDBOpenHelper dbOpenHelper) {
+			final VertexBufferObjectManager vertexBufferObjectManager,
+			OptionsDatabase optionsDatabase, HighscoreDBOpenHelper dbOpenHelper) {
 		super();
-		scene = new OptionsScene(camera, vertexBufferObjectManager, Difficulty.NORMAL);
-		scene.setOnMenuItemClickListener(this);
 		this.dbOpenHelper = dbOpenHelper;
+		this.optionsDatabase = optionsDatabase;
+		difficulty = optionsDatabase.getDifficultyLevel();
+		scene = new OptionsScene(camera, vertexBufferObjectManager, difficulty);
+		scene.setOnMenuItemClickListener(this);
 	}
-	
+
 	@Override
 	public boolean onMenuItemClicked(final MenuScene menuScene,
 			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
+		
 		case OptionsScene.CHANGE_DIFFICULTY:
-			scene.updateDifficultyButton(Difficulty.HARD);
+			Difficulty newDifficulty;
+			switch (difficulty) {
+			case NORMAL:
+				newDifficulty = Difficulty.HARD;
+				break;
+			case HARD:
+				newDifficulty = Difficulty.EXTREME;
+				break;
+			case EXTREME:
+				newDifficulty = Difficulty.ULTRAEXTREME;
+				break;
+			case ULTRAEXTREME:
+				newDifficulty = Difficulty.NORMAL;
+				break;
+			default:
+				newDifficulty = Difficulty.NORMAL;
+				break;
+			}
+			scene.updateDifficultyButton(newDifficulty);
+			optionsDatabase.setDifficultyLevel(newDifficulty);
+			difficulty = newDifficulty;
 			break;
 
 		case OptionsScene.RESET_HIGH_SCORES:
-			
+
 			// Delete the database file
 			File db = new File(dbOpenHelper.getWritableDatabase().getPath());
 			dbOpenHelper.close();
@@ -67,13 +93,13 @@ public class OptionsController extends AbstractController implements
 	@Override
 	public void activateController() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deactivateController() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

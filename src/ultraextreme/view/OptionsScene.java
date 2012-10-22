@@ -1,5 +1,8 @@
 package ultraextreme.view;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 import javax.vecmath.Vector2d;
 
 import org.andengine.engine.camera.Camera;
@@ -14,6 +17,11 @@ import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.Dimension;
 import ultraextreme.view.SpriteFactory.OptionsTexture;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ *
+ */
 public class OptionsScene extends MenuScene {
 
 	// Button IDs
@@ -21,9 +29,24 @@ public class OptionsScene extends MenuScene {
 	public static final int RESET_HIGH_SCORES = 1;
 	public static final int RETURN_TO_MAIN_MENU = 2;
 
-	private IMenuItem[] difficultyButtons;
-	private int currentButton;
+	/**
+	 * Map with the different kinds of difficulty buttons
+	 */
+	private Map<Difficulty, IMenuItem> difficultyButtons;
 
+	/**
+	 * Which difficulty the button was last set to. This is used when updating
+	 * the difficulty button to easily deatch the old one.
+	 */
+	private Difficulty lastDifficulty;
+
+	/**
+	 * 
+	 * @param camera
+	 * @param vertexBufferObjectManager
+	 * @param difficulty
+	 *            Which difficulty level it should be set to from the beginning.
+	 */
 	public OptionsScene(final Camera camera,
 			final VertexBufferObjectManager vertexBufferObjectManager,
 			Difficulty difficulty) {
@@ -53,21 +76,29 @@ public class OptionsScene extends MenuScene {
 		/*
 		 * Add the difficulty button.
 		 */
-		currentButton = 0;
-		difficultyButtons = new IMenuItem[4];
-		difficultyButtons[0] = createButton(CHANGE_DIFFICULTY, 350,
-				OptionsTexture.NORMAL_DIFFICULTY, scaling, screenWidth,
-				vertexBufferObjectManager);
-		difficultyButtons[1] = createButton(CHANGE_DIFFICULTY, 350,
-				OptionsTexture.HARD_DIFFICULTY, scaling, screenWidth,
-				vertexBufferObjectManager);
-		difficultyButtons[2] = createButton(CHANGE_DIFFICULTY, 350,
-				OptionsTexture.EXTREME_DIFFICULTY, scaling, screenWidth,
-				vertexBufferObjectManager);
-		difficultyButtons[3] = createButton(CHANGE_DIFFICULTY, 350,
-				OptionsTexture.ULTRAEXTREME_DIFFICULTY, scaling, screenWidth,
-				vertexBufferObjectManager);
-		addMenuItem(difficultyButtons[currentButton]);
+		difficultyButtons = new EnumMap<Difficulty, IMenuItem>(Difficulty.class);
+		difficultyButtons.put(
+				Difficulty.NORMAL,
+				createButton(CHANGE_DIFFICULTY, 350,
+						OptionsTexture.NORMAL_DIFFICULTY, scaling, screenWidth,
+						vertexBufferObjectManager));
+		difficultyButtons.put(
+				Difficulty.HARD,
+				createButton(CHANGE_DIFFICULTY, 350,
+						OptionsTexture.HARD_DIFFICULTY, scaling, screenWidth,
+						vertexBufferObjectManager));
+		difficultyButtons.put(
+				Difficulty.EXTREME,
+				createButton(CHANGE_DIFFICULTY, 350,
+						OptionsTexture.EXTREME_DIFFICULTY, scaling,
+						screenWidth, vertexBufferObjectManager));
+		difficultyButtons.put(
+				Difficulty.ULTRAEXTREME,
+				createButton(CHANGE_DIFFICULTY, 350,
+						OptionsTexture.ULTRAEXTREME_DIFFICULTY, scaling,
+						screenWidth, vertexBufferObjectManager));
+		addMenuItem(difficultyButtons.get(difficulty));
+		lastDifficulty = difficulty;
 
 		/*
 		 * Add the reset button.
@@ -108,9 +139,12 @@ public class OptionsScene extends MenuScene {
 		return button;
 	}
 
+	/**
+	 * Switch to the next difficulty level.
+	 */
 	public void updateDifficultyButton(Difficulty difficulty) {
-		detachChild(difficultyButtons[currentButton++]);
-		currentButton %= 4;
-		addMenuItem(difficultyButtons[currentButton]);
+		detachChild(difficultyButtons.get(lastDifficulty));
+		addMenuItem(difficultyButtons.get(difficulty));
+		lastDifficulty = difficulty;
 	}
 }

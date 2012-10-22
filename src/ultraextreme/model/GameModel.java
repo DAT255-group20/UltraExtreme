@@ -63,12 +63,17 @@ public class GameModel implements IUltraExtremeModel {
 
 	private PropertyChangeSupport pcs;
 
-	public GameModel() {
+	/**
+	 * 
+	 * @param difficulty
+	 *            Which difficulty level the game model should be on.
+	 */
+	public GameModel(Difficulty difficulty) {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
 		WeaponFactory.initialize(bulletManager);
-		enemySpawner = new EnemySpawner(new RandomWaveList(Difficulty.NORMAL));
+		enemySpawner = new EnemySpawner(new RandomWaveList(difficulty));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 		pcs = new PropertyChangeSupport(this);
@@ -208,12 +213,15 @@ public class GameModel implements IUltraExtremeModel {
 
 	/**
 	 * Resets the game
+	 * 
+	 * @param difficulty
+	 *            Which difficulty it should be reset to.
 	 */
-	public void reset() {
+	public void reset(Difficulty difficulty) {
 		bulletManager.clearAllBullets();
 		enemyManager.clearAllEnemies();
 		pickupManager.clearAllPickups();
-		enemySpawner = new EnemySpawner(new RandomWaveList(Difficulty.NORMAL));
+		enemySpawner = new EnemySpawner(new RandomWaveList(difficulty));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
 		player.giveWeapon(new BasicWeapon(bulletManager));

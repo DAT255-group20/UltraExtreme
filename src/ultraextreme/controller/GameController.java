@@ -56,15 +56,18 @@ public class GameController extends AbstractController implements
 	private final GameScene scene;
 	private final GameModel gameModel;
 	private final GameLoop gameLoop;
+	
+	private OptionsDatabase optionsDatabase;
 
 	private float lastX = -1;
 	private float lastY = -1;
 
 	public GameController(
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final SimpleBaseGameActivity activity, Camera camera, Font font) {
+			final SimpleBaseGameActivity activity, Camera camera, Font font, OptionsDatabase optionsDatabase) {
 		super();
-		gameModel = new GameModel();
+		this.optionsDatabase = optionsDatabase;
+		gameModel = new GameModel(optionsDatabase.getDifficultyLevel());
 		scene = new GameScene(gameModel, vertexBufferObjectManager, activity
 				.getResources().getDisplayMetrics().widthPixels, activity
 				.getResources().getDisplayMetrics().heightPixels, camera, font);
@@ -181,7 +184,7 @@ public class GameController extends AbstractController implements
 	private void resetGameModel() {
 		Log.d("DEBUG", "Resetting the game model");
 		gameLoop.reset();
-		gameModel.reset();
+		gameModel.reset(optionsDatabase.getDifficultyLevel());
 	}
 
 	/**
