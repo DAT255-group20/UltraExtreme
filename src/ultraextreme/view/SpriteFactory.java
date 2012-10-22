@@ -101,6 +101,15 @@ public final class SpriteFactory {
 		BACKGROUND, NORMAL_DIFFICULTY, HARD_DIFFICULTY, EXTREME_DIFFICULTY, ULTRAEXTREME_DIFFICULTY, RESET_BUTTON, RETURN_BUTTON
 	};
 
+	/**
+	 * A map containing the high scores scene's textures.
+	 */
+	private Map<HighScoresTexture, ITextureRegion> highScoresTextures;
+
+	public static enum HighScoresTexture {
+		BACKGROUND, RETURN_BUTTON
+	};
+
 	private TiledTextureRegion textInputBackground;
 
 	/**
@@ -282,6 +291,21 @@ public final class SpriteFactory {
 						"options_return_button.png", 0, 708));
 		textureManager.loadTexture(textureAtlasOptions);
 		textureManager.loadTexture(textureAtlasOptions2);
+
+		// Init textures for the high scores view
+		highScoresTextures = new EnumMap<HighScoresTexture, ITextureRegion>(
+				HighScoresTexture.class);
+		BitmapTextureAtlas textureAtlasHighScores = new BitmapTextureAtlas(
+				textureManager, 800, 1495, TextureOptions.DEFAULT);
+		highScoresTextures.put(HighScoresTexture.BACKGROUND,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasHighScores, activity, "high_scores_bg.jpg",
+						0, 0));
+		highScoresTextures.put(HighScoresTexture.RETURN_BUTTON,
+				BitmapTextureAtlasTextureRegionFactory.createFromAsset(
+						textureAtlasHighScores, activity,
+						"high_scores_return_button.png", 0, 1281));
+		textureManager.loadTexture(textureAtlasHighScores);
 	}
 
 	/**
@@ -381,6 +405,10 @@ public final class SpriteFactory {
 
 	public static ITextureRegion getOptionsTexture(OptionsTexture texture) {
 		return instance.optionsTextures.get(texture);
+	}
+
+	public static ITextureRegion getHighScoresTexture(HighScoresTexture texture) {
+		return instance.highScoresTextures.get(texture);
 	}
 
 	/**
