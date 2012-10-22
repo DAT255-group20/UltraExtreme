@@ -108,23 +108,23 @@ public class RandomWaveList extends AbstractWaveList {
 	private void scaleToDifficulty(Difficulty difficulty) {
 		switch (difficulty) {
 		case NORMAL:
-			difficultyRiseSpeed = 1.01;
+			difficultyRiseSpeed = 0.02;
 			break;
 
 		case HARD:
-			difficultyRiseSpeed = 1.05;
+			difficultyRiseSpeed = 0.04;
 			break;
 
 		case EXTREME:
-			difficultyRiseSpeed = 1.07;
+			difficultyRiseSpeed = 0.07;
 			break;
 
 		case ULTRAEXTREME:
-			difficultyRiseSpeed = 1.12;
+			difficultyRiseSpeed = 0.1;
 			break;
 
 		default:
-			difficultyRiseSpeed = 1;
+			difficultyRiseSpeed = 0;
 		}
 	}
 
@@ -214,7 +214,7 @@ public class RandomWaveList extends AbstractWaveList {
 	private void generateNewSpawningTime() {
 		currentSpawningTime += (randomGenerator.nextFloat() * 2 + 10)
 				/ currentDifficultyMod;
-		currentDifficultyMod = currentDifficultyMod * difficultyRiseSpeed;
+		currentDifficultyMod = currentDifficultyMod + difficultyRiseSpeed;
 	}
 
 	/**
