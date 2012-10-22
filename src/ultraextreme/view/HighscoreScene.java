@@ -23,34 +23,38 @@ package ultraextreme.view;
 import java.util.Collections;
 import java.util.List;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
-import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.entity.scene.menu.item.SpriteMenuItem;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
 
+import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
-import ultraextreme.util.Resources;
-import ultraextreme.util.Resources.ResourceName;
 import ultraextreme.view.SpriteFactory.HighScoresTexture;
 
+/**
+ * 
+ * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
+ *
+ */
 public class HighscoreScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
-	public static final int CLEAR_LIST = 1;
 
 	private static final int NR_OF_HIGHSCORES = 10;
 
 	// TODO(plankton) Make these centered on the screen
-	private static final Position GOTOMENU_BTN_POS = new Position(100, 100);
-	private static final Position CLEARLIST_BTN_POS = new Position(100, 750);
-	private static final Position HIGHSCORE_HEADER_POS = new Position(135, 160);
-	private static final Position HIGHSCORE_LIST_POS = new Position(80, 220);
+	private static final Position HIGHSCORE_HEADER_POS = new Position(200, 400);
+	private static final Position HIGHSCORE_LIST_POS = new Position(180, 420);
 	private static final int HIGHSCORE_DISPERSION = 50;
 
 	private HighscoreText[] highscores = new HighscoreText[NR_OF_HIGHSCORES];
@@ -58,7 +62,7 @@ public class HighscoreScene extends MenuScene {
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {
 		super(camera);
-		
+
 		/*
 		 * Add the background.
 		 */
@@ -71,21 +75,26 @@ public class HighscoreScene extends MenuScene {
 				vbo));
 		setBackground(background);
 
-		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
-				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
-				vbo);
-		gotoMenuButton.setPosition((float) GOTOMENU_BTN_POS.getX(),
-				(float) GOTOMENU_BTN_POS.getY());
-		gotoMenuButton.setColor(Color.BLUE);
-		addMenuItem(gotoMenuButton);
+		// FIXME: These lines can be found in all menu scenes I think ...
+		/*
+		 * Scaling
+		 */
+		final Dimension screenDimension = new Dimension(screenWidth,
+				screenHeight);
+		// The following resolution is what the background and buttons were made
+		// for
+		Vector2d scaling = screenDimension
+				.getQuotient(new Dimension(800, 1280));
 
-		final IMenuItem clearListButton = new TextMenuItem(CLEAR_LIST, font,
-				Resources.getInstance().getResource(
-						ResourceName.CLEAR_HIGHSCORE), vbo);
-		clearListButton.setPosition((float) CLEARLIST_BTN_POS.getX(),
-				(float) CLEARLIST_BTN_POS.getY());
-		clearListButton.setColor(Color.BLUE);
-		addMenuItem(clearListButton);
+		/*
+		 * Add a return-to-main-menu button.
+		 */
+		addMenuItem(createButton(GOTO_MENU, 1000,
+				HighScoresTexture.RETURN_BUTTON, scaling, screenWidth, vbo));
+
+		// FIXME Resources.GOTO_MENU not needed anymore
+		
+		// FIXME Resources.CLEAR_LIST not needed anymore
 
 		Text highscoreHeader = new Text((float) HIGHSCORE_HEADER_POS.getX(),
 				(float) HIGHSCORE_HEADER_POS.getY(), font, "Name  |  Score",
@@ -98,6 +107,32 @@ public class HighscoreScene extends MenuScene {
 							* HIGHSCORE_DISPERSION), font, vbo, i + 1);
 			attachChild(highscores[i]);
 		}
+	}
+
+	// FIXME: Copied method from OptionsScene and sligtly modified. Maybe we
+	// could use a menu abstract class or something.
+	/**
+	 * Create a menu button.
+	 * 
+	 * @param destination
+	 * @param y
+	 * @param texture
+	 * @param scaling
+	 * @param screenWidth
+	 * @param vertexBufferObjectManager
+	 */
+	private IMenuItem createButton(final int destination, final int y,
+			final HighScoresTexture texture, final Vector2d scaling,
+			final float screenWidth,
+			final VertexBufferObjectManager vertexBufferObjectManager) {
+		final IMenuItem button = new SpriteMenuItem(destination,
+				SpriteFactory.getHighScoresTexture(texture),
+				vertexBufferObjectManager);
+		button.setWidth((float) scaling.x * button.getWidth());
+		button.setHeight((float) scaling.y * button.getHeight());
+		button.setX((screenWidth - button.getWidth()) / 2);
+		button.setY((float) scaling.y * y);
+		return button;
 	}
 
 	/**

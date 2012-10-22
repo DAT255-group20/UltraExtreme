@@ -20,7 +20,6 @@
 
 package ultraextreme.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,16 +103,6 @@ public class HighscoreController extends AbstractController implements
 
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
-			break;
-
-		case HighscoreScene.CLEAR_LIST:
-
-			// Delete the database file
-			File db = new File(dbOpenHelper.getWritableDatabase().getPath());
-			dbOpenHelper.close();
-			db.delete();
-			loadFromDatabase();
-
 			break;
 
 		default:
