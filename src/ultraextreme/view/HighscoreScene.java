@@ -31,10 +31,8 @@ import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.SpriteMenuItem;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.util.color.Color;
 
 import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.Position;
@@ -53,11 +51,12 @@ public class HighscoreScene extends MenuScene {
 	private static final int NR_OF_HIGHSCORES = 10;
 
 	// TODO(plankton) Make these centered on the screen
-	private static final Position HIGHSCORE_HEADER_POS = new Position(200, 400);
-	private static final Position HIGHSCORE_LIST_POS = new Position(180, 420);
-	private static final int HIGHSCORE_DISPERSION = 50;
+//	private static final Position HIGHSCORE_LIST_POS = new Position(180, 440);
+	private static final int HIGHSCORE_DISPERSION = 40;
 
 	private HighscoreText[] highscores = new HighscoreText[NR_OF_HIGHSCORES];
+	
+	private float screenWidth;
 
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {
@@ -66,7 +65,7 @@ public class HighscoreScene extends MenuScene {
 		/*
 		 * Add the background.
 		 */
-		final float screenWidth = camera.getWidth();
+		screenWidth = camera.getWidth();
 		final float screenHeight = camera.getHeight();
 		final SpriteBackground background = new SpriteBackground(new Sprite(0,
 				0, screenWidth, screenHeight,
@@ -96,20 +95,22 @@ public class HighscoreScene extends MenuScene {
 		
 		// FIXME Resources.CLEAR_LIST not needed anymore
 
-		Text highscoreHeader = new Text((float) HIGHSCORE_HEADER_POS.getX(),
-				(float) HIGHSCORE_HEADER_POS.getY(), font, "Name  |  Score",
-				vbo);
-		highscoreHeader.setColor(Color.BLACK);
-		attachChild(highscoreHeader);
+		
+//		Font defaultFont = FontFactory.create(this.getFontManager(),
+//				this.getTextureManager(), 256, 256,
+//				Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32f,
+//				Color.WHITE_ARGB_PACKED_INT);
+//		defaultFont.load();
+		
 		for (int i = 0; i < highscores.length; i++) {
-			highscores[i] = new HighscoreText(new Position(
-					HIGHSCORE_LIST_POS.getX(), HIGHSCORE_LIST_POS.getY() + i
-							* HIGHSCORE_DISPERSION), font, vbo, i + 1);
+			highscores[i] = new HighscoreText(new Position(0, scaling.y * 420 + i * HIGHSCORE_DISPERSION), font, vbo, i + 1);
+			HighscoreText highscoreText = highscores[i];
+			highscoreText.setX((screenWidth - highscoreText.getWidth()) / 2);
 			attachChild(highscores[i]);
 		}
 	}
 
-	// FIXME: Copied method from OptionsScene and sligtly modified. Maybe we
+	// FIXME: Copied method from OptionsScene and slightly modified. Maybe we
 	// could use a menu abstract class or something.
 	/**
 	 * Create a menu button.
@@ -150,6 +151,7 @@ public class HighscoreScene extends MenuScene {
 			} else {
 				this.highscores[i].setHighscore(Highscore.EMPTY_HIGHSCORE);
 			}
+			this.highscores[i].setX((screenWidth - this.highscores[i].getWidth()) / 2);
 		}
 	}
 }
