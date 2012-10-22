@@ -107,8 +107,6 @@ public class GameOverScene extends MenuScene {
 		staticText.setY((float) scaling.y * 450);
 		attachChild(staticText);
 
-		// TODO: ResourceName.GOTO_MENU not needed anymore
-
 		/*
 		 * Add dynamic score.
 		 */

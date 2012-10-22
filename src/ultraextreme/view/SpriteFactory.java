@@ -161,16 +161,14 @@ public final class SpriteFactory {
 		final TextureRegion hitAndRunEnemy = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(textureAtlas, activity, "evil_ship_2.png",
 						221, 0);
-
 		putProperties(ObjectName.HITANDRUN_ENEMYSHIP, hitAndRunEnemy,
 				new Vector2d(27, 40), false);
 
 		final TextureRegion parabolaEnemy = BitmapTextureAtlasTextureRegionFactory
-
-		.createFromAsset(textureAtlas, activity, "evil_ship_3.png", 275, 0);
-
+				.createFromAsset(textureAtlas, activity, "evil_ship_3.png",
+						275, 0);
 		putProperties(ObjectName.PARABOLA_ENEMYSHIP, parabolaEnemy,
-				new Vector2d(56, 59), false);
+				new Vector2d(28, 29.5), false);
 
 		// init pickupables
 		final TextureRegion basicWeapon = BitmapTextureAtlasTextureRegionFactory
@@ -189,7 +187,7 @@ public final class SpriteFactory {
 				.createFromAsset(textureAtlas, activity, "spread.png", 73, 0);
 		putProperties(ObjectName.SPREAD_WEAPON, spreadWeapon, new Vector2d(15,
 				15), false);
-		itemTextures.put(ObjectName.SPREAD_WEAPON, spinningWeapon);
+		itemTextures.put(ObjectName.SPREAD_WEAPON, spreadWeapon);
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory

@@ -35,7 +35,7 @@ import ultraextreme.model.util.Rotation;
 public class WeaponPickup extends AbstractEntity {
 
 	public static final float SPEED = 200f;
-	private static final int WIDTH = 30;
+	private static final int WIDTH = 50;
 
 	public WeaponPickup(double x, double y, ObjectName weaponType) {
 		super(x, y, WIDTH, WIDTH, new Rotation(0), weaponType);

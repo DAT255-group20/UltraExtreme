@@ -136,14 +136,12 @@ public class OptionsController extends AbstractController implements
 
 	@Override
 	public void activateController() {
-		// TODO Auto-generated method stub
-
+		// Auto-generated method stub
 	}
 
 	@Override
 	public void deactivateController() {
-		// TODO Auto-generated method stub
-
+		// Auto-generated method stub
 	}
 
 	@Override

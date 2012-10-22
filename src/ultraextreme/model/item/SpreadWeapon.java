@@ -33,7 +33,7 @@ public class SpreadWeapon extends AbstractWeapon {
 
 	private static final int BULLET_WIDTH = 20;
 	private static final int BULLET_HEIGHT = 40;
-	private static final int BULLET_DAMAGE = 10;
+	private static final int BULLET_DAMAGE = 9;
 	private static final double ANGLE_DELTA = Math.PI / 8;
 	private static final int NR_OF_SHOTS = 4;
 	private static final float INIT_COOLDOWN = 0.5f;
