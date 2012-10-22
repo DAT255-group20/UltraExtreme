@@ -24,10 +24,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.andengine.engine.camera.Camera;
-import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -36,12 +37,13 @@ import org.andengine.util.color.Color;
 import ultraextreme.model.util.Position;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
+import ultraextreme.view.SpriteFactory.HighScoresTexture;
 
 public class HighscoreScene extends MenuScene {
 
 	public static final int GOTO_MENU = 0;
 	public static final int CLEAR_LIST = 1;
-	
+
 	private static final int NR_OF_HIGHSCORES = 10;
 
 	// TODO(plankton) Make these centered on the screen
@@ -56,7 +58,18 @@ public class HighscoreScene extends MenuScene {
 	public HighscoreScene(Camera camera, Font font,
 			VertexBufferObjectManager vbo) {
 		super(camera);
-		setBackground(new Background(0.1f, 0.9f, 0.1f));
+		
+		/*
+		 * Add the background.
+		 */
+		final float screenWidth = camera.getWidth();
+		final float screenHeight = camera.getHeight();
+		final SpriteBackground background = new SpriteBackground(new Sprite(0,
+				0, screenWidth, screenHeight,
+				SpriteFactory
+						.getHighScoresTexture(HighScoresTexture.BACKGROUND),
+				vbo));
+		setBackground(background);
 
 		final IMenuItem gotoMenuButton = new TextMenuItem(GOTO_MENU, font,
 				Resources.getInstance().getResource(ResourceName.GOTO_MENU),
