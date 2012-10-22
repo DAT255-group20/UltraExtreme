@@ -172,7 +172,7 @@ public class Player implements IPlayer {
 		listeners.add(listener);
 	}
 
-	public void reset() {
+	public final void reset() {
 		lives = Constants.getInitShipLives();
 		score = 0;
 		ship.reset();
