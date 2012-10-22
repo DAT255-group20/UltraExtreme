@@ -180,7 +180,7 @@ public final class SpriteFactory {
 				.createFromAsset(textureAtlas, activity, "spread.png", 73, 0);
 		putProperties(ObjectName.SPREAD_WEAPON, spreadWeapon, new Vector2d(15,
 				15), false);
-		itemTextures.put(ObjectName.SPREAD_WEAPON, spinningWeapon);
+		itemTextures.put(ObjectName.SPREAD_WEAPON, spreadWeapon);
 
 		// Init the item bar texture
 		itemBarTexture = BitmapTextureAtlasTextureRegionFactory
