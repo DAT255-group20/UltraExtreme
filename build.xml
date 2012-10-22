@@ -1,235 +1,92 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UltraExtreme" default="help">
 
-<!--<project basedir="/home/hesa/workspace/Moon" default="build" name="Moon">-->
-<project basedir="/var/lib/jenkins/jobs/Moon/workspace" default="build" name="Moon">
+    <!-- The local.properties file is created and updated by the 'android' tool.
+         It contains the path to the SDK. It should *NOT* be checked into
+         Version Control Systems. -->
+    <property file="local.properties" />
 
-  <property environment="env"/>
-  <property name="ECLIPSE_HOME" value="../../opt/eclipse"/>
-  <property name="eclipse.home" value="../../opt/eclipse"/>
-  <property name="junit.output.dir" value="junit"/>
-  <property name="debuglevel" value="source,lines,vars"/>
-  <property name="target" value="1.6"/>
-  <property name="source" value="1.6"/>
-  
+    <!-- The ant.properties file can be created by you. It is only edited by the
+         'android' tool to add properties to it.
+         This is the place to change some Ant specific build properties.
+         Here are some properties you may want to change/update:
 
-  <path id="Android 4.1.libraryclasspath">
-    <pathelement location="/home/hesa/android-sdks/platforms/android-16/android.jar"/>
-  </path>
+         source.dir
+             The name of the source directory. Default is 'src'.
+         out.dir
+             The name of the output directory. Default is 'bin'.
 
-  <path id="Android Dependencies.libraryclasspath">
-    <pathelement location="libs/android-support-v4.jar"/>
-  </path>
+         For other overridable properties, look at the beginning of the rules
+         files in the SDK, at tools/ant/build.xml
 
-  <path id="JUnit 4.libraryclasspath">
-    <pathelement location="./libs/junit.jar"/> 
-    <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/> 
-    <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.ant_1.8.3.v20120321-1730/lib/ant-junit.jar"/>
-    <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
-  </path>
+         Properties related to the SDK location or the project target should
+         be updated using the 'android' tool with the 'update' action.
 
-  <path id="Moon.classpath">
-    <pathelement location="bin/classes"/>
-    <path refid="Android 4.1.libraryclasspath"/>
-    <path refid="Android Dependencies.libraryclasspath"/>
-    <path refid="JUnit 4.libraryclasspath"/>
-  </path>
-  
-  <path id="run.NadaTest.classpath">
-    <path refid="JUnit 4.libraryclasspath"/>
-    <path refid="Moon.classpath"/>
-  </path>
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems.
 
-  <target name="init">
-    <mkdir dir="bin/classes"/>
-    <copy includeemptydirs="false" todir="bin/classes">
-      <fileset dir="src">
-	<exclude name="**/*.java"/>
-      </fileset>
-    </copy>
-    <copy includeemptydirs="false" todir="bin/classes">
-      <fileset dir="test">
-	<exclude name="**/*.java"/>
-      </fileset>
-    </copy>
-    <copy includeemptydirs="false" todir="bin/classes">
-      <fileset dir="gen">
-	<exclude name="**/*.java"/>
-      </fileset>
-    </copy>
-  </target>
-  <target name="clean">
-    <delete dir="bin/classes"/>
-  </target>
-  
-  <target name="all" depends="clean, build, NadaTest, emma"/>
-  
-  <target depends="clean" name="cleanall"/>
-  <target depends="build-subprojects,build-project" name="build"/>
-  <target name="build-subprojects"/>
-  <target depends="init" name="build-project">
-    <echo message="${ant.project.name}: ${ant.file}"/>
-    <javac debug="true" debuglevel="${debuglevel}" destdir="bin/classes" includeantruntime="false" source="${source}" target="${target}">
-      <src path="src"/>
-      <src path="test"/>
-      <src path="gen"/>
-      <classpath refid="Moon.classpath"/>
-    </javac>
-  </target>
+         -->
+    <property file="ant.properties" />
 
-  <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-  <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-    <copy todir="${ant.library.dir}">
-      <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-    </copy>
-    <unzip dest="${ant.library.dir}">
-      <patternset includes="jdtCompilerAdapter.jar"/>
-      <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-    </unzip>
-  </target>
+    <!-- if sdk.dir was not set from one of the property file, then
+         get it from the ANDROID_HOME env var.
+         This must be done before we load project.properties since
+         the proguard config can use sdk.dir -->
+    <property environment="env" />
+    <condition property="sdk.dir" value="${env.ANDROID_HOME}">
+        <isset property="env.ANDROID_HOME" />
+    </condition>
 
-  <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-    <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-    <antcall target="build"/>
-  </target>
-  
-  <target name="NadaTest">
+    <!-- The project.properties file is created and updated by the 'android'
+         tool, as well as ADT.
 
-    <junit printsummary="on" fork="true" haltonfailure="yes">
-      <formatter type="xml" />
-<!--      <batchtest todir="${test.report.dir}"> -->
-      <batchtest todir="${basedir}/reports/emma"> 
-	<!--                    <fileset dir="${src.dir}"> -->
-	<fileset dir="./test"> 
-	  <include name="**/NadaTest.java" />
-	</fileset>
-      </batchtest>
-      
-      <classpath>
-        <pathelement location="${basedir}/target/emmainstr/"/>
-        <path refid="emma.lib" />
-	<pathelement location="./libs/junit.jar"
-		     path="./libs/junit.jar"/>
-      </classpath>
-      
-<!--      <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.emma" /> -->
-      <jvmarg value="-Demma.coverage.out.file=${basedir}/reports/emma/coverage.emma" />
-      <jvmarg value="-Demma.coverage.out.merge=false" />
+         This contains project specific properties such as project target, and library
+         dependencies. Lower level build properties are stored in ant.properties
+         (or in .classpath for Eclipse projects).
 
-    </junit>
-    
-    
-    <mkdir dir="${junit.output.dir}"/>
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems. -->
+    <loadproperties srcFile="project.properties" />
 
-    <junit fork="yes" printsummary="withOutAndErr">
-      <formatter type="xml"/>
-      <test name="com.example.moon.NadaTest" todir="${junit.output.dir}"/>
-      <classpath refid="run.NadaTest.classpath"/>
-    </junit>
+    <!-- quick check on sdk.dir -->
+    <fail
+            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable."
+            unless="sdk.dir"
+    />
 
-
-
-  </target>
-  
-  <target name="junitreport">
-    <junitreport todir="${junit.output.dir}">
-      <fileset dir="${junit.output.dir}">
-	<include name="TEST-*.xml"/>
-      </fileset>
-      <report format="frames" todir="${junit.output.dir}"/>
-    </junitreport>
-  </target>
-  
-  
-  <property name="coverage.dir" value="${basedir}/reports/emma" />
-  <property name="instr.dir" value="${basedir}/target/emmainstr" />    <!-- directory which emma instrumentation classes will be written to -->
-  <property name="emma.dir" value="/home/hesa/opt/emma/" />             <!-- directory that contains emma.jar and emma_ant.jar -->
-  
-  <!-- Set emma.lib to refer to the list of EMMA jar files -->
-  <path id="emma.lib" >
-    <fileset dir="${emma.dir}">
-      <include name="*.jar"/>
-    </fileset>
-  </path>
-  
-  <!-- Define which classes will be reported in the coverage reports (by default, we will include all classes and assume -->
-  <!-- that your project's output folder is target/classes -->
-  <path id="emma.coverage.classes" >
-    <pathelement location="bin/classes/" />
-  </path>
-  
-  <!-- Load <emma> and <emmajava> custom tasks so that they can be used in ANT -->
-  <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
-  
-  <!-- Enable Emma -->
-  <target name="emma" description="turns on EMMA's instrumentation/reporting" >
-
-    <property name="emma.enabled" value="true" />
-    
-    <!-- EMMA instr class output directory (it is important to create this property only when EMMA is enabled) -->
-    <mkdir dir="${instr.dir}" />
-    
-    <!-- this property, if overriden via -Demma.filter=<list of filter specs>
-	 on ANT's command line, will set the coverage filter; by default,
-	 all classes found in 'emma.coverage.classes' pathref will be instrumented:
+    <!--
+        Import per project custom build rules if present at the root of the project.
+        This is the place to put custom intermediary targets such as:
+            -pre-build
+            -pre-compile
+            -post-compile (This is typically used for code obfuscation.
+                           Compiled code location: ${out.classes.absolute.dir}
+                           If this is not done in place, override ${out.dex.input.absolute.dir})
+            -post-package
+            -post-build
+            -pre-clean
     -->
-    <property name="emma.filter" value="" />
-    
-    <!-- ======================================================================= -->
-    <!-- EMMA INSTRUMENTATION -->
-    <!-- ======================================================================= -->
-    <!-- Instrument the classes, this takes the normal classes, and makes instrumented classes instead -->
-    <!-- Note that EMMA takes regular ANT path elements as instrumentation input, which is exceedingly convenient -->
-    <emma enabled="${emma.enabled}" >
+    <import file="custom_rules.xml" optional="true" />
 
-      <instr instrpathref="emma.coverage.classes"
-	     destdir="${instr.dir}"
-	     metadatafile="${coverage.dir}/metadata.emma"
-	     merge="true"
-	     >
-	<filter value="${emma.filter}" />
-      </instr>
-    </emma>
-    
-    <!-- if enabled, generate coverage report(s): -->
-    <emma enabled="${emma.enabled}" >
-      <report sourcepath="${basedir}/src"
-	      sort="+block,+name,+method,+class"
-	      metrics="method:70,block:80,line:80,class:100"
-	      >
-	<!-- collect all EMMA data dumps (metadata and runtime)
-	     [this can be done via nested <fileset> fileset elements
-	     or <file> elements pointing to a single file]:
-	-->
-	<fileset dir="${coverage.dir}" >
-	  <include name="*.emma" />
-	</fileset>
-	
-	<!-- for every type of report desired, configure a nested
-	     element; various report parameters
-	     can be inherited from the parent <report>
-	     and individually overridden for each report type:
-	-->
-	
-	<txt outfile="${coverage.dir}/coverage.txt"
-	     depth="package"
-	     columns="class,method,block,line,name"
-	     />
-	<xml outfile="${coverage.dir}/coverage.xml"
-	     depth="package"
-	     />
-	<html outfile="${coverage.dir}/coverage.html"
-	      depth="method"
-	      columns="name,class,method,block,line"
-	      />
-	
-      </report>
-    </emma>
-    
-  </target>
-  
+    <!-- Import the actual build file.
+
+         To customize existing targets, there are two options:
+         - Customize only one target:
+             - copy/paste the target into this file, *before* the
+               <import> task.
+             - customize it to your needs.
+         - Customize the whole content of build.xml
+             - copy/paste the content of the rules files (minus the top node)
+               into this file, replacing the <import> task.
+             - customize to your needs.
+
+         ***********************
+         ****** IMPORTANT ******
+         ***********************
+         In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
+         in order to avoid having your file be overridden by tools such as "android update project"
+    -->
+    <!-- version-tag: 1 -->
+    <import file="${sdk.dir}/tools/ant/build.xml" />
+
 </project>
