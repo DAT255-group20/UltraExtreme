@@ -32,10 +32,12 @@ import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.entity.WeaponPickup;
+import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
 import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Difficulty;
 import ultraextreme.model.util.PlayerID;
 
 /**
@@ -44,31 +46,34 @@ import ultraextreme.model.util.PlayerID;
  * @author Bjorn Persson Mattsson
  * @author Daniel Jonsson
  * @author Johan Gronvall
+ * @author Viktor Anderling
  * 
  */
 public class GameModel implements IUltraExtremeModel {
 
-	final private Player player;
+	private final Player player;
 
-	final private BulletManager bulletManager;
+	private final BulletManager bulletManager;
 
-	final private EnemyManager enemyManager;
+	private final EnemyManager enemyManager;
 
-	final private EnemySpawner enemySpawner;
+	private EnemySpawner enemySpawner;
 
 	private PickupManager pickupManager;
 
-	private WeaponFactory weaponFactory;
-
 	private PropertyChangeSupport pcs;
 
-	public GameModel() {
+	/**
+	 * 
+	 * @param difficulty
+	 *            Which difficulty level the game model should be on.
+	 */
+	public GameModel(Difficulty difficulty) {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
 		WeaponFactory.initialize(bulletManager);
-		weaponFactory = WeaponFactory.getInstance();
-		enemySpawner = new EnemySpawner(new RandomWaveList(1000));
+		enemySpawner = new EnemySpawner(new RandomWaveList(difficulty));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 		pcs = new PropertyChangeSupport(this);
@@ -93,12 +98,9 @@ public class GameModel implements IUltraExtremeModel {
 		for (AbstractEnemy enemy : enemyManager.getEnemies()) {
 			enemy.update(timeElapsed);
 		}
-
-		// TODO Decide if we want pickups to move around. If so, the following
-		// commented code is necessary.
-		// for(WeaponPickup pickup : pickupManager.getPickups()) {
-		// pickup.doMovement(timeElapsed);
-		// }
+		for (WeaponPickup pickup : pickupManager.getPickups()) {
+			pickup.doMovement(timeElapsed);
+		}
 
 		enemySpawner.update(timeElapsed);
 
@@ -107,6 +109,7 @@ public class GameModel implements IUltraExtremeModel {
 		spawnPickups();
 		enemyManager.clearDeadEnemies();
 		bulletManager.clearBulletsOffScreen();
+		pickupManager.clearPickupsOffScreen();
 	}
 
 	/**
@@ -156,7 +159,7 @@ public class GameModel implements IUltraExtremeModel {
 		for (int i = 0; i < pickupManager.getPickups().size(); i++) {
 			WeaponPickup wp = pickupManager.getPickups().get(i);
 			if (wp.collidesWith(player.getShip())) {
-				player.giveWeapon(weaponFactory.getNewWeapon(wp.getObjectName()));
+				player.giveWeapon(WeaponFactory.getNewWeapon(wp.getObjectName()));
 				pickupManager.removePickup(i);
 				i--;
 			}
@@ -210,13 +213,17 @@ public class GameModel implements IUltraExtremeModel {
 
 	/**
 	 * Resets the game
+	 * 
+	 * @param difficulty
+	 *            Which difficulty it should be reset to.
 	 */
-	public void reset() {
+	public void reset(Difficulty difficulty) {
 		bulletManager.clearAllBullets();
 		enemyManager.clearAllEnemies();
 		pickupManager.clearAllPickups();
+		enemySpawner = new EnemySpawner(new RandomWaveList(difficulty));
+		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
-
-		// TODO Reset enemymanager and enemysawner too?
+		player.giveWeapon(new BasicWeapon(bulletManager));
 	}
 }

@@ -20,6 +20,8 @@
 
 package ultraextreme.controller;
 
+import java.util.Calendar;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -29,13 +31,11 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.BaseGameActivity;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameOverScene;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * 
@@ -47,6 +47,7 @@ public class GameOverController extends AbstractController implements
 
 	private final GameOverScene scene;
 	private HighscoreDBOpenHelper dbOpenHelper;
+	private Long time;
 
 	public GameOverController(IUltraExtremeModel gameModel,
 			final Camera camera, final Font font,
@@ -61,8 +62,10 @@ public class GameOverController extends AbstractController implements
 
 	@Override
 	public void activateController() {
-		// Auto-generated method stub
-
+		scene.updateScene();
+		// Store the time when this view was switched to
+		Calendar c = Calendar.getInstance();
+		this.time = c.getTimeInMillis();
 	}
 
 	@Override
@@ -81,29 +84,14 @@ public class GameOverController extends AbstractController implements
 			final IMenuItem menuItem, float menuItemLocalX, float menuItemLocalY) {
 		switch (menuItem.getID()) {
 		case GameOverScene.GOTO_MENU:
-			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
-			String nameTag = scene.getName();
-			String score = Integer.toString(scene.getScore());
-			String sqlCommand = "INSERT INTO "
-					+ HighscoreDBOpenHelper.TABLE_NAME + " ("
-					+ HighscoreDBOpenHelper.NAME + ", "
-					+ HighscoreDBOpenHelper.HIGHSCORE + ") VALUES ('" + nameTag
-					+ "', '" + score + "')";
-			Log.d("DEBUG", "Saving highscore: " + sqlCommand);
-			database.execSQL(sqlCommand);
-			dbOpenHelper.close();
-
-			// Testing the database
-			SQLiteDatabase readableDb = dbOpenHelper.getReadableDatabase();
-			String query = "SELECT * FROM " + HighscoreDBOpenHelper.TABLE_NAME;
-			Cursor cursor = readableDb.rawQuery(query, null);
-			cursor.moveToFirst();
-			while (!cursor.isAfterLast()) {
-				Log.d("DEBUG", "Cursor pointing on: " + cursor.getString(0)
-						+ ", " + cursor.getString(1));
-				cursor.moveToNext();
+			// It's only possible to switch from the game over view after 1.5
+			// seconds
+			Long time1 = Calendar.getInstance().getTimeInMillis();
+			if (time1 < this.time + 1500) {
+				break;
 			}
-			// End of database test
+			
+			saveScore();
 
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
@@ -113,5 +101,28 @@ public class GameOverController extends AbstractController implements
 			break;
 		}
 		return true;
+	}
+	
+	/**
+	 * Save the score along with the tag in the database
+	 */
+	private void saveScore() {
+		SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+		String nameTag = scene.getName();
+		String score = Integer.toString(scene.getScore());
+		String sqlCommand = "INSERT INTO "
+				+ HighscoreDBOpenHelper.TABLE_NAME + " ("
+				+ HighscoreDBOpenHelper.NAME + ", "
+				+ HighscoreDBOpenHelper.HIGHSCORE + ") VALUES ('" + nameTag
+				+ "', '" + score + "')";
+		Log.d("DEBUG", "Saving highscore: " + sqlCommand);
+		database.execSQL(sqlCommand);
+		dbOpenHelper.close();
+	}
+
+	@Override
+	public void backButtonPressed() {
+		saveScore();
+		fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_MENU));
 	}
 }

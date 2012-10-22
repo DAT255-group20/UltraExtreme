@@ -35,8 +35,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class PlayerShip extends AbstractDestroyableEntity {
 
-	private static double speedMod = Constants.getPlayerSpeedModifier();
-
+	private static final int HITBOX_SIZE = 10;
 	/**
 	 * If the ship is hit this update.
 	 */
@@ -47,17 +46,17 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	private boolean destroyed;
 
-	public PlayerShip(final double x, final double y, final int width,
-			final int height) {
-		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
+	public PlayerShip() {
+		this(0, 0);
 	}
 
 	public PlayerShip(final double x, double y) {
-		this(x, y, 20, 20);
+		this(x, y, HITBOX_SIZE, HITBOX_SIZE);
 	}
 
-	public PlayerShip() {
-		this(0, 0);
+	public PlayerShip(final double x, final double y, final int width,
+			final int height) {
+		super(x, y, width, height, new Rotation(0), ObjectName.PLAYERSHIP);
 	}
 
 	/**
@@ -71,7 +70,7 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	public boolean canMoveX(double deltaX) {
 		final Dimension dimension = Constants.getLevelDimension();
-		final Position position = this.getCenteredPositionClone();
+		final Position position = this.getPositionClone();
 		final double newX = deltaX + position.getX();
 		return newX + getWidth() / 2 < dimension.getX()
 				&& newX - getWidth() / 2 > 0;
@@ -88,25 +87,15 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	 */
 	public boolean canMoveY(double deltaY) {
 		final Dimension dimension = Constants.getLevelDimension();
-		final Position position = this.getCenteredPositionClone();
+		final Position position = this.getPositionClone();
 		double newY = deltaY + position.getY();
 		return newY + getHeight() / 2 < dimension.getY()
 				&& newY - getHeight() / 2 > 0;
 	}
 
 	@Override
-	public void move(double x, double y) {
-		justHit = false;
-		super.move(x, y);
-	}
-
-	@Override
 	public boolean isDestroyed() {
 		return destroyed;
-	}
-
-	public void setDestroyed() {
-		destroyed = true;
 	}
 
 	/**
@@ -119,7 +108,25 @@ public class PlayerShip extends AbstractDestroyableEntity {
 	}
 
 	@Override
+	public void move(double x, double y) {
+		justHit = false;
+		super.move(x, y);
+	}
+
+	@Override
 	public void receiveDamage(int damage) {
 		justHit = true;
+	}
+
+	public void setDestroyed() {
+		destroyed = true;
+	}
+
+	/**
+	 * Resets values for the ship. Position will not be changed.
+	 */
+	public void reset() {
+		justHit = false;
+		destroyed = false;
 	}
 }

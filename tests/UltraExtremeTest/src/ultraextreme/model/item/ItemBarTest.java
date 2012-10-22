@@ -58,7 +58,7 @@ public class ItemBarTest extends TestCase {
 	private void resetInstanceVariables(int slots) {
 		bulletManager = new BulletManager();
 		playerId = PlayerID.PLAYER1;
-		itemBar = new ItemBar(playerId, bulletManager, new Rotation(0), slots);
+		itemBar = new ItemBar(playerId, new Rotation(0), slots);
 	}
 
 	@Override
@@ -76,6 +76,14 @@ public class ItemBarTest extends TestCase {
 			resetInstanceVariables(1000);
 			addItemSizeTester(i);
 		}
+	}
+	
+	public void testClear() {
+		itemBar.addItem(getNewWeapon());
+		itemBar.addItem(getNewWeapon());
+		itemBar.clear();
+		assertTrue(itemBar.getItems().isEmpty());
+		assertEquals(itemBar.getMarkerPosition(), 0);
 	}
 
 	/**
@@ -111,9 +119,18 @@ public class ItemBarTest extends TestCase {
 
 	public void testLoseItems() {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
-		itemBar.addItem(item);
-		itemBar.addItem(item);
-		itemBar.addItem(item);
+		for(int i = 0; i < 9; i++) {
+			itemBar.addItem(item);
+		}
+		assertEquals(9, itemBar.getItems().size());
+		assertEquals(9, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(6, itemBar.getItems().size());
+		assertEquals(6, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(4, itemBar.getItems().size());
+		assertEquals(4, itemBar.getMarkerPosition());
+		itemBar.loseItems();
 		assertEquals(3, itemBar.getItems().size());
 		assertEquals(3, itemBar.getMarkerPosition());
 		itemBar.loseItems();
@@ -138,8 +155,9 @@ public class ItemBarTest extends TestCase {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
 		resetInstanceVariables(5);
 		// Fill the item bar
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < 5; ++i) {
 			itemBar.addItem(item);
+		}
 		assertEquals("Marker on first position", 0, itemBar.getMarkerPosition());
 		itemBar.loseItems();
 		assertEquals("Marker on last position", 4, itemBar.getMarkerPosition());
@@ -149,7 +167,7 @@ public class ItemBarTest extends TestCase {
 	 * This test checks so the marker's position wraps correctly when the item
 	 * bar gets full.
 	 */
-	public void testMarkerPositionWraping() {
+	public void testMarkerPositionWrapping() {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
 
 		// Add items and check if it wraps

@@ -22,6 +22,7 @@ package ultraextreme.model.item;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,48 +41,44 @@ import ultraextreme.model.util.ObjectName;
  * 
  */
 public class PickupManagerTest extends TestCase {
+
 	/**
 	 * Add this as a listener to the pickupManager and collects its pickups
 	 * 
-	 * @author Daniel Jonsson, Johan Gronvall
+	 * @author Daniel Jonsson
+	 * @author Johan Gronvall
 	 * 
 	 */
 	public class PickupCollector implements PropertyChangeListener {
 
-		private Map<String, WeaponPickup> map;
+		private Map<String, ArrayList<WeaponPickup>> map;
 
 		public PickupCollector() {
-			map = new HashMap<String, WeaponPickup>();
+			map = new HashMap<String, ArrayList<WeaponPickup>>();
 		}
 
-		public Map<String, WeaponPickup> getPickupMap() {
+		public Map<String, ArrayList<WeaponPickup>> getPickupMap() {
 			return map;
 		}
 
 		@Override
 		public void propertyChange(PropertyChangeEvent event) {
 
-			// if an add has already been performed, save instead an
-			// additionalAdd in the map
-			if (map.containsKey(event.getPropertyName())
-					&& (event.getPropertyName()
-							.equals(Constants.EVENT_NEW_ENTITY))) {
-				map.put("additionalAdd", (WeaponPickup) event.getNewValue());
-			} else {
-				map.put(event.getPropertyName(),
-						(WeaponPickup) event.getNewValue());
+			if (!map.containsKey(event.getPropertyName())) {
+				map.put(event.getPropertyName(), new ArrayList<WeaponPickup>());
 			}
+			map.get(event.getPropertyName()).add(
+					(WeaponPickup) event.getNewValue());
 		}
 	}
-	PickupManager manager;
-	WeaponPickup pickup;
-	WeaponPickup pickup2;
 
-	PickupCollector collector;
+	private PickupManager manager;
+	private WeaponPickup pickup;
+	private WeaponPickup pickup2;
+	private PickupCollector collector;
 
 	@Override
 	public void setUp() {
-
 		manager = new PickupManager();
 		pickup = new WeaponPickup(0, 0, ObjectName.BOMB);
 		pickup2 = new WeaponPickup(0, 0, ObjectName.BASIC_WEAPON);
@@ -97,14 +94,18 @@ public class PickupManagerTest extends TestCase {
 		assertTrue(manager.getPickups().get(0).equals(pickup));
 		assertTrue(manager.getPickups().get(1).equals(pickup2));
 		assertTrue(collector.getPickupMap().get(Constants.EVENT_NEW_ENTITY)
-				.equals(pickup));
+				.contains(pickup));
 		// check if the map has stored an event for the secondary addPickup call
-		assertTrue(collector.getPickupMap().get("additionalAdd")
-				.equals(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_NEW_ENTITY)
+				.contains(pickup2));
 	}
 
 	public void testClearAllPickups() {
-		fail("Not yet tested");
+		manager.clearAllPickups();
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup2));
 	}
 
 	@Test
@@ -119,8 +120,7 @@ public class PickupManagerTest extends TestCase {
 		manager.removePickup(0);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
 		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
-				.equals(pickup));
-
+				.contains(pickup));
 	}
 
 	@Test
@@ -128,6 +128,23 @@ public class PickupManagerTest extends TestCase {
 		manager.removePickup(pickup);
 		assertTrue(manager.getPickups().get(0).equals(pickup2));
 		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
-				.equals(pickup));
+				.contains(pickup));
+	}
+
+	@Test
+	public void testRemovePickupsOffScreen() {
+		manager.clearPickupsOffScreen();
+		assertTrue(manager.getPickups().contains(pickup));
+		assertTrue(manager.getPickups().contains(pickup2));
+
+		pickup.doMovement(1000);
+		pickup2.doMovement(1000);
+		manager.clearPickupsOffScreen();
+		assertFalse(manager.getPickups().contains(pickup));
+		assertFalse(manager.getPickups().contains(pickup2));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup));
+		assertTrue(collector.getPickupMap().get(Constants.EVENT_REMOVED_ENTITY)
+				.contains(pickup2));
 	}
 }

@@ -26,15 +26,30 @@ import java.util.Random;
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.enemy.HitAndRunEnemy;
+import ultraextreme.model.enemy.ParabolaEnemy;
+import ultraextreme.model.enemyspawning.wave.AbstractEnemyProvider;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
-import ultraextreme.model.enemyspawning.wave.EnemyProvider;
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Difficulty;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
 public class RandomWaveList extends AbstractWaveList {
+
+	/**
+	 * How much the difficulty will be increased for each wave. Should be a
+	 * number greater than 1.
+	 */
+	private double difficultyRiseSpeed;
+
+	/**
+	 * Modifies the duration between waves. Higher value means higher
+	 * difficulty.
+	 */
+	private double currentDifficultyMod;
 
 	private AbstractWave currentWave;
 
@@ -45,13 +60,21 @@ public class RandomWaveList extends AbstractWaveList {
 	private int screenWidth;
 
 	/**
+	 * Create a wave list that returns random waves with random spawn times, and
+	 * with normal difficulty.
+	 */
+	public RandomWaveList() {
+		this(Difficulty.NORMAL);
+	}
+
+	/**
 	 * Create a wave list that returns random waves with random spawn times.
 	 * 
-	 * @param numberOfWaves
-	 *            Maximum number of waves this will return.
+	 * @param difficulty
+	 *            Difficulty of the spawning waves
 	 */
-	public RandomWaveList(final int numberOfWaves) {
-		this(numberOfWaves, new AbstractRandomGenerator() {
+	public RandomWaveList(final Difficulty difficulty) {
+		this(difficulty, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
 				// Using SecureRandom instead of Random because Random was
@@ -66,19 +89,43 @@ public class RandomWaveList extends AbstractWaveList {
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
 	 * 
-	 * @param numberOfWaves
-	 *            Maximum number of waves this will return.
+	 * @param difficulty
+	 *            Difficulty of the spawning waves
 	 * @param randomGenerator
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
 	 */
-	public RandomWaveList(final int numberOfWaves,
+	public RandomWaveList(final Difficulty difficulty,
 			final AbstractRandomGenerator randomGenerator) {
-		super(numberOfWaves);
+		scaleToDifficulty(difficulty);
+		this.currentDifficultyMod = 1;
 		this.screenWidth = (int) Constants.getLevelDimension().getX();
 		this.randomGenerator = randomGenerator;
 		this.generateNewWave();
 		this.currentSpawningTime = 0;
+	}
+
+	private void scaleToDifficulty(Difficulty difficulty) {
+		switch (difficulty) {
+		case NORMAL:
+			difficultyRiseSpeed = 0.02;
+			break;
+
+		case HARD:
+			difficultyRiseSpeed = 0.04;
+			break;
+
+		case EXTREME:
+			difficultyRiseSpeed = 0.07;
+			break;
+
+		case ULTRAEXTREME:
+			difficultyRiseSpeed = 0.1;
+			break;
+
+		default:
+			difficultyRiseSpeed = 0;
+		}
 	}
 
 	/**
@@ -86,7 +133,7 @@ public class RandomWaveList extends AbstractWaveList {
 	 */
 	private void generateNewWave() {
 		// Randomize which wave will spawn
-		int wave = (int) (randomGenerator.nextFloat() * 3);
+		int wave = (int) (randomGenerator.nextFloat() * 4);
 		switch (wave) {
 		/**
 		 * VWave spawned with some randomness along the x axis
@@ -102,7 +149,7 @@ public class RandomWaveList extends AbstractWaveList {
 		 */
 		case 1:
 			currentWave = new RectangleWave(3, 1, 0, 300, -100,
-					new EnemyProvider() {
+					new AbstractEnemyProvider() {
 						// Counter so the enemies will fly to different
 						// positions
 						private int counter = 0;
@@ -116,10 +163,12 @@ public class RandomWaveList extends AbstractWaveList {
 							++counter;
 							counter %= 3;
 							return new HitAndRunEnemy(spawningPosition,
-									firePoint, endPoint);
+									firePoint, endPoint,
+									ObjectName.SPINNING_WEAPON);
 						}
 					});
 			break;
+
 		/**
 		 * Vertical line of 3 enemies with a slight randomized rotation and
 		 * position
@@ -128,14 +177,32 @@ public class RandomWaveList extends AbstractWaveList {
 			float rotation = (randomGenerator.nextFloat() * 6 - 3) / 8;
 			x = 450 + (randomGenerator.nextFloat() * 800 - 400);
 			currentWave = new RectangleWave(1, 3, rotation, (int) x, -100,
-					new EnemyProvider() {
+					new AbstractEnemyProvider() {
 						@Override
 						public AbstractEnemy getEnemy(
 								Position spawningPosition, Rotation rotation) {
-							return new BasicEnemy(spawningPosition, rotation);
+							return new BasicEnemy(spawningPosition, rotation,
+									ObjectName.BASIC_WEAPON);
 						}
 					});
 			break;
+
+		/**
+		 * 3 parabola enemies with spread weapons that spawns one after another
+		 */
+		case 3:
+			currentWave = new RectangleWave(1, 3, 0, 100, -100,
+					new AbstractEnemyProvider() {
+						@Override
+						public AbstractEnemy getEnemy(
+								Position spawningPosition, Rotation rotation) {
+							return new ParabolaEnemy(spawningPosition,
+									new Position(400, 400), new Position(900,
+											-400), ObjectName.SPREAD_WEAPON);
+						}
+					});
+			break;
+
 		default:
 			break;
 		}
@@ -145,7 +212,9 @@ public class RandomWaveList extends AbstractWaveList {
 	 * Update the currentSpawningTime with a random number.
 	 */
 	private void generateNewSpawningTime() {
-		currentSpawningTime += randomGenerator.nextFloat() * 2 + 3.5;
+		currentSpawningTime += (randomGenerator.nextFloat() * 2 + 10)
+				/ currentDifficultyMod;
+		currentDifficultyMod = currentDifficultyMod + difficultyRiseSpeed;
 	}
 
 	/**
@@ -172,5 +241,13 @@ public class RandomWaveList extends AbstractWaveList {
 	@Override
 	public float getCurrentSpawningTime() {
 		return currentSpawningTime;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean hasNext() {
+		return true; // Always returning true since the wave list is endless
 	}
 }

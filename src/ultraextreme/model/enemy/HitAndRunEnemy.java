@@ -38,6 +38,17 @@ import ultraextreme.model.util.Rotation;
  */
 public class HitAndRunEnemy extends AbstractEnemy {
 
+	private static final int SHIP_SIZE = 40;
+	private static final int SCORE = 50;
+	private static final int HITPOINTS = 35;
+
+	/**
+	 * for how long the enemy will be firing in seconds
+	 */
+	private static final float WAITING_TIME = 6;
+
+	private static final int SPEED = 400;
+
 	/**
 	 * endPoint where the enemy will run off to
 	 */
@@ -50,14 +61,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 
 	private float timeWaited = 0;
 
-	/**
-	 * for how long the enemy will be firing in seconds
-	 */
-	private float waitingTime = 6;
-
-	private int speed = 400;
-
-	protected HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
+	private HitAndRunEnemy(EnemyShip ship, AbstractWeapon weapon) {
 		super(ship, weapon);
 	}
 
@@ -74,10 +78,10 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 *            where the enemy will run off to
 	 */
 	public HitAndRunEnemy(Position startingPosition, Position firePoint,
-			Position endPoint) {
-		super(new EnemyShip(startingPosition, 30, 30, 40,
-				ObjectName.HITANDRUN_ENEMYSHIP), WeaponFactory.getInstance()
-				.getNewWeapon(ObjectName.SPINNING_WEAPON));
+			Position endPoint, ObjectName weaponName) {
+		super(new EnemyShip(startingPosition, SHIP_SIZE, SHIP_SIZE, HITPOINTS,
+				ObjectName.HITANDRUN_ENEMYSHIP), WeaponFactory
+				.getNewWeapon(weaponName));
 		this.endPoint = endPoint;
 		this.firePoint = firePoint;
 	}
@@ -87,7 +91,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 */
 	@Override
 	public int getScoreValue() {
-		return 50;
+		return SCORE;
 	}
 
 	/**
@@ -99,7 +103,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 			// while flying into position
 			goTowardPosition(firePoint, timePassed);
 
-		} else if (timeWaited > waitingTime) {
+		} else if (timeWaited > WAITING_TIME) {
 			// while retreating
 			goTowardPosition(endPoint, timePassed);
 		}
@@ -133,8 +137,8 @@ public class HitAndRunEnemy extends AbstractEnemy {
 		Position prePos = new Position(position.getX(), position.getY());
 
 		// moves the position
-		position.setX(position.getX() + directionVector.x * speed * timePassed);
-		position.setY(position.getY() + directionVector.y * speed * timePassed);
+		position.setX(position.getX() + directionVector.x * SPEED * timePassed);
+		position.setY(position.getY() + directionVector.y * SPEED * timePassed);
 
 		if (wentPastPoint(prePos.getX(), position.getX(), goalPoint.getX())) {
 			position.setX(goalPoint.getX());
@@ -148,7 +152,7 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	private boolean wentPastPoint(double prePos, double newPos, double goalPos) {
 		if (prePos > newPos) { // (came from right)
 			return goalPos > newPos;
-		} else {// if (prePos < newPos) { //(came from left)
+		} else /* if (prePos < newPos) */{ // (came from left)
 			return goalPos < newPos;
 		}
 	}
@@ -159,6 +163,6 @@ public class HitAndRunEnemy extends AbstractEnemy {
 	 * @return the time this kind of enemy stays in place to shoot
 	 */
 	public float getWaitingTime() {
-		return waitingTime;
+		return WAITING_TIME;
 	}
 }

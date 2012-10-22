@@ -36,6 +36,7 @@ import ultraextreme.model.enemyspawning.EnemySpawner;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
 import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.Position;
 
 /**
  * 
@@ -72,6 +73,7 @@ public class EnemyManagerTest extends TestCase {
 		}
 
 	}
+
 	private EnemyManager enemyManager;
 	private EnemyCollector collector;
 
@@ -91,25 +93,20 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testAddEnemy() {
-		AbstractEnemy enemy = new BasicEnemy(0, 0);
+		AbstractEnemy enemy = new BasicEnemy(new Position());
 		enemyManager.addEnemy(enemy);
 		assertEquals(enemy, enemyManager.getEnemies().get(0));
 		assertEquals(enemy,
 				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY).get(0));
-	}
 
-	/**
-	 * Test to add a lot of enemies to the manager.
-	 */
-	@Test
-	public void testAddEnemy2() {
+		// Test to add a lot of enemies to the manager.
 		List<IEnemy> addedEnemies = new ArrayList<IEnemy>();
 
 		// Add a lot of enemies to the enemy manager and to a local list.
 		for (int i = 0; i < 10000; i++) {
-			AbstractEnemy enemy = new BasicEnemy(0, 0);
-			enemyManager.addEnemy(enemy);
-			addedEnemies.add(enemy);
+			AbstractEnemy e = new BasicEnemy(new Position());
+			enemyManager.addEnemy(e);
+			addedEnemies.add(e);
 		}
 		// Check so the enemy manager fired events for all added ships.
 		assertTrue("Enemy manager fired events for all added enemies",
@@ -120,13 +117,23 @@ public class EnemyManagerTest extends TestCase {
 				.containsAll(addedEnemies));
 	}
 
+	public void testClearAllEnemies() {
+		for (int i = 0; i < 10; i++) {
+			enemyManager.addEnemy(new BasicEnemy(new Position(0, 1)));
+		}
+		enemyManager.clearAllEnemies();
+
+		assertTrue((collector.getEnemies().get(Constants.EVENT_REMOVED_ENTITY)
+				.size() == 10));
+	}
+
 	/**
 	 * Test to clear a dead enemy from the manager with the method
 	 * clearDeadEnemies().
 	 */
 	@Test
 	public void testClearDeadEnemies() {
-		AbstractEnemy enemy = new BasicEnemy(0, 0);
+		AbstractEnemy enemy = new BasicEnemy(new Position());
 		enemyManager.addEnemy(enemy);
 
 		// kill the ship
@@ -149,7 +156,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testClearDeadEnemies2() {
-		AbstractEnemy enemy = new BasicEnemy(-500, -500);
+		AbstractEnemy enemy = new BasicEnemy(new Position(-500, -500));
 		enemyManager.addEnemy(enemy);
 
 		enemyManager.clearDeadEnemies();
@@ -168,7 +175,7 @@ public class EnemyManagerTest extends TestCase {
 	 */
 	@Test
 	public void testPropertyChange() {
-		IEnemy enemy = new BasicEnemy(0, 0);
+		IEnemy enemy = new BasicEnemy(new Position());
 		PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 		pcs.addPropertyChangeListener(enemyManager);
 		pcs.firePropertyChange(EnemySpawner.NEW_ENEMY, null, enemy);
@@ -177,5 +184,4 @@ public class EnemyManagerTest extends TestCase {
 				collector.getEnemies().get(Constants.EVENT_NEW_ENTITY)
 						.contains(enemy));
 	}
-
 }

@@ -25,7 +25,6 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.andengine.entity.scene.menu.item.IMenuItem;
-import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import ultraextreme.controller.ControllerEvent.ControllerEventType;
@@ -41,10 +40,10 @@ public class MainMenuController extends AbstractController implements
 
 	private final MainMenuScene scene;
 
-	public MainMenuController(final Camera camera, final Font font,
+	public MainMenuController(final Camera camera,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super();
-		scene = new MainMenuScene(camera, font, vertexBufferObjectManager);
+		scene = new MainMenuScene(camera, vertexBufferObjectManager);
 		scene.setOnMenuItemClickListener(this);
 	}
 
@@ -55,6 +54,20 @@ public class MainMenuController extends AbstractController implements
 		case MainMenuScene.MENU_START:
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_GAME));
+			break;
+
+		case MainMenuScene.MENU_HIGHSCORE:
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_HIGHSCORE));
+			break;
+
+		case MainMenuScene.MENU_OPTIONS:
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_OPTIONS));
+			break;
+
+		case MainMenuScene.MENU_EXIT:
+			fireEvent(new ControllerEvent(this, ControllerEventType.EXIT_GAME));
 			break;
 
 		default:
@@ -78,5 +91,10 @@ public class MainMenuController extends AbstractController implements
 	public void deactivateController() {
 		// Auto-generated method stub
 
+	}
+
+	@Override
+	public void backButtonPressed() {
+		fireEvent(new ControllerEvent(this, ControllerEventType.EXIT_GAME));
 	}
 }

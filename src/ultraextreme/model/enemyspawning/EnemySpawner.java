@@ -28,8 +28,8 @@ import java.util.List;
 
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
-import ultraextreme.model.enemyspawning.wave.WaveListener;
-import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
+import ultraextreme.model.enemyspawning.wave.IWaveListener;
+import ultraextreme.model.enemyspawning.wavelist.IWaveSpawningList;
 
 /**
  * This class is responsible for managing the waves of enemies. It takes one or
@@ -40,7 +40,7 @@ import ultraextreme.model.enemyspawning.wavelist.WaveSpawningList;
  * @author Daniel Jonsson
  * 
  */
-public class EnemySpawner implements WaveListener {
+public class EnemySpawner implements IWaveListener {
 
 	public static final String NEW_ENEMY = "nE";
 
@@ -60,7 +60,7 @@ public class EnemySpawner implements WaveListener {
 	 * The wave lists that the enemy spawner is working with and grabbing waves
 	 * from.
 	 */
-	private final List<WaveSpawningList> waveLists;
+	private final List<IWaveSpawningList> waveLists;
 
 	/**
 	 * The waves of enemies that are currently spawning enemies.
@@ -80,9 +80,9 @@ public class EnemySpawner implements WaveListener {
 	 *            EnemySpawner keep track of and spawn the enemies from their
 	 *            waves.
 	 */
-	public EnemySpawner(final WaveSpawningList... waveLists) {
-		this.waveLists = new ArrayList<WaveSpawningList>();
-		for (WaveSpawningList waveList : waveLists) {
+	public EnemySpawner(final IWaveSpawningList... waveLists) {
+		this.waveLists = new ArrayList<IWaveSpawningList>();
+		for (IWaveSpawningList waveList : waveLists) {
 			if (waveList != null) {
 				this.waveLists.add(waveList);
 			}
@@ -110,26 +110,36 @@ public class EnemySpawner implements WaveListener {
 	}
 
 	/**
-	 * Check the wave lists that are being monitored and grab new waves if any
-	 * should be spawned. Note that this method is recursive and that it calls
-	 * itself.
+	 * Traverse the wave lists that are being monitored and grab new waves if
+	 * any should be spawned.
 	 */
 	private void addNewWaves() {
-		// TODO: This method could use some optimization.
-		for (int i = 0; i < waveLists.size(); i++) {
-			final WaveSpawningList waveList = waveLists.get(i);
-			if (waveList.hasNext()) {
-				if (waveList.getCurrentSpawningTime() <= timer) {
-					activeWaves.add(waveList.getCurrentWave());
-					waveList.getCurrentWave().addListener(this);
-					waveList.next();
-					wave++;
-					addNewWaves();
-				}
-			} else {
+		for (int i = 0; i < waveLists.size(); ++i) {
+			final IWaveSpawningList waveList = waveLists.get(i);
+			addWavesFromWaveList(waveList);
+			if (!waveList.hasNext()) {
 				waveLists.remove(waveList);
-				i--;
+				--i;
 			}
+		}
+	}
+
+	/**
+	 * Helper method to addNewWaves(). This asks a wave list for new waves until
+	 * it doesn't have any more left. Note that this method is recursive and
+	 * therefore calls itself.
+	 * 
+	 * This method is potentially dangerous if the wave list isn't properly
+	 * coded. If the currentSpawningTime never increases, or increases too
+	 * slowly, the game will crash because of a stack overflow.
+	 */
+	private void addWavesFromWaveList(IWaveSpawningList waveList) {
+		if (waveList.hasNext() && waveList.getCurrentSpawningTime() <= timer) {
+			activeWaves.add(waveList.getCurrentWave());
+			waveList.getCurrentWave().addListener(this);
+			waveList.next();
+			++wave;
+			addWavesFromWaveList(waveList);
 		}
 	}
 
@@ -147,8 +157,8 @@ public class EnemySpawner implements WaveListener {
 		}
 		for (final Iterator<AbstractWave> i = activeWaves.iterator(); i
 				.hasNext();) {
-			final AbstractWave wave = i.next();
-			wave.update(timeElapsed);
+			final AbstractWave wave1 = i.next();
+			wave1.update(timeElapsed);
 		}
 	}
 

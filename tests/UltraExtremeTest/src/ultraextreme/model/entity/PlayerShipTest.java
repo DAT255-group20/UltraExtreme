@@ -20,6 +20,10 @@
 
 package ultraextreme.model.entity;
 
+import org.junit.Test;
+
+import ultraextreme.model.util.Constants;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -30,7 +34,7 @@ import ultraextreme.model.util.Rotation;
  */
 public class PlayerShipTest extends AbstractEntityTest {
 
-	PlayerShip playerShip;
+	private PlayerShip playerShip;
 
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
@@ -50,15 +54,6 @@ public class PlayerShipTest extends AbstractEntityTest {
 	}
 
 	/**
-	 * Test if it's possible to destroy the ship. FIXME: Not implemented yet.
-	 */
-	public void testIsDestroyed() {
-		// FIXME: Since the ship can't get hurt yet this is hard to test.
-		resetInstanceVariables(0, 0, 0, 0);
-		assertEquals(playerShip.isDestroyed(), false);
-	}
-
-	/**
 	 * Test if it's possible to move the ship.
 	 */
 	@Override
@@ -72,5 +67,81 @@ public class PlayerShipTest extends AbstractEntityTest {
 
 		playerShip.move(-100, -1000);
 		assertEquals(playerShip.getPositionClone(), new Position(-80.0, -880.0));
+	}
+
+	@Override
+	public void testGetRotation() {
+		resetInstanceVariables(10, 20, 30, 40);
+		assertEquals(0.0, playerShip.getRotation().getAngle());
+	}
+
+	public void testCanMove() {
+		int shipWidth = 10;
+		int shipHeight = 10;
+		
+		// Ship is on the left border of the model
+		resetInstanceVariables(shipWidth/2, shipWidth/2, shipWidth, shipHeight);
+		assertFalse(playerShip.canMoveX(-1));
+		assertTrue(playerShip.canMoveX(1));
+
+		// Ship is on the right border of the model
+		resetInstanceVariables(Constants.getLevelDimension().getX() - shipWidth/2, shipHeight/2,
+				10, 10);
+		assertTrue(playerShip.canMoveX(-1));
+		assertFalse(playerShip.canMoveX(1));
+
+		// Ship is on the top border of the model
+		resetInstanceVariables(shipWidth/2, shipHeight/2, shipWidth, shipHeight);
+		assertFalse(playerShip.canMoveY(-1));
+		assertTrue(playerShip.canMoveY(1));
+
+		// Ship is on the bottom border of the model
+		resetInstanceVariables(shipWidth/2, Constants.getLevelDimension().getY() - shipHeight/2,
+				10, 10);
+		assertTrue(playerShip.canMoveY(-1));
+		assertFalse(playerShip.canMoveY(1));
+	}
+
+	/**
+	 * Test the methods recieveDamage and justGotHit.
+	 */
+	public void testReceiveDamageAndJustGotHit() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertFalse(playerShip.justGotHit());
+		assertFalse(playerShip.justGotHit());
+		playerShip.receiveDamage(1);
+		assertTrue(playerShip.justGotHit());
+		assertTrue(playerShip.justGotHit());
+		playerShip.move(0, 0);
+		assertFalse(playerShip.justGotHit());
+		assertFalse(playerShip.justGotHit());
+	}
+
+	public void testSetDestroyedAndIsDestroyed() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertFalse(playerShip.isDestroyed());
+		assertFalse(playerShip.isDestroyed());
+		playerShip.setDestroyed();
+		assertTrue(playerShip.isDestroyed());
+		assertTrue(playerShip.isDestroyed());
+	}
+
+	@Override
+	@Test
+	public void testGetObjectName() {
+		resetInstanceVariables(0, 0, 0, 0);
+		assertEquals(ObjectName.PLAYERSHIP, playerShip.getObjectName());
+	}
+
+	public void testReset() {
+		resetInstanceVariables(0, 0, 0, 0);
+		playerShip.setDestroyed();
+		playerShip.receiveDamage(1);
+		assertTrue(playerShip.isDestroyed());
+		assertTrue(playerShip.justGotHit());
+
+		playerShip.reset();
+		assertFalse(playerShip.isDestroyed());
+		assertFalse(playerShip.justGotHit());
 	}
 }

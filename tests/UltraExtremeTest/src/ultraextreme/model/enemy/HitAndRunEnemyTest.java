@@ -23,6 +23,7 @@ package ultraextreme.model.enemy;
 import junit.framework.TestCase;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 
 /**
@@ -32,19 +33,21 @@ import ultraextreme.model.util.Position;
  * 
  */
 public class HitAndRunEnemyTest extends TestCase {
-	Position startPoint;
-	Position endPoint;
-	Position firePoint;
-	HitAndRunEnemy enemy;
-	BulletManager manager;
+	private Position startPoint;
+	private Position endPoint;
+	private Position firePoint;
+	private HitAndRunEnemy enemy;
+	private BulletManager manager;
 
+	@Override
 	public void setUp() {
 		manager = new BulletManager();
 		WeaponFactory.initialize(manager);
 		startPoint = new Position(5, 10);
 		endPoint = new Position(20, 20);
 		firePoint = new Position(15, 15);
-		enemy = new HitAndRunEnemy(startPoint, firePoint, endPoint);
+		enemy = new HitAndRunEnemy(startPoint, firePoint, endPoint,
+				ObjectName.SPINNING_WEAPON);
 	}
 
 	public void testGoTowardPosition() {
@@ -77,18 +80,18 @@ public class HitAndRunEnemyTest extends TestCase {
 		boolean startedMovingAgain = false;
 		boolean shot = false;
 		for (int i = 0; i < 100000; i++) {
-			enemy.update((float) (1));
+			enemy.update((1));
 			if (enemy.getShip().getPositionClone().equals(new Position(15, 15))) {
 				secondsStopped += 1;
 			}
-			if (secondsStopped == enemy.getWaitingTime() && stopped == false) {
+			if (!stopped && secondsStopped == enemy.getWaitingTime()) {
 				stopped = true;
 				supposedToStartMoving = true;
 				shot = (!manager.getBullets().isEmpty());
 			}
-			if (supposedToStartMoving) {
-				if (enemy.getShip().getPositionClone().equals(endPoint))
-					startedMovingAgain = true;
+			if (supposedToStartMoving
+					&& (enemy.getShip().getPositionClone().equals(endPoint))) {
+				startedMovingAgain = true;
 			}
 		}
 		assertTrue(stopped);

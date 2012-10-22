@@ -72,10 +72,11 @@ public class BulletManagerTest extends TestCase {
 		}
 
 	}
+
 	private BulletManager bulletManager;
 
 	private BulletCollector bulletCollector;
-	
+
 	private int bulletDamage = 10;
 
 	private List<AbstractBullet> generateBulletList(int bullets) {
@@ -167,6 +168,16 @@ public class BulletManagerTest extends TestCase {
 				.containsAll(bulletList));
 	}
 
+	public void testRemoveBullet() {
+		BasicBullet bullet = new BasicBullet(10, 10, 10, 10, PlayerID.ENEMY,
+				new Rotation(0), 10);
+		bulletManager.addBullet(bullet);
+		bulletManager.removeBullet(bullet);
+		assertFalse(bulletManager.getBullets().contains(bullet));
+		assertTrue(bulletCollector.getBullets().containsKey(
+				Constants.EVENT_REMOVED_ENTITY));
+	}
+
 	/**
 	 * Create bullets, add them to the manager, clear them and check so they
 	 * were removed.
@@ -236,13 +247,13 @@ public class BulletManagerTest extends TestCase {
 	public void testClearBulletsOffScreen() {
 		// Init stuff
 		List<AbstractBullet> insideBullets = generateBulletList(100, 200, 200);
-		List<AbstractBullet> outsideBullets = generateBulletList(100, -200,
-				-200);
+		List<AbstractBullet> outsideBullets = generateBulletList(100, -5000,
+				-5000);
 		List<AbstractBullet> allBullets = new ArrayList<AbstractBullet>();
 		allBullets.addAll(insideBullets);
 		allBullets.addAll(outsideBullets);
-		BulletCollector bulletCollector = new BulletCollector();
-		bulletManager.addPropertyChangeListener(bulletCollector);
+		BulletCollector bulletCollector1 = new BulletCollector();
+		bulletManager.addPropertyChangeListener(bulletCollector1);
 
 		for (AbstractBullet bullet : allBullets) {
 			bulletManager.addBullet(bullet);
@@ -254,9 +265,10 @@ public class BulletManagerTest extends TestCase {
 		bulletManager.clearBulletsOffScreen();
 
 		assertTrue(bulletManager.getBullets().containsAll(insideBullets));
-		assertEquals(outsideBullets,
-				bulletCollector.getBullets()
-						.get(Constants.EVENT_REMOVED_ENTITY));
+		assertEquals(
+				outsideBullets,
+				bulletCollector1.getBullets().get(
+						Constants.EVENT_REMOVED_ENTITY));
 		for (AbstractBullet outsideBullet : outsideBullets) {
 			assertFalse(bulletManager.getBullets().contains(outsideBullet));
 		}
@@ -307,4 +319,5 @@ public class BulletManagerTest extends TestCase {
 		assertEquals(enemyBullets.size(),
 				bulletManager.getBulletsFrom(PlayerID.ENEMY).size());
 	}
+
 }

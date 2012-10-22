@@ -31,12 +31,7 @@ import junit.framework.TestCase;
  */
 public class RotationTest extends TestCase {
 
-	Rotation rotation;
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+	private Rotation rotation;
 
 	public void testGetRotatedCoordinates() {
 		rotation = new Rotation(0);
@@ -52,5 +47,28 @@ public class RotationTest extends TestCase {
 		rotation = new Rotation(Math.PI / 2);
 		vec = rotation.getRotatedCoordinates(1, 1);
 		assertTrue(-1 - vec.x < epsilon && 1 - vec.y < epsilon);
+	}
+
+	public void testEquals() {
+		Rotation rot1 = new Rotation(5);
+		Rotation rot2 = new Rotation(3.85);
+		Rotation rot3 = new Rotation(5);
+		Rotation rot4 = new Rotation(3.85);
+
+		assertTrue(rot1.equals(rot3));
+		assertFalse(rot1.equals(rot2));
+		assertTrue(rot3.equals(rot1));
+		assertFalse(rot2.equals(rot3));
+		assertTrue(rot4.equals(rot2));
+	}
+
+	public void testHashcode() {
+		Rotation rot1 = new Rotation(5);
+		Rotation rot2 = new Rotation(3.85);
+		Rotation rot3 = new Rotation(5);
+		Rotation rot4 = new Rotation(3.85);
+
+		assertEquals(rot1.hashCode(), rot3.hashCode());
+		assertEquals(rot2.hashCode(), rot4.hashCode());
 	}
 }

@@ -35,7 +35,6 @@ import ultraextreme.model.util.Dimension;
 import ultraextreme.model.util.PlayerID;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
-import android.util.Log;
 
 /**
  * The player. The player has a ship and an item bar containing the ship's items
@@ -48,25 +47,26 @@ import android.util.Log;
  */
 public class Player implements IPlayer {
 
-	List<IPlayerListener> listeners = new ArrayList<IPlayerListener>();
+	private List<IPlayerListener> listeners = new ArrayList<IPlayerListener>();
+
 	/**
 	 * Reference to the player's ship.
 	 */
-	final private PlayerShip ship;
+	private final PlayerShip ship;
 
 	/**
 	 * The player's ID. This is used in the view to differentiate player ships
 	 * from each other.
 	 */
-	final private PlayerID playerId;
+	private final PlayerID playerId;
 
 	/**
 	 * Item bar containing the items that the player's ship is currently
 	 * holding.
 	 */
-	final private ItemBar itemBar;
+	private final ItemBar itemBar;
 
-	final private BulletManager bulletManager;
+	private final BulletManager bulletManager;
 
 	/**
 	 * The lives the player has left.
@@ -99,10 +99,8 @@ public class Player implements IPlayer {
 		this.bulletManager = bulletManager;
 		this.ship = new PlayerShip();
 		this.playerId = playerId;
-		this.itemBar = new ItemBar(playerId, bulletManager, new Rotation(
-				Math.PI), 10);
-		lives = Constants.getInitShipLives();
-		this.score = 0;
+		this.itemBar = new ItemBar(playerId, new Rotation(Math.PI), 10);
+		reset();
 	}
 
 	@Override
@@ -177,6 +175,9 @@ public class Player implements IPlayer {
 	public void reset() {
 		lives = Constants.getInitShipLives();
 		score = 0;
+		ship.reset();
+		invincCountdown = 0;
+		itemBar.clear();
 		setShipToSpawn();
 		notifyListeners();
 	}
@@ -185,13 +186,9 @@ public class Player implements IPlayer {
 	 * Sets the players ship to its spawn point.
 	 */
 	private void setShipToSpawn() {
-		giveWeapon(new BasicWeapon(bulletManager));
 		final Dimension levelDimension = Constants.getLevelDimension();
 		ship.setPosition(new Position(levelDimension.getX() * 0.5
 				- ship.getWidth() / 2, levelDimension.getY() * 0.65));
-
-		Log.d("DEBUG",
-				"Ship has been set to spawn point and been given a basic weapon");
 	}
 
 	public void unregisterListener(IPlayerListener listener) {
@@ -218,6 +215,7 @@ public class Player implements IPlayer {
 					ship.setDestroyed();
 				} else {
 					setShipToSpawn();
+					giveWeapon(new BasicWeapon(bulletManager));
 				}
 			}
 			if (!ship.isDestroyed()) {

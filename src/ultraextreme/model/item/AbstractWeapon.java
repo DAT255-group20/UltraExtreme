@@ -43,8 +43,6 @@ public abstract class AbstractWeapon {
 		this.objectName = objectName;
 	}
 
-	// bulletProdqueue.addBullet(new BasicBullet(shipPosition.getX(),
-	// shipPosition.getY(), width, height, playerId));
 	public abstract void fire(Position shipPosition, PlayerID playerId,
 			Rotation rotation, float timeElapsed);
 
@@ -57,10 +55,8 @@ public abstract class AbstractWeapon {
 	}
 
 	/**
-	 * returns a shallow clone of this weapon
-	 * 
-	 * @return a shallow clone of this weapon
+	 * @return A new weapon of the same sort as this weapon.
 	 */
-	public abstract AbstractWeapon shallowClone();
+	public abstract AbstractWeapon getNewInstance();
 
 }

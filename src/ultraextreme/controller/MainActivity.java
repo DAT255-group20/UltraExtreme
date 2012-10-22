@@ -30,13 +30,10 @@ import org.andengine.opengl.font.FontFactory;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 
-import ultraextreme.model.util.Constants;
 import ultraextreme.util.Resources;
 import ultraextreme.util.Resources.ResourceName;
 import ultraextreme.view.SpriteFactory;
-import android.content.Context;
 import android.graphics.Typeface;
-import android.hardware.SensorManager;
 
 /**
  * This is the main class of the game.
@@ -54,19 +51,13 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private MainMenuController mainMenuController;
 	private GameOverController gameOverController;
 	private HighscoreController highscoreController;
+	private OptionsController optionsController;
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
 	private AbstractController currentController;
 	private HighscoreDBOpenHelper highscoreDBOpenHelper;
-
-	// TODO PMD: The field name indicates a constant but its modifiers do not
-	// These two should either be final, or not be in capital letters.
-	// Capital letters indicates a constant, but constants MUST be final.
-	private static int CAMERA_WIDTH;
-	private static int CAMERA_HEIGHT;
-
-	private float scaling;
+	private OptionsDatabase optionsDatabase;
 
 	@Override
 	public void controllerListenerUpdate(final ControllerEvent event) {
@@ -87,6 +78,14 @@ public class MainActivity extends SimpleBaseGameActivity implements
 			switchControllerTo(highscoreController);
 			break;
 
+		case SWITCH_TO_OPTIONS:
+			switchControllerTo(optionsController);
+			break;
+
+		case EXIT_GAME:
+			finish();
+			break;
+
 		default:
 			break;
 		}
@@ -94,26 +93,24 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private void initializeResources() {
 		Resources res = Resources.getInstance();
-		res.setResource(ResourceName.START_GAME, getString(R.string.start_game));
 		res.setResource(ResourceName.LIVES, getString(R.string.lives));
 		res.setResource(ResourceName.SCORE, getString(R.string.score));
-		res.setResource(ResourceName.GOTO_MENU, getString(R.string.goto_menu));
+		res.setResource(ResourceName.DEFAULT_HIGHSCORE_NAME,
+				getString(R.string.default_highscore_name));
+		res.setResource(ResourceName.HIGHSCORE_INPUT_TEXT,
+				getString(R.string.highscore_input_text));
+		res.setResource(ResourceName.HIGHSCORE_INPUT_TITLE,
+				getString(R.string.highscore_input_title));
 	}
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		initializeResources();
-		// TODO FindBugs: This instance method writes to a static field.
-		// This is tricky to get correct if multiple instances are being
-		// manipulated,
-		// and generally bad practice.
-		CAMERA_WIDTH = getResources().getDisplayMetrics().widthPixels;
-		CAMERA_HEIGHT = getResources().getDisplayMetrics().heightPixels;
-		scaling = (float) (getResources().getDisplayMetrics().heightPixels / Constants
-				.getLevelDimension().getY());
-		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		int cameraWidth = getResources().getDisplayMetrics().widthPixels;
+		int cameraHeight = getResources().getDisplayMetrics().heightPixels;
+		camera = new Camera(0, 0, cameraWidth, cameraHeight);
 		return new EngineOptions(true, ScreenOrientation.PORTRAIT_SENSOR,
-				new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
+				new RatioResolutionPolicy(cameraWidth, cameraHeight), camera);
 	}
 
 	@Override
@@ -129,23 +126,27 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	@Override
 	protected Scene onCreateScene() {
 		highscoreDBOpenHelper = new HighscoreDBOpenHelper(this);
+		optionsDatabase = new OptionsDatabase(this);
 		gameController = new GameController(
-				this.getVertexBufferObjectManager(),
-				(SensorManager) this.getSystemService(Context.SENSOR_SERVICE),
-				this, scaling, camera, defaultFont);
-		mainMenuController = new MainMenuController(camera, defaultFont,
+				this.getVertexBufferObjectManager(), this, camera, defaultFont,
+				optionsDatabase);
+		mainMenuController = new MainMenuController(camera,
 				this.getVertexBufferObjectManager());
 		gameOverController = new GameOverController(
 				gameController.getGameModel(), camera, defaultFont,
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper,
 				this);
-		highscoreController = new HighscoreController(camera, defaultFont,
+		highscoreController = new HighscoreController(camera, this.getFontManager(), this.getTextureManager(),
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
+		optionsController = new OptionsController(camera,
+				this.getVertexBufferObjectManager(), optionsDatabase,
+				highscoreDBOpenHelper);
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
 		gameOverController.addListener(this);
 		highscoreController.addListener(this);
+		optionsController.addListener(this);
 
 		currentController = mainMenuController;
 		updateScene();
@@ -162,5 +163,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private void updateScene() {
 		currentScene = currentController.getScene();
 		getEngine().setScene(currentScene);
+	}
+
+	@Override
+	public void onBackPressed() {
+		currentController.backButtonPressed();
 	}
 }

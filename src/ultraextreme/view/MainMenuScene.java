@@ -20,38 +20,107 @@
 
 package ultraextreme.view;
 
+import javax.vecmath.Vector2d;
+
 import org.andengine.engine.camera.Camera;
-import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.scene.menu.MenuScene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
-import org.andengine.entity.scene.menu.item.TextMenuItem;
-import org.andengine.opengl.font.Font;
+import org.andengine.entity.scene.menu.item.SpriteMenuItem;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.util.color.Color;
 
-import ultraextreme.util.Resources;
-import ultraextreme.util.Resources.ResourceName;
-import android.util.Log;
+import ultraextreme.model.util.Dimension;
 
 /**
  * 
  * @author Bjorn Persson Mattsson
+ * @author Daniel Jonsson
  * 
  */
 public class MainMenuScene extends MenuScene {
 
+	// Button IDs
 	public static final int MENU_START = 0;
+	public static final int MENU_HIGHSCORE = 1;
+	public static final int MENU_OPTIONS = 2;
+	public static final int MENU_EXIT = 3;
 
-	public MainMenuScene(final Camera camera, final Font font,
+	public MainMenuScene(final Camera camera,
 			final VertexBufferObjectManager vertexBufferObjectManager) {
 		super(camera);
-		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
-		final IMenuItem startButton = new TextMenuItem(MENU_START, font,
-				Resources.getInstance().getResource(ResourceName.START_GAME),
+
+		/*
+		 * Add the background.
+		 */
+		final float screenWidth = camera.getWidth();
+		final float screenHeight = camera.getHeight();
+		final SpriteBackground background = new SpriteBackground(new Sprite(0,
+				0, screenWidth, screenHeight,
+				SpriteFactory.getMainMenuBackgroundTexture(),
+				vertexBufferObjectManager));
+		setBackground(background);
+
+		/*
+		 * Scaling
+		 */
+		final Dimension screenDimension = new Dimension(screenWidth,
+				screenHeight);
+		// The following resolution is what the background and buttons were made
+		// for
+		Vector2d scaling = screenDimension
+				.getQuotient(new Dimension(800, 1280));
+
+		/*
+		 * Add the start button. /*
+		 */
+		final IMenuItem startButton = new SpriteMenuItem(MENU_START,
+				SpriteFactory.getMainMenuStartButtonTexture(),
 				vertexBufferObjectManager);
-		startButton.setPosition(100, 100);
-		startButton.setColor(Color.BLACK);
+		startButton.setWidth((float) scaling.x * startButton.getWidth());
+		startButton.setHeight((float) scaling.y * startButton.getHeight());
+		startButton.setX((screenWidth - startButton.getWidth()) / 2);
+		startButton.setY((float) scaling.y * 450);
 		addMenuItem(startButton);
-		Log.d("DEBUG", "onCreateScene");
+
+		/*
+		 * Add the high score button. /*
+		 */
+		final IMenuItem highScoresButton = new SpriteMenuItem(MENU_HIGHSCORE,
+				SpriteFactory.getMainMenuHighScoresButtonTexture(),
+				vertexBufferObjectManager);
+		highScoresButton.setWidth((float) scaling.x
+				* highScoresButton.getWidth());
+		highScoresButton.setHeight((float) scaling.y
+				* highScoresButton.getHeight());
+		highScoresButton.setX((screenWidth - highScoresButton.getWidth()) / 2);
+		highScoresButton.setY((float) scaling.y * 600);
+		addMenuItem(highScoresButton);
+		
+		/*
+		 * Add the options button. /*
+		 */
+		final IMenuItem optionsButton = new SpriteMenuItem(MENU_OPTIONS,
+				SpriteFactory.getMainMenuOptionsButtonTexture(),
+				vertexBufferObjectManager);
+		optionsButton.setWidth((float) scaling.x
+				* optionsButton.getWidth());
+		optionsButton.setHeight((float) scaling.y
+				* optionsButton.getHeight());
+		optionsButton.setX((screenWidth - optionsButton.getWidth()) / 2);
+		optionsButton.setY((float) scaling.y * 750);
+		addMenuItem(optionsButton);
+
+		/*
+		 * Add the exit button. /*
+		 */
+		final IMenuItem exitButton = new SpriteMenuItem(MENU_EXIT,
+				SpriteFactory.getMainMenuExitButtonTexture(),
+				vertexBufferObjectManager);
+		exitButton.setWidth((float) scaling.x * exitButton.getWidth());
+		exitButton.setHeight((float) scaling.y * exitButton.getHeight());
+		exitButton.setX((screenWidth - exitButton.getWidth()) / 2);
+		exitButton.setY((float) scaling.y * 900);
+		addMenuItem(exitButton);
 	}
 }

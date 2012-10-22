@@ -20,22 +20,18 @@
 
 package ultraextreme.model.enemyspawning.wavelist;
 
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import ultraextreme.model.enemyspawning.wave.RectangleWave;
 import ultraextreme.model.enemyspawning.wave.VWave;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.Difficulty;
 
 /**
  * 
  * @author Daniel Jonsson
  * 
  */
-public class RandomWaveListTest extends TestCase implements
-		AbstractWaveListTest {
+public class RandomWaveListTest extends AbstractWaveListTest {
 
 	private RandomWaveList waveList;
 
@@ -46,8 +42,8 @@ public class RandomWaveListTest extends TestCase implements
 	 * 
 	 * @param numberOfWaves
 	 */
-	private void resetWaveList(int numberOfWaves) {
-		waveList = new RandomWaveList(numberOfWaves);
+	private void resetWaveList() {
+		waveList = new RandomWaveList(Difficulty.NORMAL);
 	}
 
 	@Override
@@ -61,71 +57,62 @@ public class RandomWaveListTest extends TestCase implements
 	 * if they got the correct spawn time and are instance of the right wave.
 	 */
 	public void testGeneratingNewWaves() {
-		RandomWaveList waveList = new RandomWaveList(100,
+		waveList = new RandomWaveList(Difficulty.NORMAL,
 				new AbstractRandomGenerator() {
-					private int counter;
+					private int counter = 0;
+					// 0.0f - make it pick 1st wave
+					// 0.25f make it pick 2nd wave
+					// 0.5f make it pick 3rd wave
+					// 0.75f make it pick 4th wave
+					private float numbers[] = { 0.0f, 1, 0.25f, 1, 0.5f, 1, 1,
+							1, 0.75f, 1, 0.0f, 1, 1 };
 
 					@Override
 					public float nextFloat() {
-						return ++counter;
+						return numbers[counter++];
 					}
 				});
 
-		// 0
-		assertEquals(waveList.getCurrentSpawningTime(), 0f);
+		// First wave
+		assertEquals(0f, waveList.getCurrentSpawningTime());
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
 
 		waveList.next();
 
-		// 5.5
-		assertEquals(waveList.getCurrentSpawningTime(), 5.5f);
+		// Second wave
+		assertEquals(12f, waveList.getCurrentSpawningTime());
 		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
-		// 5.5 + 7.5 = 13
-		assertEquals(waveList.getCurrentSpawningTime(), 13f);
-		// assertTrue(waveList.getCurrentWave() instanceof VerticalLineWave);
+		// Third wave
+		assertEquals(12 + 12 / 1.02f, 
+				waveList.getCurrentSpawningTime(), 0.001f);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
-		// 5.5 + 7.5 + 9.5 = 22.5
-		assertEquals(waveList.getCurrentSpawningTime(), 22.5f);
+		// Fourth wave
+		assertEquals(12 + 12 / 1.02 + 12 / 1.04, 
+				waveList.getCurrentSpawningTime(), 0.001f);
+		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
+
+		waveList.next();
+
+		// First wave again
+		assertEquals(12 + 12 / 1.02 + 12 / 1.04 + 12 / 1.06, 
+				waveList.getCurrentSpawningTime(), 0.001f);
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
-
-		waveList.next();
-
-		// 5.5 + 7.5 + 9.5 + 11.5 = 34
-		assertEquals(waveList.getCurrentSpawningTime(), 34f);
-		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 	}
 
 	@Override
-	@Test
-	public void testGetNumberOfWaves() {
-		for (int waves = 1; waves < 100000; ++waves) {
-			resetWaveList(waves);
-			assertEquals(waves, waveList.getNumberOfWaves());
-		}
-	}
-
-	@Override
-	@Test
 	public void testNext() {
-		// Run through a number of tests where the maximum number of waves are
-		// different
-		for (int waves = 1; waves < 1000; ++waves) {
-			resetWaveList(waves);
-			// Call next() a number of times on the wave list
-			for (int i = 1; i < waves; ++i) {
-				assertEquals(i, waveList.getCurrentWaveNumber());
-				assertTrue(waveList.hasNext());
-				waveList.next();
-			}
-			// Now there shouldn't be anything left in the list
-			assertEquals(waves, waveList.getCurrentWaveNumber());
-			assertFalse(waveList.hasNext());
+		resetWaveList();
+		// Call next() a number of times on the wave list
+		for (int i = 1; i < 1000; ++i) {
+			assertEquals(i, waveList.getCurrentWaveNumber());
+			assertTrue(waveList.hasNext());
+			waveList.next();
 		}
 	}
-
 }

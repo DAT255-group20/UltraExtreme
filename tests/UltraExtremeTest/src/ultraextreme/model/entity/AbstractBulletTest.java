@@ -33,6 +33,10 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 	protected abstract AbstractBullet getNewAbstractBullet(double x, double y,
 			int width, int height, PlayerID playerId, Rotation direction);
 
+	private AbstractBullet getNewAbstractBullet(PlayerID playerId) {
+		return getNewAbstractBullet(10, 20, 30, 40, playerId, new Rotation(0));
+	}
+
 	@Override
 	protected AbstractEntity getNewAbstractEntity(double x, double y,
 			int width, int height, Rotation direction) {
@@ -40,24 +44,30 @@ public abstract class AbstractBulletTest extends AbstractEntityTest {
 				direction);
 	}
 
-	private AbstractBullet newBullet() {
-		return newBullet(PlayerID.PLAYER1);
-	}
-
-	private AbstractBullet newBullet(PlayerID playerId) {
-		return getNewAbstractBullet(10, 20, 30, 40, playerId, new Rotation(0));
-	}
-
 	public abstract void testDoMovement();
 
+	public abstract void testGetDamage();
+
 	public void testGetPlayerId() {
-		AbstractBullet bullet = newBullet(PlayerID.PLAYER1);
+		AbstractBullet bullet = getNewAbstractBullet(PlayerID.PLAYER1);
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 
-		bullet = newBullet(PlayerID.PLAYER1);
+		bullet = getNewAbstractBullet(PlayerID.PLAYER1);
 		assertEquals(bullet.getPlayerId(), PlayerID.PLAYER1);
 
-		bullet = newBullet(PlayerID.ENEMY);
+		bullet = getNewAbstractBullet(PlayerID.ENEMY);
 		assertEquals(bullet.getPlayerId(), PlayerID.ENEMY);
+	}
+
+	public void testMarkForRemoval() {
+		AbstractBullet bullet = getNewAbstractBullet(PlayerID.PLAYER1);
+		assertFalse(bullet.isMarkedForRemoval());
+		assertFalse(bullet.isMarkedForRemoval());
+		bullet.markForRemoval();
+		assertTrue(bullet.isMarkedForRemoval());
+		assertTrue(bullet.isMarkedForRemoval());
+		bullet.markForRemoval();
+		assertTrue(bullet.isMarkedForRemoval());
+		assertTrue(bullet.isMarkedForRemoval());
 	}
 }

@@ -91,6 +91,18 @@ public class PickupManager {
 		return pickups;
 	}
 
+	/**
+	 * Removes all pickups that are off the gameScreen.
+	 */
+	public void clearPickupsOffScreen() {
+		for (int i = 0; i < pickups.size(); i++) {
+			if (pickups.get(i).isOutOfScreen(200)) {
+				removePickup(i);
+				i = i - 1;
+			}
+		}
+	}
+
 	public void clearAllPickups() {
 		for (int i = 0; i < pickups.size(); i++) {
 			removePickup(i);

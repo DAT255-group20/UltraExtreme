@@ -26,8 +26,15 @@ import org.junit.Test;
 
 import ultraextreme.model.util.ObjectName;
 
+/**
+ * 
+ * @author Johan Gronvall
+ * @author Daniel Jonsson
+ * 
+ */
 public class WeaponFactoryTest extends TestCase {
-	BulletManager manager;
+
+	private BulletManager manager;
 
 	@Override
 	public void setUp() {
@@ -37,25 +44,19 @@ public class WeaponFactoryTest extends TestCase {
 	@Test
 	public void testGetNewWeapon() {
 		WeaponFactory.initialize(manager);
-		AbstractWeapon weapon = WeaponFactory.getInstance().getNewWeapon(
-				ObjectName.BASIC_WEAPON);
-		assertTrue(weapon != null);
-		assertEquals(weapon.getName(), ObjectName.BASIC_WEAPON);
+
+		AbstractWeapon weapon = WeaponFactory
+				.getNewWeapon(ObjectName.BASIC_WEAPON);
+		assertEquals(ObjectName.BASIC_WEAPON, weapon.getName());
 		assertTrue(weapon.getBulletManager().equals(manager));
-	}
 
-	@Test
-	public void testInitalize() {
-		boolean exceptionHasBeenThrown = false;
-		try {
-			WeaponFactory.getInstance();
-		} catch (IllegalStateException e) {
-			exceptionHasBeenThrown = true;
-		}
+		weapon = WeaponFactory.getNewWeapon(ObjectName.SPINNING_WEAPON);
+		assertEquals(ObjectName.SPINNING_WEAPON, weapon.getName());
+		assertTrue(weapon.getBulletManager().equals(manager));
 
-		assertTrue(exceptionHasBeenThrown);
-		WeaponFactory.initialize(manager);
-		assertFalse(WeaponFactory.getInstance() == null);
+		weapon = WeaponFactory.getNewWeapon(ObjectName.SPREAD_WEAPON);
+		assertEquals(ObjectName.SPREAD_WEAPON, weapon.getName());
+		assertTrue(weapon.getBulletManager().equals(manager));
 	}
 
 }

@@ -34,7 +34,6 @@ import ultraextreme.model.IPlayer;
 import ultraextreme.model.IPlayerListener;
 import ultraextreme.model.IUltraExtremeModel;
 import ultraextreme.view.GameScene;
-import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -57,22 +56,21 @@ public class GameController extends AbstractController implements
 	private final GameScene scene;
 	private final GameModel gameModel;
 	private final GameLoop gameLoop;
+	
+	private OptionsDatabase optionsDatabase;
 
 	private float lastX = -1;
 	private float lastY = -1;
 
 	public GameController(
 			final VertexBufferObjectManager vertexBufferObjectManager,
-			final SensorManager sensorManager,
-			final SimpleBaseGameActivity activity, float scaling,
-			Camera camera, Font font) {
+			final SimpleBaseGameActivity activity, Camera camera, Font font, OptionsDatabase optionsDatabase) {
 		super();
-		gameModel = new GameModel();
-		scene = new GameScene(gameModel, vertexBufferObjectManager,
-				sensorManager,
-				activity.getResources().getDisplayMetrics().widthPixels,
-				activity.getResources().getDisplayMetrics().heightPixels,
-				camera, font);
+		this.optionsDatabase = optionsDatabase;
+		gameModel = new GameModel(optionsDatabase.getDifficultyLevel());
+		scene = new GameScene(gameModel, vertexBufferObjectManager, activity
+				.getResources().getDisplayMetrics().widthPixels, activity
+				.getResources().getDisplayMetrics().heightPixels, camera, font);
 		scene.setOnSceneTouchListener(this);
 
 		// Start the game loop and add it as a listener to the bullet manage
@@ -185,16 +183,8 @@ public class GameController extends AbstractController implements
 
 	private void resetGameModel() {
 		Log.d("DEBUG", "Resetting the game model");
-		gameLoop.setFiring(false);
-		gameModel.reset();
-
-		/*
-		 * gameModel.getBulletManager().addPropertyChangeListener(gameLoop);
-		 * gameModel.getPickupManager().addPropertyChangeListener(gameLoop);
-		 * gameModel.getEnemyManager().addPropertyChangeListener(gameLoop);
-		 * gameModel.addPropertyChangeListener(gameLoop);
-		 * gameModel.registerPlayerListener(this);
-		 */
+		gameLoop.reset();
+		gameModel.reset(optionsDatabase.getDifficultyLevel());
 	}
 
 	/**
@@ -202,5 +192,10 @@ public class GameController extends AbstractController implements
 	 */
 	public IUltraExtremeModel getGameModel() {
 		return gameModel;
+	}
+
+	@Override
+	public void backButtonPressed() {
+		fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_MENU));
 	}
 }

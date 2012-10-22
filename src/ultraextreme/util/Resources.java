@@ -23,12 +23,12 @@ package ultraextreme.util;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Resources {
+public final class Resources {
 
 	private Map<ResourceName, String> resourceMap = new HashMap<ResourceName, String>();
 
 	public enum ResourceName {
-		START_GAME, SCORE, LIVES, GOTO_MENU;
+		SCORE, LIVES, DEFAULT_HIGHSCORE_NAME, HIGHSCORE_INPUT_TEXT, HIGHSCORE_INPUT_TITLE;
 	}
 
 	private static Resources instance;
