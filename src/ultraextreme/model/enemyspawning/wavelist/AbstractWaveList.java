@@ -34,17 +34,7 @@ public abstract class AbstractWaveList implements IWaveSpawningList {
 	 */
 	private int currentWaveNumber;
 
-	/**
-	 * Total number of waves that this list contains.
-	 */
-	private final int numberOfWaves;
-
-	/**
-	 * @param numberOfWaves
-	 *            The number of available waves.
-	 */
-	public AbstractWaveList(final int numberOfWaves) {
-		this.numberOfWaves = numberOfWaves;
+	public AbstractWaveList() {
 		this.currentWaveNumber = 1;
 	}
 
@@ -62,21 +52,5 @@ public abstract class AbstractWaveList implements IWaveSpawningList {
 	@Override
 	public final int getCurrentWaveNumber() {
 		return currentWaveNumber;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final int getNumberOfWaves() {
-		return numberOfWaves;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final boolean hasNext() {
-		return currentWaveNumber < numberOfWaves;
 	}
 }

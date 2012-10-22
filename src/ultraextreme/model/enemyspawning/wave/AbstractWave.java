@@ -37,7 +37,7 @@ public abstract class AbstractWave {
 	/**
 	 * The classes that listen to the wave.
 	 */
-	private List<WaveListener> listeners = new ArrayList<WaveListener>();
+	private List<IWaveListener> listeners = new ArrayList<IWaveListener>();
 
 	/**
 	 * Update the wave's logic.
@@ -51,7 +51,7 @@ public abstract class AbstractWave {
 	 * Tell the listeners that this wave has ended.
 	 */
 	protected void fireWaveEnded() {
-		for (WaveListener listener : listeners) {
+		for (IWaveListener listener : listeners) {
 			listener.waveEnded(this);
 		}
 	}
@@ -63,7 +63,7 @@ public abstract class AbstractWave {
 	 *            Reference to the enemy that has spawned.
 	 */
 	protected void fireNewEnemySpawned(AbstractEnemy enemy) {
-		for (WaveListener listener : listeners) {
+		for (IWaveListener listener : listeners) {
 			listener.enemySpawned(enemy);
 		}
 	}
@@ -75,7 +75,7 @@ public abstract class AbstractWave {
 	 * @param listener
 	 *            The listener to be added.
 	 */
-	public void addListener(WaveListener listener) {
+	public void addListener(IWaveListener listener) {
 		this.listeners.add(listener);
 	}
 
@@ -85,7 +85,7 @@ public abstract class AbstractWave {
 	 * @param listener
 	 *            The listener to be removed.
 	 */
-	public void removeListener(WaveListener listener) {
+	public void removeListener(IWaveListener listener) {
 		this.listeners.remove(listener);
 	}
 }

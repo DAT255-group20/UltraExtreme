@@ -90,17 +90,8 @@ public class GameOverController extends AbstractController implements
 			if (time1 < this.time + 1500) {
 				break;
 			}
-			SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
-			String nameTag = scene.getName();
-			String score = Integer.toString(scene.getScore());
-			String sqlCommand = "INSERT INTO "
-					+ HighscoreDBOpenHelper.TABLE_NAME + " ("
-					+ HighscoreDBOpenHelper.NAME + ", "
-					+ HighscoreDBOpenHelper.HIGHSCORE + ") VALUES ('" + nameTag
-					+ "', '" + score + "')";
-			Log.d("DEBUG", "Saving highscore: " + sqlCommand);
-			database.execSQL(sqlCommand);
-			dbOpenHelper.close();
+			
+			saveScore();
 
 			fireEvent(new ControllerEvent(this,
 					ControllerEventType.SWITCH_TO_MENU));
@@ -111,9 +102,27 @@ public class GameOverController extends AbstractController implements
 		}
 		return true;
 	}
+	
+	/**
+	 * Save the score along with the tag in the database
+	 */
+	private void saveScore() {
+		SQLiteDatabase database = dbOpenHelper.getWritableDatabase();
+		String nameTag = scene.getName();
+		String score = Integer.toString(scene.getScore());
+		String sqlCommand = "INSERT INTO "
+				+ HighscoreDBOpenHelper.TABLE_NAME + " ("
+				+ HighscoreDBOpenHelper.NAME + ", "
+				+ HighscoreDBOpenHelper.HIGHSCORE + ") VALUES ('" + nameTag
+				+ "', '" + score + "')";
+		Log.d("DEBUG", "Saving highscore: " + sqlCommand);
+		database.execSQL(sqlCommand);
+		dbOpenHelper.close();
+	}
 
 	@Override
 	public void backButtonPressed() {
+		saveScore();
 		fireEvent(new ControllerEvent(this, ControllerEventType.SWITCH_TO_MENU));
 	}
 }

@@ -32,7 +32,7 @@ import ultraextreme.model.enemy.IEnemy;
  * @author Daniel Jonsson
  * 
  */
-public class EnemyCollector implements WaveListener {
+public class EnemyCollector implements IWaveListener {
 
 	private boolean hasWaveEnded = false;
 

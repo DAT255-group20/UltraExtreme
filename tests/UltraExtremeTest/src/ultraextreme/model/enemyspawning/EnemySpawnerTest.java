@@ -86,14 +86,7 @@ public class EnemySpawnerTest extends TestCase {
 
 			@Override
 			public boolean hasNext() {
-				// FIXME not needed
 				return true;
-			}
-
-			@Override
-			public int getNumberOfWaves() {
-				// FIXME not needed
-				return 100;
 			}
 
 			@Override

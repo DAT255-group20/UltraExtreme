@@ -61,8 +61,14 @@ public class MainMenuController extends AbstractController implements
 					ControllerEventType.SWITCH_TO_HIGHSCORE));
 			break;
 
+		case MainMenuScene.MENU_OPTIONS:
+			fireEvent(new ControllerEvent(this,
+					ControllerEventType.SWITCH_TO_OPTIONS));
+			break;
+
 		case MainMenuScene.MENU_EXIT:
 			fireEvent(new ControllerEvent(this, ControllerEventType.EXIT_GAME));
+			break;
 
 		default:
 			break;

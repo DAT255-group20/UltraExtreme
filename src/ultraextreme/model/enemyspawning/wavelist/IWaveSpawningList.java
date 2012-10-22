@@ -59,13 +59,6 @@ public interface IWaveSpawningList {
 	int getCurrentWaveNumber();
 
 	/**
-	 * The maximum of available levels.
-	 * 
-	 * @return The number of available levels.
-	 */
-	int getNumberOfWaves();
-
-	/**
 	 * If there exists a next wave.
 	 * 
 	 * @return If there exists a next wave.

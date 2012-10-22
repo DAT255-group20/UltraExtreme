@@ -28,7 +28,7 @@ import java.util.List;
 
 import ultraextreme.model.enemy.AbstractEnemy;
 import ultraextreme.model.enemyspawning.wave.AbstractWave;
-import ultraextreme.model.enemyspawning.wave.WaveListener;
+import ultraextreme.model.enemyspawning.wave.IWaveListener;
 import ultraextreme.model.enemyspawning.wavelist.IWaveSpawningList;
 
 /**
@@ -40,7 +40,7 @@ import ultraextreme.model.enemyspawning.wavelist.IWaveSpawningList;
  * @author Daniel Jonsson
  * 
  */
-public class EnemySpawner implements WaveListener {
+public class EnemySpawner implements IWaveListener {
 
 	public static final String NEW_ENEMY = "nE";
 
@@ -110,26 +110,36 @@ public class EnemySpawner implements WaveListener {
 	}
 
 	/**
-	 * Check the wave lists that are being monitored and grab new waves if any
-	 * should be spawned. Note that this method is recursive and that it calls
-	 * itself.
+	 * Traverse the wave lists that are being monitored and grab new waves if
+	 * any should be spawned.
 	 */
 	private void addNewWaves() {
-		// TODO(matachi) This method could use some optimization.
-		for (int i = 0; i < waveLists.size(); i++) {
+		for (int i = 0; i < waveLists.size(); ++i) {
 			final IWaveSpawningList waveList = waveLists.get(i);
-			if (waveList.hasNext()) {
-				if (waveList.getCurrentSpawningTime() <= timer) {
-					activeWaves.add(waveList.getCurrentWave());
-					waveList.getCurrentWave().addListener(this);
-					waveList.next();
-					wave++;
-					addNewWaves();
-				}
-			} else {
+			addWavesFromWaveList(waveList);
+			if (!waveList.hasNext()) {
 				waveLists.remove(waveList);
-				i--;
+				--i;
 			}
+		}
+	}
+
+	/**
+	 * Helper method to addNewWaves(). This asks a wave list for new waves until
+	 * it doesn't have any more left. Note that this method is recursive and
+	 * therefore calls itself.
+	 * 
+	 * This method is potentially dangerous if the wave list isn't properly
+	 * coded. If the currentSpawningTime never increases, or increases too
+	 * slowly, the game will crash because of a stack overflow.
+	 */
+	private void addWavesFromWaveList(IWaveSpawningList waveList) {
+		if (waveList.hasNext() && waveList.getCurrentSpawningTime() <= timer) {
+			activeWaves.add(waveList.getCurrentWave());
+			waveList.getCurrentWave().addListener(this);
+			waveList.next();
+			++wave;
+			addWavesFromWaveList(waveList);
 		}
 	}
 

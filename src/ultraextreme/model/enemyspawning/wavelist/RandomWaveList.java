@@ -62,25 +62,19 @@ public class RandomWaveList extends AbstractWaveList {
 	/**
 	 * Create a wave list that returns random waves with random spawn times, and
 	 * with normal difficulty.
-	 * 
-	 * @param numberOfWaves
-	 *            Maximum number of waves this will return.
-	 * @param difficulty
 	 */
-	public RandomWaveList(final int numberOfWaves) {
-		this(numberOfWaves, Difficulty.NORMAL);
+	public RandomWaveList() {
+		this(Difficulty.NORMAL);
 	}
 
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
 	 * 
-	 * @param numberOfWaves
-	 *            Maximum number of waves this will return.
 	 * @param difficulty
 	 *            Difficulty of the spawning waves
 	 */
-	public RandomWaveList(final int numberOfWaves, final Difficulty difficulty) {
-		this(numberOfWaves, difficulty, new AbstractRandomGenerator() {
+	public RandomWaveList(final Difficulty difficulty) {
+		this(difficulty, new AbstractRandomGenerator() {
 			@Override
 			public float nextFloat() {
 				// Using SecureRandom instead of Random because Random was
@@ -95,18 +89,14 @@ public class RandomWaveList extends AbstractWaveList {
 	/**
 	 * Create a wave list that returns random waves with random spawn times.
 	 * 
-	 * @param numberOfWaves
-	 *            Maximum number of waves this will return.
 	 * @param difficulty
 	 *            Difficulty of the spawning waves
 	 * @param randomGenerator
 	 *            A Class that implements RandomGenerator, which will feed this
 	 *            class with random numbers.
-	 * @param difficulty
 	 */
-	public RandomWaveList(final int numberOfWaves, final Difficulty difficulty,
+	public RandomWaveList(final Difficulty difficulty,
 			final AbstractRandomGenerator randomGenerator) {
-		super(numberOfWaves);
 		scaleToDifficulty(difficulty);
 		this.currentDifficultyMod = 1;
 		this.screenWidth = (int) Constants.getLevelDimension().getX();
@@ -118,23 +108,23 @@ public class RandomWaveList extends AbstractWaveList {
 	private void scaleToDifficulty(Difficulty difficulty) {
 		switch (difficulty) {
 		case NORMAL:
-			difficultyRiseSpeed = 1.01;
+			difficultyRiseSpeed = 0.02;
 			break;
 
 		case HARD:
-			difficultyRiseSpeed = 1.05;
+			difficultyRiseSpeed = 0.04;
 			break;
 
 		case EXTREME:
-			difficultyRiseSpeed = 1.07;
+			difficultyRiseSpeed = 0.07;
 			break;
 
 		case ULTRAEXTREME:
-			difficultyRiseSpeed = 1.12;
+			difficultyRiseSpeed = 0.1;
 			break;
 
 		default:
-			difficultyRiseSpeed = 1;
+			difficultyRiseSpeed = 0;
 		}
 	}
 
@@ -224,7 +214,7 @@ public class RandomWaveList extends AbstractWaveList {
 	private void generateNewSpawningTime() {
 		currentSpawningTime += (randomGenerator.nextFloat() * 2 + 10)
 				/ currentDifficultyMod;
-		currentDifficultyMod = currentDifficultyMod * difficultyRiseSpeed;
+		currentDifficultyMod = currentDifficultyMod + difficultyRiseSpeed;
 	}
 
 	/**
@@ -251,5 +241,13 @@ public class RandomWaveList extends AbstractWaveList {
 	@Override
 	public float getCurrentSpawningTime() {
 		return currentSpawningTime;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean hasNext() {
+		return true; // Always returning true since the wave list is endless
 	}
 }

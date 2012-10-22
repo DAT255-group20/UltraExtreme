@@ -42,8 +42,8 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 	 * 
 	 * @param numberOfWaves
 	 */
-	private void resetWaveList(int numberOfWaves) {
-		waveList = new RandomWaveList(numberOfWaves, Difficulty.NORMAL);
+	private void resetWaveList() {
+		waveList = new RandomWaveList(Difficulty.NORMAL);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 	 * if they got the correct spawn time and are instance of the right wave.
 	 */
 	public void testGeneratingNewWaves() {
-		waveList = new RandomWaveList(100, Difficulty.NORMAL,
+		waveList = new RandomWaveList(Difficulty.NORMAL,
 				new AbstractRandomGenerator() {
 					private int counter = 0;
 					// 0.0f - make it pick 1st wave
@@ -86,44 +86,33 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 		waveList.next();
 
 		// Third wave
-		assertEquals(24f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertEquals(12 + 12 / 1.02f, 
+				waveList.getCurrentSpawningTime(), 0.001f);
 		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
 		// Fourth wave
-		assertEquals(35.5f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertEquals(12 + 12 / 1.02 + 12 / 1.04, 
+				waveList.getCurrentSpawningTime(), 0.001f);
 		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
 		// First wave again
-		assertEquals(47.3f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertEquals(12 + 12 / 1.02 + 12 / 1.04 + 12 / 1.06, 
+				waveList.getCurrentSpawningTime(), 0.001f);
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
 	}
 
 	@Override
-	public void testGetNumberOfWaves() {
-		for (int waves = 1; waves < 1000; waves += 10) {
-			resetWaveList(waves);
-			assertEquals(waves, waveList.getNumberOfWaves());
-		}
-	}
-
-	@Override
 	public void testNext() {
-		// Test with different maximum number of waves
-		for (int waves = 1; waves < 1000; waves += 200) {
-			resetWaveList(waves);
-			// Call next() a number of times on the wave list
-			for (int i = 1; i < waves; ++i) {
-				assertEquals(i, waveList.getCurrentWaveNumber());
-				assertTrue(waveList.hasNext());
-				waveList.next();
-			}
-			// Now there shouldn't be anything left in the list
-			assertEquals(waves, waveList.getCurrentWaveNumber());
-			assertFalse(waveList.hasNext());
+		resetWaveList();
+		// Call next() a number of times on the wave list
+		for (int i = 1; i < 1000; ++i) {
+			assertEquals(i, waveList.getCurrentWaveNumber());
+			assertTrue(waveList.hasNext());
+			waveList.next();
 		}
 	}
 }

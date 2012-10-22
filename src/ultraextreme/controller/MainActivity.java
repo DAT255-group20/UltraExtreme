@@ -51,11 +51,13 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	private MainMenuController mainMenuController;
 	private GameOverController gameOverController;
 	private HighscoreController highscoreController;
+	private OptionsController optionsController;
 	private Font defaultFont;
 	private Camera camera;
 	private Scene currentScene;
 	private AbstractController currentController;
 	private HighscoreDBOpenHelper highscoreDBOpenHelper;
+	private OptionsDatabase optionsDatabase;
 
 	@Override
 	public void controllerListenerUpdate(final ControllerEvent event) {
@@ -76,6 +78,10 @@ public class MainActivity extends SimpleBaseGameActivity implements
 			switchControllerTo(highscoreController);
 			break;
 
+		case SWITCH_TO_OPTIONS:
+			switchControllerTo(optionsController);
+			break;
+
 		case EXIT_GAME:
 			finish();
 			break;
@@ -87,15 +93,8 @@ public class MainActivity extends SimpleBaseGameActivity implements
 
 	private void initializeResources() {
 		Resources res = Resources.getInstance();
-		res.setResource(ResourceName.MENU_START_GAME_TEXT,
-				getString(R.string.menu_start_game));
-		res.setResource(ResourceName.MENU_HIGHSCORE_TEXT,
-				getString(R.string.menu_highscore_text));
-		res.setResource(ResourceName.CLEAR_HIGHSCORE,
-				getString(R.string.clear_highscore));
 		res.setResource(ResourceName.LIVES, getString(R.string.lives));
 		res.setResource(ResourceName.SCORE, getString(R.string.score));
-		res.setResource(ResourceName.GOTO_MENU, getString(R.string.goto_menu));
 		res.setResource(ResourceName.DEFAULT_HIGHSCORE_NAME,
 				getString(R.string.default_highscore_name));
 		res.setResource(ResourceName.HIGHSCORE_INPUT_TEXT,
@@ -127,21 +126,27 @@ public class MainActivity extends SimpleBaseGameActivity implements
 	@Override
 	protected Scene onCreateScene() {
 		highscoreDBOpenHelper = new HighscoreDBOpenHelper(this);
+		optionsDatabase = new OptionsDatabase(this);
 		gameController = new GameController(
-				this.getVertexBufferObjectManager(), this, camera, defaultFont);
+				this.getVertexBufferObjectManager(), this, camera, defaultFont,
+				optionsDatabase);
 		mainMenuController = new MainMenuController(camera,
 				this.getVertexBufferObjectManager());
 		gameOverController = new GameOverController(
 				gameController.getGameModel(), camera, defaultFont,
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper,
 				this);
-		highscoreController = new HighscoreController(camera, defaultFont,
+		highscoreController = new HighscoreController(camera, this.getFontManager(), this.getTextureManager(),
 				this.getVertexBufferObjectManager(), highscoreDBOpenHelper);
+		optionsController = new OptionsController(camera,
+				this.getVertexBufferObjectManager(), optionsDatabase,
+				highscoreDBOpenHelper);
 
 		gameController.addListener(this);
 		mainMenuController.addListener(this);
 		gameOverController.addListener(this);
 		highscoreController.addListener(this);
+		optionsController.addListener(this);
 
 		currentController = mainMenuController;
 		updateScene();

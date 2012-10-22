@@ -36,10 +36,10 @@ import ultraextreme.model.util.Rotation;
  */
 public class ParabolaEnemy extends AbstractEnemy {
 
-	private static final int SHIP_SIZE = 30;
+	private static final int SHIP_SIZE = 70;
 	private static final int SCORE = 40;
 	private static final float INIT_SPEED = 100;
-	private static final int HITPOINTS = 15;
+	private static final int HITPOINTS = 30;
 
 	private Position startPoint;
 	private Position midPoint;
@@ -51,8 +51,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 	}
 
 	/**
-	 * Creates a new ParabolaEnemy OBS: endPosition should be placed outside
-	 * screen so that the enemy gets removed
+	 * Creates a new ParabolaEnemy
 	 * 
 	 * @param startPoint
 	 *            where the ParabolaEnemy will appear
@@ -113,7 +112,7 @@ public class ParabolaEnemy extends AbstractEnemy {
 		newPosition.setX(newX);
 		newPosition.setY(calcY(newX));
 		this.getShip().setPosition(newPosition);
-		this.getWeapon().fire(this.getShip().getCenteredPositionClone(),
+		this.getWeapon().fire(this.getShip().getPositionClone(),
 				PlayerID.ENEMY, new Rotation(0), timePassed);
 	}
 

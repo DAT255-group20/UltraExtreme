@@ -26,6 +26,7 @@ import ultraextreme.model.enemy.BasicEnemy;
 import ultraextreme.model.entity.EnemyShip;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.WeaponFactory;
+import ultraextreme.model.util.ObjectName;
 import ultraextreme.model.util.Position;
 import ultraextreme.model.util.Rotation;
 
@@ -36,8 +37,10 @@ import ultraextreme.model.util.Rotation;
  */
 public class RectangleWaveTest extends TestCase {
 
+	private static final String WAVE_NOT_ENDED = "Wave hasn't ended";
 	private BulletManager bulletManager;
 
+	// EnemyCollector will listen to the wave and collect the enemies it spawns
 	private EnemyCollector enemyCollector;
 
 	private AbstractWave wave;
@@ -46,10 +49,12 @@ public class RectangleWaveTest extends TestCase {
 			int x, int y) {
 		wave = new RectangleWave(numOfEnemies, numOfLines, rotation, x, y,
 				new AbstractEnemyProvider() {
+					// Let the RectangleWave create BasicEnemies
 					@Override
 					public AbstractEnemy getEnemy(Position spawningPosition,
 							Rotation rotation) {
-						return new BasicEnemy(new Position());
+						return new BasicEnemy(spawningPosition, rotation,
+								ObjectName.BASIC_WEAPON);
 					}
 
 				});
@@ -68,20 +73,26 @@ public class RectangleWaveTest extends TestCase {
 	 * properties.
 	 */
 	public void testSpawnedEnemyProperties() {
-		initWave(1, 1, 0, 0, 0);
+		double angle = 0;
+		int x = 100;
+		int y = 200;
+		initWave(1, 1, angle, x, y);
 		wave.update(0);
 		EnemyShip enemyShip = enemyCollector.getSpawnedEnemies().get(0)
 				.getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 0.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 0.0);
+		assertEquals(angle, enemyShip.getRotation().getAngle());
+		assertEquals((double) x, enemyShip.getPositionClone().getX());
+		assertEquals((double) y, enemyShip.getPositionClone().getY());
 
-		initWave(1, 1, 2, 100, 200);
+		angle = 2;
+		x = 100;
+		y = 200;
+		initWave(1, 1, angle, x, y);
 		wave.update(0);
 		enemyShip = enemyCollector.getSpawnedEnemies().get(1).getShip();
-		assertEquals(enemyShip.getRotation().getAngle(), 2.0);
-		assertEquals(enemyShip.getPositionClone().getX(), 100.0);
-		assertEquals(enemyShip.getPositionClone().getY(), 200.0);
+		assertEquals(angle, enemyShip.getRotation().getAngle());
+		assertEquals((double) x, enemyShip.getPositionClone().getX());
+		assertEquals((double) y, enemyShip.getPositionClone().getY());
 	}
 
 	/**
@@ -90,11 +101,13 @@ public class RectangleWaveTest extends TestCase {
 	 */
 	public void testUpdate1() {
 		initWave(1, 1, 0, 0, 0);
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 0);
-		wave.update(0);
-		assertTrue(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 1);
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
+		assertEquals("No spawned enemies", 0, enemyCollector
+				.getSpawnedEnemies().size());
+		wave.update(0); // Update the wave and let it spawn it first enemy
+		assertTrue("The wave has ended", enemyCollector.hasWaveEnded());
+		assertEquals("One spawned enemy", 1, enemyCollector.getSpawnedEnemies()
+				.size());
 	}
 
 	/**
@@ -102,28 +115,36 @@ public class RectangleWaveTest extends TestCase {
 	 * they spawn correctly.
 	 */
 	public void testUpdate2() {
-		initWave(5, 3, 0, 0, 0);
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 0);
+		int enemiesInRow = 5; // Number of enemies in a row
 
-		wave.update(0.01f);
+		initWave(enemiesInRow, 3, 0, 0, 0);
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
+		assertEquals("No enemies has spawned yet", 0, enemyCollector
+				.getSpawnedEnemies().size());
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 5);
+		wave.update(0.01f); // Run an update
+
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
+		assertEquals(Integer.toString(enemiesInRow) + " enemies has spawned",
+				enemiesInRow, enemyCollector.getSpawnedEnemies().size());
 
 		wave.update(1.98f);
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 5);
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
+		assertEquals("No new enemies has spawned", enemiesInRow, enemyCollector
+				.getSpawnedEnemies().size());
 
 		wave.update(0.03f);
 
-		assertFalse(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 10);
+		assertFalse(WAVE_NOT_ENDED, enemyCollector.hasWaveEnded());
+		assertEquals(Integer.toString(enemiesInRow)
+				+ " new enemies has spawned", enemiesInRow * 2, enemyCollector
+				.getSpawnedEnemies().size());
 
 		wave.update(2);
 
-		assertTrue(enemyCollector.hasWaveEnded());
-		assertEquals(enemyCollector.getSpawnedEnemies().size(), 15);
+		assertTrue("Wave has ended", enemyCollector.hasWaveEnded());
+		assertEquals("All enemies has spawned", enemiesInRow * 3,
+				enemyCollector.getSpawnedEnemies().size());
 	}
 }

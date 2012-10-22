@@ -32,6 +32,7 @@ import ultraextreme.model.enemyspawning.wavelist.RandomWaveList;
 import ultraextreme.model.entity.AbstractBullet;
 import ultraextreme.model.entity.IBullet;
 import ultraextreme.model.entity.WeaponPickup;
+import ultraextreme.model.item.BasicWeapon;
 import ultraextreme.model.item.BulletManager;
 import ultraextreme.model.item.PickupManager;
 import ultraextreme.model.item.WeaponFactory;
@@ -62,13 +63,17 @@ public class GameModel implements IUltraExtremeModel {
 
 	private PropertyChangeSupport pcs;
 
-	public GameModel() {
+	/**
+	 * 
+	 * @param difficulty
+	 *            Which difficulty level the game model should be on.
+	 */
+	public GameModel(Difficulty difficulty) {
 		bulletManager = new BulletManager();
 		enemyManager = new EnemyManager();
 		pickupManager = new PickupManager();
 		WeaponFactory.initialize(bulletManager);
-		enemySpawner = new EnemySpawner(new RandomWaveList(1000,
-				Difficulty.NORMAL));
+		enemySpawner = new EnemySpawner(new RandomWaveList(difficulty));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player = new Player(PlayerID.PLAYER1, bulletManager);
 		pcs = new PropertyChangeSupport(this);
@@ -208,16 +213,17 @@ public class GameModel implements IUltraExtremeModel {
 
 	/**
 	 * Resets the game
+	 * 
+	 * @param difficulty
+	 *            Which difficulty it should be reset to.
 	 */
-	public void reset() {
+	public void reset(Difficulty difficulty) {
 		bulletManager.clearAllBullets();
 		enemyManager.clearAllEnemies();
 		pickupManager.clearAllPickups();
-		enemySpawner = new EnemySpawner(new RandomWaveList(1000,
-				Difficulty.NORMAL));
+		enemySpawner = new EnemySpawner(new RandomWaveList(difficulty));
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
-
-		// TODO(matachi) Reset enemyspawner too?
+		player.giveWeapon(new BasicWeapon(bulletManager));
 	}
 }
