@@ -110,26 +110,36 @@ public class EnemySpawner implements IWaveListener {
 	}
 
 	/**
-	 * Check the wave lists that are being monitored and grab new waves if any
-	 * should be spawned. Note that this method is recursive and that it calls
-	 * itself.
+	 * Traverse the wave lists that are being monitored and grab new waves if
+	 * any should be spawned.
 	 */
 	private void addNewWaves() {
-		// TODO(matachi) This method could use some optimization.
-		for (int i = 0; i < waveLists.size(); i++) {
+		for (int i = 0; i < waveLists.size(); ++i) {
 			final IWaveSpawningList waveList = waveLists.get(i);
-			if (waveList.hasNext()) {
-				if (waveList.getCurrentSpawningTime() <= timer) {
-					activeWaves.add(waveList.getCurrentWave());
-					waveList.getCurrentWave().addListener(this);
-					waveList.next();
-					wave++;
-					addNewWaves();
-				}
-			} else {
+			addWavesFromWaveList(waveList);
+			if (!waveList.hasNext()) {
 				waveLists.remove(waveList);
-				i--;
+				--i;
 			}
+		}
+	}
+
+	/**
+	 * Helper method to addNewWaves(). This asks a wave list for new waves until
+	 * it doesn't have any more left. Note that this method is recursive and
+	 * therefore calls itself.
+	 * 
+	 * This method is potentially dangerous if the wave list isn't properly
+	 * coded. If the currentSpawningTime never increases, or increases too
+	 * slowly, the game will crash because of a stack overflow.
+	 */
+	private void addWavesFromWaveList(IWaveSpawningList waveList) {
+		if (waveList.hasNext() && waveList.getCurrentSpawningTime() <= timer) {
+			activeWaves.add(waveList.getCurrentWave());
+			waveList.getCurrentWave().addListener(this);
+			waveList.next();
+			++wave;
+			addWavesFromWaveList(waveList);
 		}
 	}
 
