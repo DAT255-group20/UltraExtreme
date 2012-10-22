@@ -1,32 +1,19 @@
 UltraExtreme
 ============
 
-## Import the project
+## Developer
 
-1. Open Eclipse.
-2. Import the project.
+Instructions on how to import the project and the test project into Eclipse can be found in
+![doc/Developer Manual.pdf](https://github.com/DAT255-group20/UltraExtreme/blob/develop/doc/Developer%20Manual.pdf).
+In that document are also instructions on some settings you will probably **need to change in Eclipse to be able to
+compile the project and run the tests**.
 
-If Eclipse complains about the compiler version, do:
+## User
 
-1. Right-click the project in the Package Explorer.
-2. Choose `Properties` from the drop-down list.
-3. Go to the `Java Compiler` tab in the new window.
-4. Set `Compiler compliance level` to `1.6`.
+What is possible to do and not to do in the game can be found in
+![doc/User Manual.pdf](https://github.com/DAT255-group20/UltraExtreme/blob/develop/doc/User%20Manual.pdf).
 
-## How to run the tests
+## Latest release notes and known problems in the current release
 
-### Import the tests project
-
-1. Open Eclipse.
-2. Choose to import a new project.
-3. Navigate to into the tests folder in UltraExtreme.
-4. Import the project UltraExtremeTest.
-
-It's possible that you have to change this project's Java compiler compliance level to 1.6 too.
-
-### Run the tests
-
-1. Right-click the tests project.
-2. Choose `Run As` > `JUnit Test`.
-3. Choose `Android Junit Test Launcher` in the new window and press OK.
-4. Eclipse should now open the JUnit view and run through all the tests.
+You can read what has changed since the last release in 
+![doc/Release Notes.pdf](https://github.com/DAT255-group20/UltraExtreme/blob/develop/doc/Release%20Notes.pdf).

@@ -86,19 +86,22 @@ public class RandomWaveListTest extends AbstractWaveListTest {
 		waveList.next();
 
 		// Third wave
-		assertEquals(24f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertEquals(12 + 12 / 1.02f, 
+				waveList.getCurrentSpawningTime(), 0.001f);
 		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
 		// Fourth wave
-		assertEquals(35.5f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertEquals(12 + 12 / 1.02 + 12 / 1.04, 
+				waveList.getCurrentSpawningTime(), 0.001f);
 		assertTrue(waveList.getCurrentWave() instanceof RectangleWave);
 
 		waveList.next();
 
 		// First wave again
-		assertEquals(47.3f, waveList.getCurrentSpawningTime(), 0.3f);
+		assertEquals(12 + 12 / 1.02 + 12 / 1.04 + 12 / 1.06, 
+				waveList.getCurrentSpawningTime(), 0.001f);
 		assertTrue(waveList.getCurrentWave() instanceof VWave);
 	}
 

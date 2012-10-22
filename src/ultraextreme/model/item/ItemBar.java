@@ -94,6 +94,16 @@ public class ItemBar {
 		this.playerRotation = playerRotation;
 		this.markerPosition = 0;
 	}
+	
+	/**
+	 * Clears the itembar from all weapons 
+	 * and resets the marker position.
+	 */
+	public void clear() {
+		this.items = new ArrayList<AbstractWeapon>();
+		this.markerPosition = 0;
+		fireItemBarUpdated();
+	}
 
 	/**
 	 * Add an item to the item bar.
@@ -124,7 +134,15 @@ public class ItemBar {
 
 	public void loseItems() {
 		if (!items.isEmpty()) {
-			items.remove(items.size() - 1);
+			int itemsToBeLost;
+			if(items.size() < 4) {
+				itemsToBeLost = 1;
+			} else {
+				itemsToBeLost = items.size() / 3;
+			}
+			for(int i = 0; i < itemsToBeLost; i++) {
+				items.remove(items.size() - 1);
+			}
 			markerPosition = items.size();
 			fireItemBarUpdated();
 		}

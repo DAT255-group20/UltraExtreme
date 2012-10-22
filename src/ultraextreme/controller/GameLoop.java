@@ -162,16 +162,10 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 			// Find the GameObjectSprite that has a reference to this entity and
 			// remove
 			// it from the GameObjectSprite list and from the render scene.
-			// Note: It's generally not a very good idea to remove elements when
-			// iterating through them, but this breaks the loop when one element
-			// is
-			// removed.
-			for (GameObjectSprite sprite : gameObjectSprites) {
-				if (sprite.getEntity() == entity) {
-					gameScene.detachChild(sprite);
-					gameObjectSprites.remove(sprite);
-					break;
-				}
+			GameObjectSprite sprite = getSprite(entity);
+			if(sprite != null) {
+				gameScene.detachChild(sprite);
+				gameObjectSprites.remove(sprite);
 			}
 		}
 	}
@@ -215,8 +209,6 @@ public class GameLoop implements IUpdateHandler, PropertyChangeListener {
 		}
 	}
 
-	// TODO(natan) Should this method be used at more places?
-	// What do you mean? /Plankton
 	/**
 	 * Gets the sprite that corresponds to this entity.
 	 * 

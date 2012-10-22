@@ -77,6 +77,14 @@ public class ItemBarTest extends TestCase {
 			addItemSizeTester(i);
 		}
 	}
+	
+	public void testClear() {
+		itemBar.addItem(getNewWeapon());
+		itemBar.addItem(getNewWeapon());
+		itemBar.clear();
+		assertTrue(itemBar.getItems().isEmpty());
+		assertEquals(itemBar.getMarkerPosition(), 0);
+	}
 
 	/**
 	 * Add 15 items to an item bar that can only take 10 items, and then check
@@ -111,9 +119,18 @@ public class ItemBarTest extends TestCase {
 
 	public void testLoseItems() {
 		BasicWeapon item = new BasicWeapon(new BulletManager());
-		itemBar.addItem(item);
-		itemBar.addItem(item);
-		itemBar.addItem(item);
+		for(int i = 0; i < 9; i++) {
+			itemBar.addItem(item);
+		}
+		assertEquals(9, itemBar.getItems().size());
+		assertEquals(9, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(6, itemBar.getItems().size());
+		assertEquals(6, itemBar.getMarkerPosition());
+		itemBar.loseItems();
+		assertEquals(4, itemBar.getItems().size());
+		assertEquals(4, itemBar.getMarkerPosition());
+		itemBar.loseItems();
 		assertEquals(3, itemBar.getItems().size());
 		assertEquals(3, itemBar.getMarkerPosition());
 		itemBar.loseItems();

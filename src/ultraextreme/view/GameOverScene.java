@@ -31,6 +31,7 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.helperclasses.InputText;
 import org.andengine.opengl.font.Font;
+import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.util.color.Color;
@@ -118,16 +119,19 @@ public class GameOverScene extends MenuScene {
 		/*
 		 * Field where the player can type his name/tag
 		 */
-		nameInput = new InputText((float) scaling.x * 240,
-				(float) scaling.y * 855, Resources.getInstance().getResource(
+		TiledTextureRegion nameInputTexture = SpriteFactory.getTextInputBackground();
+		nameInputTexture.setTextureSize((float) scaling.x * 500, (float) scaling.x * 70);
+		nameInput = new InputText((float) scaling.x * 170,
+				(float) scaling.y * 845, Resources.getInstance().getResource(
 						ResourceName.HIGHSCORE_INPUT_TITLE), Resources
 						.getInstance().getResource(
 								ResourceName.HIGHSCORE_INPUT_TEXT),
-				SpriteFactory.getTextInputBackground(), font, 0, 0,
+				nameInputTexture, font, 10, 0,
 				vertexBufferObjectManager, activity);
 		nameInput.setText(Resources.getInstance().getResource(
 				ResourceName.DEFAULT_HIGHSCORE_NAME));
 		nameInput.getChildByIndex(0).setColor(Color.BLACK); // Change text color
+		nameInput.setColor(Color.TRANSPARENT);
 		attachChild(nameInput);
 		registerTouchArea(nameInput);
 	}

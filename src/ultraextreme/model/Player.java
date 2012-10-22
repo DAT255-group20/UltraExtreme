@@ -179,6 +179,7 @@ public class Player implements IPlayer {
 		score = 0;
 		ship.reset();
 		invincCountdown = 0;
+		itemBar.clear();
 		setShipToSpawn();
 		notifyListeners();
 	}

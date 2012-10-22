@@ -69,7 +69,6 @@ public class PlayerTest extends TestCase {
 	}
 
 	public void testGetItemBar() {
-		// TODO Maybe not the best test?
 		ItemBar itemBar = player.getItemBar();
 		itemBar.addItem(new BasicWeapon(bulletManager));
 		assertEquals(itemBar.getItems().size(), player.getItemBar().getItems()
@@ -103,8 +102,6 @@ public class PlayerTest extends TestCase {
 	}
 
 	public void testGiveWeapon() {
-		// TODO Only checking the amount of weapons is correct. Better test
-		// maybe?
 		ItemBar itemBar = player.getItemBar();
 		int preNoOfWeapons = itemBar.getItems().size();
 		player.giveWeapon(new BasicWeapon(bulletManager));
@@ -145,6 +142,8 @@ public class PlayerTest extends TestCase {
 
 		assertEquals(player.getLives(), Constants.getInitShipLives());
 		assertEquals(player.getScore(), 0);
+		
+		assertTrue(player.getItemBar().getItems().isEmpty());
 
 		assertFalse(player.getShip().isDestroyed());
 		assertFalse(player.getShip().justGotHit());

@@ -225,7 +225,5 @@ public class GameModel implements IUltraExtremeModel {
 		enemySpawner.addPropertyChangeListener(enemyManager);
 		player.reset();
 		player.giveWeapon(new BasicWeapon(bulletManager));
-
-		// TODO(matachi) Reset enemyspawner too?
 	}
 }
